@@ -1,5 +1,4 @@
-﻿using DapperExtensions;
-using OneCardSln.Repository.Db;
+﻿using OneCardSln.Repository.Db;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -22,11 +21,12 @@ namespace OneCardSln.Repository
             this.DbSession = session;
         }
 
-        public TEntity GetById(dynamic pkId)
+
+        public TEntity GetById(dynamic pkId, IDbTransaction trans = null)
         {
             try
             {
-                return this.DbSession.Connection.Get<TEntity>(pkId as object);
+                return this.DbSession.Connection.Get<TEntity>(pkId as object, trans);
             }
             catch (Exception ex)
             {
@@ -35,11 +35,11 @@ namespace OneCardSln.Repository
             }
         }
 
-        public TReturn GetById<TReturn>(dynamic pkId) where TReturn : class
+        public int Count(object predicate, IDbTransaction trans = null)
         {
             try
             {
-                return this.DbSession.Connection.Get<TReturn>(pkId as object);
+                return this.DbSession.Connection.Count<TEntity>(predicate, trans);
             }
             catch (Exception ex)
             {
@@ -48,21 +48,11 @@ namespace OneCardSln.Repository
             }
         }
 
-        public IEnumerable<TEntity> GetByIds(IList<dynamic> pkIds)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<TReturn> GetByIds<TReturn>(IList<dynamic> pkIds) where TReturn : class
-        {
-            throw new NotImplementedException();
-        }
-
-        public int Count(object predicate)
+        public IEnumerable<TEntity> GetList(object predicate, IList<ISort> sort = null, IDbTransaction trans = null)
         {
             try
             {
-                return this.DbSession.Connection.Count<TEntity>(predicate);
+                return this.DbSession.Connection.GetList<TEntity>(predicate, sort, trans);
             }
             catch (Exception ex)
             {
@@ -71,11 +61,13 @@ namespace OneCardSln.Repository
             }
         }
 
-        public IEnumerable<TEntity> GetList(object predicate = null, IList<ISort> sort = null)
+        public IEnumerable<TEntity> GetPageList(int pageIndex, int pageSize, out long total, IList<DapperExtensions.ISort> sort, object predicate = null, IDbTransaction trans = null)
         {
+            total = 0;
             try
             {
-                return this.DbSession.Connection.GetList<TEntity>(predicate, sort);
+                total = this.DbSession.Connection.Count<TEntity>(predicate, trans);
+                return this.DbSession.Connection.GetPage<TEntity>(predicate, sort, pageIndex, pageSize, trans);
             }
             catch (Exception ex)
             {
@@ -84,11 +76,23 @@ namespace OneCardSln.Repository
             }
         }
 
-        public IEnumerable<TReturn> GetList<TReturn>(object predicate = null, IList<ISort> sort = null) where TReturn : class
+        public dynamic Insert(TEntity entity, IDbTransaction trans = null)
         {
             try
             {
-                return this.DbSession.Connection.GetList<TReturn>(predicate, sort);
+                return this.DbSession.Connection.Insert<TEntity>(entity, trans);
+            }
+            catch (Exception ex)
+            {
+                _logHelper.LogError(ex);
+                throw;
+            }
+        }
+        public void InsertBatch(IEnumerable<TEntity> entities, IDbTransaction trans = null)
+        {
+            try
+            {
+                this.DbSession.Connection.Insert<TEntity>(entities, trans);
             }
             catch (Exception ex)
             {
@@ -97,13 +101,11 @@ namespace OneCardSln.Repository
             }
         }
 
-        public IEnumerable<TEntity> GetPageList(int pageIndex, int pageSize, out long totalRecords, IList<ISort> sort, object predicate = null)
+        public bool Delete(object predicate, IDbTransaction trans = null)
         {
             try
             {
-                totalRecords = this.DbSession.Connection.Count<TEntity>(predicate);
-                var entities = this.DbSession.Connection.GetPage<TEntity>(predicate, sort, pageIndex, pageSize);
-                return entities;
+                return this.DbSession.Connection.Delete<TEntity>(predicate, trans);
             }
             catch (Exception ex)
             {
@@ -112,75 +114,11 @@ namespace OneCardSln.Repository
             }
         }
 
-        public IEnumerable<TReturn> GetPageList<TReturn>(int pageIndex, int pageSize, out long totalRecords, IList<ISort> sort, object predicate = null) where TReturn : class
+        public bool Update(TEntity entity, IDbTransaction trans = null)
         {
             try
             {
-                var entities = this.DbSession.Connection.GetPage<TReturn>(predicate, sort, pageIndex, pageSize);
-                totalRecords = entities.Count();
-                return entities;
-            }
-            catch (Exception ex)
-            {
-                _logHelper.LogError(ex);
-                throw;
-            }
-        }
-
-        public dynamic Insert(TEntity entity, IDbTransaction transaction = null)
-        {
-            try
-            {
-                return this.DbSession.Connection.Insert<TEntity>(entity, transaction);
-            }
-            catch (Exception ex)
-            {
-                _logHelper.LogError(ex);
-                throw;
-            }
-        }
-
-        public void InsertBatch(IEnumerable<TEntity> entities, IDbTransaction transaction = null)
-        {
-            try
-            {
-                this.DbSession.Connection.Insert<TEntity>(entities, transaction);
-            }
-            catch (Exception ex)
-            {
-                _logHelper.LogError(ex);
-                throw;
-            }
-        }
-
-        public bool Update(TEntity entity, IDbTransaction transaction = null)
-        {
-            try
-            {
-                return this.DbSession.Connection.Update(entity, transaction);
-            }
-            catch (Exception ex)
-            {
-                _logHelper.LogError(ex);
-                throw;
-            }
-        }
-
-        public bool UpdateBatch(IEnumerable<TEntity> entities, IDbTransaction transaction = null)
-        {
-            bool succeed = false;
-            foreach (var item in entities)
-            {
-                Update(item, transaction);
-            }
-            succeed = true; 
-            return succeed;
-        }
-        public bool DeleteBatch(object predicate, IDbTransaction transaction = null)
-        {
-            try
-            {
-                return this.DbSession.Connection.Delete<TEntity>(predicate, transaction);
+                return this.DbSession.Connection.Update<TEntity>(entity, trans);
             }
             catch (Exception ex)
             {

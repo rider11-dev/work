@@ -8,11 +8,11 @@ namespace OneCardSln.Components.Logger
 {
     public interface ILogHelper<T>
     {
+        void LogError(string msg, Exception ex = null);
         void LogError(Exception ex);
-        void LogError(string msg);
+        void LogInfo(string msg, Exception ex = null);
         void LogInfo(Exception ex);
-        void LogInfo(string msg);
+        void LogWarning(string msg, Exception ex = null);
         void LogWarning(Exception ex);
-        void LogWarning(string msg);
     }
 }

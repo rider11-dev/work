@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DapperExtensions.Sql;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -12,10 +13,15 @@ namespace OneCardSln.Repository.Db
     public class DbUtils
     {
         public const string DefaultConnectionKey = "default";
-
         public static DatabaseType GetDbTypeByConnKey(string strKey = DefaultConnectionKey)
         {
             DatabaseType dbType = DatabaseType.SqlServer;
+            //1、获取数据库连接配置集合
+            if (ConfigurationManager.ConnectionStrings == null || ConfigurationManager.ConnectionStrings.Count < 1)
+            {
+                throw new Exception("未找到数据库连接配置！");
+            }
+            //2、获取指定key的数据库连接配置
             ConnectionStringSettings connectionStringSettings = ConfigurationManager.ConnectionStrings[strKey];
             if (connectionStringSettings == null)
             {
@@ -32,15 +38,18 @@ namespace OneCardSln.Repository.Db
                 case "System.Data.SqlClient":
                     dbType = DatabaseType.SqlServer;
                     break;
-                case "Oracle.DataAccess.Client":
-                    dbType = DatabaseType.Oracle;
-                    break;
+                //case "Oracle.DataAccess.Client":
+                //    dbType = DatabaseType.Oracle;
+                //    break;
                 case "MySql.Data.MySqlClient":
                     dbType = DatabaseType.MySql;
                     break;
-                case "System.Data.OleDb":
-                    dbType = DatabaseType.Aceess;
+                case "System.Data.SQLite":
+                    dbType = DatabaseType.Sqlite;
                     break;
+                //case "System.Data.OleDb":
+                //    dbType = DatabaseType.Aceess;
+                //    break;
                 default:
                     throw new Exception(strKey + "连接字符串未识别 ProviderName:" + connectionStringSettings.ProviderName);
             }
@@ -51,13 +60,20 @@ namespace OneCardSln.Repository.Db
         static DbProviderFactory _dbProviderFactory = null;
         public static IDbConnection CreateDbConnection(string strKey = DbUtils.DefaultConnectionKey)
         {
+            //1、获取数据库连接配置集合
+            if (ConfigurationManager.ConnectionStrings == null || ConfigurationManager.ConnectionStrings.Count < 1)
+            {
+                throw new Exception("未找到数据库连接配置！");
+            }
+
+            //2、获取指定key的数据库连接配置
             ConnectionStringSettings connectionStringSettings = ConfigurationManager.ConnectionStrings[strKey];
             if (connectionStringSettings == null)
             {
                 throw new Exception(string.Format("未找到name为{0}的连接字符串！", strKey));
             }
 
-            //获取指定数据库提供器工厂
+            //3、获取指定数据库提供器工厂
             if (_dbProviderFactory == null)
             {
                 try
@@ -73,7 +89,7 @@ namespace OneCardSln.Repository.Db
                     throw new Exception("无法创建指定类型的DbProviderFactory实例");
                 }
             }
-            //获取数据库连接
+            //4、创建数据库连接
             try
             {
                 IDbConnection conn = _dbProviderFactory.CreateConnection();
@@ -82,7 +98,22 @@ namespace OneCardSln.Repository.Db
             }
             catch (Exception ex)
             {
-                throw new Exception("获取数据库连接失败！", ex);
+                throw new Exception("创建数据库连接失败！", ex);
+            }
+        }
+
+        public static ISqlDialect GetSqlDialect()
+        {
+            var dbType = GetDbTypeByConnKey();
+            switch (dbType)
+            {
+                case DatabaseType.MySql:
+                    return new MySqlDialect();
+                case DatabaseType.Sqlite:
+                    return new SqliteDialect();
+                case DatabaseType.SqlServer:
+                default:
+                    return new SqlServerDialect();
             }
         }
     }

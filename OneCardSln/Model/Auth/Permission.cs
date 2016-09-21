@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OneCardSln.Model.Auth
+{
+    /// <summary>
+    /// 权限控制——权限列表
+    /// </summary>
+    public class Permission
+    {
+        public string per_id { get; set; }
+        public string per_code { get; set; }
+        public string per_name { get; set; }
+        public string per_type { get; set; }
+        public string per_parent { get; set; }
+        public string per_remark { get; set; }
+    }
+}

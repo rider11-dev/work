@@ -10,8 +10,7 @@ namespace OneCardSln.Repository.Db
     {
         SqlServer,
         MySql,
-        Oracle,
-        Aceess,
+        //Oracle,//暂不支持
         Sqlite
     }
 }

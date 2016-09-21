@@ -1,0 +1,15 @@
+/OneCardSln/Components/obj
+/OneCardSln/Components/bin
+/OneCardSln/dlls/dev
+/OneCardSln/Model/obj
+/OneCardSln/Model/bin
+/OneCardSln/packages
+/OneCardSln/Repository/obj
+/OneCardSln/Repository/bin
+/OneCardSln/WebServices/obj
+/OneCardSln/WebServices/bin
+/OneCardSln/WebApi/bin
+/OneCardSln/WebApi/log
+/OneCardSln/WebApi/obj
+/OneCardSln/Service/obj
+/OneCardSln/Service/bin

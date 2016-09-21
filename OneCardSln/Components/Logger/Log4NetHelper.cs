@@ -16,42 +16,36 @@ namespace OneCardSln.Components.Logger
         {
             logger = log4net.LogManager.GetLogger(typeof(T));
         }
-        /// <summary>
-        /// 输出日志到Log4Net
-        /// </summary>
-        /// <param name="t">类型</param>
-        /// <param name="ex">异常对象</param>
+
+        public void LogError(string msg, Exception ex = null)
+        {
+            if (logger == null)
+            {
+                return;
+            }
+            logger.Error(msg, ex);
+        }
+
         public void LogError(Exception ex)
         {
-            if (logger == null || !AppSettingHelper.Log)
+            if (logger == null)
             {
                 return;
             }
             logger.Error("Error:", ex);
         }
-        /// <summary>
-        /// 输出日志到Log4Net
-        /// </summary>
-        /// <param name="t">类型</param>
-        /// <param name="msg">错误信息</param>
-        public void LogError(string msg)
-        {
 
+        public void LogInfo(string msg, Exception ex = null)
+        {
             if (logger == null || !AppSettingHelper.Log)
             {
                 return;
             }
-            logger.Error(msg);
+            logger.Info(msg, ex);
         }
 
-        /// <summary>
-        /// 输出日志到Log4Net
-        /// </summary>
-        /// <param name="t">类型</param>
-        /// <param name="msg">日志信息</param>
         public void LogInfo(Exception ex)
         {
-
             if (logger == null || !AppSettingHelper.Log)
             {
                 return;
@@ -59,19 +53,13 @@ namespace OneCardSln.Components.Logger
             logger.Info("Info:", ex);
         }
 
-        /// <summary>
-        /// 输出日志到Log4Net
-        /// </summary>
-        /// <param name="t">类型</param>
-        /// <param name="msg">日志信息</param>
-        public void LogInfo(string msg)
+        public void LogWarning(string msg, Exception ex = null)
         {
-
             if (logger == null || !AppSettingHelper.Log)
             {
                 return;
             }
-            logger.Info(msg);
+            logger.Warn(msg, ex);
         }
 
         public void LogWarning(Exception ex)
@@ -82,16 +70,6 @@ namespace OneCardSln.Components.Logger
                 return;
             }
             logger.Warn("Warn:", ex);
-        }
-
-        public void LogWarning(string msg)
-        {
-
-            if (logger == null || !AppSettingHelper.Log)
-            {
-                return;
-            }
-            logger.Warn(msg);
         }
     }
 }

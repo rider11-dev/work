@@ -49,11 +49,11 @@ namespace OneCardSln.Repository.Db
             get { return _transaction; }
         }
 
-        public DbSession(string connKey = DbUtils.DefaultConnectionKey)
+        public DbSession()
         {
-            _dbType = DbUtils.GetDbTypeByConnKey(connKey);
-            _connKey = connKey;
-            _connection = DbUtils.CreateDbConnection(connKey);
+            _connKey = DbUtils.DefaultConnectionKey;
+            _dbType = DbUtils.GetDbTypeByConnKey(_connKey);
+            _connection = DbUtils.CreateDbConnection(_connKey);
         }
 
         public IDbTransaction Begin(IsolationLevel isolation = IsolationLevel.ReadCommitted)
