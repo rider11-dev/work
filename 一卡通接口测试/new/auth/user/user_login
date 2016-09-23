@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rest-client version="3.4.2"><request><http-version>1.1</http-version><http-follow-redirects/><URL>http://localhost/aaa/api/auth/user/login</URL><method>POST</method><body><string content-type="application/json" charset="UTF-8">{
+"username":"admin",
+"pwd":"admin"
+}</string></body></request></rest-client>

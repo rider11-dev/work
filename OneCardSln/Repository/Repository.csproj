@@ -59,15 +59,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auth\Mapper\PermissionMapper.cs" />
     <Compile Include="Auth\Mapper\UserMapper.cs" />
+    <Compile Include="Auth\Mapper\UserPermissionRelMapper.cs" />
     <Compile Include="Auth\PermissionRepository.cs" />
     <Compile Include="Auth\UserPermissionRelRepository.cs" />
     <Compile Include="Auth\UserRepository.cs" />
     <Compile Include="BaseRepository.cs" />
+    <Compile Include="Base\DictRepository.cs" />
+    <Compile Include="Base\DictTypeRepository.cs" />
+    <Compile Include="Base\Mapper\DictMapper.cs" />
+    <Compile Include="Base\Mapper\DictTypeMapper.cs" />
     <Compile Include="Db\DatabaseType.cs" />
     <Compile Include="Db\Database.cs" />
     <Compile Include="Db\DbSession.cs" />
     <Compile Include="Db\DbUtils.cs" />
+    <Compile Include="Db\SqlConfEntity.cs" />
+    <Compile Include="Db\SqlTextProvider.cs" />
     <Compile Include="IBaseRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Test\CardInfoMapper.cs" />
@@ -76,6 +84,10 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="sql.config.mysql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Components\Components.csproj">

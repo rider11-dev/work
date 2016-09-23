@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using OneCardSln.Components.Extensions;
 
 namespace OneCardSln.Model
 {
@@ -27,6 +28,20 @@ namespace OneCardSln.Model
         public OptResult()
         {
             code = ResultCode.Unknown;
+        }
+
+        public static OptResult Build(ResultCode code, string msg = "", dynamic data = null)
+        {
+            var rst = new OptResult();
+            rst.code = code;
+            rst.msg = rst.code.GetDescription();
+            if(!string.IsNullOrEmpty(msg))
+            {
+                rst.msg += "：" + msg;
+            }
+            rst.data = data;
+
+            return rst;
         }
     }
 }

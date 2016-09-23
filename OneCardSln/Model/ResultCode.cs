@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
@@ -7,25 +8,27 @@ namespace OneCardSln.Model
 {
     public enum ResultCode
     {
-        /// <summary>
-        /// 位置操作
-        /// </summary>
+        [Description("未知操作")]
         Unknown = -1,
-        /// <summary>
-        /// 成功
-        /// </summary>
+        [Description("成功")]
         Success = 1,
-        /// <summary>
-        /// 失败
-        /// </summary>
+        [Description("失败")]
         Fail = 0,
-        /// <summary>
-        /// 重复操作
-        /// </summary>
+        [Description("重复操作")]
         Repeat = 2,
-        /// <summary>
-        /// 参数错误
-        /// </summary>
+        [Description("参数错误")]
         ParamError = 3,
+        [Description("未找到token")]
+        Tokenless = 4,
+        [Description("token已失效")]
+        TokenExpired = 5,
+        [Description("非法token")]
+        TokenIllegal = 6,
+        [Description("数据不存在")]
+        DataNotFound = 7,
+        [Description("数据已被使用")]
+        DataInUse = 8,
+        [Description("数据重复")]
+        DataRepeat = 9,
     }
 }

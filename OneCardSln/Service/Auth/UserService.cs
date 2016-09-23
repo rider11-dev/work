@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 using DapperExtensions;
 using OneCardSln.Model.Auth;
 using OneCardSln.Components;
+using System.Dynamic;
+using OneCardSln.Components.Extensions;
+using OneCardSln.Components.Mapper;
+using OneCardSln.Service.Auth.Models;
 
 namespace OneCardSln.Service.Auth
 {
@@ -15,6 +19,12 @@ namespace OneCardSln.Service.Auth
     {
         //常量
         const string Msg_Login = "用户登录";
+        const string Msg_AddUser = "新增用户";
+        const string Msg_UpdateUser = "修改用户";
+        const string Msg_DeleteUser = "删除用户";
+        const string Msg_ChangePwd = "修改密码";
+        const string Msg_QueryByPage = "分页查询用户信息";
+
         //私有变量
         private UserRepository _usrRep;
 
@@ -25,11 +35,11 @@ namespace OneCardSln.Service.Auth
 
         public OptResult Login(string username, string pwd)
         {
-            OptResult rst = new OptResult();
+            OptResult rst = null;
+
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(pwd))
             {
-                rst.code = ResultCode.ParamError;
-                rst.msg = Msg_Login + "失败,用户名或密码不能为空";
+                rst = OptResult.Build(ResultCode.ParamError, Msg_Login + "失败,用户名或密码不能为空");
                 return rst;
             }
             //用户名
@@ -37,22 +47,177 @@ namespace OneCardSln.Service.Auth
             var usr = _usrRep.GetList(where).FirstOrDefault();
             if (usr == null)
             {
-                rst.code = ResultCode.Fail;
-                rst.msg = Msg_Login + "失败,用户不存在";
+                rst = OptResult.Build(ResultCode.Fail, Msg_Login + "失败,用户不存在");
                 return rst;
             }
             //密码
-            var pwdHash = EncryptionHelper.GetMd5Hash(pwd);
+            var pwdHash = EncryptionExtension.GetMd5Hash(pwd);
             if (string.Equals(pwdHash, usr.user_pwd))
             {
-                rst.code = ResultCode.Success;
-                rst.data = usr;
+                rst = OptResult.Build(ResultCode.Success, null, usr);
             }
             else
             {
-                rst.code = ResultCode.Fail;
-                rst.msg = Msg_Login + "失败,密码不正确";
+                rst = OptResult.Build(ResultCode.Fail, Msg_Login + "失败,密码不正确");
             }
+
+            return rst;
+        }
+
+        public OptResult Add(User usr)
+        {
+            OptResult rst = null;
+            //1、用户名是否已存在
+            PredicateGroup pg = new PredicateGroup { Operator = GroupOperator.Or, Predicates = new List<IPredicate>() };
+            pg.Predicates.Add(Predicates.Field<User>(u => u.user_name, Operator.Eq, usr.user_name));
+            pg.Predicates.Add(Predicates.Field<User>(u => u.user_idcard, Operator.Eq, usr.user_idcard));
+            var count = _usrRep.Count(pg);
+            if (count > 0)
+            {
+                rst = OptResult.Build(ResultCode.DataRepeat,
+                    string.Format("{0}，用户{1}或身份证号{2}已存在", Msg_AddUser, usr.user_name, usr.user_idcard));
+                return rst;
+            }
+            //2、处理
+            usr.user_id = GuidExtension.GetOne();
+            usr.user_pwd = EncryptionExtension.GetMd5Hash(usr.user_idcard.Substring(usr.user_idcard.Length - 6, 6));//初始密码身份证后六位
+            var val = _usrRep.Insert(usr);
+
+            rst = OptResult.Build(ResultCode.Success, Msg_AddUser);
+
+            return rst;
+        }
+
+        public OptResult Find(dynamic pkId)
+        {
+            var usr = _usrRep.GetById(pkId);
+            return OptResult.Build(ResultCode.Success, null, usr);
+        }
+
+        public OptResult Update(User usr)
+        {
+            OptResult rst = null;
+            //1、用户是否存在
+            var count = _usrRep.Count(Predicates.Field<User>(u => u.user_id, Operator.Eq, usr.user_id));
+            if (count < 1)
+            {
+                rst = OptResult.Build(ResultCode.DataNotFound, Msg_UpdateUser);
+                return rst;
+            }
+            //2、用户名不能修改，这里只检查身份证号即可（身份证号）
+            PredicateGroup pg = new PredicateGroup { Operator = GroupOperator.And, Predicates = new List<IPredicate>() };
+            pg.Predicates.Add(Predicates.Field<User>(u => u.user_idcard, Operator.Eq, usr.user_idcard));
+            pg.Predicates.Add(Predicates.Field<User>(u => u.user_id, Operator.Eq, usr.user_id, true));//user_id <> usr.user_id
+            count = _usrRep.Count(pg);
+            if (count > 0)
+            {
+                rst = OptResult.Build(ResultCode.Fail,
+                    string.Format("{0}，身份证号{1}已存在", Msg_UpdateUser, usr.user_idcard));
+                return rst;
+            }
+            //3、更新：获取旧对象，赋值，更新
+            //TODO
+            //这里修改时，需要传递完整实体信息，加大网络传输量，后续改造成只修改部分字段：vm字段设置dynamic？
+            var oldUsr = _usrRep.GetById(usr.user_id);
+            oldUsr.user_idcard = usr.user_idcard;
+            oldUsr.user_regioncode = usr.user_regioncode;
+            oldUsr.user_truename = usr.user_truename;
+            oldUsr.user_remark = usr.user_remark;
+
+            bool val = _usrRep.Update(oldUsr);
+            rst = OptResult.Build(val ? ResultCode.Success : ResultCode.Fail, Msg_UpdateUser);
+
+            return rst;
+        }
+
+        public OptResult Delete(dynamic pkId)
+        {
+            OptResult rst = null;
+            //1、用户是否存在
+            var predicate = Predicates.Field<User>(u => u.user_id, Operator.Eq, pkId as object);
+            var count = _usrRep.Count(predicate);
+            if (count < 1)
+            {
+                rst = OptResult.Build(ResultCode.DataNotFound, Msg_DeleteUser);
+                return rst;
+            }
+            //2、超级管理员不能被删除（这里只根据用户名判断，后续可以扩展根据角色或其他规则）
+            var usr = _usrRep.GetById(pkId);
+            if (usr.user_name.Equals("admin"))
+            {
+                rst = OptResult.Build(ResultCode.Fail, string.Format(Msg_DeleteUser + "，用户{0}不允许删除", usr.user_name));
+                return rst;
+            }
+
+            bool val = _usrRep.Delete(predicate);
+            rst = OptResult.Build(val ? ResultCode.Success : ResultCode.Fail, Msg_DeleteUser);
+
+            return rst;
+        }
+
+        public OptResult ChangePwd(string userid, string oldpwd, string newpwd)
+        {
+            OptResult rst = null;
+            //1、新旧密码是否相同
+            if (string.Equals(oldpwd, newpwd))
+            {
+                rst = OptResult.Build(ResultCode.ParamError, Msg_ChangePwd + "，新旧密码不能相同");
+                return rst;
+            }
+
+            //2、用户是否存在
+            var usr = _usrRep.GetById(userid);
+            if (usr == null)
+            {
+                rst = OptResult.Build(ResultCode.DataNotFound, Msg_ChangePwd + "，指定用户不存在");
+                return rst;
+            }
+
+            //3、旧密码是否正确
+            if (!EncryptionExtension.GetMd5Hash(oldpwd).Equals(usr.user_pwd))
+            {
+                rst = OptResult.Build(ResultCode.DataNotFound, Msg_ChangePwd + "，旧密码不正确");
+                return rst;
+            }
+
+            //4、执行sql
+            var val = _usrRep.ExecuteBySqlName("changepwd", new { user_pwd = EncryptionExtension.GetMd5Hash(newpwd), user_id = userid });
+            rst = OptResult.Build(val > 0 ? ResultCode.Success : ResultCode.Fail, Msg_ChangePwd);
+            return rst;
+        }
+
+        public OptResult QueryByPage(PageQuery page)
+        {
+            OptResult rst = null;
+            if (page == null)
+            {
+                rst = OptResult.Build(ResultCode.ParamError, Msg_QueryByPage + "，分页参数不能为空！");
+                return rst;
+            }
+            page.Verify();
+            //过滤条件
+            PredicateGroup pg = new PredicateGroup { Operator = GroupOperator.And, Predicates = new List<IPredicate>() };
+            if (page.conditions != null && page.conditions.Count > 0)
+            {
+                if (page.conditions.ContainsKey("user_regioncode"))
+                {
+                    pg.Predicates.Add(Predicates.Field<User>(u => u.user_regioncode, Operator.Eq, page.conditions["user_regioncode"]));
+                }
+            }
+
+            //排序
+            long total = 0;
+            IList<ISort> sort = new[]
+            {
+                new Sort{PropertyName="user_regioncode",Ascending=true}
+            };
+            //这里返回UserDto，忽略密码字段
+            var usrs = _usrRep.GetPageList<UserDto>(page.pageIndex, page.pageSize, out total, sort, pg);
+            rst = OptResult.Build(ResultCode.Success, Msg_QueryByPage, new
+            {
+                total = total,
+                rows = usrs
+            });
 
             return rst;
         }

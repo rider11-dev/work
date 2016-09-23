@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rest-client version="3.4.2"><request><http-version>1.1</http-version><http-follow-redirects/><URL>http://localhost/aaa/api/auth/permission/querybypage</URL><method>POST</method><headers><header key="token" value="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhZG1pbiIsImlhdCI6MTQ3NDYwNjI1MiwidXNlciI6bnVsbH0.Ou9cWxYcHW1V878YGnGwQroMezHHO06TuoLjFLxdDUM"/></headers><body><string content-type="application/json" charset="UTF-8">{
+"pageIndex":"0",
+"pageSize":"100",
+"conditions":{
+	"per_type":"1",
+	"per_code":"zpf",
+	"per_name":"测试",
+	"per_parent":"7bac6034df004f579962c899c1f5c8b1"
+}
+}</string></body></request></rest-client>

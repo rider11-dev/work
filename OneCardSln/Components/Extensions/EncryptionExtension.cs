@@ -5,12 +5,12 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OneCardSln.Components
+namespace OneCardSln.Components.Extensions
 {
     /// <summary>
     /// 加密算法辅助类
     /// </summary>
-    public class EncryptionHelper
+    public class EncryptionExtension
     {
         /// <summary>
         /// 返回指定字符串的Md5(32位)
@@ -64,5 +64,54 @@ namespace OneCardSln.Components
             }
         }
 
+        public static string EncodeBase64(Encoding encode, string src)
+        {
+            string result = "";
+            byte[] bytes = encode.GetBytes(src);
+            try
+            {
+                result = Convert.ToBase64String(bytes);
+            }
+            catch
+            {
+                result = src;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// utf8
+        /// </summary>
+        /// <param name="src"></param>
+        /// <returns></returns>
+        public static string EncodeBase64(string src)
+        {
+            return EncodeBase64(Encoding.UTF8, src);
+        }
+
+        public static string DecodeBase64(Encoding encode, string src)
+        {
+            string result = "";
+            byte[] bytes = Convert.FromBase64String(src);
+            try
+            {
+                result = encode.GetString(bytes);
+            }
+            catch
+            {
+                result = src;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// utf8
+        /// </summary>
+        /// <param name="src"></param>
+        /// <returns></returns>
+        public static string DecodeBase64(string src)
+        {
+            return DecodeBase64(Encoding.UTF8, src);
+        }
     }
 }

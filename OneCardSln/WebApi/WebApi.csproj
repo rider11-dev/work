@@ -52,6 +52,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\DapperExtensions.1.4.4\lib\net40\DapperExtensions.dll</HintPath>
     </Reference>
+    <Reference Include="JWT">
+      <HintPath>..\packages\JWT.1.3.4\lib\3.5\JWT.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dlls\log4net\log4net.dll</HintPath>
@@ -93,22 +96,46 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiContext.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="App_Start\Bootstrapper.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\Auth\PermissionController.cs" />
+    <Compile Include="Controllers\Base\DictController.cs" />
+    <Compile Include="Controllers\Base\DictTypeController.cs" />
     <Compile Include="Controllers\TestController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\Auth\UserController.cs" />
     <Compile Include="Extensions\CustomExceptionLogger.cs" />
     <Compile Include="Extensions\CustomMessageHandler.cs" />
     <Compile Include="Extensions\HttpUtils.cs" />
+    <Compile Include="Extensions\ModelStateExtension.cs" />
+    <Compile Include="Extensions\Validation\PermissionTypeAttribute.cs" />
     <Compile Include="Filters\CustomExceptionFilterAttribute.cs" />
+    <Compile Include="Filters\TokenValidateFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Auth\LoginViewModel.cs" />
+    <Compile Include="Models\Auth\Permission\AddPermissionViewModel.cs" />
+    <Compile Include="Models\Auth\Permission\EditPermissionViewModel.cs" />
+    <Compile Include="Models\Auth\User\ChangePwdViewModel.cs" />
+    <Compile Include="Models\Auth\User\EditUserViewModel.cs" />
+    <Compile Include="Models\Auth\User\LoginViewModel.cs" />
+    <Compile Include="Models\Auth\User\AddUserViewModel.cs" />
+    <Compile Include="Models\Base\AddDictTypeViewModel.cs" />
+    <Compile Include="Models\Base\AddDictViewModel.cs" />
+    <Compile Include="Models\DelByIdViewModel.cs" />
+    <Compile Include="Models\TokenData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -140,6 +167,12 @@
       <Project>{1ecb045c-bb92-481a-ba25-bf0b48a92dfd}</Project>
       <Name>Service</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

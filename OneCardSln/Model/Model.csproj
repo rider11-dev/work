@@ -64,8 +64,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Auth\Permission.cs" />
-    <Compile Include="Auth\UerPermissionRel.cs" />
+    <Compile Include="Auth\UserPermissionRel.cs" />
     <Compile Include="Auth\User.cs" />
+    <Compile Include="Base\Dict.cs" />
+    <Compile Include="Base\DictType.cs" />
     <Compile Include="Card\CardBill.cs" />
     <Compile Include="Card\CardInfo.cs" />
     <Compile Include="Card\CardOperator.cs" />
@@ -77,6 +79,7 @@
     <Compile Include="Courses\CourseTaken.cs" />
     <Compile Include="OptResult.cs" />
     <Compile Include="Card\PayEntity.cs" />
+    <Compile Include="PageQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Card\RefundEntity.cs" />
     <Compile Include="ResultCode.cs" />
@@ -84,7 +87,12 @@
     <Compile Include="Tools\ToolRent.cs" />
     <Compile Include="Tools\ToolReturn.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Components\Components.csproj">
+      <Project>{9ed019a0-a26a-4725-aa70-2b52bf7a5416}</Project>
+      <Name>Components</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

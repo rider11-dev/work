@@ -18,6 +18,7 @@ namespace OneCardSln.WebApi.Extensions
         ILogHelper<CustomExceptionLogger> _logHelper = LogHelperFactory.GetLogHelper<CustomExceptionLogger>();
         public override void Log(ExceptionLoggerContext context)
         {
+            //异步日志
             Task.Run(() =>
             {
                 _logHelper.LogError(context.Exception);

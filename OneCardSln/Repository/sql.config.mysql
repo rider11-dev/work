@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <sqlarea name="auth">
+    <sqlgroup name="auth_user">
+      <sql name="changepwd">
+        update auth_user set user_pwd=@user_pwd where user_id=@user_id;
+      </sql>
+    </sqlgroup>
+  </sqlarea>
+  <sqlarea name="one_card">
+
+  </sqlarea>
+</configuration>

@@ -1,0 +1,39 @@
+/*
+update card_courses_repeat set repeat_type='weekly',day_of_month=null,day_of_week=5;
+select DAYOFWEEK(curdate()) ;
+select DAYOFMONTH(curdate()) ;
+select * from card_courses_repeat;
+select IF(0,'yes','no'); 
+
+
+select if(DAYOFWEEK(curdate())-1<b.day_of_week,'a','b') 
+from card_courses_repeat b
+
+
+select date_add(curdate(),INTERVAL 7+b.day_of_week-DAYOFWEEK(curdate())+1 day) from card_courses_repeat b 
+
+select date_add(curdate() - day(curdate()) + 1, interval 1 month)
+
+*/
+
+select a.*,b.repeat_type,b.begin_time,
+case 
+when b.repeat_type = 'once' then b.date 
+when b.repeat_type = 'dayly' then DATE_ADD(curdate(),INTERVAL 1 day)
+when b.repeat_type = 'weekly' then 
+		 if(DAYOFWEEK(curdate())-1<b.day_of_week,
+				date_add(curdate(),INTERVAL b.day_of_week-DAYOFWEEK(curdate())+1 day),
+				date_add(curdate(),INTERVAL 7+b.day_of_week-DAYOFWEEK(curdate())+1 day))
+when b.repeat_type = 'monthly' then 
+		  if(DAYOFMONTH(curdate())<b.day_of_month,
+				DATE_ADD(curdate(),INTERVAL b.day_of_month-DAYOFMONTH(curdate()) day),
+				DATE_ADD(date_add(curdate() - day(curdate()) + 1, interval 1 month),INTERVAL b.day_of_month-1 day))
+end next_date,
+case 
+when b.repeat_type = 'once' then '一次' 
+when b.repeat_type = 'dayly' then '每天' 
+when b.repeat_type = 'weekly' then CONCAT('每周',b.day_of_week) 
+when b.repeat_type = 'monthly' then CONCAT('每月',b.day_of_month,'号') 
+end repeat_set 
+from card_courses a
+left join card_courses_repeat b on a.id = b.courseid 

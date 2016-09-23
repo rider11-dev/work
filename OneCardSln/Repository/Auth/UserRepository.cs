@@ -13,7 +13,7 @@ namespace OneCardSln.Repository.Auth
         public UserRepository(IDbSession dbsession)
             : base(dbsession)
         {
-            
+            SqlConf = new SqlConfEntity { area = "auth", group = "auth_user" };
         }
     }
 }

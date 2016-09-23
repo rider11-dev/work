@@ -1,8 +1,11 @@
 ﻿using Autofac;
 using Autofac.Integration.WebApi;
 using OneCardSln.Repository.Auth;
+using OneCardSln.Repository.Base;
 using OneCardSln.Repository.Db;
 using OneCardSln.Service.Auth;
+using OneCardSln.Service.Base;
+using OneCardSln.WebApi.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,25 +34,39 @@ namespace OneCardSln.WebApi
             var config = GlobalConfiguration.Configuration;
             var container = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+
         }
 
         static void RegisterControllers(ContainerBuilder builder)
         {
-            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly()).PropertiesAutowired(PropertyWiringOptions.None);
         }
 
         static void RegisterBussinessModules(ContainerBuilder builder)
         {
             builder.RegisterType<DbSession>().As<IDbSession>().InstancePerRequest();
+            //
+            builder.RegisterType(typeof(DictTypeRepository)).InstancePerRequest();
+            builder.RegisterType(typeof(DictTypeService)).InstancePerRequest();
+            //
+            builder.RegisterType(typeof(DictRepository)).InstancePerRequest();
+            builder.RegisterType(typeof(DictService)).InstancePerRequest();
 
+            //
             builder.RegisterType(typeof(UserRepository)).InstancePerRequest();
             builder.RegisterType(typeof(UserService)).InstancePerRequest();
+            //
+            builder.RegisterType(typeof(PermissionRepository)).InstancePerRequest();
+            builder.RegisterType(typeof(PermissionService)).InstancePerRequest();
+            //
+            builder.RegisterType(typeof(UserPermissionRelRepository)).InstancePerRequest();
+
         }
 
         static void InitDapper()
         {
             DapperExtensions.DapperExtensions.SqlDialect = DbUtils.GetSqlDialect();
-            DapperExtensions.DapperExtensions.SetMappingAssemblies(new[] { Assembly.Load("OneCardSln.Repository") });
+            DapperExtensions.DapperExtensions.SetMappingAssemblies(new[] { Assembly.Load("OneCardSln.Repository"), Assembly.Load("OneCardSln.Service") });
         }
     }
 }

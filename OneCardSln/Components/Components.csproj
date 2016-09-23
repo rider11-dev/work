@@ -65,6 +65,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dlls\dev\DevExpress.XtraEditors.v14.1.dll</HintPath>
     </Reference>
+    <Reference Include="EmitMapper">
+      <HintPath>..\packages\EmitMapper.1.0.0\lib\EmitMapper.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\dlls\log4net\log4net.dll</HintPath>
     </Reference>
@@ -86,11 +89,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppSettingHelper.cs" />
-    <Compile Include="EncryptionHelper.cs" />
+    <Compile Include="Extensions\DateTimeExtension.cs" />
+    <Compile Include="Extensions\EncryptionExtension.cs" />
     <Compile Include="Extensions\BooleanExtension.cs" />
     <Compile Include="Extensions\DataExtention.cs" />
+    <Compile Include="Extensions\DynamicExtension.cs" />
     <Compile Include="Extensions\EnumExtension.cs" />
     <Compile Include="Extensions\ExceptionExtension.cs" />
+    <Compile Include="Extensions\FileExtension.cs" />
+    <Compile Include="Extensions\GuidExtension.cs" />
     <Compile Include="Extensions\NumberExtension.cs" />
     <Compile Include="HttpHelper.cs" />
     <Compile Include="IDCard\IDCardData_SS.cs" />
@@ -105,6 +112,7 @@
     <Compile Include="Logger\Log4NetHelper.cs" />
     <Compile Include="Logger\LogHelperFactory.cs" />
     <Compile Include="Logger\LogHelperProvider.cs" />
+    <Compile Include="Mapper\OOMapper.cs" />
     <Compile Include="NFC\LotusNFCCardDriver.cs" />
     <Compile Include="NFC\NFCCardReaderHelper.cs" />
     <Compile Include="PinYinConverter.cs" />

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rest-client version="3.4.2"><request><http-version>1.1</http-version><http-follow-redirects/><URL>http://192.168.18.36:8080/dfh/OneCardSln/PayServiceHandler</URL><method>POST</method><body><string content-type="application/json" charset="UTF-8">{
+"idcard":"111111111111111111",
+"order":"order_test_zpf1",
+"payamount":"10",
+"src":"消费测试",
+"remark":"消费测试测试"
+}</string></body></request></rest-client>

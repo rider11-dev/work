@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.Common;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -116,5 +117,6 @@ namespace OneCardSln.Repository.Db
                     return new SqlServerDialect();
             }
         }
+
     }
 }

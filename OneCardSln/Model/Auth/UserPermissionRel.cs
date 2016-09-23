@@ -9,7 +9,7 @@ namespace OneCardSln.Model.Auth
     /// <summary>
     /// 权限控制——用户权限关联
     /// </summary>
-    public class UerPermissionRel
+    public class UserPermissionRel
     {
         public string rel_id { get; set; }
         public string rel_userid { get; set; }

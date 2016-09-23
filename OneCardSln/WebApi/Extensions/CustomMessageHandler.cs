@@ -17,20 +17,23 @@ namespace OneCardSln.WebApi.Extensions
         ILogHelper<CustomMessageHandler> _logHelper = LogHelperFactory.GetLogHelper<CustomMessageHandler>();
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            if (request.Content != null)
+            //异步写日志
+            Task.Run(() =>
             {
-                string msg = string.Format("本次请求:{0}\tUrl:{1}{0}\tMethod:{2}{0}\tContent：{3}",
-                    Environment.NewLine,
-                    request.RequestUri.ToString(),
-                    request.Method.ToString(),
-                    request.Content.ReadAsStringAsync().Result);
+                string msg = string.Format("{0}本次请求:{0}{1}{0}", Environment.NewLine, request.ToString());
+
+                if (request.Content != null)
+                {
+                    msg += string.Format("Content:{0}\t{1}", Environment.NewLine, request.Content.ReadAsStringAsync().Result);
+                }
+                
                 _logHelper.LogInfo(msg);
-            }
+            });
 
             return base.SendAsync(request, cancellationToken).ContinueWith<HttpResponseMessage>(
                     (task) =>
                     {
-                        _logHelper.LogInfo(string.Format("本次响应Content：{0}", task.Result.Content.ReadAsStringAsync().Result));
+                        _logHelper.LogInfo(string.Format("本次响应：{0}Content：{1}", Environment.NewLine, task.Result.Content.ReadAsStringAsync().Result));
                         return task.Result;
                     }
                 );

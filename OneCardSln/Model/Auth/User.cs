@@ -15,7 +15,9 @@ namespace OneCardSln.Model.Auth
         public string user_name { get; set; }
         public string user_pwd { get; set; }
         public string user_idcard { get; set; }
+        public string user_truename { get; set; }
         public string user_regioncode { get; set; }
         public string user_remark { get; set; }
+        public string user_creator { get; set; }
     }
 }

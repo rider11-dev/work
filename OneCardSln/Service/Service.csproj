@@ -54,8 +54,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auth\Mapper\UserDtoMapper.cs" />
+    <Compile Include="Auth\PermissionService.cs" />
     <Compile Include="Auth\UserService.cs" />
+    <Compile Include="Base\DictService.cs" />
+    <Compile Include="Base\DictTypeService.cs" />
     <Compile Include="IBaseService.cs" />
+    <Compile Include="Auth\Models\UserDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +80,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

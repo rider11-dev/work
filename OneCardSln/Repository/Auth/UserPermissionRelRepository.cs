@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OneCardSln.Repository.Auth
 {
-    public class UserPermissionRelRepository : BaseRepository<UerPermissionRel>, IBaseRepository<UerPermissionRel>
+    public class UserPermissionRelRepository : BaseRepository<UserPermissionRel>, IBaseRepository<UserPermissionRel>
     {
         public UserPermissionRelRepository(IDbSession dbsession)
             : base(dbsession)
