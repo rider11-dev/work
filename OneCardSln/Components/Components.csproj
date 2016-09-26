@@ -57,14 +57,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevExpress.Utils.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\dlls\dev\DevExpress.Utils.v14.1.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.XtraEditors.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\dlls\dev\DevExpress.XtraEditors.v14.1.dll</HintPath>
-    </Reference>
     <Reference Include="EmitMapper">
       <HintPath>..\packages\EmitMapper.1.0.0\lib\EmitMapper.dll</HintPath>
     </Reference>
@@ -80,7 +72,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -99,6 +90,7 @@
     <Compile Include="Extensions\FileExtension.cs" />
     <Compile Include="Extensions\GuidExtension.cs" />
     <Compile Include="Extensions\NumberExtension.cs" />
+    <Compile Include="Extensions\RegexExtension.cs" />
     <Compile Include="HttpHelper.cs" />
     <Compile Include="IDCard\IDCardData_SS.cs" />
     <Compile Include="IDCard\IDCardData_XZX.cs" />
@@ -208,37 +200,6 @@
     <Compile Include="Serializer\Serializer.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="ValidateHelper.cs" />
-    <Compile Include="WinForm\ControlDataGridViewEx.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="WinForm\ControlPagination.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="WinForm\ControlPagination.Designer.cs">
-      <DependentUpon>ControlPagination.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WinForm\ControlReadCardSucceedHandler.cs" />
-    <Compile Include="WinForm\ControlReadIdCard.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="WinForm\ControlReadIdCard.Designer.cs">
-      <DependentUpon>ControlReadIdCard.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WinForm\ControlReadNFCCard.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="WinForm\ControlReadNFCCard.Designer.cs">
-      <DependentUpon>ControlReadNFCCard.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WinForm\DataGridViewCheckBoxHeaderCell.cs" />
-    <Compile Include="WinForm\DataGridViewExtension.cs" />
-    <Compile Include="WinForm\FormBase.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinForm\FormBase.Designer.cs">
-      <DependentUpon>FormBase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WinForm\PagingArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\licenses.licx" />
@@ -246,15 +207,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\ControlPagination.resx">
-      <DependentUpon>ControlPagination.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\ControlReadIdCard.resx">
-      <DependentUpon>ControlReadIdCard.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForm\ControlReadNFCCard.resx">
-      <DependentUpon>ControlReadNFCCard.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

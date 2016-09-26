@@ -123,21 +123,29 @@ namespace OneCardSln.Service.Auth
                 rst = OptResult.Build(ResultCode.DataNotFound, Msg_DeletePer);
                 return rst;
             }
-            //2、是否包含下级权限
+
+            //2、系统预制不允许删除
+            if (per.per_system == true)
+            {
+                rst = OptResult.Build(ResultCode.DataSystem, Msg_DeletePer + "失败");
+                return rst;
+            }
+
+            //3、是否包含下级权限
             var count = _perRep.Count(Predicates.Field<Permission>(p => p.per_parent, Operator.Eq, pkId as object));
             if (count > 0)
             {
                 rst = OptResult.Build(ResultCode.DataInUse, string.Format("{0}，存在下级权限", Msg_DeletePer));
                 return rst;
             }
-            //3、是否已被分配
+            //4、是否已被分配
             count = _usrPerRelRep.Count(Predicates.Field<UserPermissionRel>(r => r.rel_permissionid, Operator.Eq, pkId as object));
             if (count > 0)
             {
                 rst = OptResult.Build(ResultCode.DataInUse, string.Format("{0}，已分配到用户", Msg_DeletePer));
                 return rst;
             }
-            //4、删除
+            //5、删除
             var val = _perRep.Delete(Predicates.Field<Permission>(p => p.per_id, Operator.Eq, pkId as object));
             rst = OptResult.Build(val ? ResultCode.Success : ResultCode.Fail, Msg_DeletePer);
 
@@ -178,8 +186,7 @@ namespace OneCardSln.Service.Auth
             long total = 0;
             IList<ISort> sort = new[]
             {
-                new Sort{PropertyName="per_parent",Ascending=true},
-                new Sort{PropertyName="per_code",Ascending=true},
+                new Sort{PropertyName="per_sort",Ascending=true}
             };
             var pers = _perRep.GetPageList(page.pageIndex, page.pageSize, out total, sort, pg);
             rst = OptResult.Build(ResultCode.Success, Msg_QueryByPage, new
@@ -192,9 +199,9 @@ namespace OneCardSln.Service.Auth
         }
 
         //私有方法
-        //TODO
+
         /// <summary>
-        /// 权限类型是否合法，暂时写死，应该从数据库基础字典查询
+        /// 权限类型是否合法（是否在基础字典存在）
         /// </summary>
         /// <param name="perType"></param>
         /// <param name="msg"></param>

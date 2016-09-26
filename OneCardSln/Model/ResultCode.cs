@@ -8,8 +8,8 @@ namespace OneCardSln.Model
 {
     public enum ResultCode
     {
-        [Description("未知操作")]
-        Unknown = -1,
+        [Description("异常")]
+        Exception = -1,
         [Description("成功")]
         Success = 1,
         [Description("失败")]
@@ -30,5 +30,7 @@ namespace OneCardSln.Model
         DataInUse = 8,
         [Description("数据重复")]
         DataRepeat = 9,
+        [Description("系统预制数据")]
+        DataSystem = 10,
     }
 }

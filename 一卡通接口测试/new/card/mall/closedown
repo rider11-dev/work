@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rest-client version="3.4.2"><request><http-version>1.1</http-version><http-follow-redirects/><URL>http://localhost/aaa/api/card/mall/closedown</URL><method>POST</method><headers><header key="token" value="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhZG1pbiIsImlhdCI6MTQ3NDUxNDg0OH0.DOPpvuGdYG0HHqc9-C11UGHdDjuwwTdjI1U1iue-Bkc"/></headers><body><string content-type="application/json" charset="UTF-8">{
+"pk":"test_number"
+}</string></body></request></rest-client>

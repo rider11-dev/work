@@ -10,12 +10,12 @@ namespace OneCardSln.Model
     /// </summary>
     public class CardRecord
     {
-        public String id { get; set; }
-        public String number { get; set; }
-        public String username { get; set; }
-        public String idcard { get; set; }
-        public String type { get; set; }
-        public DateTime time { get; set; }
-        public String @operator { get; set; }
+        public String rec_id { get; set; }
+        public String rec_number { get; set; }
+        public String rec_username { get; set; }
+        public String rec_idcard { get; set; }
+        public String rec_type { get; set; }
+        public DateTime rec_time { get; set; }
+        public String rec_operator { get; set; }
     }
 }

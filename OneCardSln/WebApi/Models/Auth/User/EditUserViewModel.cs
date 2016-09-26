@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OneCardSln.Components.Extensions;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace OneCardSln.WebApi.Models.Auth.User
         public string user_truename { get; set; }
 
         [StringLength(18, MinimumLength = 15, ErrorMessageResourceName = "Idcard_Length", ErrorMessageResourceType = typeof(Resources.Resource))]
-        [RegularExpression(@"^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$", ErrorMessageResourceName = "Idcard_Regx", ErrorMessageResourceType = typeof(Resources.Resource))]
+        [RegularExpression(RegexExtension.Regex_Idcard, ErrorMessageResourceName = "Idcard_Regx", ErrorMessageResourceType = typeof(Resources.Resource))]
         public string user_idcard { get; set; }
 
         [MaxLength(10, ErrorMessageResourceName = "Regioncode_Max", ErrorMessageResourceType = typeof(Resources.Resource))]

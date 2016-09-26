@@ -13,3 +13,7 @@
 /OneCardSln/WebApi/obj
 /OneCardSln/Service/obj
 /OneCardSln/Service/bin
+/OneCardSln/Controls.WinForm/obj
+/OneCardSln/Controls.WinForm/bin
+/OneCardSln/Controls.WPF/obj
+/OneCardSln/Controls.WPF/bin

@@ -141,6 +141,9 @@
   <data name="Edit_By_Id" xml:space="preserve">
     <value>请指定要修改的数据</value>
   </data>
+  <data name="GetByPk_Require" xml:space="preserve">
+    <value>主键id不能为空</value>
+  </data>
   <data name="Idcard_Length" xml:space="preserve">
     <value>身份证长度必须在{2}和{1}之间</value>
   </data>
@@ -148,7 +151,7 @@
     <value>身份证号格式不正确</value>
   </data>
   <data name="Idcard_Require" xml:space="preserve">
-    <value>身份证号不能为</value>
+    <value>身份证号不能为空</value>
   </data>
   <data name="Name_Require" xml:space="preserve">
     <value>名称不能为空</value>
@@ -168,11 +171,26 @@
   <data name="Per_Type_Require" xml:space="preserve">
     <value>权限类别不能为空</value>
   </data>
+  <data name="Phone_Require" xml:space="preserve">
+    <value>手机号不能为空</value>
+  </data>
   <data name="Pwd_Regex" xml:space="preserve">
     <value>密码格式不正确，只能是数字、字母和下划线的组合，密码长度必须在6~10个字符之间</value>
   </data>
   <data name="Pwd_Require" xml:space="preserve">
     <value>密码不能为空</value>
+  </data>
+  <data name="RegCard_Account_Length" xml:space="preserve">
+    <value>一卡通账户用户名最大为{1}个字符</value>
+  </data>
+  <data name="RegCard_Account_Require" xml:space="preserve">
+    <value>一卡通账户名称不能为空</value>
+  </data>
+  <data name="RegCard_Number_Require" xml:space="preserve">
+    <value>一卡通号不能为空</value>
+  </data>
+  <data name="Regex_CellPhone" xml:space="preserve">
+    <value>手机号码格式不正确</value>
   </data>
   <data name="Regioncode_Max" xml:space="preserve">
     <value>区域编码最大为{1}个字符</value>
@@ -182,6 +200,12 @@
   </data>
   <data name="Remark_Length" xml:space="preserve">
     <value>备注最大为{1}个字符</value>
+  </data>
+  <data name="Sort_Length" xml:space="preserve">
+    <value>排序号最大为{1}个字符</value>
+  </data>
+  <data name="Sort_Regex" xml:space="preserve">
+    <value>排序号格式不正确，只能输入0~9的字符组合</value>
   </data>
   <data name="UserId_Require" xml:space="preserve">
     <value>用户id不能为空</value>

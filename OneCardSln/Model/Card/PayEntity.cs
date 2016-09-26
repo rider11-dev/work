@@ -23,7 +23,7 @@ namespace OneCardSln.Model
         /// <summary>
         /// 消费金额
         /// </summary>
-        public decimal payamount { get; set; }
+        public decimal amount { get; set; }
 
         /// <summary>
         /// 消费来源：手机端、电脑商城
@@ -38,7 +38,7 @@ namespace OneCardSln.Model
         /// </summary>
         public string order { get; set; }
 
-        public EnumPayPrior payprior { get; set; }
+        public EnumPayPriority priority { get; set; }
 
         /// <summary>
         /// 操作人

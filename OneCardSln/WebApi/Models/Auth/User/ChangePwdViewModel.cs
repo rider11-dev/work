@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OneCardSln.Components.Extensions;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace OneCardSln.WebApi.Models.Auth.User
         public string oldpwd { get; set; }
 
         [Required(ErrorMessageResourceName = "NewPwd_Require", ErrorMessageResourceType = typeof(Resources.Resource))]
-        [RegularExpression(@"^(\d|[a-zA-Z]|_){6,10}$", ErrorMessageResourceName = "Pwd_Regex", ErrorMessageResourceType = typeof(Resources.Resource))]
+        [RegularExpression(RegexExtension.Regex_Pwd, ErrorMessageResourceName = "Pwd_Regex", ErrorMessageResourceType = typeof(Resources.Resource))]
         public string newpwd { get; set; }
     }
 }

@@ -116,12 +116,13 @@ namespace OneCardSln.Repository.Db
                         {
                             if (_transaction != null)
                             {
-                                _transaction.Rollback();
                                 _transaction.Dispose();
+                                _transaction = null;
                             }
                         }
                         _connection.Close();
                         _connection.Dispose();
+                        _connection = null;
                     }
                 }
                 _isDisposed = true;

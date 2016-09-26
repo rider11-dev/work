@@ -103,7 +103,7 @@ namespace OneCardSln.Service.Base
             //2、是否系统预制
             if (type.type_system)
             {
-                rst = OptResult.Build(ResultCode.Fail, string.Format("{0}，编号{1}为系统预制类型！", Msg_Delete, typeCode));
+                rst = OptResult.Build(ResultCode.DataSystem, string.Format("{0}，编号{1}为系统预制类型！", Msg_Delete, typeCode));
                 return rst;
             }
             //3、是否已被引用

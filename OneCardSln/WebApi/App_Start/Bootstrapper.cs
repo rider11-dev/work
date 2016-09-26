@@ -2,9 +2,11 @@
 using Autofac.Integration.WebApi;
 using OneCardSln.Repository.Auth;
 using OneCardSln.Repository.Base;
+using OneCardSln.Repository.Card;
 using OneCardSln.Repository.Db;
 using OneCardSln.Service.Auth;
 using OneCardSln.Service.Base;
+using OneCardSln.Service.Card;
 using OneCardSln.WebApi.Filters;
 using System;
 using System.Collections.Generic;
@@ -60,6 +62,14 @@ namespace OneCardSln.WebApi
             builder.RegisterType(typeof(PermissionService)).InstancePerRequest();
             //
             builder.RegisterType(typeof(UserPermissionRelRepository)).InstancePerRequest();
+            builder.RegisterType(typeof(UserPermissionRelService)).InstancePerRequest();
+            //
+            builder.RegisterType(typeof(CardInfoRepository)).InstancePerRequest();
+            builder.RegisterType(typeof(CardInfoService)).InstancePerRequest();
+            //
+            builder.RegisterType(typeof(CardRecordRepository)).InstancePerRequest();
+
+            builder.RegisterType(typeof(MallAccountService)).InstancePerRequest();
 
         }
 

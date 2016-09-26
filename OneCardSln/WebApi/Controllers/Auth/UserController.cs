@@ -23,10 +23,12 @@ namespace OneCardSln.WebApi.Controllers.Auth
 
         //私有变量
         UserService _usrSrv;
+        UserPermissionRelService _usrPerRelSrv;
 
-        public UserController(UserService usrSrv)
+        public UserController(UserService usrSrv, UserPermissionRelService usrPerRelSrv)
         {
             _usrSrv = usrSrv;
+            _usrPerRelSrv = usrPerRelSrv;
         }
 
         [HttpPost]
@@ -138,6 +140,48 @@ namespace OneCardSln.WebApi.Controllers.Auth
             OptResult rst = null;
 
             rst = _usrSrv.QueryByPage(page);
+
+            return rst;
+        }
+
+        [HttpPost]
+        [Route("assign")]
+        public OptResult AssignPermissions(AssignPermissionViewModel vmAssignPer)
+        {
+            OptResult rst = null;
+            if (vmAssignPer == null)
+            {
+                rst = OptResult.Build(ResultCode.ParamError, "参数不能为空或格式不正确");
+                return rst;
+            }
+            if (!ModelState.IsValid)
+            {
+                rst = OptResult.Build(ResultCode.ParamError, ModelState.Parse());
+                return rst;
+            }
+
+            //
+            rst = _usrPerRelSrv.AssignPermissions(vmAssignPer.userId, vmAssignPer.perIds, vmAssignPer.assignAll);
+
+            return rst;
+        }
+
+        [HttpPost]
+        [Route("getper")]
+        public OptResult GetPermissions(GetByIdViewModel vmGetByPk)
+        {
+            OptResult rst = null;
+            if (vmGetByPk == null)
+            {
+                rst = OptResult.Build(ResultCode.ParamError, "参数不能为空或格式不正确");
+                return rst;
+            }
+            if (!ModelState.IsValid)
+            {
+                rst = OptResult.Build(ResultCode.ParamError, ModelState.Parse());
+                return rst;
+            }
+            rst = _usrPerRelSrv.GetPermissions(vmGetByPk.pk);
 
             return rst;
         }

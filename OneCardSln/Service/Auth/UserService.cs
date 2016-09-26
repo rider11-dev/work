@@ -83,6 +83,8 @@ namespace OneCardSln.Service.Auth
             usr.user_pwd = EncryptionExtension.GetMd5Hash(usr.user_idcard.Substring(usr.user_idcard.Length - 6, 6));//初始密码身份证后六位
             var val = _usrRep.Insert(usr);
 
+            //3、新增用户默认权限
+
             rst = OptResult.Build(ResultCode.Success, Msg_AddUser);
 
             return rst;
@@ -221,5 +223,6 @@ namespace OneCardSln.Service.Auth
 
             return rst;
         }
+
     }
 }

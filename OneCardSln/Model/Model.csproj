@@ -70,10 +70,8 @@
     <Compile Include="Base\DictType.cs" />
     <Compile Include="Card\CardBill.cs" />
     <Compile Include="Card\CardInfo.cs" />
-    <Compile Include="Card\CardOperator.cs" />
     <Compile Include="Card\CardRecord.cs" />
-    <Compile Include="Card\EnumPayPrior.cs" />
-    <Compile Include="Card\IDCardInfo.cs" />
+    <Compile Include="Card\EnumPayPriority.cs" />
     <Compile Include="Courses\Course.cs" />
     <Compile Include="Courses\CourseRepeatSet.cs" />
     <Compile Include="Courses\CourseTaken.cs" />

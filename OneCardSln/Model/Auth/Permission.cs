@@ -16,6 +16,8 @@ namespace OneCardSln.Model.Auth
         public string per_name { get; set; }
         public string per_type { get; set; }
         public string per_parent { get; set; }
+        public string per_sort { get; set; }
+        public bool per_system { get; set; }
         public string per_remark { get; set; }
     }
 }

@@ -45,6 +45,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\DapperExtensions.1.4.4\lib\net40\DapperExtensions.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -55,10 +59,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Auth\Mapper\UserDtoMapper.cs" />
+    <Compile Include="Auth\Models\UserPremissionDto.cs" />
     <Compile Include="Auth\PermissionService.cs" />
+    <Compile Include="Auth\UserPermissionRelService.cs" />
     <Compile Include="Auth\UserService.cs" />
     <Compile Include="Base\DictService.cs" />
     <Compile Include="Base\DictTypeService.cs" />
+    <Compile Include="Card\CardInfoService.cs" />
+    <Compile Include="Card\MallAccountService.cs" />
+    <Compile Include="Card\Models\API.cs" />
+    <Compile Include="Context.cs" />
     <Compile Include="IBaseService.cs" />
     <Compile Include="Auth\Models\UserDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,6 +88,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="api_card.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

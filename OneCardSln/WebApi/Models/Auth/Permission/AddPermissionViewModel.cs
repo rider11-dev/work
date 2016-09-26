@@ -1,4 +1,5 @@
-﻿using OneCardSln.WebApi.Extensions.Validation;
+﻿using OneCardSln.Components.Extensions;
+using OneCardSln.WebApi.Extensions.Validation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -21,6 +22,10 @@ namespace OneCardSln.WebApi.Models.Auth.Permission
         public string per_type { get; set; }
 
         public string per_parent { get; set; }
+
+        [RegularExpression(RegexExtension.Regex_Sort, ErrorMessageResourceName = "Sort_Regex", ErrorMessageResourceType = typeof(Resources.Resource))]
+        [MaxLength(10, ErrorMessageResourceName = "Sort_Length", ErrorMessageResourceType = typeof(Resources.Resource))]
+        public string per_sort { get; set; }
 
         [MaxLength(200, ErrorMessageResourceName = "Remark_Length", ErrorMessageResourceType = typeof(Resources.Resource))]
         public string per_remark { get; set; }

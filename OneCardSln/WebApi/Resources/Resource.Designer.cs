@@ -133,6 +133,15 @@ namespace OneCardSln.WebApi.Resources {
         }
         
         /// <summary>
+        ///   查找类似 主键id不能为空 的本地化字符串。
+        /// </summary>
+        internal static string GetByPk_Require {
+            get {
+                return ResourceManager.GetString("GetByPk_Require", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 身份证长度必须在{2}和{1}之间 的本地化字符串。
         /// </summary>
         internal static string Idcard_Length {
@@ -151,7 +160,7 @@ namespace OneCardSln.WebApi.Resources {
         }
         
         /// <summary>
-        ///   查找类似 身份证号不能为 的本地化字符串。
+        ///   查找类似 身份证号不能为空 的本地化字符串。
         /// </summary>
         internal static string Idcard_Require {
             get {
@@ -214,6 +223,15 @@ namespace OneCardSln.WebApi.Resources {
         }
         
         /// <summary>
+        ///   查找类似 手机号不能为空 的本地化字符串。
+        /// </summary>
+        internal static string Phone_Require {
+            get {
+                return ResourceManager.GetString("Phone_Require", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 密码格式不正确，只能是数字、字母和下划线的组合，密码长度必须在6~10个字符之间 的本地化字符串。
         /// </summary>
         internal static string Pwd_Regex {
@@ -228,6 +246,42 @@ namespace OneCardSln.WebApi.Resources {
         internal static string Pwd_Require {
             get {
                 return ResourceManager.GetString("Pwd_Require", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 一卡通账户用户名最大为{1}个字符 的本地化字符串。
+        /// </summary>
+        internal static string RegCard_Account_Length {
+            get {
+                return ResourceManager.GetString("RegCard_Account_Length", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 一卡通账户名称不能为空 的本地化字符串。
+        /// </summary>
+        internal static string RegCard_Account_Require {
+            get {
+                return ResourceManager.GetString("RegCard_Account_Require", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 一卡通号不能为空 的本地化字符串。
+        /// </summary>
+        internal static string RegCard_Number_Require {
+            get {
+                return ResourceManager.GetString("RegCard_Number_Require", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 手机号码格式不正确 的本地化字符串。
+        /// </summary>
+        internal static string Regex_CellPhone {
+            get {
+                return ResourceManager.GetString("Regex_CellPhone", resourceCulture);
             }
         }
         
@@ -255,6 +309,24 @@ namespace OneCardSln.WebApi.Resources {
         internal static string Remark_Length {
             get {
                 return ResourceManager.GetString("Remark_Length", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 排序号最大为{1}个字符 的本地化字符串。
+        /// </summary>
+        internal static string Sort_Length {
+            get {
+                return ResourceManager.GetString("Sort_Length", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 排序号格式不正确，只能输入0~9的字符组合 的本地化字符串。
+        /// </summary>
+        internal static string Sort_Regex {
+            get {
+                return ResourceManager.GetString("Sort_Regex", resourceCulture);
             }
         }
         

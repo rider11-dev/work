@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{7E7C4A44-1919-4C56-8227-515544EA99F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controls.WinForm", "Controls.WinForm\Controls.WinForm.csproj", "{0CA1494C-37E6-4F89-8EE9-771AB8904EF8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controls.WPF", "Controls.WPF\Controls.WPF.csproj", "{6324A5CC-0DAF-4AF4-80A3-5D2A60769C96}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +59,18 @@ Global
 		{7E7C4A44-1919-4C56-8227-515544EA99F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E7C4A44-1919-4C56-8227-515544EA99F5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7E7C4A44-1919-4C56-8227-515544EA99F5}.Release|x86.ActiveCfg = Release|Any CPU
+		{0CA1494C-37E6-4F89-8EE9-771AB8904EF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CA1494C-37E6-4F89-8EE9-771AB8904EF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CA1494C-37E6-4F89-8EE9-771AB8904EF8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0CA1494C-37E6-4F89-8EE9-771AB8904EF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CA1494C-37E6-4F89-8EE9-771AB8904EF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CA1494C-37E6-4F89-8EE9-771AB8904EF8}.Release|x86.ActiveCfg = Release|Any CPU
+		{6324A5CC-0DAF-4AF4-80A3-5D2A60769C96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6324A5CC-0DAF-4AF4-80A3-5D2A60769C96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6324A5CC-0DAF-4AF4-80A3-5D2A60769C96}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6324A5CC-0DAF-4AF4-80A3-5D2A60769C96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6324A5CC-0DAF-4AF4-80A3-5D2A60769C96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6324A5CC-0DAF-4AF4-80A3-5D2A60769C96}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -27,7 +27,7 @@ namespace OneCardSln.Model
 
         public OptResult()
         {
-            code = ResultCode.Unknown;
+            code = ResultCode.Fail;
         }
 
         public static OptResult Build(ResultCode code, string msg = "", dynamic data = null)

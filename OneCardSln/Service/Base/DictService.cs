@@ -45,7 +45,22 @@ namespace OneCardSln.Service.Base
                 rst = OptResult.Build(ResultCode.DataRepeat, string.Format("{0}，类型{1}下已存在编号{2}！", Msg_Add, dict.dict_type, dict.dict_code));
                 return rst;
             }
-            //3、新增
+            //3、相同类型下，只能有一个默认值
+            if (dict.dict_default == true)
+            {
+                pg.Predicates.Clear();
+                pg.Predicates.Add(Predicates.Field<Dict>(d => d.dict_type, Operator.Eq, dict.dict_type));
+                pg.Predicates.Add(Predicates.Field<Dict>(d => d.dict_default, Operator.Eq, true));
+
+                count = _dictRep.Count(pg);                
+                if (count > 0)
+                {
+                    rst = OptResult.Build(ResultCode.DataRepeat, string.Format("{0}，类型{1}下已存在默认值！", Msg_Add, dict.dict_type));
+                    return rst;
+                }
+            }
+
+            //4、新增
             dict.dict_id = GuidExtension.GetOne();
             var val = _dictRep.Insert(dict);
 
@@ -70,7 +85,7 @@ namespace OneCardSln.Service.Base
             //3、是否系统预制
             if (dict.dict_system)
             {
-                rst = OptResult.Build(ResultCode.Fail, Msg_Delete + "，不能删除系统预制字典数据！");
+                rst = OptResult.Build(ResultCode.DataSystem, Msg_Delete + "，不能删除系统预制字典数据！");
                 return rst;
             }
             //4、删除

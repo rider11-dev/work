@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0CA1494C-37E6-4F89-8EE9-771AB8904EF8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OneCardSln.Components.Controls.WinForm</RootNamespace>
+    <AssemblyName>OneCardSln.Components.Controls.WinForm</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Utils.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dlls\dev\DevExpress.Utils.v14.1.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dlls\dev\DevExpress.XtraEditors.v14.1.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ControlDataGridViewEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ControlPagination.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlPagination.Designer.cs">
+      <DependentUpon>ControlPagination.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlReadCardSucceedHandler.cs" />
+    <Compile Include="ControlReadIdCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlReadIdCard.Designer.cs">
+      <DependentUpon>ControlReadIdCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlReadNFCCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlReadNFCCard.Designer.cs">
+      <DependentUpon>ControlReadNFCCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataGridViewCheckBoxHeaderCell.cs" />
+    <Compile Include="DataGridViewExtension.cs" />
+    <Compile Include="FormBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBase.Designer.cs">
+      <DependentUpon>FormBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PagingArgs.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ControlPagination.resx">
+      <DependentUpon>ControlPagination.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlReadIdCard.resx">
+      <DependentUpon>ControlReadIdCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlReadNFCCard.resx">
+      <DependentUpon>ControlReadNFCCard.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Components\Components.csproj">
+      <Project>{9ed019a0-a26a-4725-aa70-2b52bf7a5416}</Project>
+      <Name>Components</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

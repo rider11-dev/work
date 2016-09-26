@@ -31,6 +31,11 @@ namespace OneCardSln.Model.Base
         public bool dict_system { get; set; }
 
         /// <summary>
+        /// 是否默认值
+        /// </summary>
+        public bool dict_default { get; set; }
+
+        /// <summary>
         /// 排序号
         /// </summary>
         public int dict_order { get; set; }
