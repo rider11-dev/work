@@ -70,7 +70,7 @@ namespace OneCardSln.Repository.Db
             }
             catch (Exception ex)
             {
-                throw new Exception("开启事务错误：" + ex.Message);
+                throw new Exception("开启事务错误：", ex);
             }
         }
 
@@ -116,6 +116,11 @@ namespace OneCardSln.Repository.Db
                         {
                             if (_transaction != null)
                             {
+                                try
+                                {
+                                    _transaction.Rollback();
+                                }
+                                catch { }
                                 _transaction.Dispose();
                                 _transaction = null;
                             }

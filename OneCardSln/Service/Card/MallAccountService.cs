@@ -12,7 +12,7 @@ namespace OneCardSln.Service.Card
     /// <summary>
     /// 商城账户服务类
     /// </summary>
-    public class MallAccountService
+    public class MallAccountService : BaseService<dynamic>
     {
         const string Key_Api_GetAccountInfo = "getAccountInfo";
         const string Key_Api_CreateAccount = "createAccount";
@@ -26,6 +26,12 @@ namespace OneCardSln.Service.Card
         const string Msg_CloseDownAccount = "封停商城账户";
         const string Msg_ChangePhone = "商城账户手机号变更";
 
+
+        public MallAccountService()
+            : base(null, null)
+        {
+
+        }
 
         /// <summary>
         /// 调用商城接口——根据身份证号获取商城账户信息
@@ -50,6 +56,7 @@ namespace OneCardSln.Service.Card
             }
             catch (Exception ex)
             {
+                LogHelper.LogError(Msg_GetAccount, ex);
                 rst = OptResult.Build(ResultCode.Fail, Msg_GetAccount + "失败，" + ex.Message);
             }
 
@@ -91,6 +98,7 @@ namespace OneCardSln.Service.Card
             }
             catch (Exception ex)
             {
+                LogHelper.LogError(Msg_CreateAccount, ex);
                 rst = OptResult.Build(ResultCode.Fail, Msg_CreateAccount + "失败，" + ex.Message);
             }
             return rst;
@@ -120,6 +128,7 @@ namespace OneCardSln.Service.Card
             }
             catch (Exception ex)
             {
+                LogHelper.LogError(Msg_CloseDownAccount, ex);
                 rst = OptResult.Build(ResultCode.Fail, Msg_CloseDownAccount + "失败，" + ex.Message);
             }
 
@@ -151,6 +160,7 @@ namespace OneCardSln.Service.Card
             }
             catch (Exception ex)
             {
+                LogHelper.LogError(Msg_ChangePhone, ex);
                 rst = OptResult.Build(ResultCode.Fail, Msg_ChangePhone + "失败，" + ex.Message);
             }
 

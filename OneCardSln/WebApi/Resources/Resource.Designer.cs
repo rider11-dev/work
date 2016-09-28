@@ -61,6 +61,33 @@ namespace OneCardSln.WebApi.Resources {
         }
         
         /// <summary>
+        ///   查找类似 一卡通账户用户名最大为{1}个字符 的本地化字符串。
+        /// </summary>
+        internal static string Card_Account_Length {
+            get {
+                return ResourceManager.GetString("Card_Account_Length", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 一卡通账户名称不能为空 的本地化字符串。
+        /// </summary>
+        internal static string Card_Account_Require {
+            get {
+                return ResourceManager.GetString("Card_Account_Require", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 一卡通号不能为空 的本地化字符串。
+        /// </summary>
+        internal static string Card_Number_Require {
+            get {
+                return ResourceManager.GetString("Card_Number_Require", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 编号不能为空 的本地化字符串。
         /// </summary>
         internal static string Code_Require {
@@ -169,6 +196,15 @@ namespace OneCardSln.WebApi.Resources {
         }
         
         /// <summary>
+        ///   查找类似 身份证列表不能为空 的本地化字符串。
+        /// </summary>
+        internal static string Idcards_Require {
+            get {
+                return ResourceManager.GetString("Idcards_Require", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 名称不能为空 的本地化字符串。
         /// </summary>
         internal static string Name_Require {
@@ -192,6 +228,42 @@ namespace OneCardSln.WebApi.Resources {
         internal static string OldPwd_Require {
             get {
                 return ResourceManager.GetString("OldPwd_Require", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 操作员最大为{1}个字符 的本地化字符串。
+        /// </summary>
+        internal static string Opt_Length {
+            get {
+                return ResourceManager.GetString("Opt_Length", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 订单号不能为空 的本地化字符串。
+        /// </summary>
+        internal static string Order_Require {
+            get {
+                return ResourceManager.GetString("Order_Require", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 付款金额不能为空 的本地化字符串。
+        /// </summary>
+        internal static string Pay_Amount_Require {
+            get {
+                return ResourceManager.GetString("Pay_Amount_Require", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 付款来源最大为{1}个字符 的本地化字符串。
+        /// </summary>
+        internal static string Pay_Src_Length {
+            get {
+                return ResourceManager.GetString("Pay_Src_Length", resourceCulture);
             }
         }
         
@@ -250,29 +322,11 @@ namespace OneCardSln.WebApi.Resources {
         }
         
         /// <summary>
-        ///   查找类似 一卡通账户用户名最大为{1}个字符 的本地化字符串。
+        ///   查找类似 退款来源最大为{1}个字符 的本地化字符串。
         /// </summary>
-        internal static string RegCard_Account_Length {
+        internal static string Refund_Src_Length {
             get {
-                return ResourceManager.GetString("RegCard_Account_Length", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 一卡通账户名称不能为空 的本地化字符串。
-        /// </summary>
-        internal static string RegCard_Account_Require {
-            get {
-                return ResourceManager.GetString("RegCard_Account_Require", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 一卡通号不能为空 的本地化字符串。
-        /// </summary>
-        internal static string RegCard_Number_Require {
-            get {
-                return ResourceManager.GetString("RegCard_Number_Require", resourceCulture);
+                return ResourceManager.GetString("Refund_Src_Length", resourceCulture);
             }
         }
         
@@ -327,6 +381,15 @@ namespace OneCardSln.WebApi.Resources {
         internal static string Sort_Regex {
             get {
                 return ResourceManager.GetString("Sort_Regex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 排序号不能为空 的本地化字符串。
+        /// </summary>
+        internal static string Sort_Require {
+            get {
+                return ResourceManager.GetString("Sort_Require", resourceCulture);
             }
         }
         

@@ -7,11 +7,8 @@ using System.Web;
 
 namespace OneCardSln.WebApi.Models.Card
 {
-    public class ChangePhoneViewModel
+    public class ChangePhoneViewModel : EditByIdcardViewModel
     {
-        [Required(ErrorMessageResourceName = "Idcard_Require", ErrorMessageResourceType = typeof(Resources.Resource))]
-        public string idcard { get; set; }
-
         [Required(ErrorMessageResourceName = "Phone_Require", ErrorMessageResourceType = typeof(Resources.Resource))]
         [RegularExpression(RegexExtension.Regex_CellPhone, ErrorMessageResourceName = "Regex_CellPhone", ErrorMessageResourceType = typeof(Resources.Resource))]
         public string phone { get; set; }

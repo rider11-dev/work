@@ -14,7 +14,7 @@ namespace OneCardSln.Repository.Card.Mapper
         {
             Table("card_info");
 
-            Map(c => c.card_state_obj).Ignore();
+            Map(c => c.State).Ignore();
 
             AutoMap();
         }

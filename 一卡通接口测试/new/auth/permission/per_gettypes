@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rest-client version="3.4.2"><request><http-version>1.1</http-version><http-follow-redirects/><URL>http://localhost/aaa/api/auth/permission/gettypes</URL><method>GET</method><headers><header key="token" value="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhZG1pbiIsImlhdCI6MTQ3NTA0MjM4NiwidXNlciI6bnVsbH0.3riTHa_pNrQ0L6cDeDCsXUtXmrNlFmm0V-CmCtt893U"/></headers><body></body></request></rest-client>

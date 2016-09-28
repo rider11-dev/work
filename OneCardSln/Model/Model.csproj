@@ -64,22 +64,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Auth\Permission.cs" />
+    <Compile Include="Auth\PermType.cs" />
     <Compile Include="Auth\UserPermissionRel.cs" />
     <Compile Include="Auth\User.cs" />
     <Compile Include="Base\Dict.cs" />
     <Compile Include="Base\DictType.cs" />
     <Compile Include="Card\CardBill.cs" />
     <Compile Include="Card\CardInfo.cs" />
+    <Compile Include="Card\CardOperation.cs" />
     <Compile Include="Card\CardRecord.cs" />
-    <Compile Include="Card\EnumPayPriority.cs" />
+    <Compile Include="Card\CardState.cs" />
+    <Compile Include="Card\MoneyEnum.cs" />
     <Compile Include="Courses\Course.cs" />
     <Compile Include="Courses\CourseRepeatSet.cs" />
     <Compile Include="Courses\CourseTaken.cs" />
     <Compile Include="OptResult.cs" />
-    <Compile Include="Card\PayEntity.cs" />
     <Compile Include="PageQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Card\RefundEntity.cs" />
     <Compile Include="ResultCode.cs" />
     <Compile Include="Tools\Tool.cs" />
     <Compile Include="Tools\ToolRent.cs" />

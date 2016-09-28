@@ -109,6 +109,9 @@
     <Compile Include="Controllers\Base\DictController.cs" />
     <Compile Include="Controllers\Base\DictTypeController.cs" />
     <Compile Include="Controllers\Card\CardInfoController.cs" />
+    <Compile Include="Controllers\Card\CardMoneyController.cs" />
+    <Compile Include="Controllers\Card\CardBillController.cs" />
+    <Compile Include="Controllers\Card\CardRecordController.cs" />
     <Compile Include="Controllers\Card\MallAccountController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\Auth\UserController.cs" />
@@ -132,7 +135,13 @@
     <Compile Include="Models\Base\AddDictTypeViewModel.cs" />
     <Compile Include="Models\Base\AddDictViewModel.cs" />
     <Compile Include="Models\Card\ChangePhoneViewModel.cs" />
+    <Compile Include="Models\Card\EditByIdcardsViewModel.cs" />
+    <Compile Include="Models\Card\EditByIdcardViewModel.cs" />
+    <Compile Include="Models\Card\MakeupCardViewModel.cs" />
+    <Compile Include="Models\Card\PayViewModel.cs" />
+    <Compile Include="Models\Card\RefundViewModel.cs" />
     <Compile Include="Models\Card\RegisterCardViewModel.cs" />
+    <Compile Include="Models\Card\SetMoneyViewModel.cs" />
     <Compile Include="Models\DelByIdViewModel.cs" />
     <Compile Include="Models\GetByIdViewModel.cs" />
     <Compile Include="Models\TokenData.cs" />

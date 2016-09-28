@@ -68,8 +68,18 @@ namespace OneCardSln.WebApi
             builder.RegisterType(typeof(CardInfoService)).InstancePerRequest();
             //
             builder.RegisterType(typeof(CardRecordRepository)).InstancePerRequest();
-
+            //
             builder.RegisterType(typeof(MallAccountService)).InstancePerRequest();
+            //
+            builder.RegisterType(typeof(CardRecordRepository)).InstancePerRequest();
+            //
+            builder.RegisterType(typeof(CardBillRepository)).InstancePerRequest();
+            //
+            builder.RegisterType(typeof(CardMoneyService)).InstancePerRequest();
+            //
+            builder.RegisterType(typeof(CardRecordService)).InstancePerRequest();
+            //
+            builder.RegisterType(typeof(CardBillService)).InstancePerRequest();
 
         }
 

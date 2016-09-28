@@ -17,5 +17,6 @@ namespace OneCardSln.Model
         public String rec_type { get; set; }
         public DateTime rec_time { get; set; }
         public String rec_operator { get; set; }
+        public String rec_remark { get; set; }
     }
 }

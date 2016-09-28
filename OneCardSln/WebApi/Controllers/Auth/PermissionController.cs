@@ -91,5 +91,12 @@ namespace OneCardSln.WebApi.Controllers.Auth
 
             return rst;
         }
+
+        [HttpGet]
+        [Route("gettypes")]
+        public OptResult GetPermTypes()
+        {
+            return _perSrv.GetPermTypes();
+        }
     }
 }

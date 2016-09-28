@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Card_Account_Length" xml:space="preserve">
+    <value>一卡通账户用户名最大为{1}个字符</value>
+  </data>
+  <data name="Card_Account_Require" xml:space="preserve">
+    <value>一卡通账户名称不能为空</value>
+  </data>
+  <data name="Card_Number_Require" xml:space="preserve">
+    <value>一卡通号不能为空</value>
+  </data>
   <data name="Code_Require" xml:space="preserve">
     <value>编号不能为空</value>
   </data>
@@ -143,6 +152,9 @@
   </data>
   <data name="GetByPk_Require" xml:space="preserve">
     <value>主键id不能为空</value>
+  </data>
+  <data name="Idcards_Require" xml:space="preserve">
+    <value>身份证列表不能为空</value>
   </data>
   <data name="Idcard_Length" xml:space="preserve">
     <value>身份证长度必须在{2}和{1}之间</value>
@@ -180,15 +192,6 @@
   <data name="Pwd_Require" xml:space="preserve">
     <value>密码不能为空</value>
   </data>
-  <data name="RegCard_Account_Length" xml:space="preserve">
-    <value>一卡通账户用户名最大为{1}个字符</value>
-  </data>
-  <data name="RegCard_Account_Require" xml:space="preserve">
-    <value>一卡通账户名称不能为空</value>
-  </data>
-  <data name="RegCard_Number_Require" xml:space="preserve">
-    <value>一卡通号不能为空</value>
-  </data>
   <data name="Regex_CellPhone" xml:space="preserve">
     <value>手机号码格式不正确</value>
   </data>
@@ -218,5 +221,23 @@
   </data>
   <data name="User_TrueName_Length" xml:space="preserve">
     <value>用户真实姓名长度必须在{2}和{1}之间</value>
+  </data>
+  <data name="Order_Require" xml:space="preserve">
+    <value>订单号不能为空</value>
+  </data>
+  <data name="Pay_Amount_Require" xml:space="preserve">
+    <value>付款金额不能为空</value>
+  </data>
+  <data name="Opt_Length" xml:space="preserve">
+    <value>操作员最大为{1}个字符</value>
+  </data>
+  <data name="Pay_Src_Length" xml:space="preserve">
+    <value>付款来源最大为{1}个字符</value>
+  </data>
+  <data name="Refund_Src_Length" xml:space="preserve">
+    <value>退款来源最大为{1}个字符</value>
+  </data>
+  <data name="Sort_Require" xml:space="preserve">
+    <value>排序号不能为空</value>
   </data>
 </root>

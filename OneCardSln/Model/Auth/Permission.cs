@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OneCardSln.Components.Extensions;
 
 namespace OneCardSln.Model.Auth
 {
@@ -15,6 +16,14 @@ namespace OneCardSln.Model.Auth
         public string per_code { get; set; }
         public string per_name { get; set; }
         public string per_type { get; set; }
+
+        public PermType PermType
+        {
+            get
+            {
+                return per_type.ToEnum<PermType>();
+            }
+        }
         public string per_parent { get; set; }
         public string per_sort { get; set; }
         public bool per_system { get; set; }

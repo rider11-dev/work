@@ -2,6 +2,7 @@
 using OneCardSln.Model;
 using OneCardSln.Model.Base;
 using OneCardSln.Repository.Base;
+using OneCardSln.Repository.Db;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,16 +11,18 @@ using System.Threading.Tasks;
 
 namespace OneCardSln.Service.Base
 {
-    public class DictTypeService
+    public class DictTypeService : BaseService<DictType>
     {
         const string Msg_QueryByPage = "分页查询字典类型信息";
+        const string Msg_GetList = "获取字典类型信息列表";
         const string Msg_Add = "添加字典类型信息";
         const string Msg_Delete = "删除字典类型信息";
 
         DictTypeRepository _dictTypeRep;
         DictRepository _dictRep;
 
-        public DictTypeService(DictTypeRepository dictTypeRep, DictRepository dictRep)
+        public DictTypeService(IDbSession session, DictTypeRepository dictTypeRep, DictRepository dictRep)
+            : base(session,dictTypeRep)
         {
             _dictTypeRep = dictTypeRep;
             _dictRep = dictRep;
@@ -41,15 +44,21 @@ namespace OneCardSln.Service.Base
             {
                 new Sort{PropertyName="type_code",Ascending=true}
             };
-
-            var types = _dictTypeRep.GetPageList(page.pageIndex, page.pageSize, out total, sort);
-
-            rst = OptResult.Build(ResultCode.Success, null, new
+            try
             {
-                total = total,
-                rows = types
-            });
+                var types = _dictTypeRep.GetPageList(page.pageIndex, page.pageSize, out total, sort);
 
+                rst = OptResult.Build(ResultCode.Success, null, new
+                {
+                    total = total,
+                    rows = types
+                });
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(Msg_QueryByPage, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_QueryByPage);
+            }
             return rst;
         }
 
@@ -61,14 +70,20 @@ namespace OneCardSln.Service.Base
             {
                 new Sort{PropertyName="type_code",Ascending=true}
             };
-
-            var types = _dictTypeRep.GetList(null, sort);
-
-            rst = OptResult.Build(ResultCode.Success, null, new
+            try
             {
-                rows = types
-            });
+                var types = _dictTypeRep.GetList(null, sort);
 
+                rst = OptResult.Build(ResultCode.Success, null, new
+                {
+                    rows = types
+                });
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(Msg_GetList, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_GetList);
+            }
             return rst;
         }
 
@@ -83,9 +98,16 @@ namespace OneCardSln.Service.Base
                 return rst;
             }
             //2、添加
-            var val = _dictTypeRep.Insert(dictType);
-            rst = OptResult.Build(ResultCode.Success, Msg_Add);
-
+            try
+            {
+                var val = _dictTypeRep.Insert(dictType);
+                rst = OptResult.Build(ResultCode.Success, Msg_Add);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(Msg_Add, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_Add);
+            }
             return rst;
         }
 
@@ -114,10 +136,17 @@ namespace OneCardSln.Service.Base
                 return rst;
             }
             //3、删除
-            bool val = _dictTypeRep.Delete(predicate);
+            try
+            {
+                bool val = _dictTypeRep.Delete(predicate);
 
-            rst = OptResult.Build(val ? ResultCode.Success : ResultCode.Fail, Msg_Delete);
-
+                rst = OptResult.Build(val ? ResultCode.Success : ResultCode.Fail, Msg_Delete);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(Msg_Delete, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_Delete);
+            }
             return rst;
         }
     }

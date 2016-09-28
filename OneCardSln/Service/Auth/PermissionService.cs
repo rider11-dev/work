@@ -5,6 +5,7 @@ using OneCardSln.Model.Auth;
 using OneCardSln.Model.Base;
 using OneCardSln.Repository.Auth;
 using OneCardSln.Repository.Base;
+using OneCardSln.Repository.Db;
 using OneCardSln.Service.Base;
 using System;
 using System.Collections.Generic;
@@ -14,24 +15,28 @@ using System.Threading.Tasks;
 
 namespace OneCardSln.Service.Auth
 {
-    public class PermissionService
+    public class PermissionService : BaseService<Permission>
     {
         //常量
         const string Msg_AddPer = "新增权限";
         const string Msg_UpdatePer = "修改权限";
         const string Msg_DeletePer = "删除权限";
         const string Msg_QueryByPage = "分页查询权限信息";
+        const string Msg_FindById = "根据主键查询权限数据";
+        const string Msg_GetPermTypes = "获取权限类型列表";
 
         //私有变量
         private PermissionRepository _perRep;
         private UserPermissionRelRepository _usrPerRelRep;
-        private DictRepository _dictRep;
 
-        public PermissionService(PermissionRepository perRep, UserPermissionRelRepository usrPerRelRep, DictRepository dictRep)
+        private PermTypeRepository _permTypeRep = new PermTypeRepository();
+
+
+        public PermissionService(IDbSession session, PermissionRepository perRep, UserPermissionRelRepository usrPerRelRep, DictRepository dictRep)
+            : base(session, perRep)
         {
             _perRep = perRep;
             _usrPerRelRep = usrPerRelRep;
-            _dictRep = dictRep;
         }
 
         public OptResult Add(Permission per)
@@ -62,17 +67,34 @@ namespace OneCardSln.Service.Auth
             }
 
             per.per_id = GuidExtension.GetOne();
-            _perRep.Insert(per);
+            try
+            {
+                _perRep.Insert(per);
 
-            rst = OptResult.Build(ResultCode.Success, Msg_AddPer);
-
+                rst = OptResult.Build(ResultCode.Success, Msg_AddPer);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(Msg_AddPer, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_AddPer);
+            }
             return rst;
         }
 
         public OptResult Find(dynamic pkId)
         {
-            var per = _perRep.GetById(pkId as object);
-            return OptResult.Build(ResultCode.Success, null, per);
+            OptResult rst = null;
+            try
+            {
+                var per = _perRep.GetById(pkId as object);
+                rst = OptResult.Build(ResultCode.Success, Msg_FindById, per);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(Msg_FindById, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_FindById);
+            }
+            return rst;
         }
 
         public OptResult Update(Permission per)
@@ -98,17 +120,23 @@ namespace OneCardSln.Service.Auth
                 rst = OptResult.Build(ResultCode.ParamError, Msg_UpdatePer + "，" + msg);
                 return rst;
             }
+            try
+            {
+                //2、更新
+                var oldPer = _perRep.GetById(per.per_id);
+                oldPer.per_name = per.per_name;
+                oldPer.per_type = per.per_type;
+                oldPer.per_remark = per.per_remark;
+                oldPer.per_parent = per.per_parent;
 
-            //2、更新
-            var oldPer = _perRep.GetById(per.per_id);
-            oldPer.per_name = per.per_name;
-            oldPer.per_type = per.per_type;
-            oldPer.per_remark = per.per_remark;
-            oldPer.per_parent = per.per_parent;
-
-            bool val = _perRep.Update(oldPer);
-            rst = OptResult.Build(val ? ResultCode.Success : ResultCode.Fail, Msg_UpdatePer);
-
+                bool val = _perRep.Update(oldPer);
+                rst = OptResult.Build(val ? ResultCode.Success : ResultCode.Fail, Msg_UpdatePer);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(Msg_UpdatePer, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_UpdatePer);
+            }
             return rst;
         }
 
@@ -146,9 +174,16 @@ namespace OneCardSln.Service.Auth
                 return rst;
             }
             //5、删除
-            var val = _perRep.Delete(Predicates.Field<Permission>(p => p.per_id, Operator.Eq, pkId as object));
-            rst = OptResult.Build(val ? ResultCode.Success : ResultCode.Fail, Msg_DeletePer);
-
+            try
+            {
+                var val = _perRep.Delete(Predicates.Field<Permission>(p => p.per_id, Operator.Eq, pkId as object));
+                rst = OptResult.Build(val ? ResultCode.Success : ResultCode.Fail, Msg_DeletePer);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(Msg_DeletePer, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_DeletePer);
+            }
             return rst;
         }
 
@@ -165,21 +200,21 @@ namespace OneCardSln.Service.Auth
             PredicateGroup pg = new PredicateGroup { Operator = GroupOperator.And, Predicates = new List<IPredicate>() };
             if (page.conditions != null && page.conditions.Count > 0)
             {
-                if (page.conditions.ContainsKey("per_type"))
+                if (page.conditions.ContainsKey("type"))
                 {
-                    pg.Predicates.Add(Predicates.Field<Permission>(p => p.per_type, Operator.Eq, page.conditions["per_type"]));
+                    pg.Predicates.Add(Predicates.Field<Permission>(p => p.per_type, Operator.Eq, page.conditions["type"]));
                 }
-                if (page.conditions.ContainsKey("per_code"))
+                if (page.conditions.ContainsKey("code"))
                 {
-                    pg.Predicates.Add(Predicates.Field<Permission>(p => p.per_code, Operator.Like, "%" + page.conditions["per_code"] + "%"));
+                    pg.Predicates.Add(Predicates.Field<Permission>(p => p.per_code, Operator.Like, "%" + page.conditions["code"] + "%"));
                 }
-                if (page.conditions.ContainsKey("per_name"))
+                if (page.conditions.ContainsKey("name"))
                 {
-                    pg.Predicates.Add(Predicates.Field<Permission>(p => p.per_name, Operator.Like, "%" + page.conditions["per_name"] + "%"));
+                    pg.Predicates.Add(Predicates.Field<Permission>(p => p.per_name, Operator.Like, "%" + page.conditions["name"] + "%"));
                 }
-                if (page.conditions.ContainsKey("per_parent"))
+                if (page.conditions.ContainsKey("parent"))
                 {
-                    pg.Predicates.Add(Predicates.Field<Permission>(p => p.per_parent, Operator.Eq, page.conditions["per_parent"]));
+                    pg.Predicates.Add(Predicates.Field<Permission>(p => p.per_parent, Operator.Eq, page.conditions["parent"]));
                 }
             }
             //2、排序
@@ -188,14 +223,31 @@ namespace OneCardSln.Service.Auth
             {
                 new Sort{PropertyName="per_sort",Ascending=true}
             };
-            var pers = _perRep.GetPageList(page.pageIndex, page.pageSize, out total, sort, pg);
-            rst = OptResult.Build(ResultCode.Success, Msg_QueryByPage, new
+            try
             {
-                total = total,
-                rows = pers
-            });
-
+                var pers = _perRep.GetPageList(page.pageIndex, page.pageSize, out total, sort, pg);
+                rst = OptResult.Build(ResultCode.Success, Msg_QueryByPage, new
+                {
+                    total = total,
+                    rows = pers
+                });
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(Msg_QueryByPage, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_QueryByPage);
+            }
             return rst;
+        }
+
+        public OptResult GetPermTypes()
+        {
+            var dict = _permTypeRep.DataSrc;
+            return OptResult.Build(ResultCode.Success, Msg_GetPermTypes, new
+            {
+                total=dict.Count,
+                rows = dict
+            });
         }
 
         //私有方法
@@ -209,7 +261,7 @@ namespace OneCardSln.Service.Auth
         private bool ValidatePermissionType(string perType, out string msg)
         {
             msg = "";
-            var val = _dictRep.Count(Predicates.Field<Dict>(d => d.dict_id, Operator.Eq, perType)) > 0;
+            var val = _permTypeRep.DataSrc.ContainsKey(perType);
 
             msg = val ? "" : "权限类型不存在！";
 

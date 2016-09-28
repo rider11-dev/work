@@ -3,6 +3,7 @@ using OneCardSln.Components.Extensions;
 using OneCardSln.Model;
 using OneCardSln.Model.Base;
 using OneCardSln.Repository.Base;
+using OneCardSln.Repository.Db;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,15 +12,17 @@ using System.Threading.Tasks;
 
 namespace OneCardSln.Service.Base
 {
-    public class DictService
+    public class DictService : BaseService<Dict>
     {
         const string Msg_Add = "添加字典数据";
         const string Msg_Delete = "删除字典数据";
         const string Msg_QueryByPage = "分页查询字典数据";
+        const string Msg_GetList = "获取字典数据列表";
 
         DictRepository _dictRep;
         DictTypeRepository _dictTypeRep;
-        public DictService(DictRepository dictRep, DictTypeRepository dictTypeRep)
+        public DictService(IDbSession session, DictRepository dictRep, DictTypeRepository dictTypeRep)
+            : base(session,dictRep)
         {
             _dictRep = dictRep;
             _dictTypeRep = dictTypeRep;
@@ -52,7 +55,7 @@ namespace OneCardSln.Service.Base
                 pg.Predicates.Add(Predicates.Field<Dict>(d => d.dict_type, Operator.Eq, dict.dict_type));
                 pg.Predicates.Add(Predicates.Field<Dict>(d => d.dict_default, Operator.Eq, true));
 
-                count = _dictRep.Count(pg);                
+                count = _dictRep.Count(pg);
                 if (count > 0)
                 {
                     rst = OptResult.Build(ResultCode.DataRepeat, string.Format("{0}，类型{1}下已存在默认值！", Msg_Add, dict.dict_type));
@@ -62,10 +65,17 @@ namespace OneCardSln.Service.Base
 
             //4、新增
             dict.dict_id = GuidExtension.GetOne();
-            var val = _dictRep.Insert(dict);
+            try
+            {
+                var val = _dictRep.Insert(dict);
 
-            rst = OptResult.Build(ResultCode.Success, Msg_Add);
-
+                rst = OptResult.Build(ResultCode.Success, Msg_Add);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(Msg_Add, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_Add);
+            }
             return rst;
         }
 
@@ -89,9 +99,16 @@ namespace OneCardSln.Service.Base
                 return rst;
             }
             //4、删除
-            bool val = _dictRep.Delete(predicate);
-            rst = OptResult.Build(val ? ResultCode.Success : ResultCode.Fail, Msg_Delete);
-
+            try
+            {
+                bool val = _dictRep.Delete(predicate);
+                rst = OptResult.Build(val ? ResultCode.Success : ResultCode.Fail, Msg_Delete);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(Msg_Delete, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_Delete);
+            }
             return rst;
         }
 
@@ -109,13 +126,20 @@ namespace OneCardSln.Service.Base
             //2、排序
             IList<ISort> sort = GetSort();
             long total = 0;
-            var dicts = _dictRep.GetPageList(page.pageIndex, page.pageSize, out total, sort, pg);
-            rst = OptResult.Build(ResultCode.Success, Msg_QueryByPage, new
+            try
             {
-                total = total,
-                rows = dicts
-            });
-
+                var dicts = _dictRep.GetPageList(page.pageIndex, page.pageSize, out total, sort, pg);
+                rst = OptResult.Build(ResultCode.Success, Msg_QueryByPage, new
+                {
+                    total = total,
+                    rows = dicts
+                });
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(Msg_QueryByPage, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_QueryByPage);
+            }
             return rst;
         }
 
@@ -126,14 +150,20 @@ namespace OneCardSln.Service.Base
             var pg = GetPredicates(conditions);
             //2、排序
             IList<ISort> sort = GetSort();
-
-            var types = _dictRep.GetList(pg, sort);
-
-            rst = OptResult.Build(ResultCode.Success, null, new
+            try
             {
-                rows = types
-            });
+                var types = _dictRep.GetList(pg, sort);
 
+                rst = OptResult.Build(ResultCode.Success, null, new
+                {
+                    rows = types
+                });
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(Msg_GetList, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_GetList);
+            }
             return rst;
         }
 

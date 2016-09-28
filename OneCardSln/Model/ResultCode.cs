@@ -15,7 +15,7 @@ namespace OneCardSln.Model
         [Description("失败")]
         Fail = 0,
         [Description("重复操作")]
-        Repeat = 2,
+        OptRepeat = 2,
         [Description("参数错误")]
         ParamError = 3,
         [Description("未找到token")]
@@ -32,5 +32,7 @@ namespace OneCardSln.Model
         DataRepeat = 9,
         [Description("系统预制数据")]
         DataSystem = 10,
+        [Description("数据库操作错误")]
+        DbError = 11,
     }
 }

@@ -12,7 +12,7 @@ using System.Xml.Linq;
 
 namespace OneCardSln.Repository
 {
-    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
+    public class BaseRepository<TEntity> : IBaseRepository<TEntity>, IDbSession where TEntity : class
     {
         public IDbSession DbSession { get; private set; }
         public virtual SqlConfEntity SqlConf { get; protected set; }
@@ -22,7 +22,7 @@ namespace OneCardSln.Repository
             this.DbSession = session;
         }
 
-
+        #region IBaseRepository
         public TEntity GetById(dynamic pkId, IDbTransaction trans = null)
         {
             try
@@ -32,7 +32,6 @@ namespace OneCardSln.Repository
             catch
             {
                 Dispose();
-
                 throw;
             }
         }
@@ -59,7 +58,6 @@ namespace OneCardSln.Repository
             catch
             {
                 Dispose();
-
                 throw;
             }
         }
@@ -75,7 +73,6 @@ namespace OneCardSln.Repository
             catch
             {
                 Dispose();
-
                 throw;
             }
         }
@@ -91,7 +88,6 @@ namespace OneCardSln.Repository
             catch
             {
                 Dispose();
-
                 throw;
             }
         }
@@ -117,7 +113,6 @@ namespace OneCardSln.Repository
             catch
             {
                 Dispose();
-
                 throw;
             }
         }
@@ -131,7 +126,6 @@ namespace OneCardSln.Repository
             catch
             {
                 Dispose();
-
                 throw;
             }
         }
@@ -145,7 +139,6 @@ namespace OneCardSln.Repository
             catch
             {
                 Dispose();
-
                 throw;
             }
         }
@@ -230,8 +223,6 @@ namespace OneCardSln.Repository
         }
 
 
-
-
         public IEnumerable<object> QueryBySqlName(Type type, string sqlName, object param = null, IDbTransaction transaction = null, bool buffered = true, int? commandTimeout = null, CommandType? commandType = null)
         {
             return Query(type, GetSql(sqlName), param, transaction, buffered, commandTimeout, commandType);
@@ -256,26 +247,94 @@ namespace OneCardSln.Repository
         {
             return Execute(GetSql(sqlName), param, transaction, commandTimeout, commandType);
         }
+
         public T ExecuteScalarBySqlName<T>(string sqlName, object param = null, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
         {
             return ExecuteScalar<T>(GetSql(sqlName), param, transaction, commandTimeout, commandType);
         }
 
+        public int UpdateBySqlName(string sqlName, object param = null, IEnumerable<string> setFields = null, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null)
+        {
+            var sqlText = BuildUpdateSql(GetSql(sqlName), setFields);
+
+            return Execute(sqlText, param, transaction, commandTimeout, commandType);
+        }
+
+        private string BuildUpdateSql(string sqlText, IEnumerable<string> setFields)
+        {
+            StringBuilder sqlSet = new StringBuilder();
+            if (setFields != null && setFields.Count() > 0)
+            {
+                //setFields有值，则认为sqlText格式为：update tbname set {0} where id=@id
+                foreach (var field in setFields)
+                {
+                    sqlSet.AppendFormat(" {0}={1}{0},", field, DapperExtensions.DapperExtensions.SqlDialect.ParameterPrefix, field);
+                }
+                sqlSet.Remove(sqlSet.Length - 1, 1);//去除最后一个','
+            }
+            if (sqlSet.Length > 0)
+            {
+                sqlText = string.Format(sqlText, sqlSet.ToString());
+            }
+            return sqlText;
+        }
+
         private string GetSql(string sqlName)
         {
-            return SqlTextProvider.GetSql(new SqlConfEntity
+            string sqlText = SqlTextProvider.GetSql(new SqlConfEntity
             {
                 area = SqlConf.area,
                 group = SqlConf.group,
                 name = sqlName
             });
+
+            return sqlText;
         }
+
+        #endregion IBaseRepository
+
+
+        #region IDbSession
+        public string ConnKey
+        {
+            get { return DbSession.ConnKey; }
+        }
+
+        public DatabaseType DbType
+        {
+            get { return DbSession.DbType; }
+        }
+
+        public IDbConnection Connection
+        {
+            get { return DbSession.Connection; }
+        }
+
+        public IDbTransaction Transaction
+        {
+            get { return DbSession.Transaction; }
+        }
+
+        public IDbTransaction Begin(IsolationLevel isolation = IsolationLevel.ReadCommitted)
+        {
+            return DbSession.Begin(isolation);
+        }
+
+        public void Commit()
+        {
+            DbSession.Commit();
+        }
+
+        public void Rollback()
+        {
+            DbSession.Rollback();
+        }
+        #endregion IDbSession
 
         public void Dispose()
         {
             this.DbSession.Dispose();
         }
-
 
     }
 }

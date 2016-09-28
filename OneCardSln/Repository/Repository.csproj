@@ -63,6 +63,7 @@
     <Compile Include="Auth\Mapper\UserMapper.cs" />
     <Compile Include="Auth\Mapper\UserPermissionRelMapper.cs" />
     <Compile Include="Auth\PermissionRepository.cs" />
+    <Compile Include="Auth\PermTypeRepository.cs" />
     <Compile Include="Auth\UserPermissionRelRepository.cs" />
     <Compile Include="Auth\UserRepository.cs" />
     <Compile Include="BaseRepository.cs" />
@@ -70,8 +71,12 @@
     <Compile Include="Base\DictTypeRepository.cs" />
     <Compile Include="Base\Mapper\DictMapper.cs" />
     <Compile Include="Base\Mapper\DictTypeMapper.cs" />
+    <Compile Include="Card\CardBillRepository.cs" />
     <Compile Include="Card\CardInfoRepository.cs" />
+    <Compile Include="Card\CardOperationRepository.cs" />
     <Compile Include="Card\CardRecordRepository.cs" />
+    <Compile Include="Card\CardStateRepository.cs" />
+    <Compile Include="Card\Mapper\CardBillMapper.cs" />
     <Compile Include="Card\Mapper\CardInfoMapper.cs" />
     <Compile Include="Card\Mapper\CardRecordMapper.cs" />
     <Compile Include="Db\DatabaseType.cs" />

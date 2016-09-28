@@ -3,6 +3,7 @@ using OneCardSln.Components.Extensions;
 using OneCardSln.Model;
 using OneCardSln.Model.Auth;
 using OneCardSln.Repository.Auth;
+using OneCardSln.Repository.Db;
 using OneCardSln.Service.Auth.Models;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace OneCardSln.Service.Auth
 {
-    public class UserPermissionRelService
+    public class UserPermissionRelService : BaseService<UserPermissionRel>
     {
         //常量
         const string Msg_AssignPer = "给用户分配权限";
@@ -22,7 +23,8 @@ namespace OneCardSln.Service.Auth
         private UserRepository _usrRep;
         private UserPermissionRelRepository _usrPerRelRep;
 
-        public UserPermissionRelService(UserPermissionRelRepository usrPerRelRep, UserRepository usrRep)
+        public UserPermissionRelService(IDbSession session, UserPermissionRelRepository usrPerRelRep, UserRepository usrRep)
+            : base(session, usrPerRelRep)
         {
             _usrPerRelRep = usrPerRelRep;
             _usrRep = usrRep;
@@ -60,7 +62,7 @@ namespace OneCardSln.Service.Auth
             {
                 newRels.Add(new UserPermissionRel { rel_id = GuidExtension.GetOne(), rel_userid = usrId, rel_permissionid = "*" });
             }
-            var tran = _usrPerRelRep.DbSession.Begin();
+            var tran = _usrPerRelRep.Begin();
             try
             {
                 //2、清空用户当前所有权限
@@ -71,14 +73,13 @@ namespace OneCardSln.Service.Auth
                     _usrPerRelRep.InsertBatch(newRels, tran);
                 }
                 tran.Commit();
+                rst = OptResult.Build(ResultCode.Success, Msg_AssignPer);
             }
             catch (Exception ex)
             {
-                tran.Rollback();
-                throw;
+                LogHelper.LogError(Msg_AssignPer, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_AssignPer);
             }
-
-            rst = OptResult.Build(ResultCode.Success, Msg_AssignPer);
 
             return rst;
         }
@@ -94,10 +95,17 @@ namespace OneCardSln.Service.Auth
                 return rst;
             }
             //2、执行查询
-            var pers = _usrPerRelRep.QueryBySqlName(typeof(UserPremissionDto), "getper", new { user_id = usrId });
+            try
+            {
+                var pers = _usrPerRelRep.QueryBySqlName(typeof(UserPremissionDto), "getper", new { user_id = usrId });
 
-            rst = OptResult.Build(ResultCode.Success, Msg_GetPer, new { user_id = usrId, pers = pers });
-
+                rst = OptResult.Build(ResultCode.Success, Msg_GetPer, new { user_id = usrId, pers = pers });
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(Msg_GetPer, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_GetPer);
+            }
             return rst;
         }
     }

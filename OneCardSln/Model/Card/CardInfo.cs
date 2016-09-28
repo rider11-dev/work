@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using OneCardSln.Components.Extensions;
 
 namespace OneCardSln.Model
 {
@@ -18,8 +19,15 @@ namespace OneCardSln.Model
         public String card_phone { get; set; }
         public Decimal card_govmoney { get; set; }
         public Decimal card_mymoney { get; set; }
-        public String card_state { get; set; }
-        public Dict card_state_obj { get; set; }
+        public string card_state { get; set; }
+
+        public CardState State
+        {
+            get
+            {
+                return card_state.ToEnum<CardState>();
+            }
+        }
         public String card_creator { get; set; }
         public DateTime card_createtime { get; set; }
         public String card_modifier { get; set; }
@@ -29,7 +37,7 @@ namespace OneCardSln.Model
         public override string ToString()
         {
             return string.Format("card_id:{0},card_number:{1},card_idcard:{2},card_username:{3},card_phone:{4},card_govmoney:{5},card_state:{6},card_creator:{7},card_createtime:{8},card_modifier:{9},card_modifytime:{10},card_remark:{10}",
-                card_id, card_number, card_idcard, card_username, card_govmoney, card_mymoney, card_state, card_creator, card_createtime.ToString("yyyy-MM-dd HH:mm:ss"), card_modifier, card_modifytime, card_remark);
+                card_id, card_number, card_idcard, card_username, card_govmoney, card_mymoney, State.GetDescription(), card_creator, card_createtime.ToString("yyyy-MM-dd HH:mm:ss"), card_modifier, card_modifytime, card_remark);
         }
     }
 }

@@ -14,6 +14,8 @@ namespace OneCardSln.Repository.Auth.Mapper
         {
             Table("auth_permission");
 
+            Map(p => p.PermType).Ignore();
+
             AutoMap();
         }
     }

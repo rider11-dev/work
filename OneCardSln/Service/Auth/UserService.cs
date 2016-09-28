@@ -12,10 +12,11 @@ using System.Dynamic;
 using OneCardSln.Components.Extensions;
 using OneCardSln.Components.Mapper;
 using OneCardSln.Service.Auth.Models;
+using OneCardSln.Repository.Db;
 
 namespace OneCardSln.Service.Auth
 {
-    public class UserService
+    public class UserService : BaseService<User>
     {
         //常量
         const string Msg_Login = "用户登录";
@@ -24,11 +25,15 @@ namespace OneCardSln.Service.Auth
         const string Msg_DeleteUser = "删除用户";
         const string Msg_ChangePwd = "修改密码";
         const string Msg_QueryByPage = "分页查询用户信息";
+        const string Msg_FindById = "根据主键查询用户信息";
+
+        const string SqlName_Update = "update";
 
         //私有变量
         private UserRepository _usrRep;
 
-        public UserService(UserRepository usrRep)
+        public UserService(IDbSession session, UserRepository usrRep)
+            : base(session,usrRep)
         {
             _usrRep = usrRep;
         }
@@ -81,19 +86,38 @@ namespace OneCardSln.Service.Auth
             //2、处理
             usr.user_id = GuidExtension.GetOne();
             usr.user_pwd = EncryptionExtension.GetMd5Hash(usr.user_idcard.Substring(usr.user_idcard.Length - 6, 6));//初始密码身份证后六位
-            var val = _usrRep.Insert(usr);
+            try
+            {
+                var val = _usrRep.Insert(usr);
 
-            //3、新增用户默认权限
+                //3、新增用户默认权限
+                //TODO
 
-            rst = OptResult.Build(ResultCode.Success, Msg_AddUser);
-
+                rst = OptResult.Build(ResultCode.Success, Msg_AddUser);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(Msg_AddUser, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_AddUser);
+            }
             return rst;
         }
 
         public OptResult Find(dynamic pkId)
         {
-            var usr = _usrRep.GetById(pkId);
-            return OptResult.Build(ResultCode.Success, null, usr);
+            OptResult rst = null;
+            try
+            {
+                var usr = _usrRep.GetById(pkId);
+                rst = OptResult.Build(ResultCode.Success, Msg_FindById, usr);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(Msg_FindById, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_FindById);
+            }
+
+            return rst;
         }
 
         public OptResult Update(User usr)
@@ -120,15 +144,22 @@ namespace OneCardSln.Service.Auth
             //3、更新：获取旧对象，赋值，更新
             //TODO
             //这里修改时，需要传递完整实体信息，加大网络传输量，后续改造成只修改部分字段：vm字段设置dynamic？
-            var oldUsr = _usrRep.GetById(usr.user_id);
-            oldUsr.user_idcard = usr.user_idcard;
-            oldUsr.user_regioncode = usr.user_regioncode;
-            oldUsr.user_truename = usr.user_truename;
-            oldUsr.user_remark = usr.user_remark;
+            try
+            {
+                var oldUsr = _usrRep.GetById(usr.user_id);
+                oldUsr.user_idcard = usr.user_idcard;
+                oldUsr.user_regioncode = usr.user_regioncode;
+                oldUsr.user_truename = usr.user_truename;
+                oldUsr.user_remark = usr.user_remark;
 
-            bool val = _usrRep.Update(oldUsr);
-            rst = OptResult.Build(val ? ResultCode.Success : ResultCode.Fail, Msg_UpdateUser);
-
+                bool val = _usrRep.Update(oldUsr);
+                rst = OptResult.Build(val ? ResultCode.Success : ResultCode.Fail, Msg_UpdateUser);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(Msg_UpdateUser, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_UpdateUser);
+            }
             return rst;
         }
 
@@ -150,10 +181,16 @@ namespace OneCardSln.Service.Auth
                 rst = OptResult.Build(ResultCode.Fail, string.Format(Msg_DeleteUser + "，用户{0}不允许删除", usr.user_name));
                 return rst;
             }
-
-            bool val = _usrRep.Delete(predicate);
-            rst = OptResult.Build(val ? ResultCode.Success : ResultCode.Fail, Msg_DeleteUser);
-
+            try
+            {
+                bool val = _usrRep.Delete(predicate);
+                rst = OptResult.Build(val ? ResultCode.Success : ResultCode.Fail, Msg_DeleteUser);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(Msg_DeleteUser, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_DeleteUser);
+            }
             return rst;
         }
 
@@ -183,8 +220,16 @@ namespace OneCardSln.Service.Auth
             }
 
             //4、执行sql
-            var val = _usrRep.ExecuteBySqlName("changepwd", new { user_pwd = EncryptionExtension.GetMd5Hash(newpwd), user_id = userid });
-            rst = OptResult.Build(val > 0 ? ResultCode.Success : ResultCode.Fail, Msg_ChangePwd);
+            try
+            {
+                var val = _usrRep.UpdateBySqlName(SqlName_Update, new { user_pwd = EncryptionExtension.GetMd5Hash(newpwd), user_id = userid }, new string[] { "user_pwd" });
+                rst = OptResult.Build(val > 0 ? ResultCode.Success : ResultCode.Fail, Msg_ChangePwd);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(Msg_ChangePwd, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_ChangePwd);
+            }
             return rst;
         }
 
@@ -201,9 +246,9 @@ namespace OneCardSln.Service.Auth
             PredicateGroup pg = new PredicateGroup { Operator = GroupOperator.And, Predicates = new List<IPredicate>() };
             if (page.conditions != null && page.conditions.Count > 0)
             {
-                if (page.conditions.ContainsKey("user_regioncode"))
+                if (page.conditions.ContainsKey("regioncode"))
                 {
-                    pg.Predicates.Add(Predicates.Field<User>(u => u.user_regioncode, Operator.Eq, page.conditions["user_regioncode"]));
+                    pg.Predicates.Add(Predicates.Field<User>(u => u.user_regioncode, Operator.Eq, page.conditions["regioncode"]));
                 }
             }
 
@@ -214,12 +259,20 @@ namespace OneCardSln.Service.Auth
                 new Sort{PropertyName="user_regioncode",Ascending=true}
             };
             //这里返回UserDto，忽略密码字段
-            var usrs = _usrRep.GetPageList<UserDto>(page.pageIndex, page.pageSize, out total, sort, pg);
-            rst = OptResult.Build(ResultCode.Success, Msg_QueryByPage, new
+            try
             {
-                total = total,
-                rows = usrs
-            });
+                var usrs = _usrRep.GetPageList<UserDto>(page.pageIndex, page.pageSize, out total, sort, pg);
+                rst = OptResult.Build(ResultCode.Success, Msg_QueryByPage, new
+                {
+                    total = total,
+                    rows = usrs
+                });
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(Msg_QueryByPage, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_QueryByPage);
+            }
 
             return rst;
         }

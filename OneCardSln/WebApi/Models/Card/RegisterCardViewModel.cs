@@ -9,7 +9,7 @@ namespace OneCardSln.WebApi.Models.Card
 {
     public class RegisterCardViewModel
     {
-        [Required(ErrorMessageResourceName = "RegCard_Number_Require", ErrorMessageResourceType = typeof(Resources.Resource))]
+        [Required(ErrorMessageResourceName = "Card_Number_Require", ErrorMessageResourceType = typeof(Resources.Resource))]
         [MaxLength(20, ErrorMessageResourceName = "Card_Number_Length", ErrorMessageResourceType = typeof(Resources.Resource))]
         public String card_number { get; set; }
 
@@ -20,8 +20,8 @@ namespace OneCardSln.WebApi.Models.Card
         public String card_idcard { get; set; }
 
 
-        [Required(ErrorMessageResourceName = "RegCard_Account_Require", ErrorMessageResourceType = typeof(Resources.Resource))]
-        [MaxLength(20, ErrorMessageResourceName = "RegCard_Account_Length", ErrorMessageResourceType = typeof(Resources.Resource))]
+        [Required(ErrorMessageResourceName = "Card_Account_Require", ErrorMessageResourceType = typeof(Resources.Resource))]
+        [MaxLength(20, ErrorMessageResourceName = "Card_Account_Length", ErrorMessageResourceType = typeof(Resources.Resource))]
         public String card_username { get; set; }
 
 

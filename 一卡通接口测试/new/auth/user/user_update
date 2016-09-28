@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rest-client version="3.4.2"><request><http-version>1.1</http-version><http-follow-redirects/><URL>http://localhost/aaa/api/auth/user/update</URL><method>POST</method><headers><header key="token" value="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhZG1pbiIsImlhdCI6MTQ3NDU5MTEwNCwidXNlciI6bnVsbH0.qwDm7RbPELNeE1Q7_qJdZndtCg-oJqlxB0cKzX_IH9E"/></headers><body><string content-type="application/json" charset="UTF-8">{
+<rest-client version="3.4.2"><request><http-version>1.1</http-version><http-follow-redirects/><URL>http://localhost/aaa/api/auth/user/update</URL><method>POST</method><headers><header key="token" value="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhZG1pbiIsImlhdCI6MTQ3NTA0MjM4NiwidXNlciI6bnVsbH0.3riTHa_pNrQ0L6cDeDCsXUtXmrNlFmm0V-CmCtt893U"/></headers><body><string content-type="application/json" charset="UTF-8">{
 "user_id":"06a4946690e649709cbb7258e4d20298",
 "user_name":"zpf2",
 "user_idcard":"222222222222222222",

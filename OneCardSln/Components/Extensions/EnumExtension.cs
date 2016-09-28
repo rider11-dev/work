@@ -9,9 +9,9 @@ namespace OneCardSln.Components.Extensions
 {
     public static class EnumExtension
     {
-        public static string GetString<TEnum>(this Enum value)
+        public static string GetText(this Enum value)
         {
-            return Enum.GetName(typeof(TEnum), value);
+            return Enum.GetName(value.GetType(), value);
         }
 
         public static string GetDescription(this Enum value)
@@ -29,6 +29,12 @@ namespace OneCardSln.Components.Extensions
                 return str;
             }
             return da.Description;
+        }
+
+        public static TEnum ToEnum<TEnum>(this string str)
+        {
+            return (TEnum)Enum.Parse(typeof(TEnum), str);
+
         }
     }
 }

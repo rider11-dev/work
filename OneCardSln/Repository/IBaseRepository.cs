@@ -13,7 +13,7 @@ namespace OneCardSln.Repository
     /// <summary>
     /// Repository接口
     /// </summary>
-    interface IBaseRepository<TEntity> : IDisposable where TEntity : class
+    public interface IBaseRepository<TEntity> : IDisposable where TEntity : class
     {
         IDbSession DbSession { get; }
 
@@ -72,6 +72,8 @@ namespace OneCardSln.Repository
         int ExecuteBySqlName(string sqlName, object param = null, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null);
 
         T ExecuteScalarBySqlName<T>(string sqlName, object param = null, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null);
+
+        int UpdateBySqlName(string sqlName, object param = null, IEnumerable<string> setFields = null, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null);
 
         #endregion dapper
     }

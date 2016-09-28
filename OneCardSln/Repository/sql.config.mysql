@@ -2,8 +2,8 @@
 <configuration>
   <sqlarea name="auth">
     <sqlgroup name="auth_user">
-      <sql name="changepwd">
-        update auth_user set user_pwd=@user_pwd where user_id=@user_id;
+      <sql name="update">
+        update auth_user set {0} where user_id=@user_id
       </sql>
     </sqlgroup>
     <sqlgroup name="auth_user_per_rel">
@@ -21,7 +21,9 @@
   </sqlarea>
   <sqlarea name="card">
     <sqlgroup name="cardinfo">
-      
+      <sql name="update">
+        update card_info set {0} where card_idcard=@card_idcard
+      </sql>
     </sqlgroup>
     <sqlgroup name="cardrecord">
 

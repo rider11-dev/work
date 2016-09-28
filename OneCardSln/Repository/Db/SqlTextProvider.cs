@@ -67,7 +67,7 @@ namespace OneCardSln.Repository.Db
                 return string.Empty;
             }
 
-            return sqlNode.Value.Replace("\r\n", "").Replace("\t", "");
+            return sqlNode.Value.Replace("\r\n", " ").Replace("\n", " ").Replace("\t", " ").Trim();
         }
     }
 }
