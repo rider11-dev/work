@@ -88,7 +88,7 @@ namespace OneCardSln.Service.Card
                 newCard.card_id = GuidExtension.GetOne();
             }
             //默认状态
-            newCard.card_state = CardState.Normal.GetText();
+            newCard.card_state = CardState.Normal.ToString();
 
             //新增一卡通数据
             var cardRecord = new CardRecord
@@ -97,7 +97,7 @@ namespace OneCardSln.Service.Card
                 rec_number = newCard.card_number,
                 rec_username = newCard.card_username,
                 rec_idcard = newCard.card_idcard,
-                rec_type = operation.GetText(),
+                rec_type = operation.ToString(),
                 rec_time = DateTime.Now,
                 rec_operator = newCard.card_creator,
                 rec_remark = optDesc
@@ -158,7 +158,7 @@ namespace OneCardSln.Service.Card
                 rec_number = number,
                 rec_username = card.card_username,
                 rec_idcard = idcard,
-                rec_type = operation.GetText(),
+                rec_type = operation.ToString(),
                 rec_time = optTime,
                 rec_operator = opt,
                 rec_remark = string.Format("{0}，变更前：{1}，变更后：{2}", optDesc, card.card_number, number)
@@ -223,7 +223,7 @@ namespace OneCardSln.Service.Card
                 rec_number = card.card_number,
                 rec_username = card.card_username,
                 rec_idcard = idcard,
-                rec_type = operation.GetText(),
+                rec_type = operation.ToString(),
                 rec_time = optTime,
                 rec_operator = opt,
                 rec_remark = string.Format("手机号，变更前：{0}，变更后：{1}", card.card_phone, newPhone)
@@ -322,7 +322,7 @@ namespace OneCardSln.Service.Card
                 rec_number = card.card_number,
                 rec_username = card.card_username,
                 rec_idcard = idcard,
-                rec_type = operation.GetText(),
+                rec_type = operation.ToString(),
                 rec_time = optTime,
                 rec_operator = opt,
                 rec_remark = optDesc
@@ -332,7 +332,7 @@ namespace OneCardSln.Service.Card
             try
             {
                 var count = _cardInfoRep.UpdateBySqlName(SqlName_Update,
-                    new { card_state = CardState.Loss.GetText(), card_idcard = idcard, card_modifier = opt, card_modifytime = optTime },
+                    new { card_state = CardState.Loss.ToString(), card_idcard = idcard, card_modifier = opt, card_modifytime = optTime },
                     new string[] { "card_state", "card_modifier", "card_modifytime" }, tran);
                 if (count < 1)
                 {
@@ -504,7 +504,7 @@ namespace OneCardSln.Service.Card
                 rec_number = param.card.card_number,
                 rec_username = param.card.card_username,
                 rec_idcard = param.card.card_idcard,
-                rec_type = operation.GetText(),
+                rec_type = operation.ToString(),
                 rec_time = optTime,
                 rec_operator = param.opt,
                 rec_remark = string.Format("{0}——本次变动额：{1}", optDesc, param.card.card_govmoney + param.card.card_mymoney)
@@ -523,7 +523,7 @@ namespace OneCardSln.Service.Card
                 bill_nowall = 0,
                 bill_nowgov = 0,
                 bill_nowmy = 0,
-                bill_type = operation.GetText(),
+                bill_type = operation.ToString(),
                 bill_time = optTime,
                 bill_record = rec_id,
                 bill_remark = optDesc
@@ -538,7 +538,7 @@ namespace OneCardSln.Service.Card
             {
                 //1
                 var count = _cardInfoRep.UpdateBySqlName(SqlName_Update,
-                        new { card_govmoney = 0, card_mymoney = 0, card_idcard = param.card.card_idcard, card_state = CardState.Off.GetText(), card_modifier = param.opt, card_modifytime = optTime },
+                        new { card_govmoney = 0, card_mymoney = 0, card_idcard = param.card.card_idcard, card_state = CardState.Off.ToString(), card_modifier = param.opt, card_modifytime = optTime },
                         new string[] { "card_govmoney", "card_mymoney", "card_state", "card_modifier", "card_modifytime" },
                         innerTran);
                 if (count < 1)
@@ -604,7 +604,7 @@ namespace OneCardSln.Service.Card
                 rec_number = param.card.card_number,
                 rec_username = param.card.card_username,
                 rec_idcard = param.card.card_idcard,
-                rec_type = operation.GetText(),
+                rec_type = operation.ToString(),
                 rec_time = optTime,
                 rec_operator = param.opt,
                 rec_remark = optDesc
@@ -619,7 +619,7 @@ namespace OneCardSln.Service.Card
             {
                 //1
                 var count = _cardInfoRep.UpdateBySqlName(SqlName_Update,
-                        new { card_idcard = param.card.card_idcard, card_state = CardState.Normal.GetText(), card_modifier = param.opt, card_modifytime = optTime },
+                        new { card_idcard = param.card.card_idcard, card_state = CardState.Normal.ToString(), card_modifier = param.opt, card_modifytime = optTime },
                         new string[] { "card_state", "card_modifier", "card_modifytime" },
                         innerTran);
                 if (count < 1)

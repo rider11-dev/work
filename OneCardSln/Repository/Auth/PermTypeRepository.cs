@@ -18,23 +18,11 @@ namespace OneCardSln.Repository.Auth
             {
                 if (_dataSrc == null)
                 {
-                    _dataSrc = GetSrc();
+                    _dataSrc = EnumExtension.ToDict<PermType>();
                 }
 
                 return _dataSrc;
             }
-        }
-
-        static Dictionary<string, string> GetSrc()
-        {
-            Dictionary<string, string> dict = new Dictionary<string, string>();
-            var arr = Enum.GetValues(typeof(PermType));
-            foreach (var item in arr)
-            {
-                dict.Add(item.ToString(), item.ToString().ToEnum<PermType>().GetDescription());
-            }
-
-            return dict;
         }
     }
 }

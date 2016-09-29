@@ -18,24 +18,11 @@ namespace OneCardSln.Repository.Card
             {
                 if (_dataSrc == null)
                 {
-                    _dataSrc = GetSrc();
+                    _dataSrc = EnumExtension.ToDict<CardState>();
                 }
 
                 return _dataSrc;
             }
         }
-
-        static Dictionary<string, string> GetSrc()
-        {
-            Dictionary<string, string> dict = new Dictionary<string, string>();
-            var arr = Enum.GetValues(typeof(CardState));
-            foreach (var item in arr)
-            {
-                dict.Add(item.ToString(), item.ToString().ToEnum<CardState>().GetDescription());
-            }
-
-            return dict;
-        }
-
     }
 }

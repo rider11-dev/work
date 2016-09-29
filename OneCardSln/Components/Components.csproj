@@ -90,6 +90,7 @@
     <Compile Include="Extensions\FileExtension.cs" />
     <Compile Include="Extensions\GuidExtension.cs" />
     <Compile Include="Extensions\NumberExtension.cs" />
+    <Compile Include="Extensions\ObjectExtension.cs" />
     <Compile Include="Extensions\RegexExtension.cs" />
     <Compile Include="HttpHelper.cs" />
     <Compile Include="IDCard\IDCardData_SS.cs" />

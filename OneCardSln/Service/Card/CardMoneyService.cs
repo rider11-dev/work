@@ -124,7 +124,7 @@ namespace OneCardSln.Service.Card
             var pg = new PredicateGroup { Operator = GroupOperator.And, Predicates = new List<IPredicate>() };
             pg.Predicates.Add(Predicates.Field<CardBill>(b => b.bill_idcard, Operator.Eq, card.card_idcard));
             pg.Predicates.Add(Predicates.Field<CardBill>(b => b.bill_order, Operator.Eq, pay.order));
-            pg.Predicates.Add(Predicates.Field<CardBill>(b => b.bill_type, Operator.Eq, new string[] { CardOperation.Pay.GetText(), CardOperation.Refund.GetText() }));
+            pg.Predicates.Add(Predicates.Field<CardBill>(b => b.bill_type, Operator.Eq, new string[] { CardOperation.Pay.ToString(), CardOperation.Refund.ToString() }));
             var count = _cardBillRep.Count(pg);
             if (count > 0)
             {
@@ -187,7 +187,7 @@ namespace OneCardSln.Service.Card
                 rec_id = rec_id,
                 rec_number = card.card_number,
                 rec_idcard = card.card_idcard,
-                rec_type = operation.GetText(),
+                rec_type = operation.ToString(),
                 rec_time = optTime,
                 rec_username = card.card_username,
                 rec_remark = string.Format("付款金额：{0}", pay.amount),
@@ -206,7 +206,7 @@ namespace OneCardSln.Service.Card
                 bill_nowall = mynew + govnew,
                 bill_nowgov = govnew,
                 bill_nowmy = mynew,
-                bill_type = operation.GetText(),
+                bill_type = operation.ToString(),
                 bill_time = optTime,
                 bill_order = pay.order,
                 bill_src = pay.src,
@@ -285,7 +285,7 @@ namespace OneCardSln.Service.Card
             PredicateGroup pg = new PredicateGroup { Operator = GroupOperator.And, Predicates = new List<IPredicate>() };
             pg.Predicates.Add(Predicates.Field<CardBill>(b => b.bill_idcard, Operator.Eq, card.card_idcard));
             pg.Predicates.Add(Predicates.Field<CardBill>(b => b.bill_order, Operator.Eq, refund.order));
-            var payTypeWhere = Predicates.Field<CardBill>(b => b.bill_type, Operator.Eq, CardOperation.Pay.GetText());
+            var payTypeWhere = Predicates.Field<CardBill>(b => b.bill_type, Operator.Eq, CardOperation.Pay.ToString());
             pg.Predicates.Add(payTypeWhere);
             var payBill = _cardBillRep.GetList(pg).FirstOrDefault();
             if (payBill == null)
@@ -320,7 +320,7 @@ namespace OneCardSln.Service.Card
                 rec_id = rec_id,
                 rec_number = card.card_number,
                 rec_idcard = card.card_idcard,
-                rec_type = operation.GetText(),
+                rec_type = operation.ToString(),
                 rec_time = optTime,
                 rec_username = card.card_username,
                 rec_remark = string.Format("退款金额：{0}", govchanged + mychanged),
@@ -339,7 +339,7 @@ namespace OneCardSln.Service.Card
                 bill_nowall = govnew + mynew,
                 bill_nowgov = govnew,
                 bill_nowmy = mynew,
-                bill_type = operation.GetText(),
+                bill_type = operation.ToString(),
                 bill_time = optTime,
                 bill_order = refund.order,
                 bill_src = refund.src,
@@ -422,7 +422,7 @@ namespace OneCardSln.Service.Card
                 rec_number = param.card.card_number,
                 rec_username = param.card.card_username,
                 rec_idcard = param.card.card_idcard,
-                rec_type = operation.GetText(),
+                rec_type = operation.ToString(),
                 rec_time = optTime,
                 rec_operator = param.opt,
                 rec_remark = string.Format("{0}，本次变动额：{1}", optDesc, param.money)
@@ -441,7 +441,7 @@ namespace OneCardSln.Service.Card
                 bill_nowall = param.moneyType == MoneyEnum.gov ? (param.money + param.card.card_mymoney) : (param.card.card_govmoney + param.card.card_mymoney + param.money),
                 bill_nowgov = param.moneyType == MoneyEnum.gov ? param.money : param.card.card_govmoney,
                 bill_nowmy = param.moneyType == MoneyEnum.my ? (param.card.card_mymoney + param.money) : param.card.card_mymoney,
-                bill_type = operation.GetText(),
+                bill_type = operation.ToString(),
                 bill_time = optTime,
                 bill_record = rec_id,
                 bill_remark = optDesc
