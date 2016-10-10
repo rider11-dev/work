@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ControlTemplate x:Key="valTemplate_Warn">
+        <DockPanel>
+            <Image Width="20" Source="pack://application:,,,/Resources/img/warn.png" Margin="0,0,4,0"/>
+            <!--AdornedElementPlaceholder表示需要装饰的控件-->
+            <AdornedElementPlaceholder/>
+        </DockPanel>
+    </ControlTemplate>
+</ResourceDictionary>

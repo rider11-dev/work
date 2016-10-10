@@ -113,6 +113,7 @@
     <Compile Include="Controllers\Card\CardBillController.cs" />
     <Compile Include="Controllers\Card\CardRecordController.cs" />
     <Compile Include="Controllers\Card\MallAccountController.cs" />
+    <Compile Include="Controllers\Common\MiscController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\Auth\UserController.cs" />
     <Compile Include="Extensions\CustomExceptionLogger.cs" />

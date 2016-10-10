@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Drawing;
 
 namespace OneCardSln.Components
 {
@@ -134,6 +135,28 @@ namespace OneCardSln.Components
                     //记录本次请求信息
                     _logHelper.LogInfo(string.Format("request:{2}\turl,{0}{2}\tjsonData,{1}{2}response:{2}\t{3}", url, JsonConvert.SerializeObject(jsonData), Environment.NewLine, strResponse));
                     return strResponse;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("http请求错误：" + ex.Message, ex);
+            }
+        }
+
+        /// <summary>
+        /// 通过get方式获取图片
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static Image GetImage(string url)
+        {
+            try
+            {
+                var reqEncoding = Encoding.UTF8;
+                var response = CreateGetHttpResponse(url, null, null, null);
+                using (var stream = response.GetResponseStream())
+                {
+                    return Image.FromStream(stream);
                 }
             }
             catch (Exception ex)

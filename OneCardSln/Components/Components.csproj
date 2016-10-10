@@ -201,6 +201,7 @@
     <Compile Include="Serializer\Serializer.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="ValidateHelper.cs" />
+    <Compile Include="VerificationCodeHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\licenses.licx" />

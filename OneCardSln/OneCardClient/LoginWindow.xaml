@@ -1,0 +1,83 @@
+﻿<local:BaseWindow
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:OneCardSln.OneCardClient"
+        xmlns:vm="clr-namespace:OneCardSln.OneCardClient.Models"
+        xmlns:ctlExt="clr-namespace:OneCardSln.Components.WPF.Controls;assembly=OneCardSln.Components.WPF"
+        xmlns:valExt="clr-namespace:OneCardSln.Components.WPF.Validation;assembly=OneCardSln.Components.WPF"
+        x:Class="OneCardSln.OneCardClient.LoginWindow"
+        Style="{StaticResource BaseWindowStyle}"
+        Title="MainWindow" Height="300" Width="344" 
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <!--row1-->
+        <Image Grid.Row="0" Grid.ColumnSpan="2" Source="pack://application:,,,/Resources/img/logo.jpg"/>
+        <!--row2-->
+        <TextBox Name="txtUsrName" Grid.Row="1" Grid.ColumnSpan="2" 
+                 Style="{StaticResource txtAddOnStyle}"
+                 Width="210" Height="32" 
+                 Tag="pack://application:,,,/Resources/img/username.jpg"
+                 Padding="5,5,0,0" 
+                 FontWeight="Bold" FontSize="16"
+                 Text="{Binding Path=UserName,Source={StaticResource vmLogin},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                 >
+        </TextBox>
+        <!--row3-->
+        <ctlExt:MyPasswordBox Name="txtPwd" Grid.Row="2" Grid.ColumnSpan="2" 
+                 Style="{StaticResource txtAddOnStyle}"
+                 Width="210" Height="32" Padding="5,8,0,0" FontSize="12"
+                 Tag="pack://application:,,,/Resources/img/pwd.jpg"
+                 ctlExt:MyPasswordBox.RealText="{Binding Path=Pwd,Source={StaticResource vmLogin},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                 Text="{Binding Path=Pwd,Source={StaticResource vmLogin},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+        </ctlExt:MyPasswordBox>
+        <!--row4-->
+        <TextBox Name="txtVerifyCode" Grid.Row="3" Grid.ColumnSpan="2" 
+                 Style="{StaticResource txtAddOnStyle}"
+                 Width="210" Height="32" 
+                 Tag="pack://application:,,,/Resources/img/qrcode.jpg"
+                 Padding="5,5,0,0" 
+                 FontWeight="Bold" FontSize="16" 
+                 Text="{Binding Path=VerifyCode,Source={StaticResource vmLogin},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                 />
+        <!--row5-->
+        <CheckBox Name="ckRememberMe" Grid.Row="4" Grid.Column="0" 
+                  HorizontalAlignment="Center" VerticalAlignment="Center"
+                  Margin="12,0,0,0"
+                  Content="记住我"
+                  IsChecked="{Binding Path=RememberMe,Source={StaticResource vmLogin}}"/>
+        <TextBlock Grid.Row="5" Grid.Column="1"
+                  HorizontalAlignment="Center" VerticalAlignment="Center"
+                  Margin="-15,0,0,0"
+                   >
+            <Hyperlink>
+                找回密码
+            </Hyperlink>
+        </TextBlock>
+        <!--row6-->
+        <Grid Grid.Row="5" Grid.ColumnSpan="2" >
+            <Label Name="btnLogin"
+               Width="210" Height="40" Padding="86,8"
+               Cursor="Hand" FontWeight="Bold" Foreground="White" FontSize="16"
+               MouseLeftButtonDown="btnLogin_MouseLeftButtonDown"
+               MouseLeftButtonUp="btnLogin_MouseLeftButtonUp"
+               Content="登 录">
+                <Label.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/Resources/img/login.jpg"/>
+                </Label.Background>
+            </Label>
+        </Grid>
+    </Grid>
+</local:BaseWindow>
