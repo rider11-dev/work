@@ -1,0 +1,178 @@
+﻿using OneCardSln.Components.Mapper;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OneCardSln.Components.WPF.Controls
+{
+    public class TreeViewData
+    {
+        private static TreeViewData _data = null;
+        public static TreeViewData Data
+        {
+            get
+            {
+                if (_data == null)
+                {
+                    _data = new TreeViewData();
+
+                    var rn1 = new TreeNode() { Label = "Root A", Level = 1 };
+                    rn1.SubNodes.Add(new TreeNode() { Label = "Root A - Child 1", Level = 2 });
+                    rn1.SubNodes.Add(new TreeNode() { Label = "Root A - Child 2", Level = 2 });
+                    rn1.SubNodes.Add(new TreeNode() { Label = "Root A - Child 3", Level = 2 });
+                    rn1.SubNodes.Add(new TreeNode() { Label = "Root A - Child 4", Level = 2 });
+                    rn1.SubNodes.Add(new TreeNode() { Label = "Root A - Child 5", Level = 2 });
+
+                    var rn2 = new TreeNode() { Label = "Root B", Level = 1 };
+                    rn2.SubNodes.Add(new TreeNode() { Label = "Root B - Child 1", Level = 2 });
+
+                    var rn21 = new TreeNode() { Label = "Root B - Child 2", Level = 2 };
+                    rn21.SubNodes.Add(new TreeNode() { Label = "Root B - Child 2 - Child 1", Level = 3 });
+                    rn21.SubNodes.Add(new TreeNode() { Label = "Root B - Child 2 - Child 2", Level = 3 });
+                    rn2.SubNodes.Add(rn21);
+                    rn2.SubNodes.Add(new TreeNode() { Label = "Root B - Child 3", Level = 2 });
+                    rn2.SubNodes.Add(new TreeNode() { Label = "Root B - Child 4", Level = 2 });
+                    rn2.SubNodes.Add(new TreeNode() { Label = "Root B - Child 5", Level = 2 });
+
+
+
+                    var rn3 = new TreeNode() { Label = "Root C", Level = 1 };
+                    rn3.SubNodes.Add(new TreeNode() { Label = "Root C - Child 1", Level = 2 });
+                    rn3.SubNodes.Add(new TreeNode() { Label = "Root C - Child 2", Level = 2 });
+                    rn3.SubNodes.Add(new TreeNode() { Label = "Root C - Child 3", Level = 2 });
+                    rn3.SubNodes.Add(new TreeNode() { Label = "Root C - Child 4", Level = 2 });
+                    rn3.SubNodes.Add(new TreeNode() { Label = "Root C - Child 5", Level = 2 });
+
+                    _data.RootNodes.Add(rn1);
+                    _data.RootNodes.Add(rn2);
+                    _data.RootNodes.Add(rn3);
+                }
+
+                return _data;
+            }
+        }
+
+        private ObservableCollection<TreeNode> _rootNodes = null;
+        public IList<TreeNode> RootNodes
+        {
+            get
+            {
+                return _rootNodes ?? (_rootNodes = new ObservableCollection<TreeNode>());
+            }
+        }
+
+        public TreeViewData()
+        {
+            //BindTest();
+        }
+
+        public void Bind(IList<NodeData> data)
+        {
+            RootNodes.Clear();
+            if (data == null || data.Count < 1)
+            {
+                return;
+            }
+            //构造节点树
+            var rootsData = data.Where(p => string.IsNullOrEmpty(p.Parent))
+                                .OrderBy(p => p.Order);
+            TreeNode rootNode = null;
+            foreach (var rData in rootsData)
+            {
+                rootNode = OOMapper.Map<NodeData, TreeNode>(rData);//Label、Id、Parent、Data
+                rootNode.Level = 1;
+                //递归构造子节点
+                if (data.Where(p => p.Parent == rootNode.Id).Count() > 0)
+                {
+                    BindSubNodes(rootNode, data);
+                }
+
+                RootNodes.Add(rootNode);
+            }
+        }
+
+        private void BindSubNodes(TreeNode pNode, IList<NodeData> data)
+        {
+            var subDatas = data.Where(p => p.Parent == pNode.Id)
+                                .OrderBy(p => p.Order);
+            if (subDatas == null || subDatas.Count() < 1)
+            {
+                return;
+            }
+            TreeNode subNode = null;
+            foreach (var sub in subDatas)
+            {
+                subNode = OOMapper.Map<NodeData, TreeNode>(sub);
+                subNode.Level = pNode.Level + 1;
+                if (data.Where(p => p.Parent == subNode.Id).Count() > 0)
+                {
+                    BindSubNodes(subNode, data);
+                }
+
+                pNode.SubNodes.Add(subNode);
+            }
+        }
+
+        private void BindTest()
+        {
+            List<NodeData> nodesData = new List<NodeData>();
+            //A
+            nodesData.Add(new NodeData { Id = "rootA", Label = "Root A", Order = "1", Data = new { Id = "rootA", Code = "RootA" } });
+            nodesData.Add(new NodeData { Id = "level2A1", Label = "Root A - Child 1", Parent = "rootA", Order = "1" });
+            nodesData.Add(new NodeData { Id = "level2A2", Label = "Root A - Child 2", Parent = "rootA", Order = "2" });
+            nodesData.Add(new NodeData { Id = "level2A3", Label = "Root A - Child 3", Parent = "rootA", Order = "3" });
+
+            //B
+            nodesData.Add(new NodeData { Id = "rootB", Label = "Root B", Order = "2" });
+            //B1
+            nodesData.Add(new NodeData { Id = "level2B1", Label = "Root B - Child 1", Parent = "rootB", Order = "1" });
+            //B2
+            nodesData.Add(new NodeData { Id = "level2B2", Label = "Root B - Child 2", Parent = "rootB", Order = "2" });
+            nodesData.Add(new NodeData { Id = "level3B2C1", Label = "Root B - Child 2 - Child 1", Parent = "level2B2", Order = "1" });
+            nodesData.Add(new NodeData { Id = "level3B2C2", Label = "Root B - Child 2 - Child 2", Parent = "level2B2", Order = "2" });
+            nodesData.Add(new NodeData { Id = "level3B2C3", Label = "Root B - Child 2 - Child 3", Parent = "level2B2", Order = "3" });
+            //B3
+            nodesData.Add(new NodeData { Id = "level2B3", Label = "Root B - Child 3", Parent = "rootB", Order = "3" });
+
+            //C
+            nodesData.Add(new NodeData { Id = "rootC", Label = "Root C", Order = "3" });
+            nodesData.Add(new NodeData { Id = "level2C1", Label = "Root C - Child 1", Parent = "rootC", Order = "1" });
+            nodesData.Add(new NodeData { Id = "level2C2", Label = "Root C - Child 2", Parent = "rootC", Order = "2" });
+
+            Bind(nodesData);
+        }
+
+        public class TreeNode
+        {
+            public string Label { get; set; }
+            public int Level { get; set; }
+            public string Id { get; set; }
+            /// <summary>
+            /// 指向上级节点的Id字段
+            /// </summary>
+            public string Parent { get; set; }
+            public dynamic Data { get; set; }
+
+            private ObservableCollection<TreeNode> _subNodes = null;
+            public IList<TreeNode> SubNodes
+            {
+                get
+                {
+                    return _subNodes ?? (_subNodes = new ObservableCollection<TreeNode>());
+                }
+            }
+        }
+
+        public class NodeData
+        {
+            public string Label { get; set; }
+            public string Id { get; set; }
+            public string Parent { get; set; }
+            public string Order { get; set; }
+            public dynamic Data { get; set; }
+        }
+    }
+}

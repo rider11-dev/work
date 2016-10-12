@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using OneCardSln.Components.WPF.Extension;
 
 namespace OneCardSln.OneCardClient.Public
 {
@@ -19,20 +20,23 @@ namespace OneCardSln.OneCardClient.Public
     /// </summary>
     public partial class MessageWindow : Window
     {
+        const string msgWindowTemplateName = "msgWindowTemplate";
         public MessageType MsgType { get; set; }
-        public string Title { get; private set; }
+        public string MsgTitle { get; private set; }
         public string Msg { get; private set; }
 
         private MessageWindow()
         {
             InitializeComponent();
+            //允许拖拽
+            this.DragWhenLeftMouseDown();
         }
 
-        public MessageWindow(MessageType mstType, string title = "", string msg = "")
+        private MessageWindow(MessageType mstType, string title = "", string msg = "")
             : this()
         {
             MsgType = mstType;
-            Title = title;
+            MsgTitle = title;
             Msg = msg;
 
             this.Loaded += delegate
@@ -43,14 +47,14 @@ namespace OneCardSln.OneCardClient.Public
 
         void Bind()
         {
-            ControlTemplate msgWindowTemplate = (ControlTemplate)App.Current.Resources["MsgWindowTemplate"];
+            ControlTemplate msgWindowTemplate = (ControlTemplate)App.Current.Resources[msgWindowTemplateName];
             //
             Image img = (Image)msgWindowTemplate.FindName("imgTitle", this);
             BitmapImage bitmap = new BitmapImage(new Uri(GetIconFile(), UriKind.Absolute));
             img.Source = bitmap;
             //
             TextBlock txt = (TextBlock)msgWindowTemplate.FindName("txtTitle", this);
-            txt.Text = Title;
+            txt.Text = MsgTitle;
             //
             txt = (TextBlock)msgWindowTemplate.FindName("txtMsg", this);
             txt.Text = Msg;
@@ -81,6 +85,12 @@ namespace OneCardSln.OneCardClient.Public
                     return "pack://application:,,,/Resources/img/warn.png";
             }
             return string.Empty;
+        }
+
+        public static bool? ShowMsg(MessageType msgType, string title = "", string msg = "")
+        {
+            MessageWindow msgWin = new MessageWindow(msgType, title, msg);
+            return msgWin.ShowDialog();
         }
 
     }

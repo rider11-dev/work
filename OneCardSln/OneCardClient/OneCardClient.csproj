@@ -38,8 +38,13 @@
     <Reference Include="log4net">
       <HintPath>..\dlls\log4net\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -61,6 +66,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BaseWindow.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Api.cs" />
+    <Compile Include="Models\ApiKeys.cs" />
+    <Compile Include="Models\UserViewModel.cs" />
+    <Compile Include="Public\ApiHelper.cs" />
+    <Compile Include="Public\Context.cs" />
     <Compile Include="Public\MessageWindow.xaml.cs">
       <DependentUpon>MessageWindow.xaml</DependentUpon>
     </Compile>
@@ -76,6 +89,10 @@
       <DependentUpon>LoginWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Public\MessageWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -84,7 +101,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\style\InputAddOnStyle.xaml">
+    <Page Include="Resources\style\MiscStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -92,9 +109,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\style\ValidationTemplate.xaml">
+    <Page Include="Resources\style\TreeViewStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\style\ValidationTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\style\WindowStyle.xaml">
       <SubType>Designer</SubType>
@@ -117,6 +138,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Resources\img\userhead.png" />
+    <Resource Include="Resources\img\top.jpg" />
+    <Resource Include="Resources\img\logoff.png" />
     <Resource Include="Resources\img\ask.png" />
     <Resource Include="Resources\img\error.png" />
     <Resource Include="Resources\img\info.png" />
@@ -134,6 +158,10 @@
     <Content Include="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="api.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -144,17 +172,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\img\+.png" />
-    <Resource Include="Resources\img\-.png" />
+    <Resource Include="Resources\img\node_+.png" />
+    <Resource Include="Resources\img\node_-.png" />
     <Resource Include="Resources\img\login.jpg" />
-    <Resource Include="Resources\img\geduan.jpg" />
+    <Resource Include="Resources\img\separator.jpg" />
     <Resource Include="Resources\img\logo.jpg" />
     <Resource Include="Resources\img\maximize.jpg" />
     <Resource Include="Resources\img\pwd.jpg" />
     <Resource Include="Resources\img\mininize.jpg" />
     <Resource Include="Resources\img\qrcode.jpg" />
     <Resource Include="Resources\img\header.jpg" />
-    <Resource Include="Resources\img\head_portrait.png" />
     <Resource Include="Resources\img\location.png" />
     <Resource Include="Resources\img\username.jpg" />
   </ItemGroup>
@@ -169,6 +196,10 @@
     <ProjectReference Include="..\Components\Components.csproj">
       <Project>{9ed019a0-a26a-4725-aa70-2b52bf7a5416}</Project>
       <Name>Components</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{bb11afa2-784c-4e60-9586-6608d8338d67}</Project>
+      <Name>Model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

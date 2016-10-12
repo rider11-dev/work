@@ -1,7 +1,14 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <!--BaseWindow模板-->
-    <ControlTemplate x:Key="BaseWindowTemplate" TargetType="Window">
+    <!--基础Window样式-->
+    <Style x:Key="baseWindowStyle" TargetType="Window">
+        <Setter Property="AllowsTransparency" Value="True" />
+        <Setter Property="WindowStyle" Value="None" />
+        <Setter Property="AllowDrop" Value="True"/>
+    </Style>
+
+    <!--弹出Window模板-->
+    <ControlTemplate x:Key="popWindowTemplate" TargetType="Window">
         <Border BorderBrush="LightGray" BorderThickness="1">
             <DockPanel LastChildFill="True">
                 <Border Width="Auto" DockPanel.Dock="Top" Background="White" Height="40" x:Name="borderTitle">
@@ -19,19 +26,17 @@
             </DockPanel>
         </Border>
     </ControlTemplate>
-    <!--BaseWindow样式-->
-    <Style x:Key="BaseWindowStyle" TargetType="Window">
-        <Setter Property="Template" Value="{StaticResource BaseWindowTemplate}"/>
-        <Setter Property="AllowsTransparency" Value="True" />
-        <Setter Property="WindowStyle" Value="None" />
-        <Setter Property="AllowDrop" Value="True"/>
+
+    <!--弹出Window样式-->
+    <Style x:Key="popWindowStyle" TargetType="Window" BasedOn="{StaticResource baseWindowStyle}">
+        <Setter Property="Template" Value="{StaticResource popWindowTemplate}"/>
     </Style>
 
 
     <!--消息窗口模板-->
-    <ControlTemplate x:Key="MsgWindowTemplate" TargetType="Window">
-        <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="4">
-            <Grid Background="LightBlue">
+    <ControlTemplate x:Key="msgWindowTemplate" TargetType="Window">
+        <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="2">
+            <Grid Background="AliceBlue">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
                     <RowDefinition/>
@@ -65,10 +70,7 @@
         </Border>
     </ControlTemplate>
     <!--消息窗口样式-->
-    <Style x:Key="MsgWindowStyle" TargetType="Window">
-        <Setter Property="Template" Value="{StaticResource MsgWindowTemplate}"/>
-        <Setter Property="AllowsTransparency" Value="True" />
-        <Setter Property="WindowStyle" Value="None" />
-        <Setter Property="AllowDrop" Value="True"/>
+    <Style x:Key="msgWindowStyle" TargetType="Window"  BasedOn="{StaticResource baseWindowStyle}">
+        <Setter Property="Template" Value="{StaticResource msgWindowTemplate}"/>
     </Style>
 </ResourceDictionary>

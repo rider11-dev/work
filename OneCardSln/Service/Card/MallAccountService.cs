@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using OneCardSln.Components;
+using OneCardSln.Components.Result;
 using OneCardSln.Model;
 using System;
 using System.Collections.Generic;
@@ -51,8 +52,7 @@ namespace OneCardSln.Service.Card
             //调用商城接口：查询账户信息
             try
             {
-                var data = HttpHelper.Post(apiUrl, new { idcard = idcard });
-                rst = JsonConvert.DeserializeObject<OptResult>(data);
+                rst = HttpHelper.GetResultByPost(apiUrl, new { idcard = idcard });
             }
             catch (Exception ex)
             {
@@ -93,8 +93,7 @@ namespace OneCardSln.Service.Card
             }
             try
             {
-                var data = HttpHelper.Post(apiUrl, entity);
-                rst = JsonConvert.DeserializeObject<OptResult>(data);
+                rst = HttpHelper.GetResultByPost(apiUrl, entity);
             }
             catch (Exception ex)
             {
@@ -123,8 +122,7 @@ namespace OneCardSln.Service.Card
             //调用商城接口：封停账户
             try
             {
-                var data = HttpHelper.Post(apiUrl, new { idcard = idcard });
-                rst = JsonConvert.DeserializeObject<OptResult>(data);
+                rst = HttpHelper.GetResultByPost(apiUrl, new { idcard = idcard });
             }
             catch (Exception ex)
             {
@@ -155,8 +153,7 @@ namespace OneCardSln.Service.Card
             //调用商城接口：修改手机号
             try
             {
-                var data = HttpHelper.Post(apiUrl, new { idcard = idcard, phone = phone });
-                rst = JsonConvert.DeserializeObject<OptResult>(data);
+                rst = HttpHelper.GetResultByPost(apiUrl, new { idcard = idcard, phone = phone });
             }
             catch (Exception ex)
             {

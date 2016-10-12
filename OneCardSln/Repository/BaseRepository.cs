@@ -25,9 +25,13 @@ namespace OneCardSln.Repository
         #region IBaseRepository
         public TEntity GetById(dynamic pkId, IDbTransaction trans = null)
         {
+            return GetById<TEntity>(pkId, trans);
+        }
+        public TReturn GetById<TReturn>(dynamic pkId, IDbTransaction trans = null) where TReturn : class
+        {
             try
             {
-                return this.DbSession.Connection.Get<TEntity>(pkId as object, trans);
+                return this.DbSession.Connection.Get<TReturn>(pkId as object, trans);
             }
             catch
             {

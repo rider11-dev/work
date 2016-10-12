@@ -1,4 +1,5 @@
 ﻿using log4net;
+using OneCardSln.Components.Result;
 using OneCardSln.Model;
 using System;
 using System.Collections.Generic;

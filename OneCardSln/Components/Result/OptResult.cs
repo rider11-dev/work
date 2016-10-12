@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using OneCardSln.Components.Extensions;
 
-namespace OneCardSln.Model
+namespace OneCardSln.Components.Result
 {
     /// <summary>
     /// http请求json响应数据实体

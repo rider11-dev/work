@@ -19,6 +19,7 @@ namespace OneCardSln.Repository
 
         #region dapper-extensions
         TEntity GetById(dynamic pkId, IDbTransaction trans = null);
+        TReturn GetById<TReturn>(dynamic pkId, IDbTransaction trans = null) where TReturn : class;
 
         int Count(object predicate, IDbTransaction trans = null);
 

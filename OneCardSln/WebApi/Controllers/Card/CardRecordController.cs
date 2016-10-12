@@ -1,4 +1,5 @@
-﻿using OneCardSln.Model;
+﻿using OneCardSln.Components.Result;
+using OneCardSln.Model;
 using OneCardSln.Service.Card;
 using OneCardSln.WebApi.Filters;
 using System;

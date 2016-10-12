@@ -1,5 +1,6 @@
 ﻿using OneCardSln.Components.Extensions;
 using OneCardSln.Components.Mapper;
+using OneCardSln.Components.Result;
 using OneCardSln.Model;
 using OneCardSln.Model.Auth;
 using OneCardSln.Service.Auth;
@@ -55,7 +56,7 @@ namespace OneCardSln.WebApi.Controllers.Auth
                 };
 
                 string token = JWT.JsonWebToken.Encode(payload, ApiContext.JwtSecretKey, JWT.JwtHashAlgorithm.HS256);
-                rst = OptResult.Build(ResultCode.Success, "用户登录成功，并已生成token", new { token = token });
+                rst = OptResult.Build(ResultCode.Success, "用户登录成功，并已生成token", new { token = token, usrid = rst.data.user_id });
             }
 
             return rst;
@@ -145,6 +146,25 @@ namespace OneCardSln.WebApi.Controllers.Auth
         }
 
         [HttpPost]
+        [Route("get")]
+        public OptResult GetUserInfo(GetByIdViewModel vmGetById)
+        {
+            OptResult rst = null;
+            if (vmGetById == null)
+            {
+                rst = OptResult.Build(ResultCode.ParamError, "参数不能为空或格式不正确");
+                return rst;
+            }
+            if (!ModelState.IsValid)
+            {
+                rst = OptResult.Build(ResultCode.ParamError, ModelState.Parse());
+                return rst;
+            }
+            rst = _usrSrv.Find(vmGetById.pk);
+            return rst;
+        }
+
+        [HttpPost]
         [Route("assign")]
         public OptResult AssignPermissions(AssignPermissionViewModel vmAssignPer)
         {
@@ -168,10 +188,10 @@ namespace OneCardSln.WebApi.Controllers.Auth
 
         [HttpPost]
         [Route("getper")]
-        public OptResult GetPermissions(GetByIdViewModel vmGetByPk)
+        public OptResult GetPermissions(GetByIdViewModel vmGetById)
         {
             OptResult rst = null;
-            if (vmGetByPk == null)
+            if (vmGetById == null)
             {
                 rst = OptResult.Build(ResultCode.ParamError, "参数不能为空或格式不正确");
                 return rst;
@@ -181,7 +201,7 @@ namespace OneCardSln.WebApi.Controllers.Auth
                 rst = OptResult.Build(ResultCode.ParamError, ModelState.Parse());
                 return rst;
             }
-            rst = _usrPerRelSrv.GetPermissions(vmGetByPk.pk);
+            rst = _usrPerRelSrv.GetPermissions(vmGetById.pk);
 
             return rst;
         }

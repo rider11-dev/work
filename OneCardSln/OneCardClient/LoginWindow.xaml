@@ -3,13 +3,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:OneCardSln.OneCardClient"
         xmlns:vm="clr-namespace:OneCardSln.OneCardClient.Models"
-        xmlns:ctlExt="clr-namespace:OneCardSln.Components.WPF.Controls;assembly=OneCardSln.Components.WPF"
         xmlns:valExt="clr-namespace:OneCardSln.Components.WPF.Validation;assembly=OneCardSln.Components.WPF"
+        xmlns:ext="clr-namespace:OneCardSln.Components.WPF.Extension;assembly=OneCardSln.Components.WPF"
         x:Class="OneCardSln.OneCardClient.LoginWindow"
-        Style="{StaticResource BaseWindowStyle}"
-        Title="MainWindow" Height="300" Width="344" 
+        Style="{StaticResource popWindowStyle}"
+        Title="LoginWindow" Height="300" Width="344" 
+        FocusManager.FocusedElement="{Binding ElementName=txtUsrName}"
         WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded">
+    <Window.Resources>
+        <Style x:Key="inputStyle" TargetType="Control" BasedOn="{StaticResource txtValidateStyle}">
+            <Setter Property="Width" Value="210"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -27,29 +37,22 @@
         <Image Grid.Row="0" Grid.ColumnSpan="2" Source="pack://application:,,,/Resources/img/logo.jpg"/>
         <!--row2-->
         <TextBox Name="txtUsrName" Grid.Row="1" Grid.ColumnSpan="2" 
-                 Style="{StaticResource txtAddOnStyle}"
-                 Width="210" Height="32" 
+                 Style="{StaticResource inputStyle}"
                  Tag="pack://application:,,,/Resources/img/username.jpg"
-                 Padding="5,5,0,0" 
-                 FontWeight="Bold" FontSize="16"
                  Text="{Binding Path=UserName,Source={StaticResource vmLogin},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                  >
         </TextBox>
         <!--row3-->
-        <ctlExt:MyPasswordBox Name="txtPwd" Grid.Row="2" Grid.ColumnSpan="2" 
-                 Style="{StaticResource txtAddOnStyle}"
-                 Width="210" Height="32" Padding="5,8,0,0" FontSize="12"
+        <PasswordBox Name="txtPwd" Grid.Row="2" Grid.ColumnSpan="2"
                  Tag="pack://application:,,,/Resources/img/pwd.jpg"
-                 ctlExt:MyPasswordBox.RealText="{Binding Path=Pwd,Source={StaticResource vmLogin},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                 Text="{Binding Path=Pwd,Source={StaticResource vmLogin},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
-        </ctlExt:MyPasswordBox>
+                 Style="{StaticResource inputStyle}"
+                 ext:PasswordBoxAssistant.BindPassword="True"
+                 ext:PasswordBoxAssistant.BoundPassword="{Binding Path=Pwd,Source={StaticResource vmLogin},Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <!--row4-->
         <TextBox Name="txtVerifyCode" Grid.Row="3" Grid.ColumnSpan="2" 
-                 Style="{StaticResource txtAddOnStyle}"
+                 Style="{StaticResource inputStyle}"
                  Width="210" Height="32" 
                  Tag="pack://application:,,,/Resources/img/qrcode.jpg"
-                 Padding="5,5,0,0" 
-                 FontWeight="Bold" FontSize="16" 
                  Text="{Binding Path=VerifyCode,Source={StaticResource vmLogin},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                  />
         <!--row5-->
@@ -58,7 +61,7 @@
                   Margin="12,0,0,0"
                   Content="记住我"
                   IsChecked="{Binding Path=RememberMe,Source={StaticResource vmLogin}}"/>
-        <TextBlock Grid.Row="5" Grid.Column="1"
+        <TextBlock Grid.Row="4" Grid.Column="1"
                   HorizontalAlignment="Center" VerticalAlignment="Center"
                   Margin="-15,0,0,0"
                    >
@@ -71,7 +74,6 @@
             <Label Name="btnLogin"
                Width="210" Height="40" Padding="86,8"
                Cursor="Hand" FontWeight="Bold" Foreground="White" FontSize="16"
-               MouseLeftButtonDown="btnLogin_MouseLeftButtonDown"
                MouseLeftButtonUp="btnLogin_MouseLeftButtonUp"
                Content="登 录">
                 <Label.Background>

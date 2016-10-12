@@ -41,6 +41,7 @@ namespace OneCardSln.OneCardClient.Models
         }
         string _verifyCode;
         [Required(ErrorMessage = "验证码不能为空")]
+        //[Compare("VerifyCodeTarget", ErrorMessage = "验证码错误")]
         public string VerifyCode
         {
             get
@@ -56,6 +57,10 @@ namespace OneCardSln.OneCardClient.Models
                 }
             }
         }
+        /// <summary>
+        /// 目标验证码
+        /// </summary>
+        public string VerifyCodeTarget { get; set; }
         public bool RememberMe { get; set; }
 
         public LoginViewModel()
@@ -68,6 +73,11 @@ namespace OneCardSln.OneCardClient.Models
         public override string ToString()
         {
             return string.Format("UserName:{0},Pwd:{1},VerifyCode:{2},RememberMe:{3}", UserName, Pwd, VerifyCode, RememberMe);
+        }
+
+        public bool CheckVerifyCode()
+        {
+            return VerifyCode == VerifyCodeTarget;
         }
     }
 }

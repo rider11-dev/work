@@ -1,4 +1,5 @@
 ﻿using DapperExtensions;
+using OneCardSln.Components.Result;
 using OneCardSln.Model;
 using OneCardSln.Repository.Card;
 using OneCardSln.Repository.Db;

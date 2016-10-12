@@ -116,6 +116,8 @@
       <DependentUpon>Resource.resx</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Result\OptResult.cs" />
+    <Compile Include="Result\ResultCode.cs" />
     <Compile Include="Serializer\Protobuf\Protobuf.Compiler\CodeLabel.cs" />
     <Compile Include="Serializer\Protobuf\Protobuf.Compiler\CompilerContext.cs" />
     <Compile Include="Serializer\Protobuf\Protobuf.Compiler\Local.cs" />
@@ -209,6 +211,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

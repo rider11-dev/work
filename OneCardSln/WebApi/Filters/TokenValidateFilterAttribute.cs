@@ -13,6 +13,7 @@ using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using Autofac;
 using System.Web.Http;
+using OneCardSln.Components.Result;
 
 namespace OneCardSln.WebApi.Filters
 {

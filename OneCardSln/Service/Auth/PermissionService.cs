@@ -1,5 +1,6 @@
 ﻿using DapperExtensions;
 using OneCardSln.Components.Extensions;
+using OneCardSln.Components.Result;
 using OneCardSln.Model;
 using OneCardSln.Model.Auth;
 using OneCardSln.Model.Base;

@@ -13,6 +13,7 @@ using OneCardSln.Components.Extensions;
 using OneCardSln.Components.Mapper;
 using OneCardSln.Service.Auth.Models;
 using OneCardSln.Repository.Db;
+using OneCardSln.Components.Result;
 
 namespace OneCardSln.Service.Auth
 {
@@ -33,7 +34,7 @@ namespace OneCardSln.Service.Auth
         private UserRepository _usrRep;
 
         public UserService(IDbSession session, UserRepository usrRep)
-            : base(session,usrRep)
+            : base(session, usrRep)
         {
             _usrRep = usrRep;
         }
@@ -103,12 +104,12 @@ namespace OneCardSln.Service.Auth
             return rst;
         }
 
-        public OptResult Find(dynamic pkId)
+        public OptResult Find(dynamic pk)
         {
             OptResult rst = null;
             try
             {
-                var usr = _usrRep.GetById(pkId);
+                var usr = _usrRep.GetById<UserDto>(pk);
                 rst = OptResult.Build(ResultCode.Success, Msg_FindById, usr);
             }
             catch (Exception ex)

@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
-namespace OneCardSln.Model
+namespace OneCardSln.Components.Result
 {
     public enum ResultCode
     {

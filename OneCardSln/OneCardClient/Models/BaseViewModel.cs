@@ -35,7 +35,7 @@ namespace OneCardSln.OneCardClient.Models
                 IEnumerable<string> errors = from val in _validators
                                              from attr in val.Value
                                              where !attr.IsValid(_propertyGetters[val.Key].GetValue(this))
-                                             select attr.ErrorMessage;
+                                             select attr.FormatErrorMessage(attr.ErrorMessage);
                 return string.Join(Environment.NewLine, errors.ToArray());
             }
         }
@@ -48,6 +48,7 @@ namespace OneCardSln.OneCardClient.Models
                 {
                     return string.Empty;
                 }
+                //return Validate(columnName);
                 return Validate1(columnName);
             }
         }

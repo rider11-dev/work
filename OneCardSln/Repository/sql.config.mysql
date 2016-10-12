@@ -8,14 +8,11 @@
     </sqlgroup>
     <sqlgroup name="auth_user_per_rel">
       <sql name="getper">
-        select t.*,d.dict_name per_type_name from (
         select per.per_id ,per.per_code,per.per_name,per.per_type,per.per_parent,per.per_sort,rel.rel_userid
         from auth_permission per,auth_user_permission rel
         where per.per_id = rel.rel_permissionid or rel.rel_permissionid = '*'
         and rel.rel_userid=@user_id
-        ) t
-        left join base_dict d on t.per_type=d.dict_id
-        order by t.per_sort
+        order by per.per_sort
       </sql>
     </sqlgroup>
   </sqlarea>

@@ -10,6 +10,7 @@ using System.Web.Http;
 using OneCardSln.WebApi.Extensions;
 using OneCardSln.Components.Mapper;
 using OneCardSln.Service.Card.Models;
+using OneCardSln.Components.Result;
 
 namespace OneCardSln.WebApi.Controllers.Card
 {

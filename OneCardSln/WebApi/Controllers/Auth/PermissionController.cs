@@ -11,6 +11,7 @@ using OneCardSln.WebApi.Extensions;
 using OneCardSln.Components.Mapper;
 using OneCardSln.Model.Auth;
 using OneCardSln.WebApi.Models;
+using OneCardSln.Components.Result;
 
 namespace OneCardSln.WebApi.Controllers.Auth
 {

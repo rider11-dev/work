@@ -12,6 +12,8 @@ namespace OneCardSln.OneCardClient
 {
     public class BaseWindow : Window
     {
+        const string BaseWindowTemplateName = "popWindowTemplate";
+
         public BaseWindow()
             : base()
         {
@@ -29,23 +31,35 @@ namespace OneCardSln.OneCardClient
         private void BindWindowButtonEvent()
         {
             //右上角按钮绑定事件，在Loaded事件中处理，不能在构造函数中
-            ControlTemplate baseWindowTemplate = (ControlTemplate)App.Current.Resources["BaseWindowTemplate"];
-            Button btn = (Button)baseWindowTemplate.FindName("btnMinimize", this);
-            if (btn != null)
+            if (!App.Current.Resources.Contains(BaseWindowTemplateName))
             {
-                btn.Click += delegate
-                {
-                    this.WindowState = WindowState.Minimized;
-                };
+                return;
             }
-            btn = (Button)baseWindowTemplate.FindName("btnClose", this);
-            if (btn != null)
+            ControlTemplate baseWindowTemplate = (ControlTemplate)App.Current.Resources[BaseWindowTemplateName];
+            if (baseWindowTemplate == null)
             {
-                btn.Click += delegate
-                {
-                    this.Close();
-                };
+                return;
             }
+            try
+            {
+                Button btn = (Button)baseWindowTemplate.FindName("btnMinimize", this);
+                if (btn != null)
+                {
+                    btn.Click += delegate
+                    {
+                        this.WindowState = WindowState.Minimized;
+                    };
+                }
+                btn = (Button)baseWindowTemplate.FindName("btnClose", this);
+                if (btn != null)
+                {
+                    btn.Click += delegate
+                    {
+                        this.Close();
+                    };
+                }
+            }
+            catch { }
         }
     }
 }
