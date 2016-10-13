@@ -8,7 +8,7 @@ namespace OneCardSln.WebApi.Models.Auth.User
 {
     public class AssignPermissionViewModel
     {
-        [Required(ErrorMessageResourceName = "UserId_Require", ErrorMessageResourceType = typeof(Resources.Resource))]
+        [Required(ErrorMessageResourceName = "UserId_Require", ErrorMessageResourceType = typeof(OneCardSln.Components.Resource.ViewModelResource))]
         public string userId { get; set; }
 
         public List<string> perIds { get; set; }

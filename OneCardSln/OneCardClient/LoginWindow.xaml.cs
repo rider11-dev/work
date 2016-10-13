@@ -34,54 +34,17 @@ namespace OneCardSln.OneCardClient
         /*
          * TODO：改进点
          * 1、passwordbox，模型验证不起作用
+         * 2、输入框placeholder
          */
         LoginViewModel vmLogin;
         public LoginWindow()
         {
             vmLogin = new LoginViewModel();
-            this.Resources.Add("vmLogin", vmLogin);
+            this.Resources.Add("model", vmLogin);
 
             InitializeComponent();
             //允许拖拽
             this.DragWhenLeftMouseDown();
-            btnLogin.MouseLeftButtonDown += MiscExtension.HandleMouseButtonEvent;
-        }
-
-        private void btnLogin_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            e.Handled = true;
-            if (!vmLogin.IsValid)
-            {
-                MessageWindow.ShowMsg(MessageType.Warning, "输入验证失败", vmLogin.Error);
-                return;
-            }
-            if (!vmLogin.CheckVerifyCode())
-            {
-                MessageWindow.ShowMsg(MessageType.Warning, "输入验证失败", "验证码错误");
-                return;
-            }
-            //登录
-            var url = ApiHelper.GetApiUrl(ApiKeys.Login);
-            var rst = HttpHelper.GetResultByPost(url, new { username = vmLogin.UserName, pwd = vmLogin.Pwd });
-            if (rst.code != ResultCode.Success)
-            {
-                MessageWindow.ShowMsg(MessageType.Warning, "登录失败", rst.msg);
-                return;
-            }
-            //登录成功，记录token
-            Context.Token = rst.data.token;
-            //获取用户信息
-            rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.GetUsr), new { pk = rst.data.usrid }, Context.Token);
-            if (rst.code != ResultCode.Success)
-            {
-                MessageWindow.ShowMsg(MessageType.Warning, "获取用户信息失败", rst.msg);
-                return;
-            }
-            var user = JsonConvert.DeserializeObject<User>(((JObject)rst.data).ToString());
-            Context.CurrentUser = OOMapper.Map<User, UserViewModel>(user);
-
-            new MainWindow().Show();
-            this.Close();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -110,6 +73,43 @@ namespace OneCardSln.OneCardClient
             txtUsrName.BindImageAddOn();
             txtPwd.BindImageAddOn();
             txtVerifyCode.BindImageAddOn();
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            e.Handled = true;
+            if (!vmLogin.IsValid)
+            {
+                MessageWindow.ShowMsg(MessageType.Warning, MsgConst.Msg_ValidateFail, vmLogin.Error);
+                return;
+            }
+            if (!vmLogin.CheckVerifyCode())
+            {
+                MessageWindow.ShowMsg(MessageType.Warning, MsgConst.Msg_ValidateFail, "验证码错误");
+                return;
+            }
+            //登录
+            var url = ApiHelper.GetApiUrl(ApiKeys.Login);
+            var rst = HttpHelper.GetResultByPost(url, new { username = vmLogin.UserName, pwd = vmLogin.Pwd });
+            if (rst.code != ResultCode.Success)
+            {
+                MessageWindow.ShowMsg(MessageType.Warning, MsgConst.Msg_LoginFail, rst.msg);
+                return;
+            }
+            //登录成功，记录token
+            Context.Token = rst.data.token;
+            //获取用户信息
+            rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.GetUsr), new { pk = rst.data.usrid }, Context.Token);
+            if (rst.code != ResultCode.Success)
+            {
+                MessageWindow.ShowMsg(MessageType.Warning, MsgConst.Msg_GetUsr, rst.msg);
+                return;
+            }
+            var user = JsonConvert.DeserializeObject<User>(((JObject)rst.data).ToString());
+            Context.CurrentUser = OOMapper.Map<User, UserViewModel>(user);
+
+            new MainWindow().Show();
+            this.Close();
         }
     }
 }

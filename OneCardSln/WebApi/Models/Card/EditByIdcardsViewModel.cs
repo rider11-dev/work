@@ -8,7 +8,7 @@ namespace OneCardSln.WebApi.Models.Card
 {
     public class EditByIdcardsViewModel
     {
-        [Required(ErrorMessageResourceName = "Idcard_Require", ErrorMessageResourceType = typeof(Resources.Resource))]
+        [Required(ErrorMessageResourceName = "Idcard_Require", ErrorMessageResourceType = typeof(OneCardSln.Components.Resource.ViewModelResource))]
         public IEnumerable<string> idcards { get; set; }
     }
 }

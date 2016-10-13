@@ -8,7 +8,7 @@ namespace OneCardSln.WebApi.Models
 {
     public class DelByPkViewModel
     {
-        [Required(ErrorMessageResourceName = "DelByPk_Require", ErrorMessageResourceType = typeof(Resources.Resource))]
+        [Required(ErrorMessageResourceName = "DelByPk_Require", ErrorMessageResourceType = typeof(OneCardSln.Components.Resource.ViewModelResource))]
         public string pk { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace OneCardSln.WebApi.Models.Card
 {
     public class SetMoneyViewModel
     {
-        [Required(ErrorMessageResourceName = "Idcards_Require", ErrorMessageResourceType = typeof(Resources.Resource))]
+        [Required(ErrorMessageResourceName = "Idcards_Require", ErrorMessageResourceType = typeof(OneCardSln.Components.Resource.ViewModelResource))]
         public IEnumerable<string> idcards { get; set; }
         public decimal money { get; set; }
     }

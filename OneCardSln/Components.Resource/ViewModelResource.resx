@@ -147,6 +147,9 @@
   <data name="Dict_Type_Require" xml:space="preserve">
     <value>字典类型不能为空</value>
   </data>
+  <data name="Dict_Type_Require1" xml:space="preserve">
+    <value>字典类型不能为空</value>
+  </data>
   <data name="Edit_By_Id" xml:space="preserve">
     <value>请指定要修改的数据</value>
   </data>
@@ -174,6 +177,18 @@
   <data name="OldPwd_Require" xml:space="preserve">
     <value>旧密码不能为空</value>
   </data>
+  <data name="Opt_Length" xml:space="preserve">
+    <value>操作员最大为{1}个字符</value>
+  </data>
+  <data name="Order_Require" xml:space="preserve">
+    <value>订单号不能为空</value>
+  </data>
+  <data name="Pay_Amount_Require" xml:space="preserve">
+    <value>付款金额不能为空</value>
+  </data>
+  <data name="Pay_Src_Length" xml:space="preserve">
+    <value>付款来源最大为{1}个字符</value>
+  </data>
   <data name="Per_Code_Length" xml:space="preserve">
     <value>权限编号最大为{1}个字符</value>
   </data>
@@ -183,6 +198,9 @@
   <data name="Per_Type_Require" xml:space="preserve">
     <value>权限类别不能为空</value>
   </data>
+  <data name="Per_Uri_Length" xml:space="preserve">
+    <value>权限uri最大为{1}个字符</value>
+  </data>
   <data name="Phone_Require" xml:space="preserve">
     <value>手机号不能为空</value>
   </data>
@@ -191,6 +209,9 @@
   </data>
   <data name="Pwd_Require" xml:space="preserve">
     <value>密码不能为空</value>
+  </data>
+  <data name="Refund_Src_Length" xml:space="preserve">
+    <value>退款来源最大为{1}个字符</value>
   </data>
   <data name="Regex_CellPhone" xml:space="preserve">
     <value>手机号码格式不正确</value>
@@ -210,6 +231,9 @@
   <data name="Sort_Regex" xml:space="preserve">
     <value>排序号格式不正确，只能输入0~9的字符组合</value>
   </data>
+  <data name="Sort_Require" xml:space="preserve">
+    <value>排序号不能为空</value>
+  </data>
   <data name="UserId_Require" xml:space="preserve">
     <value>用户id不能为空</value>
   </data>
@@ -222,22 +246,10 @@
   <data name="User_TrueName_Length" xml:space="preserve">
     <value>用户真实姓名长度必须在{2}和{1}之间</value>
   </data>
-  <data name="Order_Require" xml:space="preserve">
-    <value>订单号不能为空</value>
+  <data name="NewPwd2_Require" xml:space="preserve">
+    <value>请确认新密码</value>
   </data>
-  <data name="Pay_Amount_Require" xml:space="preserve">
-    <value>付款金额不能为空</value>
-  </data>
-  <data name="Opt_Length" xml:space="preserve">
-    <value>操作员最大为{1}个字符</value>
-  </data>
-  <data name="Pay_Src_Length" xml:space="preserve">
-    <value>付款来源最大为{1}个字符</value>
-  </data>
-  <data name="Refund_Src_Length" xml:space="preserve">
-    <value>退款来源最大为{1}个字符</value>
-  </data>
-  <data name="Sort_Require" xml:space="preserve">
-    <value>排序号不能为空</value>
+  <data name="User_TrueName_Require" xml:space="preserve">
+    <value>用户真实姓名不能为空</value>
   </data>
 </root>

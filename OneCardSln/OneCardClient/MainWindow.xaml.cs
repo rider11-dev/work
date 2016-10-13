@@ -22,6 +22,8 @@ using OneCardSln.Model.Auth;
 using OneCardSln.Components.WPF.Controls;
 using OneCardSln.Components.Extensions;
 using OneCardSln.Components.Mapper;
+using OneCardSln.OneCardClient.Command;
+using OneCardSln.Components.Logger;
 
 namespace OneCardSln.OneCardClient
 {
@@ -31,14 +33,18 @@ namespace OneCardSln.OneCardClient
     public partial class MainWindow : BaseWindow
     {
         private TreeViewData _menuTreeData = null;
+        private OpenFuncCmd _cmdOpenFunc = new OpenFuncCmd();
+        private ILogHelper<MainWindow> _logHelper = LogHelperFactory.GetLogHelper<MainWindow>();
         //TODO——MainWindow要修改的
         /*
          * 1、欢迎登陆，动态用户名 √
-         * 2、当前位置，根据菜单动态设置
+         * 2、当前位置，根据菜单动态设置√
          */
         public MainWindow()
         {
             InitializeComponent();
+
+            _cmdOpenFunc.Container = framePage;
         }
 
         private void imgBtnUserInfo_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -57,6 +63,7 @@ namespace OneCardSln.OneCardClient
         {
             _menuTreeData = (TreeViewData)this.FindResource("menuTreeData");
 
+            //TODO：需要优化
             imgBtnUserInfo.MouseLeftButtonDown += MiscExtension.HandleMouseButtonEvent;
             imgBtnExit.MouseLeftButtonDown += MiscExtension.HandleMouseButtonEvent;
 
@@ -83,14 +90,48 @@ namespace OneCardSln.OneCardClient
             var funcs = pers.Where(p => p.per_type.ToEnum<PermType>() == PermType.Func);
             if (funcs != null && funcs.Count() > 0)
             {
-                List<TreeViewData.NodeData> datas = new List<TreeViewData.NodeData>();
-                datas.Add(new TreeViewData.NodeData { Id = "main", Label = "主页", Order = "0" });
+                List<TreeViewData.NodeViewModel> datas = new List<TreeViewData.NodeViewModel>();
+                datas.Add(new TreeViewData.NodeViewModel { Id = "main", Label = "主页", Order = "0", Data = new Permission { per_uri = "MainPage.xaml" } });
                 foreach (var p in funcs)
                 {
-                    datas.Add(new TreeViewData.NodeData { Id = p.per_id, Label = p.per_name, Parent = p.per_parent, Order = p.per_sort, Data = p });
+                    datas.Add(new TreeViewData.NodeViewModel { Id = p.per_id, Label = p.per_name, Parent = p.per_parent, Order = p.per_sort, Data = p });
                 }
                 _menuTreeData.Bind(datas);
             }
+
+            //选中第一个节点（主页）
+            if (menuTree.Items != null && menuTree.Items.Count > 0)
+            {
+                TreeViewItem item = ((TreeViewItem)menuTree.ItemContainerGenerator.ContainerFromIndex(0));
+                item.IsSelected = true;
+                item.Focus();
+            }
+        }
+
+        private void menuTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            e.Handled = true;
+            TreeViewData.TreeNode node = e.NewValue as TreeViewData.TreeNode;
+            if (node == null)
+            {
+                _logHelper.LogInfo(string.Format("{1}。{0}未能解析TreeViewData.TreeNodeData。", Environment.NewLine, OperationDesc.OpenFunc));
+                MessageWindow.ShowMsg(MessageType.Error, OperationDesc.OpenFunc, MsgConst.Msg_ViewAppLog);
+                return;
+            }
+            if (node.Data == null)
+            {
+                _logHelper.LogInfo(string.Format("{1}。{0}未能解析TreeViewData.TreeNodeData。{0}FuncName:{2}", Environment.NewLine, OperationDesc.OpenFunc, node.Label));
+                MessageWindow.ShowMsg(MessageType.Error, OperationDesc.OpenFunc, MsgConst.Msg_ViewAppLog);
+                return;
+            }
+            if (node.SubNodes != null && node.SubNodes.Count > 0)
+            {
+                return;
+            }
+            var per = node.Data as Permission;
+            _cmdOpenFunc.Execute(new OpenFuncParam { PageUri = per.per_uri });
+            //报告当前位置
+            lblCurrLocation.Text = node.GetNodePath();
         }
     }
 }

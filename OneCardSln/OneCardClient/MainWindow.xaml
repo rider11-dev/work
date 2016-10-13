@@ -77,12 +77,15 @@
                     <ColumnDefinition Width="8*"/>
                 </Grid.ColumnDefinitions>
                 <!--菜单区-->
-                <TreeView Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
+                <TreeView x:Name="menuTree"
+                          Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
                           BorderThickness="0,0,0,1" BorderBrush="LightGray"
                           HorizontalContentAlignment="Stretch"
                           Background="#E2EBF5" Padding="0,20,0,0"
                           ItemsSource="{Binding Source={StaticResource menuTreeData},Path=RootNodes}"
-                          ItemContainerStyle="{StaticResource modernTreeViewItem}">
+                          ItemContainerStyle="{StaticResource modernTreeViewItem}"
+                          SelectedItemChanged="menuTree_SelectedItemChanged"
+                          >
                     <TreeView.ItemTemplate>
                         <HierarchicalDataTemplate DataType="{x:Type ctlExt:TreeViewData+TreeNode}" ItemsSource="{Binding SubNodes}">
                             <Grid Height="32">
@@ -99,10 +102,14 @@
                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <TextBlock Style="{StaticResource locationTextStyle}"
                             Text="当前位置："/>
-                        <TextBlock Style="{StaticResource locationTextStyle}"
+                        <TextBlock Name="lblCurrLocation"
+                                   Style="{StaticResource locationTextStyle}"
                                    Text="一卡通管理 - 业务办理"/>
                     </StackPanel>
                 </Border>
+                <Frame Name="framePage" Grid.Row="1" Grid.Column="1" NavigationUIVisibility="Hidden">
+
+                </Frame>
             </Grid>
             <!--footer-->
             <Border Grid.Row="3" Background="#E2EBF5">

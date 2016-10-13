@@ -147,11 +147,6 @@
     <Compile Include="Models\GetByIdViewModel.cs" />
     <Compile Include="Models\TokenData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\Resource.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resource.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -167,6 +162,10 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Components.Resource\Components.Resource.csproj">
+      <Project>{4ecb69ea-c6d9-436b-9689-90d065424f53}</Project>
+      <Name>Components.Resource</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Components\Components.csproj">
       <Project>{9ed019a0-a26a-4725-aa70-2b52bf7a5416}</Project>
       <Name>Components</Name>
@@ -183,12 +182,6 @@
       <Project>{1ecb045c-bb92-481a-ba25-bf0b48a92dfd}</Project>
       <Name>Service</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Resource.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

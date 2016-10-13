@@ -66,17 +66,38 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BaseWindow.cs" />
+    <Compile Include="Command\OpenFuncCmd.cs" />
+    <Compile Include="Command\OpenFuncParam.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Account\ChangePwdViewModel.cs" />
     <Compile Include="Models\Api.cs" />
     <Compile Include="Models\ApiKeys.cs" />
     <Compile Include="Models\UserViewModel.cs" />
+    <Compile Include="Pages\Account\DetailPage.xaml.cs">
+      <DependentUpon>DetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Account\ChangePwdPage.xaml.cs">
+      <DependentUpon>ChangePwdPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Auth\PermissionMngPage.xaml.cs">
+      <DependentUpon>PermissionMngPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Auth\UserMngPage.xaml.cs">
+      <DependentUpon>UserMngPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PageHelper.cs" />
     <Compile Include="Public\ApiHelper.cs" />
     <Compile Include="Public\Context.cs" />
     <Compile Include="Public\MessageWindow.xaml.cs">
       <DependentUpon>MessageWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Public\MsgConst.cs" />
+    <Compile Include="Public\OperationDesc.cs" />
     <Page Include="LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -93,6 +114,26 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Account\DetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Account\ChangePwdPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Auth\PermissionMngPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Auth\UserMngPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Public\MessageWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -101,7 +142,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\style\MiscStyle.xaml">
+    <Page Include="Resources\style\InputStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -112,10 +153,6 @@
     <Page Include="Resources\style\TreeViewStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\style\ValidationTemplate.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\style\WindowStyle.xaml">
       <SubType>Designer</SubType>
@@ -174,7 +211,7 @@
   <ItemGroup>
     <Resource Include="Resources\img\node_+.png" />
     <Resource Include="Resources\img\node_-.png" />
-    <Resource Include="Resources\img\login.jpg" />
+    <Resource Include="Resources\img\btn_bg.jpg" />
     <Resource Include="Resources\img\separator.jpg" />
     <Resource Include="Resources\img\logo.jpg" />
     <Resource Include="Resources\img\maximize.jpg" />
@@ -189,6 +226,10 @@
     <Resource Include="Resources\img\warn.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Components.Resource\Components.Resource.csproj">
+      <Project>{4ecb69ea-c6d9-436b-9689-90d065424f53}</Project>
+      <Name>Components.Resource</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Components.WPF\Components.WPF.csproj">
       <Project>{6324a5cc-0daf-4af4-80a3-5d2a60769c96}</Project>
       <Name>Components.WPF</Name>

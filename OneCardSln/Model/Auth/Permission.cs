@@ -24,6 +24,7 @@ namespace OneCardSln.Model.Auth
                 return per_type.ToEnum<PermType>();
             }
         }
+        public string per_uri { get; set; }
         public string per_parent { get; set; }
         public string per_sort { get; set; }
         public bool per_system { get; set; }

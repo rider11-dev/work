@@ -15,7 +15,7 @@ namespace OneCardSln.WebApi.Models.Card
         /// <summary>
         /// 身份证号
         /// </summary>
-        [Required(ErrorMessageResourceName = "Idcard_Require", ErrorMessageResourceType = typeof(Resources.Resource))]
+        [Required(ErrorMessageResourceName = "Idcard_Require", ErrorMessageResourceType = typeof(OneCardSln.Components.Resource.ViewModelResource))]
         public string idcard { get; set; }
 
         /// <summary>
@@ -26,22 +26,22 @@ namespace OneCardSln.WebApi.Models.Card
         /// <summary>
         /// 消费订单号
         /// </summary>
-        [Required(ErrorMessageResourceName = "Order_Require", ErrorMessageResourceType = typeof(Resources.Resource))]
+        [Required(ErrorMessageResourceName = "Order_Require", ErrorMessageResourceType = typeof(OneCardSln.Components.Resource.ViewModelResource))]
         public string order { get; set; }
         /// <summary>
         /// 消费金额
         /// </summary>
-        [Required(ErrorMessageResourceName = "Pay_Amount_Require", ErrorMessageResourceType = typeof(Resources.Resource))]
+        [Required(ErrorMessageResourceName = "Pay_Amount_Require", ErrorMessageResourceType = typeof(OneCardSln.Components.Resource.ViewModelResource))]
         public decimal amount { get; set; }
         /// <summary>
         /// 消费来源：手机端、电脑商城
         /// </summary>
-        [MaxLength(255, ErrorMessageResourceName = "Pay_Src_Length", ErrorMessageResourceType = typeof(Resources.Resource))]
+        [MaxLength(255, ErrorMessageResourceName = "Pay_Src_Length", ErrorMessageResourceType = typeof(OneCardSln.Components.Resource.ViewModelResource))]
         public string src { get; set; }
         /// <summary>
         /// 备注：手机端：deviceid，电脑商城：IP地址
         /// </summary>
-        [MaxLength(255, ErrorMessageResourceName = "Remark_Length", ErrorMessageResourceType = typeof(Resources.Resource))]
+        [MaxLength(255, ErrorMessageResourceName = "Remark_Length", ErrorMessageResourceType = typeof(OneCardSln.Components.Resource.ViewModelResource))]
         public string remark { get; set; }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace OneCardSln.WebApi.Models.Card
         /// <summary>
         /// 操作人
         /// </summary>
-        [MaxLength(32, ErrorMessageResourceName = "Opt_Length", ErrorMessageResourceType = typeof(Resources.Resource))]
+        [MaxLength(32, ErrorMessageResourceName = "Opt_Length", ErrorMessageResourceType = typeof(OneCardSln.Components.Resource.ViewModelResource))]
         public string opt { get; set; }
 
     }

@@ -9,24 +9,24 @@ namespace OneCardSln.WebApi.Models.Card
 {
     public class RegisterCardViewModel
     {
-        [Required(ErrorMessageResourceName = "Card_Number_Require", ErrorMessageResourceType = typeof(Resources.Resource))]
-        [MaxLength(20, ErrorMessageResourceName = "Card_Number_Length", ErrorMessageResourceType = typeof(Resources.Resource))]
+        [Required(ErrorMessageResourceName = "Card_Number_Require", ErrorMessageResourceType = typeof(OneCardSln.Components.Resource.ViewModelResource))]
+        [MaxLength(20, ErrorMessageResourceName = "Card_Number_Length", ErrorMessageResourceType = typeof(OneCardSln.Components.Resource.ViewModelResource))]
         public String card_number { get; set; }
 
 
-        [Required(ErrorMessageResourceName = "Idcard_Require", ErrorMessageResourceType = typeof(Resources.Resource))]
-        [StringLength(18, MinimumLength = 15, ErrorMessageResourceName = "Idcard_Length", ErrorMessageResourceType = typeof(Resources.Resource))]
-        [RegularExpression(RegexExtension.Regex_Idcard, ErrorMessageResourceName = "Idcard_Regx", ErrorMessageResourceType = typeof(Resources.Resource))]
+        [Required(ErrorMessageResourceName = "Idcard_Require", ErrorMessageResourceType = typeof(OneCardSln.Components.Resource.ViewModelResource))]
+        [StringLength(18, MinimumLength = 15, ErrorMessageResourceName = "Idcard_Length", ErrorMessageResourceType = typeof(OneCardSln.Components.Resource.ViewModelResource))]
+        [RegularExpression(RegexExtension.Regex_Idcard, ErrorMessageResourceName = "Idcard_Regx", ErrorMessageResourceType = typeof(OneCardSln.Components.Resource.ViewModelResource))]
         public String card_idcard { get; set; }
 
 
-        [Required(ErrorMessageResourceName = "Card_Account_Require", ErrorMessageResourceType = typeof(Resources.Resource))]
-        [MaxLength(20, ErrorMessageResourceName = "Card_Account_Length", ErrorMessageResourceType = typeof(Resources.Resource))]
+        [Required(ErrorMessageResourceName = "Card_Account_Require", ErrorMessageResourceType = typeof(OneCardSln.Components.Resource.ViewModelResource))]
+        [MaxLength(20, ErrorMessageResourceName = "Card_Account_Length", ErrorMessageResourceType = typeof(OneCardSln.Components.Resource.ViewModelResource))]
         public String card_username { get; set; }
 
 
-        [Required(ErrorMessageResourceName = "Phone_Require", ErrorMessageResourceType = typeof(Resources.Resource))]
-        [RegularExpression(RegexExtension.Regex_CellPhone, ErrorMessageResourceName = "Regex_CellPhone", ErrorMessageResourceType = typeof(Resources.Resource))]
+        [Required(ErrorMessageResourceName = "Phone_Require", ErrorMessageResourceType = typeof(OneCardSln.Components.Resource.ViewModelResource))]
+        [RegularExpression(RegexExtension.Regex_CellPhone, ErrorMessageResourceName = "Regex_CellPhone", ErrorMessageResourceType = typeof(OneCardSln.Components.Resource.ViewModelResource))]
         public String card_phone { get; set; }
         public Decimal card_govmoney { get; set; }
         public Decimal card_mymoney { get; set; }

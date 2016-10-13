@@ -12,12 +12,12 @@
         WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded">
     <Window.Resources>
-        <Style x:Key="inputStyle" TargetType="Control" BasedOn="{StaticResource txtValidateStyle}">
+        <Style x:Key="inputStyle" TargetType="Control" BasedOn="{StaticResource inputBaseStyle}">
             <Setter Property="Width" Value="210"/>
             <Setter Property="Height" Value="32"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontSize" Value="14"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
     </Window.Resources>
     <Grid>
@@ -39,28 +39,28 @@
         <TextBox Name="txtUsrName" Grid.Row="1" Grid.ColumnSpan="2" 
                  Style="{StaticResource inputStyle}"
                  Tag="pack://application:,,,/Resources/img/username.jpg"
-                 Text="{Binding Path=UserName,Source={StaticResource vmLogin},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                 >
-        </TextBox>
+                 Text="{Binding Path=UserName,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                 />
+
         <!--row3-->
         <PasswordBox Name="txtPwd" Grid.Row="2" Grid.ColumnSpan="2"
                  Tag="pack://application:,,,/Resources/img/pwd.jpg"
                  Style="{StaticResource inputStyle}"
                  ext:PasswordBoxAssistant.BindPassword="True"
-                 ext:PasswordBoxAssistant.BoundPassword="{Binding Path=Pwd,Source={StaticResource vmLogin},Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                 ext:PasswordBoxAssistant.BoundPassword="{Binding Path=Pwd,Source={StaticResource model},Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <!--row4-->
         <TextBox Name="txtVerifyCode" Grid.Row="3" Grid.ColumnSpan="2" 
                  Style="{StaticResource inputStyle}"
                  Width="210" Height="32" 
                  Tag="pack://application:,,,/Resources/img/qrcode.jpg"
-                 Text="{Binding Path=VerifyCode,Source={StaticResource vmLogin},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                 Text="{Binding Path=VerifyCode,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                  />
         <!--row5-->
         <CheckBox Name="ckRememberMe" Grid.Row="4" Grid.Column="0" 
                   HorizontalAlignment="Center" VerticalAlignment="Center"
                   Margin="12,0,0,0"
                   Content="记住我"
-                  IsChecked="{Binding Path=RememberMe,Source={StaticResource vmLogin}}"/>
+                  IsChecked="{Binding Path=RememberMe,Source={StaticResource model}}"/>
         <TextBlock Grid.Row="4" Grid.Column="1"
                   HorizontalAlignment="Center" VerticalAlignment="Center"
                   Margin="-15,0,0,0"
@@ -70,16 +70,11 @@
             </Hyperlink>
         </TextBlock>
         <!--row6-->
-        <Grid Grid.Row="5" Grid.ColumnSpan="2" >
-            <Label Name="btnLogin"
-               Width="210" Height="40" Padding="86,8"
-               Cursor="Hand" FontWeight="Bold" Foreground="White" FontSize="16"
-               MouseLeftButtonUp="btnLogin_MouseLeftButtonUp"
-               Content="登 录">
-                <Label.Background>
-                    <ImageBrush ImageSource="pack://application:,,,/Resources/img/login.jpg"/>
-                </Label.Background>
-            </Label>
-        </Grid>
+        <Button Name="btnLogin" Grid.Row="5" Grid.ColumnSpan="2" 
+                Width="210" Height="40" FontSize="15"
+                Style="{StaticResource btnStyle}"
+                Content="登 录"
+                Click="btnLogin_Click"
+                />
     </Grid>
 </local:BaseWindow>
