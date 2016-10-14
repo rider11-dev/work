@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OneCardSln.OneCardClient.Models
+namespace OneCardSln.OneCardClient.Models.Auth
 {
     public class UserViewModel : BaseViewModel, ICloneable
     {

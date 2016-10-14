@@ -26,7 +26,7 @@
         </Style.Triggers>
     </Style>
     <!--输入框前置label基础样式-->
-    <Style x:Key="lblInputStyle" TargetType="Label">
+    <Style x:Key="lblInputBaseStyle" TargetType="Label">
         <Setter Property="FontSize" Value="15"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>

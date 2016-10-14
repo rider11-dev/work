@@ -23,6 +23,7 @@ using OneCardSln.Model.Auth;
 using Newtonsoft.Json.Linq;
 using OneCardSln.Components.Mapper;
 using System.IO;
+using OneCardSln.OneCardClient.Models.Auth;
 
 namespace OneCardSln.OneCardClient
 {
@@ -35,6 +36,8 @@ namespace OneCardSln.OneCardClient
          * TODO：改进点
          * 1、passwordbox，模型验证不起作用
          * 2、输入框placeholder
+         * 3、图片按钮模板改成image？（工具栏样式可以这么干，图片+文字）
+         * 4、分页进度条！！！
          */
         LoginViewModel vmLogin;
         public LoginWindow()

@@ -2,6 +2,7 @@
 using OneCardSln.Components.Logger;
 using OneCardSln.Model.Auth;
 using OneCardSln.OneCardClient.Models;
+using OneCardSln.OneCardClient.Models.Auth;
 using System;
 using System.Collections.Generic;
 using System.Configuration;

@@ -41,11 +41,15 @@
                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                Content="{TemplateBinding Content}">
             <Label.Background>
-                <ImageBrush ImageSource="pack://application:,,,/Resources/img/btn_bg.jpg"/>
+                <ImageBrush ImageSource="pack://application:,,,/Resources/img/btn_bg.jpg" Stretch="Fill"/>
             </Label.Background>
         </Label>
     </ControlTemplate>
-    <Style x:Key="btnStyle" TargetType="Button">
+    <Style x:Key="btnBaseStyle" TargetType="Button">
         <Setter Property="Template" Value="{StaticResource btnTemplate}"/>
+    </Style>
+    <Style x:Key="btnToolBarStyle" TargetType="Button">
+        <Setter Property="Template" Value="{StaticResource btnTemplate}"/>
+        <Setter Property="FontSize" Value="12"/>
     </Style>
 </ResourceDictionary>

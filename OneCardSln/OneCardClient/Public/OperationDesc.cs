@@ -9,5 +9,6 @@ namespace OneCardSln.OneCardClient.Public
     public struct OperationDesc
     {
         public const string OpenFunc = "打开功能菜单";
+        public const string GetUsrs = "获取用户信息";
     }
 }

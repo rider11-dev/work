@@ -71,6 +71,10 @@ namespace OneCardSln.Repository
             total = 0;
             try
             {
+                if (pageIndex > 0)
+                {
+                    pageIndex -= 1;//dapper分页查询页索引起始为0
+                }
                 total = this.DbSession.Connection.Count<TEntity>(predicate, trans);
                 return this.DbSession.Connection.GetPage<TEntity>(predicate, sort, pageIndex, pageSize, trans);
             }
@@ -86,6 +90,10 @@ namespace OneCardSln.Repository
             total = 0;
             try
             {
+                if (pageIndex > 0)
+                {
+                    pageIndex -= 1;//dapper分页查询页索引起始为0
+                }
                 total = this.DbSession.Connection.Count<TEntity>(predicate, trans);
                 return this.DbSession.Connection.GetPage<TReturn>(predicate, sort, pageIndex, pageSize, trans);
             }

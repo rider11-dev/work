@@ -17,7 +17,6 @@
             <Setter Property="Height" Value="32"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontSize" Value="14"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
     </Window.Resources>
     <Grid>
@@ -51,7 +50,6 @@
         <!--row4-->
         <TextBox Name="txtVerifyCode" Grid.Row="3" Grid.ColumnSpan="2" 
                  Style="{StaticResource inputStyle}"
-                 Width="210" Height="32" 
                  Tag="pack://application:,,,/Resources/img/qrcode.jpg"
                  Text="{Binding Path=VerifyCode,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                  />
@@ -71,8 +69,8 @@
         </TextBlock>
         <!--row6-->
         <Button Name="btnLogin" Grid.Row="5" Grid.ColumnSpan="2" 
-                Width="210" Height="40" FontSize="15"
-                Style="{StaticResource btnStyle}"
+                Width="210" Height="40"
+                Style="{StaticResource btnBaseStyle}"
                 Content="登 录"
                 Click="btnLogin_Click"
                 />

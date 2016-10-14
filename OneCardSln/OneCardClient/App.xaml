@@ -6,10 +6,12 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/Resources/Style/ButtonTemplate.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Resources/Style/ButtonStyle.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/Resources/Style/WindowStyle.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/Resources/Style/InputStyle.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/Resources/Style/TreeViewStyle.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Resources/Style/PageStyle.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Resources/Style/DataGridStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

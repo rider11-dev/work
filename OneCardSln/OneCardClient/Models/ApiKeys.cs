@@ -19,5 +19,9 @@ namespace OneCardSln.OneCardClient.Models
         public const string ChangePwd = "changepwd";
         public const string EditUsr = "editusr";
 
+        /*-------------------------------------权限管理——用户管理------------------------------*/
+        public const string GetUsrByPage = "querybypage";
+
+
     }
 }

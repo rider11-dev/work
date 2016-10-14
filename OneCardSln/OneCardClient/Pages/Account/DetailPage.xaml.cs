@@ -3,6 +3,7 @@ using OneCardSln.Components.Mapper;
 using OneCardSln.Components.Result;
 using OneCardSln.OneCardClient.Models;
 using OneCardSln.OneCardClient.Models.Account;
+using OneCardSln.OneCardClient.Models.Auth;
 using OneCardSln.OneCardClient.Public;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,6 @@ namespace OneCardSln.OneCardClient.Pages.Account
     /*
      * TODO
      * 1、区域使用弹出帮助选择
-     * 2、grid单元格边框
      */
     /// <summary>
     /// DetailPage.xaml 的交互逻辑

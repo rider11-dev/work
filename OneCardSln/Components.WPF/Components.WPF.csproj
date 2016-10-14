@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dlls\log4net\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -43,8 +47,13 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ControlPagination.xaml.cs">
+      <DependentUpon>ControlPagination.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PagingArgs.cs" />
     <Compile Include="Controls\TreeViewData.cs" />
     <Compile Include="Converter\LevelToMarginConverter.cs" />
+    <Compile Include="Extension\DataGridExtension.cs" />
     <Compile Include="Extension\InputExtension.cs" />
     <Compile Include="Extension\InputImgAddOnAdorner.cs" />
     <Compile Include="Extension\MiscExtension.cs" />
@@ -60,6 +69,30 @@
       <Project>{9ed019a0-a26a-4725-aa70-2b52bf7a5416}</Project>
       <Name>Components</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Controls\ControlPagination.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\img\first.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\img\last.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\img\previous.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\img\next.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\img\refresh1.png" />
+    <Resource Include="Resources\img\search_blue.png" />
+    <Resource Include="Resources\img\search_green.png" />
+    <Resource Include="Resources\img\refresh.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

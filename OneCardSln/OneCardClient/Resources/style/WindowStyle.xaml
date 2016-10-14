@@ -11,7 +11,7 @@
     <ControlTemplate x:Key="popWindowTemplate" TargetType="Window">
         <Border BorderBrush="LightGray" BorderThickness="1">
             <DockPanel LastChildFill="True">
-                <Border Width="Auto" DockPanel.Dock="Top" Background="White" Height="40" x:Name="borderTitle">
+                <Border Width="Auto" DockPanel.Dock="Top" Background="{TemplateBinding Background}" Height="40" x:Name="borderTitle">
                     <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                         <Button x:Name="btnMinimize" Width="30" Template="{StaticResource btnTemplate_WinMin}"/>
                         <Button x:Name="btnClose" Width="30" Template="{StaticResource btnTemplate_WinClose}"/>
