@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rest-client version="3.4.2"><request><http-version>1.1</http-version><http-follow-redirects/><URL>http://localhost/OneCardSln/RefundServiceHandler.ashx</URL><method>POST</method><body><string content-type="application/json" charset="UTF-8">{
-    "number": "13C724B0",
-    "remark": "设备id",
-    "order":"BBBB",
-	"src":"商城",
+"idcard":"372924198812123456",
+"order":"8000000000105709",
+"amount":"10"
 }</string></body></request></rest-client>

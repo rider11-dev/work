@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rest-client version="3.4.2"><request><http-version>1.1</http-version><http-follow-redirects/><URL>http://192.168.18.89/OneCardSln/PayServiceHandler.ashx</URL><method>POST</method><body><string content-type="application/json" charset="UTF-8">{
+    "idcard": "372924198812123456",
+    "number": "134B5BB1",
+    "src": "手机app",
+    "remark": "设备id",
+    "order": [
+        {
+            "order_sn": "8000000000105709",
+            "pay_sn": "520530103104569002",
+            "order_amount": "45.00"
+        }
+    ]
+}</string></body></request></rest-client>
