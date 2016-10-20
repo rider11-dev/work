@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OneCardSln.Components.Extensions;
 
 namespace OneCardSln.Service.Card
 {
@@ -39,23 +40,23 @@ namespace OneCardSln.Service.Card
             PredicateGroup pg = new PredicateGroup { Operator = GroupOperator.And, Predicates = new List<IPredicate>() };
             if (page.conditions != null && page.conditions.Count > 0)
             {
-                if (page.conditions.ContainsKey("idcard"))
+                if (page.conditions.ContainsKey("idcard") && !page.conditions["idcard"].IsEmpty())
                 {
                     pg.Predicates.Add(Predicates.Field<CardBill>(b => b.bill_idcard, Operator.Eq, page.conditions["idcard"]));
                 }
-                if (page.conditions.ContainsKey("type"))
+                if (page.conditions.ContainsKey("type") && !page.conditions["type"].IsEmpty())
                 {
                     pg.Predicates.Add(Predicates.Field<CardBill>(b => b.bill_type, Operator.Eq, page.conditions["type"]));
                 }
-                if (page.conditions.ContainsKey("order"))
+                if (page.conditions.ContainsKey("order") && !page.conditions["order"].IsEmpty())
                 {
                     pg.Predicates.Add(Predicates.Field<CardBill>(b => b.bill_order, Operator.Like, "%" + page.conditions["order"] + "%"));
                 }
-                if (page.conditions.ContainsKey("time_begin"))
+                if (page.conditions.ContainsKey("time_begin") && !page.conditions["time_begin"].IsEmpty())
                 {
                     pg.Predicates.Add(Predicates.Field<CardBill>(b => b.bill_time, Operator.Gt, page.conditions["time_begin"]));//＞查询起始时间
                 }
-                if (page.conditions.ContainsKey("time_end"))
+                if (page.conditions.ContainsKey("time_end") && !page.conditions["time_end"].IsEmpty())
                 {
                     pg.Predicates.Add(Predicates.Field<CardBill>(r => r.bill_time, Operator.Le, page.conditions["time_end"]));//≤查询结束时间
                 }

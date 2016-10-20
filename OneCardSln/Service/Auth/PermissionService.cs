@@ -22,6 +22,7 @@ namespace OneCardSln.Service.Auth
         const string Msg_AddPer = "新增权限";
         const string Msg_UpdatePer = "修改权限";
         const string Msg_DeletePer = "删除权限";
+        const string Msg_BatchDeletePer = "批量删除权限";
         const string Msg_QueryByPage = "分页查询权限信息";
         const string Msg_FindById = "根据主键查询权限数据";
         const string Msg_GetPermTypes = "获取权限类型列表";
@@ -129,6 +130,8 @@ namespace OneCardSln.Service.Auth
                 oldPer.per_type = per.per_type;
                 oldPer.per_remark = per.per_remark;
                 oldPer.per_parent = per.per_parent;
+                oldPer.per_uri = per.per_uri;
+                oldPer.per_method = per.per_method;
 
                 bool val = _perRep.Update(oldPer);
                 rst = OptResult.Build(val ? ResultCode.Success : ResultCode.Fail, Msg_UpdatePer);
@@ -188,6 +191,57 @@ namespace OneCardSln.Service.Auth
             return rst;
         }
 
+        public OptResult DeleteBatch(IEnumerable<string> ids)
+        {
+            OptResult rst = null;
+            //1、权限是否存在
+            var predicate1 = Predicates.Field<Permission>(p => p.per_id, Operator.Eq, ids);
+            var count = _perRep.Count(predicate1);
+            if (count < ids.Count())
+            {
+                rst = OptResult.Build(ResultCode.DataNotFound, Msg_BatchDeletePer);
+                return rst;
+            }
+            //2、系统预制不允许删除
+            PredicateGroup pg = new PredicateGroup { Operator = GroupOperator.And, Predicates = new List<IPredicate>() };
+            pg.Predicates.Add(predicate1);
+            var predicate2 = Predicates.Field<Permission>(p => p.per_system, Operator.Eq, true);
+            pg.Predicates.Add(predicate2);
+            count = _perRep.Count(pg);
+            if (count > 0)
+            {
+                rst = OptResult.Build(ResultCode.DataSystem, Msg_BatchDeletePer + "失败");
+                return rst;
+            }
+            //3、是否包含下级权限
+            predicate2 = Predicates.Field<Permission>(p => p.per_parent, Operator.Eq, ids);
+            count = _perRep.Count(pg);
+            if (count > 0)
+            {
+                rst = OptResult.Build(ResultCode.DataInUse, string.Format("{0}，存在下级权限", Msg_BatchDeletePer));
+                return rst;
+            }
+            //4、是否已被分配
+            count = _usrPerRelRep.Count(Predicates.Field<UserPermissionRel>(r => r.rel_permissionid, Operator.Eq, ids));
+            if (count > 0)
+            {
+                rst = OptResult.Build(ResultCode.DataInUse, string.Format("{0}，已分配到用户", Msg_BatchDeletePer));
+                return rst;
+            }
+            //删除
+            try
+            {
+                bool val = _perRep.Delete(predicate1);
+                rst = OptResult.Build(val ? ResultCode.Success : ResultCode.Fail, Msg_BatchDeletePer);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(Msg_BatchDeletePer, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_BatchDeletePer);
+            }
+            return rst;
+        }
+
         public OptResult QueryByPage(PageQuery page)
         {
             OptResult rst = null;
@@ -201,21 +255,21 @@ namespace OneCardSln.Service.Auth
             PredicateGroup pg = new PredicateGroup { Operator = GroupOperator.And, Predicates = new List<IPredicate>() };
             if (page.conditions != null && page.conditions.Count > 0)
             {
-                if (page.conditions.ContainsKey("type"))
+                if (page.conditions.ContainsKey("per_code") && !page.conditions["per_code"].IsEmpty())
                 {
-                    pg.Predicates.Add(Predicates.Field<Permission>(p => p.per_type, Operator.Eq, page.conditions["type"]));
+                    pg.Predicates.Add(Predicates.Field<Permission>(p => p.per_code, Operator.Like, "%" + page.conditions["per_code"] + "%"));
                 }
-                if (page.conditions.ContainsKey("code"))
+                if (page.conditions.ContainsKey("per_name") && !page.conditions["per_name"].IsEmpty())
                 {
-                    pg.Predicates.Add(Predicates.Field<Permission>(p => p.per_code, Operator.Like, "%" + page.conditions["code"] + "%"));
+                    pg.Predicates.Add(Predicates.Field<Permission>(p => p.per_name, Operator.Like, "%" + page.conditions["per_name"] + "%"));
                 }
-                if (page.conditions.ContainsKey("name"))
+                if (page.conditions.ContainsKey("per_type") && !page.conditions["per_type"].IsEmpty())
                 {
-                    pg.Predicates.Add(Predicates.Field<Permission>(p => p.per_name, Operator.Like, "%" + page.conditions["name"] + "%"));
+                    pg.Predicates.Add(Predicates.Field<Permission>(p => p.per_type, Operator.Eq, page.conditions["per_type"]));
                 }
-                if (page.conditions.ContainsKey("parent"))
+                if (page.conditions.ContainsKey("per_parent") && !page.conditions["per_parent"].IsEmpty())
                 {
-                    pg.Predicates.Add(Predicates.Field<Permission>(p => p.per_parent, Operator.Eq, page.conditions["parent"]));
+                    pg.Predicates.Add(Predicates.Field<Permission>(p => p.per_parent, Operator.Eq, page.conditions["per_parent"]));
                 }
             }
             //2、排序
@@ -246,7 +300,7 @@ namespace OneCardSln.Service.Auth
             var dict = _permTypeRep.DataSrc;
             return OptResult.Build(ResultCode.Success, Msg_GetPermTypes, new
             {
-                total=dict.Count,
+                total = dict.Count,
                 rows = dict
             });
         }

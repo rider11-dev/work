@@ -36,27 +36,32 @@
         <StackPanel Orientation="Horizontal" Margin="2">
             <Button x:Name="btnFirst" Style="{StaticResource btnStyle}"
                     Tag="/OneCardSln.Components.WPF;component/Resources/img/first.png"
+                     ToolTip="首页"
                     Click="btnFirst_Click">
             </Button>
             <Button x:Name="btnPrev" Style="{StaticResource btnStyle}"
                     Tag="/OneCardSln.Components.WPF;component/Resources/img/previous.png"
+                     ToolTip="上一页"
                     Click="btnPrev_Click">
             </Button>
             <Label Content="第" Style="{StaticResource lblStyle}"/>
-            <TextBox x:Name="txtPageIdx" Style="{StaticResource inputStyle}"/>
+            <TextBox x:Name="txtPageIdx" Style="{StaticResource inputStyle}" Text="1"/>
             <Label Content="页 / 共" Style="{StaticResource lblStyle}"/>
             <Label x:Name="lblPageCount" Content="0" Style="{StaticResource lblStyle}"/>
             <Label Content="页" Style="{StaticResource lblStyle}"/>
             <Button  x:Name="btnGoToPage" Style="{StaticResource btnStyle}"
                      Tag="/OneCardSln.Components.WPF;component/Resources/img/refresh.png"
+                     ToolTip="Go"
                      Click="btnGoToPage_Click">
             </Button>
             <Button  x:Name="btnNext" Style="{StaticResource btnStyle}"
                      Tag="/OneCardSln.Components.WPF;component/Resources/img/next.png"
+                     ToolTip="下一页"
                      Click="btnNext_Click">
             </Button>
             <Button  x:Name="btnLast" Style="{StaticResource btnStyle}"
                      Tag="/OneCardSln.Components.WPF;component/Resources/img/last.png"
+                     ToolTip="末页"
                      Click="btnLast_Click">
             </Button>
             <TextBox  x:Name="txtPageSize" Style="{StaticResource inputStyle}" Text="20"/>

@@ -29,12 +29,11 @@ namespace OneCardSln.OneCardClient.Pages.Account
     /// <summary>
     /// DetailPage.xaml 的交互逻辑
     /// </summary>
-    public partial class DetailPage : Page
+    public partial class DetailPage : BasePage
     {
         UserViewModel vmUsr;
         public DetailPage()
         {
-            //TODO是否需要Context.CurrentUser的副本？后续确认
             vmUsr = Context.CurrentUser;
             this.Resources.Add("model", vmUsr);
             InitializeComponent();
@@ -45,7 +44,7 @@ namespace OneCardSln.OneCardClient.Pages.Account
             e.Handled = true;
             if (!vmUsr.IsValid)
             {
-                MessageWindow.ShowMsg(MessageType.Warning, MsgConst.Msg_ValidateFail, vmUsr.Error);
+                MessageWindow.ShowMsg(MessageType.Warning, OperationDesc.Validate, vmUsr.Error);
                 return;
             }
             var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.EditUsr),
@@ -60,10 +59,10 @@ namespace OneCardSln.OneCardClient.Pages.Account
                 Context.Token);
             if (rst.code != ResultCode.Success)
             {
-                MessageWindow.ShowMsg(MessageType.Warning, MsgConst.Msg_EditUsr, rst.msg);
+                MessageWindow.ShowMsg(MessageType.Warning, OperationDesc.Edit, rst.msg);
                 return;
             }
-            MessageWindow.ShowMsg(MessageType.Info, MsgConst.Msg_EditUsr, "修改成功");
+            MessageWindow.ShowMsg(MessageType.Info, OperationDesc.Edit, "修改成功");
 
         }
 

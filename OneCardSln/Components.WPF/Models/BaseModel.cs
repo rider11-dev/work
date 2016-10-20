@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -6,10 +7,11 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
-namespace OneCardSln.OneCardClient.Models
+namespace OneCardSln.Components.WPF.Models
 {
-    public class BaseViewModel : IDataErrorInfo, INotifyPropertyChanged
+    public class BaseModel : IDataErrorInfo, INotifyPropertyChanged
     {
         private readonly Dictionary<string, PropertyInfo> _propertyGetters = new Dictionary<string, PropertyInfo>();
         private readonly Dictionary<string, ValidationAttribute[]> _validators = new Dictionary<string, ValidationAttribute[]>();
@@ -18,8 +20,10 @@ namespace OneCardSln.OneCardClient.Models
         /// <summary>
         /// 标识是否可以验证，主要用来避免界面初次展现后即验证的问题
         /// </summary>
+        [JsonIgnore]
         public bool CanValidate { get; set; }
 
+        [JsonIgnore]
         public bool IsValid
         {
             get
@@ -28,6 +32,7 @@ namespace OneCardSln.OneCardClient.Models
             }
         }
 
+        [JsonIgnore]
         public string Error
         {
             get
@@ -86,7 +91,7 @@ namespace OneCardSln.OneCardClient.Models
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected BaseViewModel()
+        protected BaseModel()
         {
             _type = GetType();
             LoadData();
@@ -106,11 +111,20 @@ namespace OneCardSln.OneCardClient.Models
             }
         }
 
-        internal virtual void RaisePropertyChanged(string propertyName)
+        protected virtual void RaisePropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        [JsonIgnore]
+        public virtual Dictionary<string, ICommand> Commands
+        {
+            get
+            {
+                return null;
             }
         }
     }

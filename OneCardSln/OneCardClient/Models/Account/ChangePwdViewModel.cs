@@ -1,4 +1,5 @@
 ﻿using OneCardSln.Components.Extensions;
+using OneCardSln.Components.WPF.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +8,7 @@ using System.Web;
 
 namespace OneCardSln.OneCardClient.Models.Account
 {
-    public class ChangePwdViewModel : BaseViewModel
+    public class ChangePwdViewModel : BaseModel
     {
         string _oldpwd;
         [Required(ErrorMessageResourceName = "OldPwd_Require", ErrorMessageResourceType = typeof(OneCardSln.Components.Resource.ViewModelResource))]

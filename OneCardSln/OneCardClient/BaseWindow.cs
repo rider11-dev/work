@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using OneCardSln.Components.WPF.Extension;
 using System.Windows.Controls;
+using OneCardSln.Components.WPF.Command;
 
 
 namespace OneCardSln.OneCardClient
@@ -24,42 +25,42 @@ namespace OneCardSln.OneCardClient
         {
             this.AllowDrop = true;
             this.DragWhenLeftMouseDown();
-
-            this.Loaded += delegate { BindWindowButtonEvent(); };
         }
 
-        private void BindWindowButtonEvent()
+        private DelegateCommand _closeCmd;
+        public DelegateCommand CloseCmd
         {
-            //右上角按钮绑定事件，在Loaded事件中处理，不能在构造函数中
-            if (!App.Current.Resources.Contains(BaseWindowTemplateName))
+            get
             {
-                return;
-            }
-            ControlTemplate baseWindowTemplate = (ControlTemplate)App.Current.Resources[BaseWindowTemplateName];
-            if (baseWindowTemplate == null)
-            {
-                return;
-            }
-            try
-            {
-                Button btn = (Button)baseWindowTemplate.FindName("btnMinimize", this);
-                if (btn != null)
+                if (_closeCmd == null)
                 {
-                    btn.Click += delegate
-                    {
-                        this.WindowState = WindowState.Minimized;
-                    };
+                    _closeCmd = new DelegateCommand(CloseAction);
                 }
-                btn = (Button)baseWindowTemplate.FindName("btnClose", this);
-                if (btn != null)
-                {
-                    btn.Click += delegate
-                    {
-                        this.Close();
-                    };
-                }
+                return _closeCmd;
             }
-            catch { }
+        }
+
+        private void CloseAction(object parameter)
+        {
+            this.Close();
+        }
+
+        private DelegateCommand _minCmd;
+        public DelegateCommand MinCmd
+        {
+            get
+            {
+                if (_minCmd == null)
+                {
+                    _minCmd = new DelegateCommand(MinimizeAction);
+                }
+                return _minCmd;
+            }
+        }
+
+        private void MinimizeAction(object parameter)
+        {
+            this.WindowState = WindowState.Minimized;
         }
     }
 }

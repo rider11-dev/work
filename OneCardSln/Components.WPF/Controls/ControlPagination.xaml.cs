@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using OneCardSln.Components.WPF.Extension;
 
 namespace OneCardSln.Components.WPF.Controls
 {
@@ -80,14 +81,20 @@ namespace OneCardSln.Components.WPF.Controls
         /// <summary>
         /// 当前页
         /// </summary>
-        private int _pageIndex = 0;
+        private int _pageIndex = 1;
         /// <summary>
         /// 当前页
         /// </summary>
         public int PageIndex
         {
             get { return _pageIndex; }
-            set { _pageIndex = value; }
+            set
+            {
+                if (value > 0)
+                {
+                    _pageIndex = value;
+                }
+            }
         }
 
         Action<PagingArgs> _actionSetPagination = null;
@@ -111,6 +118,10 @@ namespace OneCardSln.Components.WPF.Controls
                 this.btnNext.IsEnabled = !(this.PageIndex >= this.PageCount);
                 this.btnLast.IsEnabled = !(this.PageIndex >= this.PageCount);
             };
+            //限制文本框输入：只能输入正整数
+            string pattern = @"^[1-9]\d*$";
+            txtPageIdx.LimitInput(pattern);
+            txtPageSize.LimitInput(pattern);
         }
 
         private void SetPageCount()

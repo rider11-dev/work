@@ -23,7 +23,7 @@ namespace OneCardSln.OneCardClient.Pages.Account
     /// <summary>
     /// ChangePwdPage.xaml 的交互逻辑
     /// </summary>
-    public partial class ChangePwdPage : Page
+    public partial class ChangePwdPage : BasePage
     {
         ChangePwdViewModel vmChangePwd = null;
         public ChangePwdPage()
@@ -39,13 +39,13 @@ namespace OneCardSln.OneCardClient.Pages.Account
             e.Handled = true;
             if (!vmChangePwd.IsValid)
             {
-                MessageWindow.ShowMsg(MessageType.Warning, MsgConst.Msg_ValidateFail, vmChangePwd.Error);
+                MessageWindow.ShowMsg(MessageType.Warning, OperationDesc.Validate, vmChangePwd.Error);
                 return;
             }
             string msg = "";
             if (!vmChangePwd.HandlyCheck(out msg))
             {
-                MessageWindow.ShowMsg(MessageType.Warning, MsgConst.Msg_ValidateFail, msg);
+                MessageWindow.ShowMsg(MessageType.Warning, OperationDesc.Validate, msg);
                 return;
             }
             var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.ChangePwd),
@@ -58,10 +58,10 @@ namespace OneCardSln.OneCardClient.Pages.Account
                 Context.Token);
             if (rst.code != ResultCode.Success)
             {
-                MessageWindow.ShowMsg(MessageType.Warning, MsgConst.Msg_ChangePwd, rst.msg);
+                MessageWindow.ShowMsg(MessageType.Warning, OperationDesc.ChangePwd, rst.msg);
                 return;
             }
-            MessageWindow.ShowMsg(MessageType.Info, MsgConst.Msg_ChangePwd, "密码修改成功");
+            MessageWindow.ShowMsg(MessageType.Info, OperationDesc.ChangePwd, "密码修改成功");
             vmChangePwd.Reset();
             FocusManager.SetFocusedElement(this, txtOldPwd);
         }

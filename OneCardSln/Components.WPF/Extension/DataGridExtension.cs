@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OneCardSln.Components.Misc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,13 +12,17 @@ namespace OneCardSln.Components.WPF.Extension
 {
     public static class DataGridExtension
     {
+        /// <summary>
+        /// 暂不使用
+        /// </summary>
+        /// <param name="dg"></param>
         public static void AddCheckBoxCol(this DataGrid dg)
         {
             DataGridTemplateColumn ckCol = new DataGridTemplateColumn();
             ckCol.CellTemplate = new DataTemplate();
             FrameworkElementFactory fef = new FrameworkElementFactory(typeof(CheckBox));
             Binding binding = new Binding();
-            binding.Path = new PropertyPath("Selected");
+            binding.Path = new PropertyPath("IsChecked");
             fef.SetBinding(CheckBox.ContentProperty, binding);
             ckCol.CellTemplate.VisualTree = fef;
 
@@ -39,15 +44,65 @@ namespace OneCardSln.Components.WPF.Extension
 
             ckCol.DisplayIndex = 0;
             dg.Columns.Add(ckCol);
+            dg.SelectionMode = DataGridSelectionMode.Single;
         }
 
+        /// <summary>
+        /// 显示行号
+        /// 如果行绑定模型实现Iindexer接口，则取其RowNumber；否则，设置为datagrid行号
+        /// </summary>
+        /// <param name="dg"></param>
         public static void ShowRowNumber(this DataGrid dg)
         {
             //TODO行号需要根据分页设置
             dg.LoadingRow += (o, e) =>
             {
-                e.Row.Header = e.Row.GetIndex() + 1;
+                var item = e.Row.Item;
+                if (item != null && item is Iindexer)
+                {
+                    e.Row.Header = ((Iindexer)item).RowNumber;
+                }
+                else
+                {
+                    e.Row.Header = e.Row.GetIndex() + 1;
+                }
             };
         }
+
+        /// <summary>
+        /// 获取所有选中的行数据（通过CheckBox过滤）
+        /// 暂不使用，通过模型绑定解决了
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <param name="grid"></param>
+        /// <returns></returns>
+        public static IList<TModel> GetCheckedItems<TModel>(this DataGrid grid) where TModel : class,ICheckable
+        {
+            IList<TModel> models = new List<TModel>();
+            var rows = grid.Items.Count;
+            if (rows > 0)
+            {
+                for (int idx = 0; idx < rows; idx++)
+                {
+                    DataGridRow row = (DataGridRow)grid.ItemContainerGenerator.ContainerFromIndex(idx);
+                    var model = (ICheckable)row.DataContext;
+                    //因为CheckBox与ICheckable接口的IsChecked绑定了
+                    /*如：
+                     * <ControlTemplate>
+                           <Border BorderThickness="0">
+                     *          <CheckBox  HorizontalAlignment="Center"  VerticalAlignment="Center" IsChecked="{Binding Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                     *     </Border>
+                       </ControlTemplate>
+                     */
+                    if (model.IsChecked)
+                    {
+                        models.Add((TModel)row.DataContext);
+                    }
+                }
+            }
+
+            return models;
+        }
+
     }
 }

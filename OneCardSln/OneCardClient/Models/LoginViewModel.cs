@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OneCardSln.Components.WPF.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace OneCardSln.OneCardClient.Models
 {
-    public class LoginViewModel : BaseViewModel
+    [Serializable]
+    public class LoginViewModel : BaseModel
     {
         string _userName;
         [Required(ErrorMessage = "用户名不能为空")]

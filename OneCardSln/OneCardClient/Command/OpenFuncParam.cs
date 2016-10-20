@@ -9,5 +9,6 @@ namespace OneCardSln.OneCardClient.Command
     public class OpenFuncParam
     {
         public string PageUri { get; set; }
+        public string FuncId { get; set; }
     }
 }

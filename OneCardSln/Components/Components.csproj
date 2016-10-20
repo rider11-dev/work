@@ -93,6 +93,7 @@
     <Compile Include="Extensions\ObjectExtension.cs" />
     <Compile Include="Extensions\RegexExtension.cs" />
     <Compile Include="HttpHelper.cs" />
+    <Compile Include="Misc\ICheckable.cs" />
     <Compile Include="IDCard\IDCardData_SS.cs" />
     <Compile Include="IDCard\IDCardData_XZX.cs" />
     <Compile Include="IDCard\IDCardDriver_SS.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Logger\LogHelperFactory.cs" />
     <Compile Include="Logger\LogHelperProvider.cs" />
     <Compile Include="Mapper\OOMapper.cs" />
+    <Compile Include="Misc\Iindexer.cs" />
     <Compile Include="NFC\LotusNFCCardDriver.cs" />
     <Compile Include="NFC\NFCCardReaderHelper.cs" />
     <Compile Include="PinYinConverter.cs" />

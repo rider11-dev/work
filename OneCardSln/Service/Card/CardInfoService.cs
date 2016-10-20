@@ -435,15 +435,15 @@ namespace OneCardSln.Service.Card
             PredicateGroup pg = new PredicateGroup { Operator = GroupOperator.And, Predicates = new List<IPredicate>() };
             if (page.conditions != null && page.conditions.Count > 0)
             {
-                if (page.conditions.ContainsKey("idcard"))
+                if (page.conditions.ContainsKey("idcard") && page.conditions["idcard"].IsNotEmpty())
                 {
                     pg.Predicates.Add(Predicates.Field<CardInfo>(c => c.card_idcard, Operator.Eq, page.conditions["idcard"]));
                 }
-                if (page.conditions.ContainsKey("state"))
+                if (page.conditions.ContainsKey("state") && page.conditions["state"].IsNotEmpty())
                 {
                     pg.Predicates.Add(Predicates.Field<CardInfo>(c => c.card_state, Operator.Eq, page.conditions["state"]));
                 }
-                if (page.conditions.ContainsKey("username"))
+                if (page.conditions.ContainsKey("username") && page.conditions["username"].IsNotEmpty())
                 {
                     pg.Predicates.Add(Predicates.Field<CardInfo>(c => c.card_username, Operator.Like, "%" + page.conditions["username"] + "%"));
                 }

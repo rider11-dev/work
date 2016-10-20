@@ -34,5 +34,7 @@ namespace OneCardSln.Components.Result
         DataSystem = 10,
         [Description("数据库操作错误")]
         DbError = 11,
+        [Description("非法操作")]
+        IllegalOpt = 12,
     }
 }

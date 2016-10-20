@@ -7,7 +7,7 @@
         xmlns:pub="clr-namespace:OneCardSln.OneCardClient.Public"
         WindowStartupLocation="CenterScreen" Height="Auto" Width="Auto"
         Style="{StaticResource baseWindowStyle}"
-        Title="MainWindow" 
+        Title="一卡通管理系统" 
         Loaded="MainWindow_Loaded">
     <Window.Resources>
         <Style x:Key="headerTextStyle" TargetType="TextBlock">

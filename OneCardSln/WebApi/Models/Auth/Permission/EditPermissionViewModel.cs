@@ -20,6 +20,10 @@ namespace OneCardSln.WebApi.Models.Auth.Permission
 
         [MaxLength(255, ErrorMessageResourceName = "Per_Uri_Length", ErrorMessageResourceType = typeof(OneCardSln.Components.Resource.ViewModelResource))]
         public string per_uri { get; set; }
+
+        [MaxLength(255, ErrorMessageResourceName = "Per_Method_Length", ErrorMessageResourceType = typeof(OneCardSln.Components.Resource.ViewModelResource))]
+        public string per_method { get; set; }
+
         public string per_parent { get; set; }
 
         [Required(ErrorMessageResourceName = "Sort_Require", ErrorMessageResourceType = typeof(OneCardSln.Components.Resource.ViewModelResource))]

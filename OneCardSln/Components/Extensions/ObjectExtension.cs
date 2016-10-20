@@ -30,5 +30,24 @@ namespace OneCardSln.Components.Extensions
             }
             return da.Description;
         }
+
+        /// <summary>
+        /// 判断是否为空字符串
+        /// </summary>
+        /// <param name="val"></param>
+        /// <returns></returns>
+        public static bool IsEmpty(this object val)
+        {
+            if (val == null)
+            {
+                return true;
+            }
+            return string.IsNullOrWhiteSpace(val.ToString());
+        }
+
+        public static bool IsNotEmpty(this object val)
+        {
+            return !IsEmpty(val);
+        }
     }
 }

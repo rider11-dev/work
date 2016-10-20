@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Navigation;
 
 namespace OneCardSln.OneCardClient.Command
 {
@@ -25,6 +26,10 @@ namespace OneCardSln.OneCardClient.Command
 
         public event EventHandler CanExecuteChanged;
 
+        /// <summary>
+        /// 记录上次加载完成时绑定的事件委托，用来在下次绑定之前取消，避免多次绑定
+        /// </summary>
+        static LoadCompletedEventHandler LastEventHandler = null;//
         public void Execute(object parameter)
         {
             Container.Source = null;
@@ -41,8 +46,26 @@ namespace OneCardSln.OneCardClient.Command
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.OpenFunc, MsgConst.Msg_ViewAppLog);
                 return;
             }
-            //MessageWindow.ShowMsg(MessageType.Info, "提示", "我被单击了！" + param.PageUri);
+            //需要在LoadCompleted事件中，才能获取到绑定到Frame的Page实例
+            Container.LoadCompleted -= LastEventHandler;
+            LastEventHandler = (o, e) =>
+            {
+                try
+                {
+                    var page = e.Content as BasePage;
+                    page.FuncId = param.FuncId;
+                }
+                catch (Exception ex)
+                {
+                    _logHelper.LogError("LoadCompleted事件", ex);
+                    MessageWindow.ShowMsg(MessageType.Error, OperationDesc.OpenFunc, MsgConst.Msg_ViewAppLog);
+                }
+            };
+            Container.LoadCompleted += LastEventHandler;
+
             Container.Source = PageHelper.GetPageFullUri(param.PageUri);
-        }   
+        }
+
+
     }
 }

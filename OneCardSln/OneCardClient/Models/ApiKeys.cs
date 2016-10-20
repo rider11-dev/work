@@ -12,16 +12,25 @@ namespace OneCardSln.OneCardClient.Models
         public const string Login = "login";
         public const string VerifyCode = "verifycode";
         public const string GetPer = "getper";
-        public const string GetUsr = "getusr";
+        public const string GetUsr = "usr_get";
 
         /*-------------------------------------我的账户------------------------------*/
         //修改密码
         public const string ChangePwd = "changepwd";
-        public const string EditUsr = "editusr";
+        public const string EditUsr = "usr_edit";
 
         /*-------------------------------------权限管理——用户管理------------------------------*/
-        public const string GetUsrByPage = "querybypage";
+        public const string GetUsrByPage = "usr_pagequery";
+        public const string AddUsr = "usr_add";
+        public const string DeleteUsr = "usr_delete";
+        public const string MultiDeleteUsr = "usr_multidelete";
 
+        /*-------------------------------------权限管理——权限管理------------------------------*/
+        public const string GetPerByPage = "per_pagequery";
+        public const string AddPer = "per_add";
+        public const string EditPer = "per_edit";
+        public const string DeletePer = "per_delete";
+        public const string MultiDeletePer = "per_multidelete";
 
     }
 }

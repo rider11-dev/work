@@ -1,0 +1,61 @@
+﻿using Newtonsoft.Json;
+using OneCardSln.Components;
+using OneCardSln.Components.Result;
+using OneCardSln.Components.WPF.Command;
+using OneCardSln.OneCardClient.Public;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OneCardSln.OneCardClient.Models.Auth
+{
+    public class PermDetailViewModel : PermViewModel
+    {
+        [JsonIgnore]
+        public bool IsNew
+        {
+            get { return string.IsNullOrEmpty(base.per_id); }
+        }
+
+        [JsonIgnore]
+        public BaseWindow Window { get; set; }
+
+        [JsonIgnore]
+        private DelegateCommand _saveCmd;
+        public DelegateCommand SaveCmd
+        {
+            get
+            {
+                if (_saveCmd == null)
+                {
+                    _saveCmd = new DelegateCommand(SaveAction);
+                }
+                return _saveCmd;
+            }
+        }
+
+        private void SaveAction(object parameter)
+        {
+            if (!this.IsValid)
+            {
+                MessageWindow.ShowMsg(MessageType.Warning, OperationDesc.Validate, this.Error);
+                return;
+            }
+            var url = ApiHelper.GetApiUrl(this.IsNew ? ApiKeys.AddUsr : ApiKeys.EditUsr);
+            var rst = HttpHelper.GetResultByPost(url, (PermViewModel)this, Context.Token);
+            if (rst.code != ResultCode.Success)
+            {
+                MessageWindow.ShowMsg(MessageType.Error, this.IsNew ? OperationDesc.Add : OperationDesc.Edit, rst.msg);
+                return;
+            }
+            MessageWindow.ShowMsg(MessageType.Info, this.IsNew ? OperationDesc.Add : OperationDesc.Edit, MsgConst.Msg_Succeed);
+            if (Window != null)
+            {
+                Window.DialogResult = true;
+                Window.CloseCmd.Execute(null);
+            }
+        }
+    }
+}

@@ -24,6 +24,7 @@ namespace OneCardSln.Service.Auth
         const string Msg_AddUser = "新增用户";
         const string Msg_UpdateUser = "修改用户";
         const string Msg_DeleteUser = "删除用户";
+        const string Msg_BatchDeleteUser = "批量删除用户";
         const string Msg_ChangePwd = "修改密码";
         const string Msg_QueryByPage = "分页查询用户信息";
         const string Msg_FindById = "根据主键查询用户信息";
@@ -184,6 +185,7 @@ namespace OneCardSln.Service.Auth
             }
             try
             {
+                //TODO，应该起事务，删除用户权限
                 bool val = _usrRep.Delete(predicate);
                 rst = OptResult.Build(val ? ResultCode.Success : ResultCode.Fail, Msg_DeleteUser);
             }
@@ -191,6 +193,41 @@ namespace OneCardSln.Service.Auth
             {
                 LogHelper.LogError(Msg_DeleteUser, ex);
                 rst = OptResult.Build(ResultCode.DbError, Msg_DeleteUser);
+            }
+            return rst;
+        }
+
+        public OptResult DeleteBatch(IEnumerable<string> ids)
+        {
+            OptResult rst = null;
+            //1、用户是否存在
+            var predicate = Predicates.Field<User>(u => u.user_id, Operator.Eq, ids);
+            var count = _usrRep.Count(predicate);
+            if (count < ids.Count())
+            {
+                rst = OptResult.Build(ResultCode.DataNotFound, Msg_BatchDeleteUser);
+                return rst;
+            }
+            //2、超级管理员不能被删除（这里只根据用户名判断，后续可以扩展根据角色或其他规则）
+            PredicateGroup pg = new PredicateGroup { Operator = GroupOperator.And, Predicates = new List<IPredicate> { predicate } };
+            pg.Predicates.Add(Predicates.Field<User>(u => u.user_name, Operator.Eq, "admin"));
+            count = _usrRep.Count(pg);
+            if (count > 0)
+            {
+                rst = OptResult.Build(ResultCode.IllegalOpt, Msg_BatchDeleteUser + "，管理员不允许删除");
+                return rst;
+            }
+
+            try
+            {
+                //TODO，应该起事务，删除用户权限
+                bool val = _usrRep.Delete(predicate);
+                rst = OptResult.Build(val ? ResultCode.Success : ResultCode.Fail, Msg_BatchDeleteUser);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(Msg_BatchDeleteUser, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_BatchDeleteUser);
             }
             return rst;
         }
@@ -247,9 +284,17 @@ namespace OneCardSln.Service.Auth
             PredicateGroup pg = new PredicateGroup { Operator = GroupOperator.And, Predicates = new List<IPredicate>() };
             if (page.conditions != null && page.conditions.Count > 0)
             {
-                if (page.conditions.ContainsKey("regioncode"))
+                if (page.conditions.ContainsKey("regioncode") && !page.conditions["regioncode"].IsEmpty())
                 {
                     pg.Predicates.Add(Predicates.Field<User>(u => u.user_regioncode, Operator.Eq, page.conditions["regioncode"]));
+                }
+                if (page.conditions.ContainsKey("username") && !page.conditions["username"].IsEmpty())
+                {
+                    pg.Predicates.Add(Predicates.Field<User>(u => u.user_name, Operator.Like, "%" + page.conditions["username"] + "%"));
+                }
+                if (page.conditions.ContainsKey("truename") && !page.conditions["truename"].IsEmpty())
+                {
+                    pg.Predicates.Add(Predicates.Field<User>(u => u.user_truename, Operator.Like, "%" + page.conditions["truename"] + "%"));
                 }
             }
 

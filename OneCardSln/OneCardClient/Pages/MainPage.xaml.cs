@@ -18,9 +18,10 @@ namespace OneCardSln.OneCardClient.Pages
     /// <summary>
     /// MainPage.xaml 的交互逻辑
     /// </summary>
-    public partial class MainPage : Page
+    public partial class MainPage : BasePage
     {
         public MainPage()
+            : base()
         {
             InitializeComponent();
         }

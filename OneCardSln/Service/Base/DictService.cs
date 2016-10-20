@@ -23,7 +23,7 @@ namespace OneCardSln.Service.Base
         DictRepository _dictRep;
         DictTypeRepository _dictTypeRep;
         public DictService(IDbSession session, DictRepository dictRep, DictTypeRepository dictTypeRep)
-            : base(session,dictRep)
+            : base(session, dictRep)
         {
             _dictRep = dictRep;
             _dictTypeRep = dictTypeRep;
@@ -182,15 +182,15 @@ namespace OneCardSln.Service.Base
             PredicateGroup pg = new PredicateGroup { Operator = GroupOperator.And, Predicates = new List<IPredicate>() };
             if (conditions != null && conditions.Count > 0)
             {
-                if (conditions.ContainsKey("dict_type"))
+                if (conditions.ContainsKey("dict_type") && !conditions["dict_type"].IsEmpty())
                 {
                     pg.Predicates.Add(Predicates.Field<Dict>(d => d.dict_type, Operator.Eq, conditions["dict_type"]));
                 }
-                if (conditions.ContainsKey("dict_code"))
+                if (conditions.ContainsKey("dict_code") && !conditions["dict_code"].IsEmpty())
                 {
                     pg.Predicates.Add(Predicates.Field<Dict>(d => d.dict_type, Operator.Like, "%" + conditions["dict_code"] + "%"));
                 }
-                if (conditions.ContainsKey("dict_name"))
+                if (conditions.ContainsKey("dict_name") && !conditions["dict_name"].IsEmpty())
                 {
                     pg.Predicates.Add(Predicates.Field<Dict>(d => d.dict_type, Operator.Like, "%" + conditions["dict_name"] + "%"));
                 }

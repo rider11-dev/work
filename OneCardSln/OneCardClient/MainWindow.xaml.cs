@@ -129,7 +129,7 @@ namespace OneCardSln.OneCardClient
                 return;
             }
             var per = node.Data as Permission;
-            _cmdOpenFunc.Execute(new OpenFuncParam { PageUri = per.per_uri });
+            _cmdOpenFunc.Execute(new OpenFuncParam { PageUri = per.per_uri, FuncId = per.per_id });
             //报告当前位置
             lblCurrLocation.Text = node.GetNodePath();
         }

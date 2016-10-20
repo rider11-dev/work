@@ -12,12 +12,13 @@ namespace OneCardSln.OneCardClient.Public
     public struct MsgConst
     {
         public const string Msg_ViewAppLog = "请查看程序日志获取详细信息";
-        public const string Msg_ValidateFail = "输入验证";
-        public const string Msg_LoginFail = "登录";
-        public const string Msg_GetUsr = "获取用户信息";
 
-        public const string Msg_ChangePwd = "修改密码";
-        public const string Msg_EditUsr = "修改用户信息";
+        public const string Msg_SelectData = "请选择数据";
 
+        public const string Msg_Succeed = "操作成功";
+
+        public const string Msg_SelectOnlyone = "只能选择一条数据";
+
+        public const string Msg_AskWhenDeleteSel = "确定要删除所选数据吗？";
     }
 }

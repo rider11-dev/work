@@ -295,6 +295,15 @@ namespace OneCardSln.Components.Resource {
         }
         
         /// <summary>
+        ///   查找类似 操作方法最大为{1}个字符 的本地化字符串。
+        /// </summary>
+        public static string Per_Method_Length {
+            get {
+                return ResourceManager.GetString("Per_Method_Length", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 权限名称最大为{1}个字符 的本地化字符串。
         /// </summary>
         public static string Per_Name_Length {

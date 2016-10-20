@@ -83,6 +83,24 @@ namespace OneCardSln.WebApi.Controllers.Auth
         }
 
         [HttpPost]
+        [Route("multidelete")]
+        public OptResult Delete(DelByIdsViewModel vmDels)
+        {
+            OptResult rst = null;
+            if (!ModelState.IsValid)
+            {
+                rst = OptResult.Build(ResultCode.ParamError, ModelState.Parse());
+                return rst;
+            }
+
+            var token = base.ParseToken(ActionContext);
+
+            rst = _perSrv.DeleteBatch(vmDels.pks);
+
+            return rst;
+        }
+
+        [HttpPost]
         [Route("querybypage")]
         public OptResult QueryByPage(PageQuery page)
         {

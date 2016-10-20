@@ -13,6 +13,7 @@ namespace OneCardSln.Service.Auth.Models
         public string per_name { get; set; }
         public string per_type { get; set; }
         public string per_uri { get; set; }
+        public string per_method { get; set; }
         public string per_type_name { get; set; }
         public string per_parent { get; set; }
         public string per_sort { get; set; }

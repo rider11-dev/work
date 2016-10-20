@@ -1,4 +1,11 @@
-﻿using OneCardSln.Components.Extensions;
+﻿using Newtonsoft.Json;
+using OneCardSln.Components;
+using OneCardSln.Components.Extensions;
+using OneCardSln.Components.Misc;
+using OneCardSln.Components.Result;
+using OneCardSln.Components.WPF.Command;
+using OneCardSln.Components.WPF.Models;
+using OneCardSln.OneCardClient.Public;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,11 +16,13 @@ using System.Threading.Tasks;
 
 namespace OneCardSln.OneCardClient.Models.Auth
 {
-    public class UserViewModel : BaseViewModel, ICloneable
+    public class UserViewModel : CheckableModel
     {
         public string user_id { get; set; }
 
         private string _usr_name;
+        [Required(ErrorMessageResourceName = "User_Name_Require", ErrorMessageResourceType = typeof(OneCardSln.Components.Resource.ViewModelResource))]
+        [StringLength(10, MinimumLength = 3, ErrorMessageResourceName = "User_Name_Length", ErrorMessageResourceType = typeof(OneCardSln.Components.Resource.ViewModelResource))]
         public string user_name
         {
             get { return _usr_name; }
@@ -96,10 +105,19 @@ namespace OneCardSln.OneCardClient.Models.Auth
             }
         }
 
-
-        public object Clone()
+        public void CopyTo(UserViewModel vmUsr)
         {
-            return this.MemberwiseClone();
+            if (vmUsr == null)
+            {
+                return;
+            }
+            vmUsr.user_id = this.user_id;
+            vmUsr.user_name = this.user_name;
+            vmUsr.user_idcard = this.user_idcard;
+            vmUsr.user_truename = this.user_truename;
+            vmUsr.user_regioncode = this.user_regioncode;
+            vmUsr.user_remark = this.user_remark;
         }
+
     }
 }

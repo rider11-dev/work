@@ -12,6 +12,7 @@
                 <ResourceDictionary Source="pack://application:,,,/Resources/Style/TreeViewStyle.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/Resources/Style/PageStyle.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/Resources/Style/DataGridStyle.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Resources/Style/MngPageStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

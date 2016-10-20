@@ -25,6 +25,7 @@ namespace OneCardSln.Model.Auth
             }
         }
         public string per_uri { get; set; }
+        public string per_method { get; set; }
         public string per_parent { get; set; }
         public string per_sort { get; set; }
         public bool per_system { get; set; }

@@ -13,8 +13,12 @@
             <DockPanel LastChildFill="True">
                 <Border Width="Auto" DockPanel.Dock="Top" Background="{TemplateBinding Background}" Height="40" x:Name="borderTitle">
                     <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                        <Button x:Name="btnMinimize" Width="30" Template="{StaticResource btnTemplate_WinMin}"/>
-                        <Button x:Name="btnClose" Width="30" Template="{StaticResource btnTemplate_WinClose}"/>
+                        <Button x:Name="btnMinimize" Width="30" Template="{StaticResource btnTemplate_WinMin}"
+                                Command="{Binding Path=MinCmd,RelativeSource={RelativeSource AncestorType=Window}}"
+                                />
+                        <Button x:Name="btnClose" Width="30" Template="{StaticResource btnTemplate_WinClose}"
+                                Command="{Binding Path=CloseCmd,RelativeSource={RelativeSource AncestorType=Window}}"
+                                />
                     </StackPanel>
                 </Border>
                 <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"

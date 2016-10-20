@@ -33,5 +33,4 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Margin" Value="0,0,0,0"/>
     </Style>
-
 </ResourceDictionary>

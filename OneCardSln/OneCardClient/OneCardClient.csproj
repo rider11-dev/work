@@ -48,6 +48,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dlls\WPF\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -74,12 +78,25 @@
     <Compile Include="Models\Account\ChangePwdViewModel.cs" />
     <Compile Include="Models\Api.cs" />
     <Compile Include="Models\ApiKeys.cs" />
+    <Compile Include="Models\Auth\PermDetailViewModel.cs" />
+    <Compile Include="Models\Auth\PermMngViewModel.cs" />
+    <Compile Include="Models\Auth\PermViewModel.cs" />
+    <Compile Include="Models\Auth\UserDetailViewModel.cs" />
+    <Compile Include="Models\Auth\UserMngViewModel.cs" />
     <Compile Include="Models\Auth\UserViewModel.cs" />
+    <Compile Include="Models\MngViewModel.cs" />
+    <Compile Include="Models\WindowViewModel.cs" />
     <Compile Include="Pages\Account\DetailPage.xaml.cs">
       <DependentUpon>DetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Account\ChangePwdPage.xaml.cs">
       <DependentUpon>ChangePwdPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Auth\PermissionDetailWindow.xaml.cs">
+      <DependentUpon>PermissionDetailWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Auth\UserDetailWindow.xaml.cs">
+      <DependentUpon>UserDetailWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Auth\PermissionMngPage.xaml.cs">
       <DependentUpon>PermissionMngPage.xaml</DependentUpon>
@@ -87,6 +104,7 @@
     <Compile Include="Pages\Auth\UserMngPage.xaml.cs">
       <DependentUpon>UserMngPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\BasePage.cs" />
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -122,6 +140,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Auth\PermissionDetailWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Auth\UserDetailWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Auth\PermissionMngPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -150,6 +176,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\style\MngPageStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\style\PageStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -169,7 +199,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\LoginViewModel.cs" />
-    <Compile Include="Models\BaseViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
