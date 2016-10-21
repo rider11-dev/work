@@ -169,13 +169,6 @@ namespace MyNet.WebApi.Controllers.Card
         }
 
         [HttpGet]
-        [Route("getstates")]
-        public OptResult GetCardStates()
-        {
-            return _cardSrv.GetCardStates();
-        }
-
-        [HttpGet]
         [Route("getopts")]
         public OptResult GetCardOpts()
         {

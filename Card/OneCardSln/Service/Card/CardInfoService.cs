@@ -30,7 +30,6 @@ namespace MyNet.Service.Card
         protected CardInfoRepository _cardInfoRep;
         protected CardRecordRepository _cardRecordRep;
         protected CardBillRepository _cardBillRep;
-        protected CardStateRepository _stateRep = new CardStateRepository();
         protected CardOperationRepository _optRep = new CardOperationRepository();
 
         public CardInfoService(IDbSession session, CardInfoRepository cardInfoRep,
@@ -390,19 +389,6 @@ namespace MyNet.Service.Card
             }
 
             return RecoverSingle(new SingleProcessParam { card = card, opt = opt });
-        }
-
-        /// <summary>
-        /// 获取一卡通状态列表
-        /// </summary>
-        /// <returns></returns>
-        public OptResult GetCardStates()
-        {
-            return OptResult.Build(ResultCode.Success, Msg_GetStates, new
-            {
-                total = _stateRep.DataSrc.Count,
-                rows = _stateRep.DataSrc
-            });
         }
 
         /// <summary>

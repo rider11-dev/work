@@ -25,6 +25,7 @@ using MyNet.Components.Mapper;
 using OneCardSln.OneCardClient.Command;
 using MyNet.Components.Logger;
 using MyNet.Components.WPF.Windows;
+using MyNet.Model.Base;
 
 namespace OneCardSln.OneCardClient
 {
@@ -88,7 +89,7 @@ namespace OneCardSln.OneCardClient
             Context.Pers = pers;
 
             //功能菜单
-            var funcs = pers.Where(p => p.per_type.ToEnum<PermType>() == PermType.Func);
+            var funcs = pers.Where(p => p.per_type == PermType.PermTypeFunc.ToString());
             if (funcs != null && funcs.Count() > 0)
             {
                 List<TreeViewData.NodeViewModel> datas = new List<TreeViewData.NodeViewModel>();

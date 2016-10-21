@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OneCardSln.OneCardClient.Models
+namespace MyNet.Components.WPF.Windows
 {
     public class WindowViewModel : BaseModel
     {

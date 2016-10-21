@@ -9,7 +9,7 @@
             <m:CmbModel x:Key="cbVm"/>
         </Style.Resources>
         <Setter Property="ItemsSource" Value="{Binding Path=DataSource,Source={StaticResource cbVm},Mode=OneWay}"/>
-        <Setter Property="SelectedValue" Value="Code"/>
+        <Setter Property="SelectedValue" Value="Id"/>
         <Setter Property="DisplayMemberPath" Value="Text"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>

@@ -31,14 +31,15 @@ namespace MyNet.Service.Auth
         private PermissionRepository _perRep;
         private UserPermissionRelRepository _usrPerRelRep;
 
-        private PermTypeRepository _permTypeRep = new PermTypeRepository();
+        private DictTypeRepository _dictTypeRep;
 
 
-        public PermissionService(IDbSession session, PermissionRepository perRep, UserPermissionRelRepository usrPerRelRep, DictRepository dictRep)
+        public PermissionService(IDbSession session, PermissionRepository perRep, UserPermissionRelRepository usrPerRelRep, DictTypeRepository dictTypeRep)
             : base(session, perRep)
         {
             _perRep = perRep;
             _usrPerRelRep = usrPerRelRep;
+            _dictTypeRep = dictTypeRep;
         }
 
         public OptResult Add(Permission per)
@@ -295,16 +296,6 @@ namespace MyNet.Service.Auth
             return rst;
         }
 
-        public OptResult GetPermTypes()
-        {
-            var dict = _permTypeRep.DataSrc;
-            return OptResult.Build(ResultCode.Success, Msg_GetPermTypes, new
-            {
-                total = dict.Count,
-                rows = dict
-            });
-        }
-
         //私有方法
 
         /// <summary>
@@ -316,7 +307,7 @@ namespace MyNet.Service.Auth
         private bool ValidatePermissionType(string perType, out string msg)
         {
             msg = "";
-            var val = _permTypeRep.DataSrc.ContainsKey(perType);
+            var val = _dictTypeRep.Count(Predicates.Field<DictType>(d => d.type_code, Operator.Eq, DictType.Perm.type_code)) > 0;
 
             msg = val ? "" : "权限类型不存在！";
 

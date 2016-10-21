@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MyNet.Components.WPF.Windows;
+using MyNet.Components.WPF.Models;
 
 namespace OneCardSln.OneCardClient.Models.Auth
 {
@@ -25,6 +26,7 @@ namespace OneCardSln.OneCardClient.Models.Auth
 
         [JsonIgnore]
         private DelegateCommand _saveCmd;
+        [JsonIgnore]
         public DelegateCommand SaveCmd
         {
             get
@@ -56,6 +58,25 @@ namespace OneCardSln.OneCardClient.Models.Auth
             {
                 Window.DialogResult = true;
                 Window.CloseCmd.Execute(null);
+            }
+        }
+
+        CmbItem _selectedPermType;
+        [JsonIgnore]
+        public CmbItem SelectedPermType
+        {
+            get { return _selectedPermType; }
+            set
+            {
+                if (_selectedPermType != value)
+                {
+                    _selectedPermType = value;
+                    if (_selectedPermType != null && base.per_type != _selectedPermType.Id)
+                    {
+                        base.per_type = _selectedPermType.Id;
+                    }
+                    base.RaisePropertyChanged("SelectedPermType");
+                }
             }
         }
     }

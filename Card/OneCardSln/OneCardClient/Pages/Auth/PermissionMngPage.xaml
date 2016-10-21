@@ -6,6 +6,8 @@
       xmlns:usrCtl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
       xmlns:local="clr-namespace:OneCardSln.OneCardClient.Pages" 
       xmlns:vmauth="clr-namespace:OneCardSln.OneCardClient.Models.Auth"
+      xmlns:cvt="clr-namespace:MyNet.Components.WPF.Converter;assembly=MyNet.Components.WPF"
+      xmlns:localcvt="clr-namespace:OneCardSln.OneCardClient.Converter"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="600"
       Loaded="PermissionMngPage_Loaded"
@@ -14,6 +16,8 @@
         <!--model-->
         <vmauth:PermMngViewModel x:Key="model"/>
         <usrCtl:PagingArgs x:Key="paging"/>
+        <cvt:BooleanConverter x:Key="boolConverter"/>
+        <localcvt:PermTypeConverter x:Key="permTypeConverter"/>
     </Page.Resources>
     <Grid x:Name="gridLayout">
         <Grid.RowDefinitions>
@@ -43,9 +47,11 @@
                          Text="{Binding Path=Filter_PerName,Source={StaticResource model}}"
                          />
                 <Label Content="类型" Style="{StaticResource mngLblStyle}"/>
-                <TextBox Style="{StaticResource mngInputStyle}"
-                         Text="{Binding Path=Filter_PerType,Source={StaticResource model}}"
-                         />
+                <ComboBox x:Name="cbPermType" Grid.Row="3" Grid.Column="1" 
+                  Style="{StaticResource cbBaseStyle}"
+                  Width="80" Height="24" FontSize="14"
+                  SelectedValue="{Binding Path=Filter_PerType,Source={StaticResource model}}"
+                  />
                 <Label Content="上级" Style="{StaticResource mngLblStyle}"/>
                 <TextBox Style="{StaticResource mngInputStyle}"
                          Text="{Binding Path=Filter_PerParent,Source={StaticResource model}}"
@@ -71,10 +77,22 @@
                                                 CanUserResize="False"/>
                         <DataGridTextColumn Header="编号" Binding="{Binding per_code}"/>
                         <DataGridTextColumn Header="名称" Binding="{Binding per_name}"/>
-                        <DataGridTextColumn Header="类型" Binding="{Binding per_type}"/>
+                        <DataGridTemplateColumn Header="类型">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=per_type,Converter={StaticResource permTypeConverter}}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                         <DataGridTextColumn Header="上级" Binding="{Binding per_parent}"/>
                         <DataGridTextColumn Header="排序"  Binding="{Binding per_sort}"/>
-                        <DataGridTextColumn Header="是否系统"  Binding="{Binding per_system}"/>
+                        <DataGridTemplateColumn Header="是否系统">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=per_system,Converter={StaticResource boolConverter}}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                         <DataGridTextColumn Header="菜单uri"  Binding="{Binding per_uri}"/>
                         <DataGridTextColumn Header="动作"  Binding="{Binding per_method}"/>
                         <DataGridTextColumn Header="备注"  Binding="{Binding per_remark}"/>

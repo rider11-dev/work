@@ -1,7 +1,7 @@
-﻿<local:BaseWindow
+﻿<winEx:BaseWindow
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:OneCardSln.OneCardClient"
+        xmlns:winEx="clr-namespace:MyNet.Components.WPF.Windows;assembly=MyNet.Components.WPF"
         xmlns:vm="clr-namespace:OneCardSln.OneCardClient.Models"
         xmlns:ext="clr-namespace:MyNet.Components.WPF.Extension;assembly=MyNet.Components.WPF"
         x:Class="OneCardSln.OneCardClient.LoginWindow"
@@ -74,4 +74,4 @@
                 Click="btnLogin_Click"
                 />
     </Grid>
-</local:BaseWindow>
+</winEx:BaseWindow>

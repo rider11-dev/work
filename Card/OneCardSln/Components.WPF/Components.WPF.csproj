@@ -60,8 +60,12 @@
     <Compile Include="Controls\ControlPagination.xaml.cs">
       <DependentUpon>ControlPagination.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ControlTree.xaml.cs">
+      <DependentUpon>ControlTree.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PagingArgs.cs" />
     <Compile Include="Controls\TreeViewData.cs" />
+    <Compile Include="Converter\BooleanConverter.cs" />
     <Compile Include="Converter\LevelToMarginConverter.cs" />
     <Compile Include="Extension\DataGridExtension.cs" />
     <Compile Include="Extension\InputExtension.cs" />
@@ -78,9 +82,14 @@
     <Compile Include="Validation\RequiredRule.cs" />
     <Compile Include="Validation\RequiredValidator.cs" />
     <Compile Include="Validation\Validator.cs" />
+    <Compile Include="Windows\BaseWindow.cs" />
+    <Compile Include="Windows\HelpWindow.xaml.cs">
+      <DependentUpon>HelpWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\MessageWindow.xaml.cs">
       <DependentUpon>MessageWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\WindowViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Components\Components.csproj">
@@ -90,6 +99,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\ControlPagination.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ControlTree.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -126,6 +139,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\style\WindowStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\HelpWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

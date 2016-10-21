@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MyNet.Components.WPF.Extension;
+using OneCardSln.OneCardClient.Public;
+using MyNet.Model.Base;
 
 namespace OneCardSln.OneCardClient.Pages.Auth
 {
@@ -42,6 +44,8 @@ namespace OneCardSln.OneCardClient.Pages.Auth
                 //“隐藏”工具栏——列表布局第一行，高度设为0
                 gridLayout.RowDefinitions[0].Height = new GridLength(0);
             }
+            //设置combobox数据源
+            DictHelper.SetSource(cbPermType, DictType.Perm, "", false, true);
         }
 
         private void InitDataGrid()

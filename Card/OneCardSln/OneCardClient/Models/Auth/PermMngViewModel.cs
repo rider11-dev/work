@@ -90,7 +90,7 @@ namespace OneCardSln.OneCardClient.Models.Auth
                     {
                         {"per_code",Filter_PerCode},
                         {"per_name",Filter_PerName},
-                        {"per_type",Filter_PerType},
+                        {"per_type",Filter_PerType==null?"":Filter_PerType.Id},
                         {"per_parent",Filter_PerParent},
                     }
                },
@@ -147,15 +147,15 @@ namespace OneCardSln.OneCardClient.Models.Auth
                 }
             }
         }
-        string _filter_type;
-        public string Filter_PerType
+        CmbItem _filter_pertype;
+        public CmbItem Filter_PerType
         {
-            get { return _filter_type; }
+            get { return _filter_pertype; }
             set
             {
-                if (_filter_type != value)
+                if (_filter_pertype != value)
                 {
-                    _filter_type = value;
+                    _filter_pertype = value;
                     base.RaisePropertyChanged("Filter_PerType");
                 }
             }

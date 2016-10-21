@@ -69,9 +69,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BaseWindow.cs" />
     <Compile Include="Command\OpenFuncCmd.cs" />
     <Compile Include="Command\OpenFuncParam.cs" />
+    <Compile Include="Converter\PermTypeConverter.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -85,7 +85,6 @@
     <Compile Include="Models\Auth\UserMngViewModel.cs" />
     <Compile Include="Models\Auth\UserViewModel.cs" />
     <Compile Include="Models\MngViewModel.cs" />
-    <Compile Include="Models\WindowViewModel.cs" />
     <Compile Include="Pages\Account\DetailPage.xaml.cs">
       <DependentUpon>DetailPage.xaml</DependentUpon>
     </Compile>
@@ -112,7 +111,6 @@
     <Compile Include="Public\ApiHelper.cs" />
     <Compile Include="Public\Context.cs" />
     <Compile Include="Public\DictHelper.cs" />
-    <Compile Include="Public\DictType.cs" />
     <Compile Include="Public\MsgConst.cs" />
     <Compile Include="Public\OperationDesc.cs" />
     <Page Include="LoginWindow.xaml">

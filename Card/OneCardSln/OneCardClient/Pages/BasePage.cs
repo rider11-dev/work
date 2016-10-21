@@ -28,7 +28,7 @@ namespace OneCardSln.OneCardClient.Pages
             {
                 return;
             }
-            var opts = Context.Pers.Where(p => p.per_parent == FuncId && p.PermType == PermType.Opt);
+            var opts = Context.Pers.Where(p => p.per_parent == FuncId && p.PermType == PermType.PermTypeOpt);
             if (opts.Count() <= 0)
             {
                 return;

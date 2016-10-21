@@ -15,6 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MyNet.Components.Extensions;
 using OneCardSln.OneCardClient.Public;
+using MyNet.Model.Base;
+using MyNet.Components.WPF.Windows;
 
 namespace OneCardSln.OneCardClient.Pages.Auth
 {
@@ -50,7 +52,7 @@ namespace OneCardSln.OneCardClient.Pages.Auth
             _vmPermDetail.CanValidate = true;
 
             //设置权限类型
-            DictHelper.SetSource(cbPermType, DictType.permtype);
+            DictHelper.SetSource(cbPermType, DictType.Perm, _vmPermDetail.per_type);
         }
     }
 }

@@ -26,9 +26,9 @@ namespace MyNet.Components.WPF.Models
             }
         }
 
-        private ObservableCollection<CmbItem> _dataSrc = null;
+        private IList<CmbItem> _dataSrc = null;
 
-        public ObservableCollection<CmbItem> DataSource
+        public IList<CmbItem> DataSource
         {
             get
             {
@@ -44,25 +44,39 @@ namespace MyNet.Components.WPF.Models
             }
         }
 
-        public void Bind(ObservableCollection<CmbItem> dataSrc, string selectedId = "")
+        public void Bind(IList<CmbItem> dataSrc, string selectedId = "", bool setSelect = true, bool needBlankItem = false)
         {
-            this.DataSource = dataSrc;
-            if (this.DataSource == null)
+            if (dataSrc == null || dataSrc.Count < 1)
             {
                 return;
             }
 
-            //设置选中项
-            if (string.IsNullOrEmpty(selectedId))
+            var copyArr = new CmbItem[dataSrc.Count];
+            if (dataSrc != null)
             {
-                Select(this.DataSource
-                    .Where(m => m.IsDefault == true)
-                    .FirstOrDefault()
-                    .Id);
+                dataSrc.CopyTo(copyArr, 0);
             }
-            else
+            var copyList = copyArr.ToList();
+            if (needBlankItem && copyList != null && copyList.Count(m => string.IsNullOrEmpty(m.Id)) < 1)
             {
-                Select(selectedId);
+                copyList.Insert(0, new CmbItem { Id = string.Empty });
+            }
+            this.DataSource = copyList;
+
+            if (setSelect)
+            {
+                //设置选中项
+                if (string.IsNullOrEmpty(selectedId))
+                {
+                    Select(this.DataSource
+                        .Where(m => m.IsDefault == true)
+                        .FirstOrDefault()
+                        .Id);
+                }
+                else
+                {
+                    Select(selectedId);
+                }
             }
         }
 

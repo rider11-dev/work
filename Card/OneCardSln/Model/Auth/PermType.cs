@@ -13,8 +13,8 @@ namespace MyNet.Model.Auth
     public enum PermType
     {
         [Description("功能权限")]
-        Func = 0,
+        PermTypeFunc = 0,
         [Description("操作权限")]
-        Opt = 1
+        PermTypeOpt = 1
     }
 }

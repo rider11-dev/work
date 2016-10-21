@@ -2,6 +2,7 @@
 using MyNet.Components.Result;
 using MyNet.Components.WPF.Models;
 using MyNet.Components.WPF.Windows;
+using MyNet.Model.Base;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using OneCardSln.OneCardClient.Models;
@@ -23,9 +24,17 @@ namespace OneCardSln.OneCardClient.Public
         /// <summary>
         /// 字典缓存
         /// </summary>
-        private static Dictionary<DictType, ObservableCollection<CmbItem>> DictSource = new Dictionary<DictType, ObservableCollection<CmbItem>>();
+        private static Dictionary<DictType, IList<CmbItem>> DictSource = new Dictionary<DictType, IList<CmbItem>>();
 
-        public static void SetSource(ComboBox cmb, DictType dictType)
+        /// <summary>
+        /// 设置ComboBox数据源
+        /// </summary>
+        /// <param name="cmb">ComboBox控件</param>
+        /// <param name="dictType">字典类别</param>
+        /// <param name="selectedTypeCode">设置要选中的子项</param>
+        /// <param name="setSelect">是否设置选中项</param>
+        /// <param name="needBlankItem">是否需要一个空项</param>
+        public static void SetSource(ComboBox cmb, DictType dictType, string selectedTypeCode = "", bool setSelect = true, bool needBlankItem = false)
         {
             if (cmb == null)
             {
@@ -35,14 +44,14 @@ namespace OneCardSln.OneCardClient.Public
             if (DictHelper.DictSource.ContainsKey(dictType))
             {
                 //取缓存数据
-                model.Bind(DictSource[dictType]);
+                model.Bind(DictSource[dictType], selectedTypeCode, setSelect, needBlankItem);
             }
             else
             {
                 //从服务器获取
                 var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.GetDict), new
                  {
-                     dict_type = dictType.ToString()
+                     dict_type = dictType.type_code
                  }, Context.Token);
                 if (rst.code != ResultCode.Success)
                 {
@@ -52,7 +61,7 @@ namespace OneCardSln.OneCardClient.Public
                 if (rst.data != null && rst.data.rows != null)
                 {
                     var dicts = JsonConvert.DeserializeObject<ObservableCollection<CmbItem>>(((JArray)rst.data.rows).ToString());
-                    model.Bind(dicts);
+                    model.Bind(dicts, selectedTypeCode, setSelect, needBlankItem);
                     DictHelper.DictSource.Add(dictType, dicts);
                 }
             }

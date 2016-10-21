@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MyNet.Components.Extensions;
+using MyNet.Components.WPF.Windows;
 
 namespace OneCardSln.OneCardClient.Pages.Auth
 {

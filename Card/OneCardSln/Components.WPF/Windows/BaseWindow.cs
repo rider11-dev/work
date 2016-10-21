@@ -7,10 +7,8 @@ using System.Windows;
 using MyNet.Components.WPF.Extension;
 using System.Windows.Controls;
 using MyNet.Components.WPF.Command;
-using OneCardSln.OneCardClient.Models;
 
-
-namespace OneCardSln.OneCardClient
+namespace MyNet.Components.WPF.Windows
 {
     public class BaseWindow : Window
     {

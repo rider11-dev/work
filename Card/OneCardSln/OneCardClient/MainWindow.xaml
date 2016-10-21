@@ -1,6 +1,6 @@
-﻿<local:BaseWindow x:Class="OneCardSln.OneCardClient.MainWindow"
+﻿<winEx:BaseWindow x:Class="OneCardSln.OneCardClient.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:local="clr-namespace:OneCardSln.OneCardClient"
+        xmlns:winEx="clr-namespace:MyNet.Components.WPF.Windows;assembly=MyNet.Components.WPF"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ctlExt="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
         xmlns:vm="clr-namespace:OneCardSln.OneCardClient.Models"
@@ -121,4 +121,4 @@
             </Border>
         </Grid>
     </Border>
-</local:BaseWindow>
+</winEx:BaseWindow>
