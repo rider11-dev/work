@@ -1,0 +1,10 @@
+﻿<Window x:Class="MyNet.Components.WPF.Windows.MessageWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Style="{StaticResource msgWindowStyle}"
+        FontSize="14"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResize"
+        Title="MessageWindow" Height="160" Width="300">
+
+</Window>

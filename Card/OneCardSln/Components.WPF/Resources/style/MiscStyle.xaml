@@ -1,0 +1,31 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:m="clr-namespace:MyNet.Components.WPF.Models"
+                    >
+    <!--杂项样式-->
+    <!--下拉框样式-->
+    <Style x:Key="cbBaseStyle" TargetType="ComboBox">
+        <Style.Resources>
+            <m:CmbModel x:Key="cbVm"/>
+        </Style.Resources>
+        <Setter Property="ItemsSource" Value="{Binding Path=DataSource,Source={StaticResource cbVm},Mode=OneWay}"/>
+        <Setter Property="SelectedValue" Value="Code"/>
+        <Setter Property="DisplayMemberPath" Value="Text"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="4,0,0,0"/>
+        <Setter Property="SelectedItem" Value="{Binding Path=Selected,Source={StaticResource cbVm},Mode=TwoWay}"/>
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="ComboBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="Height" Value="{Binding Path=Height,RelativeSource={RelativeSource AncestorType=ComboBox}}"/>
+                    <Setter Property="FontSize" Value="{Binding Path=FontSize,RelativeSource={RelativeSource AncestorType=ComboBox}}"/>
+                    <Setter Property="Padding" Value="{Binding Path=Margin,RelativeSource={RelativeSource AncestorType=ComboBox}}"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

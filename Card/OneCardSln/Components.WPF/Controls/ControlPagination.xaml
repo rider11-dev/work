@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="MyNet.Components.WPF.Controls.ControlPagination"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Height="36" Width="Auto">
+    <UserControl.Resources>
+        <Style x:Key="baseStyle" TargetType="Control">
+            <Setter Property="Margin" Value="4,0,0,0"/>
+        </Style>
+        <ControlTemplate x:Key="btnTemplate" TargetType="Button">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="{Binding Path=Tag,RelativeSource={RelativeSource TemplatedParent}}"/>
+            </StackPanel>
+        </ControlTemplate>
+        <Style x:Key="btnStyle" TargetType="Button" BasedOn="{StaticResource baseStyle}">
+            <Setter Property="Template" Value="{StaticResource btnTemplate}"/>
+            <Setter Property="Width" Value="32"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style x:Key="inputStyle" TargetType="TextBox" BasedOn="{StaticResource baseStyle}">
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        <Style x:Key="lblStyle" TargetType="Label" BasedOn="{StaticResource baseStyle}">
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+    </UserControl.Resources>
+    <Border>
+        <StackPanel Orientation="Horizontal" Margin="2">
+            <Button x:Name="btnFirst" Style="{StaticResource btnStyle}"
+                    Tag="/MyNet.Components.WPF;component/Resources/img/first.png"
+                     ToolTip="首页"
+                    Click="btnFirst_Click">
+            </Button>
+            <Button x:Name="btnPrev" Style="{StaticResource btnStyle}"
+                    Tag="/MyNet.Components.WPF;component/Resources/img/previous.png"
+                     ToolTip="上一页"
+                    Click="btnPrev_Click">
+            </Button>
+            <Label Content="第" Style="{StaticResource lblStyle}"/>
+            <TextBox x:Name="txtPageIdx" Style="{StaticResource inputStyle}" Text="1"/>
+            <Label Content="页 / 共" Style="{StaticResource lblStyle}"/>
+            <Label x:Name="lblPageCount" Content="0" Style="{StaticResource lblStyle}"/>
+            <Label Content="页" Style="{StaticResource lblStyle}"/>
+            <Button  x:Name="btnGoToPage" Style="{StaticResource btnStyle}"
+                     Tag="/MyNet.Components.WPF;component/Resources/img/refresh.png"
+                     ToolTip="Go"
+                     Click="btnGoToPage_Click">
+            </Button>
+            <Button  x:Name="btnNext" Style="{StaticResource btnStyle}"
+                     Tag="/MyNet.Components.WPF;component/Resources/img/next.png"
+                     ToolTip="下一页"
+                     Click="btnNext_Click">
+            </Button>
+            <Button  x:Name="btnLast" Style="{StaticResource btnStyle}"
+                     Tag="/MyNet.Components.WPF;component/Resources/img/last.png"
+                     ToolTip="末页"
+                     Click="btnLast_Click">
+            </Button>
+            <TextBox  x:Name="txtPageSize" Style="{StaticResource inputStyle}" Text="20"/>
+            <Label Content="条 / 页" Style="{StaticResource lblStyle}"/>
+            <Label Content="共" Style="{StaticResource lblStyle}"/>
+            <Label  x:Name="lblRecordCount" Content="0" Style="{StaticResource lblStyle}"/>
+            <Label Content="条" Style="{StaticResource lblStyle}"/>
+        </StackPanel>
+    </Border>
+</UserControl>
