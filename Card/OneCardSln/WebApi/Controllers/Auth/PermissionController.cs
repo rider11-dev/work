@@ -111,5 +111,14 @@ namespace MyNet.WebApi.Controllers.Auth
             return rst;
         }
 
+        [HttpPost]
+        [Route("getallfuncs")]
+        public OptResult GetAllFuncs()
+        {
+            OptResult rst = null;
+            rst = _perSrv.GetAllFuncs();
+
+            return rst;
+        }
     }
 }

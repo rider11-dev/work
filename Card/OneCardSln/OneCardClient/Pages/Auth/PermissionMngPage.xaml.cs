@@ -16,6 +16,8 @@ using System.Windows.Shapes;
 using MyNet.Components.WPF.Extension;
 using OneCardSln.OneCardClient.Public;
 using MyNet.Model.Base;
+using MyNet.Components.WPF.Windows;
+using MyNet.Components.WPF.Controls;
 
 namespace OneCardSln.OneCardClient.Pages.Auth
 {
@@ -45,13 +47,35 @@ namespace OneCardSln.OneCardClient.Pages.Auth
                 gridLayout.RowDefinitions[0].Height = new GridLength(0);
             }
             //设置combobox数据源
-            DictHelper.SetSource(cbPermType, DictType.Perm, "", false, true);
+            CacheHelper.SetCmbSource(cbPermType, DictType.Perm, "", false, true);
         }
 
         private void InitDataGrid()
         {
             dgPers.ShowRowNumber();
             model.CtlPage = ctlPagination;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            TreeHelpWindow treeHelpWin = new TreeHelpWindow("功能菜单帮助", () =>
+            {
+                List<TreeViewData.NodeViewModel> datas = new List<TreeViewData.NodeViewModel>();
+                var funcs = CacheHelper.AllFuncs;
+                foreach (var kvp in CacheHelper.AllFuncs)
+                {
+                    var func = kvp.Value;
+                    datas.Add(new TreeViewData.NodeViewModel { Id = func.per_code, Label = func.per_name, Parent = func.per_parent, Order = func.per_sort, Data = func });
+                }
+                return datas;
+            },
+            node =>
+            {
+                var tNode = (TreeViewData.TreeNode)node;
+                model.Filter_PerParent_Name = tNode.Label;
+                model.Filter_PerParent = tNode.Id;
+            });
+            treeHelpWin.ShowDialog();
         }
 
     }

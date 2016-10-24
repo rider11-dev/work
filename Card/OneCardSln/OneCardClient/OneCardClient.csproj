@@ -34,7 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="C1.WPF.4, Version=4.0.20162.517, Culture=neutral, PublicKeyToken=2aa4ec5576d6c3ce, processorArchitecture=MSIL" />
     <Reference Include="log4net">
       <HintPath>..\dlls\log4net\log4net.dll</HintPath>
     </Reference>
@@ -71,6 +70,7 @@
     </ApplicationDefinition>
     <Compile Include="Command\OpenFuncCmd.cs" />
     <Compile Include="Command\OpenFuncParam.cs" />
+    <Compile Include="Converter\PermParentConverter.cs" />
     <Compile Include="Converter\PermTypeConverter.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -110,7 +110,7 @@
     <Compile Include="Pages\PageHelper.cs" />
     <Compile Include="Public\ApiHelper.cs" />
     <Compile Include="Public\Context.cs" />
-    <Compile Include="Public\DictHelper.cs" />
+    <Compile Include="Public\CacheHelper.cs" />
     <Compile Include="Public\MsgConst.cs" />
     <Compile Include="Public\OperationDesc.cs" />
     <Page Include="LoginWindow.xaml">
@@ -176,7 +176,6 @@
     <Resource Include="Resources\img\userhead.png" />
     <Resource Include="Resources\img\top.jpg" />
     <Resource Include="Resources\img\logoff.png" />
-    <EmbeddedResource Include="Properties\Licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -224,6 +223,10 @@
     <ProjectReference Include="..\Components\Components.csproj">
       <Project>{9ed019a0-a26a-4725-aa70-2b52bf7a5416}</Project>
       <Name>Components</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dto\Dto.csproj">
+      <Project>{ea32f873-b280-4b79-947e-01ab4fcf6616}</Project>
+      <Name>Dto</Name>
     </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{bb11afa2-784c-4e60-9586-6608d8338d67}</Project>

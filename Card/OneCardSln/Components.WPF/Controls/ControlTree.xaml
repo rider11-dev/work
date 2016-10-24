@@ -10,7 +10,7 @@
         <ctl:TreeViewData x:Key="treeData"/>
     </UserControl.Resources>
     <!--菜单区-->
-    <TreeView x:Name="menuTree"
+    <TreeView x:Name="treeView"
                           Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
                           BorderThickness="0,0,0,1" BorderBrush="LightGray"
                           HorizontalContentAlignment="Stretch"

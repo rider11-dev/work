@@ -34,6 +34,7 @@ namespace OneCardSln.OneCardClient.Models
         public const string EditPer = "per_edit";
         public const string DeletePer = "per_delete";
         public const string MultiDeletePer = "per_multidelete";
+        public const string GetAllFuncs = "per_allfuncs";
 
     }
 }

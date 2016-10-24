@@ -1,5 +1,6 @@
 ﻿using MyNet.Components.Extensions;
 using MyNet.Components.Logger;
+using MyNet.Components.WPF.Models;
 using MyNet.Model.Auth;
 using OneCardSln.OneCardClient.Models;
 using OneCardSln.OneCardClient.Models.Auth;
@@ -9,6 +10,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Xml.Linq;
 
 namespace OneCardSln.OneCardClient.Public
@@ -48,7 +50,7 @@ namespace OneCardSln.OneCardClient.Public
         }
 
         public static IEnumerable<Permission> Pers { get; set; }
-
+        public static CmbModel CmbModel;
         static Context()
         {
 

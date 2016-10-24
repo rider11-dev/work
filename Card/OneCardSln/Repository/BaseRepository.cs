@@ -78,7 +78,7 @@ namespace MyNet.Repository
             }
         }
 
-        public IEnumerable<TEntity> GetPageList(int pageIndex, int pageSize, out long total, IList<DapperExtensions.ISort> sort, object predicate = null, IDbTransaction trans = null)
+        public IEnumerable<TEntity> GetPageList(int pageIndex, int pageSize, out long total, IList<ISort> sort, object predicate = null, IDbTransaction trans = null)
         {
             total = 0;
             try
@@ -97,7 +97,7 @@ namespace MyNet.Repository
             }
         }
 
-        public IEnumerable<TReturn> GetPageList<TReturn>(int pageIndex, int pageSize, out long total, IList<DapperExtensions.ISort> sort, object predicate = null, IDbTransaction trans = null) where TReturn : class
+        public IEnumerable<TReturn> GetPageList<TReturn>(int pageIndex, int pageSize, out long total, IList<ISort> sort, object predicate = null, IDbTransaction trans = null) where TReturn : class
         {
             total = 0;
             try
@@ -303,7 +303,7 @@ namespace MyNet.Repository
             return sqlText;
         }
 
-        private string GetSql(string sqlName)
+        public string GetSql(string sqlName)
         {
             string sqlText = SqlTextProvider.GetSql(new SqlConfEntity
             {

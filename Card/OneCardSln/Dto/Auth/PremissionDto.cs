@@ -3,35 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MyNet.Components.Extensions;
 
-namespace MyNet.Model.Auth
+namespace MyNet.Dto.Auth
 {
-    /// <summary>
-    /// 权限控制——权限列表
-    /// </summary>
-    public class Permission
+    public class PremissionDto
     {
         public string per_id { get; set; }
         public string per_code { get; set; }
         public string per_name { get; set; }
         public string per_type { get; set; }
-
-        public PermType PermType
-        {
-            get
-            {
-                return per_type.ToEnum<PermType>();
-            }
-        }
         public string per_uri { get; set; }
         public string per_method { get; set; }
+        public string per_type_name { get; set; }
         /// <summary>
         /// 上级权限编号
         /// </summary>
         public string per_parent { get; set; }
         public string per_sort { get; set; }
-        public bool per_system { get; set; }
-        public string per_remark { get; set; }
     }
 }

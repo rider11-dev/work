@@ -12,14 +12,26 @@
         <Border BorderBrush="LightGray" BorderThickness="1">
             <DockPanel LastChildFill="True">
                 <Border Width="Auto" DockPanel.Dock="Top" Background="{TemplateBinding Background}" Height="40" x:Name="borderTitle">
-                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                        <Button x:Name="btnMinimize" Width="30" Template="{StaticResource btnTemplate_WinMin}"
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label 
+                            Content="{Binding Path=Title,RelativeSource={RelativeSource AncestorType=Window},Mode=OneWay}"
+                            FontWeight="Bold" FontSize="14"
+                            HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                            Margin="4,0,0,0"
+                            />
+                        <StackPanel Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
+                            <Button x:Name="btnMinimize" Width="30" Template="{StaticResource btnTemplate_WinMin}"
                                 Command="{Binding Path=MinCmd,RelativeSource={RelativeSource AncestorType=Window}}"
                                 />
-                        <Button x:Name="btnClose" Width="30" Template="{StaticResource btnTemplate_WinClose}"
+                            <Button x:Name="btnClose" Width="30" Template="{StaticResource btnTemplate_WinClose}"
                                 Command="{Binding Path=CloseCmd,RelativeSource={RelativeSource AncestorType=Window}}"
                                 />
-                    </StackPanel>
+                        </StackPanel>
+                    </Grid>
                 </Border>
                 <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
                     Width="Auto" Height="Auto" DockPanel.Dock="Top">

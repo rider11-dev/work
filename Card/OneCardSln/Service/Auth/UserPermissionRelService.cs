@@ -1,11 +1,11 @@
 ﻿using DapperExtensions;
 using MyNet.Components.Extensions;
 using MyNet.Components.Result;
+using MyNet.Dto.Auth;
 using MyNet.Model;
 using MyNet.Model.Auth;
 using MyNet.Repository.Auth;
 using MyNet.Repository.Db;
-using MyNet.Service.Auth.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -98,7 +98,7 @@ namespace MyNet.Service.Auth
             //2、执行查询
             try
             {
-                var pers = _usrPerRelRep.QueryBySqlName(typeof(UserPremissionDto), "getper", new { user_id = usrId });
+                var pers = _usrPerRelRep.QueryBySqlName(typeof(PremissionDto), "getper", new { user_id = usrId });
 
                 rst = OptResult.Build(ResultCode.Success, Msg_GetPer, new { user_id = usrId, pers = pers });
             }

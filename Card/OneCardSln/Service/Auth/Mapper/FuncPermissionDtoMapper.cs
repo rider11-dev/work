@@ -8,13 +8,11 @@ using System.Threading.Tasks;
 
 namespace MyNet.Service.Auth.Mapper
 {
-    public class UserDtoMapper : ClassMapper<UserDto>
+    public class FuncPermissionDtoMapper : ClassMapper<FuncPermissionDto>
     {
-        public UserDtoMapper()
+        public FuncPermissionDtoMapper()
         {
-            Table("auth_user");
-
-            Map(u => u.user_pwd).Ignore();
+            Table("auth_permission");
 
             AutoMap();
         }

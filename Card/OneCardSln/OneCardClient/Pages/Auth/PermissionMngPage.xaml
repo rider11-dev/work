@@ -8,6 +8,7 @@
       xmlns:vmauth="clr-namespace:OneCardSln.OneCardClient.Models.Auth"
       xmlns:cvt="clr-namespace:MyNet.Components.WPF.Converter;assembly=MyNet.Components.WPF"
       xmlns:localcvt="clr-namespace:OneCardSln.OneCardClient.Converter"
+      xmlns:vmwpf="clr-namespace:MyNet.Components.WPF.Models;assembly=MyNet.Components.WPF"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="600"
       Loaded="PermissionMngPage_Loaded"
@@ -18,6 +19,8 @@
         <usrCtl:PagingArgs x:Key="paging"/>
         <cvt:BooleanConverter x:Key="boolConverter"/>
         <localcvt:PermTypeConverter x:Key="permTypeConverter"/>
+        <localcvt:PermParentConverter x:Key="permParentConverter"/>
+        <vmwpf:CmbModel x:Key="cbVm"/>
     </Page.Resources>
     <Grid x:Name="gridLayout">
         <Grid.RowDefinitions>
@@ -48,13 +51,16 @@
                          />
                 <Label Content="类型" Style="{StaticResource mngLblStyle}"/>
                 <ComboBox x:Name="cbPermType" Grid.Row="3" Grid.Column="1" 
+                  DataContext="{StaticResource cbVm}"
                   Style="{StaticResource cbBaseStyle}"
-                  Width="80" Height="24" FontSize="14"
+                  Width="80" Height="26" FontSize="12"
                   SelectedValue="{Binding Path=Filter_PerType,Source={StaticResource model}}"
                   />
                 <Label Content="上级" Style="{StaticResource mngLblStyle}"/>
-                <TextBox Style="{StaticResource mngInputStyle}"
-                         Text="{Binding Path=Filter_PerParent,Source={StaticResource model}}"
+                <Button Width="120" Height="26" 
+                         Style="{StaticResource inputBtnAddOnStyle}" 
+                         Content="{Binding Path=Filter_PerParent_Name,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                         Command="{Binding Path=PermParentHelpCmd,Source={StaticResource model}}"
                          />
                 <Button x:Name="btnSearch" Style="{StaticResource mngBtnStyle}" Content="查 询"
                         Command="{Binding Path=SearchCmd,Source={StaticResource model}}"
@@ -84,7 +90,14 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="上级" Binding="{Binding per_parent}"/>
+                        <!--<DataGridTextColumn Header="上级" Binding="{Binding per_parent}"/>-->
+                        <DataGridTemplateColumn Header="上级">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=per_parent,Converter={StaticResource permParentConverter}}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                         <DataGridTextColumn Header="排序"  Binding="{Binding per_sort}"/>
                         <DataGridTemplateColumn Header="是否系统">
                             <DataGridTemplateColumn.CellTemplate>

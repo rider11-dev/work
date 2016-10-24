@@ -14,8 +14,6 @@ namespace MyNet.Components.WPF.Windows
     {
         const string BaseWindowTemplateName = "popWindowTemplate";
 
-        protected WindowViewModel VmWindow { get; set; }
-
         public BaseWindow()
             : base()
         {

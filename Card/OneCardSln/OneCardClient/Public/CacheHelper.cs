@@ -2,6 +2,8 @@
 using MyNet.Components.Result;
 using MyNet.Components.WPF.Models;
 using MyNet.Components.WPF.Windows;
+using MyNet.Dto.Auth;
+using MyNet.Model.Auth;
 using MyNet.Model.Base;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -17,9 +19,9 @@ using System.Windows.Controls;
 namespace OneCardSln.OneCardClient.Public
 {
     /// <summary>
-    /// 字典辅助类
+    /// 缓存辅助类
     /// </summary>
-    public class DictHelper
+    public class CacheHelper
     {
         /// <summary>
         /// 字典缓存
@@ -34,14 +36,15 @@ namespace OneCardSln.OneCardClient.Public
         /// <param name="selectedTypeCode">设置要选中的子项</param>
         /// <param name="setSelect">是否设置选中项</param>
         /// <param name="needBlankItem">是否需要一个空项</param>
-        public static void SetSource(ComboBox cmb, DictType dictType, string selectedTypeCode = "", bool setSelect = true, bool needBlankItem = false)
+        public static void SetCmbSource(ComboBox cmb, DictType dictType, string selectedTypeCode = "", bool setSelect = true, bool needBlankItem = false)
         {
             if (cmb == null)
             {
                 return;
             }
+
             CmbModel model = cmb.FindResource("cbVm") as CmbModel;
-            if (DictHelper.DictSource.ContainsKey(dictType))
+            if (CacheHelper.DictSource.ContainsKey(dictType))
             {
                 //取缓存数据
                 model.Bind(DictSource[dictType], selectedTypeCode, setSelect, needBlankItem);
@@ -62,7 +65,50 @@ namespace OneCardSln.OneCardClient.Public
                 {
                     var dicts = JsonConvert.DeserializeObject<ObservableCollection<CmbItem>>(((JArray)rst.data.rows).ToString());
                     model.Bind(dicts, selectedTypeCode, setSelect, needBlankItem);
-                    DictHelper.DictSource.Add(dictType, dicts);
+                    CacheHelper.DictSource.Add(dictType, dicts);
+                }
+            }
+        }
+
+        private static Dictionary<string, FuncPermissionDto> _allFuncs = null;
+        /// <summary>
+        /// 所有功能权限缓存
+        /// </summary>
+        public static Dictionary<string, FuncPermissionDto> AllFuncs
+        {
+            get
+            {
+                if (_allFuncs == null)
+                {
+                    LoadAllFuncs();
+                }
+                return _allFuncs;
+            }
+        }
+
+        /// <summary>
+        /// 获取所有功能权限
+        /// </summary>
+        private static void LoadAllFuncs()
+        {
+            _allFuncs = new Dictionary<string, FuncPermissionDto>();
+
+            //从服务器获取
+            var rst = HttpHelper.GetResultByPost(url: ApiHelper.GetApiUrl(ApiKeys.GetAllFuncs), token: Context.Token);
+            if (rst.code != ResultCode.Success)
+            {
+                MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);
+                return;
+            }
+            if (rst.data != null)
+            {
+                var funcs = JsonConvert.DeserializeObject<IList<FuncPermissionDto>>(((JArray)rst.data).ToString());
+                if (funcs != null && funcs.Count > 0)
+                {
+                    foreach (var func in funcs)
+                    {
+                        _allFuncs.Add(func.per_code, func);
+                    }
                 }
             }
         }

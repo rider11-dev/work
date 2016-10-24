@@ -96,7 +96,7 @@ namespace OneCardSln.OneCardClient
                 datas.Add(new TreeViewData.NodeViewModel { Id = "main", Label = "主页", Order = "0", Data = new Permission { per_uri = "MainPage.xaml" } });
                 foreach (var p in funcs)
                 {
-                    datas.Add(new TreeViewData.NodeViewModel { Id = p.per_id, Label = p.per_name, Parent = p.per_parent, Order = p.per_sort, Data = p });
+                    datas.Add(new TreeViewData.NodeViewModel { Id = p.per_code, Label = p.per_name, Parent = p.per_parent, Order = p.per_sort, Data = p });
                 }
                 _menuTreeData.Bind(datas);
             }

@@ -1,6 +1,7 @@
 ﻿using DapperExtensions;
 using MyNet.Components.Extensions;
 using MyNet.Components.Result;
+using MyNet.Dto.Auth;
 using MyNet.Model;
 using MyNet.Model.Auth;
 using MyNet.Model.Base;
@@ -10,6 +11,7 @@ using MyNet.Repository.Db;
 using MyNet.Service.Base;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +28,9 @@ namespace MyNet.Service.Auth
         const string Msg_QueryByPage = "分页查询权限信息";
         const string Msg_FindById = "根据主键查询权限数据";
         const string Msg_GetPermTypes = "获取权限类型列表";
+        const string Msg_GetAllFuncs = "获取所有功能权限";
+
+        const string SqlName_HasChild = "haschild";
 
         //私有变量
         private PermissionRepository _perRep;
@@ -165,15 +170,15 @@ namespace MyNet.Service.Auth
             }
 
             //3、是否包含下级权限
-            var count = _perRep.Count(Predicates.Field<Permission>(p => p.per_parent, Operator.Eq, pkId as object));
-            if (count > 0)
+            var hasChild = HasChild(new List<string>() { pkId });
+            if (hasChild)
             {
                 rst = OptResult.Build(ResultCode.DataInUse, string.Format("{0}，存在下级权限", Msg_DeletePer));
                 return rst;
             }
             //4、是否已被分配
-            count = _usrPerRelRep.Count(Predicates.Field<UserPermissionRel>(r => r.rel_permissionid, Operator.Eq, pkId as object));
-            if (count > 0)
+            var assigned = Assigned(new List<string> { pkId });
+            if (assigned)
             {
                 rst = OptResult.Build(ResultCode.DataInUse, string.Format("{0}，已分配到用户", Msg_DeletePer));
                 return rst;
@@ -206,8 +211,7 @@ namespace MyNet.Service.Auth
             //2、系统预制不允许删除
             PredicateGroup pg = new PredicateGroup { Operator = GroupOperator.And, Predicates = new List<IPredicate>() };
             pg.Predicates.Add(predicate1);
-            var predicate2 = Predicates.Field<Permission>(p => p.per_system, Operator.Eq, true);
-            pg.Predicates.Add(predicate2);
+            pg.Predicates.Add(Predicates.Field<Permission>(p => p.per_system, Operator.Eq, true));
             count = _perRep.Count(pg);
             if (count > 0)
             {
@@ -215,16 +219,15 @@ namespace MyNet.Service.Auth
                 return rst;
             }
             //3、是否包含下级权限
-            predicate2 = Predicates.Field<Permission>(p => p.per_parent, Operator.Eq, ids);
-            count = _perRep.Count(pg);
-            if (count > 0)
+            var hasChild = HasChild(ids);
+            if (hasChild)
             {
                 rst = OptResult.Build(ResultCode.DataInUse, string.Format("{0}，存在下级权限", Msg_BatchDeletePer));
                 return rst;
             }
             //4、是否已被分配
-            count = _usrPerRelRep.Count(Predicates.Field<UserPermissionRel>(r => r.rel_permissionid, Operator.Eq, ids));
-            if (count > 0)
+            var assigned = Assigned(ids);
+            if (assigned)
             {
                 rst = OptResult.Build(ResultCode.DataInUse, string.Format("{0}，已分配到用户", Msg_BatchDeletePer));
                 return rst;
@@ -272,6 +275,22 @@ namespace MyNet.Service.Auth
                 {
                     pg.Predicates.Add(Predicates.Field<Permission>(p => p.per_parent, Operator.Eq, page.conditions["per_parent"]));
                 }
+                else if (page.conditions.ContainsKey("per_parent_name") && !page.conditions["per_parent_name"].IsEmpty())
+                {
+                    //TODO
+                    //上级模糊查询（方法很笨，考虑后续优化）
+                    var parentCodes = _perRep.GetList<PermissionParentDto>(Predicates.Field<Permission>(p => p.per_name, Operator.Like, "%" + page.conditions["per_parent_name"] + "%"));
+                    if (parentCodes == null || parentCodes.Count() < 1)
+                    {
+                        rst = OptResult.Build(ResultCode.Success, Msg_QueryByPage, new
+                        {
+                            total = 0
+                        });
+                        return rst;
+                    }
+                    pg.Predicates.Add(Predicates.Field<Permission>(p => p.per_parent, Operator.Eq, parentCodes.Select(p => p.per_code)));
+
+                }
             }
             //2、排序
             long total = 0;
@@ -292,6 +311,23 @@ namespace MyNet.Service.Auth
             {
                 LogHelper.LogError(Msg_QueryByPage, ex);
                 rst = OptResult.Build(ResultCode.DbError, Msg_QueryByPage);
+            }
+            return rst;
+        }
+
+        public OptResult GetAllFuncs()
+        {
+            OptResult rst = null;
+            try
+            {
+                var predicate = Predicates.Field<FuncPermissionDto>(p => p.per_type, Operator.Eq, PermType.PermTypeFunc.ToString());
+                var perFuncs = _perRep.GetList<FuncPermissionDto>(predicate);
+                rst = OptResult.Build(ResultCode.Success, Msg_GetAllFuncs, perFuncs);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(Msg_GetAllFuncs, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_GetAllFuncs);
             }
             return rst;
         }
@@ -326,7 +362,7 @@ namespace MyNet.Service.Auth
             msg = "";
             if (!string.IsNullOrEmpty(parent))
             {
-                var count = _perRep.Count(Predicates.Field<Permission>(p => p.per_id, Operator.Eq, parent));
+                var count = _perRep.Count(Predicates.Field<Permission>(p => p.per_code, Operator.Eq, parent));
                 if (count < 1)
                 {
                     msg = "父级权限不存在！";
@@ -337,5 +373,39 @@ namespace MyNet.Service.Auth
             return true;
         }
 
+        private bool HasChild(IEnumerable<string> ids)
+        {
+            if (ids == null || ids.Count() < 1)
+            {
+                return false;
+            }
+            var sqlPlainText = _perRep.GetSql(SqlName_HasChild);
+            List<string> paraNames = new List<string>();
+            var paraValues = new ExpandoObject() as IDictionary<string, Object>;
+            int i = 0;
+            foreach (var id in ids)
+            {
+                paraNames.Add("@per_id_" + i);
+                paraValues.Add("per_id_" + i, id);
+
+                i++;
+            }
+
+            string sqlText = string.Format(sqlPlainText, string.Join(",", paraNames));
+
+            var val = _perRep.ExecuteScalar<int>(sqlText, paraValues);
+
+            return val > 0;
+        }
+
+        private bool Assigned(IEnumerable<string> ids)
+        {
+            if (ids == null || ids.Count() < 1)
+            {
+                return false;
+            }
+            var count = _usrPerRelRep.Count(Predicates.Field<UserPermissionRel>(r => r.rel_permissionid, Operator.Eq, ids));
+            return count > 0;
+        }
     }
 }

@@ -19,8 +19,8 @@ namespace MyNet.Components.WPF.Extension
         public string ImageFile { get; private set; }
         public double ImageWidth { get; private set; }
         public double ImageHeight { get; private set; }
-        public AddOnLocation Location { get; private set; }
-        const int ImagePadding = 2;//为了不让图片覆盖输入框
+        public InputExtension.AddOnLocation Location { get; private set; }
+        const int ImagePadding = 2;//为了不让图片覆盖输入框边框
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -29,7 +29,7 @@ namespace MyNet.Components.WPF.Extension
         /// <param name="imageFile">图片文件绝对路径，如果为空，则取Control.Tag属性</param>
         /// <param name="imageWidth">图片宽度，默认32，最大宽度为控件宽度</param>
         /// <param name="imageHeight">图片高度，默认32，最大高度为控件高度；小于控件高度时，居中显示</param>
-        public InputImgAddOnAdorner(UIElement adornedElement, AddOnLocation location, string imageFile = "", double imageWidth = 32, double imageHeight = 32)
+        public InputImgAddOnAdorner(UIElement adornedElement, InputExtension.AddOnLocation location, string imageFile = "", double imageWidth = 32, double imageHeight = 32)
             : base(adornedElement)
         {
             var ctl = AdornedElement as Control;
@@ -60,9 +60,9 @@ namespace MyNet.Components.WPF.Extension
             Rect adornedElementRect = new Rect(this.AdornedElement.DesiredSize);
             var ctl = AdornedElement as Control;
 
-            double x = Location == AddOnLocation.Left ? (adornedElementRect.TopLeft.X + ImagePadding) : (adornedElementRect.TopRight.X - ImageWidth - ImagePadding);
+            double x = Location == InputExtension.AddOnLocation.Left ? (adornedElementRect.TopLeft.X + ImagePadding) : (adornedElementRect.TopRight.X - ImageWidth - ImagePadding);
             double y = (adornedElementRect.Height - ImageHeight) / 2;
-            var padding = Location == AddOnLocation.Left ? new Thickness(ImageWidth + 2, 0, 0, 0) : new Thickness(0, 0, ImageWidth + 2, 0);
+            var padding = Location == InputExtension.AddOnLocation.Left ? new Thickness(ImageWidth + 2, 0, 0, 0) : new Thickness(0, 0, ImageWidth + 2, 0);
 
             ImageSource img = new BitmapImage(new Uri(ImageFile, UriKind.Absolute));
             drawingContext.DrawImage(img, new Rect(new Point(x, y), new Size(ImageWidth, ImageHeight)));
@@ -70,10 +70,6 @@ namespace MyNet.Components.WPF.Extension
             ctl.Padding = padding;
         }
 
-        public enum AddOnLocation
-        {
-            Left,
-            Right
-        }
+
     }
 }

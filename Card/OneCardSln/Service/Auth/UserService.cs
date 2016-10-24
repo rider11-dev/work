@@ -11,9 +11,9 @@ using MyNet.Components;
 using System.Dynamic;
 using MyNet.Components.Extensions;
 using MyNet.Components.Mapper;
-using MyNet.Service.Auth.Models;
 using MyNet.Repository.Db;
 using MyNet.Components.Result;
+using MyNet.Dto.Auth;
 
 namespace MyNet.Service.Auth
 {

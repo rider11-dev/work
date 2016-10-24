@@ -22,7 +22,7 @@ namespace MyNet.Components.WPF.Extension
         /// <param name="imgWidth">图片宽度，默认32，最大宽度为控件宽度</param>
         /// <param name="imgHeight">图片高度，默认32，最大高度为控件高度；小于控件高度时，居中显示</param>
         public static void BindImageAddOn(this Control ctl, string imgUrl = "",
-            InputImgAddOnAdorner.AddOnLocation location = InputImgAddOnAdorner.AddOnLocation.Right,
+            InputExtension.AddOnLocation location = InputExtension.AddOnLocation.Right,
             double imgWidth = 32,
             double imgHeight = 32
             )
@@ -70,6 +70,12 @@ namespace MyNet.Components.WPF.Extension
                     }
                 };
             }
+        }
+
+        public enum AddOnLocation
+        {
+            Left,
+            Right
         }
     }
 }

@@ -13,6 +13,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MyNet.Components.WPF.Windows;
+using MyNet.Model.Auth;
+using MyNet.Components.Mapper;
+using MyNet.Dto.Auth;
+using MyNet.Components.WPF.Command;
 
 namespace OneCardSln.OneCardClient.Models.Auth
 {
@@ -31,6 +35,40 @@ namespace OneCardSln.OneCardClient.Models.Auth
             }
         }
 
+        private ICommand _permParentHelpCmd;
+        public ICommand PermParentHelpCmd
+        {
+            get
+            {
+                if (_permParentHelpCmd == null)
+                {
+                    _permParentHelpCmd = new DelegateCommand(OpenPermParentHelp);
+                }
+                return _permParentHelpCmd;
+            }
+        }
+
+        private void OpenPermParentHelp(object parameter)
+        {
+            TreeHelpWindow treeHelpWin = new TreeHelpWindow("功能菜单帮助", () =>
+            {
+                List<TreeViewData.NodeViewModel> datas = new List<TreeViewData.NodeViewModel>();
+                var funcs = CacheHelper.AllFuncs;
+                foreach (var kvp in CacheHelper.AllFuncs)
+                {
+                    var func = kvp.Value;
+                    datas.Add(new TreeViewData.NodeViewModel { Id = func.per_code, Label = func.per_name, Parent = func.per_parent, Order = func.per_sort, Data = func });
+                }
+                return datas;
+            },
+            node =>
+            {
+                var tNode = (TreeViewData.TreeNode)node;
+                Filter_PerParent_Name = tNode.Label;
+                Filter_PerParent = tNode.Id;
+            });
+            treeHelpWin.ShowDialog();
+        }
 
         #region 基类命令对应动作重写
         protected override void AddAction(object parameter)
@@ -64,6 +102,19 @@ namespace OneCardSln.OneCardClient.Models.Auth
                 return;
             }
             MessageWindow.ShowMsg(MessageType.Info, OperationDesc.Delete, MsgConst.Msg_Succeed);
+            //清除垃圾缓存
+            var funcCodes = items.Where(m => ((PermViewModel)m).per_type == PermType.PermTypeFunc.ToString())
+                                .Select(m => ((PermViewModel)m).per_code);
+            if (funcCodes != null && funcCodes.Count() > 0 && CacheHelper.AllFuncs.Count > 0)
+            {
+                foreach (var code in funcCodes)
+                {
+                    if (CacheHelper.AllFuncs.ContainsKey(code))
+                    {
+                        CacheHelper.AllFuncs.Remove(code);
+                    }
+                }
+            }
             base.SearchCmd.Execute(null);
         }
         private void AddOrEdit(PermViewModel vmPerm)
@@ -92,6 +143,7 @@ namespace OneCardSln.OneCardClient.Models.Auth
                         {"per_name",Filter_PerName},
                         {"per_type",Filter_PerType==null?"":Filter_PerType.Id},
                         {"per_parent",Filter_PerParent},
+                        {"per_parent_name",Filter_PerParent_Name},
                     }
                },
                Context.Token);
@@ -171,6 +223,22 @@ namespace OneCardSln.OneCardClient.Models.Auth
                 {
                     _filter_parent = value;
                     base.RaisePropertyChanged("Filter_PerParent");
+                }
+            }
+        }
+
+        string _filter_parent_name;
+        public string Filter_PerParent_Name
+        {
+            get { return _filter_parent_name; }
+            set
+            {
+                if (_filter_parent_name != value)
+                {
+                    _filter_parent_name = value;
+                    base.RaisePropertyChanged("Filter_PerParent_Name");
+                    //上级名称变了，说明是手动输入，此时应该将Filter_PerParent置空，因为二者已经不匹配了
+                    Filter_PerParent = "";
                 }
             }
         }

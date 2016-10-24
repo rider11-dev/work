@@ -78,18 +78,18 @@
     <Compile Include="Models\CheckableModelCollection.cs" />
     <Compile Include="Models\CmbItem.cs" />
     <Compile Include="Models\CmbModel.cs" />
+    <Compile Include="Windows\HelpWindowViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validation\RequiredRule.cs" />
     <Compile Include="Validation\RequiredValidator.cs" />
     <Compile Include="Validation\Validator.cs" />
     <Compile Include="Windows\BaseWindow.cs" />
-    <Compile Include="Windows\HelpWindow.xaml.cs">
-      <DependentUpon>HelpWindow.xaml</DependentUpon>
+    <Compile Include="Windows\TreeHelpWindow.xaml.cs">
+      <DependentUpon>TreeHelpWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\MessageWindow.xaml.cs">
       <DependentUpon>MessageWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\WindowViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Components\Components.csproj">
@@ -142,7 +142,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\HelpWindow.xaml">
+    <Page Include="Windows\TreeHelpWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

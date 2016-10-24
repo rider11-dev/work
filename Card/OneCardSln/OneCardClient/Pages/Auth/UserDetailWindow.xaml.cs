@@ -28,10 +28,8 @@ namespace OneCardSln.OneCardClient.Pages.Auth
         {
             InitializeComponent();
 
-            _vmUsrDetail = this.Resources["model"] as UserDetailViewModel;
+            _vmUsrDetail = this.DataContext as UserDetailViewModel;
             _vmUsrDetail.Window = this;
-
-            base.VmWindow = this.Resources["win"] as WindowViewModel;
         }
 
         public UserDetailWindow(UserViewModel vm = null)
@@ -42,7 +40,7 @@ namespace OneCardSln.OneCardClient.Pages.Auth
                 vm.CopyTo(_vmUsrDetail);
             }
 
-            base.Title = base.VmWindow.Title = string.IsNullOrEmpty(_vmUsrDetail.user_id) ? "新增用户" : "修改用户";
+            base.Title = _vmUsrDetail.Window.Title = string.IsNullOrEmpty(_vmUsrDetail.user_id) ? "新增用户" : "修改用户";
             txtUserName.IsReadOnly = _vmUsrDetail.user_name.IsNotEmpty();
         }
 

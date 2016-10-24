@@ -30,10 +30,8 @@ namespace OneCardSln.OneCardClient.Pages.Auth
         {
             InitializeComponent();
 
-            _vmPermDetail = this.Resources["model"] as PermDetailViewModel;
+            _vmPermDetail = this.DataContext as PermDetailViewModel;
             _vmPermDetail.Window = this;
-
-            base.VmWindow = this.Resources["win"] as WindowViewModel;
         }
 
         public PermissionDetailWindow(PermViewModel vm = null)
@@ -43,7 +41,7 @@ namespace OneCardSln.OneCardClient.Pages.Auth
             {
                 vm.CopyTo(_vmPermDetail);
             }
-            base.Title = base.VmWindow.Title = string.IsNullOrEmpty(_vmPermDetail.per_id) ? "新增权限" : "修改权限";
+            base.Title = _vmPermDetail.Window.Title = string.IsNullOrEmpty(_vmPermDetail.per_id) ? "新增权限" : "修改权限";
             txtPerCode.IsReadOnly = _vmPermDetail.per_code.IsNotEmpty();
         }
 
@@ -52,7 +50,7 @@ namespace OneCardSln.OneCardClient.Pages.Auth
             _vmPermDetail.CanValidate = true;
 
             //设置权限类型
-            DictHelper.SetSource(cbPermType, DictType.Perm, _vmPermDetail.per_type);
+            CacheHelper.SetCmbSource(cbPermType, DictType.Perm, _vmPermDetail.per_type);
         }
     }
 }

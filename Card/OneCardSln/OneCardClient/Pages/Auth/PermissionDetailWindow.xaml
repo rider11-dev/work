@@ -1,9 +1,10 @@
-﻿<winEx:BaseWindow x:Class="OneCardSln.OneCardClient.Pages.Auth.PermissionDetailWindow"
-        xmlns:winEx="clr-namespace:MyNet.Components.WPF.Windows;assembly=MyNet.Components.WPF"
+﻿<win:BaseWindow x:Class="OneCardSln.OneCardClient.Pages.Auth.PermissionDetailWindow"
+        xmlns:win="clr-namespace:MyNet.Components.WPF.Windows;assembly=MyNet.Components.WPF"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:OneCardSln.OneCardClient.Models"
         xmlns:vmauth="clr-namespace:OneCardSln.OneCardClient.Models.Auth"
+        xmlns:vmwpf="clr-namespace:MyNet.Components.WPF.Models;assembly=MyNet.Components.WPF"
         Style="{StaticResource popWindowStyle}"
         WindowStartupLocation="CenterScreen"
         Title="PermissionDetailWindow" Height="500" Width="450"
@@ -15,9 +16,12 @@
         <Style x:Key="inputStyle" TargetType="Control" BasedOn="{StaticResource inputDetailWinStyle}">
             <Setter Property="Width" Value="240"/>
         </Style>
-        <winEx:WindowViewModel x:Key="win"/>
         <vmauth:PermDetailViewModel x:Key="model"/>
+        <vmwpf:CmbModel x:Key="cbVm"/>
     </Window.Resources>
+    <Window.DataContext>
+        <Binding Source="{StaticResource model}"/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -40,7 +44,7 @@
         <Label x:Name="lblTitle" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                FontWeight="Bold" FontSize="20"
-               Content="{Binding Path=Title,Source={StaticResource win},Mode=OneWay}"
+               Content="{Binding Path=Title,RelativeSource={RelativeSource AncestorType=Window},Mode=OneWay}"
                    />
 
         <!--row2：编号-->
@@ -54,10 +58,8 @@
                 Text="{Binding Path=per_name,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                  />
         <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource lblStyle}" Content="权限类型"/>
-        <!--<TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource inputStyle}"
-                Text="{Binding Path=per_type,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                 />-->
         <ComboBox x:Name="cbPermType" Grid.Row="3" Grid.Column="1" 
+                  DataContext="{StaticResource cbVm}"
                   Style="{StaticResource cbBaseStyle}"
                   Width="240" Height="28" FontSize="14"
                   SelectedValue="{Binding Path=SelectedPermType,Source={StaticResource model}}"
@@ -109,4 +111,4 @@
                     />
         </Grid>
     </Grid>
-</winEx:BaseWindow>
+</win:BaseWindow>

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyNet.Service.Auth.Models
+namespace MyNet.Dto.Auth
 {
     public class UserDto : User
     {

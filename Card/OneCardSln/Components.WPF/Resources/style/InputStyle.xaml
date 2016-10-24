@@ -33,6 +33,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Margin" Value="0,0,0,0"/>
     </Style>
+    <!--详细信息窗口输入框样式-->
     <Style x:Key="inputDetailWinStyle" TargetType="Control" BasedOn="{StaticResource inputBaseStyle}">
         <Setter Property="Width" Value="220"/>
         <Setter Property="Height" Value="32"/>
@@ -40,5 +41,23 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+    <!--带附加按钮输入框样式-->
+    <ControlTemplate x:Key="inputBtnAddOnTemp" TargetType="Button">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0" HorizontalContentAlignment="Left"
+                     Style="{StaticResource inputBaseStyle}" 
+                     Text="{Binding Path=Content,RelativeSource={RelativeSource TemplatedParent},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Grid.Column="1" Content="选择" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                        Style="{StaticResource btnBaseStyle}" Command="{TemplateBinding Command}"
+                        />
+        </Grid>
+    </ControlTemplate>
+    <Style x:Key="inputBtnAddOnStyle" TargetType="Button">
+        <Setter Property="Template" Value="{StaticResource inputBtnAddOnTemp}"/>
     </Style>
 </ResourceDictionary>
