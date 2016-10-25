@@ -6,9 +6,9 @@
         xmlns:ext="clr-namespace:MyNet.Components.WPF.Extension;assembly=MyNet.Components.WPF"
         x:Class="OneCardSln.OneCardClient.LoginWindow"
         Style="{StaticResource popWindowStyle}"
-        Title="LoginWindow" Height="300" Width="344" 
+        Title="一卡通管理系统" Height="300" Width="344" 
         FocusManager.FocusedElement="{Binding ElementName=txtUsrName}"
-        WindowStartupLocation="CenterScreen"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
         Loaded="Window_Loaded">
     <Window.Resources>
         <Style x:Key="inputStyle" TargetType="Control" BasedOn="{StaticResource inputBaseStyle}">

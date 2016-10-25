@@ -5,6 +5,8 @@
         xmlns:vm="clr-namespace:OneCardSln.OneCardClient.Models"
         xmlns:vmauth="clr-namespace:OneCardSln.OneCardClient.Models.Auth"
         xmlns:vmwpf="clr-namespace:MyNet.Components.WPF.Models;assembly=MyNet.Components.WPF"
+        xmlns:localcvt="clr-namespace:OneCardSln.OneCardClient.Converter"
+        xmlns:ctl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
         Style="{StaticResource popWindowStyle}"
         WindowStartupLocation="CenterScreen"
         Title="PermissionDetailWindow" Height="500" Width="450"
@@ -16,8 +18,15 @@
         <Style x:Key="inputStyle" TargetType="Control" BasedOn="{StaticResource inputDetailWinStyle}">
             <Setter Property="Width" Value="240"/>
         </Style>
+        <Style x:Key="cbStyle" TargetType="ComboBox" BasedOn="{StaticResource cbBaseStyle}">
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
         <vmauth:PermDetailViewModel x:Key="model"/>
-        <vmwpf:CmbModel x:Key="cbVm"/>
+        <vmwpf:CmbModel x:Key="cbVmPermType"/>
+        <vmwpf:CmbModel x:Key="cbVmBoolType"/>
+        <localcvt:PermParentConverter x:Key="permParentConverter"/>
     </Window.Resources>
     <Window.DataContext>
         <Binding Source="{StaticResource model}"/>
@@ -59,23 +68,27 @@
                  />
         <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource lblStyle}" Content="权限类型"/>
         <ComboBox x:Name="cbPermType" Grid.Row="3" Grid.Column="1" 
-                  DataContext="{StaticResource cbVm}"
-                  Style="{StaticResource cbBaseStyle}"
-                  Width="240" Height="28" FontSize="14"
+                  DataContext="{StaticResource cbVmPermType}"
+                  Style="{StaticResource cbStyle}"
                   SelectedValue="{Binding Path=SelectedPermType,Source={StaticResource model}}"
                   />
         <Label Grid.Row="4" Grid.Column="0" Style="{StaticResource lblStyle}" Content="上级权限"/>
-        <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource inputStyle}"
-                Text="{Binding Path=per_parent,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                 />
+        <ctl:HelpButton Grid.Row="4" Grid.Column="1" 
+                Width="240" Height="28" ForbidInput="True"
+                Style="{StaticResource inputBtnAddOnStyle}" 
+                Content="{Binding Path=per_parent,Source={StaticResource model},Mode=OneWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource permParentConverter}}"
+                Command="{Binding Path=PermParentHelpCmd,Source={StaticResource model}}"
+                />
         <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource lblStyle}" Content="排序号"/>
         <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource inputStyle}"
                 Text="{Binding Path=per_sort,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                  />
         <Label Grid.Row="6" Grid.Column="0" Style="{StaticResource lblStyle}" Content="是否系统"/>
-        <TextBox Grid.Row="6" Grid.Column="1" Style="{StaticResource inputStyle}"
-                Text="{Binding Path=per_system,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                 />
+        <ComboBox Grid.Row="6" Grid.Column="1" x:Name="cbIsSystem"
+                  DataContext="{StaticResource cbVmBoolType}"
+                  Style="{StaticResource cbStyle}"
+                  SelectedValue="{Binding Path=SelectedIsSystem,Source={StaticResource model}}"
+                  />
         <Label Grid.Row="7" Grid.Column="0" Style="{StaticResource lblStyle}" Content="菜单uri"/>
         <TextBox Grid.Row="7" Grid.Column="1" Style="{StaticResource inputStyle}"
                 Text="{Binding Path=per_uri,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"

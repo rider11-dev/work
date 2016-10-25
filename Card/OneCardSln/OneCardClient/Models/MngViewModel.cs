@@ -117,7 +117,7 @@ namespace OneCardSln.OneCardClient.Models
 
         #endregion
 
-        protected bool GetSelectedOne(out CheckableModel model)
+        protected bool GetSelectedOne(out CheckableModel model, string optDesc)
         {
             model = null;
             if (Models == null || Models.Count() < 1)
@@ -128,12 +128,12 @@ namespace OneCardSln.OneCardClient.Models
             var count = items.Count();
             if (count < 1)
             {
-                MessageWindow.ShowMsg(MessageType.Warning, OperationDesc.Edit, MsgConst.Msg_SelectData);
+                MessageWindow.ShowMsg(MessageType.Warning, optDesc, MsgConst.Msg_SelectData);
                 return false;
             }
             if (count > 1)
             {
-                MessageWindow.ShowMsg(MessageType.Warning, OperationDesc.Edit, MsgConst.Msg_SelectOnlyone);
+                MessageWindow.ShowMsg(MessageType.Warning, optDesc, MsgConst.Msg_SelectOnlyone);
                 return false;
             }
             model = items.First();

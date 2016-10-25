@@ -35,7 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net">
-      <HintPath>..\dlls\log4net\log4net.dll</HintPath>
+      <HintPath>..\..\..\Share\dlls\log4net\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -72,6 +72,7 @@
     <Compile Include="Command\OpenFuncParam.cs" />
     <Compile Include="Converter\PermParentConverter.cs" />
     <Compile Include="Converter\PermTypeConverter.cs" />
+    <Compile Include="Help\TreeHelpHelper.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -212,29 +213,29 @@
     <Resource Include="Resources\img\username.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Components.Resource\Components.Resource.csproj">
+    <Folder Include="Resources\style\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Share\Components.Resource\Components.Resource.csproj">
       <Project>{4ecb69ea-c6d9-436b-9689-90d065424f53}</Project>
       <Name>Components.Resource</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Components.WPF\Components.WPF.csproj">
+    <ProjectReference Include="..\..\..\Share\Components.WPF\Components.WPF.csproj">
       <Project>{6324a5cc-0daf-4af4-80a3-5d2a60769c96}</Project>
       <Name>Components.WPF</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Components\Components.csproj">
+    <ProjectReference Include="..\..\..\Share\Components\Components.csproj">
       <Project>{9ed019a0-a26a-4725-aa70-2b52bf7a5416}</Project>
       <Name>Components</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Dto\Dto.csproj">
+    <ProjectReference Include="..\..\..\Share\Dto\Dto.csproj">
       <Project>{ea32f873-b280-4b79-947e-01ab4fcf6616}</Project>
       <Name>Dto</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Model\Model.csproj">
+    <ProjectReference Include="..\..\..\Share\Model\Model.csproj">
       <Project>{bb11afa2-784c-4e60-9586-6608d8338d67}</Project>
       <Name>Model</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\style\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

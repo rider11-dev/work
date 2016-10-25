@@ -15,6 +15,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using MyNet.Components.Extensions;
 
 namespace OneCardSln.OneCardClient.Public
 {
@@ -27,6 +28,59 @@ namespace OneCardSln.OneCardClient.Public
         /// 字典缓存
         /// </summary>
         private static Dictionary<DictType, IList<CmbItem>> DictSource = new Dictionary<DictType, IList<CmbItem>>();
+
+        private static Dictionary<string, PermissionCacheDto> _allFuncs = null;
+        /// <summary>
+        /// 所有功能权限缓存
+        /// </summary>
+        public static Dictionary<string, PermissionCacheDto> AllFuncs
+        {
+            get
+            {
+                if (_allFuncs == null)
+                {
+                    _allFuncs = new Dictionary<string, PermissionCacheDto>();
+                    LoadPerms(ApiKeys.GetAllFuncs, _allFuncs);
+                }
+                return _allFuncs;
+            }
+        }
+
+        private static Dictionary<string, PermissionCacheDto> _allOpts = null;
+        /// <summary>
+        /// 所有操作权限缓存
+        /// </summary>
+        public static Dictionary<string, PermissionCacheDto> AllOpts
+        {
+            get
+            {
+                if (_allOpts == null)
+                {
+                    _allOpts = new Dictionary<string, PermissionCacheDto>();
+                    LoadPerms(ApiKeys.GetAllOpts, _allOpts);
+                }
+                return _allOpts;
+            }
+        }
+
+        static CacheHelper()
+        {
+            PreLoadSomeDicts();
+        }
+
+        /// <summary>
+        /// 预加载部分字典
+        /// </summary>
+        private static void PreLoadSomeDicts()
+        {
+            var boolTypes = EnumExtension.ToDict<BoolType>();
+            System.Collections.Generic.List<CmbItem> items = new List<CmbItem>();
+            foreach (var t in boolTypes)
+            {
+                items.Add(new CmbItem { Id = t.Key, Text = t.Value });
+            }
+            DictSource.Add(DictType.Bool, items);
+        }
 
         /// <summary>
         /// 设置ComboBox数据源
@@ -43,7 +97,7 @@ namespace OneCardSln.OneCardClient.Public
                 return;
             }
 
-            CmbModel model = cmb.FindResource("cbVm") as CmbModel;
+            CmbModel model = cmb.DataContext as CmbModel;
             if (CacheHelper.DictSource.ContainsKey(dictType))
             {
                 //取缓存数据
@@ -53,9 +107,9 @@ namespace OneCardSln.OneCardClient.Public
             {
                 //从服务器获取
                 var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.GetDict), new
-                 {
-                     dict_type = dictType.type_code
-                 }, Context.Token);
+                {
+                    dict_type = dictType.type_code
+                }, Context.Token);
                 if (rst.code != ResultCode.Success)
                 {
                     MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);
@@ -63,38 +117,17 @@ namespace OneCardSln.OneCardClient.Public
                 }
                 if (rst.data != null && rst.data.rows != null)
                 {
-                    var dicts = JsonConvert.DeserializeObject<ObservableCollection<CmbItem>>(((JArray)rst.data.rows).ToString());
+                    var dicts = JsonConvert.DeserializeObject<IList<CmbItem>>(((JArray)rst.data.rows).ToString());
                     model.Bind(dicts, selectedTypeCode, setSelect, needBlankItem);
                     CacheHelper.DictSource.Add(dictType, dicts);
                 }
             }
         }
 
-        private static Dictionary<string, FuncPermissionDto> _allFuncs = null;
-        /// <summary>
-        /// 所有功能权限缓存
-        /// </summary>
-        public static Dictionary<string, FuncPermissionDto> AllFuncs
+        private static void LoadPerms(string apiKey, Dictionary<string, PermissionCacheDto> target)
         {
-            get
-            {
-                if (_allFuncs == null)
-                {
-                    LoadAllFuncs();
-                }
-                return _allFuncs;
-            }
-        }
-
-        /// <summary>
-        /// 获取所有功能权限
-        /// </summary>
-        private static void LoadAllFuncs()
-        {
-            _allFuncs = new Dictionary<string, FuncPermissionDto>();
-
             //从服务器获取
-            var rst = HttpHelper.GetResultByPost(url: ApiHelper.GetApiUrl(ApiKeys.GetAllFuncs), token: Context.Token);
+            var rst = HttpHelper.GetResultByPost(url: ApiHelper.GetApiUrl(apiKey), token: Context.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);
@@ -102,12 +135,12 @@ namespace OneCardSln.OneCardClient.Public
             }
             if (rst.data != null)
             {
-                var funcs = JsonConvert.DeserializeObject<IList<FuncPermissionDto>>(((JArray)rst.data).ToString());
-                if (funcs != null && funcs.Count > 0)
+                var opts = JsonConvert.DeserializeObject<IList<PermissionCacheDto>>(((JArray)rst.data).ToString());
+                if (opts != null && opts.Count > 0)
                 {
-                    foreach (var func in funcs)
+                    foreach (var func in opts)
                     {
-                        _allFuncs.Add(func.per_code, func);
+                        target.Add(func.per_code, func);
                     }
                 }
             }

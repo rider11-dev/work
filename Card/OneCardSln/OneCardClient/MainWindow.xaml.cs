@@ -63,8 +63,6 @@ namespace OneCardSln.OneCardClient
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            _menuTreeData = (TreeViewData)this.FindResource("menuTreeData");
-
             //TODO：需要优化
             imgBtnUserInfo.MouseLeftButtonDown += MiscExtension.HandleMouseButtonEvent;
             imgBtnExit.MouseLeftButtonDown += MiscExtension.HandleMouseButtonEvent;
@@ -74,7 +72,9 @@ namespace OneCardSln.OneCardClient
 
         private void InitMenutTree()
         {
-            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.GetPer), new { pk = "admin" }, Context.Token);
+            _menuTreeData = (TreeViewData)menuTree.DataContext;
+
+            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.GetPer), new { pk = Context.CurrentUser.user_id }, Context.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Warning, "获取权限失败", rst.msg);
@@ -96,7 +96,7 @@ namespace OneCardSln.OneCardClient
                 datas.Add(new TreeViewData.NodeViewModel { Id = "main", Label = "主页", Order = "0", Data = new Permission { per_uri = "MainPage.xaml" } });
                 foreach (var p in funcs)
                 {
-                    datas.Add(new TreeViewData.NodeViewModel { Id = p.per_code, Label = p.per_name, Parent = p.per_parent, Order = p.per_sort, Data = p });
+                    datas.Add(new TreeViewData.NodeViewModel { Id = p.per_code, Label = p.per_name, Parent = p.per_parent, Order = p.per_sort, Data = p, DataId = p.per_id });
                 }
                 _menuTreeData.Bind(datas);
             }
@@ -135,5 +135,15 @@ namespace OneCardSln.OneCardClient
             //报告当前位置
             lblCurrLocation.Text = node.GetNodePath();
         }
+
+        private void gridHeader_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2)
+            {
+                base.Resize();
+                e.Handled = true;
+            }
+        }
+
     }
 }

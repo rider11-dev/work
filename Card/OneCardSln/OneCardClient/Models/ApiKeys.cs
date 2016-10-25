@@ -27,6 +27,7 @@ namespace OneCardSln.OneCardClient.Models
         public const string AddUsr = "usr_add";
         public const string DeleteUsr = "usr_delete";
         public const string MultiDeleteUsr = "usr_multidelete";
+        public const string Assign = "usr_assign";
 
         /*-------------------------------------权限管理——权限管理------------------------------*/
         public const string GetPerByPage = "per_pagequery";
@@ -35,6 +36,7 @@ namespace OneCardSln.OneCardClient.Models
         public const string DeletePer = "per_delete";
         public const string MultiDeletePer = "per_multidelete";
         public const string GetAllFuncs = "per_allfuncs";
+        public const string GetAllOpts = "per_allopts";
 
     }
 }

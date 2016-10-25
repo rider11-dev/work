@@ -15,6 +15,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MyNet.Components.WPF.Windows;
+using OneCardSln.OneCardClient.Help;
 
 namespace OneCardSln.OneCardClient.Models.Auth
 {
@@ -49,8 +50,31 @@ namespace OneCardSln.OneCardClient.Models.Auth
 
         private void AssignAction(object param)
         {
-            MessageWindow.ShowMsg(MessageType.Info, OperationDesc.Assign, "分配用户权限");
-
+            CheckableModel vm;
+            if (base.GetSelectedOne(out vm, OperationDesc.Assign))
+            {
+                var usr = vm as UserViewModel;
+                TreeHelpHelper.OpenAllPermsHelpWindow((selNodes) =>
+                {
+                    if (selNodes == null || selNodes.Count < 1)
+                    {
+                        return;
+                    }
+                    var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.Assign),
+                        new
+                        {
+                            userId = usr.user_id,
+                            perIds = selNodes.Select(n => n.DataId),
+                            assignAll = false
+                        }, Context.Token);
+                    if (rst.code != ResultCode.Success)
+                    {
+                        MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Assign, rst.msg);
+                        return;
+                    }
+                    MessageWindow.ShowMsg(MessageType.Info, OperationDesc.Assign, MsgConst.Msg_Succeed);
+                });
+            }
         }
 
 
@@ -62,7 +86,7 @@ namespace OneCardSln.OneCardClient.Models.Auth
         protected override void EditAction(object param)
         {
             CheckableModel vm;
-            if (base.GetSelectedOne(out vm))
+            if (base.GetSelectedOne(out vm, OperationDesc.Edit))
             {
                 AddOrEdit(vm as UserViewModel);
             }

@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:usrCtl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
+      xmlns:ctl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
       xmlns:local="clr-namespace:OneCardSln.OneCardClient.Pages" 
       xmlns:vmauth="clr-namespace:OneCardSln.OneCardClient.Models.Auth"
       xmlns:cvt="clr-namespace:MyNet.Components.WPF.Converter;assembly=MyNet.Components.WPF"
@@ -16,7 +16,7 @@
     <Page.Resources>
         <!--model-->
         <vmauth:PermMngViewModel x:Key="model"/>
-        <usrCtl:PagingArgs x:Key="paging"/>
+        <ctl:PagingArgs x:Key="paging"/>
         <cvt:BooleanConverter x:Key="boolConverter"/>
         <localcvt:PermTypeConverter x:Key="permTypeConverter"/>
         <localcvt:PermParentConverter x:Key="permParentConverter"/>
@@ -57,7 +57,7 @@
                   SelectedValue="{Binding Path=Filter_PerType,Source={StaticResource model}}"
                   />
                 <Label Content="上级" Style="{StaticResource mngLblStyle}"/>
-                <Button Width="120" Height="26" 
+                <ctl:HelpButton Width="120" Height="26" 
                          Style="{StaticResource inputBtnAddOnStyle}" 
                          Content="{Binding Path=Filter_PerParent_Name,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                          Command="{Binding Path=PermParentHelpCmd,Source={StaticResource model}}"
@@ -111,7 +111,7 @@
                         <DataGridTextColumn Header="备注"  Binding="{Binding per_remark}"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <usrCtl:ControlPagination x:Name="ctlPagination" Grid.Row="1" HorizontalAlignment="Center"/>
+                <ctl:ControlPagination x:Name="ctlPagination" Grid.Row="1" HorizontalAlignment="Center"/>
             </Grid>
         </Border>
     </Grid>

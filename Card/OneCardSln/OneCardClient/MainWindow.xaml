@@ -33,7 +33,7 @@
                 <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
             <!--header-->
-            <Grid>
+            <Grid x:Name="gridHeader" MouseDown="gridHeader_MouseDown">
                 <Grid.Background>
                     <ImageBrush ImageSource="pack://application:,,,/Resources/img/top.jpg"/>
                 </Grid.Background>
@@ -65,7 +65,9 @@
                 </StackPanel>
             </Grid>
             <!--separator-->
-            <Image Grid.Row="1" Source="pack://application:,,,/Resources/img/separator.jpg" Height="12"/>
+            <Image Grid.Row="1" 
+                   Source="pack://application:,,,/Resources/img/separator.jpg" 
+                   Height="12" Stretch="Fill"/>
             <!--content-->
             <Grid Grid.Row="2">
                 <Grid.RowDefinitions>
@@ -79,21 +81,9 @@
                 <!--菜单区-->
                 <TreeView x:Name="menuTree"
                           Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
-                          BorderThickness="0,0,0,1" BorderBrush="LightGray"
-                          HorizontalContentAlignment="Stretch"
-                          Background="#E2EBF5" Padding="0,20,0,0"
-                          ItemsSource="{Binding Source={StaticResource menuTreeData},Path=RootNodes}"
-                          ItemContainerStyle="{StaticResource modernTreeViewItem}"
-                          SelectedItemChanged="menuTree_SelectedItemChanged"
-                          >
-                    <TreeView.ItemTemplate>
-                        <HierarchicalDataTemplate DataType="{x:Type ctlExt:TreeViewData+TreeNode}" ItemsSource="{Binding SubNodes}">
-                            <Grid Height="32">
-                                <TextBlock Text="{Binding Label}" VerticalAlignment="Center" Foreground="Black" FontSize="13"/>
-                            </Grid>
-                        </HierarchicalDataTemplate>
-                    </TreeView.ItemTemplate>
-                </TreeView>
+                          DataContext="{StaticResource menuTreeData}"
+                          Style="{StaticResource menuTreeViewStyle}"
+                          SelectedItemChanged="menuTree_SelectedItemChanged"/>
                 <!--当前位置-->
                 <Border Grid.Row="0" Grid.Column="1" BorderBrush="LightGray" BorderThickness="0,0,0,1">
                     <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">

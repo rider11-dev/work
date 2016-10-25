@@ -40,7 +40,7 @@ namespace OneCardSln.OneCardClient.Pages.Auth
                 vm.CopyTo(_vmUsrDetail);
             }
 
-            base.Title = _vmUsrDetail.Window.Title = string.IsNullOrEmpty(_vmUsrDetail.user_id) ? "新增用户" : "修改用户";
+            base.Title = string.IsNullOrEmpty(_vmUsrDetail.user_id) ? "新增用户" : "修改用户";
             txtUserName.IsReadOnly = _vmUsrDetail.user_name.IsNotEmpty();
         }
 

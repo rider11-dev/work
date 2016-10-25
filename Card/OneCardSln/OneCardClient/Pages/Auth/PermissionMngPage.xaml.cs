@@ -55,28 +55,5 @@ namespace OneCardSln.OneCardClient.Pages.Auth
             dgPers.ShowRowNumber();
             model.CtlPage = ctlPagination;
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            TreeHelpWindow treeHelpWin = new TreeHelpWindow("功能菜单帮助", () =>
-            {
-                List<TreeViewData.NodeViewModel> datas = new List<TreeViewData.NodeViewModel>();
-                var funcs = CacheHelper.AllFuncs;
-                foreach (var kvp in CacheHelper.AllFuncs)
-                {
-                    var func = kvp.Value;
-                    datas.Add(new TreeViewData.NodeViewModel { Id = func.per_code, Label = func.per_name, Parent = func.per_parent, Order = func.per_sort, Data = func });
-                }
-                return datas;
-            },
-            node =>
-            {
-                var tNode = (TreeViewData.TreeNode)node;
-                model.Filter_PerParent_Name = tNode.Label;
-                model.Filter_PerParent = tNode.Id;
-            });
-            treeHelpWin.ShowDialog();
-        }
-
     }
 }

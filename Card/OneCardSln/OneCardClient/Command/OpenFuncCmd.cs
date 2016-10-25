@@ -34,6 +34,7 @@ namespace OneCardSln.OneCardClient.Command
         public void Execute(object parameter)
         {
             Container.Source = null;
+            Container.LoadCompleted -= LastEventHandler;
             OpenFuncParam param = (OpenFuncParam)parameter;
             if (param == null)
             {
@@ -48,7 +49,6 @@ namespace OneCardSln.OneCardClient.Command
                 return;
             }
             //需要在LoadCompleted事件中，才能获取到绑定到Frame的Page实例
-            Container.LoadCompleted -= LastEventHandler;
             LastEventHandler = (o, e) =>
             {
                 try
@@ -59,7 +59,7 @@ namespace OneCardSln.OneCardClient.Command
                 catch (Exception ex)
                 {
                     _logHelper.LogError("LoadCompleted事件", ex);
-                    MessageWindow.ShowMsg(MessageType.Error, OperationDesc.OpenFunc, MsgConst.Msg_ViewAppLog);
+                    throw new Exception("打开功能菜单错误", ex);
                 }
             };
             Container.LoadCompleted += LastEventHandler;

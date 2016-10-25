@@ -17,6 +17,7 @@ using MyNet.Model.Auth;
 using MyNet.Components.Mapper;
 using MyNet.Dto.Auth;
 using MyNet.Components.WPF.Command;
+using OneCardSln.OneCardClient.Help;
 
 namespace OneCardSln.OneCardClient.Models.Auth
 {
@@ -50,24 +51,12 @@ namespace OneCardSln.OneCardClient.Models.Auth
 
         private void OpenPermParentHelp(object parameter)
         {
-            TreeHelpWindow treeHelpWin = new TreeHelpWindow("功能菜单帮助", () =>
-            {
-                List<TreeViewData.NodeViewModel> datas = new List<TreeViewData.NodeViewModel>();
-                var funcs = CacheHelper.AllFuncs;
-                foreach (var kvp in CacheHelper.AllFuncs)
-                {
-                    var func = kvp.Value;
-                    datas.Add(new TreeViewData.NodeViewModel { Id = func.per_code, Label = func.per_name, Parent = func.per_parent, Order = func.per_sort, Data = func });
-                }
-                return datas;
-            },
-            node =>
+            TreeHelpHelper.OpenAllFuncsHelpWindow(false, node =>
             {
                 var tNode = (TreeViewData.TreeNode)node;
                 Filter_PerParent_Name = tNode.Label;
                 Filter_PerParent = tNode.Id;
             });
-            treeHelpWin.ShowDialog();
         }
 
         #region 基类命令对应动作重写
@@ -78,7 +67,7 @@ namespace OneCardSln.OneCardClient.Models.Auth
         protected override void EditAction(object parameter)
         {
             CheckableModel vm;
-            if (base.GetSelectedOne(out vm))
+            if (base.GetSelectedOne(out vm, OperationDesc.Edit))
             {
                 AddOrEdit(vm as PermViewModel);
             }

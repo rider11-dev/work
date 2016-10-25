@@ -41,7 +41,7 @@ namespace OneCardSln.OneCardClient.Pages.Auth
             {
                 vm.CopyTo(_vmPermDetail);
             }
-            base.Title = _vmPermDetail.Window.Title = string.IsNullOrEmpty(_vmPermDetail.per_id) ? "新增权限" : "修改权限";
+            base.Title = string.IsNullOrEmpty(_vmPermDetail.per_id) ? "新增权限" : "修改权限";
             txtPerCode.IsReadOnly = _vmPermDetail.per_code.IsNotEmpty();
         }
 
@@ -51,6 +51,8 @@ namespace OneCardSln.OneCardClient.Pages.Auth
 
             //设置权限类型
             CacheHelper.SetCmbSource(cbPermType, DictType.Perm, _vmPermDetail.per_type);
+            //是否系统下拉框
+            CacheHelper.SetCmbSource(cbIsSystem, DictType.Bool, _vmPermDetail.per_system);
         }
     }
 }
