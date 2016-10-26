@@ -48,7 +48,7 @@ namespace MyNet.ClientFrame.Models.Auth
 
         private void OpenGpParentHelp(object parameter)
         {
-            TreeHelpHelper.OpenAllFuncsHelp(false, node =>
+            TreeHelpHelper.OpenAllGroupsHelp(false, node =>
             {
                 var tNode = (TreeViewData.TreeNode)node;
                 Filter_GpParent_Name = tNode.Label;
