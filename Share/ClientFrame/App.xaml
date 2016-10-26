@@ -1,0 +1,19 @@
+﻿<Application x:Class="MyNet.ClientFrame.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="LoginWindow.xaml"
+             DispatcherUnhandledException="Application_DispatcherUnhandledException">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/MyNet.Components.WPF;component/Resources/Style/ButtonStyle.xaml"/>
+                <ResourceDictionary Source="/MyNet.Components.WPF;component/Resources/Style/WindowStyle.xaml"/>
+                <ResourceDictionary Source="/MyNet.Components.WPF;component/Resources/Style/InputStyle.xaml"/>
+                <ResourceDictionary Source="/MyNet.Components.WPF;component/Resources/Style/TreeViewStyle.xaml"/>
+                <ResourceDictionary Source="/MyNet.Components.WPF;component/Resources/Style/MiscStyle.xaml"/>
+                <ResourceDictionary Source="/MyNet.Components.WPF;component/Resources/Style/DataGridStyle.xaml"/>
+                <ResourceDictionary Source="/MyNet.Components.WPF;component/Resources/Style/MngPageStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

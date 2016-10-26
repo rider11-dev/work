@@ -1,0 +1,62 @@
+﻿<local:BasePage x:Class="MyNet.ClientFrame.Pages.Account.ChangePwdPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ext="clr-namespace:MyNet.Components.WPF.Extension;assembly=MyNet.Components.WPF"
+      xmlns:local="clr-namespace:MyNet.ClientFrame.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="400"
+      FocusManager.FocusedElement="{Binding txtOldPwd}"
+      Loaded="Page_Loaded"
+	Title="ChangePwdPage">
+    <Page.Resources>
+        <Style x:Key="inputStyle" TargetType="Control" BasedOn="{StaticResource inputBaseStyle}">
+            <Setter Property="Width" Value="210"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        </Style>
+        <Style x:Key="lblStyle" TargetType="Label" BasedOn="{StaticResource lblInputBaseStyle}">
+            <Setter Property="Margin" Value="6,0,0,0"/>
+        </Style>
+    </Page.Resources>
+    <Grid Height="200" Width="300" VerticalAlignment="Top" Margin="0,50,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2.5*"/>
+            <ColumnDefinition Width="7.5*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="旧密码" Grid.Row="0" Grid.Column="0" Style="{StaticResource lblStyle}"/>
+        <PasswordBox Name="txtOldPwd" Grid.Row="0" Grid.Column="1" 
+                 Style="{StaticResource inputStyle}"
+                 ext:PasswordBoxAssistant.BindPassword="True"
+                 ext:PasswordBoxAssistant.BoundPassword="{Binding Path=oldpwd,Source={StaticResource model},Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 />
+        <Label Content="新密码" Grid.Row="1" Grid.Column="0" Style="{StaticResource lblStyle}"/>
+        <PasswordBox Name="txtNewPwd" Grid.Row="1" Grid.Column="1" 
+                 Style="{StaticResource inputStyle}"
+                 ext:PasswordBoxAssistant.BindPassword="True"
+                 ext:PasswordBoxAssistant.BoundPassword="{Binding Path=newpwd,Source={StaticResource model},Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 />
+        <Label Content="密码确认" Grid.Row="2" Grid.Column="0" Style="{StaticResource lblStyle}"/>
+        <PasswordBox Name="txtNewPwd2" Grid.Row="2" Grid.Column="1" 
+                 Style="{StaticResource inputStyle}"
+                 ext:PasswordBoxAssistant.BindPassword="True"
+                 ext:PasswordBoxAssistant.BoundPassword="{Binding Path=newpwd2,Source={StaticResource model},Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 />
+        <Button Name="btnOk" Grid.Row="5" Grid.Column="1" 
+                Width="220" Height="40"
+                Style="{StaticResource btnBaseStyle}"
+                Content="确   认"
+                Click="btnOk_Click"
+                />
+    </Grid>
+</local:BasePage>
