@@ -59,6 +59,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auth\GroupRepository.cs" />
+    <Compile Include="Auth\Mapper\GroupMapper.cs" />
     <Compile Include="Auth\Mapper\PermissionMapper.cs" />
     <Compile Include="Auth\Mapper\UserMapper.cs" />
     <Compile Include="Auth\Mapper\UserPermissionRelMapper.cs" />

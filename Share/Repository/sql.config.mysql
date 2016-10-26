@@ -14,6 +14,14 @@
         and exists(select 1 from auth_permission where per_parent=p.per_code)
       </sql>
     </sqlgroup>
+    <sqlgroup name="auth_group">
+      <sql name="haschild">
+        select count(1)
+        from auth_group gp
+        where gp.gp_id in ({0})
+        and exists(select 1 from auth_group where gp_parent=gp.gp_code)
+      </sql>
+    </sqlgroup>
     <sqlgroup name="auth_user_per_rel">
       <sql name="getper">
         select per.per_id ,per.per_code,per.per_name,per.per_type,per.per_uri,per.per_method,per.per_parent,per.per_sort,rel.rel_userid

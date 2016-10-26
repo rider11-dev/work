@@ -45,7 +45,7 @@ namespace MyNet.ClientFrame.Pages.Auth
         {
             InitDataGrid();
 
-            base.LoadButtons(panelBtns, Application.Current.FindResource("mngBtnStyle") as Style);
+            base.LoadButtons(panelBtns, StyleCacheHelper.MngBtnStyle);
 
             if (panelBtns.Children == null || panelBtns.Children.Count < 1)
             {

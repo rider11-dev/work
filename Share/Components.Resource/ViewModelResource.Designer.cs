@@ -178,6 +178,24 @@ namespace MyNet.Components.Resource {
         }
         
         /// <summary>
+        ///   查找类似 组织编号最大为{1}个字符 的本地化字符串。
+        /// </summary>
+        public static string Group_Code_Length {
+            get {
+                return ResourceManager.GetString("Group_Code_Length", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 组织名称最大为{1}个字符 的本地化字符串。
+        /// </summary>
+        public static string Group_Name_Length {
+            get {
+                return ResourceManager.GetString("Group_Name_Length", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 身份证长度必须在{2}和{1}之间 的本地化字符串。
         /// </summary>
         public static string Idcard_Length {
@@ -426,6 +444,15 @@ namespace MyNet.Components.Resource {
         public static string Sort_Require {
             get {
                 return ResourceManager.GetString("Sort_Require", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 用户组织不能为空 的本地化字符串。
+        /// </summary>
+        public static string User_Group_Require {
+            get {
+                return ResourceManager.GetString("User_Group_Require", resourceCulture);
             }
         }
         

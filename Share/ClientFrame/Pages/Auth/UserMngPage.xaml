@@ -6,14 +6,16 @@
       xmlns:usrCtl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
       xmlns:local="clr-namespace:MyNet.ClientFrame.Pages" 
       xmlns:vmauth="clr-namespace:MyNet.ClientFrame.Models.Auth"
+      xmlns:localcvt="clr-namespace:MyNet.ClientFrame.Converter"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="500"
+      d:DesignHeight="300" d:DesignWidth="700"
       Title="UserMngPage"
       Loaded="Page_Loaded">
     <Page.Resources>
         <!--model-->
         <vmauth:UserMngViewModel x:Key="model"/>
         <usrCtl:PagingArgs x:Key="paging"/>
+        <localcvt:GroupIdConverter x:Key="groupIdConverter"/>
     </Page.Resources>
     <Grid x:Name="gridLayout">
         <Grid.RowDefinitions>
@@ -24,10 +26,6 @@
         <!--row1：工具栏-->
         <Border x:Name="bdBtns" Grid.Row="0" Style="{StaticResource mngBdStyle}">
             <StackPanel x:Name="panelBtns" Orientation="Horizontal">
-                <!--<Button Style="{StaticResource btnStyle}" Content="新 增" />
-                <Button Style="{StaticResource btnStyle}" Content="修 改" />
-                <Button Style="{StaticResource btnStyle}" Content="删 除" />
-                <Button Style="{StaticResource btnStyle}" Content="权 限" />-->
             </StackPanel>
         </Border>
         <!--row2：过滤-->
@@ -45,6 +43,12 @@
                 <Label Content="所属区域" Style="{StaticResource mngLblStyle}"/>
                 <TextBox x:Name="txtRegion" Style="{StaticResource mngInputStyle}"
                          Text="{Binding Path=Filter_RegionCode,Source={StaticResource model}}"
+                         />
+                <Label Content="所属组织" Style="{StaticResource mngLblStyle}"/>
+                <usrCtl:HelpButton Width="120" Height="26" 
+                         Style="{StaticResource inputBtnAddOnStyle}" 
+                         Content="{Binding Path=Filter_Group_Name,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                         Command="{Binding Path=GroupHelpCmd,Source={StaticResource model}}"
                          />
                 <Button x:Name="btnSearch" Style="{StaticResource mngBtnStyle}" Content="查 询"
                         Command="{Binding Path=SearchCmd,Source={StaticResource model}}"
@@ -69,6 +73,7 @@
                         <DataGridTextColumn Header="身份证号" Binding="{Binding user_idcard}" />
                         <DataGridTextColumn Header="真实姓名" Binding="{Binding user_truename}" />
                         <DataGridTextColumn Header="所属区域" Binding="{Binding user_regioncode}" />
+                        <DataGridTextColumn Header="所属组织" Binding="{Binding user_group,Converter={StaticResource groupIdConverter}}" />
                         <DataGridTextColumn Header="备注"  Binding="{Binding user_remark}" />
                     </DataGrid.Columns>
                 </DataGrid>

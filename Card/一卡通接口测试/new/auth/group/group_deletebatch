@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rest-client version="3.4.2"><request><http-version>1.1</http-version><http-follow-redirects/><URL>http://localhost/aaa/api/auth/group/multidelete</URL><method>POST</method><headers><header key="token" value="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhZG1pbiIsImlhdCI6MTQ3NTA0MjM4NiwidXNlciI6bnVsbH0.3riTHa_pNrQ0L6cDeDCsXUtXmrNlFmm0V-CmCtt893U"/></headers><body><string content-type="application/json" charset="UTF-8">{
+"pks":["6194fb62253e4ddba293447e36fd2cae","ccd5cdbf9c034eed95a4db3fddb232ad"]
+}</string></body></request></rest-client>

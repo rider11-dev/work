@@ -19,7 +19,7 @@
         <ctl:PagingArgs x:Key="paging"/>
         <cvt:BooleanConverter x:Key="boolConverter"/>
         <localcvt:PermTypeConverter x:Key="permTypeConverter"/>
-        <localcvt:PermParentConverter x:Key="permParentConverter"/>
+        <localcvt:PermCodeConverter x:Key="permCodeConverter"/>
         <vmwpf:CmbModel x:Key="cbVm"/>
     </Page.Resources>
     <Grid x:Name="gridLayout">
@@ -41,7 +41,7 @@
         <Border x:Name="bdSearch" Grid.Row="1" Style="{StaticResource mngBdStyle}">
             <StackPanel Orientation="Horizontal">
                 <Label Content="编号" Style="{StaticResource mngLblStyle}"/>
-                <TextBox x:Name="txtPerName" Style="{StaticResource mngInputStyle}"
+                <TextBox Style="{StaticResource mngInputStyle}"
                          Text="{Binding Path=Filter_PerCode,Source={StaticResource model}}"
                          IsReadOnly="{Binding}"
                          />
@@ -90,11 +90,10 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <!--<DataGridTextColumn Header="上级" Binding="{Binding per_parent}"/>-->
                         <DataGridTemplateColumn Header="上级">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Path=per_parent,Converter={StaticResource permParentConverter}}"/>
+                                    <TextBlock Text="{Binding Path=per_parent,Converter={StaticResource permCodeConverter}}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

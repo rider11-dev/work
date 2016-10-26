@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auth\Group.cs" />
     <Compile Include="Auth\Permission.cs" />
     <Compile Include="Auth\PermType.cs" />
     <Compile Include="Auth\UserPermissionRel.cs" />

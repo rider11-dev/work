@@ -20,19 +20,19 @@ namespace MyNet.ClientFrame.Models.Auth
     {
         public string user_id { get; set; }
 
-        private string _usr_name;
+        private string _user_name;
         [Required(ErrorMessageResourceName = "User_Name_Require", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
         [StringLength(10, MinimumLength = 3, ErrorMessageResourceName = "User_Name_Length", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
         public string user_name
         {
-            get { return _usr_name; }
+            get { return _user_name; }
             set
             {
-                if (_usr_name == value)
+                if (_user_name == value)
                 {
                     return;
                 }
-                _usr_name = value;
+                _user_name = value;
                 base.RaisePropertyChanged("user_name");
             }
         }
@@ -105,6 +105,21 @@ namespace MyNet.ClientFrame.Models.Auth
             }
         }
 
+        private string _user_group;
+        [Required(ErrorMessageResourceName = "User_Group_Require", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
+        public string user_group
+        {
+            get { return _user_group; }
+            set
+            {
+                if (_user_group != value)
+                {
+                    _user_group = value;
+                    base.RaisePropertyChanged("user_group");
+                }
+            }
+        }
+
         public void CopyTo(IBaseModel targetModel)
         {
             if (targetModel == null)
@@ -117,6 +132,7 @@ namespace MyNet.ClientFrame.Models.Auth
             vmUsr.user_idcard = this.user_idcard;
             vmUsr.user_truename = this.user_truename;
             vmUsr.user_regioncode = this.user_regioncode;
+            vmUsr.user_group = this.user_group;
             vmUsr.user_remark = this.user_remark;
         }
     }

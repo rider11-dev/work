@@ -26,7 +26,6 @@ namespace MyNet.Service.Auth
         const string Msg_DeletePer = "删除权限";
         const string Msg_BatchDeletePer = "批量删除权限";
         const string Msg_QueryByPage = "分页查询权限信息";
-        const string Msg_FindById = "根据主键查询权限数据";
         const string Msg_GetPermTypes = "获取权限类型列表";
         const string Msg_GetAllFuncs = "获取所有功能权限";
 
@@ -85,22 +84,6 @@ namespace MyNet.Service.Auth
             {
                 LogHelper.LogError(Msg_AddPer, ex);
                 rst = OptResult.Build(ResultCode.DbError, Msg_AddPer);
-            }
-            return rst;
-        }
-
-        public OptResult Find(dynamic pkId)
-        {
-            OptResult rst = null;
-            try
-            {
-                var per = _perRep.GetById(pkId as object);
-                rst = OptResult.Build(ResultCode.Success, Msg_FindById, per);
-            }
-            catch (Exception ex)
-            {
-                LogHelper.LogError(Msg_FindById, ex);
-                rst = OptResult.Build(ResultCode.DbError, Msg_FindById);
             }
             return rst;
         }

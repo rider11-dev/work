@@ -51,7 +51,7 @@ namespace MyNet.ClientFrame.Models.Auth
 
         private void OpenPermParentHelp(object parameter)
         {
-            TreeHelpHelper.OpenAllFuncsHelpWindow(false, node =>
+            TreeHelpHelper.OpenAllFuncsHelp(false, node =>
             {
                 var tNode = (TreeViewData.TreeNode)node;
                 Filter_PerParent_Name = tNode.Label;
@@ -94,13 +94,13 @@ namespace MyNet.ClientFrame.Models.Auth
             //清除垃圾缓存
             var funcCodes = items.Where(m => ((PermViewModel)m).per_type == PermType.PermTypeFunc.ToString())
                                 .Select(m => ((PermViewModel)m).per_code);
-            if (funcCodes != null && funcCodes.Count() > 0 && CacheHelper.AllFuncs.Count > 0)
+            if (funcCodes != null && funcCodes.Count() > 0 && DataCacheHelper.AllFuncs.Count > 0)
             {
                 foreach (var code in funcCodes)
                 {
-                    if (CacheHelper.AllFuncs.ContainsKey(code))
+                    if (DataCacheHelper.AllFuncs.ContainsKey(code))
                     {
-                        CacheHelper.AllFuncs.Remove(code);
+                        DataCacheHelper.AllFuncs.Remove(code);
                     }
                 }
             }

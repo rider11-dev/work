@@ -39,7 +39,7 @@ namespace MyNet.ClientFrame.Pages.Auth
         {
             InitDataGrid();
 
-            base.LoadButtons(panelBtns, Application.Current.FindResource("mngBtnStyle") as Style);
+            base.LoadButtons(panelBtns, StyleCacheHelper.MngBtnStyle);
 
             if (panelBtns.Children == null || panelBtns.Children.Count < 1)
             {
@@ -47,7 +47,7 @@ namespace MyNet.ClientFrame.Pages.Auth
                 gridLayout.RowDefinitions[0].Height = new GridLength(0);
             }
             //设置combobox数据源
-            CacheHelper.SetCmbSource(cbPermType, DictType.Perm, "", false, true);
+            DataCacheHelper.SetCmbSource(cbPermType, DictType.Perm, "", false, true);
         }
 
         private void InitDataGrid()

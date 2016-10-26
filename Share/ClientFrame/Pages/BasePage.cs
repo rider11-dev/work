@@ -37,7 +37,7 @@ namespace MyNet.ClientFrame.Pages
             foreach (var opt in opts)
             {
                 btn = new Button();
-                btn.Name = opt.per_id;
+                btn.Uid = opt.per_id;
                 btn.Content = opt.per_name;
                 btn.Style = btnStyle;
                 if (Commands != null && Commands.Count > 0 && Commands.ContainsKey(opt.per_method))

@@ -64,13 +64,13 @@ namespace MyNet.ClientFrame.Models.Auth
             if (base.per_type == PermType.PermTypeFunc.ToString())
             {
                 var funcPermDto = OOMapper.Map<PermViewModel, PermissionCacheDto>(this);
-                if (CacheHelper.AllFuncs.ContainsKey(base.per_code))
+                if (DataCacheHelper.AllFuncs.ContainsKey(base.per_code))
                 {
-                    CacheHelper.AllFuncs[base.per_code] = funcPermDto;
+                    DataCacheHelper.AllFuncs[base.per_code] = funcPermDto;
                 }
                 else
                 {
-                    CacheHelper.AllFuncs.Add(base.per_code, funcPermDto);
+                    DataCacheHelper.AllFuncs.Add(base.per_code, funcPermDto);
                 }
             }
             if (Window != null)
@@ -98,7 +98,7 @@ namespace MyNet.ClientFrame.Models.Auth
 
         private void OpenPermParentHelp(object parameter)
         {
-            TreeHelpHelper.OpenAllFuncsHelpWindow(false, node =>
+            TreeHelpHelper.OpenAllFuncsHelp(false, node =>
             {
                 var tNode = (TreeViewData.TreeNode)node;
                 base.per_parent = tNode.Id;

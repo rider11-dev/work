@@ -14,15 +14,14 @@ namespace MyNet.ClientFrame.Help
     /// </summary>
     public class TreeHelpHelper
     {
-        public static void OpenAllFuncsHelpWindow(bool multiSel = false,
+        public static void OpenAllFuncsHelp(bool multiSel = false,
             Action<TreeViewData.TreeNode> singleSelAction = null,
             Action<IList<TreeViewData.TreeNode>> multiSelAction = null)
         {
             TreeHelpWindow.ShowHelp("功能菜单帮助", () =>
             {
                 List<TreeViewData.NodeViewModel> datas = new List<TreeViewData.NodeViewModel>();
-                var funcs = CacheHelper.AllFuncs;
-                foreach (var kvp in CacheHelper.AllFuncs)
+                foreach (var kvp in DataCacheHelper.AllFuncs)
                 {
                     var func = kvp.Value;
                     datas.Add(new TreeViewData.NodeViewModel { Id = func.per_code, Label = func.per_name, Parent = func.per_parent, Order = func.per_sort, Data = func, DataId = func.per_id });
@@ -31,24 +30,40 @@ namespace MyNet.ClientFrame.Help
             }, multiSel, singleSelAction, multiSelAction);
         }
 
-        public static void OpenAllPermsHelpWindow(Action<IList<TreeViewData.TreeNode>> multiSelAction = null)
+        public static void OpenAllPermsHelp(Action<IList<TreeViewData.TreeNode>> multiSelAction = null)
         {
             TreeHelpWindow.ShowHelp("所有权限", () =>
             {
                 List<TreeViewData.NodeViewModel> datas = new List<TreeViewData.NodeViewModel>();
-                foreach (var kvp in CacheHelper.AllFuncs)
+                foreach (var kvp in DataCacheHelper.AllFuncs)
                 {
                     var func = kvp.Value;
                     datas.Add(new TreeViewData.NodeViewModel { Id = func.per_code, Label = func.per_name, Parent = func.per_parent, Order = func.per_sort, Data = func, DataId = func.per_id });
                 }
 
-                foreach (var kvp in CacheHelper.AllOpts)
+                foreach (var kvp in DataCacheHelper.AllOpts)
                 {
                     var opt = kvp.Value;
                     datas.Add(new TreeViewData.NodeViewModel { Id = opt.per_code, Label = opt.per_name, Parent = opt.per_parent, Order = opt.per_sort, Data = opt, DataId = opt.per_id });
                 }
                 return datas;
             }, true, null, multiSelAction);
+        }
+
+        public static void OpenAllGroupsHelp(bool multiSel = false,
+            Action<TreeViewData.TreeNode> singleSelAction = null,
+            Action<IList<TreeViewData.TreeNode>> multiSelAction = null)
+        {
+            TreeHelpWindow.ShowHelp("组织帮助", () =>
+            {
+                List<TreeViewData.NodeViewModel> datas = new List<TreeViewData.NodeViewModel>();
+                foreach (var kvp in DataCacheHelper.AllGroups)
+                {
+                    var gp = kvp.Value;
+                    datas.Add(new TreeViewData.NodeViewModel { Id = gp.gp_code, Label = gp.gp_name, Parent = gp.gp_parent, Order = gp.gp_sort, Data = gp, DataId = gp.gp_id });
+                }
+                return datas;
+            }, multiSel, singleSelAction, multiSelAction);
         }
     }
 }

@@ -4,9 +4,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:MyNet.ClientFrame.Models"
         xmlns:vmauth="clr-namespace:MyNet.ClientFrame.Models.Auth"
+        xmlns:localcvt="clr-namespace:MyNet.ClientFrame.Converter"
+        xmlns:ctl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
         Style="{StaticResource popWindowStyle}"
         WindowStartupLocation="CenterScreen"
-        Title="UserDetailWindow" Height="400" Width="400"
+        Title="UserDetailWindow" Height="450" Width="400"
                   Loaded="UserDetailWindow_Loaded">
     <Window.Resources>
         <Style x:Key="lblStyle" TargetType="Label" BasedOn="{StaticResource lblInputBaseStyle}">
@@ -15,6 +17,7 @@
         <Style x:Key="inputStyle" TargetType="Control" BasedOn="{StaticResource inputDetailWinStyle}">
         </Style>
         <vmauth:UserDetailViewModel x:Key="model"/>
+        <localcvt:GroupIdConverter x:Key="groupIdConverter"/>
     </Window.Resources>
     <Window.DataContext>
         <Binding Source="{StaticResource model}"/>
@@ -22,6 +25,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
+            <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
@@ -59,13 +63,23 @@
         <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource inputStyle}"
                 Text="{Binding Path=user_regioncode,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                  />
-        <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource lblStyle}" Content="备注"/>
-        <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource inputStyle}"
+        <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource lblStyle}" Content="所属组织"/>
+        <!--<TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource inputStyle}"
+                Text="{Binding Path=user_group,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Margin="0,3,0,0" VerticalAlignment="Top"
+                 />-->
+        <ctl:HelpButton Grid.Row="5" Grid.Column="1" 
+                Width="220" Height="28" ForbidInput="True"
+                Style="{StaticResource inputBtnAddOnStyle}" 
+                Content="{Binding Path=user_group,Source={StaticResource model},Mode=OneWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource groupIdConverter}}"
+                Command="{Binding Path=GroupHelpCmd,Source={StaticResource model}}"
+                />
+        <Label Grid.Row="6" Grid.Column="0" Style="{StaticResource lblStyle}" Content="备注"/>
+        <TextBox Grid.Row="6" Grid.Column="1" Style="{StaticResource inputStyle}"
                  TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"
                  Height="Auto" HorizontalContentAlignment="Left" VerticalContentAlignment="Top"
                 Text="{Binding Path=user_remark,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                  />
-        <Grid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2">
+        <Grid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>

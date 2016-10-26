@@ -27,6 +27,8 @@ namespace MyNet.WebApi.Models.Auth.User
 
         [MaxLength(255, ErrorMessageResourceName = "Remark_Length", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
         public string user_remark { get; set; }
-        //public string user_creator { get; set; }
+
+        [Required(ErrorMessageResourceName = "User_Group_Require", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
+        public string user_group { get; set; }
     }
 }

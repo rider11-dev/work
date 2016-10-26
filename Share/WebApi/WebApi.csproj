@@ -104,6 +104,7 @@
     <Compile Include="ApiContext.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="App_Start\Bootstrapper.cs" />
+    <Compile Include="Controllers\Auth\GroupController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\Auth\PermissionController.cs" />
     <Compile Include="Controllers\Base\DictController.cs" />
@@ -126,6 +127,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Auth\Group\AddGroupViewModel.cs" />
+    <Compile Include="Models\Auth\Group\EditGroupViewModel.cs" />
     <Compile Include="Models\Auth\Permission\AddPermissionViewModel.cs" />
     <Compile Include="Models\Auth\Permission\EditPermissionViewModel.cs" />
     <Compile Include="Models\Auth\User\AssignPermissionViewModel.cs" />
@@ -159,9 +162,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Components.Resource\Components.Resource.csproj">
       <Project>{4ecb69ea-c6d9-436b-9689-90d065424f53}</Project>

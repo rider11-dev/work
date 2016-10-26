@@ -10,7 +10,7 @@ using MyNet.ClientFrame.Public;
 
 namespace MyNet.ClientFrame.Converter
 {
-    public class PermParentConverter : IValueConverter
+    public class PermCodeConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -19,12 +19,11 @@ namespace MyNet.ClientFrame.Converter
                 return "";
             }
             var code = value.ToString();
-            if (!CacheHelper.AllFuncs.ContainsKey(value.ToString()))
+            if (!DataCacheHelper.AllFuncs.ContainsKey(value.ToString()))
             {
                 return "";
             }
-            //return parent.per_code + "|" + parent.per_name;
-            return CacheHelper.AllFuncs[code].per_name;
+            return DataCacheHelper.AllFuncs[code].per_name;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

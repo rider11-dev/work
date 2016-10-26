@@ -26,7 +26,7 @@
         <vmauth:PermDetailViewModel x:Key="model"/>
         <vmwpf:CmbModel x:Key="cbVmPermType"/>
         <vmwpf:CmbModel x:Key="cbVmBoolType"/>
-        <localcvt:PermParentConverter x:Key="permParentConverter"/>
+        <localcvt:PermCodeConverter x:Key="permCodeConverter"/>
     </Window.Resources>
     <Window.DataContext>
         <Binding Source="{StaticResource model}"/>
@@ -53,7 +53,7 @@
         <Label x:Name="lblTitle" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                FontWeight="Bold" FontSize="20"
-               Content="{Binding Path=Title,RelativeSource={RelativeSource AncestorType=Window},Mode=OneWay}"
+               Content="{Binding Path=Title,RelativeSource={RelativeSource AncestorType=win:BaseWindow},Mode=OneWay}"
                    />
 
         <!--row2：编号-->
@@ -76,7 +76,7 @@
         <ctl:HelpButton Grid.Row="4" Grid.Column="1" 
                 Width="240" Height="28" ForbidInput="True"
                 Style="{StaticResource inputBtnAddOnStyle}" 
-                Content="{Binding Path=per_parent,Source={StaticResource model},Mode=OneWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource permParentConverter}}"
+                Content="{Binding Path=per_parent,Source={StaticResource model},Mode=OneWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource permCodeConverter}}"
                 Command="{Binding Path=PermParentHelpCmd,Source={StaticResource model}}"
                 />
         <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource lblStyle}" Content="排序号"/>
@@ -119,7 +119,7 @@
                     Width="90" Height="36"
                     Margin="-20,0,0,0"
                     Style="{StaticResource btnBaseStyle}"
-                    Command="{Binding Path=CloseCmd,RelativeSource={RelativeSource AncestorType=Window}}"
+                    Command="{Binding Path=CloseCmd,RelativeSource={RelativeSource AncestorType=win:BaseWindow}}"
                     Content="取   消"
                     />
         </Grid>

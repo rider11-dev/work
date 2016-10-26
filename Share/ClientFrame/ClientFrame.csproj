@@ -86,7 +86,9 @@
     </ApplicationDefinition>
     <Compile Include="Command\OpenFuncCmd.cs" />
     <Compile Include="Command\OpenFuncParam.cs" />
-    <Compile Include="Converter\PermParentConverter.cs" />
+    <Compile Include="Converter\GroupIdConverter.cs" />
+    <Compile Include="Converter\GroupCodeConverter.cs" />
+    <Compile Include="Converter\PermCodeConverter.cs" />
     <Compile Include="Converter\PermTypeConverter.cs" />
     <Compile Include="Help\TreeHelpHelper.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -95,6 +97,9 @@
     <Compile Include="Models\Account\ChangePwdViewModel.cs" />
     <Compile Include="Models\Api.cs" />
     <Compile Include="Models\ApiKeys.cs" />
+    <Compile Include="Models\Auth\GroupDetailViewModel.cs" />
+    <Compile Include="Models\Auth\GroupMngViewModel.cs" />
+    <Compile Include="Models\Auth\GroupViewModel.cs" />
     <Compile Include="Models\Auth\PermDetailViewModel.cs" />
     <Compile Include="Models\Auth\PermMngViewModel.cs" />
     <Compile Include="Models\Auth\PermViewModel.cs" />
@@ -107,6 +112,12 @@
     </Compile>
     <Compile Include="Pages\Account\ChangePwdPage.xaml.cs">
       <DependentUpon>ChangePwdPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Auth\GroupDetailWindow.xaml.cs">
+      <DependentUpon>GroupDetailWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Auth\GroupMngPage.xaml.cs">
+      <DependentUpon>GroupMngPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Auth\PermissionDetailWindow.xaml.cs">
       <DependentUpon>PermissionDetailWindow.xaml</DependentUpon>
@@ -127,9 +138,10 @@
     <Compile Include="Pages\PageHelper.cs" />
     <Compile Include="Public\ApiHelper.cs" />
     <Compile Include="Public\Context.cs" />
-    <Compile Include="Public\CacheHelper.cs" />
+    <Compile Include="Public\DataCacheHelper.cs" />
     <Compile Include="Public\MsgConst.cs" />
     <Compile Include="Public\OperationDesc.cs" />
+    <Compile Include="Public\StyleCacheHelper.cs" />
     <Page Include="LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -153,6 +165,14 @@
     <Page Include="Pages\Account\ChangePwdPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Auth\GroupDetailWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Auth\GroupMngPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\Auth\PermissionDetailWindow.xaml">
       <SubType>Designer</SubType>

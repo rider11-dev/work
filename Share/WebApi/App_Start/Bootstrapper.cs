@@ -58,6 +58,9 @@ namespace MyNet.WebApi
             builder.RegisterType(typeof(UserRepository)).InstancePerRequest();
             builder.RegisterType(typeof(UserService)).InstancePerRequest();
             //
+            builder.RegisterType(typeof(GroupRepository)).InstancePerRequest();
+            builder.RegisterType(typeof(GroupService)).InstancePerRequest();
+            //
             builder.RegisterType(typeof(PermissionRepository)).InstancePerRequest();
             builder.RegisterType(typeof(PermissionService)).InstancePerRequest();
             //

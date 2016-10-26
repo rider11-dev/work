@@ -22,7 +22,7 @@ namespace MyNet.ClientFrame.Public
     /// <summary>
     /// 缓存辅助类
     /// </summary>
-    public class CacheHelper
+    public class DataCacheHelper
     {
         /// <summary>
         /// 字典缓存
@@ -63,7 +63,24 @@ namespace MyNet.ClientFrame.Public
             }
         }
 
-        static CacheHelper()
+        private static Dictionary<string, Group> _allGroups = null;
+        /// <summary>
+        /// 所有组织缓存
+        /// </summary>
+        public static Dictionary<string, Group> AllGroups
+        {
+            get
+            {
+                if (_allGroups == null)
+                {
+                    _allGroups = new Dictionary<string, Group>();
+                    LoadGroups(ApiKeys.GetAllGroups, _allGroups);
+                }
+                return _allGroups;
+            }
+        }
+
+        static DataCacheHelper()
         {
             PreLoadSomeDicts();
         }
@@ -98,7 +115,7 @@ namespace MyNet.ClientFrame.Public
             }
 
             CmbModel model = cmb.DataContext as CmbModel;
-            if (CacheHelper.DictSource.ContainsKey(dictType))
+            if (DataCacheHelper.DictSource.ContainsKey(dictType))
             {
                 //取缓存数据
                 model.Bind(DictSource[dictType], selectedTypeCode, setSelect, needBlankItem);
@@ -119,7 +136,7 @@ namespace MyNet.ClientFrame.Public
                 {
                     var dicts = JsonConvert.DeserializeObject<IList<CmbItem>>(((JArray)rst.data.rows).ToString());
                     model.Bind(dicts, selectedTypeCode, setSelect, needBlankItem);
-                    CacheHelper.DictSource.Add(dictType, dicts);
+                    DataCacheHelper.DictSource.Add(dictType, dicts);
                 }
             }
         }
@@ -141,6 +158,27 @@ namespace MyNet.ClientFrame.Public
                     foreach (var func in opts)
                     {
                         target.Add(func.per_code, func);
+                    }
+                }
+            }
+        }
+        private static void LoadGroups(string apiKey, Dictionary<string, Group> target)
+        {
+            //从服务器获取
+            var rst = HttpHelper.GetResultByPost(url: ApiHelper.GetApiUrl(apiKey), token: Context.Token);
+            if (rst.code != ResultCode.Success)
+            {
+                MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);
+                return;
+            }
+            if (rst.data != null)
+            {
+                var groups = JsonConvert.DeserializeObject<IList<Group>>(((JArray)rst.data).ToString());
+                if (groups != null && groups.Count > 0)
+                {
+                    foreach (var func in groups)
+                    {
+                        target.Add(func.gp_code, func);
                     }
                 }
             }

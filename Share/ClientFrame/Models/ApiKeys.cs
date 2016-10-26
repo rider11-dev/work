@@ -28,6 +28,13 @@ namespace MyNet.ClientFrame.Models
         public const string DeleteUsr = "usr_delete";
         public const string MultiDeleteUsr = "usr_multidelete";
         public const string Assign = "usr_assign";
+        /*-------------------------------------权限管理——组织管理------------------------------*/
+        public const string GetGroupByPage = "group_pagequery";
+        public const string AddGroup = "group_add";
+        public const string DeleteGroup = "group_delete";
+        public const string MultiDeleteGroup = "group_multidelete";
+        public const string EditGroup = "group_edit";
+        public const string GetAllGroups = "group_getall";
 
         /*-------------------------------------权限管理——权限管理------------------------------*/
         public const string GetPerByPage = "per_pagequery";

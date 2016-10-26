@@ -27,7 +27,6 @@ namespace MyNet.Service.Auth
         const string Msg_BatchDeleteUser = "批量删除用户";
         const string Msg_ChangePwd = "修改密码";
         const string Msg_QueryByPage = "分页查询用户信息";
-        const string Msg_FindById = "根据主键查询用户信息";
 
         const string SqlName_Update = "update";
 
@@ -105,23 +104,6 @@ namespace MyNet.Service.Auth
             return rst;
         }
 
-        public OptResult Find(dynamic pk)
-        {
-            OptResult rst = null;
-            try
-            {
-                var usr = _usrRep.GetById<UserDto>(pk);
-                rst = OptResult.Build(ResultCode.Success, Msg_FindById, usr);
-            }
-            catch (Exception ex)
-            {
-                LogHelper.LogError(Msg_FindById, ex);
-                rst = OptResult.Build(ResultCode.DbError, Msg_FindById);
-            }
-
-            return rst;
-        }
-
         public OptResult Update(User usr)
         {
             OptResult rst = null;
@@ -153,6 +135,7 @@ namespace MyNet.Service.Auth
                 oldUsr.user_regioncode = usr.user_regioncode;
                 oldUsr.user_truename = usr.user_truename;
                 oldUsr.user_remark = usr.user_remark;
+                oldUsr.user_group = usr.user_group;
 
                 bool val = _usrRep.Update(oldUsr);
                 rst = OptResult.Build(val ? ResultCode.Success : ResultCode.Fail, Msg_UpdateUser);
@@ -295,6 +278,25 @@ namespace MyNet.Service.Auth
                 if (page.conditions.ContainsKey("truename") && !page.conditions["truename"].IsEmpty())
                 {
                     pg.Predicates.Add(Predicates.Field<User>(u => u.user_truename, Operator.Like, "%" + page.conditions["truename"] + "%"));
+                }
+                if (page.conditions.ContainsKey("group") && !page.conditions["group"].IsEmpty())
+                {
+                    pg.Predicates.Add(Predicates.Field<User>(u => u.user_truename, Operator.Eq, page.conditions["group"]));
+                }
+                else if (page.conditions.ContainsKey("group_name") && !page.conditions["group_name"].IsEmpty())
+                {
+                    //TODO
+                    //用户所属组织模糊查询（方法很笨，考虑后续优化）
+                    var groups = _usrRep.GetList<Group>(Predicates.Field<Group>(gp => gp.gp_name, Operator.Like, "%" + page.conditions["group_name"] + "%"));
+                    if (groups == null || groups.Count() < 1)
+                    {
+                        rst = OptResult.Build(ResultCode.Success, Msg_QueryByPage, new
+                        {
+                            total = 0
+                        });
+                        return rst;
+                    }
+                    pg.Predicates.Add(Predicates.Field<User>(u => u.user_group, Operator.Eq, groups.Select(gp => gp.gp_id)));
                 }
             }
 

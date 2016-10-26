@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rest-client version="3.4.2"><request><http-version>1.1</http-version><http-follow-redirects/><URL>http://localhost/aaa/api/auth/group/update</URL><method>POST</method><headers><header key="token" value="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhZG1pbiIsImlhdCI6MTQ3NTA0MjM4NiwidXNlciI6bnVsbH0.3riTHa_pNrQ0L6cDeDCsXUtXmrNlFmm0V-CmCtt893U"/></headers><body><string content-type="application/json" charset="UTF-8">{
+"gp_id":"41eb283780cd4d5dbcb8798f74d41478",
+"gp_code":"00",//gp_code必须提供，但是不更新
+"gp_name":"22222222",
+"gp_system":"0",
+"gp_parent":"admin",
+"gp_sort":"0000"
+}</string></body></request></rest-client>

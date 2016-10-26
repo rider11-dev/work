@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auth\GroupService.cs" />
     <Compile Include="Auth\Mapper\PermissionCacheDtoMapper.cs" />
     <Compile Include="Auth\Mapper\PermssionParentDtoMapper.cs" />
     <Compile Include="Auth\Mapper\UserDtoMapper.cs" />

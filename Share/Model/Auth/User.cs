@@ -17,6 +17,7 @@ namespace MyNet.Model.Auth
         public string user_idcard { get; set; }
         public string user_truename { get; set; }
         public string user_regioncode { get; set; }
+        public string user_group { get; set; }
         public string user_remark { get; set; }
         public string user_creator { get; set; }
     }

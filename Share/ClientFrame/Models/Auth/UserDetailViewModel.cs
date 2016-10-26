@@ -9,6 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MyNet.Components.WPF.Windows;
+using System.Windows.Input;
+using MyNet.ClientFrame.Help;
+using MyNet.Components.WPF.Controls;
 
 namespace MyNet.ClientFrame.Models.Auth
 {
@@ -35,6 +38,30 @@ namespace MyNet.ClientFrame.Models.Auth
                 }
                 return _saveCmd;
             }
+        }
+
+        [JsonIgnore]
+        private ICommand _groupHelpCmd;
+        [JsonIgnore]
+        public ICommand GroupHelpCmd
+        {
+            get
+            {
+                if (_groupHelpCmd == null)
+                {
+                    _groupHelpCmd = new DelegateCommand(OpenGroupHelp);
+                }
+                return _groupHelpCmd;
+            }
+        }
+
+        private void OpenGroupHelp(object parameter)
+        {
+            TreeHelpHelper.OpenAllGroupsHelp(false, node =>
+            {
+                var tNode = (TreeViewData.TreeNode)node;
+                base.user_group = tNode.DataId;
+            });
         }
 
         private void SaveAction(object parameter)

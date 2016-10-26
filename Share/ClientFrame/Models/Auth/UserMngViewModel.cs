@@ -54,7 +54,7 @@ namespace MyNet.ClientFrame.Models.Auth
             if (base.GetSelectedOne(out vm, OperationDesc.Assign))
             {
                 var usr = vm as UserViewModel;
-                TreeHelpHelper.OpenAllPermsHelpWindow((selNodes) =>
+                TreeHelpHelper.OpenAllPermsHelp((selNodes) =>
                 {
                     if (selNodes == null || selNodes.Count < 1)
                     {
@@ -77,6 +77,30 @@ namespace MyNet.ClientFrame.Models.Auth
             }
         }
 
+        [JsonIgnore]
+        private ICommand _groupHelpCmd;
+        [JsonIgnore]
+        public ICommand GroupHelpCmd
+        {
+            get
+            {
+                if (_groupHelpCmd == null)
+                {
+                    _groupHelpCmd = new DelegateCommand(OpenGroupHelp);
+                }
+                return _groupHelpCmd;
+            }
+        }
+
+        private void OpenGroupHelp(object parameter)
+        {
+            TreeHelpHelper.OpenAllGroupsHelp(false, node =>
+            {
+                var tNode = (TreeViewData.TreeNode)node;
+                Filter_Group = tNode.DataId;
+                Filter_Group_Name = tNode.Label;
+            });
+        }
 
         #region 基类命令对应动作重写
         protected override void AddAction(object param)
@@ -142,6 +166,8 @@ namespace MyNet.ClientFrame.Models.Auth
                         {"regioncode",Filter_RegionCode},
                         {"username",Filter_UserName},
                         {"truename",Filter_TrueName},
+                        {"group",Filter_Group},
+                        {"group_name",Filter_Group_Name},
                     }
                },
                Context.Token);
@@ -211,7 +237,38 @@ namespace MyNet.ClientFrame.Models.Auth
             }
         }
 
+        string _filter_group;
+        /// <summary>
+        /// 所属组织id
+        /// </summary>
+        public string Filter_Group
+        {
+            get { return _filter_group; }
+            set
+            {
+                if (_filter_group != value)
+                {
+                    _filter_group = value;
+                    base.RaisePropertyChanged("Filter_Group");
+                }
+            }
+        }
 
+        string _filter_group_name;
+        public string Filter_Group_Name
+        {
+            get { return _filter_group_name; }
+            set
+            {
+                if (_filter_group_name != value)
+                {
+                    _filter_group_name = value;
+                    base.RaisePropertyChanged("Filter_Group_Name");
+                    //组织名称变了，说明是手动输入，此时应该将Filter_Group置空，因为二者已经不匹配了
+                    Filter_Group = "";
+                }
+            }
+        }
         #endregion
 
 
