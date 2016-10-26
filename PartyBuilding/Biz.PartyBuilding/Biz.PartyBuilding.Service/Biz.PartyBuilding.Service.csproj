@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EA32F873-B280-4B79-947E-01AB4FCF6616}</ProjectGuid>
+    <ProjectGuid>{EB16AD69-D777-4941-BE53-4150195A0680}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MyNet.Dto</RootNamespace>
-    <AssemblyName>MyNet.Dto</AssemblyName>
+    <RootNamespace>Biz.PartyBuilding.Service</RootNamespace>
+    <AssemblyName>Biz.PartyBuilding.Service</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\dlls\MyNet\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -24,12 +24,24 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\dlls\MyNet\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MyNet.Components">
+      <HintPath>..\..\..\Share\dlls\MyNet\MyNet.Components.dll</HintPath>
+    </Reference>
+    <Reference Include="MyNet.Model">
+      <HintPath>..\..\..\Share\dlls\MyNet\MyNet.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="MyNet.Repository">
+      <HintPath>..\..\..\Share\dlls\MyNet\MyNet.Repository.dll</HintPath>
+    </Reference>
+    <Reference Include="MyNet.Service">
+      <HintPath>..\..\..\Share\dlls\MyNet\MyNet.Service.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,18 +51,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Auth\PermissionCacheDto.cs" />
-    <Compile Include="Auth\PermissionParentDto.cs" />
-    <Compile Include="Auth\PremissionDto.cs" />
-    <Compile Include="Auth\UserDto.cs" />
-    <Compile Include="Base\DictDto.cs" />
+    <Compile Include="Base\PartyOrgService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Model\Model.csproj">
-      <Project>{bb11afa2-784c-4e60-9586-6608d8338d67}</Project>
-      <Name>Model</Name>
+    <ProjectReference Include="..\Biz.PartyBuilding.Model\Biz.PartyBuilding.Model.csproj">
+      <Project>{373afccf-ac9c-42ab-a58f-52c651be971f}</Project>
+      <Name>Biz.PartyBuilding.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Biz.PartyBuilding.Repository\Biz.PartyBuilding.Repository.csproj">
+      <Project>{ffd54aa0-3d66-4ff5-8556-12ef4b52e8c4}</Project>
+      <Name>Biz.PartyBuilding.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Evaluation\" />
+    <Folder Include="UsualMng\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
