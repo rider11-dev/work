@@ -1,18 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <configuration>
-  <sqlarea name="base">
-    <sqlgroup name="base_dict">
-      <sql name="pagequery"
-           type="sp"
-           sp_name="sp_page_query"
-           fields=" d.*,dt.type_name dict_type_name "
-           tables=" base_dict d left join base_dict_type dt on d.dict_type = dt.type_code "
-           where=" 1=1 "
-           order=" d.dict_type asc,d.dict_order asc "
-           >
-      </sql>
-    </sqlgroup>
-  </sqlarea>
   <sqlarea name="auth">
     <sqlgroup name="auth_user">
       <sql name="update" type="txt">
@@ -70,16 +57,6 @@
         and rel.rel_userid=@user_id
         order by per.per_sort
       </sql>
-    </sqlgroup>
-  </sqlarea>
-  <sqlarea name="card">
-    <sqlgroup name="cardinfo">
-      <sql name="update" type="txt">
-        update card_info set {0} where card_idcard=@card_idcard
-      </sql>
-    </sqlgroup>
-    <sqlgroup name="cardrecord">
-
     </sqlgroup>
   </sqlarea>
 </configuration>

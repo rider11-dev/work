@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Biz.PartyBuilding.Repository
 {
-    public class PartyOrgRepository : BaseRepository<PartyOrg>, IBaseRepository<PartyOrg>
+    public class PartyOrgRepository : BaseRepository<PartyOrgDto>, IBaseRepository<PartyOrgDto>
     {
         public PartyOrgRepository(IDbSession dbsession)
             : base(dbsession)

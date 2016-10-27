@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50626
 File Encoding         : 65001
 
-Date: 2016-10-26 17:30:37
+Date: 2016-10-27 18:08:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,7 +32,7 @@ CREATE TABLE `auth_group` (
 -- ----------------------------
 -- Records of auth_group
 -- ----------------------------
-INSERT INTO `auth_group` VALUES ('a203b7641ffd4159bf8365317e991ae0', 'admin', '超级管理员', '', '', '01');
+INSERT INTO `auth_group` VALUES ('admin', 'admin', '超级管理员', '', '', '01');
 
 -- ----------------------------
 -- Table structure for auth_permission
@@ -96,7 +96,7 @@ CREATE TABLE `auth_user` (
 -- ----------------------------
 -- Records of auth_user
 -- ----------------------------
-INSERT INTO `auth_user` VALUES ('admin', 'admin', '0b4e7a0e5fe84ad35fb5f95b9ceeac79', '372924198708265138', '管理员', '372924', 'a203b7641ffd4159bf8365317e991ae0', null, '管理员\r\n继续加油！！！');
+INSERT INTO `auth_user` VALUES ('admin', 'admin', '0b4e7a0e5fe84ad35fb5f95b9ceeac79', '372924198708265138', '管理员', '372924', 'admin', null, '管理员\r\n继续加油！！！');
 INSERT INTO `auth_user` VALUES ('e4831f52908b4c3e90d50032d4ffb043', 'ww', '0b4e7a0e5fe84ad35fb5f95b9ceeac79', '333333333333333', '王五', '1234', null, 'admin', '啥都分开了');
 INSERT INTO `auth_user` VALUES ('test', 'test', '0b4e7a0e5fe84ad35fb5f95b9ceeac79', '111111111111111111', '测试', '372924', '', 'admin', '阿斯蒂芬');
 
@@ -187,3 +187,77 @@ CREATE TABLE `party_org` (
 -- Records of party_org
 -- ----------------------------
 INSERT INTO `party_org` VALUES ('a203b7641ffd4159bf8365317e991ae0', null, null, null, null, '\0', '0', '0', '0', null);
+
+-- ----------------------------
+-- Procedure structure for sp_page_query
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `sp_page_query`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_page_query`(  
+    #输入参数  
+    _fields VARCHAR(2000), #要查询的字段，用逗号(,)分隔  
+    _tables TEXT,  #要查询的表  
+    _where VARCHAR(2000),   #查询条件  
+    _orderby VARCHAR(200),  #排序规则  
+    _pageindex INT,  #查询页码  
+    _pageSize INT,   #每页记录数  
+    #输出参数  
+    OUT _totalcount INT,  #总记录数  
+    OUT _pagecount INT    #总页数  
+)
+BEGIN  
+    #140529-xxj-分页存储过程  
+    #计算起始行号  
+    SET @startRow = _pageSize * (_pageIndex - 1);  
+    SET @pageSize = _pageSize;  
+    SET @rowindex = 0; #行号  
+  
+    #合并字符串  
+    SET @strsql = CONCAT(  
+        #'select sql_calc_found_rows  @rowindex:=@rowindex+1 as rownumber,' #记录行号  
+        'select sql_calc_found_rows '  
+        ,_fields  
+        ,' from '  
+        ,_tables  
+        ,CASE IFNULL(_where, '') WHEN '' THEN '' ELSE CONCAT(' where ', _where) END  
+        ,CASE IFNULL(_orderby, '') WHEN '' THEN '' ELSE CONCAT(' order by ', _orderby) END  
+      ,' limit '   
+        ,@startRow  
+        ,','   
+        ,@pageSize  
+    );  
+  
+    PREPARE strsql FROM @strsql;#定义预处理语句   
+    EXECUTE strsql;                         #执行预处理语句   
+    DEALLOCATE PREPARE strsql;  #删除定义   
+    #通过 sql_calc_found_rows 记录没有使用 limit 语句的记录，使用 found_rows() 获取行数  
+    SET _totalcount = FOUND_ROWS();  
+  
+    #计算总页数  
+    IF (_totalcount <= _pageSize) THEN  
+        SET _pagecount = 1;  
+    ELSE IF (_totalcount % _pageSize > 0) THEN  
+        SET _pagecount = _totalcount / _pageSize + 1;  
+    ELSE  
+        SET _pagecount = _totalcount / _pageSize;  
+    END IF;  
+    END IF;    
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Procedure structure for sp_test
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `sp_test`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_test`(  
+    Foo int, 
+	  out Bar int
+)
+BEGIN
+set Bar=Foo;
+select 1 as A;
+END
+;;
+DELIMITER ;

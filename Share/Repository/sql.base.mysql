@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <sqlarea name="base">
+    <sqlgroup name="base_dict">
+      <sql name="pagequery"
+           type="sp"
+           sp_name="sp_page_query"
+           fields=" d.*,dt.type_name dict_type_name "
+           tables=" base_dict d left join base_dict_type dt on d.dict_type = dt.type_code "
+           where=" 1=1 "
+           order=" d.dict_type asc,d.dict_order asc "
+           >
+      </sql>
+    </sqlgroup>
+  </sqlarea>
+  <sqlarea name="auth">
+    <sqlgroup name="auth_user">
+      <sql name="update" type="txt">
+        update auth_user set {0} where user_id=@user_id
+      </sql>
+      <sql name="pagequery"
+           type="sp"
+           sp_name="sp_page_query"
+           fields=" usr.*,gp.gp_name user_group_name"
+           tables=" auth_user usr left join auth_group gp on usr.user_group=gp.gp_id "
+           where=" 1=1 "
+           order=" usr.user_name asc"
+           >
+      </sql>
+    </sqlgroup>
+    <sqlgroup name="auth_permission">
+      <sql name="haschild" type="txt">
+        select count(1)
+        from auth_permission p
+        where p.per_id in ({0})
+        and exists(select 1 from auth_permission where per_parent=p.per_code)
+      </sql>
+      <sql name="pagequery"
+           type="sp"
+           sp_name="sp_page_query"
+           fields=" p.* ,d.dict_name per_type_name,pp.per_name per_parent_name "
+           tables=" auth_permission p left join base_dict d on p.per_type=d.dict_code left join auth_permission pp on p.per_parent=pp.per_code "
+           where=" 1=1 "
+           order=" p.per_sort asc"
+           >
+      </sql>
+    </sqlgroup>
+    <sqlgroup name="auth_group">
+      <sql name="haschild" type="txt">
+        select count(1)
+        from auth_group gp
+        where gp.gp_id in ({0})
+        and exists(select 1 from auth_group where gp_parent=gp.gp_code)
+      </sql>
+      <sql name="pagequery"
+           type="sp"
+           sp_name="sp_page_query"
+           fields=" gp.*,gpp.gp_name gp_parent_name "
+           tables=" auth_group gp left join auth_group gpp on gp.gp_parent=gpp.gp_code "
+           where=" 1=1 "
+           order=" gp.gp_sort asc"
+           >
+      </sql>
+    </sqlgroup>
+    <sqlgroup name="auth_user_per_rel">
+      <sql name="getper" type="txt">
+        select per.per_id ,per.per_code,per.per_name,per.per_type,per.per_uri,per.per_method,per.per_parent,per.per_sort,rel.rel_userid
+        from auth_permission per,auth_user_permission rel
+        where (per.per_id = rel.rel_permissionid or rel.rel_permissionid = '*')
+        and rel.rel_userid=@user_id
+        order by per.per_sort
+      </sql>
+    </sqlgroup>
+  </sqlarea>
+</configuration>

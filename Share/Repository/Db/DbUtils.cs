@@ -16,7 +16,7 @@ namespace MyNet.Repository.Db
         public const string DefaultConnectionKey = "default";
         public static DatabaseType GetDbTypeByConnKey(string strKey = DefaultConnectionKey)
         {
-            DatabaseType dbType = DatabaseType.SqlServer;
+            DatabaseType dbType = DatabaseType.sqlserver;
             //1、获取数据库连接配置集合
             if (ConfigurationManager.ConnectionStrings == null || ConfigurationManager.ConnectionStrings.Count < 1)
             {
@@ -37,16 +37,16 @@ namespace MyNet.Repository.Db
             switch (connectionStringSettings.ProviderName)
             {
                 case "System.Data.SqlClient":
-                    dbType = DatabaseType.SqlServer;
+                    dbType = DatabaseType.sqlserver;
                     break;
                 //case "Oracle.DataAccess.Client":
                 //    dbType = DatabaseType.Oracle;
                 //    break;
                 case "MySql.Data.MySqlClient":
-                    dbType = DatabaseType.MySql;
+                    dbType = DatabaseType.mysql;
                     break;
                 case "System.Data.SQLite":
-                    dbType = DatabaseType.Sqlite;
+                    dbType = DatabaseType.sqlite;
                     break;
                 //case "System.Data.OleDb":
                 //    dbType = DatabaseType.Aceess;
@@ -108,11 +108,11 @@ namespace MyNet.Repository.Db
             var dbType = GetDbTypeByConnKey();
             switch (dbType)
             {
-                case DatabaseType.MySql:
+                case DatabaseType.mysql:
                     return new MySqlDialect();
-                case DatabaseType.Sqlite:
+                case DatabaseType.sqlite:
                     return new SqliteDialect();
-                case DatabaseType.SqlServer:
+                case DatabaseType.sqlserver:
                 default:
                     return new SqlServerDialect();
             }

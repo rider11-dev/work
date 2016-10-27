@@ -10,10 +10,14 @@ using MyNet.Service.Card;
 using MyNet.WebApi.Filters;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Http;
+using MyNet.Components.Extensions;
+using System.Web.Http.Dispatcher;
+using MyNet.WebApi.Extensions;
 
 namespace MyNet.WebApi
 {
@@ -29,67 +33,34 @@ namespace MyNet.WebApi
         static void SetAutofacWebApi()
         {
             var builder = new ContainerBuilder();
+            RegisterModules(builder);
 
-            RegisterControllers(builder);
-            RegisterBussinessModules(builder);
-
-            var config = GlobalConfiguration.Configuration;
             var container = builder.Build();
+            var config = GlobalConfiguration.Configuration;
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
 
         }
 
-        static void RegisterControllers(ContainerBuilder builder)
+        static void RegisterModules(ContainerBuilder builder)
         {
-            builder.RegisterApiControllers(Assembly.GetExecutingAssembly()).PropertiesAutowired(PropertyWiringOptions.None);
-        }
-
-        static void RegisterBussinessModules(ContainerBuilder builder)
-        {
-            builder.RegisterType<DbSession>().As<IDbSession>().InstancePerRequest();
-            //
-            builder.RegisterType(typeof(DictTypeRepository)).InstancePerRequest();
-            builder.RegisterType(typeof(DictTypeService)).InstancePerRequest();
-            //
-            builder.RegisterType(typeof(DictRepository)).InstancePerRequest();
-            builder.RegisterType(typeof(DictService)).InstancePerRequest();
-
-            //
-            builder.RegisterType(typeof(UserRepository)).InstancePerRequest();
-            builder.RegisterType(typeof(UserService)).InstancePerRequest();
-            //
-            builder.RegisterType(typeof(GroupRepository)).InstancePerRequest();
-            builder.RegisterType(typeof(GroupService)).InstancePerRequest();
-            //
-            builder.RegisterType(typeof(PermissionRepository)).InstancePerRequest();
-            builder.RegisterType(typeof(PermissionService)).InstancePerRequest();
-            //
-            builder.RegisterType(typeof(UserPermissionRelRepository)).InstancePerRequest();
-            builder.RegisterType(typeof(UserPermissionRelService)).InstancePerRequest();
-            //
-            builder.RegisterType(typeof(CardInfoRepository)).InstancePerRequest();
-            builder.RegisterType(typeof(CardInfoService)).InstancePerRequest();
-            //
-            builder.RegisterType(typeof(CardRecordRepository)).InstancePerRequest();
-            //
-            builder.RegisterType(typeof(MallAccountService)).InstancePerRequest();
-            //
-            builder.RegisterType(typeof(CardRecordRepository)).InstancePerRequest();
-            //
-            builder.RegisterType(typeof(CardBillRepository)).InstancePerRequest();
-            //
-            builder.RegisterType(typeof(CardMoneyService)).InstancePerRequest();
-            //
-            builder.RegisterType(typeof(CardRecordService)).InstancePerRequest();
-            //
-            builder.RegisterType(typeof(CardBillService)).InstancePerRequest();
-
+            //1、注册当前应用程序域中指定程序集的类型
+            var assDomain = System.AppDomain.CurrentDomain.GetAssemblies();
+            builder.RegisterType<DbSession>().As<IDbSession>().InstancePerRequest();//DbSession
+            builder.RegisterApiControllers(assDomain).PropertiesAutowired(PropertyWiringOptions.None);//ApiController
+            builder.RegisterAssemblyTypes(assDomain)
+                .Where(t => t.Name.EndsWith("Repository"));//Repository
+            builder.RegisterAssemblyTypes(assDomain)
+                .Where(t => t.Name.EndsWith("Service"));//Service
         }
 
         static void InitDapper()
         {
             DapperExtensions.DapperExtensions.SqlDialect = DbUtils.GetSqlDialect();
-            DapperExtensions.DapperExtensions.SetMappingAssemblies(new[] { Assembly.Load("MyNet.Repository"), Assembly.Load("MyNet.Service") });
+            DapperExtensions.DapperExtensions.SetMappingAssemblies(
+                System.AppDomain.CurrentDomain.GetAssemblies()
+                .Where(ass => ass.FullName.Contains("Repository") || ass.FullName.Contains("Service"))
+                .ToList()
+                );
         }
     }
 }

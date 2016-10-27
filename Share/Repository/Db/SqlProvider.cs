@@ -11,43 +11,36 @@ namespace MyNet.Repository.Db
 {
     public class SqlProvider
     {
-        static XDocument SqlConfigure = null;
+        static Dictionary<string, XDocument> SqlCfgs = new Dictionary<string, XDocument>();
 
         static SqlProvider()
         {
-            string sqlFile = GetSqlFile();
-            SqlConfigure = XDocument.Load(sqlFile);
-            if (SqlConfigure == null)
-            {
-                throw new Exception("加载sql配置文件失败！");
-            }
+            LoadSqlCfgs();
         }
 
-        static string GetSqlFile()
+        private static void LoadSqlCfgs()
         {
-            string filePrefix = "sql.config.";
-            string fileName = string.Empty;
-            var dbType = DbUtils.GetDbTypeByConnKey();
-            switch (dbType)
+            //1、构造sql配置文件正则表达式
+            string searchPattern = "^sql.*.";
+            string dbString = DbUtils.GetDbTypeByConnKey().ToString();
+            searchPattern += dbString + "$";
+
+            //2、加载sql配置文件
+            try
             {
-                case DatabaseType.MySql:
-                    fileName = filePrefix + "mysql";
-                    break;
-                case DatabaseType.Sqlite:
-                    fileName = filePrefix + "sqlite";
-                    break;
-                case DatabaseType.SqlServer:
-                default:
-                    fileName = filePrefix + "sqlserver";
-                    break;
+                var files = FileExtension.GetFiles(AppDomain.CurrentDomain.BaseDirectory + "/bin", searchPattern);
+                if (files != null && files.Count > 0)
+                {
+                    files.ForEach(f =>
+                    {
+                        SqlCfgs.Add(f.Name.Replace("sql.", "").Replace("." + dbString, ""), XDocument.Load(f.FullName));
+                    });
+                }
             }
-            string fileFullPath = "";
-            bool find = FileExtension.GetFileFullPath(AppDomain.CurrentDomain.BaseDirectory, fileName, out fileFullPath);
-            if (find == false)
+            catch (Exception ex)
             {
-                throw new FileNotFoundException("未找到sql配置文件：", fileName);
+                throw new Exception("加载sql配置文件失败！", ex);
             }
-            return fileFullPath;
         }
 
         public static string GetTxtSql(SqlConfEntity conf)
@@ -91,7 +84,7 @@ namespace MyNet.Repository.Db
 
         static XElement GetSqlNode(SqlConfEntity conf)
         {
-            var sqlNode = SqlConfigure
+            var sqlNode = SqlCfgs[conf.area]
                 .Descendants("sqlarea").Where(e => e.Attribute("name").Value == conf.area)
                 .Descendants("sqlgroup").Where(e => e.Attribute("name").Value == conf.group)
                 .Descendants("sql").Where(e => e.Attribute("name").Value == conf.name)

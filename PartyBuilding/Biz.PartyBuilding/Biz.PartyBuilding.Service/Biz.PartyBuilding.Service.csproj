@@ -55,6 +55,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Biz.PartyBuilding.Dto\Biz.PartyBuilding.Dto.csproj">
+      <Project>{7b76688f-e279-447a-9267-efec1a5a7b93}</Project>
+      <Name>Biz.PartyBuilding.Dto</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Biz.PartyBuilding.Model\Biz.PartyBuilding.Model.csproj">
       <Project>{373afccf-ac9c-42ab-a58f-52c651be971f}</Project>
       <Name>Biz.PartyBuilding.Model</Name>

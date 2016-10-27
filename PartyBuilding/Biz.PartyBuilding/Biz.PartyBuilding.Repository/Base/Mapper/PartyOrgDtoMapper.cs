@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Biz.PartyBuilding.Repository.Base.Mapper
 {
-    public class PartyOrgMapper : ClassMapper<PartyOrg>
+    public class PartyOrgDtoMapper : ClassMapper<PartyOrgDto>
     {
-        public PartyOrgMapper()
+        public PartyOrgDtoMapper()
         {
             Table("party_org");
 

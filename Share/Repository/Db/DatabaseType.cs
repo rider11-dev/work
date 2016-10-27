@@ -8,9 +8,9 @@ namespace MyNet.Repository.Db
 {
     public enum DatabaseType
     {
-        SqlServer,
-        MySql,
-        //Oracle,//暂不支持
-        Sqlite
+        sqlserver,
+        mysql,
+        //oracle,//暂不支持
+        sqlite
     }
 }

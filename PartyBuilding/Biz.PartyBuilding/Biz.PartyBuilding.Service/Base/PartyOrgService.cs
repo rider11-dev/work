@@ -10,18 +10,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MyNet.Components.Extensions;
 
 namespace Biz.PartyBuilding.Service
 {
-    public class PartyOrgService : BaseService<PartyOrg>
+    public class PartyOrgService : BaseService<PartyOrgDto>
     {
         //常量
-        const string Msg_SyncOrg = "同步组织信息";
         const string Msg_Update = "更新党组织信息";
-        const string Msg_GetById = "根据主键查询党组织信息";
         const string Msg_PageQuery = "分页查询党组织信息";
-        const string SqlName_Sync = "sync";
-        const string SqlName_GetById = "getbyid";
+
+        const string SqlName_PageQuery = "pagequery";
 
         //私有变量
         private PartyOrgRepository _poRep;
@@ -34,26 +33,7 @@ namespace Biz.PartyBuilding.Service
             _gpRep = gpRep;
         }
 
-        /// <summary>
-        /// 同步党组织，从auth_group表拉取数据
-        /// </summary>
-        /// <returns></returns>
-        public OptResult Sync()
-        {
-            OptResult rst = null;
-            try
-            {
-                var val = _poRep.UpdateBySqlName(SqlName_Sync);
-            }
-            catch (Exception ex)
-            {
-                LogHelper.LogError(Msg_SyncOrg, ex);
-                rst = OptResult.Build(ResultCode.DbError, Msg_SyncOrg);
-            }
-            return rst;
-        }
-
-        public OptResult Update(PartyOrg po)
+        public OptResult Update(PartyOrgDto po)
         {
             OptResult rst = null;
             //3、更新：获取旧对象，赋值，更新
@@ -82,27 +62,56 @@ namespace Biz.PartyBuilding.Service
             return rst;
         }
 
-        public OptResult GetById(string pkId)
+        public OptResult QueryByPage(PageQuery page)
         {
             OptResult rst = null;
+            if (page == null)
+            {
+                rst = OptResult.Build(ResultCode.ParamError, Msg_PageQuery + "，分页参数不能为空！");
+                return rst;
+            }
+
+            PageQuerySqlEntity sqlEntity = _poRep.GetPageQuerySql(SqlName_PageQuery);
+            if (sqlEntity == null)
+            {
+                rst = OptResult.Build(ResultCode.ParamError, Msg_PageQuery + "，未能获取sql配置！");
+                return rst;
+            }
+            //构造where
+            #region where条件
+            if (page.conditions != null && page.conditions.Count > 0)
+            {
+                if (page.conditions.ContainsKey("gp_name") && !page.conditions["gp_name"].IsEmpty())
+                {
+                    sqlEntity.where.AppendFormat(" and gp.gp_name like '%{0}%' ", page.conditions["gp_name"]);
+                }
+
+                if (page.conditions.ContainsKey("gp_parent") && !page.conditions["gp_parent"].IsEmpty())
+                {
+                    sqlEntity.where.AppendFormat(" and gp.gp_parent = '{0}' ", page.conditions["gp_parent"]);
+                }
+                else if (page.conditions.ContainsKey("gp_parent_name") && !page.conditions["gp_parent_name"].IsEmpty())
+                {
+                    sqlEntity.where.AppendFormat(" and gpp.gp_name like '%{0}%' ", page.conditions["gp_parent_name"]);
+                }
+            }
+            #endregion
             try
             {
-                var val = _poRep.QueryBySqlName(typeof(PartyOrg), SqlName_GetById, new { pkid = pkId });
-                rst = (val == null || val.Count() < 1) ?
-                    OptResult.Build(ResultCode.DataNotFound, Msg_GetById) :
-                    OptResult.Build(ResultCode.Success, Msg_GetById, val.First());
+                var groups = _poRep.PageQueryBySp<PartyOrgDto>(sqlEntity: sqlEntity, page: page);
+                rst = OptResult.Build(ResultCode.Success, Msg_PageQuery, new
+                {
+                    total = page.total,
+                    pagecount = page.pageTotal,
+                    rows = groups
+                });
             }
             catch (Exception ex)
             {
-                LogHelper.LogError(Msg_GetById, ex);
-                rst = OptResult.Build(ResultCode.DbError, Msg_GetById);
+                LogHelper.LogError(Msg_PageQuery, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_PageQuery);
             }
             return rst;
-        }
-
-        public OptResult PageQuery(PageQuery page)
-        {
-            return null;
         }
     }
 }

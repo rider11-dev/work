@@ -14,6 +14,7 @@ namespace MyNet.WebApi.Controllers
     {
         public BaseController()
         {
+            var dd = 0;
         }
 
         protected TokenData ParseToken(HttpActionContext actionContext)
