@@ -10,23 +10,43 @@ namespace MyNet.Model
     /// </summary>
     public class PageQuery
     {
-        public int pageIndex { get; set; }
-        public int pageSize { get; set; }
+        private int _idx;
+        public int pageIndex
+        {
+            get { return _idx; }
+            set
+            {
+                _idx = value;
+                if (_idx <= 0)
+                {
+                    _idx = 1;
+                }
+            }
+        }
+        private int _size;
+        public int pageSize
+        {
+            get { return _size; }
+            set
+            {
+                _size = value;
+                if (_size <= 0)
+                {
+                    _size = 20;
+                }
+            }
+        }
 
-        public long total { get; set; }
+        /// <summary>
+        /// 总记录数
+        /// </summary>
+        public int total { get; set; }
+        /// <summary>
+        /// 总页数
+        /// </summary>
+        public int pageTotal { get; set; }
 
         public Dictionary<string, object> conditions { get; set; }
 
-        public void Verify()
-        {
-            if (pageIndex < 0)
-            {
-                pageIndex = 0;
-            }
-            if (pageSize <= 0)
-            {
-                pageSize = 20;
-            }
-        }
     }
 }

@@ -101,6 +101,7 @@ namespace MyNet.ClientFrame.Models.Auth
             TreeHelpHelper.OpenAllFuncsHelp(false, node =>
             {
                 var tNode = (TreeViewData.TreeNode)node;
+                base.per_parent_name = tNode.Label;
                 base.per_parent = tNode.Id;
             });
         }

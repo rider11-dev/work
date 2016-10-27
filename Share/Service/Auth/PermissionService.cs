@@ -30,6 +30,7 @@ namespace MyNet.Service.Auth
         const string Msg_GetAllFuncs = "获取所有功能权限";
 
         const string SqlName_HasChild = "haschild";
+        const string SqlName_PageQuery = "pagequery";
 
         //私有变量
         private PermissionRepository _perRep;
@@ -239,56 +240,46 @@ namespace MyNet.Service.Auth
                 rst = OptResult.Build(ResultCode.ParamError, Msg_QueryByPage + "，分页参数不能为空！");
                 return rst;
             }
-            page.Verify();
-            //1、过滤条件
-            PredicateGroup pg = new PredicateGroup { Operator = GroupOperator.And, Predicates = new List<IPredicate>() };
+            PageQuerySqlEntity sqlEntity = _perRep.GetPageQuerySql(SqlName_PageQuery);
+            if (sqlEntity == null)
+            {
+                rst = OptResult.Build(ResultCode.ParamError, Msg_QueryByPage + "，未能获取sql配置！");
+                return rst;
+            }
+            //构造where
+            #region where条件
             if (page.conditions != null && page.conditions.Count > 0)
             {
                 if (page.conditions.ContainsKey("per_code") && !page.conditions["per_code"].IsEmpty())
                 {
-                    pg.Predicates.Add(Predicates.Field<Permission>(p => p.per_code, Operator.Like, "%" + page.conditions["per_code"] + "%"));
+                    sqlEntity.where.AppendFormat(" and p.per_code='{0}' ", page.conditions["per_code"]);
                 }
                 if (page.conditions.ContainsKey("per_name") && !page.conditions["per_name"].IsEmpty())
                 {
-                    pg.Predicates.Add(Predicates.Field<Permission>(p => p.per_name, Operator.Like, "%" + page.conditions["per_name"] + "%"));
+                    sqlEntity.where.AppendFormat(" and p.per_name like '%{0}%' ", page.conditions["per_name"]);
                 }
                 if (page.conditions.ContainsKey("per_type") && !page.conditions["per_type"].IsEmpty())
                 {
-                    pg.Predicates.Add(Predicates.Field<Permission>(p => p.per_type, Operator.Eq, page.conditions["per_type"]));
+                    sqlEntity.where.AppendFormat(" and p.per_type = '{0}' ", page.conditions["per_type"]);
                 }
                 if (page.conditions.ContainsKey("per_parent") && !page.conditions["per_parent"].IsEmpty())
                 {
-                    pg.Predicates.Add(Predicates.Field<Permission>(p => p.per_parent, Operator.Eq, page.conditions["per_parent"]));
+                    sqlEntity.where.AppendFormat(" and p.per_parent = '{0}' ", page.conditions["per_parent"]);
                 }
                 else if (page.conditions.ContainsKey("per_parent_name") && !page.conditions["per_parent_name"].IsEmpty())
                 {
-                    //TODO
-                    //上级模糊查询（方法很笨，考虑后续优化）
-                    var parentCodes = _perRep.GetList<PermissionParentDto>(Predicates.Field<Permission>(p => p.per_name, Operator.Like, "%" + page.conditions["per_parent_name"] + "%"));
-                    if (parentCodes == null || parentCodes.Count() < 1)
-                    {
-                        rst = OptResult.Build(ResultCode.Success, Msg_QueryByPage, new
-                        {
-                            total = 0
-                        });
-                        return rst;
-                    }
-                    pg.Predicates.Add(Predicates.Field<Permission>(p => p.per_parent, Operator.Eq, parentCodes.Select(p => p.per_code)));
-
+                    sqlEntity.where.AppendFormat(" and pp.per_name like '%{0}%' ", page.conditions["per_parent_name"]);
                 }
             }
-            //2、排序
-            long total = 0;
-            IList<ISort> sort = new[]
-            {
-                new Sort{PropertyName="per_sort",Ascending=true}
-            };
+            #endregion
+
             try
             {
-                var pers = _perRep.GetPageList(page.pageIndex, page.pageSize, out total, sort, pg);
+                var pers = _perRep.PageQueryBySp<PermissionDto>(sqlEntity: sqlEntity, page: page);
                 rst = OptResult.Build(ResultCode.Success, Msg_QueryByPage, new
                 {
-                    total = total,
+                    total = page.total,
+                    pagecount = page.pageTotal,
                     rows = pers
                 });
             }

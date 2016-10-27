@@ -7,7 +7,6 @@
       xmlns:local="clr-namespace:MyNet.ClientFrame.Pages" 
       xmlns:vmauth="clr-namespace:MyNet.ClientFrame.Models.Auth"
       xmlns:cvt="clr-namespace:MyNet.Components.WPF.Converter;assembly=MyNet.Components.WPF"
-      xmlns:localcvt="clr-namespace:MyNet.ClientFrame.Converter"
       xmlns:vmwpf="clr-namespace:MyNet.Components.WPF.Models;assembly=MyNet.Components.WPF"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="600"
@@ -18,8 +17,6 @@
         <vmauth:PermMngViewModel x:Key="model"/>
         <ctl:PagingArgs x:Key="paging"/>
         <cvt:BooleanConverter x:Key="boolConverter"/>
-        <localcvt:PermTypeConverter x:Key="permTypeConverter"/>
-        <localcvt:PermCodeConverter x:Key="permCodeConverter"/>
         <vmwpf:CmbModel x:Key="cbVm"/>
     </Page.Resources>
     <Grid x:Name="gridLayout">
@@ -31,10 +28,6 @@
         <!--row1：工具栏-->
         <Border x:Name="bdBtns" Grid.Row="0" Style="{StaticResource mngBdStyle}">
             <StackPanel x:Name="panelBtns" Orientation="Horizontal">
-                <!--<Button Style="{StaticResource btnStyle}" Content="新 增" />
-                <Button Style="{StaticResource btnStyle}" Content="修 改" />
-                <Button Style="{StaticResource btnStyle}" Content="删 除" />
-                <Button Style="{StaticResource btnStyle}" Content="权 限" />-->
             </StackPanel>
         </Border>
         <!--row2：过滤-->
@@ -86,14 +79,14 @@
                         <DataGridTemplateColumn Header="类型">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Path=per_type,Converter={StaticResource permTypeConverter}}"/>
+                                    <TextBlock Text="{Binding Path=per_type_name}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTemplateColumn Header="上级">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Path=per_parent,Converter={StaticResource permCodeConverter}}"/>
+                                    <TextBlock Text="{Binding Path=per_parent_name}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

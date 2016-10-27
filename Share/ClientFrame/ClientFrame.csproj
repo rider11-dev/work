@@ -86,8 +86,6 @@
     </ApplicationDefinition>
     <Compile Include="Command\OpenFuncCmd.cs" />
     <Compile Include="Command\OpenFuncParam.cs" />
-    <Compile Include="Converter\GroupIdConverter.cs" />
-    <Compile Include="Converter\GroupCodeConverter.cs" />
     <Compile Include="Converter\PermCodeConverter.cs" />
     <Compile Include="Converter\PermTypeConverter.cs" />
     <Compile Include="Help\TreeHelpHelper.cs" />

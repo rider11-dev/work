@@ -157,6 +157,7 @@ namespace MyNet.WebApi.Controllers.Auth
         {
             OptResult rst = null;
 
+            //rst = _usrSrv.QueryByPage(page);
             rst = _usrSrv.QueryByPage(page);
 
             return rst;

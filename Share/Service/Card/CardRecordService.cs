@@ -35,7 +35,7 @@ namespace MyNet.Service.Card
                 rst = OptResult.Build(ResultCode.ParamError, Msg_QueryByPage + "，分页参数不能为空！");
                 return rst;
             }
-            page.Verify();
+            
 
             //1、过滤条件
             PredicateGroup pg = new PredicateGroup { Operator = GroupOperator.And, Predicates = new List<IPredicate>() };

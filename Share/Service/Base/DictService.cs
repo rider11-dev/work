@@ -2,6 +2,7 @@
 using MyNet.Components.Extensions;
 using MyNet.Components.Result;
 using MyNet.Dto.Auth;
+using MyNet.Dto.Base;
 using MyNet.Model;
 using MyNet.Model.Base;
 using MyNet.Repository.Base;
@@ -20,6 +21,8 @@ namespace MyNet.Service.Base
         const string Msg_Delete = "删除字典数据";
         const string Msg_QueryByPage = "分页查询字典数据";
         const string Msg_GetList = "获取字典数据列表";
+
+        const string SqlName_PageQuery = "pagequery";
 
         DictRepository _dictRep;
         DictTypeRepository _dictTypeRep;
@@ -122,18 +125,44 @@ namespace MyNet.Service.Base
                 rst = OptResult.Build(ResultCode.ParamError, Msg_QueryByPage + "，分页参数不能为空！");
                 return rst;
             }
-            page.Verify();
-            //1、过滤条件
-            var pg = GetPredicates(page.conditions);
-            //2、排序
-            IList<ISort> sort = GetSort();
+            PageQuerySqlEntity sqlEntity = _dictRep.GetPageQuerySql(SqlName_PageQuery);
+            if (sqlEntity == null)
+            {
+                rst = OptResult.Build(ResultCode.ParamError, Msg_QueryByPage + "，未能获取sql配置！");
+                return rst;
+            }
+            //构造where
+            #region where条件
+            if (page.conditions != null && page.conditions.Count > 0)
+            {
+                if (page.conditions.ContainsKey("dict_code") && !page.conditions["dict_code"].IsEmpty())
+                {
+                    sqlEntity.where.AppendFormat(" and d.dict_code='{0}' ", page.conditions["dict_code"]);
+                }
+                if (page.conditions.ContainsKey("dict_name") && !page.conditions["dict_name"].IsEmpty())
+                {
+                    sqlEntity.where.AppendFormat(" and d.dict_name like '%{0}%' ", page.conditions["dict_name"]);
+                }
+
+                if (page.conditions.ContainsKey("dict_type") && !page.conditions["dict_type"].IsEmpty())
+                {
+                    sqlEntity.where.AppendFormat(" and d.dict_type = '{0}' ", page.conditions["dict_type"]);
+                }
+                else if (page.conditions.ContainsKey("dict_type_name") && !page.conditions["dict_type_name"].IsEmpty())
+                {
+                    sqlEntity.where.AppendFormat(" and dt.type_name like '%{0}%' ", page.conditions["dict_type_name"]);
+                }
+            }
+            #endregion
+
             long total = 0;
             try
             {
-                var dicts = _dictRep.GetPageList(page.pageIndex, page.pageSize, out total, sort, pg);
+                var dicts = _dictRep.PageQueryBySp<DictDto>(sqlEntity: sqlEntity, page: page);
                 rst = OptResult.Build(ResultCode.Success, Msg_QueryByPage, new
                 {
-                    total = total,
+                    total = page.total,
+                    pagecount = page.pageTotal,
                     rows = dicts
                 });
             }
@@ -154,7 +183,7 @@ namespace MyNet.Service.Base
             IList<ISort> sort = GetSort();
             try
             {
-                var types = _dictRep.GetList<DictDto>(pg, sort);
+                var types = _dictRep.GetList<DictCmbDto>(pg, sort);
 
                 rst = OptResult.Build(ResultCode.Success, null, new
                 {
@@ -185,15 +214,15 @@ namespace MyNet.Service.Base
             {
                 if (conditions.ContainsKey("dict_type") && !conditions["dict_type"].IsEmpty())
                 {
-                    pg.Predicates.Add(Predicates.Field<DictDto>(d => d.Type, Operator.Eq, conditions["dict_type"]));
+                    pg.Predicates.Add(Predicates.Field<DictCmbDto>(d => d.Type, Operator.Eq, conditions["dict_type"]));
                 }
                 if (conditions.ContainsKey("dict_code") && !conditions["dict_code"].IsEmpty())
                 {
-                    pg.Predicates.Add(Predicates.Field<DictDto>(d => d.Id, Operator.Like, "%" + conditions["dict_code"] + "%"));
+                    pg.Predicates.Add(Predicates.Field<DictCmbDto>(d => d.Id, Operator.Like, "%" + conditions["dict_code"] + "%"));
                 }
                 if (conditions.ContainsKey("dict_name") && !conditions["dict_name"].IsEmpty())
                 {
-                    pg.Predicates.Add(Predicates.Field<DictDto>(d => d.Text, Operator.Like, "%" + conditions["dict_name"] + "%"));
+                    pg.Predicates.Add(Predicates.Field<DictCmbDto>(d => d.Text, Operator.Like, "%" + conditions["dict_name"] + "%"));
                 }
             }
 

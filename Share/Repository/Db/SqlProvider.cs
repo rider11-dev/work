@@ -9,11 +9,11 @@ using System.Xml.Linq;
 
 namespace MyNet.Repository.Db
 {
-    public class SqlTextProvider
+    public class SqlProvider
     {
         static XDocument SqlConfigure = null;
 
-        static SqlTextProvider()
+        static SqlProvider()
         {
             string sqlFile = GetSqlFile();
             SqlConfigure = XDocument.Load(sqlFile);
@@ -50,24 +50,53 @@ namespace MyNet.Repository.Db
             return fileFullPath;
         }
 
-        public static string GetSql(SqlConfEntity conf)
+        public static string GetTxtSql(SqlConfEntity conf)
         {
             if (!conf.Check())
             {
                 return string.Empty;
             }
 
-            var sqlNode = SqlConfigure
-                .Descendants("sqlarea").Where(e => e.Attribute("name").Value == conf.area)
-                .Descendants("sqlgroup").Where(e => e.Attribute("name").Value == conf.group)
-                .Descendants("sql").Where(e => e.Attribute("name").Value == conf.name)
-                .FirstOrDefault();
+            var sqlNode = GetSqlNode(conf);
             if (sqlNode == null)
             {
                 return string.Empty;
             }
 
             return sqlNode.Value.Replace("\r\n", " ").Replace("\n", " ").Replace("\t", " ").Trim();
+        }
+
+        public static PageQuerySqlEntity GetPageQuerySql(SqlConfEntity conf)
+        {
+            PageQuerySqlEntity entity = null;
+            if (!conf.Check())
+            {
+                return entity;
+            }
+            var sqlNode = GetSqlNode(conf);
+            if (sqlNode == null)
+            {
+                return entity;
+            }
+            entity = new PageQuerySqlEntity
+            {
+                sp_name = sqlNode.Attribute("sp_name").Value,
+                fields = sqlNode.Attribute("fields").Value,
+                tables = sqlNode.Attribute("tables").Value,
+                where = new StringBuilder(sqlNode.Attribute("where").Value),
+                order = new StringBuilder(sqlNode.Attribute("order").Value),
+            };
+            return entity;
+        }
+
+        static XElement GetSqlNode(SqlConfEntity conf)
+        {
+            var sqlNode = SqlConfigure
+                .Descendants("sqlarea").Where(e => e.Attribute("name").Value == conf.area)
+                .Descendants("sqlgroup").Where(e => e.Attribute("name").Value == conf.group)
+                .Descendants("sql").Where(e => e.Attribute("name").Value == conf.name)
+                .FirstOrDefault();
+            return sqlNode;
         }
     }
 }

@@ -37,7 +37,7 @@ namespace MyNet.Service.Base
                 rst = OptResult.Build(ResultCode.ParamError, Msg_QueryByPage + "，分页参数不能为空！");
                 return rst;
             }
-            page.Verify();
+            
 
             //排序
             long total = 0;

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MyNet.Service.Base.Mapper
 {
-    public class DictDtoMapper : ClassMapper<DictDto>
+    public class DictDtoMapper : ClassMapper<DictCmbDto>
     {
         public DictDtoMapper()
         {

@@ -83,8 +83,9 @@
     <Compile Include="Db\Database.cs" />
     <Compile Include="Db\DbSession.cs" />
     <Compile Include="Db\DbUtils.cs" />
+    <Compile Include="Db\PageQuerySqlEntity.cs" />
     <Compile Include="Db\SqlConfEntity.cs" />
-    <Compile Include="Db\SqlTextProvider.cs" />
+    <Compile Include="Db\SqlProvider.cs" />
     <Compile Include="IBaseRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

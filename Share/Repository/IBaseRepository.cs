@@ -1,5 +1,7 @@
 ﻿
+using Dapper;
 using DapperExtensions;
+using MyNet.Model;
 using MyNet.Repository.Db;
 using System;
 using System.Collections.Generic;
@@ -40,8 +42,8 @@ namespace MyNet.Repository
         #endregion dapper-extensions
 
         #region dapper
-
-        IEnumerable<object> Query(Type type, string sql, object param = null, IDbTransaction transaction = null, bool buffered = true, int? commandTimeout = null, CommandType? commandType = null);
+        IEnumerable<TReturn> PageQueryBySp<TReturn>(PageQuerySqlEntity sqlEntity, PageQuery page, IDbTransaction transaction = null, bool buffered = true, int? commandTimeout = null);
+        IEnumerable<TReturn> Query<TReturn>(string sql, object param = null, IDbTransaction transaction = null, bool buffered = true, int? commandTimeout = null, CommandType? commandType = null);
 
         IEnumerable<TReturn> Query<TFirst, TSecond, TReturn>(string sql, Func<TFirst, TSecond, TReturn> map, object param = null, IDbTransaction transaction = null, bool buffered = true, string splitOn = "Id", int? commandTimeout = null, CommandType? commandType = null);
 
@@ -61,7 +63,7 @@ namespace MyNet.Repository
 
 
 
-        IEnumerable<object> QueryBySqlName(Type type, string sqlName, object param = null, IDbTransaction transaction = null, bool buffered = true, int? commandTimeout = null, CommandType? commandType = null);
+        IEnumerable<TReturn> QueryBySqlName<TReturn>(string sqlName, object param = null, IDbTransaction transaction = null, bool buffered = true, int? commandTimeout = null, CommandType? commandType = null);
 
         IEnumerable<TReturn> QueryBySqlName<TFirst, TSecond, TReturn>(string sqlName, Func<TFirst, TSecond, TReturn> map, object param = null, IDbTransaction transaction = null, bool buffered = true, string splitOn = "Id", int? commandTimeout = null, CommandType? commandType = null);
 

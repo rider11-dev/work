@@ -1,6 +1,7 @@
 ﻿using DapperExtensions;
 using MyNet.Components.Extensions;
 using MyNet.Components.Result;
+using MyNet.Dto.Auth;
 using MyNet.Model;
 using MyNet.Model.Auth;
 using MyNet.Repository.Auth;
@@ -25,6 +26,7 @@ namespace MyNet.Service.Auth
         const string Msg_GetAll = "获取所有组织信息";
 
         const string SqlName_HasChild = "haschild";
+        const string SqlName_PageQuery = "pagequery";
 
         //私有变量
         private GroupRepository _groupRep;
@@ -215,52 +217,43 @@ namespace MyNet.Service.Auth
                 rst = OptResult.Build(ResultCode.ParamError, Msg_QueryByPage + "，分页参数不能为空！");
                 return rst;
             }
-            page.Verify();
-            //1、过滤条件
-            PredicateGroup pg = new PredicateGroup { Operator = GroupOperator.And, Predicates = new List<IPredicate>() };
+
+            PageQuerySqlEntity sqlEntity = _groupRep.GetPageQuerySql(SqlName_PageQuery);
+            if (sqlEntity == null)
+            {
+                rst = OptResult.Build(ResultCode.ParamError, Msg_QueryByPage + "，未能获取sql配置！");
+                return rst;
+            }
+            //构造where
+            #region where条件
             if (page.conditions != null && page.conditions.Count > 0)
             {
                 if (page.conditions.ContainsKey("gp_code") && !page.conditions["gp_code"].IsEmpty())
                 {
-                    pg.Predicates.Add(Predicates.Field<Group>(gp => gp.gp_code, Operator.Like, "%" + page.conditions["gp_code"] + "%"));
+                    sqlEntity.where.AppendFormat(" and gp.gp_code='{0}' ", page.conditions["gp_code"]);
                 }
                 if (page.conditions.ContainsKey("gp_name") && !page.conditions["gp_name"].IsEmpty())
                 {
-                    pg.Predicates.Add(Predicates.Field<Group>(gp => gp.gp_name, Operator.Like, "%" + page.conditions["gp_name"] + "%"));
+                    sqlEntity.where.AppendFormat(" and gp.gp_name like '%{0}%' ", page.conditions["gp_name"]);
                 }
+
                 if (page.conditions.ContainsKey("gp_parent") && !page.conditions["gp_parent"].IsEmpty())
                 {
-                    pg.Predicates.Add(Predicates.Field<Group>(gp => gp.gp_parent, Operator.Eq, page.conditions["gp_parent"]));
+                    sqlEntity.where.AppendFormat(" and gp.gp_parent = '{0}' ", page.conditions["gp_parent"]);
                 }
                 else if (page.conditions.ContainsKey("gp_parent_name") && !page.conditions["gp_parent_name"].IsEmpty())
                 {
-                    //TODO
-                    //上级模糊查询（方法很笨，考虑后续优化）
-                    var parentCodes = _groupRep.GetList<Group>(Predicates.Field<Group>(gp => gp.gp_name, Operator.Like, "%" + page.conditions["gp_parent_name"] + "%"));
-                    if (parentCodes == null || parentCodes.Count() < 1)
-                    {
-                        rst = OptResult.Build(ResultCode.Success, Msg_QueryByPage, new
-                        {
-                            total = 0
-                        });
-                        return rst;
-                    }
-                    pg.Predicates.Add(Predicates.Field<Group>(gp => gp.gp_parent, Operator.Eq, parentCodes.Select(gp => gp.gp_code)));
-
+                    sqlEntity.where.AppendFormat(" and gpp.gp_name like '%{0}%' ", page.conditions["gp_parent_name"]);
                 }
             }
-            //2、排序
-            long total = 0;
-            IList<ISort> sort = new[]
-            {
-                new Sort{PropertyName="gp_sort",Ascending=true}
-            };
+            #endregion
             try
             {
-                var groups = _groupRep.GetPageList(page.pageIndex, page.pageSize, out total, sort, pg);
+                var groups = _groupRep.PageQueryBySp<GroupDto>(sqlEntity: sqlEntity, page: page);
                 rst = OptResult.Build(ResultCode.Success, Msg_QueryByPage, new
                 {
-                    total = total,
+                    total = page.total,
+                    pagecount = page.pageTotal,
                     rows = groups
                 });
             }

@@ -9,6 +9,7 @@ using Dapper;
 using DapperExtensions;
 using MyNet.Components.Logger;
 using System.Xml.Linq;
+using MyNet.Model;
 
 namespace MyNet.Repository
 {
@@ -167,11 +168,36 @@ namespace MyNet.Repository
             }
         }
 
-        public IEnumerable<object> Query(Type type, string sql, object param = null, IDbTransaction transaction = null, bool buffered = true, int? commandTimeout = null, CommandType? commandType = null)
+        public IEnumerable<TReturn> PageQueryBySp<TReturn>(PageQuerySqlEntity sqlEntity, PageQuery page, IDbTransaction transaction = null, bool buffered = true, int? commandTimeout = null)
         {
             try
             {
-                return this.DbSession.Connection.Query(type, sql, param, transaction, buffered, commandTimeout, commandType);
+                var param = new DynamicParameters();
+                param.Add("_fields", sqlEntity.fields);
+                param.Add("_tables", sqlEntity.tables);
+                param.Add("_where", sqlEntity.where.ToString());
+                param.Add("_orderby", sqlEntity.order.ToString());
+                param.Add("_pageindex", page.pageIndex, dbType: System.Data.DbType.Int32);
+                param.Add("_pageSize", page.pageSize, dbType: System.Data.DbType.Int32);
+                param.Add("_totalcount", page.total, dbType: System.Data.DbType.Int32, direction: ParameterDirection.Output);
+                param.Add("_pagecount", page.pageTotal, dbType: System.Data.DbType.Int32, direction: ParameterDirection.Output);
+
+                var lst = this.DbSession.Connection.Query<TReturn>(sql: sqlEntity.sp_name, param: param, commandType: CommandType.StoredProcedure);
+                page.total = param.Get<Int32>("_totalcount");
+                page.pageTotal = param.Get<Int32>("_pagecount");
+                return lst;
+            }
+            catch
+            {
+                Dispose();
+                throw;
+            }
+        }
+        public IEnumerable<TReturn> Query<TReturn>(string sql, object param = null, IDbTransaction transaction = null, bool buffered = true, int? commandTimeout = null, CommandType? commandType = null)
+        {
+            try
+            {
+                return this.DbSession.Connection.Query<TReturn>(sql, param, transaction, buffered, commandTimeout, commandType);
             }
             catch
             {
@@ -247,9 +273,9 @@ namespace MyNet.Repository
         }
 
 
-        public IEnumerable<object> QueryBySqlName(Type type, string sqlName, object param = null, IDbTransaction transaction = null, bool buffered = true, int? commandTimeout = null, CommandType? commandType = null)
+        public IEnumerable<TReturn> QueryBySqlName<TReturn>(string sqlName, object param = null, IDbTransaction transaction = null, bool buffered = true, int? commandTimeout = null, CommandType? commandType = null)
         {
-            return Query(type, GetSql(sqlName), param, transaction, buffered, commandTimeout, commandType);
+            return Query<TReturn>(GetSql(sqlName), param, transaction, buffered, commandTimeout, commandType);
         }
 
         public IEnumerable<TReturn> QueryBySqlName<TFirst, TSecond, TReturn>(string sqlName, Func<TFirst, TSecond, TReturn> map, object param = null, IDbTransaction transaction = null, bool buffered = true, string splitOn = "Id", int? commandTimeout = null, CommandType? commandType = null)
@@ -305,7 +331,7 @@ namespace MyNet.Repository
 
         public string GetSql(string sqlName)
         {
-            string sqlText = SqlTextProvider.GetSql(new SqlConfEntity
+            string sqlText = SqlProvider.GetTxtSql(new SqlConfEntity
             {
                 area = SqlConf.area,
                 group = SqlConf.group,
@@ -313,6 +339,11 @@ namespace MyNet.Repository
             });
 
             return sqlText;
+        }
+
+        public PageQuerySqlEntity GetPageQuerySql(string sqlName)
+        {
+            return SqlProvider.GetPageQuerySql(new SqlConfEntity { area = SqlConf.area, group = SqlConf.group, name = sqlName });
         }
 
         #endregion IBaseRepository

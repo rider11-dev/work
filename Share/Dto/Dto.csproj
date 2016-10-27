@@ -39,10 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auth\GroupDto.cs" />
     <Compile Include="Auth\PermissionCacheDto.cs" />
     <Compile Include="Auth\PermissionParentDto.cs" />
-    <Compile Include="Auth\PremissionDto.cs" />
+    <Compile Include="Auth\PermissionDto.cs" />
     <Compile Include="Auth\UserDto.cs" />
+    <Compile Include="Base\DictCmbDto.cs" />
     <Compile Include="Base\DictDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -6,7 +6,6 @@
       xmlns:usrCtl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
       xmlns:local="clr-namespace:MyNet.ClientFrame.Pages" 
       xmlns:vmauth="clr-namespace:MyNet.ClientFrame.Models.Auth"
-      xmlns:localcvt="clr-namespace:MyNet.ClientFrame.Converter"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="700"
       Title="UserMngPage"
@@ -15,7 +14,6 @@
         <!--model-->
         <vmauth:UserMngViewModel x:Key="model"/>
         <usrCtl:PagingArgs x:Key="paging"/>
-        <localcvt:GroupIdConverter x:Key="groupIdConverter"/>
     </Page.Resources>
     <Grid x:Name="gridLayout">
         <Grid.RowDefinitions>
@@ -73,7 +71,7 @@
                         <DataGridTextColumn Header="身份证号" Binding="{Binding user_idcard}" />
                         <DataGridTextColumn Header="真实姓名" Binding="{Binding user_truename}" />
                         <DataGridTextColumn Header="所属区域" Binding="{Binding user_regioncode}" />
-                        <DataGridTextColumn Header="所属组织" Binding="{Binding user_group,Converter={StaticResource groupIdConverter}}" />
+                        <DataGridTextColumn Header="所属组织" Binding="{Binding user_group_name}" />
                         <DataGridTextColumn Header="备注"  Binding="{Binding user_remark}" />
                     </DataGrid.Columns>
                 </DataGrid>

@@ -1,17 +1,14 @@
-﻿using System;
+﻿using MyNet.Model.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyNet.Dto.Auth
+namespace MyNet.Dto.Base
 {
-    public class DictDto
+    public class DictDto : Dict
     {
-        public string Id { get; set; }
-        public string Text { get; set; }
-        public string Type { get; set; }
-        public string Order { get; set; }
-        public bool IsDefault { get; set; }
+        public string dict_type_name { get; set; }
     }
 }

@@ -60,6 +60,7 @@ namespace MyNet.ClientFrame.Models.Auth
             TreeHelpHelper.OpenAllGroupsHelp(false, node =>
             {
                 var tNode = (TreeViewData.TreeNode)node;
+                base.user_group_name = tNode.Label;
                 base.user_group = tNode.DataId;
             });
         }

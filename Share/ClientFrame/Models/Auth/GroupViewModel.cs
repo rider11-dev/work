@@ -73,6 +73,20 @@ namespace MyNet.ClientFrame.Models.Auth
             }
         }
 
+        string _gp_parent_name;
+        public string gp_parent_name
+        {
+            get { return _gp_parent_name; }
+            set
+            {
+                if (_gp_parent_name != value)
+                {
+                    _gp_parent_name = value;
+                    base.RaisePropertyChanged("gp_parent_name");
+                }
+            }
+        }
+
         string _gp_sort;
         [Required(ErrorMessageResourceName = "Sort_Require", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
         [RegularExpression(RegexExtension.Regex_Sort, ErrorMessageResourceName = "Sort_Regex", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
@@ -103,6 +117,7 @@ namespace MyNet.ClientFrame.Models.Auth
             vmGroup.gp_system = this.gp_system;
             vmGroup.gp_parent = this.gp_parent;
             vmGroup.gp_sort = this.gp_sort;
+            vmGroup.gp_parent_name = this.gp_parent_name;
         }
     }
 }

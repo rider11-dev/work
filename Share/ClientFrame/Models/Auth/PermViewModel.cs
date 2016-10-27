@@ -61,6 +61,20 @@ namespace MyNet.ClientFrame.Models.Auth
             }
         }
 
+        string _per_type_name;
+        public string per_type_name
+        {
+            get { return _per_type_name; }
+            set
+            {
+                if (_per_type_name != value)
+                {
+                    _per_type_name = value;
+                    base.RaisePropertyChanged("per_type_name");
+                }
+            }
+        }
+
         string _per_uri;
         [MaxLength(255, ErrorMessageResourceName = "Per_Uri_Length", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
         public string per_uri
@@ -101,6 +115,20 @@ namespace MyNet.ClientFrame.Models.Auth
                 {
                     _per_parent = value;
                     base.RaisePropertyChanged("per_parent");
+                }
+            }
+        }
+
+        string _per_parent_name;
+        public string per_parent_name
+        {
+            get { return _per_parent_name; }
+            set
+            {
+                if (_per_parent_name != value)
+                {
+                    _per_parent_name = value;
+                    base.RaisePropertyChanged("per_parent_name");
                 }
             }
         }
@@ -162,7 +190,9 @@ namespace MyNet.ClientFrame.Models.Auth
             vmPerm.per_code = this.per_code;
             vmPerm.per_name = this.per_name;
             vmPerm.per_type = this.per_type;
+            vmPerm.per_type_name = this.per_type_name;
             vmPerm.per_parent = this.per_parent;
+            vmPerm.per_parent_name = this.per_parent_name;
             vmPerm.per_sort = this.per_sort;
             vmPerm.per_system = this.per_system;
             vmPerm.per_uri = this.per_uri;

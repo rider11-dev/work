@@ -14,6 +14,8 @@ using MyNet.Components.Mapper;
 using MyNet.Repository.Db;
 using MyNet.Components.Result;
 using MyNet.Dto.Auth;
+using System.Data;
+using Dapper;
 
 namespace MyNet.Service.Auth
 {
@@ -29,6 +31,7 @@ namespace MyNet.Service.Auth
         const string Msg_QueryByPage = "分页查询用户信息";
 
         const string SqlName_Update = "update";
+        const string SqlName_PageQuery = "pagequery";
 
         //私有变量
         private UserRepository _usrRep;
@@ -262,57 +265,48 @@ namespace MyNet.Service.Auth
                 rst = OptResult.Build(ResultCode.ParamError, Msg_QueryByPage + "，分页参数不能为空！");
                 return rst;
             }
-            page.Verify();
-            //过滤条件
-            PredicateGroup pg = new PredicateGroup { Operator = GroupOperator.And, Predicates = new List<IPredicate>() };
+
+            PageQuerySqlEntity sqlEntity = _usrRep.GetPageQuerySql(SqlName_PageQuery);
+            if (sqlEntity == null)
+            {
+                rst = OptResult.Build(ResultCode.ParamError, Msg_QueryByPage + "，未能获取sql配置！");
+                return rst;
+            }
+
+            //构造where
+            #region where条件
             if (page.conditions != null && page.conditions.Count > 0)
             {
                 if (page.conditions.ContainsKey("regioncode") && !page.conditions["regioncode"].IsEmpty())
                 {
-                    pg.Predicates.Add(Predicates.Field<User>(u => u.user_regioncode, Operator.Eq, page.conditions["regioncode"]));
+                    sqlEntity.where.AppendFormat(" and usr.user_regioncode='{0}' ", page.conditions["regioncode"]);
                 }
                 if (page.conditions.ContainsKey("username") && !page.conditions["username"].IsEmpty())
                 {
-                    pg.Predicates.Add(Predicates.Field<User>(u => u.user_name, Operator.Like, "%" + page.conditions["username"] + "%"));
+                    sqlEntity.where.AppendFormat(" and usr.user_name like '%{0}%' ", page.conditions["username"]);
                 }
                 if (page.conditions.ContainsKey("truename") && !page.conditions["truename"].IsEmpty())
                 {
-                    pg.Predicates.Add(Predicates.Field<User>(u => u.user_truename, Operator.Like, "%" + page.conditions["truename"] + "%"));
+                    sqlEntity.where.AppendFormat(" and usr.user_truename like '%{0}%' ", page.conditions["truename"]);
                 }
                 if (page.conditions.ContainsKey("group") && !page.conditions["group"].IsEmpty())
                 {
-                    pg.Predicates.Add(Predicates.Field<User>(u => u.user_truename, Operator.Eq, page.conditions["group"]));
+                    sqlEntity.where.AppendFormat(" and usr.user_group = '{0}' ", page.conditions["group"]);
                 }
                 else if (page.conditions.ContainsKey("group_name") && !page.conditions["group_name"].IsEmpty())
                 {
-                    //TODO
-                    //用户所属组织模糊查询（方法很笨，考虑后续优化）
-                    var groups = _usrRep.GetList<Group>(Predicates.Field<Group>(gp => gp.gp_name, Operator.Like, "%" + page.conditions["group_name"] + "%"));
-                    if (groups == null || groups.Count() < 1)
-                    {
-                        rst = OptResult.Build(ResultCode.Success, Msg_QueryByPage, new
-                        {
-                            total = 0
-                        });
-                        return rst;
-                    }
-                    pg.Predicates.Add(Predicates.Field<User>(u => u.user_group, Operator.Eq, groups.Select(gp => gp.gp_id)));
+                    sqlEntity.where.AppendFormat(" and gp.gp_name like '%{0}%' ", page.conditions["group_name"]);
                 }
             }
+            #endregion
 
-            //排序
-            long total = 0;
-            IList<ISort> sort = new[]
-            {
-                new Sort{PropertyName="user_regioncode",Ascending=true}
-            };
-            //这里返回UserDto，忽略密码字段
             try
             {
-                var usrs = _usrRep.GetPageList<UserDto>(page.pageIndex, page.pageSize, out total, sort, pg);
+                var usrs = _usrRep.PageQueryBySp<UserDto>(sqlEntity: sqlEntity, page: page);
                 rst = OptResult.Build(ResultCode.Success, Msg_QueryByPage, new
                 {
-                    total = total,
+                    total = page.total,
+                    pagecount = page.pageTotal,
                     rows = usrs
                 });
             }

@@ -120,6 +120,20 @@ namespace MyNet.ClientFrame.Models.Auth
             }
         }
 
+        private string _user_group_name;
+        public string user_group_name
+        {
+            get { return _user_group_name; }
+            set
+            {
+                if (_user_group_name != value)
+                {
+                    _user_group_name = value;
+                    base.RaisePropertyChanged("user_group_name");
+                }
+            }
+        }
+
         public void CopyTo(IBaseModel targetModel)
         {
             if (targetModel == null)
@@ -133,6 +147,7 @@ namespace MyNet.ClientFrame.Models.Auth
             vmUsr.user_truename = this.user_truename;
             vmUsr.user_regioncode = this.user_regioncode;
             vmUsr.user_group = this.user_group;
+            vmUsr.user_group_name = this.user_group_name;
             vmUsr.user_remark = this.user_remark;
         }
     }
