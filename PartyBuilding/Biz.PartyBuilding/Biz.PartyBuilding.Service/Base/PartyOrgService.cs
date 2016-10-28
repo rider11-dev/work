@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MyNet.Components.Extensions;
+using MyNet.Dto.Auth;
 
 namespace Biz.PartyBuilding.Service
 {
@@ -98,12 +99,17 @@ namespace Biz.PartyBuilding.Service
             #endregion
             try
             {
-                var groups = _poRep.PageQueryBySp<PartyOrgDto>(sqlEntity: sqlEntity, page: page);
+                var pos = _poRep.PageQueryBySp<PartyOrgDto, GroupDto, PartyOrgDto>(sqlEntity: sqlEntity, page: page,
+                    map: (po, gp) =>
+                    {
+                        po.po_group = gp;
+                        return po;
+                    }, splitOn: "po_id,gp_id");
                 rst = OptResult.Build(ResultCode.Success, Msg_PageQuery, new
                 {
                     total = page.total,
                     pagecount = page.pageTotal,
-                    rows = groups
+                    rows = pos
                 });
             }
             catch (Exception ex)

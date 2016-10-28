@@ -12,8 +12,6 @@ namespace MyNet.Components.WPF.Windows
 {
     public class BaseWindow : Window
     {
-        const string BaseWindowTemplateName = "popWindowTemplate";
-
         private DelegateCommand _closeCmd;
         public DelegateCommand CloseCmd
         {

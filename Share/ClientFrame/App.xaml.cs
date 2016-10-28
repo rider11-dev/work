@@ -1,6 +1,5 @@
 ﻿using MyNet.Components.Logger;
 using MyNet.Components.WPF.Windows;
-using MyNet.ClientFrame.Public;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -9,8 +8,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
+using MyNet.Components.Extensions;
+using MyNet.Client.Public;
 
-namespace MyNet.ClientFrame
+namespace ClientFrame
 {
     /// <summary>
     /// App.xaml 的交互逻辑
@@ -30,6 +31,12 @@ namespace MyNet.ClientFrame
                 //TODO
                 this.Shutdown(-1);
             }
+        }
+
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            //加载插件目录程序集
+            AssemblyExtention.LoadAssemblies(Context.BaseDirectory + "plugin", "^*.dll$");
         }
     }
 }

@@ -172,17 +172,9 @@ namespace MyNet.Repository
         {
             try
             {
-                var param = new DynamicParameters();
-                param.Add("_fields", sqlEntity.fields);
-                param.Add("_tables", sqlEntity.tables);
-                param.Add("_where", sqlEntity.where.ToString());
-                param.Add("_orderby", sqlEntity.order.ToString());
-                param.Add("_pageindex", page.pageIndex, dbType: System.Data.DbType.Int32);
-                param.Add("_pageSize", page.pageSize, dbType: System.Data.DbType.Int32);
-                param.Add("_totalcount", page.total, dbType: System.Data.DbType.Int32, direction: ParameterDirection.Output);
-                param.Add("_pagecount", page.pageTotal, dbType: System.Data.DbType.Int32, direction: ParameterDirection.Output);
+                var param = BuildParamsForPageQueryBySp(sqlEntity, page);
 
-                var lst = this.DbSession.Connection.Query<TReturn>(sql: sqlEntity.sp_name, param: param, commandType: CommandType.StoredProcedure);
+                var lst = this.DbSession.Connection.Query<TReturn>(sql: sqlEntity.sp_name, param: param, transaction: transaction, buffered: buffered, commandTimeout: commandTimeout, commandType: CommandType.StoredProcedure);
                 page.total = param.Get<Int32>("_totalcount");
                 page.pageTotal = param.Get<Int32>("_pagecount");
                 return lst;
@@ -192,6 +184,20 @@ namespace MyNet.Repository
                 Dispose();
                 throw;
             }
+        }
+
+        private DynamicParameters BuildParamsForPageQueryBySp(PageQuerySqlEntity sqlEntity, PageQuery page)
+        {
+            var param = new DynamicParameters();
+            param.Add("_fields", sqlEntity.fields);
+            param.Add("_tables", sqlEntity.tables);
+            param.Add("_where", sqlEntity.where.ToString());
+            param.Add("_orderby", sqlEntity.order.ToString());
+            param.Add("_pageindex", page.pageIndex, dbType: System.Data.DbType.Int32);
+            param.Add("_pageSize", page.pageSize, dbType: System.Data.DbType.Int32);
+            param.Add("_totalcount", page.total, dbType: System.Data.DbType.Int32, direction: ParameterDirection.Output);
+            param.Add("_pagecount", page.pageTotal, dbType: System.Data.DbType.Int32, direction: ParameterDirection.Output);
+            return param;
         }
         public IEnumerable<TReturn> Query<TReturn>(string sql, object param = null, IDbTransaction transaction = null, bool buffered = true, int? commandTimeout = null, CommandType? commandType = null)
         {
@@ -206,6 +212,40 @@ namespace MyNet.Repository
             }
         }
 
+        public IEnumerable<TReturn> PageQueryBySp<TFirst, TSecond, TReturn>(PageQuerySqlEntity sqlEntity, PageQuery page, Func<TFirst, TSecond, TReturn> map, IDbTransaction transaction = null, bool buffered = true, string splitOn = "Id", int? commandTimeout = null)
+        {
+            try
+            {
+                var param = BuildParamsForPageQueryBySp(sqlEntity, page);
+                var lst = this.DbSession.Connection.Query<TFirst, TSecond, TReturn>(sql: sqlEntity.sp_name, map: map, param: param,
+                    transaction: transaction, buffered: buffered, splitOn: splitOn, commandTimeout: commandTimeout, commandType: CommandType.StoredProcedure);
+                page.total = param.Get<Int32>("_totalcount");
+                page.pageTotal = param.Get<Int32>("_pagecount");
+                return lst;
+            }
+            catch
+            {
+                Dispose();
+                throw;
+            }
+        }
+        public IEnumerable<TReturn> PageQueryBySp<TFirst, TSecond, TThird, TReturn>(PageQuerySqlEntity sqlEntity, PageQuery page, Func<TFirst, TSecond, TThird, TReturn> map, IDbTransaction transaction = null, bool buffered = true, string splitOn = "Id", int? commandTimeout = null)
+        {
+            try
+            {
+                var param = BuildParamsForPageQueryBySp(sqlEntity, page);
+                var lst = this.DbSession.Connection.Query<TFirst, TSecond, TThird, TReturn>(sql: sqlEntity.sp_name, map: map, param: param,
+                    transaction: transaction, buffered: buffered, splitOn: splitOn, commandTimeout: commandTimeout, commandType: CommandType.StoredProcedure);
+                page.total = param.Get<Int32>("_totalcount");
+                page.pageTotal = param.Get<Int32>("_pagecount");
+                return lst;
+            }
+            catch
+            {
+                Dispose();
+                throw;
+            }
+        }
         public IEnumerable<TReturn> Query<TFirst, TSecond, TReturn>(string sql, Func<TFirst, TSecond, TReturn> map, object param = null, IDbTransaction transaction = null, bool buffered = true, string splitOn = "Id", int? commandTimeout = null, CommandType? commandType = null)
         {
             try

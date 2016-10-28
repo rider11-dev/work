@@ -43,6 +43,8 @@ namespace MyNet.Repository
 
         #region dapper
         IEnumerable<TReturn> PageQueryBySp<TReturn>(PageQuerySqlEntity sqlEntity, PageQuery page, IDbTransaction transaction = null, bool buffered = true, int? commandTimeout = null);
+        IEnumerable<TReturn> PageQueryBySp<TFirst, TSecond, TReturn>(PageQuerySqlEntity sqlEntity, PageQuery page, Func<TFirst, TSecond, TReturn> map, IDbTransaction transaction = null, bool buffered = true, string splitOn = "Id", int? commandTimeout = null);
+        IEnumerable<TReturn> PageQueryBySp<TFirst, TSecond, TThird, TReturn>(PageQuerySqlEntity sqlEntity, PageQuery page, Func<TFirst, TSecond, TThird, TReturn> map, IDbTransaction transaction = null, bool buffered = true, string splitOn = "Id", int? commandTimeout = null);
         IEnumerable<TReturn> Query<TReturn>(string sql, object param = null, IDbTransaction transaction = null, bool buffered = true, int? commandTimeout = null, CommandType? commandType = null);
 
         IEnumerable<TReturn> Query<TFirst, TSecond, TReturn>(string sql, Func<TFirst, TSecond, TReturn> map, object param = null, IDbTransaction transaction = null, bool buffered = true, string splitOn = "Id", int? commandTimeout = null, CommandType? commandType = null);

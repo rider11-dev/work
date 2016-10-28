@@ -1,7 +1,8 @@
-﻿<Application x:Class="MyNet.ClientFrame.App"
+﻿<Application x:Class="ClientFrame.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="LoginWindow.xaml"
+             StartupUri="/MyNet.Client;component/LoginWindow.xaml"
+             Startup="Application_Startup"
              DispatcherUnhandledException="Application_DispatcherUnhandledException">
     <Application.Resources>
         <ResourceDictionary>

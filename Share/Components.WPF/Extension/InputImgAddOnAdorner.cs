@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -64,7 +65,10 @@ namespace MyNet.Components.WPF.Extension
             double y = (adornedElementRect.Height - ImageHeight) / 2;
             var padding = Location == InputExtension.AddOnLocation.Left ? new Thickness(ImageWidth + 2, 0, 0, 0) : new Thickness(0, 0, ImageWidth + 2, 0);
 
-            ImageSource img = new BitmapImage(new Uri(ImageFile, UriKind.Absolute));
+            var imgFilePath = AppDomain.CurrentDomain.BaseDirectory + ImageFile;
+            var uri = new Uri(File.Exists(imgFilePath) ? imgFilePath : ("pack://application:,,," + ImageFile), UriKind.Absolute);
+
+            ImageSource img = new BitmapImage(uri);
             drawingContext.DrawImage(img, new Rect(new Point(x, y), new Size(ImageWidth, ImageHeight)));
 
             ctl.Padding = padding;

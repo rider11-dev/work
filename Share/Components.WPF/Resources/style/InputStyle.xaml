@@ -47,16 +47,20 @@
     <ControlTemplate x:Key="inputBtnAddOnTemp" TargetType="ctl:HelpButton">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="7*"/>
-                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="4*"/>
             </Grid.ColumnDefinitions>
-            <TextBox Grid.Column="0" HorizontalContentAlignment="Left" Height="Auto"
+            <TextBox Grid.Column="0" x:Name="txtInput" HorizontalContentAlignment="Left" Height="Auto"
                      Style="{StaticResource inputBaseStyle}" IsReadOnly="{Binding Path=ForbidInput,RelativeSource={RelativeSource TemplatedParent}}"
                      Text="{Binding Path=Content,RelativeSource={RelativeSource TemplatedParent},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-            <Button Grid.Column="1" Content="选择" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                        Style="{StaticResource btnBaseStyle}" Command="{TemplateBinding Command}"
-                        Height="Auto"
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Button Content="选择" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                        Style="{StaticResource btnBaseStyle}" Command="{TemplateBinding Command}" Height="Auto"
                         />
+                <Button Content="清除" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="Auto"
+                       Style="{StaticResource btnBaseStyle}" Command="{Binding ClearCmd,RelativeSource={RelativeSource AncestorType=ctl:HelpButton}}"
+                        />
+            </StackPanel>
         </Grid>
     </ControlTemplate>
     <Style x:Key="inputBtnAddOnStyle" TargetType="ctl:HelpButton">

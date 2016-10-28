@@ -39,5 +39,36 @@ namespace MyNet.Components.WPF.Extension
         {
             panel.Background = GetImageBrush(imgFilePath);
         }
+
+        public static TElement FindVisualChild<TElement>(this DependencyObject obj)
+            where TElement : DependencyObject
+        {
+            if (obj == null)
+            {
+                return null;
+            }
+            var cnt = VisualTreeHelper.GetChildrenCount(obj);
+            if (cnt < 1)
+            {
+                return null;
+            }
+            for (int idx = 0; idx < cnt; idx++)
+            {
+                var child = VisualTreeHelper.GetChild(obj, idx);
+                if (child != null && child is TElement)
+                {
+                    return (TElement)child;
+                }
+                else
+                {
+                    TElement childOfChild = FindVisualChild<TElement>(child);
+                    if (childOfChild != null)
+                    {
+                        return childOfChild;
+                    }
+                }
+            }
+            return null;
+        }
     }
 }

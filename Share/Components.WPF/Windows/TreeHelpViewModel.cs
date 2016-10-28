@@ -61,7 +61,7 @@ namespace MyNet.Components.WPF.Windows
 
         private bool SelectMulti()
         {
-            TreeViewData treeData = TreeCtl.tree.DataContext as TreeViewData;
+            TreeViewData treeData = TreeCtl.Tree.DataContext as TreeViewData;
             if (treeData == null || treeData.RootNodes == null || treeData.RootNodes.Count < 1)
             {
                 return false;

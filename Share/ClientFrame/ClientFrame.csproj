@@ -4,30 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6AABD137-BB47-4636-8635-DE0F6DC9AEA1}</ProjectGuid>
+    <ProjectGuid>{A7BB4884-C2A9-474C-A7F4-F7A4EF4BE87D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MyNet.ClientFrame</RootNamespace>
+    <RootNamespace>ClientFrame</RootNamespace>
     <AssemblyName>ClientFrame</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
-    <PublishUrl>发布\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -50,19 +35,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net">
-      <HintPath>..\..\..\Share\dlls\log4net\log4net.dll</HintPath>
+      <HintPath>..\dlls\log4net\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="MyNet.Components">
+      <HintPath>..\dlls\MyNet\MyNet.Components.dll</HintPath>
+    </Reference>
+    <Reference Include="MyNet.Components.Resource">
+      <HintPath>..\dlls\MyNet\MyNet.Components.Resource.dll</HintPath>
+    </Reference>
+    <Reference Include="MyNet.Components.WPF">
+      <HintPath>..\dlls\MyNet\MyNet.Components.WPF.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dlls\WPF\System.Windows.Interactivity.dll</HintPath>
@@ -84,115 +69,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Command\OpenFuncCmd.cs" />
-    <Compile Include="Command\OpenFuncParam.cs" />
-    <Compile Include="Help\TreeHelpHelper.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Account\ChangePwdViewModel.cs" />
-    <Compile Include="Models\Api.cs" />
-    <Compile Include="Models\ApiKeys.cs" />
-    <Compile Include="Models\Auth\GroupDetailViewModel.cs" />
-    <Compile Include="Models\Auth\GroupMngViewModel.cs" />
-    <Compile Include="Models\Auth\GroupViewModel.cs" />
-    <Compile Include="Models\Auth\PermDetailViewModel.cs" />
-    <Compile Include="Models\Auth\PermMngViewModel.cs" />
-    <Compile Include="Models\Auth\PermViewModel.cs" />
-    <Compile Include="Models\Auth\UserDetailViewModel.cs" />
-    <Compile Include="Models\Auth\UserMngViewModel.cs" />
-    <Compile Include="Models\Auth\UserViewModel.cs" />
-    <Compile Include="Models\MngViewModel.cs" />
-    <Compile Include="Pages\Account\DetailPage.xaml.cs">
-      <DependentUpon>DetailPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Account\ChangePwdPage.xaml.cs">
-      <DependentUpon>ChangePwdPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Auth\GroupDetailWindow.xaml.cs">
-      <DependentUpon>GroupDetailWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Auth\GroupMngPage.xaml.cs">
-      <DependentUpon>GroupMngPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Auth\PermissionDetailWindow.xaml.cs">
-      <DependentUpon>PermissionDetailWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Auth\UserDetailWindow.xaml.cs">
-      <DependentUpon>UserDetailWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Auth\PermissionMngPage.xaml.cs">
-      <DependentUpon>PermissionMngPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Auth\UserMngPage.xaml.cs">
-      <DependentUpon>UserMngPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\BasePage.cs" />
-    <Compile Include="Pages\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\PageHelper.cs" />
-    <Compile Include="Public\ApiHelper.cs" />
-    <Compile Include="Public\Context.cs" />
-    <Compile Include="Public\DataCacheHelper.cs" />
-    <Compile Include="Public\MsgConst.cs" />
-    <Compile Include="Public\OperationDesc.cs" />
-    <Compile Include="Public\StyleCacheHelper.cs" />
-    <Page Include="LoginWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="LoginWindow.xaml.cs">
-      <DependentUpon>LoginWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="MainWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\Account\DetailPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\Account\ChangePwdPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\Auth\GroupDetailWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\Auth\GroupMngPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\Auth\PermissionDetailWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\Auth\UserDetailWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\Auth\PermissionMngPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\Auth\UserMngPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\MainPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -206,29 +88,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Resource Include="Resources\img\userhead.png" />
-    <Resource Include="Resources\img\top.jpg" />
-    <Resource Include="Resources\img\logoff.png" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Content Include="download\img\readme.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="download\readme.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="header.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="log4net.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="api.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -239,56 +102,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\img\separator.jpg" />
-    <Resource Include="Resources\img\logo.jpg" />
-    <Resource Include="Resources\img\pwd.jpg" />
-    <Resource Include="Resources\img\qrcode.jpg" />
-    <Resource Include="Resources\img\header.jpg" />
-    <Resource Include="Resources\img\location.png" />
-    <Resource Include="Resources\img\username.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Converter\" />
-    <Folder Include="Resources\style\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Components.Resource\Components.Resource.csproj">
-      <Project>{4ecb69ea-c6d9-436b-9689-90d065424f53}</Project>
-      <Name>Components.Resource</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Components.WPF\Components.WPF.csproj">
-      <Project>{6324a5cc-0daf-4af4-80a3-5d2a60769c96}</Project>
-      <Name>Components.WPF</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Components\Components.csproj">
-      <Project>{9ed019a0-a26a-4725-aa70-2b52bf7a5416}</Project>
-      <Name>Components</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Dto\Dto.csproj">
-      <Project>{ea32f873-b280-4b79-947e-01ab4fcf6616}</Project>
-      <Name>Dto</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Model\Model.csproj">
-      <Project>{bb11afa2-784c-4e60-9586-6608d8338d67}</Project>
-      <Name>Model</Name>
+    <ProjectReference Include="..\Client\Client.csproj">
+      <Project>{6aabd137-bb47-4636-8635-de0f6dc9aea1}</Project>
+      <Name>Client</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.5 %28x86 和 x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
+    <Content Include="plugin\readme.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

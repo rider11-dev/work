@@ -33,6 +33,10 @@
     <Reference Include="MyNet.Components">
       <HintPath>..\..\..\Share\dlls\MyNet\MyNet.Components.dll</HintPath>
     </Reference>
+    <Reference Include="MyNet.Dto, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Share\dlls\MyNet\MyNet.Dto.dll</HintPath>
+    </Reference>
     <Reference Include="MyNet.Model">
       <HintPath>..\..\..\Share\dlls\MyNet\MyNet.Model.dll</HintPath>
     </Reference>

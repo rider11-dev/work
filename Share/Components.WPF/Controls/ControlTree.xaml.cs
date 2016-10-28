@@ -27,6 +27,12 @@ namespace MyNet.Components.WPF.Controls
         }
 
         public static readonly DependencyProperty MultiSelectProperty = DependencyProperty.Register("MultiSelect", typeof(bool), typeof(ControlTree), new PropertyMetadata(false));
+
+        public TreeView Tree
+        {
+            get { return tree; }
+        }
+
         public ControlTree()
         {
             InitializeComponent();

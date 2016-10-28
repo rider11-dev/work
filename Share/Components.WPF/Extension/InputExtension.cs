@@ -17,7 +17,7 @@ namespace MyNet.Components.WPF.Extension
         /// 给指定控件添加附加图片
         /// </summary>
         /// <param name="ctl"></param>
-        /// <param name="imgUrl">图片文件绝对路径，如果为空，则取Control.Tag属性</param>
+        /// <param name="imgUrl">图片文件相对路径（如：pack://application:,,,/程序集名称;component/Resources/img/bj.png），如果为空，则取Control.Tag属性</param>
         /// <param name="location">图片位置：Left、Right</param>
         /// <param name="imgWidth">图片宽度，默认32，最大宽度为控件宽度</param>
         /// <param name="imgHeight">图片高度，默认32，最大高度为控件高度；小于控件高度时，居中显示</param>

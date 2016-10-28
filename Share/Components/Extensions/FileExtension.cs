@@ -54,32 +54,6 @@ namespace MyNet.Components.Extensions
             return result;
         }
 
-        public static List<Assembly> GetAssemblies(string path, string searchPattern = "", SearchOption searchOpt = SearchOption.AllDirectories)
-        {
-            List<Assembly> assList = new List<Assembly>();
-            var dir = new DirectoryInfo(path);
-            if (!dir.Exists)
-            {
-                return assList;
-            }
-            assList = GetAssemblies(dir, searchPattern, searchOpt);
-            return assList;
-        }
-
-
-        public static List<Assembly> GetAssemblies(this DirectoryInfo dir, string searchPattern = "", SearchOption searchOpt = SearchOption.AllDirectories)
-        {
-            var target = new List<Assembly>();
-            //当前目录及其子目录下所有符合的文件
-            var files = dir.GetFiles("*.dll", searchOpt)
-                .Where(f => Regex.IsMatch(f.Name, searchPattern));
-            foreach (var file in files)
-            {
-                target.Add(Assembly.LoadFile(file.FullName));
-            }
-            return target;
-        }
-
         public static List<FileInfo> GetFiles(string path, string searchPattern = "", SearchOption searchOpt = SearchOption.AllDirectories)
         {
             List<FileInfo> files = new List<FileInfo>();

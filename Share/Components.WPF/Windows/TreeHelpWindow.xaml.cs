@@ -25,13 +25,14 @@ namespace MyNet.Components.WPF.Windows
     {
         private TreeViewData _treeData;
         private TreeHelpViewModel _model;
+
         private TreeHelpWindow()
         {
             InitializeComponent();
             //允许拖拽
             this.DragWhenLeftMouseDown();
 
-            _treeData = ctlTree.tree.DataContext as TreeViewData;
+            _treeData = ctlTree.Tree.DataContext as TreeViewData;
 
             _model = this.DataContext as TreeHelpViewModel;
             _model.TreeCtl = ctlTree;

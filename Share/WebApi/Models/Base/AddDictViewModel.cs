@@ -9,7 +9,7 @@ namespace MyNet.WebApi.Models.Base
     public class AddDictViewModel
     {
         [Required(ErrorMessageResourceName = "Code_Require", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
-        [MaxLength(20, ErrorMessageResourceName = "Dict_Code_Length", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
+        [MaxLength(40, ErrorMessageResourceName = "Dict_Code_Length", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
         public string dict_code { get; set; }
 
         [Required(ErrorMessageResourceName = "Name_Require", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]

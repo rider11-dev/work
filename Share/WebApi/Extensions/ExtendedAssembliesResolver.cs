@@ -13,30 +13,7 @@ namespace MyNet.WebApi.Extensions
     {
         public ExtendedAssembliesResolver()
         {
-            LoadPluginAssemblies();
-        }
-
-        public override ICollection<Assembly> GetAssemblies()
-        {
-            return base.GetAssemblies();
-        }
-
-        void LoadPluginAssemblies()
-        {
-            var assFiles = FileExtension.GetFiles(AppDomain.CurrentDomain.BaseDirectory + "/bin/plugin", "^*.dll$");
-            if (assFiles.Count > 0)
-            {
-                foreach (var file in assFiles)
-                {
-                    AssemblyName assName = AssemblyName.GetAssemblyName(file.FullName);
-                    if (!AppDomain.CurrentDomain.GetAssemblies()
-                        .Any(ass => AssemblyName.ReferenceMatchesDefinition(ass.GetName(), assName)))
-                    {
-                        AppDomain.CurrentDomain.Load(assName);
-                    }
-                }
-            }
-
+            AssemblyExtention.LoadAssemblies(AppDomain.CurrentDomain.BaseDirectory + "/bin/plugin", "^*.dll$");
         }
     }
 }

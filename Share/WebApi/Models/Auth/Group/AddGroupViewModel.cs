@@ -10,7 +10,7 @@ namespace MyNet.WebApi.Models.Auth.Group
     public class AddGroupViewModel
     {
         [Required(ErrorMessageResourceName = "Code_Require", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
-        [MaxLength(20, ErrorMessageResourceName = "Group_Code_Length", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
+        [MaxLength(40, ErrorMessageResourceName = "Group_Code_Length", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
         public string gp_code { get; set; }
         [Required(ErrorMessageResourceName = "Name_Require", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
         [MaxLength(40, ErrorMessageResourceName = "Group_Name_Length", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]

@@ -114,7 +114,7 @@
         <Setter Property="BorderThickness" Value="0,0,0,1"/>
         <Setter Property="BorderBrush" Value="LightGray"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-        <Setter Property="Background" Value="#E2EBF5"/>
+        <Setter Property="Background" Value="{Binding Path=Background,RelativeSource={RelativeSource TemplatedParent}}"/>
         <Setter Property="Padding" Value="0,20,0,0"/>
         <Setter Property="ItemsSource" Value="{Binding Path=RootNodes}"/>
         <Setter Property="ItemContainerStyle" Value="{StaticResource menuTreeViewItemStyle}"/>
