@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rest-client version="3.4.2"><request><http-version>1.1</http-version><http-follow-redirects/><URL>http://localhost/aaa/api/party/org/save</URL><method>POST</method><headers><header key="token" value="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhZG1pbiIsImlhdCI6MTQ3NjE2NTg2NywidXNlciI6bnVsbH0.vGbRZRUXqWMzHwapI1-C6iMu1d8KEGUte28ZgdVcqjw"/></headers><body><string content-type="application/json" charset="UTF-8">{
+"po_id":"41eb283780cd4d5dbcb8798f74d41478",
+"po_type":"",
+"po_chg_num":"",
+"po_chg_date":"",
+"po_expire_date":"",
+"po_chg_remind":"",
+"po_mem_normal":"",
+"po_mem_potential":"",
+"po_mem_activists":"",
+"po_remark":""
+}</string></body></request></rest-client>

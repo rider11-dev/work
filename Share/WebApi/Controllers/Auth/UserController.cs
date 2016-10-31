@@ -102,24 +102,6 @@ namespace MyNet.WebApi.Controllers.Auth
         }
 
         [HttpPost]
-        [Route("delete")]
-        public OptResult Delete(DelByPkViewModel vmDel)
-        {
-            OptResult rst = null;
-            if (!ModelState.IsValid)
-            {
-                rst = OptResult.Build(ResultCode.ParamError, ModelState.Parse());
-                return rst;
-            }
-
-            var token = base.ParseToken(ActionContext);
-
-            rst = _usrSrv.Delete(vmDel.pk);
-
-            return rst;
-        }
-
-        [HttpPost]
         [Route("multidelete")]
         public OptResult DeleteBatch(DelByIdsViewModel vmDels)
         {

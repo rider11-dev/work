@@ -37,15 +37,6 @@
     <Reference Include="log4net">
       <HintPath>..\dlls\log4net\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="MyNet.Components">
-      <HintPath>..\dlls\MyNet\MyNet.Components.dll</HintPath>
-    </Reference>
-    <Reference Include="MyNet.Components.Resource">
-      <HintPath>..\dlls\MyNet\MyNet.Components.Resource.dll</HintPath>
-    </Reference>
-    <Reference Include="MyNet.Components.WPF">
-      <HintPath>..\dlls\MyNet\MyNet.Components.WPF.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -105,6 +96,18 @@
     <ProjectReference Include="..\Client\Client.csproj">
       <Project>{6aabd137-bb47-4636-8635-de0f6dc9aea1}</Project>
       <Name>Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Components.Resource\Components.Resource.csproj">
+      <Project>{4ecb69ea-c6d9-436b-9689-90d065424f53}</Project>
+      <Name>Components.Resource</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Components.WPF\Components.WPF.csproj">
+      <Project>{6324a5cc-0daf-4af4-80a3-5d2a60769c96}</Project>
+      <Name>Components.WPF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Components\Components.csproj">
+      <Project>{9ed019a0-a26a-4725-aa70-2b52bf7a5416}</Project>
+      <Name>Components</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

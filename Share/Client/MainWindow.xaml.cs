@@ -105,12 +105,7 @@ namespace MyNet.Client
             }
 
             //选中第一个节点（主页）
-            if (menuTree.Items != null && menuTree.Items.Count > 0)
-            {
-                TreeViewItem item = ((TreeViewItem)menuTree.ItemContainerGenerator.ContainerFromIndex(0));
-                item.IsSelected = true;
-                item.Focus();
-            }
+            menuTree.Select();
         }
 
         private void menuTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)

@@ -151,38 +151,6 @@ namespace MyNet.Service.Auth
             return rst;
         }
 
-        public OptResult Delete(dynamic pkId)
-        {
-            OptResult rst = null;
-            //1、用户是否存在
-            var predicate = Predicates.Field<User>(u => u.user_id, Operator.Eq, pkId as object);
-            var count = _usrRep.Count(predicate);
-            if (count < 1)
-            {
-                rst = OptResult.Build(ResultCode.DataNotFound, Msg_DeleteUser);
-                return rst;
-            }
-            //2、超级管理员不能被删除（这里只根据用户名判断，后续可以扩展根据角色或其他规则）
-            var usr = _usrRep.GetById(pkId);
-            if (usr.user_name.Equals("admin"))
-            {
-                rst = OptResult.Build(ResultCode.Fail, string.Format(Msg_DeleteUser + "，用户{0}不允许删除", usr.user_name));
-                return rst;
-            }
-            try
-            {
-                //TODO，应该起事务，删除用户权限
-                bool val = _usrRep.Delete(predicate);
-                rst = OptResult.Build(val ? ResultCode.Success : ResultCode.Fail, Msg_DeleteUser);
-            }
-            catch (Exception ex)
-            {
-                LogHelper.LogError(Msg_DeleteUser, ex);
-                rst = OptResult.Build(ResultCode.DbError, Msg_DeleteUser);
-            }
-            return rst;
-        }
-
         public OptResult DeleteBatch(IEnumerable<string> ids)
         {
             OptResult rst = null;

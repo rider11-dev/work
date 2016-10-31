@@ -133,15 +133,6 @@ namespace MyNet.Components.Resource {
         }
         
         /// <summary>
-        ///   查找类似 字典类型不能为空 的本地化字符串。
-        /// </summary>
-        public static string Dict_Type_Require1 {
-            get {
-                return ResourceManager.GetString("Dict_Type_Require1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 字典类型编号最大为{1}个字符 的本地化字符串。
         /// </summary>
         public static string DictType_Code_Length {

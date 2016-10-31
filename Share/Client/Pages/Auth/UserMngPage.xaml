@@ -6,6 +6,7 @@
       xmlns:usrCtl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
       xmlns:local="clr-namespace:MyNet.Client.Pages" 
       xmlns:vmauth="clr-namespace:MyNet.Client.Models.Auth"
+      xmlns:pub="clr-namespace:MyNet.Client.Public"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="700"
       Title="UserMngPage"
@@ -48,7 +49,9 @@
                          Content="{Binding Path=Filter_Group_Name,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                          Command="{Binding Path=GroupHelpCmd,Source={StaticResource model}}"
                          />
-                <Button x:Name="btnSearch" Style="{StaticResource mngBtnStyle}" Content="查 询"
+                <Button x:Name="btnSearch"
+                        Style="{StaticResource mngBtnStyle}"
+                        Content="查 询"
                         Command="{Binding Path=SearchCmd,Source={StaticResource model}}"
                         CommandParameter="{StaticResource paging}"
                         />

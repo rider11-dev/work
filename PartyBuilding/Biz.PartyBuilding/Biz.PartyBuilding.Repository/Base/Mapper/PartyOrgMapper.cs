@@ -8,13 +8,11 @@ using System.Threading.Tasks;
 
 namespace Biz.PartyBuilding.Repository.Base.Mapper
 {
-    public class PartyOrgDtoMapper : ClassMapper<PartyOrgDto>
+    public class PartyOrgMapper : ClassMapper<PartyOrg>
     {
-        public PartyOrgDtoMapper()
+        public PartyOrgMapper()
         {
             Table("party_org");
-
-            //Map(po => po.po_group).Ignore();
 
             AutoMap();
         }

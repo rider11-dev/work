@@ -2,18 +2,26 @@
 using MyNet.Components.WPF.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Biz.PartyBuilding.Client.Models.Base
 {
-    public class PartyOrgViewModel : BaseModel, ICopytToable
+    public class PartyOrgViewModel : BaseModel
     {
+        public PartyOrgViewModel()
+        {
+            po_chg_date = DateTime.Now;
+            po_expire_date = DateTime.Now;
+        }
 
         public string po_id { get; set; }
+        public string po_gp_id { get; set; }
 
         string _po_type;
+        [Required(ErrorMessageResourceName = "OrgType_Require", ErrorMessageResourceType = typeof(Biz.PartyBuilding.Resource.ViewModelResource))]
         public string po_type
         {
             get { return _po_type; }
@@ -28,6 +36,7 @@ namespace Biz.PartyBuilding.Client.Models.Base
         }
 
         string _po_chg_num;
+        [MaxLength(100, ErrorMessageResourceName = "Org_ChgNum_Length", ErrorMessageResourceType = typeof(Biz.PartyBuilding.Resource.ViewModelResource))]
         public string po_chg_num
         {
             get { return _po_chg_num; }
@@ -126,6 +135,7 @@ namespace Biz.PartyBuilding.Client.Models.Base
         }
 
         string _po_remark;
+        [MaxLength(255, ErrorMessageResourceName = "Remark_Length", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
         public string po_remark
         {
             get { return _po_remark; }
@@ -137,24 +147,6 @@ namespace Biz.PartyBuilding.Client.Models.Base
                     base.RaisePropertyChanged("po_remark");
                 }
             }
-        }
-
-        public void CopyTo(IBaseModel targetModel)
-        {
-            if (targetModel == null)
-            {
-                return;
-            }
-            var vmOrg = (PartyOrgViewModel)targetModel;
-            vmOrg.po_type = this.po_type;
-            vmOrg.po_chg_num = this.po_chg_num;
-            vmOrg.po_chg_date = this.po_chg_date;
-            vmOrg.po_expire_date = this.po_expire_date;
-            vmOrg.po_chg_remind = this.po_chg_remind;
-            vmOrg.po_mem_normal = this.po_mem_normal;
-            vmOrg.po_mem_potential = this.po_mem_potential;
-            vmOrg.po_mem_activists = this.po_mem_activists;
-            vmOrg.po_remark = this.po_remark;
         }
     }
 }

@@ -22,6 +22,7 @@ namespace MyNet.Client.Public
         public const string Add = "新增";
         public const string Delete = "删除";
         public const string Edit = "修改";
+        public const string Save = "保存";
         public const string Assign = "分配用户权限";
         public const string Search = "查询";
 

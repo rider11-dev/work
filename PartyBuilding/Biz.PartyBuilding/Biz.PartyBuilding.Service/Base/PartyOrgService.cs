@@ -12,53 +12,91 @@ using System.Text;
 using System.Threading.Tasks;
 using MyNet.Components.Extensions;
 using MyNet.Dto.Auth;
+using MyNet.Components.Mapper;
+using MyNet.Repository.Base;
+using DapperExtensions;
+using MyNet.Model.Base;
+using Biz.PartyBuilding.Model.Base;
 
 namespace Biz.PartyBuilding.Service
 {
-    public class PartyOrgService : BaseService<PartyOrgDto>
+    public class PartyOrgService : BaseService<PartyOrg>
     {
         //常量
-        const string Msg_Update = "更新党组织信息";
+        const string Msg_Save = "保存党组织信息";
         const string Msg_PageQuery = "分页查询党组织信息";
+        const string Msg_FindOrgByGroupId = "查找党组织信息";
 
         const string SqlName_PageQuery = "pagequery";
+        const string SqlName_FindOrgByGroupId = "get";
 
         //私有变量
         private PartyOrgRepository _poRep;
-        private GroupRepository _gpRep;
+        private DictRepository _dictRep;
 
-        public PartyOrgService(IDbSession session, PartyOrgRepository poRep, GroupRepository gpRep)
+        public PartyOrgService(IDbSession session, PartyOrgRepository poRep, DictRepository dictRep)
             : base(session, poRep)
         {
             _poRep = poRep;
-            _gpRep = gpRep;
+            _dictRep = dictRep;
         }
 
-        public OptResult Update(PartyOrgDto po)
+        public OptResult FindOrgByGroupId(string gpid)
         {
             OptResult rst = null;
-            //3、更新：获取旧对象，赋值，更新
-            //TODO
             try
             {
-                var oldPo = _poRep.GetById(po.po_id);
-                oldPo.po_type = po.po_type;
-                oldPo.po_chg_num = po.po_chg_num;
-                oldPo.po_chg_date = po.po_chg_date;
-                oldPo.po_expire_date = po.po_expire_date;
-                oldPo.po_chg_remind = po.po_chg_remind;
-                oldPo.po_mem_normal = po.po_mem_normal;
-                oldPo.po_mem_potential = po.po_mem_potential;
-                oldPo.po_mem_activists = po.po_mem_activists;
-                oldPo.po_remark = po.po_remark;
-
-                bool val = _poRep.Update(oldPo);
-                rst = OptResult.Build(val ? ResultCode.Success : ResultCode.Fail, Msg_Update);
+                var pod = _poRep.QueryBySqlName<PartyOrgDto>(SqlName_FindOrgByGroupId, new { gpid = gpid }).FirstOrDefault();
+                rst = OptResult.Build(ResultCode.Success, Msg_FindOrgByGroupId, pod);
             }
             catch (Exception ex)
             {
-                LogHelper.LogError(Msg_Update, ex);
-                rst = OptResult.Build(ResultCode.DbError, Msg_Update);
+                LogHelper.LogError(Msg_FindOrgByGroupId, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_FindOrgByGroupId);
+            }
+            return rst;
+        }
+
+        public OptResult Save(PartyOrg po, string po_gp_id)
+        {
+            OptResult rst = null;
+            try
+            {
+                //1、党组织类型是否存在
+                string msg = "";
+                if (!ValidateOrgType(po.po_type, out msg))
+                {
+                    rst = OptResult.Build(ResultCode.ParamError, Msg_Save + "，" + msg);
+                    return rst;
+                }
+                //2、保存
+                var oldPo = _poRep.GetById(po_gp_id);
+                if (oldPo == null)
+                {
+                    po.po_id = po_gp_id;
+                    //新增
+                    _poRep.Insert(po);
+                }
+                else
+                {
+                    //修改
+                    oldPo.po_type = po.po_type;
+                    oldPo.po_chg_num = po.po_chg_num;
+                    oldPo.po_chg_date = po.po_chg_date;
+                    oldPo.po_expire_date = po.po_expire_date;
+                    oldPo.po_chg_remind = po.po_chg_remind;
+                    oldPo.po_mem_normal = po.po_mem_normal;
+                    oldPo.po_mem_potential = po.po_mem_potential;
+                    oldPo.po_mem_activists = po.po_mem_activists;
+                    oldPo.po_remark = po.po_remark;
+                    _poRep.Update(oldPo);
+                }
+                rst = OptResult.Build(ResultCode.Success, Msg_Save);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(Msg_Save, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_Save);
             }
             return rst;
         }
@@ -119,5 +157,17 @@ namespace Biz.PartyBuilding.Service
             }
             return rst;
         }
+
+        private bool ValidateOrgType(string orgType, out string msg)
+        {
+            msg = "";
+            var val = _dictRep.Count(Predicates.Field<Dict>(d => d.dict_type, Operator.Eq, PartyDictType.PartyOrg.type_code)) > 0;
+
+            msg = val ? "" : "党组织类型不存在！";
+
+            return val;
+        }
+
+
     }
 }

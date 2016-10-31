@@ -109,6 +109,7 @@
     <Compile Include="Logger\LogHelperFactory.cs" />
     <Compile Include="Logger\LogHelperProvider.cs" />
     <Compile Include="Mapper\OOMapper.cs" />
+    <Compile Include="Misc\IClearable.cs" />
     <Compile Include="Misc\ICopytToable.cs" />
     <Compile Include="Misc\Iindexer.cs" />
     <Compile Include="NFC\LotusNFCCardDriver.cs" />

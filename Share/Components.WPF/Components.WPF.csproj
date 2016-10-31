@@ -74,6 +74,7 @@
     <Compile Include="Extension\InputImgAddOnAdorner.cs" />
     <Compile Include="Extension\MiscExtension.cs" />
     <Compile Include="Extension\PasswordBoxAssistant.cs" />
+    <Compile Include="Extension\TreeViewExtension.cs" />
     <Compile Include="Extension\WindowExtension.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\CheckableModel.cs" />

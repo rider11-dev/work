@@ -8,6 +8,12 @@
         from auth_group gp
         where not exists(select 1 from party_org where po_id = gp.gp_id)
       </sql>
+      <sql name="get">
+        select gp.gp_id po_gp_id,po.*
+        from auth_group gp
+        left join party_org po on gp.gp_id=po.po_id
+        where gp.gp_id=@gpid
+      </sql>
       <sql name="pagequery"
            type="sp"
            sp_name="sp_page_query"

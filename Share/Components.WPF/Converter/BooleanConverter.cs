@@ -13,13 +13,21 @@ namespace MyNet.Components.WPF.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            bool en = parameter != null && parameter.ToString() == "en";//是否返回英文
             if (value.IsEmpty())
             {
-                return "否";
+                return en ? "false" : "否";
             }
             bool val = false;
             Boolean.TryParse(value.ToString(), out val);
-            return val ? "是" : "否";
+            if (en)
+            {
+                return val ? "true" : "false";
+            }
+            else
+            {
+                return val ? "是" : "否";
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -28,7 +36,7 @@ namespace MyNet.Components.WPF.Converter
             {
                 return false;
             }
-            return value.ToString() == "是";
+            return value.ToString() == "是" || value.ToString().ToLower() == "true";
         }
     }
 }

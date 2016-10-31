@@ -28,8 +28,7 @@
     </Style>
     <!--输入框前置label基础样式-->
     <Style x:Key="lblInputBaseStyle" TargetType="Label">
-        <Setter Property="FontSize" Value="15"/>
-        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontSize" Value="12"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Margin" Value="0,0,0,0"/>

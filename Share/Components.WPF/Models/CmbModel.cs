@@ -89,7 +89,7 @@ namespace MyNet.Components.WPF.Models
             {
                 return;
             }
-            this.Selected = this.DataSource.Where(m => m.Id == id).FirstOrDefault();
+            this.Selected = this.DataSource.Where(m => string.Equals(m.Id, id, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
         }
     }
 }

@@ -38,12 +38,6 @@
       <HintPath>..\packages\DapperExtensions.1.4.4\lib\net40\DapperExtensions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MyNet.Model">
-      <HintPath>..\..\..\Share\dlls\MyNet\MyNet.Model.dll</HintPath>
-    </Reference>
-    <Reference Include="MyNet.Repository">
-      <HintPath>..\..\..\Share\dlls\MyNet\MyNet.Repository.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -57,11 +51,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\Mapper\PartyOrgMapper.cs" />
     <Compile Include="Base\Mapper\PartyOrgDtoMapper.cs" />
     <Compile Include="Base\PartyOrgRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Share\Model\Model.csproj">
+      <Project>{bb11afa2-784c-4e60-9586-6608d8338d67}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Share\Repository\Repository.csproj">
+      <Project>{0c81a4e4-bd67-4f8d-a602-ec4062a0d0c2}</Project>
+      <Name>Repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Biz.PartyBuilding.Dto\Biz.PartyBuilding.Dto.csproj">
       <Project>{7b76688f-e279-447a-9267-efec1a5a7b93}</Project>
       <Name>Biz.PartyBuilding.Dto</Name>

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.IO;
 
 namespace MyNet.Client.Public
 {
@@ -27,36 +28,34 @@ namespace MyNet.Client.Public
         static void LoadApis()
         {
             Apis = new List<Api>();
-            string apiFileFullPath = "";
-            bool find = FileExtension.GetFileFullPath(Context.BaseDirectory, ApiFile, out apiFileFullPath);
-            if (find == false)
-            {
-                string msg = "加载api失败，未找到配置文件" + ApiFile;
-                throw new Exception(msg);
-            }
+            var files = FileExtension.GetFiles(Context.BaseDirectory, "api.config", SearchOption.AllDirectories);
             try
             {
-                //加载所有api配置
-                XDocument doc = XDocument.Load(apiFileFullPath);
-                var apisNode = doc.Descendants("apis").FirstOrDefault();
-                ApiEnabled = Convert.ToBoolean(apisNode.Attribute("enable").Value);
-
-                if (!ApiEnabled)
+                foreach (var file in files)
                 {
-                    return;
+                    //加载所有api配置
+                    XDocument doc = XDocument.Load(file.FullName);
+                    var apisNode = doc.Descendants("apis").FirstOrDefault();
+                    ApiEnabled = Convert.ToBoolean(apisNode.Attribute("enable").Value);
+
+                    if (!ApiEnabled)
+                    {
+                        continue;
+                    }
+                    var apis = (from a in apisNode.Descendants("api")
+                                select new Api
+                                {
+                                    Name = a.Attribute("name").Value,
+                                    RelativeUrl = a.Attribute("url").Value,
+                                    Provider = a.Attribute("provider").Value
+                                }).ToList();
+                    Apis.AddRange(apis);
                 }
-                var apis = (from a in apisNode.Descendants("api")
-                            select new Api
-                            {
-                                Name = a.Attribute("name").Value,
-                                RelativeUrl = a.Attribute("url").Value,
-                                Provider = a.Attribute("provider").Value
-                            }).ToList();
-                Apis = apis;
+
             }
             catch (Exception ex)
             {
-                string msg = "读取配置文件" + apiFileFullPath + "错误";
+                string msg = "读取配置文件" + ApiFile + "错误";
                 throw new Exception(msg, ex);
             }
         }

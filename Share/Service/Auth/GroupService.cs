@@ -113,53 +113,6 @@ namespace MyNet.Service.Auth
             return rst;
         }
 
-        public OptResult Delete(dynamic pkId)
-        {
-            OptResult rst = null;
-
-            //1、组织是否存在
-            var group = _groupRep.GetById(pkId);
-            if (group == null)
-            {
-                rst = OptResult.Build(ResultCode.DataNotFound, Msg_DeleteGroup);
-                return rst;
-            }
-
-            //2、系统预制不允许删除
-            if (group.gp_system == true)
-            {
-                rst = OptResult.Build(ResultCode.DataSystem, Msg_DeleteGroup + "失败");
-                return rst;
-            }
-
-            //3、是否包含下级组织
-            var hasChild = HasChild(new List<string>() { pkId });
-            if (hasChild)
-            {
-                rst = OptResult.Build(ResultCode.DataInUse, string.Format("{0}，存在下级组织", Msg_DeleteGroup));
-                return rst;
-            }
-            //4、是否包含用户
-            var assigned = HasUser(new List<string> { pkId });
-            if (assigned)
-            {
-                rst = OptResult.Build(ResultCode.DataInUse, string.Format("{0}，已分配到用户", Msg_DeleteGroup));
-                return rst;
-            }
-            //5、删除
-            try
-            {
-                var val = _groupRep.Delete(Predicates.Field<Group>(gp => gp.gp_id, Operator.Eq, pkId as object));
-                rst = OptResult.Build(val ? ResultCode.Success : ResultCode.Fail, Msg_DeleteGroup);
-            }
-            catch (Exception ex)
-            {
-                LogHelper.LogError(Msg_DeleteGroup, ex);
-                rst = OptResult.Build(ResultCode.DbError, Msg_DeleteGroup);
-            }
-            return rst;
-        }
-
         public OptResult DeleteBatch(IEnumerable<string> ids)
         {
             OptResult rst = null;
@@ -174,11 +127,22 @@ namespace MyNet.Service.Auth
             //2、系统预制不允许删除
             PredicateGroup pg = new PredicateGroup { Operator = GroupOperator.And, Predicates = new List<IPredicate>() };
             pg.Predicates.Add(predicate1);
-            pg.Predicates.Add(Predicates.Field<Group>(gp => gp.gp_system, Operator.Eq, true));
+            var predicate2 = Predicates.Field<Group>(gp => gp.gp_system, Operator.Eq, true);
+            pg.Predicates.Add(predicate2);
             count = _groupRep.Count(pg);
             if (count > 0)
             {
                 rst = OptResult.Build(ResultCode.DataSystem, Msg_BatchDeleteGroup + "失败");
+                return rst;
+            }
+            //3、admin不允许删除
+            pg.Predicates.Remove(predicate2);
+            predicate2 = Predicates.Field<Group>(gp => gp.gp_code, Operator.Eq, "admin");
+            pg.Predicates.Add(predicate2);
+            count = _groupRep.Count(pg);
+            if (count > 0)
+            {
+                rst = OptResult.Build(ResultCode.DataAddmin, Msg_BatchDeleteGroup + "失败");
                 return rst;
             }
             //3、是否包含下级组织

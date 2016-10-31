@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{373AFCCF-AC9C-42AB-A58F-52C651BE971F}</ProjectGuid>
+    <ProjectGuid>{D9031679-12D3-416F-9E41-7C9A426D71E6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Biz.PartyBuilding.Model</RootNamespace>
-    <AssemblyName>Biz.PartyBuilding.Model</AssemblyName>
+    <RootNamespace>Biz.PartyBuilding.Resource</RootNamespace>
+    <AssemblyName>Biz.PartyBuilding.Resource</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,24 +39,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\PartyDictType.cs" />
-    <Compile Include="Base\PartyOrg.cs" />
-    <Compile Include="Base\PartyOrgType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModelResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewModelResource.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Evaluation\" />
-    <Folder Include="UsualMng\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Share\Components\Components.csproj">
-      <Project>{9ed019a0-a26a-4725-aa70-2b52bf7a5416}</Project>
-      <Name>Components</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Share\Model\Model.csproj">
-      <Project>{bb11afa2-784c-4e60-9586-6608d8338d67}</Project>
-      <Name>Model</Name>
-    </ProjectReference>
+    <EmbeddedResource Include="ViewModelResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ViewModelResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

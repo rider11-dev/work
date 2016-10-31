@@ -36,5 +36,7 @@ namespace MyNet.Components.Result
         DbError = 11,
         [Description("非法操作")]
         IllegalOpt = 12,
+        [Description("管理员数据")]
+        DataAddmin = 13,
     }
 }

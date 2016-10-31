@@ -9,51 +9,129 @@
       xmlns:vmparty="clr-namespace:Biz.PartyBuilding.Client.Models.Base"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="600"
-	Title="PartyOrgMngPage">
+	Title="PartyOrgMngPage"
+               Loaded="PartyOrgMngPage_Loaded">
     <Page.Resources>
-        <vmparty:PartyOrgViewModel x:Key="model"/>
+        <Style x:Key="lblStyle" TargetType="Label" BasedOn="{StaticResource lblInputBaseStyle}">
+            <Setter Property="Margin" Value="4,0,0,0"/>
+        </Style>
+        <Style x:Key="inputStyle" TargetType="Control" BasedOn="{StaticResource inputBaseStyle}">
+            <!--自动填充-->
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Width" Value="Auto"/>
+
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        <Style x:Key="cbStyle" TargetType="ComboBox" BasedOn="{StaticResource cbBaseStyle}">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Width" Value="Auto"/>
+
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        <Style x:Key="btnStyle" TargetType="Button" BasedOn="{StaticResource btnBaseStyle}">
+            <Setter Property="Width" Value="60"/>
+            <Setter Property="Height" Value="24"/>
+        </Style>
+        <vmparty:PartyOrgDetailViewModel x:Key="model"/>
         <ctl:TreeViewData x:Key="treeData"/>
-        <vmwpf:CmbModel x:Key="cbVm"/>
+        <vmwpf:CmbModel x:Key="cbVmOrgType"/>
+        <vmwpf:CmbModel x:Key="cbVmBoolType"/>
     </Page.Resources>
     <Page.DataContext>
         <Binding Source="{StaticResource model}"/>
     </Page.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2.5*"/>
-            <ColumnDefinition Width="7.5*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="8*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="6*"/>
         </Grid.RowDefinitions>
         <!--左列：组织列表-->
-        <GroupBox Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Header="党组织">
-            <!--<ctl:ControlTree  x:Name="ctlTreeGroup" Grid.Column="0"/>-->
+        <GroupBox Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Header="党组织" Style="{StaticResource headerBaseStyle}">
+            <ctl:ControlTree DockPanel.Dock="Top"  x:Name="ctlTreeGroup" Grid.Column="0"/>
         </GroupBox>
         <!--右上：详细信息-->
-        <GroupBox Grid.Row="0" Grid.Column="1" Header="详细信息">
+        <GroupBox Grid.Row="0" Grid.Column="1" Header="详细信息" Style="{StaticResource headerBaseStyle}">
             <Grid x:Name="gridDetail">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="1.1*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
-                <ComboBox x:Name="cbOrgType" Grid.Row="0" Grid.Column="0" 
-                  DataContext="{StaticResource cbVm}"
-                  Style="{StaticResource cbBaseStyle}"
-                  Width="80" Height="26" FontSize="12"
-                  SelectedValue="{Binding Path=po_type,Source={StaticResource model}}"
+                <!--row1-->
+                <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource lblStyle}" Content="党组织类型"/>
+                <ComboBox x:Name="cbOrgType" Grid.Row="0" Grid.Column="1" 
+                  DataContext="{StaticResource cbVmOrgType}"
+                  Style="{StaticResource cbStyle}"
+                  SelectedValue="{Binding Path=SelectedPoType,Source={StaticResource model}}"
                   />
+
+                <Label Grid.Row="0" Grid.Column="2" Style="{StaticResource lblStyle}" Content="换届文号"/>
+                <TextBox Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="3" Style="{StaticResource inputStyle}"
+                Text="{Binding Path=po_chg_num,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                 />
+
+
+                <!--row2-->
+                <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource lblStyle}" Content="换届日期"/>
+                <DatePicker Grid.Row="1" Grid.Column="1" Style="{StaticResource dtPickerBaseStyle}"
+                    Text="{Binding Path=po_chg_date,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
+
+                <Label Grid.Row="1" Grid.Column="2" Style="{StaticResource lblStyle}" Content="期满日期"/>
+                <DatePicker Grid.Row="1" Grid.Column="3" Style="{StaticResource dtPickerBaseStyle}"
+                    Text="{Binding Path=po_expire_date,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
+
+                <Label Grid.Row="1" Grid.Column="4" Style="{StaticResource lblStyle}" Content="换届提醒"/>
+                <ComboBox Grid.Row="1" Grid.Column="5" x:Name="cbChgRemind"
+                  DataContext="{StaticResource cbVmBoolType}" Style="{StaticResource cbStyle}"
+                  SelectedValue="{Binding Path=cmb_chg_remind,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus}"
+                  />
+
+                <!--row3-->
+                <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource lblStyle}" Content="正式党员"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource inputStyle}"
+                    Text="{Binding Path=po_mem_normal,Source={StaticResource model},Mode=OneWay}"
+                    IsReadOnly="True"
+                 />
+
+                <Label Grid.Row="2" Grid.Column="2" Style="{StaticResource lblStyle}" Content="发展党员"/>
+                <TextBox Grid.Row="2" Grid.Column="3" Style="{StaticResource inputStyle}"
+                Text="{Binding Path=po_mem_potential,Source={StaticResource model},Mode=OneWay}"
+                    IsReadOnly="True"
+                 />
+
+                <Label Grid.Row="2" Grid.Column="4" Style="{StaticResource lblStyle}" Content="积极分子"/>
+                <TextBox Grid.Row="2" Grid.Column="5" Style="{StaticResource inputStyle}"
+                Text="{Binding Path=po_mem_activists,Source={StaticResource model},Mode=OneWay}"
+                    IsReadOnly="True"
+                 />
+
+                <!--row4-->
+                <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource lblStyle}" Content="备注"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4" Style="{StaticResource inputStyle}"
+                Text="{Binding Path=po_remark,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                 />
+                <Button Grid.Row="3" Grid.Column="5" x:Name="btnSave" Content="保存" 
+                        Style="{StaticResource btnStyle}"
+                        Command="{Binding Path=SaveCmd,Source={StaticResource model}}"/>
             </Grid>
         </GroupBox>
         <!--右下：党员信息-->
-        <GroupBox Grid.Row="1" Grid.Column="1" Header="党员">
+        <GroupBox Grid.Row="1" Grid.Column="1" Header="党员信息" Style="{StaticResource headerBaseStyle}">
 
         </GroupBox>
     </Grid>

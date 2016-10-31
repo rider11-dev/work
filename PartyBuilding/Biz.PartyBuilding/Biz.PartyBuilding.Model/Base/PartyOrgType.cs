@@ -10,14 +10,14 @@ namespace Biz.PartyBuilding.Model.Base
     public enum PartyOrgType
     {
         [Description("党委")]
-        DW = 0,
+        PartyOrgDW = 0,
         [Description("机关党委")]
-        JGDW = 1,
+        PartyOrgJGDW = 1,
         [Description("基层党委")]
-        JCDW = 2,
+        PartyOrgJCDW = 2,
         [Description("党总支部")]
-        DZZB = 3,
+        PartyOrgDZZB = 3,
         [Description("党支部")]
-        DZB = 4
+        PartyOrgDZB = 4
     }
 }

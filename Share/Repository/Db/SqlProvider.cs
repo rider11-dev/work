@@ -33,7 +33,11 @@ namespace MyNet.Repository.Db
                 {
                     files.ForEach(f =>
                     {
-                        SqlCfgs.Add(f.Name.Replace("sql.", "").Replace("." + dbString, ""), XDocument.Load(f.FullName));
+                        var key = f.Name.Replace("sql.", "").Replace("." + dbString, "");
+                        if (!SqlCfgs.ContainsKey(key))
+                        {
+                            SqlCfgs.Add(key, XDocument.Load(f.FullName));
+                        }
                     });
                 }
             }
