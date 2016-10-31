@@ -98,7 +98,7 @@
                                    Text=""/>
                     </StackPanel>
                 </Border>
-                <Frame Name="framePage" Grid.Row="1" Grid.Column="1" NavigationUIVisibility="Hidden">
+                <Frame Name="framePage" Grid.Row="1" Grid.Column="1" NavigationUIVisibility="Hidden" Padding="0,0,4,0">
 
                 </Frame>
             </Grid>
