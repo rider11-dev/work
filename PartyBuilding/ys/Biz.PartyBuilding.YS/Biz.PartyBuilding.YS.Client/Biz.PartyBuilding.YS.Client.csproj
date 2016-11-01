@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{40E7AEE1-3F61-47AF-A127-399DD06B2A13}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Biz.PartyBuilding.YS.Client</RootNamespace>
+    <AssemblyName>Biz.PartyBuilding.YS.Client</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\..\Share\ClientFrame\bin\plugin\party\ys\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\..\Share\ClientFrame\bin\plugin\party\ys\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Share\dlls\log4net\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Daily\InfoReleasePage.xaml.cs">
+      <DependentUpon>InfoReleasePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Daily\NoticePage.xaml.cs">
+      <DependentUpon>NoticePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Daily\PartyActRecordPage.xaml.cs">
+      <DependentUpon>PartyActRecordPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Daily\TaskReceivePage.xaml.cs">
+      <DependentUpon>TaskReceivePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Daily\TaskDispatchPage.xaml.cs">
+      <DependentUpon>TaskDispatchPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\EvaluateDetailPage.xaml.cs">
+      <DependentUpon>EvaluateDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\EvaluatePage.xaml.cs">
+      <DependentUpon>EvaluatePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\EvaluateScorePage.xaml.cs">
+      <DependentUpon>EvaluateScorePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\FileuploadPage.xaml.cs">
+      <DependentUpon>FileuploadPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Learn\PartyLearnPage.xaml.cs">
+      <DependentUpon>PartyLearnPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PartyBuildingContext.cs" />
+    <Compile Include="PartyOrg\Models\OrgStrucViewModel.cs" />
+    <Compile Include="PartyOrg\Org2NewPage.xaml.cs">
+      <DependentUpon>Org2NewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PartyOrg\CollegeStuOfficerPage.xaml.cs">
+      <DependentUpon>CollegeStuOfficerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PartyOrg\FirstSecretaryPage.xaml.cs">
+      <DependentUpon>FirstSecretaryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PartyOrg\ActivityPlacePage.xaml.cs">
+      <DependentUpon>ActivityPlacePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PartyOrg\QueryPage.xaml.cs">
+      <DependentUpon>QueryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PartyOrg\VillageCadresPage.xaml.cs">
+      <DependentUpon>VillageCadresPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PartyOrg\PartyMemDuesPage.xaml.cs">
+      <DependentUpon>PartyMemDuesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PartyOrg\PartymemAddBookPage.xaml.cs">
+      <DependentUpon>PartymemAddBookPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PartyOrg\PartyMemberPage.xaml.cs">
+      <DependentUpon>PartyMemberPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PartyOrg\OrgStructPage.xaml.cs">
+      <DependentUpon>OrgStructPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Sys\Evaluation\EvalProjAssignPage.xaml.cs">
+      <DependentUpon>EvalProjAssignPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sys\Evaluation\EvaluateProjectPage.xaml.cs">
+      <DependentUpon>EvaluateProjectPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sys\Learn\ArticlesPage.xaml.cs">
+      <DependentUpon>ArticlesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sys\Learn\ChannelSetPage.xaml.cs">
+      <DependentUpon>ChannelSetPage.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Daily\InfoReleasePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Daily\NoticePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Daily\PartyActRecordPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Daily\TaskReceivePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Daily\TaskDispatchPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Evaluation\EvaluateDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Evaluation\EvaluatePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Evaluation\EvaluateScorePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Evaluation\FileuploadPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Learn\PartyLearnPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PartyOrg\Org2NewPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PartyOrg\CollegeStuOfficerPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PartyOrg\FirstSecretaryPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PartyOrg\ActivityPlacePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PartyOrg\QueryPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PartyOrg\VillageCadresPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PartyOrg\PartyMemDuesPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PartyOrg\PartymemAddBookPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PartyOrg\PartyMemberPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PartyOrg\OrgStructPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sys\Evaluation\EvalProjAssignPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Sys\Evaluation\EvaluateProjectPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sys\Learn\ArticlesPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Sys\Learn\ChannelSetPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Share\Client\Client.csproj">
+      <Project>{6aabd137-bb47-4636-8635-de0f6dc9aea1}</Project>
+      <Name>Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Share\Components.Resource\Components.Resource.csproj">
+      <Project>{4ecb69ea-c6d9-436b-9689-90d065424f53}</Project>
+      <Name>Components.Resource</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Share\Components.WPF\Components.WPF.csproj">
+      <Project>{6324a5cc-0daf-4af4-80a3-5d2a60769c96}</Project>
+      <Name>Components.WPF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Share\Components\Components.csproj">
+      <Project>{9ed019a0-a26a-4725-aa70-2b52bf7a5416}</Project>
+      <Name>Components</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Share\Model\Model.csproj">
+      <Project>{bb11afa2-784c-4e60-9586-6608d8338d67}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
