@@ -23,11 +23,11 @@ using System.Windows.Shapes;
 namespace Biz.PartyBuilding.YS.Client.PartyOrg
 {
     /// <summary>
-    /// PartyMemDuesPage.xaml 的交互逻辑
+    /// PartymemAddrBookPage.xaml 的交互逻辑
     /// </summary>
-    public partial class PartyMemDuesPage : BasePage
+    public partial class PartymemAddrBookPage : BasePage
     {
-        public PartyMemDuesPage()
+        public PartymemAddrBookPage()
         {
             InitializeComponent();
 
@@ -44,8 +44,8 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg
             {
                 return;
             }
-            var dfs = PartyBuildingContext.Df.Where(p => p.dy_party == node.Label);
-            dg.ItemsSource = dfs;
+            var phones = PartyBuildingContext.DyPhones.Where(p => p.dy_party == node.Label);
+            dg.ItemsSource = phones;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -70,7 +70,7 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg
                 return;
             }
 
-            SaveFileDialog saveFileDialog = new SaveFileDialog { Filter = "Excel Files|*.xls;*.xlsx", FileName = "缴费记录" };
+            SaveFileDialog saveFileDialog = new SaveFileDialog { Filter = "Excel Files|*.xls;*.xlsx", FileName = "党员通讯录" };
             var rst = saveFileDialog.ShowDialog();
             if (rst == null || ((bool)rst) == false)
             {
@@ -82,13 +82,9 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg
                     return new Dictionary<string, string>
                     {
                         {"dy_name","党员姓名"},
-                        {"dy_party","所属党组织"},
-                        {"df_zxbz","执行标准"},
-                        {"df_base","缴费基数"},
-                        {"df_month","每月应缴党费"},
-                        {"df_year_plan","全年应缴党费"},
-                        {"df_year_actual","全年实缴党费"},
-                        {"df_year","缴纳年份"},
+                        {"dy_phone","联系电话"},
+                        {"dy_email","邮箱"},
+                        {"dy_party","所属党组织"}
                     };
                 }, data);
             MessageBoxResult dia = MessageBox.Show("文件已保存至" + saveFileDialog.FileName + Environment.NewLine + "是否打开？", "导出成功", MessageBoxButton.YesNo);

@@ -1,0 +1,142 @@
+﻿<win:BaseWindow x:Class="Biz.PartyBuilding.YS.Client.PartyOrg.DetailPartyMemWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:win="clr-namespace:MyNet.Components.WPF.Windows;assembly=MyNet.Components.WPF"
+        xmlns:vmwpf="clr-namespace:MyNet.Components.WPF.Models;assembly=MyNet.Components.WPF"
+        xmlns:ctl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
+      xmlns:party="clr-namespace:Biz.PartyBuilding.YS.Client"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource popWindowStyle}"
+        Title="党员详细信息" Height="500" Width="600">
+    <Window.Resources>
+        <Style x:Key="lblStyle" TargetType="Label" BasedOn="{StaticResource lblInputBaseStyle}">
+            <!--<Setter Property="Margin" Value="34,0,0,0"/>-->
+            <Setter Property="HorizontalContentAlignment" Value="Right"/>
+        </Style>
+        <Style x:Key="inputStyle" TargetType="Control" BasedOn="{StaticResource inputDetailWinStyle}">
+            <Setter Property="MaxHeight" Value="26"/>
+            <Setter Property="Margin" Value="4,0,4,0"/>
+        </Style>
+        <Style x:Key="cbStyle" TargetType="ComboBox" BasedOn="{StaticResource cbBaseStyle}">
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Height" Value="26"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        <Style x:Key="btnStyle" TargetType="Button" BasedOn="{StaticResource btnBaseStyle}">
+            <Setter Property="Width" Value="90"/>
+            <Setter Property="Height" Value="28"/>
+        </Style>
+        <vmwpf:CmbModel x:Key="cbVmType"/>
+        <vmwpf:CmbModel x:Key="cbVmSex"/>
+        <vmwpf:CmbModel x:Key="cbVmNation"/>
+        <vmwpf:CmbModel x:Key="cbVmDnzw"/>
+        <vmwpf:CmbModel x:Key="cbVmXL"/>
+        <vmwpf:CmbModel x:Key="cbVmNowGzgw"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Label x:Name="lblTitle" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+               HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+               FontWeight="Bold" FontSize="20"
+               Content="{Binding Path=Title,RelativeSource={RelativeSource AncestorType=win:BaseWindow},Mode=OneWay}"
+                   />
+        <GroupBox Grid.Row="1" Header="基本信息">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="姓名" Grid.Row="0" Grid.Column="0" Style="{StaticResource lblStyle}"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource inputStyle}" Text="王学强"/>
+                <Label Content="类别" Grid.Row="0" Grid.Column="2" Style="{StaticResource lblStyle}"/>
+                <ComboBox  x:Name="cmbType" Grid.Row="0" Grid.Column="3"
+                  DataContext="{StaticResource cbVmType}"
+                  Style="{StaticResource cbStyle}"/>
+                <Label Content="性别" Grid.Row="0" Grid.Column="4" Style="{StaticResource lblStyle}"/>
+                <ComboBox  x:Name="cmbSex" Grid.Row="0" Grid.Column="5"
+                  DataContext="{StaticResource cbVmType}"
+                  Style="{StaticResource cbStyle}"/>
+                <Label Content="年龄" Grid.Row="1" Grid.Column="0" Style="{StaticResource lblStyle}"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource inputStyle}" Text="40"/>
+                <Label Content="民族" Grid.Row="1" Grid.Column="2" Style="{StaticResource lblStyle}"/>
+                <ComboBox  x:Name="cmbNation" Grid.Row="1" Grid.Column="3"
+                  DataContext="{StaticResource cbVmNation}"
+                  Style="{StaticResource cbStyle}"/>
+                <Label Content="所属组织" Grid.Row="1" Grid.Column="4" Style="{StaticResource lblStyle}"/>
+                <TextBox Grid.Row="1" Grid.Column="5" Style="{StaticResource inputStyle}" Text="曹县县委组织部"/>
+                <Label Content="党内职务" Grid.Row="2" Grid.Column="0" Style="{StaticResource lblStyle}"/>
+                <ComboBox  x:Name="cmbDnzw" Grid.Row="2" Grid.Column="1"
+                  DataContext="{StaticResource cbVmDnzw}"
+                  Style="{StaticResource cbStyle}"/>
+                <Label Content="入党时间" Grid.Row="2" Grid.Column="2" Style="{StaticResource lblStyle}"/>
+                <DatePicker Grid.Row="2" Grid.Column="3" Style="{StaticResource dtPickerBaseStyle}"/>
+                <Label Content="转正时间" Grid.Row="2" Grid.Column="4" Style="{StaticResource lblStyle}"/>
+                <DatePicker Grid.Row="2" Grid.Column="5" Style="{StaticResource dtPickerBaseStyle}"/>
+                <Label Content="身份证号" Grid.Row="3" Grid.Column="0" Style="{StaticResource lblStyle}"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource inputStyle}" Text="372924195212125566"/>
+                <Label Content="学历" Grid.Row="3" Grid.Column="2" Style="{StaticResource lblStyle}"/>
+                <ComboBox  x:Name="cmbXL" Grid.Row="3" Grid.Column="3"
+                  DataContext="{StaticResource cbVmXL}"
+                  Style="{StaticResource cbStyle}"/>
+                <Label Content="联系电话" Grid.Row="3" Grid.Column="4" Style="{StaticResource lblStyle}"/>
+                <TextBox Grid.Row="3" Grid.Column="5" Style="{StaticResource inputStyle}" Text="15820001654"/>
+                <Label Content="籍贯" Grid.Row="4" Grid.Column="0" Style="{StaticResource lblStyle}"/>
+                <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource inputStyle}" Text="山东曹县"/>
+                <Label Content="现工作岗位" Grid.Row="4" Grid.Column="2" Style="{StaticResource lblStyle}"/>
+                <ComboBox  x:Name="cmbNowGzgw" Grid.Row="4" Grid.Column="3"
+                  DataContext="{StaticResource cbVmNowGzgw}"
+                  Style="{StaticResource cbStyle}"/>
+                <Label Content="月薪(税后)" Grid.Row="4" Grid.Column="4" Style="{StaticResource lblStyle}"/>
+                <TextBox Grid.Row="4" Grid.Column="5" Style="{StaticResource inputStyle}" Text="4000"/>
+                <Label Content="应缴党费(月)" Grid.Row="5" Grid.Column="0" Style="{StaticResource lblStyle}"/>
+                <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource inputStyle}" Text="40"/>
+                <Label Content="备注" Grid.Row="5" Grid.Column="2" Style="{StaticResource lblStyle}"/>
+                <TextBox Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="3" Style="{StaticResource inputStyle}" Text="作风优良，工作认真"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="2" Header="家庭成员">
+            <DataGrid x:Name="dgFamily" Style="{StaticResource gridBaseStyle}" ItemsSource="{x:Static party:PartyBuildingContext.Families}">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn CellStyle="{StaticResource ckCellStyle}" HeaderStyle="{StaticResource ckCellHeaderStyle}"
+                                                CanUserResize="False"/>
+                    <DataGridTextColumn Header="称谓" Binding="{Binding cw}"/>
+                    <DataGridTextColumn Header="姓名" Binding="{Binding name}"/>
+                    <DataGridTextColumn Header="年龄" Binding="{Binding age}"/>
+                    <DataGridTextColumn Header="政治面貌" Binding="{Binding zzmm}"/>
+                    <DataGridTextColumn Header="工作单位" Binding="{Binding work_unit}"/>
+                    <DataGridTextColumn Header="职务" Binding="{Binding zw}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+        <Grid Grid.Row="3" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Content="确  定" Grid.Row="0" Grid.Column="0" Style="{StaticResource btnStyle}"
+                    Command="{Binding Path=CloseCmd,RelativeSource={RelativeSource AncestorType=win:BaseWindow}}"
+                    />
+            <Button Content="取  消" Grid.Column="1" Style="{StaticResource btnStyle}"
+                    Command="{Binding Path=CloseCmd,RelativeSource={RelativeSource AncestorType=win:BaseWindow}}"
+                    />
+        </Grid>
+    </Grid>
+</win:BaseWindow>

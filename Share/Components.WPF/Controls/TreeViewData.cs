@@ -166,7 +166,7 @@ namespace MyNet.Components.WPF.Controls
             public dynamic Data { get; set; }
 
             private ObservableCollection<TreeNode> _subNodes = null;
-            public IList<TreeNode> SubNodes
+            public ObservableCollection<TreeNode> SubNodes
             {
                 get
                 {

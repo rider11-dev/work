@@ -25,14 +25,14 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg
     /// </summary>
     public partial class OrgStructPage : BasePage
     {
-        TreeViewData _menuTreeData = null;
+        TreeViewData _gpTreeData = null;
         OrgStrucViewModel _model;
 
         public OrgStructPage()
         {
             InitializeComponent();
 
-            _menuTreeData = (TreeViewData)menuTree.DataContext;
+            _gpTreeData = (TreeViewData)gpTree.DataContext;
             _model = this.DataContext as OrgStrucViewModel;
         }
 
@@ -41,7 +41,7 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg
             //组织树
             var nodes = TreeHelper.ParseGroupsTreeData(DataCacheHelper.AllGroups.Where(kvp => kvp.Value.gp_system == false).Select(kvp => kvp.Value));
 
-            _menuTreeData.Bind(nodes);
+            _gpTreeData.Bind(nodes);
         }
 
         private void menuTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
@@ -56,6 +56,27 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg
                 }
             }
 
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            TreeViewData.TreeNode selNode = (gpTree.SelectedItem as TreeViewData.TreeNode);
+
+            TreeViewData.TreeNode node = new TreeViewData.TreeNode { Label = "新增党组织" };
+
+            if (selNode == null || _gpTreeData.RootNodes.Contains(selNode))
+            {
+                node.Level = 1;
+                _gpTreeData.RootNodes.Add(node);
+            }
+            else
+            {
+                node.ParentNode = selNode.ParentNode;
+                node.Parent = selNode.Parent;
+                node.Level = selNode.Level;
+
+                selNode.ParentNode.SubNodes.Add(node);
+            }
         }
     }
 }

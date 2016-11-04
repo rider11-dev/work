@@ -87,7 +87,18 @@
       <DependentUpon>PartyLearnPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="PartyBuildingContext.cs" />
+    <Compile Include="PartyOrg\DetailPartyMemPhoneWindow.xaml.cs">
+      <DependentUpon>DetailPartyMemPhoneWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PartyOrg\DetailPartyMemWindow.xaml.cs">
+      <DependentUpon>DetailPartyMemWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PartyOrg\DetailOrg2NewWindow.xaml.cs">
+      <DependentUpon>DetailOrg2NewWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PartyOrg\Models\Org2NewViewModel.cs" />
     <Compile Include="PartyOrg\Models\OrgStrucViewModel.cs" />
+    <Compile Include="PartyOrg\Models\PartyMemberViewModel.cs" />
     <Compile Include="PartyOrg\Org2NewPage.xaml.cs">
       <DependentUpon>Org2NewPage.xaml</DependentUpon>
     </Compile>
@@ -100,17 +111,17 @@
     <Compile Include="PartyOrg\ActivityPlacePage.xaml.cs">
       <DependentUpon>ActivityPlacePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PartyOrg\PartyMemDuesPage.xaml.cs">
+      <DependentUpon>PartyMemDuesPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PartyOrg\QueryPage.xaml.cs">
       <DependentUpon>QueryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="PartyOrg\VillageCadresPage.xaml.cs">
       <DependentUpon>VillageCadresPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PartyOrg\PartyMemDuesPage.xaml.cs">
-      <DependentUpon>PartyMemDuesPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="PartyOrg\PartymemAddBookPage.xaml.cs">
-      <DependentUpon>PartymemAddBookPage.xaml</DependentUpon>
+    <Compile Include="PartyOrg\PartymemAddrBookPage.xaml.cs">
+      <DependentUpon>PartymemAddrBookPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="PartyOrg\PartyMemberPage.xaml.cs">
       <DependentUpon>PartyMemberPage.xaml</DependentUpon>
@@ -197,6 +208,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PartyOrg\DetailPartyMemPhoneWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PartyOrg\DetailPartyMemWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PartyOrg\DetailOrg2NewWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PartyOrg\Org2NewPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -213,6 +236,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="PartyOrg\PartyMemDuesPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="PartyOrg\QueryPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -221,11 +248,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PartyOrg\PartyMemDuesPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="PartyOrg\PartymemAddBookPage.xaml">
+    <Page Include="PartyOrg\PartymemAddrBookPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -4,11 +4,121 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:page="clr-namespace:MyNet.Client.Pages;assembly=MyNet.Client"
+      xmlns:ctl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
+      xmlns:model="clr-namespace:Biz.PartyBuilding.YS.Client.PartyOrg.Models"
+      xmlns:vmwpf="clr-namespace:MyNet.Components.WPF.Models;assembly=MyNet.Components.WPF"
+      xmlns:party="clr-namespace:Biz.PartyBuilding.YS.Client"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="300" d:DesignWidth="800" Loaded="BasePage_Loaded"
 	Title="PartyMemberPage">
-
+    <Page.Resources>
+        <ctl:TreeViewData x:Key="gpTreeData"/>
+        <Style x:Key="btnStyle" TargetType="Button" BasedOn="{StaticResource btnBaseStyle}">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="24"/>
+        </Style>
+        <Style x:Key="lblStyle" TargetType="Label" BasedOn="{StaticResource lblInputBaseStyle}">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+        <Style x:Key="inputStyle" TargetType="TextBox" BasedOn="{StaticResource inputBaseStyle}">
+            <Setter Property="MaxHeight" Value="26"/>
+            <Setter Property="Margin" Value="4,0,4,0"/>
+        </Style>
+        <Style x:Key="cbStyle" TargetType="ComboBox" BasedOn="{StaticResource cbBaseStyle}">
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Height" Value="26"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        <vmwpf:CmbModel x:Key="cbVmSex"/>
+        <vmwpf:CmbModel x:Key="cbVmNation"/>
+        <vmwpf:CmbModel x:Key="cbVmJoininTime"/>
+        <vmwpf:CmbModel x:Key="cbVmXL"/>
+        <vmwpf:CmbModel x:Key="cbVmGzgw"/>
+    </Page.Resources>
     <Grid>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition MaxHeight="70"/>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Header="组织架构" 
+                  Style="{StaticResource headerBaseStyle}">
+            <TreeView x:Name="gpTree"
+                          DataContext="{StaticResource gpTreeData}"
+                          Style="{StaticResource menuTreeViewStyle}"
+                          Background="AliceBlue"
+                      SelectedItemChanged="menuTree_SelectedItemChanged"
+                          />
+        </GroupBox>
+        <!--tool buttons-->
+        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+            <Button Content="新  增" Style="{StaticResource btnStyle}" Margin="4,0,4,0" Click="Button_Click"/>
+            <Button Content="修  改" Style="{StaticResource btnStyle}" Click="Button_Click"/>
+            <Button Content="删  除" Style="{StaticResource btnStyle}"/>
+            <Button x:Name="btnZZ" Content="转  正" Style="{StaticResource btnStyle}" Click="btnZZ_Click"/>
+            <Button x:Name="btnZybdw" Content="转为预备党员" Style="{StaticResource btnStyle}" Width="80" Click="btnZybdw_Click"/>
+        </StackPanel>
+        <!--row2：过滤-->
+        <Border x:Name="bdSearch" Grid.Row="1" Grid.Column="1" Style="{StaticResource mngBdStyle}">
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Label Content="性别" Style="{StaticResource mngLblStyle}"/>
+                    <ComboBox  x:Name="cmbSex" DataContext="{StaticResource cbVmSex}" Style="{StaticResource cbStyle}"/>
+                    <Label Content="民族" Style="{StaticResource mngLblStyle}"/>
+                    <ComboBox  x:Name="cmbNation" DataContext="{StaticResource cbVmNation}" Style="{StaticResource cbStyle}"/>
+                    <Label Content="入党日期" Style="{StaticResource mngLblStyle}"/>
+                    <DatePicker Style="{StaticResource dtPickerBaseStyle}"/>
+                    <Label Content="转正日期" Style="{StaticResource mngLblStyle}"/>
+                    <DatePicker Style="{StaticResource dtPickerBaseStyle}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Label Content="学历" Style="{StaticResource mngLblStyle}"/>
+                    <ComboBox  x:Name="cmbXL" DataContext="{StaticResource cbVmXL}" Style="{StaticResource cbStyle}"/>
+                    <Label Content="现工作岗位" Style="{StaticResource mngLblStyle}"/>
+                    <ComboBox  x:Name="cmbNowGzgw" DataContext="{StaticResource cbVmGzgw}" Style="{StaticResource cbStyle}"/>
+                    <Button x:Name="btnSearch" Style="{StaticResource mngBtnStyle}" Content="查 询"
+                            Margin="20,0,0,0"
+                        Command="{Binding Path=SearchCmd,Source={RelativeSource AncestorType=Page}}"
+                        />
+                </StackPanel>
+            </Grid>
+        </Border>
+        <!--row3：datagrid-->
+        <GroupBox Grid.Row="2" Grid.Column="1" Header="党员信息列表" Style="{StaticResource headerBaseStyle}">
+            <DataGrid x:Name="dg" Style="{StaticResource gridBaseStyle}"
+                          ItemsSource="{x:Static party:PartyBuildingContext.partymembers}">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn CellStyle="{StaticResource ckCellStyle}" HeaderStyle="{StaticResource ckCellHeaderStyle}"
+                                                CanUserResize="False"/>
+                    <DataGridTextColumn Header="姓名" Binding="{Binding name}"/>
+                    <DataGridTextColumn Header="类别" Binding="{Binding type}"/>
+                    <DataGridTextColumn Header="性别" Binding="{Binding sex}"/>
+                    <DataGridTextColumn Header="年龄" Binding="{Binding age}"/>
+                    <DataGridTextColumn Header="民族" Binding="{Binding nation}"/>
+                    <DataGridTextColumn Header="所属组织" Binding="{Binding party}"/>
+                    <DataGridTextColumn Header="党内职务" Binding="{Binding dnzw}"/>
+                    <DataGridTextColumn Header="入党日期" Binding="{Binding join_in_time}"/>
+                    <DataGridTextColumn Header="转正日期" Binding="{Binding zz_time}"/>
+                    <DataGridTextColumn Header="身份证号" Binding="{Binding idcard}"/>
+                    <DataGridTextColumn Header="学历"  Binding="{Binding xl}"/>
+                    <DataGridTextColumn Header="籍贯"  Binding="{Binding jg}"/>
+                    <DataGridTextColumn Header="联系电话"  Binding="{Binding phone}"/>
+                    <DataGridTextColumn Header="现工作岗位"  Binding="{Binding now_gzgw}"/>
+                    <DataGridTextColumn Header="月收入(税后)"  Binding="{Binding month_salary}"/>
+                    <DataGridTextColumn Header="应缴党费(月)"  Binding="{Binding month_party_money}"/>
+                    <DataGridTextColumn Header="备注"  Binding="{Binding remark}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+        <ctl:ControlPagination x:Name="ctlPagination" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center"/>
     </Grid>
 </page:BasePage>

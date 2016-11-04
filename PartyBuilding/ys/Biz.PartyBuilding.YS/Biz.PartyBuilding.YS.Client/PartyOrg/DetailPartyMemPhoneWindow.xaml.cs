@@ -1,4 +1,6 @@
-﻿using MyNet.Client.Pages;
+﻿using Biz.PartyBuilding.YS.Client.PartyOrg.Models;
+using MyNet.Components.WPF.Models;
+using MyNet.Components.WPF.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,17 +13,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Biz.PartyBuilding.YS.Client.PartyOrg
 {
     /// <summary>
-    /// PartymemAddBookPage.xaml 的交互逻辑
+    /// DetailPartyMemPhoneWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class PartymemAddBookPage : BasePage
+    public partial class DetailPartyMemPhoneWindow : BaseWindow
     {
-        public PartymemAddBookPage()
+        public DetailPartyMemPhoneWindow()
         {
             InitializeComponent();
         }

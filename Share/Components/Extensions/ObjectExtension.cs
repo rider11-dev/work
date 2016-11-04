@@ -49,5 +49,16 @@ namespace MyNet.Components.Extensions
         {
             return !IsEmpty(val);
         }
+
+        public static object GetPropertyValue(this object obj, string propertyName)
+        {
+            if (string.IsNullOrEmpty(propertyName))
+            {
+                return "";
+            }
+            Type type = obj.GetType();
+            var propertyInfo = type.GetProperty(propertyName);
+            return propertyInfo == null ? "" : propertyInfo.GetValue(obj);
+        }
     }
 }

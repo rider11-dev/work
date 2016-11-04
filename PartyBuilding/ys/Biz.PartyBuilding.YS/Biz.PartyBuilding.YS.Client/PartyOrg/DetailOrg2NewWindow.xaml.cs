@@ -1,6 +1,6 @@
-﻿using MyNet.Client.Pages;
-using MyNet.Components.WPF.Command;
+﻿using Biz.PartyBuilding.YS.Client.PartyOrg.Models;
 using MyNet.Components.WPF.Models;
+using MyNet.Components.WPF.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,19 +13,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Biz.PartyBuilding.YS.Client.PartyOrg
 {
     /// <summary>
-    /// Org2NewPage.xaml 的交互逻辑
+    /// DetailOrg2NewWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class Org2NewPage : BasePage
+    public partial class DetailOrg2NewWindow : BaseWindow
     {
-        public Org2NewPage()
+        private DetailOrg2NewWindow()
         {
             InitializeComponent();
+
 
             CmbModel model = cmbIsEstablish.DataContext as CmbModel;
             model.Bind(PartyBuildingContext.CmbItemsYesNo);
@@ -35,41 +35,19 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg
 
             model = cmbHasActPlace.DataContext as CmbModel;
             model.Bind(PartyBuildingContext.CmbItemsYesNo);
+
+            model = cmbSex.DataContext as CmbModel;
+            model.Bind(PartyBuildingContext.CmbItemsSex);
+
+            model = cmbXL.DataContext as CmbModel;
+            model.Bind(PartyBuildingContext.CmbItemsXL);
         }
 
-        ICommand _searchCmd;
-        public ICommand SearchCmd
+        public DetailOrg2NewWindow(Org2NewViewModel vm = null)
+            : this()
         {
-            get
-            {
-                if (_searchCmd == null)
-                {
-                    _searchCmd = new DelegateCommand(SearchAction);
-                }
-
-                return _searchCmd;
-            }
+            base.Title = "两新组织";
         }
 
-        void SearchAction(object parameter)
-        {
-
-        }
-
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
-        {
-            new DetailOrg2NewWindow().ShowDialog();
-        }
-
-        private void btnEdit_Click(object sender, RoutedEventArgs e)
-        {
-            new DetailOrg2NewWindow().ShowDialog();
-
-        }
-
-        private void btnDel_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
