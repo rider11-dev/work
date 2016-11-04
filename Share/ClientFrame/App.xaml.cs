@@ -1,4 +1,6 @@
-﻿using MyNet.Components.Logger;
+﻿using MyNet.Client.Public;
+using MyNet.Components.Extensions;
+using MyNet.Components.Logger;
 using MyNet.Components.WPF.Windows;
 using System;
 using System.Collections.Generic;
@@ -7,9 +9,6 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Threading;
-using MyNet.Components.Extensions;
-using MyNet.Client.Public;
 
 namespace ClientFrame
 {
@@ -19,8 +18,14 @@ namespace ClientFrame
     public partial class App : Application
     {
         static ILogHelper<App> _logHelper = LogHelperFactory.GetLogHelper<App>();
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            //加载插件目录程序集
+            AssemblyExtention.LoadAssemblies(Context.BaseDirectory + "plugin", "^*.dll$");
+        }
+
         //程序出错时触发的事件
-        private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
             e.Handled = true;
             _logHelper.LogError(e.Exception);
@@ -31,12 +36,6 @@ namespace ClientFrame
                 //TODO
                 this.Shutdown(-1);
             }
-        }
-
-        private void Application_Startup(object sender, StartupEventArgs e)
-        {
-            //加载插件目录程序集
-            AssemblyExtention.LoadAssemblies(Context.BaseDirectory + "plugin", "^*.dll$");
         }
     }
 }
