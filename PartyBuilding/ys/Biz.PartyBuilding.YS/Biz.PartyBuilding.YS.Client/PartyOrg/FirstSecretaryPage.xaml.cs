@@ -1,4 +1,6 @@
 ﻿using MyNet.Client.Pages;
+using MyNet.Components.WPF.Command;
+using MyNet.Components.WPF.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +26,50 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg
         public FirstSecretaryPage()
         {
             InitializeComponent();
+
+            CmbModel model = cmbSex.DataContext as CmbModel;
+            model.Bind(PartyBuildingContext.CmbItemsSex);
+
+            model = cmbNation.DataContext as CmbModel;
+            model.Bind(PartyBuildingContext.CmbItemsNation);
+
+            model = cmbXL.DataContext as CmbModel;
+            model.Bind(PartyBuildingContext.CmbItemsXL);
+        }
+
+        ICommand _searchCmd;
+        public ICommand SearchCmd
+        {
+            get
+            {
+                if (_searchCmd == null)
+                {
+                    _searchCmd = new DelegateCommand(SearchAction);
+                }
+
+                return _searchCmd;
+            }
+        }
+
+        void SearchAction(object parameter)
+        {
+
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            new DetailFirstSecretaryWindow().ShowDialog();
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            new DetailFirstSecretaryWindow().ShowDialog();
+
+        }
+
+        private void btnDel_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

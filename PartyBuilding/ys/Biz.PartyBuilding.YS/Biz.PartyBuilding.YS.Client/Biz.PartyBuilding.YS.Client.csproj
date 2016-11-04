@@ -87,6 +87,15 @@
       <DependentUpon>PartyLearnPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="PartyBuildingContext.cs" />
+    <Compile Include="PartyOrg\DetailCollStuOfficerWindow.xaml.cs">
+      <DependentUpon>DetailCollStuOfficerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PartyOrg\DetailFirstSecretaryWindow.xaml.cs">
+      <DependentUpon>DetailFirstSecretaryWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PartyOrg\DetailVillageCadresWindow.xaml.cs">
+      <DependentUpon>DetailVillageCadresWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PartyOrg\DetailPartyMemPhoneWindow.xaml.cs">
       <DependentUpon>DetailPartyMemPhoneWindow.xaml</DependentUpon>
     </Compile>
@@ -99,14 +108,17 @@
     <Compile Include="PartyOrg\Models\Org2NewViewModel.cs" />
     <Compile Include="PartyOrg\Models\OrgStrucViewModel.cs" />
     <Compile Include="PartyOrg\Models\PartyMemberViewModel.cs" />
-    <Compile Include="PartyOrg\Org2NewPage.xaml.cs">
-      <DependentUpon>Org2NewPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="PartyOrg\CollegeStuOfficerPage.xaml.cs">
       <DependentUpon>CollegeStuOfficerPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="PartyOrg\FirstSecretaryPage.xaml.cs">
       <DependentUpon>FirstSecretaryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PartyOrg\VillageCadresPage.xaml.cs">
+      <DependentUpon>VillageCadresPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PartyOrg\Org2NewPage.xaml.cs">
+      <DependentUpon>Org2NewPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="PartyOrg\ActivityPlacePage.xaml.cs">
       <DependentUpon>ActivityPlacePage.xaml</DependentUpon>
@@ -116,9 +128,6 @@
     </Compile>
     <Compile Include="PartyOrg\QueryPage.xaml.cs">
       <DependentUpon>QueryPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="PartyOrg\VillageCadresPage.xaml.cs">
-      <DependentUpon>VillageCadresPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="PartyOrg\PartymemAddrBookPage.xaml.cs">
       <DependentUpon>PartymemAddrBookPage.xaml</DependentUpon>
@@ -208,6 +217,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PartyOrg\DetailCollStuOfficerWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PartyOrg\DetailFirstSecretaryWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PartyOrg\DetailVillageCadresWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="PartyOrg\DetailPartyMemPhoneWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -220,15 +241,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PartyOrg\Org2NewPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="PartyOrg\CollegeStuOfficerPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="PartyOrg\FirstSecretaryPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PartyOrg\VillageCadresPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PartyOrg\Org2NewPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -241,10 +266,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="PartyOrg\QueryPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="PartyOrg\VillageCadresPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

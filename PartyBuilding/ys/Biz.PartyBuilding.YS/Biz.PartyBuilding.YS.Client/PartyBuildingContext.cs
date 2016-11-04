@@ -168,5 +168,23 @@ namespace Biz.PartyBuilding.YS.Client
               new{dy_name="赵明亮",dy_party="曹城办事处党组织",df_zxbz="在职工",df_base="4000",df_month=40,df_year_plan=480,df_year_actual=240,df_year="2015"},
              new{dy_name="吴玲",dy_party="曹城办事处党组织",df_zxbz="学生党员",df_base="0",df_month=2,df_year_plan=24,df_year_actual=22,df_year="2016"},
         };
+
+        /// <summary>
+        /// 干部管理
+        /// </summary>
+        public static List<dynamic> cadres = new List<dynamic>
+        {
+            new{name="张三梁",sex="男",age="40",nation="汉族",xl="大专",idcard="372924198955223456",zw="村委会主任",rz_time="2014-12-20",rz_jl="",village="陈庄",lz_time="",lz_reason=""},
+            new{name="吴思清",sex="男",age="34",nation="回族",xl="高中",idcard="372924193455221111",zw="村会计",rz_time="2015-01-24",rz_jl="",village="田庄",lz_time="",lz_reason=""},
+            new{name="李新明",sex="男",age="25",nation="汉族",xl="本科",idcard="372924197855225390",zw="组织委员",rz_time="2010-06-03",rz_jl="",village="陆湾",lz_time="",lz_reason=""},
+            new{name="王玲",sex="女",age="57",nation="汉族",xl="本科",idcard="372924196012221212",zw="宣传委员",rz_time="2009-12-26",rz_jl="",village="刘集",lz_time="2016-08-08",lz_reason="退休"}
+        };
+
+        public static List<dynamic> work_news = new List<dynamic>
+        {
+            new{time="2015-10-12",content="做好2015年征兵工作宣传",progress="10月底",remark=""},
+            new{time="2015-11-11",content="功能区建设、进展情况的宣传报道",progress="11月底",remark=""},
+            new{time="2015-12-13",content="2015乡村文艺大巡演文艺调演",progress="12月底",remark=""},
+        };
     }
 }
