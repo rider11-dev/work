@@ -4,11 +4,155 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:page="clr-namespace:MyNet.Client.Pages;assembly=MyNet.Client"
+      xmlns:ctl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
+      xmlns:cvt="clr-namespace:MyNet.Components.WPF.Converter;assembly=MyNet.Components.WPF"
+      xmlns:vmwpf="clr-namespace:MyNet.Components.WPF.Models;assembly=MyNet.Components.WPF"
+      xmlns:daily="clr-namespace:Biz.PartyBuilding.YS.Client.Daily"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-	Title="信息发布">
+      d:DesignHeight="400" d:DesignWidth="1000"
+	Title="信息管理
+               ">
+    <Page.Resources>
+        <Style x:Key="btnStyle" TargetType="Button" BasedOn="{StaticResource btnBaseStyle}">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="24"/>
+        </Style>
+        <Style x:Key="cbStyle" TargetType="ComboBox" BasedOn="{StaticResource cbBaseStyle}">
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Height" Value="26"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        <!--model-->
+        <ctl:PagingArgs x:Key="paging"/>
+        <vmwpf:CmbModel x:Key="cbVmInfoState"/>
+    </Page.Resources>
+    <TabControl>
+        <TabItem Header="已收信息" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-2,-2,-2,0" Width="66">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition MaxHeight="40"/>
+                    <RowDefinition MaxHeight="40"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <!--row1：工具栏-->
+                <Border Grid.Row="0" Style="{StaticResource mngBdStyle}">
+                    <StackPanel  Orientation="Horizontal">
+                        <Button Content="查  看" Style="{StaticResource btnStyle}" Command="{Binding Path=ViewCmd_Rec,RelativeSource={RelativeSource AncestorType=daily:InfoReleasePage}}"/>
+                    </StackPanel>
+                </Border>
+                <!--row2：过滤-->
+                <Border Grid.Row="1" Style="{StaticResource mngBdStyle}">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="信息标题" Style="{StaticResource mngLblStyle}"/>
+                        <TextBox Style="{StaticResource mngInputStyle}"/>
+                        <Label Content="发布时间" Style="{StaticResource mngLblStyle}"/>
+                        <DatePicker Style="{StaticResource dtPickerBaseStyle}"/>
+                        <Button Style="{StaticResource mngBtnStyle}" Content="查 询"
+                        Command="{Binding Path=SearchCmd,Source={RelativeSource AncestorType=Page}}"
+                        />
+                    </StackPanel>
+                </Border>
+                <!--row3：列表内容-->
+                <Border Grid.Row="2" Style="{StaticResource mngBdStyle}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="40"/>
+                        </Grid.RowDefinitions>
+                        <DataGrid x:Name="dg_Rec" Grid.Row="0" Style="{StaticResource gridBaseStyle}" ItemsSource="{x:Static daily:DailyContext.infos_rec}">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn CellStyle="{StaticResource ckCellStyle}" HeaderStyle="{StaticResource ckCellHeaderStyle}"
+                                                CanUserResize="False"/>
+                                <DataGridTextColumn Header="信息标题" Binding="{Binding title}"/>
+                                <DataGridTextColumn Header="信息内容" Binding="{Binding content}" Width="120"/>
+                                <DataGridTextColumn Header="附件" Binding="{Binding attach}"/>
+                                <DataGridTextColumn Header="发布组织" Binding="{Binding party}"/>
+                                <DataGridTextColumn Header="发布时间" Binding="{Binding issue_time}"/>
+                                <DataGridTemplateColumn Header="操作" MinWidth="100">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Content="查看附件" Width="60"
+                                        Command="{Binding Path=ViewAttachCmd,RelativeSource={RelativeSource AncestorType=daily:InfoReleasePage}}"
+                                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGrid},Path=SelectedItem}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <ctl:ControlPagination Grid.Row="1" HorizontalAlignment="Center"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </TabItem>
+        <TabItem Header="已发信息" Height="23" VerticalAlignment="Top">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition MaxHeight="40"/>
+                    <RowDefinition MaxHeight="40"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <!--row1：工具栏-->
+                <Border Grid.Row="0" Style="{StaticResource mngBdStyle}">
+                    <StackPanel  Orientation="Horizontal">
+                        <Button Content="查  看" Style="{StaticResource btnStyle}"
+                        Command="{Binding Path=ViewCmd_Sent,RelativeSource={RelativeSource AncestorType=daily:InfoReleasePage}}"
+                        />
+                        <Button Content="新  增" Style="{StaticResource btnStyle}"
+                        Command="{Binding Path=AddCmd_Sent,RelativeSource={RelativeSource AncestorType=daily:InfoReleasePage}}"
 
-    <Grid>
-        
-    </Grid>
+                        />
+                        <Button Content="修  改" Style="{StaticResource btnStyle}"
+                        Command="{Binding Path=EditCmd_Sent,RelativeSource={RelativeSource AncestorType=daily:InfoReleasePage}}"
+                                />
+
+                        <Button Content="删  除" Style="{StaticResource btnStyle}"
+                        Command="{Binding Path=DelCmd_Sent,RelativeSource={RelativeSource AncestorType=daily:InfoReleasePage}}"/>
+                        <Button Content="发  布" Style="{StaticResource btnStyle}"
+                        Command="{Binding Path=IssueCmd_Sent,RelativeSource={RelativeSource AncestorType=daily:InfoReleasePage}}"
+                        />
+                    </StackPanel>
+                </Border>
+                <!--row2：过滤-->
+                <Border Grid.Row="1" Style="{StaticResource mngBdStyle}">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="信息标题" Style="{StaticResource mngLblStyle}"/>
+                        <TextBox Style="{StaticResource mngInputStyle}"/>
+                        <Label Content="状态" Style="{StaticResource mngLblStyle}"/>
+                        <ComboBox  x:Name="cmbInfoState"
+                  DataContext="{StaticResource cbVmInfoState}"
+                  Style="{StaticResource cbStyle}"
+                  />
+                        <Label Content="发布时间" Style="{StaticResource mngLblStyle}"/>
+                        <DatePicker Style="{StaticResource dtPickerBaseStyle}"/>
+                        <Button Style="{StaticResource mngBtnStyle}" Content="查 询"
+                        Command="{Binding Path=SearchCmd,Source={RelativeSource AncestorType=Page}}"
+                        />
+                    </StackPanel>
+                </Border>
+                <!--row3：列表内容-->
+                <Border Grid.Row="2" Style="{StaticResource mngBdStyle}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="40"/>
+                        </Grid.RowDefinitions>
+                        <DataGrid x:Name="dg_Sent" Grid.Row="0" Style="{StaticResource gridBaseStyle}" ItemsSource="{x:Static daily:DailyContext.infos}">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn CellStyle="{StaticResource ckCellStyle}" HeaderStyle="{StaticResource ckCellHeaderStyle}"
+                                                CanUserResize="False"/>
+                                <DataGridTextColumn Header="信息标题" Binding="{Binding title}"/>
+                                <DataGridTextColumn Header="信息内容" Binding="{Binding content}" Width="120"/>
+                                <DataGridTextColumn Header="附件" Binding="{Binding attach}"/>
+                                <DataGridTextColumn Header="发布组织" Binding="{Binding party}"/>
+                                <DataGridTextColumn Header="发布时间" Binding="{Binding issue_time}"/>
+                                <DataGridTextColumn Header="状态" Binding="{Binding state}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <ctl:ControlPagination Grid.Row="1" HorizontalAlignment="Center"/>
+                    </Grid>
+                </Border>
+            </Grid>
+
+        </TabItem>
+    </TabControl>
 </page:BasePage>

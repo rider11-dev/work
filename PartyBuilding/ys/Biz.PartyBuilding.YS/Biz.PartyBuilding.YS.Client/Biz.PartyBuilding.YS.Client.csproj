@@ -57,18 +57,34 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Daily\DailyContext.cs" />
+    <Compile Include="Daily\DetailInfoWindow.xaml.cs">
+      <DependentUpon>DetailInfoWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Daily\DetailViewDetailsWindow.xaml.cs">
+      <DependentUpon>DetailViewDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Daily\DetailReplyNoticeWindow.xaml.cs">
+      <DependentUpon>DetailReplyNoticeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Daily\DetailTaskCompleteWindow.xaml.cs">
       <DependentUpon>DetailTaskCompleteWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Daily\DetailNoticeWindow.xaml.cs">
       <DependentUpon>DetailNoticeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Daily\DetailReplyDetailsWindow.xaml.cs">
+      <DependentUpon>DetailReplyDetailsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Daily\DetailTaskWindow.xaml.cs">
       <DependentUpon>DetailTaskWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Daily\Models\InfoEntity.cs" />
     <Compile Include="Daily\Models\NoticeEntity.cs" />
     <Compile Include="Daily\Models\TaskCompleteDetail.cs" />
     <Compile Include="Daily\Models\TaskEntity.cs" />
+    <Compile Include="Daily\InfoReleasePage.xaml.cs">
+      <DependentUpon>InfoReleasePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Daily\NoticePage.xaml.cs">
       <DependentUpon>NoticePage.xaml</DependentUpon>
     </Compile>
@@ -77,9 +93,6 @@
     </Compile>
     <Compile Include="Daily\TaskDispatchPage.xaml.cs">
       <DependentUpon>TaskDispatchPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Daily\InfoReleasePage.xaml.cs">
-      <DependentUpon>InfoReleasePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Daily\PartyActRecordPage.xaml.cs">
       <DependentUpon>PartyActRecordPage.xaml</DependentUpon>
@@ -197,11 +210,24 @@
     <Content Include="Resources\会议主题.docx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\双十一购物攻略.docx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Daily\DetailInfoWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Daily\DetailViewDetailsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Daily\DetailReplyNoticeWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Daily\DetailTaskCompleteWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -210,7 +236,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Daily\DetailReplyDetailsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Daily\DetailTaskWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Daily\InfoReleasePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -225,10 +259,6 @@
     <Page Include="Daily\TaskDispatchPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Daily\InfoReleasePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Daily\PartyActRecordPage.xaml">
       <SubType>Designer</SubType>

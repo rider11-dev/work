@@ -49,7 +49,6 @@ namespace Biz.PartyBuilding.YS.Client.Daily
                 urgency="中",issue_party="曹县县委组织部",issue_time="2016-10-07",receive_party="全部",state="编辑",need_reply="否",reply_expire_time="",
                 view_details=new List<ViewDetail>{
                     new ViewDetail{party="曹县王集镇党组织",time="2016-11-07 17:20",isviewed="是"},
-                    new ViewDetail{party="曹城办事处党组织",time="",isviewed="否"},
                 }
             },
         };
@@ -59,6 +58,24 @@ namespace Biz.PartyBuilding.YS.Client.Daily
             get
             {
                 return notices.Where(n => n.receive_party == "全部" && n.state == "已发布").ToList();
+            }
+        }
+
+        public static List<InfoEntity> infos = new List<InfoEntity>
+        {
+           new InfoEntity{title="双十一购物攻略",
+               content="看到很多朋友忙着为双十一大抢购做准备了，数字君作为一个小网购者，也都参加过几年的双十一，在这里有些小经验和大家分享一下，如果有什么不对，欢迎指导。",
+               attach="双十一购物攻略.docx",issue_time="",party="曹县王集镇党组织",state="编辑"},
+           new InfoEntity{title="大风警告",
+               content="区内已出现或即将出现6级（蒲福风级，下同）或以上大风警告性的信息。通常，以气象电报、明愈广播或悬挂风球等方式发布。",
+               attach="",issue_time="2016-11-01",party="曹县县委组织部",state="已发布"},
+        };
+
+        public static List<InfoEntity> infos_rec
+        {
+            get
+            {
+                return infos.Where(i => i.state == "已发布").ToList();
             }
         }
     }

@@ -227,34 +227,54 @@ namespace Biz.PartyBuilding.YS.Client.Daily
         }
         void Edit_SentAction(object parameter)
         {
-            new DetailNoticeWindow().ShowDialog();
+            ShowDetailWindow();
         }
         void Add_SentAction(object parameter)
         {
-            new DetailNoticeWindow().ShowDialog();
+            ShowDetailWindow();
         }
         void View_SentAction(object parameter)
         {
-            new DetailNoticeWindow().ShowDialog();
+            ShowDetailWindow();
         }
 
         void ReplyAction(object parameter)
         {
-
+            var notice = (NoticeEntity)parameter;
+            if (notice == null)
+            {
+                return;
+            }
+            new DetailReplyNoticeWindow(notice).ShowDialog();
+            Reload();
         }
         void ViewDetailsAction(object parameter)
         {
-
+            var notice = (NoticeEntity)parameter;
+            if (notice == null)
+            {
+                return;
+            }
+            new DetailViewDetailsWindow(notice).ShowDialog();
         }
         void ReplyDetailsAction(object parameter)
         {
-
+            var notice = (NoticeEntity)parameter;
+            if (notice == null)
+            {
+                return;
+            }
+            new DetailReplyDetailsWindow(notice).ShowDialog();
         }
 
         void ViewCmd_RecAction(object parameter)
         {
-
+            ShowDetailWindow();
         }
 
+        void ShowDetailWindow()
+        {
+            new DetailNoticeWindow().ShowDialog();
+        }
     }
 }
