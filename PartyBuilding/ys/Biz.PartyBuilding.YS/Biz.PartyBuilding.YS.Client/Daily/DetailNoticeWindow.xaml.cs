@@ -1,5 +1,6 @@
 ﻿using Biz.PartyBuilding.YS.Client.Daily.Models;
 using Biz.PartyBuilding.YS.Client.PartyOrg.Models;
+using Microsoft.Win32;
 using MyNet.Components.Extensions;
 using MyNet.Components.WPF.Command;
 using MyNet.Components.WPF.Models;
@@ -48,33 +49,28 @@ namespace Biz.PartyBuilding.YS.Client.Daily
         {
         }
 
-        ICommand _viewAttachCmd;
-        public ICommand ViewAttachCmd
+        ICommand _uploadAttachCmd;
+        public ICommand UploadAttachCmd
         {
             get
             {
-                if (_viewAttachCmd == null)
+                if (_uploadAttachCmd == null)
                 {
-                    _viewAttachCmd = new DelegateCommand(ViewAttachAction);
+                    _uploadAttachCmd = new DelegateCommand(UploadAttachAction);
                 }
-                return _viewAttachCmd;
+                return _uploadAttachCmd;
             }
         }
 
-        void ViewAttachAction(object parameter)
+        void UploadAttachAction(object parameter)
         {
-            var taskCompleteDetail = (TaskCompleteDetail)parameter;
-            if (taskCompleteDetail == null || string.IsNullOrEmpty(taskCompleteDetail.attach))
+            OpenFileDialog dia = new OpenFileDialog();
+            var rst = dia.ShowDialog();
+            if (rst == null || (bool)rst == false)
             {
                 return;
             }
-
-            var fullPath = "";
-            if (FileExtension.GetFileFullPath(AppDomain.CurrentDomain.BaseDirectory, taskCompleteDetail.attach, out fullPath))
-            {
-                Process.Start(fullPath);
-
-            }
+            ctlHelpButton.Content = dia.FileName;
         }
     }
 }

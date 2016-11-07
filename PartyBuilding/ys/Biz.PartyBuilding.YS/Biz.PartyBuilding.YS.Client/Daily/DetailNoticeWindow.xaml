@@ -83,8 +83,7 @@
                 <Label Content="附件" Grid.Row="3" Grid.Column="0" Style="{StaticResource lblStyle}"/>
                 <ctl:HelpButton Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" ForbidInput="True" x:Name="ctlHelpButton"
                          Style="{StaticResource inputBtnAddOnStyle}" Width="310" Height="30" HorizontalAlignment="Left"
-                            Content="{Binding Path=complete_detail.attach,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                            Command="{Binding UploadAttachCmd,RelativeSource={RelativeSource AncestorType=daily:DetailTaskCompleteWindow}}"/>
+                            Command="{Binding UploadAttachCmd,RelativeSource={RelativeSource AncestorType=daily:DetailNoticeWindow}}"/>
 
                 <Label Content="通知内容" Grid.Row="4" Grid.Column="0" Style="{StaticResource lblStyle}"/>
                 <TextBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" TextWrapping="Wrap" Text="请各乡镇级党组织，于2016年11月20日上午8点，到县委政府会议室开会。收到请回复！"/>

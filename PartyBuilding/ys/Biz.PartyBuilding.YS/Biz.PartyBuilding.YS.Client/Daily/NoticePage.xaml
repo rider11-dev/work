@@ -30,7 +30,7 @@
         <vmwpf:CmbModel x:Key="cbVmIsReplied"/>
     </Page.Resources>
     <TabControl>
-        <TabItem Header="已收通知">
+        <TabItem Header="已收通知" Height="26" VerticalAlignment="Top">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition MaxHeight="40"/>
@@ -82,7 +82,6 @@
                                 <DataGridTextColumn Header="紧急程度" Binding="{Binding urgency}"/>
                                 <DataGridTextColumn Header="发布组织" Binding="{Binding issue_party}"/>
                                 <DataGridTextColumn Header="发布时间" Binding="{Binding issue_time}"/>
-                                <DataGridTextColumn Header="状态" Binding="{Binding state}"/>
                                 <DataGridTextColumn Header="是否需要回复" Binding="{Binding need_reply}"/>
                                 <DataGridTextColumn Header="回复截止时间" Binding="{Binding reply_expire_time}"/>
                                 <DataGridTemplateColumn Header="操作" MinWidth="100">
@@ -106,7 +105,7 @@
                 </Border>
             </Grid>
         </TabItem>
-        <TabItem Header="已发通知">
+        <TabItem Header="已发通知" Height="23" VerticalAlignment="Top">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition MaxHeight="40"/>
