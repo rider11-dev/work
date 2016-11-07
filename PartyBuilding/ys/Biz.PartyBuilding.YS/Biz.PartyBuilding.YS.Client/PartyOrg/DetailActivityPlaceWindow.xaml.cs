@@ -20,26 +20,16 @@ using System.Windows.Shapes;
 namespace Biz.PartyBuilding.YS.Client.PartyOrg
 {
     /// <summary>
-    /// DetailCollStuOfficerWindow.xaml 的交互逻辑
+    /// DetailActivityPlaceWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class DetailCollStuOfficerWindow : BaseWindow
+    public partial class DetailActivityPlaceWindow : BaseWindow
     {
 
-        public DetailCollStuOfficerWindow()
+        public DetailActivityPlaceWindow()
         {
             InitializeComponent();
 
-
-            CmbModel model = cmbSex.DataContext as CmbModel;
-            model.Bind(PartyBuildingContext.CmbItemsSex);
-
-            model = cmbNation.DataContext as CmbModel;
-            model.Bind(PartyBuildingContext.CmbItemsNation);
-
-            model = cmbXL.DataContext as CmbModel;
-            model.Bind(PartyBuildingContext.CmbItemsXL);
-
-            ctlImage.ImgFile = "pack://application:,,,/Biz.PartyBuilding.YS.Client;component/Resources/村官.jpg";
+            ctlImage.ImgFile = "pack://application:,,,/Biz.PartyBuilding.YS.Client;component/Resources/村级活动场所.jpg";
         }
 
     }

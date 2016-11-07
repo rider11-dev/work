@@ -4,11 +4,66 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:page="clr-namespace:MyNet.Client.Pages;assembly=MyNet.Client"
+      xmlns:ctl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
+      xmlns:model="clr-namespace:Biz.PartyBuilding.YS.Client.PartyOrg.Models"
+      xmlns:party="clr-namespace:Biz.PartyBuilding.YS.Client"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-	Title="村级活动场所管理">
-
+      d:DesignHeight="400" d:DesignWidth="600"
+               Loaded="BasePage_Loaded"
+	Title="党员通讯录">
+    <Page.Resources>
+        <ctl:TreeViewData x:Key="gpTreeData"/>
+        <Style x:Key="btnStyle" TargetType="Button" BasedOn="{StaticResource btnBaseStyle}">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="24"/>
+        </Style>
+        <Style x:Key="lblStyle" TargetType="Label" BasedOn="{StaticResource lblInputBaseStyle}">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+        <Style x:Key="inputStyle" TargetType="TextBox" BasedOn="{StaticResource inputBaseStyle}">
+            <Setter Property="MaxHeight" Value="26"/>
+            <Setter Property="Margin" Value="4,0,4,0"/>
+        </Style>
+        <model:OrgStrucViewModel x:Key="model"/>
+    </Page.Resources>
+    <Page.DataContext>
+        <Binding Source="{StaticResource model}"/>
+    </Page.DataContext>
     <Grid>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="7*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Header="组织架构" Style="{StaticResource headerBaseStyle}">
+            <TreeView x:Name="gpTree"
+                          DataContext="{StaticResource gpTreeData}"
+                          Style="{StaticResource menuTreeViewStyle}"
+                          Background="AliceBlue"
+                      SelectedItemChanged="gpTree_SelectedItemChanged"
+                          />
+        </GroupBox>
+        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+            <Button Content="新  增" Style="{StaticResource btnStyle}" Click="Button_Click"/>
+            <Button Content="修  改" Style="{StaticResource btnStyle}" Click="Button_Click"/>
+            <Button Content="删  除" Style="{StaticResource btnStyle}" Click="Button_Click"/>
+        </StackPanel>
+        <GroupBox Grid.Row="1" Grid.Column="1" Header="活动场所信息" Style="{StaticResource headerBaseStyle}">
+            <DataGrid x:Name="dg" Style="{StaticResource gridBaseStyle}"
+                      ItemsSource="{x:Static party:PartyBuildingContext.act_place}">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn CellStyle="{StaticResource ckCellStyle}" HeaderStyle="{StaticResource ckCellHeaderStyle}"
+                                                CanUserResize="False"/>
+                    <DataGridTextColumn Header="建筑面积(㎡)" Binding="{Binding floor_area}"/>
+                    <DataGridTextColumn Header="层数" Binding="{Binding levels}"/>
+                    <DataGridTextColumn Header="房间数" Binding="{Binding rooms}"/>
+                    <DataGridTextColumn Header="院落面积(㎡)" Binding="{Binding courtyard_area}"/>
+                    <DataGridTextColumn Header="坐落位置" Binding="{Binding location}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
     </Grid>
 </page:BasePage>

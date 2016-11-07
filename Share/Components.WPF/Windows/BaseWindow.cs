@@ -60,6 +60,7 @@ namespace MyNet.Components.WPF.Windows
         }
         private void CloseAction(object parameter)
         {
+            BeforeClose();
             this.Close();
         }
         private void MinimizeAction(object parameter)
@@ -77,6 +78,11 @@ namespace MyNet.Components.WPF.Windows
             {
                 this.WindowState = WindowState.Maximized;
             }
+        }
+
+        protected virtual void BeforeClose()
+        {
+
         }
     }
 }

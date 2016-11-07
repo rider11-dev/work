@@ -7,7 +7,7 @@
       xmlns:party="clr-namespace:Biz.PartyBuilding.YS.Client"
         WindowStartupLocation="CenterScreen"
         Style="{StaticResource popWindowStyle}"
-        Title="党员详细信息" Height="500" Width="600">
+        Title="党员详细信息" Height="580" Width="600">
     <Window.Resources>
         <Style x:Key="lblStyle" TargetType="Label" BasedOn="{StaticResource lblInputBaseStyle}">
             <!--<Setter Property="Margin" Value="34,0,0,0"/>-->
@@ -37,8 +37,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1.5*"/>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="4*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="3*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Label x:Name="lblTitle" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
@@ -55,6 +55,8 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1.5*"/>
@@ -64,52 +66,53 @@
                     <ColumnDefinition Width="1.5*"/>
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
-                <Label Content="姓名" Grid.Row="0" Grid.Column="0" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource inputStyle}" Text="王学强"/>
-                <Label Content="类别" Grid.Row="0" Grid.Column="2" Style="{StaticResource lblStyle}"/>
-                <ComboBox  x:Name="cmbType" Grid.Row="0" Grid.Column="3"
+                <ctl:ControlImgSelect Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="4" x:Name="ctlImg"/>
+                <Label Content="姓名" Grid.Row="0" Grid.Column="2" Style="{StaticResource lblStyle}"/>
+                <TextBox Grid.Row="0" Grid.Column="3" Style="{StaticResource inputStyle}" Text="王学强"/>
+                <Label Content="类别" Grid.Row="0" Grid.Column="4" Style="{StaticResource lblStyle}"/>
+                <ComboBox  x:Name="cmbType" Grid.Row="0" Grid.Column="5"
                   DataContext="{StaticResource cbVmType}"
                   Style="{StaticResource cbStyle}"/>
-                <Label Content="性别" Grid.Row="0" Grid.Column="4" Style="{StaticResource lblStyle}"/>
-                <ComboBox  x:Name="cmbSex" Grid.Row="0" Grid.Column="5"
+                <Label Content="性别" Grid.Row="1" Grid.Column="2" Style="{StaticResource lblStyle}"/>
+                <ComboBox  x:Name="cmbSex" Grid.Row="1" Grid.Column="3"
                   DataContext="{StaticResource cbVmType}"
                   Style="{StaticResource cbStyle}"/>
-                <Label Content="年龄" Grid.Row="1" Grid.Column="0" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource inputStyle}" Text="40"/>
-                <Label Content="民族" Grid.Row="1" Grid.Column="2" Style="{StaticResource lblStyle}"/>
-                <ComboBox  x:Name="cmbNation" Grid.Row="1" Grid.Column="3"
+                <Label Content="年龄" Grid.Row="1" Grid.Column="4" Style="{StaticResource lblStyle}"/>
+                <TextBox Grid.Row="1" Grid.Column="5" Style="{StaticResource inputStyle}" Text="40"/>
+                <Label Content="民族" Grid.Row="2" Grid.Column="2" Style="{StaticResource lblStyle}"/>
+                <ComboBox  x:Name="cmbNation" Grid.Row="2" Grid.Column="3"
                   DataContext="{StaticResource cbVmNation}"
                   Style="{StaticResource cbStyle}"/>
-                <Label Content="所属组织" Grid.Row="1" Grid.Column="4" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="1" Grid.Column="5" Style="{StaticResource inputStyle}" Text="曹县县委组织部"/>
-                <Label Content="党内职务" Grid.Row="2" Grid.Column="0" Style="{StaticResource lblStyle}"/>
-                <ComboBox  x:Name="cmbDnzw" Grid.Row="2" Grid.Column="1"
+                <Label Content="所属组织" Grid.Row="2" Grid.Column="4" Style="{StaticResource lblStyle}"/>
+                <TextBox Grid.Row="2" Grid.Column="5" Style="{StaticResource inputStyle}" Text="曹县县委组织部"/>
+                <Label Content="党内职务" Grid.Row="3" Grid.Column="2" Style="{StaticResource lblStyle}"/>
+                <ComboBox  x:Name="cmbDnzw" Grid.Row="3" Grid.Column="3"
                   DataContext="{StaticResource cbVmDnzw}"
                   Style="{StaticResource cbStyle}"/>
-                <Label Content="入党时间" Grid.Row="2" Grid.Column="2" Style="{StaticResource lblStyle}"/>
-                <DatePicker Grid.Row="2" Grid.Column="3" Style="{StaticResource dtPickerBaseStyle}"/>
-                <Label Content="转正时间" Grid.Row="2" Grid.Column="4" Style="{StaticResource lblStyle}"/>
-                <DatePicker Grid.Row="2" Grid.Column="5" Style="{StaticResource dtPickerBaseStyle}"/>
-                <Label Content="身份证号" Grid.Row="3" Grid.Column="0" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource inputStyle}" Text="372924195212125566"/>
-                <Label Content="学历" Grid.Row="3" Grid.Column="2" Style="{StaticResource lblStyle}"/>
-                <ComboBox  x:Name="cmbXL" Grid.Row="3" Grid.Column="3"
+                <Label Content="入党时间" Grid.Row="3" Grid.Column="4" Style="{StaticResource lblStyle}"/>
+                <DatePicker Grid.Row="3" Grid.Column="5" Style="{StaticResource dtPickerBaseStyle}"/>
+                <Label Content="转正时间" Grid.Row="4" Grid.Column="0" Style="{StaticResource lblStyle}"/>
+                <DatePicker Grid.Row="4" Grid.Column="1" Style="{StaticResource dtPickerBaseStyle}"/>
+                <Label Content="身份证号" Grid.Row="4" Grid.Column="2" Style="{StaticResource lblStyle}"/>
+                <TextBox Grid.Row="4" Grid.Column="3" Style="{StaticResource inputStyle}" Text="372924195212125566"/>
+                <Label Content="学历" Grid.Row="4" Grid.Column="4" Style="{StaticResource lblStyle}"/>
+                <ComboBox  x:Name="cmbXL" Grid.Row="4" Grid.Column="5"
                   DataContext="{StaticResource cbVmXL}"
                   Style="{StaticResource cbStyle}"/>
-                <Label Content="联系电话" Grid.Row="3" Grid.Column="4" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="3" Grid.Column="5" Style="{StaticResource inputStyle}" Text="15820001654"/>
-                <Label Content="籍贯" Grid.Row="4" Grid.Column="0" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource inputStyle}" Text="山东曹县"/>
-                <Label Content="现工作岗位" Grid.Row="4" Grid.Column="2" Style="{StaticResource lblStyle}"/>
-                <ComboBox  x:Name="cmbNowGzgw" Grid.Row="4" Grid.Column="3"
+                <Label Content="联系电话" Grid.Row="5" Grid.Column="0" Style="{StaticResource lblStyle}"/>
+                <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource inputStyle}" Text="15820001654"/>
+                <Label Content="籍贯" Grid.Row="5" Grid.Column="2" Style="{StaticResource lblStyle}"/>
+                <TextBox Grid.Row="5" Grid.Column="3" Style="{StaticResource inputStyle}" Text="山东曹县"/>
+                <Label Content="现工作岗位" Grid.Row="5" Grid.Column="4" Style="{StaticResource lblStyle}"/>
+                <ComboBox  x:Name="cmbNowGzgw" Grid.Row="5" Grid.Column="5"
                   DataContext="{StaticResource cbVmNowGzgw}"
                   Style="{StaticResource cbStyle}"/>
-                <Label Content="月薪(税后)" Grid.Row="4" Grid.Column="4" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="4" Grid.Column="5" Style="{StaticResource inputStyle}" Text="4000"/>
-                <Label Content="应缴党费(月)" Grid.Row="5" Grid.Column="0" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource inputStyle}" Text="40"/>
-                <Label Content="备注" Grid.Row="5" Grid.Column="2" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="3" Style="{StaticResource inputStyle}" Text="作风优良，工作认真"/>
+                <Label Content="月薪(税后)" Grid.Row="6" Grid.Column="0" Style="{StaticResource lblStyle}"/>
+                <TextBox Grid.Row="6" Grid.Column="1" Style="{StaticResource inputStyle}" Text="4000"/>
+                <Label Content="应缴党费(月)" Grid.Row="6" Grid.Column="2" Style="{StaticResource lblStyle}"/>
+                <TextBox Grid.Row="6" Grid.Column="3" Style="{StaticResource inputStyle}" Text="40"/>
+                <Label Content="备注" Grid.Row="7" Grid.Column="0" Style="{StaticResource lblStyle}"/>
+                <TextBox Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="5" Style="{StaticResource inputStyle}" Text="作风优良，工作认真"/>
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="2" Header="家庭成员">

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -35,6 +36,12 @@ namespace MyNet.Components.WPF.Extension
             return imgBrush;
         }
 
+        public static ImageSource GetImageSource(string filePath)
+        {
+            BitmapImage bitmap = new BitmapImage(new Uri(filePath, UriKind.Absolute));
+            return bitmap;
+        }
+
         public static void SetBackgroundImg(this Panel panel, string imgFilePath)
         {
             panel.Background = GetImageBrush(imgFilePath);
@@ -69,6 +76,27 @@ namespace MyNet.Components.WPF.Extension
                 }
             }
             return null;
+        }
+
+        public static void SetSource(this Image img, string imgFilePath = "")
+        {
+            string imgFile = imgFilePath;
+            if (string.IsNullOrEmpty(imgFile))
+            {
+                OpenFileDialog dia = new OpenFileDialog();
+                dia.Filter = "图像文件|*.jpg;*.png;*.gif";
+                var result = dia.ShowDialog();
+                if (result != null && (bool)result == true)
+                {
+                    imgFile = dia.FileName;
+                }
+            }
+            if (string.IsNullOrEmpty(imgFile))
+            {
+                return;
+            }
+
+            img.Source = MiscExtension.GetImageSource(imgFile);
         }
     }
 }

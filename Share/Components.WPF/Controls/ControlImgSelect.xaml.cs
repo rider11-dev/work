@@ -1,0 +1,50 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using MyNet.Components.WPF.Extension;
+using System.IO;
+
+namespace MyNet.Components.WPF.Controls
+{
+    /// <summary>
+    /// ControlImgSelect.xaml 的交互逻辑
+    /// </summary>
+    public partial class ControlImgSelect : UserControl
+    {
+        public string ImgFile
+        {
+            get { return (string)GetValue(ImgFileProperty); }
+            set
+            {
+                SetValue(ImgFileProperty, value);
+                if (!string.IsNullOrEmpty(value))
+                {
+                    img.Source = MiscExtension.GetImageSource(value);
+                }
+            }
+        }
+
+        public static readonly DependencyProperty ImgFileProperty = DependencyProperty.Register("ImgFile", typeof(string), typeof(ControlImgSelect), new PropertyMetadata(""));
+
+        public ControlImgSelect()
+        {
+            InitializeComponent();
+        }
+
+        private void btnSel_Click(object sender, RoutedEventArgs e)
+        {
+            img.SetSource();
+        }
+    }
+}

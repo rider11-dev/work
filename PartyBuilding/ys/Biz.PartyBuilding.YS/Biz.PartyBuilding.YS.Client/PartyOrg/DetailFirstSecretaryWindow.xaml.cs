@@ -35,6 +35,8 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg
 
             model = cmbXL.DataContext as CmbModel;
             model.Bind(PartyBuildingContext.CmbItemsXL);
+
+            ctlImg.ImgFile = "pack://application:,,,/Biz.PartyBuilding.YS.Client;component/Resources/第一书记.jpg";
         }
     }
 }

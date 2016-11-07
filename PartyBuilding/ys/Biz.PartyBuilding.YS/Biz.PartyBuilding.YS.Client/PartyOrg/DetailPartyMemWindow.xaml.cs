@@ -44,6 +44,8 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg
 
             model = cmbNowGzgw.DataContext as CmbModel;
             model.Bind(PartyBuildingContext.CmbItemsNowGzgw);
+
+            ctlImg.ImgFile = "pack://application:,,,/Biz.PartyBuilding.YS.Client;component/Resources/党员.jpg";
         }
     }
 }

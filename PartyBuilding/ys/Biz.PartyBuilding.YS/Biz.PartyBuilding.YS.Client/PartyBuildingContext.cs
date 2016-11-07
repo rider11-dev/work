@@ -1,4 +1,5 @@
-﻿using Biz.PartyBuilding.YS.Client.PartyOrg.Models;
+﻿using Biz.PartyBuilding.YS.Client.Daily.Models;
+using Biz.PartyBuilding.YS.Client.PartyOrg.Models;
 using MyNet.Components.WPF.Models;
 using System;
 using System.Collections.Generic;
@@ -185,6 +186,62 @@ namespace Biz.PartyBuilding.YS.Client
             new{time="2015-10-12",content="做好2015年征兵工作宣传",progress="10月底",remark=""},
             new{time="2015-11-11",content="功能区建设、进展情况的宣传报道",progress="11月底",remark=""},
             new{time="2015-12-13",content="2015乡村文艺大巡演文艺调演",progress="12月底",remark=""},
+        };
+
+        public static List<dynamic> act_place = new List<dynamic>
+        {
+            new{party="曹城街道马山庄党组织",floor_area="500",levels="2",rooms="3",courtyard_area="400",location="曹城街道办事处长江西路南200米"},
+        };
+
+        public static List<TaskEntity> task_dispatch = new List<TaskEntity>
+        {
+            new TaskEntity{name="任务2016-11-01",priority="高",content="道路路况汇总统计",issue_time="2016-11-01",expire_time="2016-11-10",
+                rec_party="曹城办事处党组织",progress="100%",state="已完成",issue_party="曹县县委组织部",
+            complete_detail=new TaskCompleteDetail{comp_state="已完成"}},
+            new TaskEntity{name="任务2016-05-16",priority="高",content="开展2016年人口普查工作",issue_time="2016-05-16",expire_time="2016-06-16",rec_party="全部",progress="50%",state="已发布",issue_party="曹县县委组织部", complete_detail=new TaskCompleteDetail{comp_state="已完成"}},
+            new TaskEntity{name="任务2016-1-12",priority="中",content="召开党组织年度计划会议并提交总结报告",issue_time="2016-1-12",expire_time="2016-1-19",rec_party="曹城办事处党组织",progress="0%",state="已发布",issue_party="曹县县委组织部", complete_detail=new TaskCompleteDetail{comp_state="未领"}},
+            new TaskEntity{name="任务2016-10-16",priority="中",content="做好2016年供暖准备工作",issue_time="",expire_time="2016-11-10",rec_party="曹城办事处党组织",progress="0%",state="编辑",issue_party="曹县县委组织部", complete_detail=new TaskCompleteDetail{comp_state=""}},
+        };
+
+        static List<TaskEntity> _tasks_receive;
+        public static List<TaskEntity> tasks_ccbsc_receive
+        {
+            get
+            {
+                if (_tasks_receive == null)
+                {
+                    _tasks_receive = task_dispatch.Where(t => t.state != "编辑").ToList();
+                }
+                return _tasks_receive;
+            }
+        }
+
+        public static List<TaskCompleteDetail> task_complete_detail = new List<TaskCompleteDetail>
+        {
+            new TaskCompleteDetail{party="曹县王集镇党组织",comp_state="未完成",comp_remark="",comp_time="",attach=""},
+            new TaskCompleteDetail{party="曹城办事处党组织",comp_state="已完成",comp_remark="任务已完成，请检阅",comp_time="2016-06-10",attach="2016人口普查——曹城办事处.docx"}
+        };
+
+        public static List<CmbItem> task_priority = new List<CmbItem>
+        {
+            new CmbItem{Id="1",Text="高"},
+            new CmbItem{Id="2",Text="中"},
+            new CmbItem{Id="3",Text="低"},
+        };
+
+        public static List<CmbItem> task_state = new List<CmbItem>
+        {
+            new CmbItem{Id="1",Text="编辑"},
+            new CmbItem{Id="2",Text="已发布"},
+            new CmbItem{Id="3",Text="已完成"},
+            new CmbItem{Id="4",Text="已取消"}
+        };
+
+        public static List<CmbItem> task_complete_state = new List<CmbItem>
+        {
+            new CmbItem{Id="1",Text="未领"},
+            new CmbItem{Id="2",Text="已领未完成"},
+            new CmbItem{Id="3",Text="已完成"}
         };
     }
 }

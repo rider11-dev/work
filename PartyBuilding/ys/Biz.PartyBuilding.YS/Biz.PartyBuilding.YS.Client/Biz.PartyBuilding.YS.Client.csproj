@@ -56,20 +56,33 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Daily\InfoReleasePage.xaml.cs">
-      <DependentUpon>InfoReleasePage.xaml</DependentUpon>
+    <Compile Include="Daily\DailyContext.cs" />
+    <Compile Include="Daily\DetailTaskCompleteWindow.xaml.cs">
+      <DependentUpon>DetailTaskCompleteWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Daily\DetailNoticeWindow.xaml.cs">
+      <DependentUpon>DetailNoticeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Daily\DetailTaskWindow.xaml.cs">
+      <DependentUpon>DetailTaskWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Daily\Models\NoticeEntity.cs" />
+    <Compile Include="Daily\Models\TaskCompleteDetail.cs" />
+    <Compile Include="Daily\Models\TaskEntity.cs" />
     <Compile Include="Daily\NoticePage.xaml.cs">
       <DependentUpon>NoticePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Daily\PartyActRecordPage.xaml.cs">
-      <DependentUpon>PartyActRecordPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Daily\TaskReceivePage.xaml.cs">
       <DependentUpon>TaskReceivePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Daily\TaskDispatchPage.xaml.cs">
       <DependentUpon>TaskDispatchPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Daily\InfoReleasePage.xaml.cs">
+      <DependentUpon>InfoReleasePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Daily\PartyActRecordPage.xaml.cs">
+      <DependentUpon>PartyActRecordPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Evaluation\EvaluateDetailPage.xaml.cs">
       <DependentUpon>EvaluateDetailPage.xaml</DependentUpon>
@@ -87,6 +100,9 @@
       <DependentUpon>PartyLearnPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="PartyBuildingContext.cs" />
+    <Compile Include="PartyOrg\DetailActivityPlaceWindow.xaml.cs">
+      <DependentUpon>DetailActivityPlaceWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PartyOrg\DetailCollStuOfficerWindow.xaml.cs">
       <DependentUpon>DetailCollStuOfficerWindow.xaml</DependentUpon>
     </Compile>
@@ -114,14 +130,14 @@
     <Compile Include="PartyOrg\FirstSecretaryPage.xaml.cs">
       <DependentUpon>FirstSecretaryPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PartyOrg\VillageCadresPage.xaml.cs">
-      <DependentUpon>VillageCadresPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="PartyOrg\Org2NewPage.xaml.cs">
       <DependentUpon>Org2NewPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="PartyOrg\ActivityPlacePage.xaml.cs">
       <DependentUpon>ActivityPlacePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PartyOrg\VillageCadresPage.xaml.cs">
+      <DependentUpon>VillageCadresPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="PartyOrg\PartyMemDuesPage.xaml.cs">
       <DependentUpon>PartyMemDuesPage.xaml</DependentUpon>
@@ -172,28 +188,49 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <Content Include="Resources\2016人口普查——曹城办事处.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\一号文件.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\会议主题.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Daily\InfoReleasePage.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Daily\DetailTaskCompleteWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Daily\DetailNoticeWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Daily\DetailTaskWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Daily\NoticePage.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Daily\PartyActRecordPage.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Daily\TaskReceivePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Daily\TaskDispatchPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Daily\InfoReleasePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Daily\PartyActRecordPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -216,6 +253,10 @@
     <Page Include="Learn\PartyLearnPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PartyOrg\DetailActivityPlaceWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="PartyOrg\DetailCollStuOfficerWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -249,15 +290,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PartyOrg\VillageCadresPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="PartyOrg\Org2NewPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="PartyOrg\ActivityPlacePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PartyOrg\VillageCadresPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -298,7 +339,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\村官.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Share\Client\Client.csproj">
       <Project>{6aabd137-bb47-4636-8635-de0f6dc9aea1}</Project>
@@ -320,6 +363,16 @@
       <Project>{bb11afa2-784c-4e60-9586-6608d8338d67}</Project>
       <Name>Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\第一书记.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\党员.jpg" />
+    <Resource Include="Resources\村干部.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\村级活动场所.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
