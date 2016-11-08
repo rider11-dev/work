@@ -21,12 +21,8 @@ namespace Biz.PartyBuilding.YS.Client.Daily.Models
         public string cnt_qx { get; set; }
         public string cnt_chry { get; set; }
         public string content { get; set; }
-        public List<PartyActRecordAttach> attaches { get; set; }
+        public List<Attach> attaches { get; set; }
     }
 
-    public class PartyActRecordAttach
-    {
-        public string att_name { get; set; }
-        public string att_size { get; set; }
-    }
+    
 }

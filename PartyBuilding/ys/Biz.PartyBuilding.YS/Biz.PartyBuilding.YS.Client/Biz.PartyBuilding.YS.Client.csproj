@@ -56,6 +56,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attach.cs" />
     <Compile Include="Daily\DailyContext.cs" />
     <Compile Include="Daily\DetailActRecordWindow.xaml.cs">
       <DependentUpon>DetailActRecordWindow.xaml</DependentUpon>
@@ -107,13 +108,13 @@
     <Compile Include="Evaluation\EvaluatePage.xaml.cs">
       <DependentUpon>EvaluatePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Evaluation\FileuploadPage.xaml.cs">
+      <DependentUpon>FileuploadPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Evaluation\EvaluateScorePage.xaml.cs">
       <DependentUpon>EvaluateScorePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Evaluation\EvaluationContext.cs" />
-    <Compile Include="Evaluation\FileuploadPage.xaml.cs">
-      <DependentUpon>FileuploadPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Learn\PartyLearnPage.xaml.cs">
       <DependentUpon>PartyLearnPage.xaml</DependentUpon>
     </Compile>
@@ -242,6 +243,12 @@
     <Content Include="Resources\党建宣传方案、党建工作思路及党建工作重点.docx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\开展党建工作述职评议工作汇报.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\党委书记公开承诺书.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -307,13 +314,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Evaluation\EvaluateScorePage.xaml">
+    <Page Include="Evaluation\FileuploadPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Evaluation\FileuploadPage.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Evaluation\EvaluateScorePage.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Learn\PartyLearnPage.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -32,7 +32,7 @@ namespace Biz.PartyBuilding.YS.Client.Sys
             new EvaluateProject{id="01",name="乡镇党委"},
             new EvaluateProject{id="0101",name="落实党管职责",parent="01"},
             new EvaluateProject{id="010101",name="开展述职评议",parent="0101",score="100",
-                remark="党委书记向市委和乡镇党委及所属党组织负责人进行述职，有述职报告，有述职评议考评方案，有会议记录及测评结果等资料",
+                remark="党委书记向县委和乡镇党委及所属党组织负责人进行述职，有述职报告，有述职评议考评方案，有会议记录及测评结果等资料",
                 time_type="季度末月",time_day="30",party_type="所有单位",order="010101"
             },
             new EvaluateProject{id="010102",name="开展书记公开承诺",parent="0101",score="100",

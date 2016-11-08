@@ -70,7 +70,7 @@ namespace Biz.PartyBuilding.YS.Client.Daily
 
         private void btnView_Click(object sender, RoutedEventArgs e)
         {
-            var atts = dgAttaches.ItemsSource as List<PartyActRecordAttach>;
+            var atts = dgAttaches.ItemsSource as List<Attach>;
             if (atts == null || atts.Count < 1)
             {
                 return;

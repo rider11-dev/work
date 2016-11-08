@@ -92,8 +92,8 @@ namespace Biz.PartyBuilding.YS.Client.Daily
             new PartyActRecord{party="曹县县委组织部",type="党课",theme="保持先进性，深入学习党课",time="2015-10-12",place="组织部党员活动室",
                 host="李长江",recorder="王小明",cnt_yd="6",cnt_sd="4",cnt_qj="2",cnt_qx="0",cnt_chry="李长江，王雪青，赵爱国，王小明",
                 content="通过这段时间校党课培训班的学习，对党的理论知识和党的光荣历史有了非常深刻的认识，对党的性质、宗旨、方针、政策、路线有了进一步地了解，对提高自己对党的认识有非常大的帮助，有利地提高了在思想上对党的认识，增强了自己的党性，坚定了一定要加入中国共产党的决心和信心。更深刻地对党在新时代新背景下所面临的挑战与机遇以及党在新时期的发展方向，在内心树立了共产主义的信念。同时，也意识到党组织性纪律性之强，入党的条件之高，发现自己身上尚有不足，距离真正的党员还有一定的差距，但一定会不断努力，提高自身的修养，以党员的标准来要求自己，让自己早日达到党员的条件，会以实际行动争取早日加入中国共产党。",
-                attaches=new List<PartyActRecordAttach>{
-                     new PartyActRecordAttach{att_name="党课学习照片.jpg",att_size="13KB"}
+                attaches=new List<Attach>{
+                     new Attach{att_name="党课学习照片.jpg",att_size="13KB"}
                 }
             },
             new PartyActRecord{party="曹城办事处党组织",type="支部党员大会",theme=@"1、进一步学习学院“创先争优”活动推进会精神，温习王院长在会上的讲话;
@@ -124,9 +124,9 @@ namespace Biz.PartyBuilding.YS.Client.Daily
 　　要增强学习意识，加强党的知识和业务知识的学习;
 　　要增强修养意识，加强包括政治、思想、道德、法规、文明行为的修养的学习;
 　　至此，大会圆满结束。",
-                attaches=new List<PartyActRecordAttach>{
-                     new PartyActRecordAttach{att_name="支部党员大会.jpg",att_size="40KB"},
-                     new PartyActRecordAttach{att_name="会议记录2015-01-09.docx",att_size="17.1KB"},
+                attaches=new List<Attach>{
+                     new Attach{att_name="支部党员大会.jpg",att_size="40KB"},
+                     new Attach{att_name="会议记录2015-01-09.docx",att_size="17.1KB"},
                 }
             },
         };
