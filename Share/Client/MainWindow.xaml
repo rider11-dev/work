@@ -7,7 +7,7 @@
         xmlns:pub="clr-namespace:MyNet.Client.Public"
         WindowStartupLocation="CenterScreen" Height="Auto" Width="Auto"
         Style="{StaticResource baseWindowStyle}"
-        Title="{x:Static pub:Context.SysName}" 
+        Title="{x:Static pub:MyContext.SysName}" 
         Loaded="MainWindow_Loaded">
     <Window.Resources>
         <Style x:Key="headerTextStyle" TargetType="TextBlock">
@@ -52,7 +52,7 @@
                            MouseLeftButtonUp="imgBtnUserInfo_MouseLeftButtonUp"/>
                     <TextBlock Style="{StaticResource headerTextStyle}" 
                                Margin="8,0,0,0"
-                               Text="{Binding Path=user_name,Source={x:Static pub:Context.CurrentUser }}"/>
+                               Text="{Binding Path=user_name,Source={x:Static pub:MyContext.CurrentUser }}"/>
                     <TextBlock Text="，你好！欢迎登陆" 
                                Margin="0,0,20,0"
                                Style="{StaticResource headerTextStyle}"/>

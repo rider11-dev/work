@@ -37,7 +37,7 @@ namespace MyNet.Client
         /// <summary>
         /// 存储上次登录信息的文件
         /// </summary>
-        static string LoginFile = Context.BaseDirectory + "login";
+        static string LoginFile = MyContext.BaseDirectory + "login";
         /*
          * TODO：改进点
          * 1、passwordbox，模型验证不起作用
@@ -112,16 +112,16 @@ namespace MyNet.Client
                 return;
             }
             //登录成功，记录token
-            Context.Token = rst.data.token;
+            MyContext.Token = rst.data.token;
             //获取用户信息
-            rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.GetUsr), new { pk = rst.data.usrid }, Context.Token);
+            rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.GetUsr), new { pk = rst.data.usrid }, MyContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Warning, OperationDesc.GetUsr, rst.msg);
                 return;
             }
             var user = JsonConvert.DeserializeObject<User>(((JObject)rst.data).ToString());
-            Context.CurrentUser = OOMapper.Map<User, UserViewModel>(user);
+            MyContext.CurrentUser = OOMapper.Map<User, UserViewModel>(user);
             //记住我？
             RememberMe();
 

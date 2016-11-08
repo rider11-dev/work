@@ -34,7 +34,7 @@ namespace MyNet.Client
     /// </summary>
     public partial class MainWindow : BaseWindow
     {
-        readonly static string logoFile = Context.BaseDirectory + AppSettingHelper.Get("header");
+        readonly static string logoFile = MyContext.BaseDirectory + AppSettingHelper.Get("header");
         private TreeViewData _menuTreeData = null;
         private OpenFuncCmd _cmdOpenFunc = new OpenFuncCmd();
         private ILogHelper<MainWindow> _logHelper = LogHelperFactory.GetLogHelper<MainWindow>();
@@ -77,7 +77,7 @@ namespace MyNet.Client
         {
             _menuTreeData = (TreeViewData)menuTree.DataContext;
 
-            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.GetPer), new { pk = Context.CurrentUser.user_id }, Context.Token);
+            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.GetPer), new { pk = MyContext.CurrentUser.user_id }, MyContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Warning, "获取权限失败", rst.msg);
@@ -89,7 +89,7 @@ namespace MyNet.Client
                 return;
             }
             var pers = JsonConvert.DeserializeObject<IEnumerable<Permission>>(((JArray)rst.data.pers).ToString());
-            Context.Pers = pers;
+            MyContext.Pers = pers;
 
             //功能菜单
             var funcs = pers.Where(p => p.per_type == PermType.PermTypeFunc.ToString());
@@ -129,7 +129,7 @@ namespace MyNet.Client
                 return;
             }
             var per = node.Data as Permission;
-            _cmdOpenFunc.Execute(new OpenFuncParam { PageUri = per.per_uri, FuncId = per.per_id });
+            _cmdOpenFunc.Execute(new OpenFuncParam { PageUri = per.per_uri, FuncCode = per.per_code });
             //报告当前位置
             lblCurrLocation.Text = node.GetNodePath();
         }

@@ -4,11 +4,88 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:page="clr-namespace:MyNet.Client.Pages;assembly=MyNet.Client"
+      xmlns:ctl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
+      xmlns:cvt="clr-namespace:MyNet.Components.WPF.Converter;assembly=MyNet.Components.WPF"
+      xmlns:vmwpf="clr-namespace:MyNet.Components.WPF.Models;assembly=MyNet.Components.WPF"
+      xmlns:party="clr-namespace:Biz.PartyBuilding.YS.Client"
+      xmlns:learn="clr-namespace:Biz.PartyBuilding.YS.Client.Learn"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-	Title="党建学习">
-
-    <Grid>
-        
+      d:DesignHeight="400" d:DesignWidth="600"
+               Loaded="BasePage_Loaded"
+	Title="两新组织">
+    <Page.Resources>
+        <Style x:Key="btnStyle" TargetType="Button" BasedOn="{StaticResource btnBaseStyle}">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="24"/>
+        </Style>
+        <Style x:Key="cbStyle" TargetType="ComboBox" BasedOn="{StaticResource cbBaseStyle}">
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Height" Value="26"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        <!--model-->
+        <!--<vmauth:GroupMngViewModel x:Key="model"/>-->
+        <ctl:PagingArgs x:Key="paging"/>
+        <cvt:BooleanConverter x:Key="boolConverter"/>
+        <vmwpf:CmbModel x:Key="cbVmIsEstablish"/>
+        <vmwpf:CmbModel x:Key="cbVmEstablishType"/>
+        <vmwpf:CmbModel x:Key="cbVmHasActPlace"/>
+    </Page.Resources>
+    <Grid x:Name="gridLayout">
+        <Grid.RowDefinitions>
+            <RowDefinition MaxHeight="40"/>
+            <RowDefinition MaxHeight="40"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <!--row1：工具栏-->
+        <Border x:Name="bdBtns" Grid.Row="0" Style="{StaticResource mngBdStyle}">
+            <StackPanel x:Name="panelBtns" Orientation="Horizontal">
+                <Button x:Name="btnView" Content="查  看" Style="{StaticResource btnStyle}"
+                        Margin="10,0,0,0" Click="btnView_Click"
+                        />
+            </StackPanel>
+        </Border>
+        <!--row2：过滤-->
+        <Border x:Name="bdSearch" Grid.Row="1" Style="{StaticResource mngBdStyle}">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="标题" Style="{StaticResource mngLblStyle}"/>
+                <TextBox Style="{StaticResource mngInputStyle}"/>
+                <Label Content="发布日期" Style="{StaticResource mngLblStyle}"/>
+                <DatePicker Style="{StaticResource dtPickerBaseStyle}"/>
+                <Button x:Name="btnSearch" Style="{StaticResource mngBtnStyle}" Content="查 询"
+                        Command="{Binding Path=SearchCmd,Source={RelativeSource AncestorType=Page}}"
+                        />
+            </StackPanel>
+        </Border>
+        <!--row3：列表内容-->
+        <Border x:Name="bdMain" Grid.Row="2" Style="{StaticResource mngBdStyle}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <DataGrid x:Name="dg" Grid.Row="0" Style="{StaticResource gridBaseStyle}">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn CellStyle="{StaticResource ckCellStyle}" HeaderStyle="{StaticResource ckCellHeaderStyle}"
+                                                CanUserResize="False"/>
+                        <DataGridTextColumn Header="标题" Binding="{Binding title}" Width="100"/>
+                        <DataGridTextColumn Header="内容" Binding="{Binding content}" Width="100"/>
+                        <DataGridTextColumn Header="发布日期" Binding="{Binding issue_time}"/>
+                        <DataGridTextColumn Header="附件" Binding="{Binding attach}"/>
+                        <DataGridTextColumn Header="点击量" Binding="{Binding clicks}"/>
+                        <DataGridTemplateColumn Header="操作" MinWidth="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="查看附件" 
+                                        Command="{Binding Path=ViewAttachCmd,RelativeSource={RelativeSource AncestorType=learn:PartyLearnPage}}"
+                                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGrid},Path=SelectedItem}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <ctl:ControlPagination x:Name="ctlPagination" Grid.Row="1" HorizontalAlignment="Center"/>
+            </Grid>
+        </Border>
     </Grid>
 </page:BasePage>

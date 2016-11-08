@@ -73,7 +73,7 @@ namespace MyNet.Client.Models.Auth
                 return;
             }
             var url = ApiHelper.GetApiUrl(this.IsNew ? ApiKeys.AddUsr : ApiKeys.EditUsr);
-            var rst = HttpHelper.GetResultByPost(url, (UserViewModel)this, Context.Token);
+            var rst = HttpHelper.GetResultByPost(url, (UserViewModel)this, MyContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, this.IsNew ? OperationDesc.Add : OperationDesc.Edit, rst.msg);

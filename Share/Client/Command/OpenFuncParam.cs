@@ -9,6 +9,6 @@ namespace MyNet.Client.Command
     public class OpenFuncParam
     {
         public string PageUri { get; set; }
-        public string FuncId { get; set; }
+        public string FuncCode { get; set; }
     }
 }

@@ -28,7 +28,7 @@ namespace MyNet.Client.Public
         static void LoadApis()
         {
             Apis = new List<Api>();
-            var files = FileExtension.GetFiles(Context.BaseDirectory, "api.config", SearchOption.AllDirectories);
+            var files = FileExtension.GetFiles(MyContext.BaseDirectory, "api.config", SearchOption.AllDirectories);
             try
             {
                 foreach (var file in files)

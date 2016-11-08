@@ -126,7 +126,7 @@ namespace MyNet.Client.Public
                 var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.GetDict), new
                 {
                     dict_type = dictType.type_code
-                }, Context.Token);
+                }, MyContext.Token);
                 if (rst.code != ResultCode.Success)
                 {
                     MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);
@@ -144,7 +144,7 @@ namespace MyNet.Client.Public
         private static void LoadPerms(string apiKey, Dictionary<string, PermissionCacheDto> target)
         {
             //从服务器获取
-            var rst = HttpHelper.GetResultByPost(url: ApiHelper.GetApiUrl(apiKey), token: Context.Token);
+            var rst = HttpHelper.GetResultByPost(url: ApiHelper.GetApiUrl(apiKey), token: MyContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);
@@ -165,7 +165,7 @@ namespace MyNet.Client.Public
         private static void LoadGroups(string apiKey, Dictionary<string, Group> target)
         {
             //从服务器获取
-            var rst = HttpHelper.GetResultByPost(url: ApiHelper.GetApiUrl(apiKey), token: Context.Token);
+            var rst = HttpHelper.GetResultByPost(url: ApiHelper.GetApiUrl(apiKey), token: MyContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);
