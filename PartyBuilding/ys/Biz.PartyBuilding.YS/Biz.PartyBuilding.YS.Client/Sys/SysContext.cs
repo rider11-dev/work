@@ -33,11 +33,11 @@ namespace Biz.PartyBuilding.YS.Client.Sys
             new EvaluateProject{id="0101",name="落实党管职责",parent="01"},
             new EvaluateProject{id="010101",name="开展述职评议",parent="0101",score="100",
                 remark="党委书记向县委和乡镇党委及所属党组织负责人进行述职，有述职报告，有述职评议考评方案，有会议记录及测评结果等资料",
-                time_type="季度末月",time_day="30",party_type="所有单位",order="010101"
+                time_type="季度末月",time_day="30",party_type="所有单位",order="010101",check_type="passornot"
             },
             new EvaluateProject{id="010102",name="开展书记公开承诺",parent="0101",score="100",
                 remark="公开承诺书内容公开公示，承诺事项逐一兑现落实；督导所属村、社区党组织书记开展公开承诺、兑现落实承诺事项，有台账资料。",
-                time_type="年度末月",time_day="30",party_type="基层党委",order="010102"
+                time_type="年度末月",time_day="30",party_type="基层党委",order="010102",check_type="goodbad"
             },
         };
 

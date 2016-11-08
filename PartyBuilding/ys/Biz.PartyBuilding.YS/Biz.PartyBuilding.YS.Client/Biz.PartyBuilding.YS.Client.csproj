@@ -102,6 +102,9 @@
     <Compile Include="Daily\TaskDispatchPage.xaml.cs">
       <DependentUpon>TaskDispatchPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Evaluation\EvaluateWindow.xaml.cs">
+      <DependentUpon>EvaluateWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Evaluation\EvaluateDetailPage.xaml.cs">
       <DependentUpon>EvaluateDetailPage.xaml</DependentUpon>
     </Compile>
@@ -303,6 +306,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Daily\TaskDispatchPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Evaluation\EvaluateWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
