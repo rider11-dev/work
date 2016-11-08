@@ -32,7 +32,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Margin" Value="0,0,0,0"/>
-        <Setter Property="Background" Value="AliceBlue"/>
+        <!--<Setter Property="Background" Value="AliceBlue"/>-->
     </Style>
     <!--详细信息窗口输入框样式-->
     <Style x:Key="inputDetailWinStyle" TargetType="Control" BasedOn="{StaticResource inputBaseStyle}">

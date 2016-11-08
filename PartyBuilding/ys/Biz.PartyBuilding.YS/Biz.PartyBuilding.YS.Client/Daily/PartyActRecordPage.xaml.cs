@@ -1,6 +1,11 @@
-﻿using MyNet.Client.Pages;
+﻿using Biz.PartyBuilding.YS.Client.Daily.Models;
+using MyNet.Client.Pages;
+using MyNet.Components.WPF.Command;
+using MyNet.Components.WPF.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +29,55 @@ namespace Biz.PartyBuilding.YS.Client.Daily
         public PartyActRecordPage()
         {
             InitializeComponent();
+
+            CmbModel model = cmbActType.DataContext as CmbModel;
+            model.Bind(PartyBuildingContext.task_priority);
+        }
+
+        ICommand _searchCmd;
+        public ICommand SearchCmd
+        {
+            get
+            {
+                if (_searchCmd == null)
+                {
+                    _searchCmd = new DelegateCommand(SearchAction);
+                }
+
+                return _searchCmd;
+            }
+        }
+
+        void SearchAction(object parameter)
+        {
+
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            ShowDetail();
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            ShowDetail();
+
+
+        }
+
+        private void btnDel_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        void ShowDetail()
+        {
+            new DetailActRecordWindow().ShowDialog();
+        }
+
+        private void btnView_Click(object sender, RoutedEventArgs e)
+        {
+            ShowDetail();
         }
     }
 }
