@@ -7,7 +7,7 @@
         xmlns:pub="clr-namespace:MyNet.Client.Public"
         x:Class="MyNet.Client.LoginWindow"
         Style="{StaticResource popWindowStyle}"
-        Title="{x:Static pub:Context.SysName}" Height="300" Width="344" 
+        Title="{x:Static pub:MyContext.SysName}" Height="300" Width="344" 
         FocusManager.FocusedElement="{Binding ElementName=txtUsrName}"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
         Loaded="Window_Loaded">

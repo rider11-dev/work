@@ -110,6 +110,7 @@
     <Compile Include="Evaluation\EvaluateScorePage.xaml.cs">
       <DependentUpon>EvaluateScorePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Evaluation\EvaluationContext.cs" />
     <Compile Include="Evaluation\FileuploadPage.xaml.cs">
       <DependentUpon>FileuploadPage.xaml</DependentUpon>
     </Compile>
@@ -196,6 +197,9 @@
     <Compile Include="Sys\Learn\ChannelSetPage.xaml.cs">
       <DependentUpon>ChannelSetPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Sys\Models\Article.cs" />
+    <Compile Include="Sys\Models\EvaluateProject.cs" />
+    <Compile Include="Sys\SysContext.cs" />
     <Content Include="Resources\支部党员大会.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -224,6 +228,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\会议记录2015-01-09.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\压紧压实“两个责任” 推动党风廉政建设.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\2015党建工作制度.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\关于集中开展学习贯彻党的十八大精神轮训的通知.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\党建宣传方案、党建工作思路及党建工作重点.docx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -300,8 +316,8 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Learn\PartyLearnPage.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="PartyOrg\DetailActivityPlaceWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -376,16 +392,16 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Sys\Evaluation\EvaluateProjectPage.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Sys\Learn\ArticlesPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Sys\Learn\ChannelSetPage.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

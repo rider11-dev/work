@@ -1,4 +1,7 @@
-﻿using MyNet.Client.Pages;
+﻿using Biz.PartyBuilding.YS.Client.Sys.Models;
+using MyNet.Client.Pages;
+using MyNet.Components.WPF.Command;
+using MyNet.Components.WPF.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +27,44 @@ namespace Biz.PartyBuilding.YS.Client.Sys.Learn
         public ChannelSetPage()
         {
             InitializeComponent();
+        }
+
+        ICommand _searchCmd;
+        public ICommand SearchCmd
+        {
+            get
+            {
+                if (_searchCmd == null)
+                {
+                    _searchCmd = new DelegateCommand(SearchAction);
+                }
+
+                return _searchCmd;
+            }
+        }
+
+        void SearchAction(object parameter)
+        {
+
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            SysContext.channels.Add(new CmbItem { Text = "" });
+
+            dg.ItemsSource = null;
+            dg.ItemsSource = SysContext.channels;
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+
+
+        }
+
+        private void btnDel_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

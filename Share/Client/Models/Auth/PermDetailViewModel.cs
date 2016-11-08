@@ -53,7 +53,7 @@ namespace MyNet.Client.Models.Auth
                 return;
             }
             var url = ApiHelper.GetApiUrl(this.IsNew ? ApiKeys.AddPer : ApiKeys.EditPer);
-            var rst = HttpHelper.GetResultByPost(url, (PermViewModel)this, Context.Token);
+            var rst = HttpHelper.GetResultByPost(url, (PermViewModel)this, MyContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, this.IsNew ? OperationDesc.Add : OperationDesc.Edit, rst.msg);

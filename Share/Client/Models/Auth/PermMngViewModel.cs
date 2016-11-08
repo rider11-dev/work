@@ -84,7 +84,7 @@ namespace MyNet.Client.Models.Auth
                 new
                 {
                     pks = ids.ToArray()
-                }, Context.Token);
+                }, MyContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Delete, rst.msg);
@@ -135,7 +135,7 @@ namespace MyNet.Client.Models.Auth
                         {"per_parent_name",Filter_PerParent_Name},
                     }
                },
-               Context.Token);
+               MyContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);

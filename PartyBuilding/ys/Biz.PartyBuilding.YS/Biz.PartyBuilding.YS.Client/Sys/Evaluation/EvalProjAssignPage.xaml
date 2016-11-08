@@ -4,11 +4,70 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:page="clr-namespace:MyNet.Client.Pages;assembly=MyNet.Client"
+      xmlns:ctl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
+      xmlns:model="clr-namespace:Biz.PartyBuilding.YS.Client.PartyOrg.Models"
+      xmlns:vmwpf="clr-namespace:MyNet.Components.WPF.Models;assembly=MyNet.Components.WPF"
+      xmlns:sysmodel="clr-namespace:Biz.PartyBuilding.YS.Client.Sys.Models"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-	Title="考核项目分配">
-
+      d:DesignHeight="400" d:DesignWidth="500"
+	  Title="考核项目维护"
+      Loaded="BasePage_Loaded">
+    <Page.Resources>
+        <ctl:TreeViewData x:Key="gpTreeData"/>
+        <ctl:TreeViewData x:Key="projTreeData"/>
+        <Style x:Key="btnStyle" TargetType="Button" BasedOn="{StaticResource btnBaseStyle}">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="24"/>
+        </Style>
+        <Style x:Key="lblStyle" TargetType="Label" BasedOn="{StaticResource lblInputBaseStyle}">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+        <Style x:Key="inputStyle" TargetType="TextBox" BasedOn="{StaticResource inputBaseStyle}">
+            <Setter Property="MaxHeight" Value="26"/>
+            <Setter Property="Margin" Value="4,0,4,0"/>
+        </Style>
+        <Style x:Key="cbStyle" TargetType="ComboBox" BasedOn="{StaticResource cbBaseStyle}">
+            <Setter Property="Width" Value="70"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Height" Value="26"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        <Style x:Key="radioStyle" TargetType="RadioButton">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="10,0,10,0"/>
+        </Style>
+        <vmwpf:CmbModel x:Key="cbVmTimeType"/>
+        <vmwpf:CmbModel x:Key="cbVmPartyType"/>
+        <sysmodel:EvaluateProject x:Key="model"/>
+    </Page.Resources>
+    <Page.DataContext>
+        <Binding Source="{StaticResource model}"/>
+    </Page.DataContext>
     <Grid>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="7*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Header="党组织" Style="{StaticResource headerBaseStyle}">
+            <TreeView x:Name="gpTree"
+                          DataContext="{StaticResource gpTreeData}"
+                          Style="{StaticResource menuTreeViewStyle}"
+                          Background="AliceBlue"
+                      SelectedItemChanged="menuTree_SelectedItemChanged"
+                          />
+        </GroupBox>
+        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+            <Button Content="提交" Style="{StaticResource btnStyle}" Margin="20,0,0,0" Click="Button_Click"/>
+            <Label Content="当前党组织：" VerticalAlignment="Center" Margin="20,0,0,0"/>
+            <TextBlock x:Name="curParty" VerticalAlignment="Center"/>
+        </StackPanel>
+        <GroupBox Grid.Row="1" Grid.Column="1" Header="考核项目" Style="{StaticResource headerBaseStyle}">
+            <TreeView x:Name="projTree" DataContext="{StaticResource projTreeData}" Style="{StaticResource ckTreeViewStyle}"
+                          />
+        </GroupBox>
     </Grid>
 </page:BasePage>

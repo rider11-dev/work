@@ -52,11 +52,11 @@ namespace MyNet.Client.Pages.Account
             var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.ChangePwd),
                 new
                 {
-                    userid = Context.CurrentUser.user_id,
+                    userid = MyContext.CurrentUser.user_id,
                     oldpwd = vmChangePwd.oldpwd,
                     newpwd = vmChangePwd.newpwd
                 },
-                Context.Token);
+                MyContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Warning, OperationDesc.ChangePwd, rst.msg);

@@ -26,7 +26,7 @@ namespace MyNet.Client.Pages
         {
             InitializeComponent();
 
-            lblWelcome.Content = string.Format("欢迎进入{0}", Context.SysName);
+            lblWelcome.Content = string.Format("欢迎进入{0}", MyContext.SysName);
         }
     }
 }

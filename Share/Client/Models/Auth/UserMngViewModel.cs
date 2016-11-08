@@ -66,7 +66,7 @@ namespace MyNet.Client.Models.Auth
                             userId = usr.user_id,
                             perIds = selNodes.Select(n => n.DataId),
                             assignAll = false
-                        }, Context.Token);
+                        }, MyContext.Token);
                     if (rst.code != ResultCode.Success)
                     {
                         MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Assign, rst.msg);
@@ -137,7 +137,7 @@ namespace MyNet.Client.Models.Auth
                 new
                 {
                     pks = ids.ToArray()
-                }, Context.Token);
+                }, MyContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Delete, rst.msg);
@@ -170,7 +170,7 @@ namespace MyNet.Client.Models.Auth
                         {"group_name",Filter_Group_Name},
                     }
                },
-               Context.Token);
+               MyContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);

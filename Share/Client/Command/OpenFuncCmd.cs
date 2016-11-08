@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
+using System.Windows;
 
 namespace MyNet.Client.Command
 {
@@ -33,6 +34,7 @@ namespace MyNet.Client.Command
         static LoadCompletedEventHandler LastEventHandler = null;//
         public void Execute(object parameter)
         {
+            var oldSrc = Container.Source;
             Container.Source = null;
             Container.LoadCompleted -= LastEventHandler;
             OpenFuncParam param = (OpenFuncParam)parameter;
@@ -58,17 +60,41 @@ namespace MyNet.Client.Command
                     {
                         throw new Exception("未找到page，请检查uri是否正确或是否继承BasePage");
                     }
-                    page.FuncId = param.FuncId;
+                    page.FuncCode = param.FuncCode;
                 }
                 catch (Exception ex)
                 {
-                    _logHelper.LogError("LoadCompleted事件", ex);
+                    _logHelper.LogError("Container(Frame).LoadCompleted事件", ex);
                     throw new Exception("打开功能菜单错误", ex);
                 }
             };
             Container.LoadCompleted += LastEventHandler;
-
-            Container.Source = PageHelper.GetPageFullUri(param.PageUri);
+            if (oldSrc != null && oldSrc.ToString() == param.PageUri.Trim('/'))
+            {
+                //相同uri，不会重新加载，需要实例化对象
+                //“/Biz.PartyBuilding.YS.Client;component/Learn/PartyLearnPage.xaml”
+                var strUri = param.PageUri.Trim('/');
+                var start = strUri.LastIndexOf("/") + 1;
+                var len = strUri.LastIndexOf(".xaml") - start;
+                var className = strUri.Substring(start, len);
+                var assName = strUri.Substring(0, strUri.IndexOf(';'));
+                try
+                {
+                    var ass = AppDomain.CurrentDomain.GetAssemblies().Where(a => a.GetName().Name == assName).FirstOrDefault();
+                    Type type = ass.GetTypes().Where(t => t.Name == className).FirstOrDefault();
+                    BasePage page = Activator.CreateInstance(type) as BasePage;
+                    Container.Navigate(page);
+                }
+                catch (Exception ex)
+                {
+                    _logHelper.LogError("OpenFuncCmd.Execute——相同uri Page实例化失败，uri:" + param.PageUri, ex);
+                    throw new Exception("打开功能菜单失败，实例化page失败，请检查uri是否正确");
+                }
+            }
+            else
+            {
+                Container.Navigate(PageHelper.GetPageFullUri(param.PageUri));
+            }
         }
 
 

@@ -15,7 +15,7 @@ namespace MyNet.Client.Pages
     public abstract class BasePage : Page
     {
         protected Dictionary<string, ICommand> Commands = new Dictionary<string, ICommand>();
-        public string FuncId { get; set; }
+        public string FuncCode { get; set; }
         public BasePage()
             : base()
         {
@@ -28,7 +28,7 @@ namespace MyNet.Client.Pages
             {
                 return;
             }
-            var opts = Context.Pers.Where(p => p.per_parent == FuncId && p.PermType == PermType.PermTypeOpt);
+            var opts = MyContext.Pers.Where(p => p.per_parent == FuncCode && p.PermType == PermType.PermTypeOpt);
             if (opts.Count() <= 0)
             {
                 return;

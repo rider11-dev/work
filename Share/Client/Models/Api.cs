@@ -28,7 +28,7 @@ namespace MyNet.Client.Models
         {
             get
             {
-                return Context.ServerRoot.TrimEnd('/') + "/" + RelativeUrl;
+                return MyContext.ServerRoot.TrimEnd('/') + "/" + RelativeUrl;
             }
         }
 

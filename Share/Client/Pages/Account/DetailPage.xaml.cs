@@ -35,7 +35,7 @@ namespace MyNet.Client.Pages.Account
         UserViewModel vmUsr;
         public DetailPage()
         {
-            vmUsr = Context.CurrentUser;
+            vmUsr = MyContext.CurrentUser;
             this.Resources.Add("model", vmUsr);
             InitializeComponent();
         }
@@ -57,7 +57,7 @@ namespace MyNet.Client.Pages.Account
                     user_regioncode = vmUsr.user_regioncode,
                     user_remark = vmUsr.user_remark
                 },
-                Context.Token);
+                MyContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Warning, OperationDesc.Edit, rst.msg);

@@ -21,7 +21,7 @@ namespace ClientFrame
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             //加载插件目录程序集
-            AssemblyExtention.LoadAssemblies(Context.BaseDirectory + "plugin", "^*.dll$");
+            AssemblyExtention.LoadAssemblies(MyContext.BaseDirectory + "plugin", "^*.dll$");
         }
 
         //程序出错时触发的事件

@@ -14,7 +14,7 @@ namespace MyNet.Components.WPF.Controls
     public class TreeViewData
     {
         private static TreeViewData _data = null;
-        public static TreeViewData Data
+        public static TreeViewData TestData
         {
             get
             {
@@ -55,6 +55,36 @@ namespace MyNet.Components.WPF.Controls
                 }
 
                 return _data;
+            }
+        }
+
+        public IList<TreeNode> AllNodes
+        {
+            get
+            {
+                var nodes = new List<TreeNode>();
+                if (RootNodes == null || RootNodes.Count < 1)
+                {
+                    return nodes;
+                }
+                foreach (var node in RootNodes)
+                {
+                    CollectNodes(nodes, node);
+                }
+                return nodes;
+            }
+        }
+
+        private void CollectNodes(IList<TreeNode> container, TreeNode node)
+        {
+            container.Add(node);
+            if (node.SubNodes == null || node.SubNodes.Count < 1)
+            {
+                return;
+            }
+            foreach (var subNode in node.SubNodes)
+            {
+                CollectNodes(container, subNode);
             }
         }
 
@@ -149,6 +179,50 @@ namespace MyNet.Components.WPF.Controls
             Bind(nodesData);
         }
 
+        public void Check(List<string> ids)
+        {
+            if (ids == null || ids.Count < 1)
+            {
+                return;
+            }
+            if (RootNodes == null || RootNodes.Count < 1)
+            {
+                return;
+            }
+            var allNodes = AllNodes;
+            if (allNodes == null || allNodes.Count < 1)
+            {
+                return;
+            }
+            foreach (var node in allNodes.Where(n => ids.Contains(n.Id)))
+            {
+                node.IsChecked = true;
+            }
+        }
+
+        public void CheckAll()
+        {
+            SetAllChecked(true);
+        }
+
+        public void UncheckAll()
+        {
+            SetAllChecked(false);
+        }
+
+        private void SetAllChecked(bool check)
+        {
+            if (RootNodes == null || RootNodes.Count < 1)
+            {
+                return;
+            }
+
+            foreach (var node in RootNodes)
+            {
+                node.CheckCmd.Execute(check);
+            }
+        }
+
         public class TreeNode : BaseModel
         {
             public string Label { get; set; }
@@ -210,6 +284,7 @@ namespace MyNet.Components.WPF.Controls
                     }
                 }
             }
+
             private ICommand _checkCmd;
             public ICommand CheckCmd
             {
@@ -226,6 +301,7 @@ namespace MyNet.Components.WPF.Controls
             private void Check(object parameter)
             {
                 var ck = (bool)parameter;
+                IsChecked = ck;
                 CheckSub(this);
                 CheckParent(this);
             }

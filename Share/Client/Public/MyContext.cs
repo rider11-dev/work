@@ -13,10 +13,11 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Xml.Linq;
 using MyNet.Components;
+using MyNet.Client.Command;
 
 namespace MyNet.Client.Public
 {
-    public class Context
+    public class MyContext
     {
         static string _tokenTest = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhZG1pbiIsImlhdCI6MTQ3NjE2NTg2NywidXNlciI6bnVsbH0.vGbRZRUXqWMzHwapI1-C6iMu1d8KEGUte28ZgdVcqjw";
         static string _token;
@@ -64,7 +65,8 @@ namespace MyNet.Client.Public
                 return _sysName;
             }
         }
-        static Context()
+
+        static MyContext()
         {
 
         }
