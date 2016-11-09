@@ -33,7 +33,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <!--row1-->
-        <Image Grid.Row="0" Grid.ColumnSpan="2" Source="/MyNet.Client;component/Resources/img/logo.jpg"/>
+        <Image Grid.Row="0" Grid.ColumnSpan="2" Source="/MyNet.Client;component/Resources/img/logo.png"/>
         <!--row2-->
         <TextBox Name="txtUsrName" Grid.Row="1" Grid.ColumnSpan="2" 
                  Style="{StaticResource inputStyle}"
@@ -69,9 +69,9 @@
         </TextBlock>
         <!--row6-->
         <Button Name="btnLogin" Grid.Row="5" Grid.ColumnSpan="2" 
-                Width="210" Height="40"
-                Style="{StaticResource btnBaseStyle}"
-                Content="登 录"
+                Width="210" Height="40" FontSize="16" 
+                Style="{StaticResource btnLoginStyle}"
+                Content="登   录"
                 Click="btnLogin_Click"
                 />
     </Grid>

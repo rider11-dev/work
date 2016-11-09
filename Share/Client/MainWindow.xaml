@@ -28,7 +28,6 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="126"/>
-                <RowDefinition Height="12"/>
                 <RowDefinition/>
                 <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
@@ -46,6 +45,7 @@
                     <ColumnDefinition Width="6*"/>
                     <ColumnDefinition Width="4*"/>
                 </Grid.ColumnDefinitions>
+                <Image Grid.Row="1" Grid.Column="0" x:Name="imgTitle"/>
                 <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
                     <Image x:Name="imgBtnUserInfo" Source="/MyNet.Client;component/Resources/img/userhead.png" 
                            Height="32" Width="32" Cursor="Hand"
@@ -64,12 +64,8 @@
                                Style="{StaticResource headerTextStyle}"/>
                 </StackPanel>
             </Grid>
-            <!--separator-->
-            <Image Grid.Row="1" 
-                   Source="/MyNet.Client;component/Resources/img/separator.jpg" 
-                   Height="12" Stretch="Fill"/>
             <!--content-->
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
                     <RowDefinition/>
@@ -82,8 +78,7 @@
                 <TreeView x:Name="menuTree"
                           Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
                           DataContext="{StaticResource menuTreeData}"
-                          Style="{StaticResource menuTreeViewStyle}"
-                          Background="#E2EBF5"
+                          Style="{StaticResource menuTreeViewStyle_1}"
                           SelectedItemChanged="menuTree_SelectedItemChanged"/>
                 <!--当前位置-->
                 <Border Grid.Row="0" Grid.Column="1" BorderBrush="LightGray" BorderThickness="0,0,0,1">
@@ -103,13 +98,13 @@
                 </Frame>
             </Grid>
             <!--footer-->
-            <Border Grid.Row="3" Background="#E2EBF5">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <StackPanel Grid.Row="2" x:Name="panelFooter" >
+                <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
                        Margin="0,0,14,0" 
                        Text="DFH山东东方红信息科技有限公司 版权所有"/>
-                </StackPanel>
-            </Border>
+                </StackPanel>-->
+            </StackPanel>
         </Grid>
     </Border>
 </winEx:BaseWindow>

@@ -9,13 +9,36 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
+                    <!--<Border Width="12" Height="14">
+                        <Image x:Name="ExpandImg" Source="/MyNet.Components.WPF;component/Resources/img/node_collapse.png"/>
+                    </Border>-->
                     <Border Width="12" Height="14">
-                        <Image x:Name="ExpandImg" Source="/MyNet.Components.WPF;component/Resources/img/node_+.png"/>
+                        <Path x:Name="ExpandPath" HorizontalAlignment="Right" VerticalAlignment="Center"
+                            Fill="Transparent" Stroke="Gray" Data="M 2 2 L 7 7 L 2 12 Z"/>
                     </Border>
                     <ControlTemplate.Triggers>
+                        <!--<Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="ExpandImg" Property="Source" Value="/MyNet.Components.WPF;component/Resources/img/node_expand.png"/>
+                        </Trigger>-->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="IsChecked" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Stroke" TargetName="ExpandPath" Value="#FF1BBBFA"/>
+                        </MultiTrigger>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="ExpandImg" Property="Source" Value="/MyNet.Components.WPF;component/Resources/img/node_-.png"/>
+                            <Setter Property="Data" TargetName="ExpandPath" Value="M 1 10 L 7 3 L 7 10 Z"/>
+                            <Setter Property="Fill" TargetName="ExpandPath" Value="#FFE6E6E6"/>
                         </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="IsChecked" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Stroke" TargetName="ExpandPath" Value="#FF1BBBFA"/>
+                            <Setter Property="Fill" TargetName="ExpandPath" Value="#FF1BBBFA"/>
+                        </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -87,8 +110,8 @@
                             <Setter TargetName="PART_Header" Property="MinHeight" Value="19"/>
                         </MultiTrigger>
                         <Trigger Property="IsSelected" Value="true">
-                            <Setter TargetName="Bd" Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+                            <Setter TargetName="Bd" Property="Background" Value="LightGray"/>
+                            <!--<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>-->
                         </Trigger>
                         <!--<MultiTrigger>
                             <MultiTrigger.Conditions>

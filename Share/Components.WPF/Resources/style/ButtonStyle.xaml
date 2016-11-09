@@ -41,7 +41,7 @@
                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                Content="{TemplateBinding Content}">
             <Label.Background>
-                <ImageBrush ImageSource="/MyNet.Components.WPF;component/Resources/img/btn_bg.jpg" Stretch="Fill"/>
+                <ImageBrush ImageSource="/MyNet.Components.WPF;component/Resources/img/btn_bg_red.png" Stretch="Fill"/>
             </Label.Background>
         </Label>
     </ControlTemplate>

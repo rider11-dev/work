@@ -36,7 +36,7 @@
         <!--row1：工具栏-->
         <Border x:Name="bdBtns" Grid.Row="0" Style="{StaticResource mngBdStyle}">
             <StackPanel x:Name="panelBtns" Orientation="Horizontal">
-                <Button x:Name="btnCompleteDetail" Content="查看" Style="{StaticResource btnStyle}" Width="80"  Margin="10,0,0,0"
+                <Button x:Name="btnCompleteDetail" Content="查看" Style="{StaticResource btnStyle}"  Margin="10,0,0,0"
                         Click="btnCompleteDetail_Click"/>
                 <Button x:Name="btnAdd" Content="新  增" Style="{StaticResource btnStyle}"
                         Click="btnAdd_Click"

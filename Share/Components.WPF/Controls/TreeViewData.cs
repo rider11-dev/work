@@ -238,6 +238,8 @@ namespace MyNet.Components.WPF.Controls
             public string Parent { get; set; }
             public TreeNode ParentNode { get; set; }
             public dynamic Data { get; set; }
+            public string IconUri { get; set; }
+            public string HAlign { get; set; }
 
             private ObservableCollection<TreeNode> _subNodes = null;
             public ObservableCollection<TreeNode> SubNodes
@@ -350,6 +352,8 @@ namespace MyNet.Components.WPF.Controls
             public string Parent { get; set; }
             public string Order { get; set; }
             public dynamic Data { get; set; }
+            public string IconUri { get; set; }
+            public string HAlign { get; set; }
         }
     }
 }

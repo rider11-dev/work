@@ -34,7 +34,9 @@ namespace MyNet.Client
     /// </summary>
     public partial class MainWindow : BaseWindow
     {
-        readonly static string logoFile = MyContext.BaseDirectory + AppSettingHelper.Get("header");
+        readonly static string imgFileHeader = MyContext.BaseDirectory + AppSettingHelper.Get("header");
+        readonly static string imgFileTitle = MyContext.BaseDirectory + AppSettingHelper.Get("title");
+        readonly static string imgFileFooter = MyContext.BaseDirectory + AppSettingHelper.Get("footer");
         private TreeViewData _menuTreeData = null;
         private OpenFuncCmd _cmdOpenFunc = new OpenFuncCmd();
         private ILogHelper<MainWindow> _logHelper = LogHelperFactory.GetLogHelper<MainWindow>();
@@ -49,7 +51,9 @@ namespace MyNet.Client
 
             _cmdOpenFunc.Container = framePage;
             //设置header背景
-            gridHeader.SetBackgroundImg(logoFile);
+            gridHeader.SetBackgroundImg(imgFileHeader);
+            panelFooter.SetBackgroundImg(imgFileFooter);
+            imgTitle.SetSource(imgFileTitle);
         }
 
         private void imgBtnUserInfo_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -96,10 +100,28 @@ namespace MyNet.Client
             if (funcs != null && funcs.Count() > 0)
             {
                 List<TreeViewData.NodeViewModel> datas = new List<TreeViewData.NodeViewModel>();
-                datas.Add(new TreeViewData.NodeViewModel { Id = "main", Label = "主页", Order = "0", Data = new Permission { per_uri = AppSettingHelper.Get("mainpage") } });
+                datas.Add(new TreeViewData.NodeViewModel
+                {
+                    Id = "main",
+                    Label = "主页",
+                    Order = "0",
+                    Data = new Permission { per_uri = AppSettingHelper.Get("mainpage") },
+                    IconUri = "/MyNet.Client;component/Resources/img/icon_home.png",
+                    HAlign = "Center"
+                });
                 foreach (var p in funcs)
                 {
-                    datas.Add(new TreeViewData.NodeViewModel { Id = p.per_code, Label = p.per_name, Parent = p.per_parent, Order = p.per_sort, Data = p, DataId = p.per_id });
+                    datas.Add(new TreeViewData.NodeViewModel
+                    {
+                        Id = p.per_code,
+                        Label = p.per_name,
+                        Parent = p.per_parent,
+                        Order = p.per_sort,
+                        Data = p,
+                        DataId = p.per_id,
+                        IconUri = p.per_icon,
+                        HAlign = p.per_halign
+                    });
                 }
                 _menuTreeData.Bind(datas);
             }

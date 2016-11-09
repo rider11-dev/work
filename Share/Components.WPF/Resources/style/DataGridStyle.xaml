@@ -70,17 +70,19 @@
     </ControlTemplate>
     <!--checkbox单元格模板：checkbox绑定到模型的IsChecked属性-->
     <ControlTemplate x:Key="ckCellTemplate">
-        <Border BorderThickness="0">
+        <Border>
             <CheckBox x:Name="ckCell" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       BorderThickness="1" BorderBrush="#a40000"
                   IsChecked="{Binding Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             </CheckBox>
         </Border>
     </ControlTemplate>
     <!--checkbox header模板：checkbox绑定到DataGrid的DataContext对应模型的IsChecked属性（自定义，见MyNet.Components.WPF.Models.CheckableModelCollection）-->
     <ControlTemplate x:Key="ckHeaderTemplate">
-        <Border BorderThickness="0">
+        <Border>
             <!--列头IsChecked绑定CheckableModelCollection的IsChecked属性-->
-            <CheckBox x:Name="ckHeader" HorizontalAlignment="Center" VerticalAlignment="Center"
+            <CheckBox x:Name="ckHeader" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                      BorderBrush="#a40000" BorderThickness="1"
                   IsChecked="{Binding Path=DataContext.IsChecked,RelativeSource={RelativeSource AncestorType=DataGrid}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">

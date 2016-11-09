@@ -13,19 +13,23 @@
     <ControlTemplate x:Key="popWindowTemplate" TargetType="win:BaseWindow">
         <Border BorderBrush="LightGray" BorderThickness="1">
             <DockPanel LastChildFill="True">
-                <Border Width="Auto" DockPanel.Dock="Top" Background="{TemplateBinding Background}" Height="40" x:Name="borderTitle">
+                <Border Width="Auto" DockPanel.Dock="Top" Background="{TemplateBinding Background}" Height="40" x:Name="borderTitle" 
+                        BorderBrush="LightGray" BorderThickness="0,0,0,1">
                     <Grid>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="36"/>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <Label 
+                        <Image Grid.Column="0" Source="{Binding Path=Icon,RelativeSource={RelativeSource AncestorType=win:BaseWindow},Mode=OneWay}" 
+                               Height="24" HorizontalAlignment="Left" Margin="4"/>
+                        <Label Grid.Column="1"
                             Content="{Binding Path=CustomTitle,RelativeSource={RelativeSource AncestorType=win:BaseWindow},Mode=OneWay}"
                             FontWeight="Bold" FontSize="14"
                             HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
                             Margin="4,0,0,0"
                             />
-                        <StackPanel Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
+                        <StackPanel Grid.Column="2" HorizontalAlignment="Right" Orientation="Horizontal">
                             <Button x:Name="btnMinimize" Width="30" Template="{StaticResource btnTemplate_WinMin}"
                                 Command="{Binding Path=MinCmd,RelativeSource={RelativeSource AncestorType=win:BaseWindow}}"
                                 />
@@ -36,7 +40,7 @@
                     </Grid>
                 </Border>
                 <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
-                    Width="Auto" Height="Auto" DockPanel.Dock="Top">
+                    Width="Auto" Height="Auto" DockPanel.Dock="Top" Padding="4,0,4,0">
                     <AdornerDecorator>
                         <ContentPresenter />
                     </AdornerDecorator>

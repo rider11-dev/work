@@ -70,6 +70,8 @@
     <Compile Include="Controls\PagingArgs.cs" />
     <Compile Include="Controls\TreeViewData.cs" />
     <Compile Include="Converter\BooleanConverter.cs" />
+    <Compile Include="Converter\LevelMarginConverter_1.cs" />
+    <Compile Include="Converter\LevelToBorderThicknessConverter.cs" />
     <Compile Include="Converter\LevelToMarginConverter.cs" />
     <Compile Include="Extension\ControlReadOnly.cs" />
     <Compile Include="Extension\DataGridExtension.cs" />
@@ -206,6 +208,16 @@
       <Project>{bb11afa2-784c-4e60-9586-6608d8338d67}</Project>
       <Name>Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\img\btn_bg_red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\img\btn_login_red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\img\node_collapse.png" />
+    <Resource Include="Resources\img\node_expand.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

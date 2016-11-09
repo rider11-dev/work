@@ -46,6 +46,13 @@ namespace MyNet.Components.WPF.Windows
         }
 
         public static readonly DependencyProperty CustomTitleProperty = DependencyProperty.Register("CustomTitle", typeof(string), typeof(BaseWindow), new PropertyMetadata(null));
+        public new string Icon
+        {
+            get { return (string)GetValue(IconProperty); }
+            set { SetValue(IconProperty, value); }
+        }
+
+        public new static readonly DependencyProperty IconProperty = DependencyProperty.Register("Icon", typeof(string), typeof(BaseWindow), new PropertyMetadata(null));
         public BaseWindow()
             : base()
         {
@@ -57,6 +64,8 @@ namespace MyNet.Components.WPF.Windows
         {
             this.AllowDrop = true;
             this.DragWhenLeftMouseDown();
+
+            this.Icon = AppDomain.CurrentDomain.BaseDirectory + AppSettingHelper.Get("icon");
         }
         private void CloseAction(object parameter)
         {

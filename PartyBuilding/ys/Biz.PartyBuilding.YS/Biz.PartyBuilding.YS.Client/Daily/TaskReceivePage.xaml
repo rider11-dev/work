@@ -23,6 +23,9 @@
             <Setter Property="Height" Value="26"/>
             <Setter Property="FontSize" Value="12"/>
         </Style>
+        <Style x:Key="dtPickerStyle" TargetType="DatePicker" BasedOn="{StaticResource dtPickerBaseStyle}">
+            <Setter Property="Width" Value="100"/>
+        </Style>
         <!--model-->
         <ctl:PagingArgs x:Key="paging"/>
         <vmwpf:CmbModel x:Key="cbVmTaskPriority"/>
@@ -37,7 +40,7 @@
         <!--row1：工具栏-->
         <Border x:Name="bdBtns" Grid.Row="0" Style="{StaticResource mngBdStyle}">
             <StackPanel x:Name="panelBtns" Orientation="Horizontal">
-                <Button x:Name="btnCompleteDetail" Content="查看" Style="{StaticResource btnStyle}" Width="80"  Margin="10,0,0,0"
+                <Button x:Name="btnCompleteDetail" Content="查看" Style="{StaticResource btnStyle}"  Margin="10,0,0,0"
                         Click="btnCompleteDetail_Click"/>
                 <Button x:Name="btnReceive" Content="领  取" Style="{StaticResource btnStyle}"
                         Click="btnReceive_Click"/>
@@ -61,9 +64,9 @@
                   Style="{StaticResource cbStyle}"
                   />
                 <Label Content="发布时间" Style="{StaticResource mngLblStyle}"/>
-                <DatePicker Style="{StaticResource dtPickerBaseStyle}"/>
+                <DatePicker Style="{StaticResource dtPickerStyle}"/>
                 <Label Content="到期时间" Style="{StaticResource mngLblStyle}"/>
-                <DatePicker Style="{StaticResource dtPickerBaseStyle}"/>
+                <DatePicker Style="{StaticResource dtPickerStyle}"/>
                 <Button x:Name="btnSearch" Style="{StaticResource mngBtnStyle}" Content="查 询"
                         Command="{Binding Path=SearchCmd,Source={RelativeSource AncestorType=Page}}"
                         />

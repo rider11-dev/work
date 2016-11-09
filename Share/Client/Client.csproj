@@ -186,6 +186,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\style\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\style\MenuTreeStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\LoginViewModel.cs" />
@@ -202,6 +210,22 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Resources\img\logo.png" />
+    <Content Include="footer.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Resources\img\btn_bg_login_red.png" />
+    <Resource Include="Resources\img\icon_home.png" />
+    <Resource Include="Resources\img\account.png" />
+    <Resource Include="Resources\img\account_2.png" />
+    <Resource Include="Resources\img\auth.png" />
+    <Resource Include="Resources\img\auth_2.png" />
+    <Content Include="title.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="header.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Resources\img\userhead.png" />
     <Resource Include="Resources\img\top.jpg" />
     <Resource Include="Resources\img\logoff.png" />
@@ -213,9 +237,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="download\readme.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="header.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="log4net.config">
@@ -245,7 +266,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Converter\" />
-    <Folder Include="Resources\style\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Components.Resource\Components.Resource.csproj">

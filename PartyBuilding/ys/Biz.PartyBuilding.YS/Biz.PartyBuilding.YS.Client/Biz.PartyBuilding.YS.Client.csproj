@@ -204,6 +204,16 @@
     <Compile Include="Sys\Models\Article.cs" />
     <Compile Include="Sys\Models\EvaluateProject.cs" />
     <Compile Include="Sys\SysContext.cs" />
+    <Resource Include="Resources\img\party_daily.png" />
+    <Resource Include="Resources\img\party_daily_2.png" />
+    <Resource Include="Resources\img\party_evaluation.png" />
+    <Resource Include="Resources\img\party_evaluation_2.png" />
+    <Resource Include="Resources\img\party_learn.png" />
+    <Resource Include="Resources\img\party_learn2.png" />
+    <Resource Include="Resources\img\party_base.png" />
+    <Resource Include="Resources\img\party_base_2.png" />
+    <Resource Include="Resources\img\party_sys.png" />
+    <Resource Include="Resources\img\party_sys_2.png" />
     <Content Include="Resources\支部党员大会.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

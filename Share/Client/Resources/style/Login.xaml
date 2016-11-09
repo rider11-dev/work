@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--登录按钮-->
+    <ControlTemplate x:Key="btnLoginTemplate" TargetType="Button">
+        <Label x:Name="btn" 
+               Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"
+               Cursor="Hand" FontWeight="Bold" Foreground="White" FontSize="{TemplateBinding FontSize}"
+               HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+               Content="{TemplateBinding Content}">
+            <Label.Background>
+                <ImageBrush ImageSource="/MyNet.Client;component/Resources/img/btn_bg_login_red.png" Stretch="Fill"/>
+            </Label.Background>
+        </Label>
+    </ControlTemplate>
+    <Style x:Key="btnLoginStyle" TargetType="Button">
+        <Setter Property="Template" Value="{StaticResource btnTemplate}"/>
+    </Style>
+</ResourceDictionary>
