@@ -4,11 +4,68 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:page="clr-namespace:MyNet.Client.Pages;assembly=MyNet.Client"
+      xmlns:ctl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
+      xmlns:model="clr-namespace:Biz.PartyBuilding.YS.Client.PartyOrg.Models"
+      xmlns:eval="clr-namespace:Biz.PartyBuilding.YS.Client.Evaluation"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-	Title="考核情况查询">
-
+      d:DesignHeight="400" d:DesignWidth="600"
+               Loaded="BasePage_Loaded"
+	Title="党员通讯录">
+    <Page.Resources>
+        <ctl:TreeViewData x:Key="gpTreeData"/>
+        <Style x:Key="btnStyle" TargetType="Button" BasedOn="{StaticResource btnBaseStyle}">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="24"/>
+        </Style>
+        <Style x:Key="lblStyle" TargetType="Label" BasedOn="{StaticResource lblInputBaseStyle}">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+        <Style x:Key="inputStyle" TargetType="TextBox" BasedOn="{StaticResource inputBaseStyle}">
+            <Setter Property="MaxHeight" Value="26"/>
+            <Setter Property="Margin" Value="4,0,4,0"/>
+        </Style>
+        <model:OrgStrucViewModel x:Key="model"/>
+    </Page.Resources>
+    <Page.DataContext>
+        <Binding Source="{StaticResource model}"/>
+    </Page.DataContext>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="8*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Header="组织架构" Style="{StaticResource headerBaseStyle}">
+            <TreeView x:Name="gpTree"
+                          DataContext="{StaticResource gpTreeData}"
+                          Style="{StaticResource menuTreeViewStyle}"
+                          Background="AliceBlue"
+                      SelectedItemChanged="gpTree_SelectedItemChanged"
+                          />
+        </GroupBox>
+        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+            <Button Content="修  改" Style="{StaticResource btnStyle}" Click="Button_Click"/>
+            <Button Content="导出Excel" Style="{StaticResource btnStyle}" Width="80" x:Name="btnExport" Click="btnExport_Click"/>
+        </StackPanel>
+        <GroupBox Grid.Row="1" Grid.Column="1" Header="考核情况" Style="{StaticResource headerBaseStyle}">
+            <DataGrid x:Name="dg" Style="{StaticResource gridBaseStyle}"
+                      ItemsSource="{x:Static eval:EvaluationContext.check_details}">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn CellStyle="{StaticResource ckCellStyle}" HeaderStyle="{StaticResource ckCellHeaderStyle}"
+                                                CanUserResize="False"/>
+                    <DataGridTextColumn Header="考核项目" Binding="{Binding proj}"/>
+                    <DataGridTextColumn Header="考核截止日期" Binding="{Binding expire_time}"/>
+                    <DataGridTextColumn Header="被考核组织" Binding="{Binding party}"/>
+                    <DataGridTextColumn Header="考核类型" Binding="{Binding check_type}"/>
+                    <DataGridTextColumn Header="上传情况" Binding="{Binding upload_state}"/>
+                    <DataGridTextColumn Header="上传时间" Binding="{Binding upload_time}"/>
+                    <DataGridTextColumn Header="考核时间" Binding="{Binding check_time}"/>
+                    <DataGridTextColumn Header="考核结果" Binding="{Binding check_result}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
     </Grid>
 </page:BasePage>

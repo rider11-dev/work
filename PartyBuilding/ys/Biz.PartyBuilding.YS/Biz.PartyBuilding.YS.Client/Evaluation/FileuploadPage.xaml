@@ -9,7 +9,7 @@
       xmlns:vmwpf="clr-namespace:MyNet.Components.WPF.Models;assembly=MyNet.Components.WPF"
       xmlns:sysmodel="clr-namespace:Biz.PartyBuilding.YS.Client.Sys.Models"
       mc:Ignorable="d" 
-      d:DesignHeight="400" d:DesignWidth="600"
+      d:DesignHeight="600" d:DesignWidth="600"
 	  Title="考核项目维护"
       Loaded="BasePage_Loaded">
     <Page.Resources>
@@ -46,11 +46,11 @@
             <ColumnDefinition Width="7.5*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="3.5*"/>
-            <RowDefinition Height="6.5*"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
-        <GroupBox Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Header="考核项目" Style="{StaticResource headerBaseStyle}">
+        <GroupBox Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Header="考核项目" Style="{StaticResource headerBaseStyle}">
             <TreeView x:Name="gpTree"
                           DataContext="{StaticResource gpTreeData}"
                           Style="{StaticResource menuTreeViewStyle}"
@@ -63,6 +63,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
                     <RowDefinition/>
+                    <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
@@ -78,13 +79,16 @@
                 <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" 
                          Text="党委书记向县委和乡镇党委及所属党组织负责人进行述职，有述职报告，有述职评议考评方案，有会议记录及测评结果等资料" 
                          Margin="4" TextWrapping="Wrap" IsReadOnly="True"/>
+                <Label Grid.Row="2" Grid.Column="0" Content="考核状态：" Style="{StaticResource lblStyle}"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Text="已考核" Style="{StaticResource inputStyle}" IsReadOnly="True"/>
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="1" Grid.Column="1" Header="资料上传">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="6*"/>
+                    <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
@@ -109,10 +113,24 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </DockPanel>
+                <Button Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Content="上  传" Style="{StaticResource btnStyle}" Click="Button_Click"/>
             </Grid>
         </GroupBox>
-        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
-            <Button Content="上  传" Style="{StaticResource btnStyle}" Click="Button_Click" Margin="20,0,0,0"/>
-        </StackPanel>
+        <GroupBox Grid.Row="2" Grid.Column="1" Header="考核结果">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="8*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Content="考核结果：" Style="{StaticResource lblStyle}" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Text="通过" Style="{StaticResource inputStyle}" VerticalAlignment="Center" IsReadOnly="True"/>
+                <Label Grid.Row="1" Grid.Column="0" Content="考核意见：" Style="{StaticResource lblStyle}" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="工作认真，望再接再厉！" TextWrapping="Wrap" Margin="4" IsReadOnly="True"/>
+            </Grid>
+        </GroupBox>
     </Grid>
 </page:BasePage>

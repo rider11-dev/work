@@ -106,6 +106,7 @@ namespace Biz.PartyBuilding.YS.Client.Evaluation
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             new EvaluateWindow(passornot).ShowDialog();
+            MessageWindow.ShowMsg(MessageType.Info, "考核评价", "操作成功");
         }
 
         private ICommand _groupParentHelpCmd;

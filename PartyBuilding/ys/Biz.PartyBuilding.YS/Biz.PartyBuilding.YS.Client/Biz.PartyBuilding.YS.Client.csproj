@@ -105,9 +105,6 @@
     <Compile Include="Evaluation\EvaluateWindow.xaml.cs">
       <DependentUpon>EvaluateWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Evaluation\EvaluateDetailPage.xaml.cs">
-      <DependentUpon>EvaluateDetailPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Evaluation\EvaluatePage.xaml.cs">
       <DependentUpon>EvaluatePage.xaml</DependentUpon>
     </Compile>
@@ -118,6 +115,9 @@
       <DependentUpon>EvaluateScorePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Evaluation\EvaluationContext.cs" />
+    <Compile Include="Evaluation\EvaluateDetailPage.xaml.cs">
+      <DependentUpon>EvaluateDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Learn\PartyLearnPage.xaml.cs">
       <DependentUpon>PartyLearnPage.xaml</DependentUpon>
     </Compile>
@@ -313,10 +313,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Evaluation\EvaluateDetailPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Evaluation\EvaluatePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -326,6 +322,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Evaluation\EvaluateScorePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Evaluation\EvaluateDetailPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
