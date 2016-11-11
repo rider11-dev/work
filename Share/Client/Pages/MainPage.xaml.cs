@@ -1,4 +1,5 @@
 ﻿using MyNet.Client.Public;
+using MyNet.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,9 @@ namespace MyNet.Client.Pages
         {
             InitializeComponent();
 
-            lblWelcome.Content = string.Format("欢迎进入{0}", MyContext.SysName);
+            //lblWelcome.Content = string.Format("欢迎进入{0}", MyContext.SysName);
+
+            frameMain.Source = new Uri(AppSettingHelper.Get("maincontent"), UriKind.Relative);
         }
     }
 }

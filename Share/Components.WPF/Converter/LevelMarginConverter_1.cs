@@ -15,7 +15,7 @@ namespace MyNet.Components.WPF.Converter
         {
             var level = (int)value;
             //return new Thickness(8 * level + 10 * (level - 1), 0, 0, 0);
-            int delta = level < 3 ? 26 : 8;
+            int delta = level < 3 ? 40 : 8;
 
             return new Thickness(delta * level, 0, 0, 0);
         }

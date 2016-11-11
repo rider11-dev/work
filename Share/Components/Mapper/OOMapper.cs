@@ -9,10 +9,10 @@ namespace MyNet.Components.Mapper
 {
     public class OOMapper
     {
-        public static TTo Map<TFrom, TTo>(TFrom from)
+        public static TTo Map<TFrom, TTo>(TFrom from, IMappingConfigurator mappingConfigurator = null)
         {
             //EmitMapper内部有缓存机制，故不需要再维护Mapper的缓存
-            var mapper = ObjectMapperManager.DefaultInstance.GetMapper<TFrom, TTo>();
+            var mapper = ObjectMapperManager.DefaultInstance.GetMapper<TFrom, TTo>(mappingConfigurator);
             return mapper.Map(from);
         }
     }

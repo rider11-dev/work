@@ -57,6 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attach.cs" />
+    <Compile Include="Contacts\ChatWindow.xaml.cs">
+      <DependentUpon>ChatWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Daily\DailyContext.cs" />
     <Compile Include="Daily\DetailActRecordWindow.xaml.cs">
       <DependentUpon>DetailActRecordWindow.xaml</DependentUpon>
@@ -157,6 +160,9 @@
     </Compile>
     <Compile Include="PartyOrg\ActivityPlacePage.xaml.cs">
       <DependentUpon>ActivityPlacePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainContentPage.xaml.cs">
+      <DependentUpon>MainContentPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="PartyOrg\VillageCadresPage.xaml.cs">
       <DependentUpon>VillageCadresPage.xaml</DependentUpon>
@@ -267,6 +273,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Contacts\ChatWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Daily\DetailActRecordWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -384,6 +394,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="PartyOrg\ActivityPlacePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainContentPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

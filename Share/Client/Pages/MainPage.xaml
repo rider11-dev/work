@@ -9,11 +9,14 @@
 	Title="MainPage">
 
     <Grid>
-        <Label x:Name="lblWelcome" BorderThickness="0" Foreground="#a40000"
+        <!--<Label x:Name="lblWelcome" BorderThickness="0" Foreground="#a40000"
             Height="80" FontSize="24" FontWeight="Bold" FontStyle="Italic"
                VerticalAlignment="Top" Margin="0,100,0,0"
             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
             Content="欢迎进入客户端框架系统"
-                   />
+                   />-->
+        <Frame x:Name="frameMain">
+            
+        </Frame>
     </Grid>
 </local:BasePage>

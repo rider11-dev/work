@@ -11,6 +11,14 @@ namespace Biz.PartyBuilding.YS.Client
 {
     public class PartyBuildingContext
     {
+        public static List<dynamic> contacts = new List<dynamic> { 
+            new{name="王小林",party="曹县县委组织部",lasttime="2016-12-20 14:23:55"},
+            new{name="李长江",party="曹城办事处党组织",lasttime="2015-01-20 14:23:55"},
+            new{name="赵林清",party="曹城街道马山庄党组织",lasttime="2016-02-10 14:23:55"},
+            new{name="吴宁",party="曹县县委组织部",lasttime="2016-07-04 14:23:55"},
+            new{name="孙晓冉",party="曹县县委组织部",lasttime="2016-12-20 14:23:55"},
+        };
+
         public static List<OrgStrucViewModel> orgs = new List<OrgStrucViewModel>
         {
             new OrgStrucViewModel{org_code="cxxwzzb",org_name="曹县县委组织部",org_contacts="张老师",org_phone="13525008945",org_addr="县委前街1号"},
@@ -201,6 +209,10 @@ namespace Biz.PartyBuilding.YS.Client
             new TaskEntity{name="任务2016-05-16",priority="高",content="开展2016年人口普查工作",issue_time="2016-05-16",expire_time="2016-06-16",rec_party="全部",progress="50%",state="已发布",issue_party="曹县县委组织部", complete_detail=new TaskCompleteDetail{comp_state="已完成"}},
             new TaskEntity{name="任务2016-1-12",priority="中",content="召开党组织年度计划会议并提交总结报告",issue_time="2016-1-12",expire_time="2016-1-19",rec_party="曹城办事处党组织",progress="0%",state="已发布",issue_party="曹县县委组织部", complete_detail=new TaskCompleteDetail{comp_state="未领"}},
             new TaskEntity{name="任务2016-10-16",priority="中",content="做好2016年供暖准备工作",issue_time="",expire_time="2016-11-10",rec_party="曹城办事处党组织",progress="0%",state="编辑",issue_party="曹县县委组织部", complete_detail=new TaskCompleteDetail{comp_state=""}},
+            new TaskEntity{name="任务2015-12-16",priority="高",content="开展述职评议",issue_time="2015-12-16",expire_time="2015-11-10",rec_party="曹城办事处党组织",progress="0%",state="已发布",issue_party="曹县县委组织部", complete_detail=new TaskCompleteDetail{comp_state="已领未完成"}},
+            new TaskEntity{name="任务2016-04-16",priority="中",content="做好组织自律自省工作",issue_time="2016-04-16",expire_time="2016-04-30",rec_party="曹城办事处党组织",progress="0%",state="已发布",issue_party="曹县县委组织部", complete_detail=new TaskCompleteDetail{comp_state="已领未完成"}},
+            new TaskEntity{name="任务2016-09-10",priority="高",content="积极贯彻落实反腐倡议好的",issue_time="2016-09-10",expire_time="2016-09-30",rec_party="曹城办事处党组织",progress="0%",state="已发布",issue_party="曹县县委组织部", complete_detail=new TaskCompleteDetail{comp_state="已领未完成"}},
+            new TaskEntity{name="任务2016-10-11",priority="低",content="做好新党员思想培训工作",issue_time="2016-10-11",expire_time="2016-10-28",rec_party="曹城办事处党组织",progress="0%",state="已发布",issue_party="曹县县委组织部", complete_detail=new TaskCompleteDetail{comp_state="已领未完成"}},
         };
 
         static List<TaskEntity> _tasks_receive;

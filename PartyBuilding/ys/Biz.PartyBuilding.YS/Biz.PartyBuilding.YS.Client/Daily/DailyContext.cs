@@ -51,6 +51,23 @@ namespace Biz.PartyBuilding.YS.Client.Daily
                     new ViewDetail{party="曹县王集镇党组织",time="2016-11-07 17:20",isviewed="是"},
                 }
             },
+            new NoticeEntity{
+                title="会议通知",type="会议",content="各乡镇党组织做好扶贫工作！",
+                attach="",
+                urgency="中",issue_party="曹县县委组织部",issue_time="2016-10-07",receive_party="全部",state="编辑",need_reply="否",reply_expire_time="",
+                view_details=new List<ViewDetail>{
+                    new ViewDetail{party="曹县王集镇党组织",time="2016-11-07 17:20",isviewed="是"},
+                }
+            },
+            new NoticeEntity{
+                title="会议通知",type="会议",content="各乡镇党组织深入乡村基层，了解农民收入情况！",
+                attach="",
+                urgency="中",issue_party="曹县县委组织部",issue_time="2016-10-07",receive_party="全部",state="编辑",need_reply="否",reply_expire_time="",
+                view_details=new List<ViewDetail>{
+                    new ViewDetail{party="曹县王集镇党组织",time="2016-11-07 17:20",isviewed="是"},
+                }
+            },
+
         };
 
         public static List<NoticeEntity> notices_rec
