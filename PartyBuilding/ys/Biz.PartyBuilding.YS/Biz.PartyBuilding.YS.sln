@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MyNetRefer", "MyNetRefer", "{65C73368-6750-4BDD-87D6-39A764FC8952}"
 EndProject
@@ -26,6 +26,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "..\..\..\Share\Service\Service.csproj", "{1ECB045C-BB92-481A-BA25-BF0B48A92DFD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "..\..\..\Share\WebApi\WebApi.csproj", "{7E7C4A44-1919-4C56-8227-515544EA99F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biz.PartyBuilding.YS.WebApi", "Biz.PartyBuilding.YS.WebApi\Biz.PartyBuilding.YS.WebApi.csproj", "{402AC5C3-DD36-4910-A5E5-017B6A715180}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +107,12 @@ Global
 		{7E7C4A44-1919-4C56-8227-515544EA99F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E7C4A44-1919-4C56-8227-515544EA99F5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7E7C4A44-1919-4C56-8227-515544EA99F5}.Release|x86.ActiveCfg = Release|Any CPU
+		{402AC5C3-DD36-4910-A5E5-017B6A715180}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{402AC5C3-DD36-4910-A5E5-017B6A715180}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{402AC5C3-DD36-4910-A5E5-017B6A715180}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{402AC5C3-DD36-4910-A5E5-017B6A715180}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{402AC5C3-DD36-4910-A5E5-017B6A715180}.Release|Any CPU.Build.0 = Release|Any CPU
+		{402AC5C3-DD36-4910-A5E5-017B6A715180}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

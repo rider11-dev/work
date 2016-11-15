@@ -19,22 +19,7 @@ namespace MyNet.Client.Public
 {
     public class MyContext
     {
-        static string _tokenTest = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhZG1pbiIsImlhdCI6MTQ3NjE2NTg2NywidXNlciI6bnVsbH0.vGbRZRUXqWMzHwapI1-C6iMu1d8KEGUte28ZgdVcqjw";
-        static string _token;
-        public static string Token
-        {
-            get
-            {
-#if DEBUG
-                return _tokenTest;
-#endif
-                return _token;
-            }
-            set
-            {
-                _token = value;
-            }
-        }
+        public static string Token { get; set; }
         public static UserViewModel CurrentUser { get; set; }
         public static string ServerRoot
         {

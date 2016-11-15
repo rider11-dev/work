@@ -1,0 +1,221 @@
+
+一、任务流程——组织活动场所管理功能
+1、电脑端，上级组织【发布】任务
+2、app，下级组织在任务列表【领取】任务
+3、app，下级组织在组织活动场所管理功能，添加数据，上传；【完成】任务
+4、电脑端，上级组织查看任务完成情况，查看下级回复；到组织活动场所管理功能，查看列表信息
+
+二、公告
+1、电脑端，上级组织【发布】公告
+2、app，下级组织查看公告，设置为已读
+
+三、涉及接口：
+1、任务是否有更新 
+请求：
+	get，无参数
+响应：
+{
+    "code": 1,// 1请求成功，其他忽略
+    "msg": "成功",
+    "data": {
+        "flag": "1" //1，有更新；其他，无更新
+    }
+}
+2、公告是否有更新
+同1
+3、任务信息接口
+请求：
+	get，无参数
+响应：
+	{
+		"code": 1,// 1请求成功，其他忽略
+		"msg": "成功",
+		"data": {
+			"tasks": [
+					{
+						"id": "accc",
+						"name": "",
+						"content": "",
+						"priority": "",
+						"receiver": "",
+						"issue_time": "",
+						"expire_time": "",
+						"progress": "",
+						"state": ""
+					},
+					{
+						"id": "234234",
+						"name": "",
+						"content": "",
+						"priority": "",
+						"receiver": "",
+						"issue_time": "",
+						"expire_time": "",
+						"progress": "",
+						"state": ""
+					}
+				]
+		}
+	}
+4、公告信息接口
+请求：
+	get，无参数
+响应：
+	{
+		"code": 1,// 1请求成功，其他忽略
+		"msg": "成功",
+		"data": {
+			"infos": [
+					{
+						"id": "accc",
+						"title": "",
+						"content": "",
+						"issue_time": "",
+						"party": "",
+						"state": ""
+					},
+					{
+						"id": "accc",
+						"title": "",
+						"content": "",
+						"issue_time": "",
+						"party": "",
+						"state": ""
+					}
+				]
+		}
+	}
+5、组织活动场所信息接口
+请求：
+	get，无参数
+响应：
+	{
+		"code": 1,// 1请求成功，其他忽略
+		"msg": "成功",
+		"data": {
+			"infos": [
+					{
+						"id": "accc",
+						"village": "",
+						"floor_area": "",
+						"courtyard_area": "",
+						"levels": "",
+						"rooms": "",
+						"location":"",
+						"gps":"",
+						"pic":["base64图片数据","base64图片数据"]
+					},
+					{
+						"id": "234234",
+						"village": "",
+						"floor_area": "",
+						"courtyard_area": "",
+						"levels": "",
+						"rooms": "",
+						"location":"",
+						"gps":"",
+						"pic":["base64图片数据","base64图片数据"]
+					}
+				]
+		}
+	}
+6、组织活动场所新增接口
+请求：
+	post
+	参数：
+		{
+			"village": "",
+			"floor_area": "",
+			"courtyard_area": "",
+			"levels": "",
+			"rooms": "",
+			"location":"",
+			"gps":"",
+			"pic":["base64图片数据","base64图片数据"]
+		}
+响应：
+	{
+		"code": 1,// 1请求成功，0请求失败
+		"msg": "成功",
+		"data": {}
+	}
+7、任务领取接口
+请求：	
+	post
+	参数：
+		{"id":"任务id"}
+响应：	
+	{
+		"code": 1,// 1请求成功，0请求失败
+		"msg": "成功",
+		"data": {}
+	}
+8、任务完成接口
+请求：	
+	post
+	参数：
+		{
+			"id": "任务id",
+			"progress": "完成情况",
+			"attach": "附件"
+		}
+
+四、数据项
+1、任务
+	唯一标识 id
+	任务名称 name
+	任务内容 content
+	优先级   priority 高、中、低
+	接收组织 receiver
+	发布时间 issue_time
+	到期时间 expire_time
+	完成情况 progress
+	状态	 state ，编辑、已发布、已领未完成、完成
+2、公告
+	唯一标识	id
+	主题		title
+	内容		content
+	发布时间	issue_time
+	发布党组织	party
+	状态		state
+
+3、组织活动场所
+	唯一标示	id
+	所属乡镇	town
+	所属村庄 village
+	建筑面积 floor_area
+	院落面积 courtyard_area
+	层数     levels
+	房间数   rooms
+	坐落位置 location
+	地理坐标 gps
+	图片	 pic（图片base64格式字符串）
+
+	  
+	
+预制数据：
+1、党组织
+	曹县县委组织部
+		曹县王集镇党组织
+		曹县孙老家镇党组织
+2、村庄
+	王集镇
+		徐楼村
+		谷庄村
+		张店村
+	孙老家镇
+		白楼村
+		邵庄
+		焦庄
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

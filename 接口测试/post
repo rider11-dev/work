@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rest-client version="3.4.2"><request><http-version>1.1</http-version><http-follow-redirects/><URL>http://localhost/aaa/api/party/task/save</URL><method>POST</method><body><string content-type="application/json" charset="UTF-8">{
+    "name": "组织活动场所信息采集",
+    "content": "组织活动场所信息采集",
+    "priority": "高",
+    "receiver": "所有组织",
+	"issue_time":"",
+	"expire_time":"2016-11-28",
+    "progress": "",
+	"state": "编辑"
+}</string></body></request></rest-client>

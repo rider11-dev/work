@@ -47,6 +47,24 @@ namespace MyNet.Components
             }
         }
 
+        public static Image ByteArrayToImage(byte[] bytes)
+        {
+            if (bytes == null || bytes.Length < 1)
+            {
+                return null;
+            }
+            using (MemoryStream ms = new MemoryStream(bytes))
+            {
+                Image img = Image.FromStream(ms);
+                if (img == null)
+                {
+                    return null;
+                }
+                img = ImageHelper.CopyImage(img, img.Width, img.Height);
+                return img;
+            }
+        }
+
         /// <summary>
         /// 复制图片
         /// </summary>
@@ -80,6 +98,39 @@ namespace MyNet.Components
                 g.DrawImage(imgSrc, new Rectangle(0, 0, newWidth, newHeight), new Rectangle(0, 0, imgSrc.Width, imgSrc.Height), GraphicsUnit.Pixel);
             }
             return bmp;
+        }
+
+        /// <summary>
+        /// base64编码图片
+        /// </summary>
+        /// <param name="img"></param>
+        /// <returns></returns>
+        public static string Base64Encode(Image img)
+        {
+            if (img == null)
+            {
+                return "";
+            }
+            byte[] bytes = ImageHelper.ImageToByteArray(img);
+
+            return Convert.ToBase64String(bytes);
+        }
+
+        public static Image Base64Decode(string strBase64)
+        {
+            if (string.IsNullOrEmpty(strBase64))
+            {
+                return null;
+            }
+            try
+            {
+                var bytes = Convert.FromBase64String(strBase64);
+                return ImageHelper.ByteArrayToImage(bytes);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }
