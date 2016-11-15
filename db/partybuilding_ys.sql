@@ -2,16 +2,17 @@
 Navicat MySQL Data Transfer
 
 Source Server         : mysql-local
-Source Server Version : 50626
+Source Server Version : 50711
 Source Host           : localhost:3306
 Source Database       : partybuilding_ys
 
 Target Server Type    : MYSQL
-Target Server Version : 50626
+Target Server Version : 50711
 File Encoding         : 65001
 
-Date: 2016-11-09 14:44:55
+Date: 2016-11-16 00:05:05
 */
+
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
@@ -31,11 +32,11 @@ CREATE TABLE `auth_group` (
 -- ----------------------------
 -- Records of auth_group
 -- ----------------------------
+INSERT INTO `auth_group` VALUES ('313cb71fa40b4c12b05ff34b89c9a652', 'cx_sljz', '曹县孙老家镇党组织', '\0', 'cxxwzzb', '0103');
 INSERT INTO `auth_group` VALUES ('4d93696b61cf4ea5acbda0a6e7122c89', 'cxccbsc', '曹城办事处党组织', '\0', 'cxxwzzb', '0101');
 INSERT INTO `auth_group` VALUES ('6953306b35ab47f8a040dbd1d8893b13', 'cxxwzzb', '曹县县委组织部', '\0', null, '01');
 INSERT INTO `auth_group` VALUES ('7b82c887950c491fa0fd2122dfe623d6', 'cx_wagnjizhen', '曹县王集镇党组织', '\0', 'cxxwzzb', '0102');
 INSERT INTO `auth_group` VALUES ('admin', 'admin', '超级管理员', '', null, '00');
-INSERT INTO `auth_group` VALUES ('ec5871d098054dc7be2520d01ab84b54', 'cc_msz', '曹城街道马山庄党组织', '\0', 'cxccbsc', '010101');
 
 -- ----------------------------
 -- Table structure for auth_permission
