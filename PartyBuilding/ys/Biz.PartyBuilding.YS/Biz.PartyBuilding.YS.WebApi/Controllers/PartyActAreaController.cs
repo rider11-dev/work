@@ -1,4 +1,4 @@
-﻿using Biz.PartyBuilding.YS.WebApi.Models;
+﻿using Biz.PartyBuilding.YS.Models;
 using MyNet.Components;
 using MyNet.Components.Extensions;
 using MyNet.Components.Result;

@@ -1,7 +1,15 @@
 ﻿using Biz.PartyBuilding.YS.Client.Daily.Models;
+using Biz.PartyBuilding.YS.Client.Models;
+using MyNet.Client.Models;
 using MyNet.Client.Pages;
+using MyNet.Client.Public;
+using MyNet.Components;
+using MyNet.Components.Result;
 using MyNet.Components.WPF.Command;
 using MyNet.Components.WPF.Models;
+using MyNet.Components.WPF.Windows;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -35,35 +43,22 @@ namespace Biz.PartyBuilding.YS.Client.Daily
 
             model = cmbTaskState.DataContext as CmbModel;
             model.Bind(PartyBuildingContext.task_state);
+
+            model = cmbTaskCompleteState.DataContext as CmbModel;
+            model.Bind(PartyBuildingContext.task_complete_state);
         }
 
-        ICommand _searchCmd;
-        public ICommand SearchCmd
-        {
-            get
-            {
-                if (_searchCmd == null)
-                {
-                    _searchCmd = new DelegateCommand(SearchAction);
-                }
-
-                return _searchCmd;
-            }
-        }
-
-        void SearchAction(object parameter)
-        {
-
-        }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             new DetailTaskWindow().ShowDialog();
+            GetTasks();
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            new DetailTaskWindow().ShowDialog();
+            var model = (dg.ItemsSource as IEnumerable<TaskModel>).FirstOrDefault();
+            new DetailTaskWindow(model).ShowDialog();
 
 
         }
@@ -75,13 +70,18 @@ namespace Biz.PartyBuilding.YS.Client.Daily
 
         private void btnIssue_Click(object sender, RoutedEventArgs e)
         {
-            dg.ItemsSource = null;
-            var task = PartyBuildingContext.task_dispatch.Where(t => t.state == "编辑").FirstOrDefault();
-            if (task != null)
+            var model = (dg.ItemsSource as IEnumerable<TaskModel>).FirstOrDefault();
+            if(model==null)
             {
-                task.state = "已发布";
+                return;
             }
-            dg.ItemsSource = PartyBuildingContext.task_dispatch;
+            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(PartyBuildingApiKeys.TaskRelease, PartyBuildingApiKeys.Key_ApiProvider_Party), new { id = model.id });
+            if (rst.code != ResultCode.Success)
+            {
+                MessageWindow.ShowMsg(MessageType.Error, "任务发布", rst.msg);
+                return;
+            }
+            GetTasks();
         }
 
         private void btnCanel_Click(object sender, RoutedEventArgs e)
@@ -98,6 +98,32 @@ namespace Biz.PartyBuilding.YS.Client.Daily
         private void btnCompleteDetail_Click(object sender, RoutedEventArgs e)
         {
             new DetailTaskWindow().ShowDialog();
+        }
+
+        private void BasePage_Loaded(object sender, RoutedEventArgs e)
+        {
+            GetTasks();
+        }
+
+        private void GetTasks()
+        {
+            var rst = HttpHelper.GetResultByGet(ApiHelper.GetApiUrl(PartyBuildingApiKeys.TaskGet,PartyBuildingApiKeys.Key_ApiProvider_Party));
+            if (rst.code != ResultCode.Success)
+            {
+                MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);
+                return;
+            }
+            if (rst.data != null&&rst.data.tasks!=null)
+            {
+                var tasks = JsonConvert.DeserializeObject<IEnumerable<TaskModel>>(((JArray)rst.data.tasks).ToString());
+
+                dg.ItemsSource = tasks;
+            }
+        }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            GetTasks();
         }
     }
 }

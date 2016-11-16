@@ -4,11 +4,12 @@
         xmlns:win="clr-namespace:MyNet.Components.WPF.Windows;assembly=MyNet.Components.WPF"
         xmlns:vmwpf="clr-namespace:MyNet.Components.WPF.Models;assembly=MyNet.Components.WPF"
         xmlns:ctl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
+        xmlns:model="clr-namespace:Biz.PartyBuilding.YS.Client.Models"
         xmlns:party="clr-namespace:Biz.PartyBuilding.YS.Client"
         xmlns:daily="clr-namespace:Biz.PartyBuilding.YS.Client.Daily"
         WindowStartupLocation="CenterScreen"
         Style="{StaticResource popWindowStyle}"
-        Title="任务详细信息" Height="480" Width="440">
+        Title="任务详细信息" Height="380" Width="440">
     <Window.Resources>
         <Style x:Key="lblStyle" TargetType="Label" BasedOn="{StaticResource lblInputBaseStyle}">
             <!--<Setter Property="Margin" Value="34,0,0,0"/>-->
@@ -30,12 +31,16 @@
         </Style>
         <vmwpf:CmbModel x:Key="cbVmTaskPriority"/>
         <vmwpf:CmbModel x:Key="cbVmTaskState"/>
+        <model:TaskModel x:Key="model"/>
     </Window.Resources>
+        <Window.DataContext>
+        <Binding Source="{StaticResource model}"/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1.5*"/>
             <RowDefinition Height="8*"/>
-            <RowDefinition Height="6*"/>
+            <!--<RowDefinition Height="6*"/>-->
             <RowDefinition Height="1.5*"/>
         </Grid.RowDefinitions>
         <Label x:Name="lblTitle" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
@@ -59,30 +64,26 @@
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="任务名称" Grid.Row="0" Grid.Column="0" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource inputStyle}" Text="任务2016-05-16"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource inputStyle}" Text="{Binding Path=name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="接收组织" Grid.Row="0" Grid.Column="2" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="0" Grid.Column="3" Style="{StaticResource inputStyle}" Text="曹城办事处党组织"/>
+                <TextBox Grid.Row="0" Grid.Column="3" Style="{StaticResource inputStyle}" Text="{Binding Path=receiver,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="优先级" Grid.Row="1" Grid.Column="0" Style="{StaticResource lblStyle}" Margin="0"/>
-                <ComboBox  x:Name="cmbTaskPriority" Grid.Row="1" Grid.Column="1"
-                  DataContext="{StaticResource cbVmTaskPriority}"
-                  Style="{StaticResource cbStyle}"
-                  />
+                <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource inputStyle}" Text="{Binding Path=priority,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="任务状态" Grid.Row="1" Grid.Column="2" Style="{StaticResource lblStyle}" Margin="0"/>
-                <ComboBox  x:Name="cmbTaskState" Grid.Row="1" Grid.Column="3"
-                  DataContext="{StaticResource cbVmTaskState}"
-                  Style="{StaticResource cbStyle}"
-                  />
+                <TextBox Grid.Row="1" Grid.Column="13" IsReadOnly="True" Style="{StaticResource inputStyle}" Text="{Binding Path=state,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="发布时间" Grid.Row="2" Grid.Column="0" Style="{StaticResource lblStyle}"/>
-                <DatePicker Grid.Row="2" Grid.Column="1" Style="{StaticResource dtPickerBaseStyle}" Text="2016-05-16"/>
+                <DatePicker Grid.Row="2" Grid.Column="1" Style="{StaticResource dtPickerBaseStyle}" Text="{Binding Path=issue_time,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="到期时间" Grid.Row="2" Grid.Column="2" Style="{StaticResource lblStyle}"/>
-                <DatePicker Grid.Row="2" Grid.Column="3" Style="{StaticResource dtPickerBaseStyle}" Text="2016-06-16"/>
+                <DatePicker Grid.Row="2" Grid.Column="3" Style="{StaticResource dtPickerBaseStyle}" Text="{Binding Path=expire_time,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="完成情况" Grid.Row="3" Grid.Column="0" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource inputStyle}" Text="50%"/>
+                <TextBox Grid.Row="3" IsReadOnly="True" Grid.Column="1" Style="{StaticResource inputStyle}" Text="{Binding Path=progress,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Content="完成状态" Grid.Row="3" Grid.Column="2" Style="{StaticResource lblStyle}"/>
+                <TextBox Grid.Row="3" IsReadOnly="True" Grid.Column="3" Style="{StaticResource inputStyle}" Text="{Binding Path=progress,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="任务内容" Grid.Row="4" Grid.Column="0" Style="{StaticResource lblStyle}" VerticalAlignment="Center"/>
-                <TextBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" TextWrapping="Wrap" Text="开展2016年人口普查工作"/>
+                <TextBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" TextWrapping="Wrap" Text="{Binding Path=content,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
         </GroupBox>
-        <GroupBox Grid.Row="2" Header="完成情况">
+        <!--<GroupBox Grid.Row="2" Header="完成情况">
             <DataGrid Style="{StaticResource gridBaseStyle}" ItemsSource="{x:Static party:PartyBuildingContext.task_complete_detail }">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="党组织" Binding="{Binding party}"/>
@@ -101,14 +102,14 @@
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-        </GroupBox>
+        </GroupBox>-->
         <Grid Grid.Row="3" Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Button Content="确  定" Grid.Row="0" Grid.Column="0" Style="{StaticResource btnStyle}"
-                    Command="{Binding Path=CloseCmd,RelativeSource={RelativeSource AncestorType=win:BaseWindow}}"
+                    Command="{Binding Path=SaveCmd,RelativeSource={RelativeSource AncestorType=daily:DetailTaskWindow}}"
                     />
             <Button Content="取  消" Grid.Column="1" Style="{StaticResource btnStyle}"
                     Command="{Binding Path=CloseCmd,RelativeSource={RelativeSource AncestorType=win:BaseWindow}}"

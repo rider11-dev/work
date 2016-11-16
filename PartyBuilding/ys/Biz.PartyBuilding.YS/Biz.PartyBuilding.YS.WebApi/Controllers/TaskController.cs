@@ -1,4 +1,4 @@
-﻿using Biz.PartyBuilding.YS.WebApi.Models;
+﻿using Biz.PartyBuilding.YS.Models;
 using MyNet.Components.Extensions;
 using MyNet.Components.Result;
 using MyNet.WebApi.Controllers;
@@ -10,6 +10,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using MyNet.WebApi.Extensions;
+using Biz.PartyBuilding.YS.WebApi.Models;
 
 namespace Biz.PartyBuilding.YS.WebApi.Controllers
 {
@@ -98,7 +99,7 @@ namespace Biz.PartyBuilding.YS.WebApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("task_complete")]
+        [Route("task_complete_new")]
         public OptResult TaskComplete()
         {
             var infos = _tasks.Where(t => t.state == "已完成").Select<TaskModel, String>(t =>

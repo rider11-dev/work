@@ -1,6 +1,11 @@
 ﻿using Biz.PartyBuilding.YS.Client.Daily.Models;
+using Biz.PartyBuilding.YS.Client.Models;
 using Biz.PartyBuilding.YS.Client.PartyOrg.Models;
+using MyNet.Client.Models;
+using MyNet.Client.Public;
+using MyNet.Components;
 using MyNet.Components.Extensions;
+using MyNet.Components.Result;
 using MyNet.Components.WPF.Command;
 using MyNet.Components.WPF.Models;
 using MyNet.Components.WPF.Windows;
@@ -26,50 +31,64 @@ namespace Biz.PartyBuilding.YS.Client.Daily
     /// </summary>
     public partial class DetailTaskWindow : BaseWindow
     {
+        TaskModel _model;
+
+        public bool IsNew
+        {
+            get { return string.IsNullOrEmpty(_model.id); }
+        }
         private DetailTaskWindow()
         {
             InitializeComponent();
 
-
-            CmbModel model = cmbTaskPriority.DataContext as CmbModel;
-            model.Bind(PartyBuildingContext.task_priority);
-
-            model = cmbTaskState.DataContext as CmbModel;
-            model.Bind(PartyBuildingContext.task_state);
+            _model = this.DataContext as TaskModel;
         }
 
-        public DetailTaskWindow(Org2NewViewModel vm = null)
+        public DetailTaskWindow(TaskModel vm = null)
             : this()
         {
+            if(vm!=null)
+            {
+                vm.CopyTo(_model);
+            }
         }
 
-        ICommand _viewAttachCmd;
-        public ICommand ViewAttachCmd
+        ICommand _saveCmd;
+        public ICommand SaveCmd
         {
             get
             {
-                if (_viewAttachCmd == null)
+                if (_saveCmd == null)
                 {
-                    _viewAttachCmd = new DelegateCommand(ViewAttachAction);
+                    _saveCmd = new DelegateCommand(SaveAction);
                 }
-                return _viewAttachCmd;
+                return _saveCmd;
             }
         }
 
-        void ViewAttachAction(object parameter)
+        void SaveAction(object parameter)
         {
-            var taskCompleteDetail = (TaskCompleteDetail)parameter;
-            if (taskCompleteDetail == null || string.IsNullOrEmpty(taskCompleteDetail.attach))
+            //var taskCompleteDetail = (TaskCompleteDetail)parameter;
+            //if (taskCompleteDetail == null || string.IsNullOrEmpty(taskCompleteDetail.attach))
+            //{
+            //    return;
+            //}
+
+            //var fullPath = "";
+            //if (FileExtension.GetFileFullPath(AppDomain.CurrentDomain.BaseDirectory, taskCompleteDetail.attach, out fullPath))
+            //{
+            //    Process.Start(fullPath);
+
+            //}
+            var url = ApiHelper.GetApiUrl(PartyBuildingApiKeys.TaskSave,PartyBuildingApiKeys.Key_ApiProvider_Party);
+            var rst = HttpHelper.GetResultByPost(url, _model);
+            if (rst.code != ResultCode.Success)
             {
+                MessageWindow.ShowMsg(MessageType.Error, this.IsNew ? OperationDesc.Add : OperationDesc.Edit, rst.msg);
                 return;
             }
-
-            var fullPath = "";
-            if (FileExtension.GetFileFullPath(AppDomain.CurrentDomain.BaseDirectory, taskCompleteDetail.attach, out fullPath))
-            {
-                Process.Start(fullPath);
-
-            }
+            this.DialogResult = true;
+            base.CloseCmd.Execute(null);
         }
     }
 }

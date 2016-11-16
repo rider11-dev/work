@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Biz.PartyBuilding.YS.WebApi.Models
+namespace Biz.PartyBuilding.YS.Models
 {
     public class InfoModel
     {

@@ -92,13 +92,15 @@
     <Compile Include="Controllers\InfoController.cs" />
     <Compile Include="Controllers\PartyActAreaController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
-    <Compile Include="Models\InfoModel.cs" />
-    <Compile Include="Models\PartyActAreaModel.cs" />
     <Compile Include="Models\ProcessByIdModel.cs" />
-    <Compile Include="Models\TaskModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Biz.PartyBuilding.YS.Models\Biz.PartyBuilding.YS.Models.csproj">
+      <Project>{f46375cf-9fbc-4143-bb71-e9fcd6863306}</Project>
+      <Name>Biz.PartyBuilding.YS.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

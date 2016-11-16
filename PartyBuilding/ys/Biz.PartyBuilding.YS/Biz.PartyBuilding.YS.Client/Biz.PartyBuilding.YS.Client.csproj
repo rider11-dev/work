@@ -41,6 +41,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Share\dlls\log4net\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -124,6 +128,10 @@
     <Compile Include="Learn\PartyLearnPage.xaml.cs">
       <DependentUpon>PartyLearnPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\InfoModel.cs" />
+    <Compile Include="Models\PartyActAreaModel.cs" />
+    <Compile Include="Models\TaskModel.cs" />
+    <Compile Include="PartyBuildingApiKeys.cs" />
     <Compile Include="PartyBuildingContext.cs" />
     <Compile Include="PartyOrg\DetailActivityPlaceWindow.xaml.cs">
       <DependentUpon>DetailActivityPlaceWindow.xaml</DependentUpon>
@@ -227,6 +235,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Content Include="api.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -465,6 +477,10 @@
     <ProjectReference Include="..\..\..\..\Share\Model\Model.csproj">
       <Project>{bb11afa2-784c-4e60-9586-6608d8338d67}</Project>
       <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Biz.PartyBuilding.YS.Models\Biz.PartyBuilding.YS.Models.csproj">
+      <Project>{f46375cf-9fbc-4143-bb71-e9fcd6863306}</Project>
+      <Name>Biz.PartyBuilding.YS.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

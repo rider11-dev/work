@@ -163,6 +163,34 @@ namespace MyNet.Components
         }
 
         /// <summary>
+        /// 发起get请求，返回响应字符串数据
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public static string Get(string url, string token = "")
+        {
+            try
+            {
+                var reqEncoding = Encoding.UTF8;
+
+                var response = CreateGetHttpResponse(url, null, "", null, token);
+                using (var stream = response.GetResponseStream())
+                {
+                    var bytes = GetBytes(stream);
+                    var strResponse = reqEncoding.GetString(bytes, 0, bytes.Length);
+                    //记录本次请求信息
+                    _logHelper.LogInfo(string.Format("request:{0}\turl,{1}{0}\t{1}{0}response:{0}\t{2}", Environment.NewLine, url, strResponse));
+                    return strResponse;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("http请求错误：" + ex.Message, ex);
+            }
+        }
+
+        /// <summary>
         /// 发起Post请求，返回OptResult对象
         /// </summary>
         /// <param name="url"></param>
@@ -172,6 +200,25 @@ namespace MyNet.Components
         public static OptResult GetResultByPost(string url, object jsonData = null, string token = "")
         {
             var strResponse = Post(url, jsonData, token);
+            try
+            {
+                return JsonConvert.DeserializeObject<OptResult>(strResponse);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("解析http响应错误：" + ex.Message, ex);
+            }
+        }
+
+        /// <summary>
+        /// 发起Get请求，返回OptResult对象
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public static OptResult GetResultByGet(string url,string token="")
+        {
+            var strResponse = Get(url, token);
             try
             {
                 return JsonConvert.DeserializeObject<OptResult>(strResponse);

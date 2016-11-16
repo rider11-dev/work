@@ -170,7 +170,8 @@
 	发布时间 issue_time
 	到期时间 expire_time
 	完成情况 progress
-	状态	 state ，编辑、已发布、已领未完成、完成
+	状态	 state ，编辑、已发布、已完成、已取消
+	完成状态 complete_state  未领、已领未完成、已完成
 2、公告
 	唯一标识	id
 	主题		title

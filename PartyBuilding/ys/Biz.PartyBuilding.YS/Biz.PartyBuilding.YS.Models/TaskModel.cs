@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Biz.PartyBuilding.YS.WebApi.Models
+namespace Biz.PartyBuilding.YS.Models
 {
     public class TaskModel
     {
@@ -27,5 +27,6 @@ namespace Biz.PartyBuilding.YS.WebApi.Models
         /// 完成标志:未领、已领未完成、已完成
         /// </summary>
         public string complete_state { get; set; }
+
     }
 }
