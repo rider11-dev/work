@@ -1,7 +1,11 @@
 ﻿using Biz.PartyBuilding.YS.Client.Daily.Models;
+using Biz.PartyBuilding.YS.Client.Models;
 using Biz.PartyBuilding.YS.Client.PartyOrg.Models;
 using Microsoft.Win32;
+using MyNet.Client.Public;
+using MyNet.Components;
 using MyNet.Components.Extensions;
+using MyNet.Components.Result;
 using MyNet.Components.WPF.Command;
 using MyNet.Components.WPF.Models;
 using MyNet.Components.WPF.Windows;
@@ -27,17 +31,20 @@ namespace Biz.PartyBuilding.YS.Client.Daily
     /// </summary>
     public partial class DetailTaskCompleteWindow : BaseWindow
     {
-        TaskEntity _model = null;
+        TaskModel _model = null;
         private DetailTaskCompleteWindow()
         {
-            _model = PartyBuildingContext.tasks_ccbsc_receive.Where(t => t.complete_detail.comp_state == "已领未完成").FirstOrDefault();
             InitializeComponent();
-            this.DataContext = _model;
+            this._model = this.DataContext as TaskModel;
         }
 
-        public DetailTaskCompleteWindow(Org2NewViewModel vm = null)
+        public DetailTaskCompleteWindow(TaskModel vm = null)
             : this()
         {
+            if (vm != null)
+            {
+                vm.CopyTo(_model);
+            }
         }
 
         ICommand _uploadAttachCmd;
@@ -66,9 +73,31 @@ namespace Biz.PartyBuilding.YS.Client.Daily
 
         }
 
-        protected override void BeforeClose()
+        ICommand _completeCmd;
+        public ICommand CompleteCmd
         {
-            _model.complete_detail.comp_state = "已完成";
+            get
+            {
+                if (_completeCmd == null)
+                {
+                    _completeCmd = new DelegateCommand(CompleteAction);
+                }
+                return _completeCmd;
+            }
+        }
+
+        void CompleteAction(object parameter)
+        {
+            string url = ApiHelper.GetApiUrl(PartyBuildingApiKeys.TaskComplete, PartyBuildingApiKeys.Key_ApiProvider_Party);
+            var rst = HttpHelper.GetResultByPost(url, new { id = _model.id, progress = _model.progress });
+            if (rst.code != ResultCode.Success)
+            {
+                MessageWindow.ShowMsg(MessageType.Error, "任务完成", rst.msg);
+                return;
+            }
+            this.DialogResult = true;
+
+            base.Close();
         }
     }
 }

@@ -147,5 +147,20 @@ namespace Biz.PartyBuilding.YS.Client.Daily
                 }
             },
         };
+
+
+        public static List<dynamic> town_villages = new List<dynamic>
+        {
+            new {id="01",name="曹县",parent=""},
+            new {id="0101",name="王集镇",parent="01"},
+            new {id="010101",name="徐楼村",parent="0101"},
+            new {id="010102",name="谷庄村",parent="0101"},
+            new {id="010103",name="张店村",parent="0101"},
+            new {id="0102",name="孙老家镇",parent="01"},
+            new {id="010201",name="白楼村",parent="0102"},
+            new {id="010202",name="邵庄",parent="0102"},
+            new {id="010203",name="焦庄",parent="0102"},
+
+        };
     }
 }

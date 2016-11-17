@@ -9,8 +9,10 @@
       xmlns:vmwpf="clr-namespace:MyNet.Components.WPF.Models;assembly=MyNet.Components.WPF"
       xmlns:party="clr-namespace:Biz.PartyBuilding.YS.Client"
       xmlns:daily="clr-namespace:Biz.PartyBuilding.YS.Client.Daily"
+      xmlns:model="clr-namespace:Biz.PartyBuilding.YS.Client.Models"
       mc:Ignorable="d" 
-      d:DesignHeight="400" d:DesignWidth="600"
+      d:DesignHeight="400" d:DesignWidth="700"
+               Loaded="BasePage_Loaded"
 	Title="我的任务
                ">
     <Page.Resources>
@@ -29,7 +31,7 @@
         <!--model-->
         <ctl:PagingArgs x:Key="paging"/>
         <vmwpf:CmbModel x:Key="cbVmTaskPriority"/>
-        <vmwpf:CmbModel x:Key="cbVmTaskState"/>
+        <vmwpf:CmbModel x:Key="cbVmTaskCompleteState"/>
     </Page.Resources>
     <Grid x:Name="gridLayout">
         <Grid.RowDefinitions>
@@ -58,9 +60,9 @@
                   DataContext="{StaticResource cbVmTaskPriority}"
                   Style="{StaticResource cbStyle}"
                   />
-                <Label Content="领取状态" Style="{StaticResource mngLblStyle}"/>
+                <Label Content="完成状态" Style="{StaticResource mngLblStyle}"/>
                 <ComboBox  x:Name="cmbTaskCompleteState"
-                  DataContext="{StaticResource cbVmTaskState}"
+                  DataContext="{StaticResource cbVmTaskCompleteState}"
                   Style="{StaticResource cbStyle}"
                   />
                 <Label Content="发布时间" Style="{StaticResource mngLblStyle}"/>
@@ -79,22 +81,18 @@
                     <RowDefinition/>
                     <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
-                <DataGrid x:Name="dg" Grid.Row="0" Style="{StaticResource gridBaseStyle}"
-                          ItemsSource="{x:Static party:PartyBuildingContext.tasks_ccbsc_receive}">
+                <DataGrid x:Name="dg" Grid.Row="0" Style="{StaticResource gridBaseStyle}">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn CellStyle="{StaticResource ckCellStyle}" HeaderStyle="{StaticResource ckCellHeaderStyle}"
                                                 CanUserResize="False"/>
                         <DataGridTextColumn Header="任务名称" Binding="{Binding name}"/>
-                        <DataGridTextColumn Header="领取状态" Binding="{Binding complete_detail.comp_state}"/>
-                        <DataGridTextColumn Header="完成情况描述" Binding="{Binding complete_detail.comp_remark}"/>
-                        <DataGridTextColumn Header="附件" Binding="{Binding complete_detail.attach}"/>
+                        <DataGridTextColumn Header="完成状态" Binding="{Binding complete_state}"/>
+                        <DataGridTextColumn Header="完成情况" Binding="{Binding progress}"/>
                         <DataGridTextColumn Header="内容" Binding="{Binding content}"/>
                         <DataGridTextColumn Header="优先级" Binding="{Binding priority}"/>
-                        <DataGridTextColumn Header="发布组织" Binding="{Binding issue_party}"/>
-                        <DataGridTextColumn Header="接收组织" Binding="{Binding rec_party}"/>
+                        <DataGridTextColumn Header="接收组织" Binding="{Binding receiver}"/>
                         <DataGridTextColumn Header="发布时间" Binding="{Binding issue_time}"/>
                         <DataGridTextColumn Header="到期时间" Binding="{Binding expire_time}"/>
-                        <DataGridTextColumn Header="任务状态" Binding="{Binding state}"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <ctl:ControlPagination x:Name="ctlPagination" Grid.Row="1" HorizontalAlignment="Center"/>

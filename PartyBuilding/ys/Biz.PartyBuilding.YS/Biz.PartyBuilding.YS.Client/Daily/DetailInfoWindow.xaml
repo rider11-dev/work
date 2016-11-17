@@ -6,6 +6,7 @@
         xmlns:ctl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
         xmlns:party="clr-namespace:Biz.PartyBuilding.YS.Client"
         xmlns:daily="clr-namespace:Biz.PartyBuilding.YS.Client.Daily"
+                xmlns:model="clr-namespace:Biz.PartyBuilding.YS.Client.Models"
         WindowStartupLocation="CenterScreen"
         Style="{StaticResource popWindowStyle}"
         Title="信息详细信息" Height="300" Width="440">
@@ -31,7 +32,11 @@
         <vmwpf:CmbModel x:Key="cbVmNoticeType"/>
         <vmwpf:CmbModel x:Key="cbVmNoticeUrgency"/>
         <vmwpf:CmbModel x:Key="cbVmNoticeNeedReply"/>
+        <model:InfoModel x:Key="model"/>
     </Window.Resources>
+    <Window.DataContext>
+        <Binding Source="{StaticResource model}"/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1.5*"/>
@@ -57,13 +62,12 @@
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="标题" Grid.Row="0" Grid.Column="0" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource inputStyle}" Text="大风警告"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource inputStyle}" Text="{Binding Path=title,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="信息内容" Grid.Row="1" Grid.Column="0" Style="{StaticResource lblStyle}" VerticalAlignment="Center"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" TextWrapping="Wrap" Text="请各乡镇级党组织，于2016年11月20日上午8点，到县委政府会议室开会。收到请回复！"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" TextWrapping="Wrap" Text="{Binding Path=content,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="附件" Grid.Row="2" Grid.Column="0" Style="{StaticResource lblStyle}"/>
                 <ctl:HelpButton Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" ForbidInput="True" x:Name="ctlHelpButton"
-                         Style="{StaticResource inputBtnAddOnStyle}" Width="310" Height="30" HorizontalAlignment="Left"
-                            Command="{Binding UploadAttachCmd,RelativeSource={RelativeSource AncestorType=daily:DetailInfoWindow}}"/>
+                         Style="{StaticResource inputBtnAddOnStyle}" Width="310" Height="30" HorizontalAlignment="Left"/>
 
             </Grid>
         </GroupBox>
@@ -73,7 +77,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Button Content="确  定" Grid.Row="0" Grid.Column="0" Style="{StaticResource btnStyle}"
-                    Command="{Binding Path=CloseCmd,RelativeSource={RelativeSource AncestorType=win:BaseWindow}}"
+                    Command="{Binding Path=SaveCmd,RelativeSource={RelativeSource AncestorType=daily:DetailInfoWindow}}"
                     />
             <Button Content="取  消" Grid.Column="1" Style="{StaticResource btnStyle}"
                     Command="{Binding Path=CloseCmd,RelativeSource={RelativeSource AncestorType=win:BaseWindow}}"

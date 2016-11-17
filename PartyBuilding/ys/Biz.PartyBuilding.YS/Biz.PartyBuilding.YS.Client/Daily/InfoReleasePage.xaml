@@ -10,6 +10,7 @@
       xmlns:daily="clr-namespace:Biz.PartyBuilding.YS.Client.Daily"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="1000"
+               Loaded="BasePage_Loaded"
 	Title="信息管理
                ">
     <Page.Resources>
@@ -59,24 +60,15 @@
                             <RowDefinition/>
                             <RowDefinition Height="40"/>
                         </Grid.RowDefinitions>
-                        <DataGrid x:Name="dg_Rec" Grid.Row="0" Style="{StaticResource gridBaseStyle}" ItemsSource="{x:Static daily:DailyContext.infos_rec}">
+                        <DataGrid x:Name="dg_Rec" Grid.Row="0" Style="{StaticResource gridBaseStyle}" >
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn CellStyle="{StaticResource ckCellStyle}" HeaderStyle="{StaticResource ckCellHeaderStyle}"
                                                 CanUserResize="False"/>
                                 <DataGridTextColumn Header="信息标题" Binding="{Binding title}"/>
                                 <DataGridTextColumn Header="信息内容" Binding="{Binding content}" Width="120"/>
-                                <DataGridTextColumn Header="附件" Binding="{Binding attach}"/>
                                 <DataGridTextColumn Header="发布组织" Binding="{Binding party}"/>
                                 <DataGridTextColumn Header="发布时间" Binding="{Binding issue_time}"/>
-                                <DataGridTemplateColumn Header="操作" MinWidth="100">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Button Content="查看附件" Width="60"
-                                        Command="{Binding Path=ViewAttachCmd,RelativeSource={RelativeSource AncestorType=daily:InfoReleasePage}}"
-                                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGrid},Path=SelectedItem}"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Header="阅读状态" Binding="{Binding read_state}"/>
                             </DataGrid.Columns>
                         </DataGrid>
                         <ctl:ControlPagination Grid.Row="1" HorizontalAlignment="Center"/>
@@ -136,16 +128,16 @@
                             <RowDefinition/>
                             <RowDefinition Height="40"/>
                         </Grid.RowDefinitions>
-                        <DataGrid x:Name="dg_Sent" Grid.Row="0" Style="{StaticResource gridBaseStyle}" ItemsSource="{x:Static daily:DailyContext.infos}">
+                        <DataGrid x:Name="dg_Sent" Grid.Row="0" Style="{StaticResource gridBaseStyle}">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn CellStyle="{StaticResource ckCellStyle}" HeaderStyle="{StaticResource ckCellHeaderStyle}"
                                                 CanUserResize="False"/>
                                 <DataGridTextColumn Header="信息标题" Binding="{Binding title}"/>
                                 <DataGridTextColumn Header="信息内容" Binding="{Binding content}" Width="120"/>
-                                <DataGridTextColumn Header="附件" Binding="{Binding attach}"/>
                                 <DataGridTextColumn Header="发布组织" Binding="{Binding party}"/>
                                 <DataGridTextColumn Header="发布时间" Binding="{Binding issue_time}"/>
                                 <DataGridTextColumn Header="状态" Binding="{Binding state}"/>
+                                <DataGridTextColumn Header="阅读状态" Binding="{Binding read_state}"/>
                             </DataGrid.Columns>
                         </DataGrid>
                         <ctl:ControlPagination Grid.Row="1" HorizontalAlignment="Center"/>

@@ -116,6 +116,27 @@ namespace MyNet.Components
             return Convert.ToBase64String(bytes);
         }
 
+        /// <summary>
+        /// base64编码图片
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        public static string Base64Encode(string filePath)
+        {
+            if (!File.Exists(filePath))
+            {
+                return null;
+            }
+
+            using (Image img = Image.FromFile(filePath))
+            {
+                byte[] bytes = ImageHelper.ImageToByteArray(img);
+
+                return Convert.ToBase64String(bytes);
+            }
+
+        }
+
         public static Image Base64Decode(string strBase64)
         {
             if (string.IsNullOrEmpty(strBase64))

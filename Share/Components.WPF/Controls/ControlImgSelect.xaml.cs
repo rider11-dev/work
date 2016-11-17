@@ -46,5 +46,31 @@ namespace MyNet.Components.WPF.Controls
         {
             img.SetSource();
         }
+
+        public string Base64Data
+        {
+            get
+            {
+                if (img.Source == null)
+                {
+                    return "";
+                }
+                //WriteableBitmap wb = new WriteableBitmap(img.Source as BitmapSource);//将Image对象转换为WriteableBitmap 
+                //wb.
+                //byte[] b = Convert.FromBase64String(GetBase64Image(wb));//得到byte数组
+                string data = "";
+                try
+                {
+                    var dd = img.Source as BitmapImage;
+                    var file = dd.UriSource.LocalPath;
+                    if (File.Exists(file))
+                    {
+                        data = ImageHelper.Base64Encode(file);
+                    }
+                }
+                catch { }
+                return data;
+            }
+        }
     }
 }

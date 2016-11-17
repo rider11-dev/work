@@ -1,9 +1,16 @@
 ﻿using Biz.PartyBuilding.YS.Client.Daily.Models;
+using Biz.PartyBuilding.YS.Client.Models;
 using Microsoft.Win32;
 using MyNet.Client.Pages;
+using MyNet.Client.Public;
+using MyNet.Components;
 using MyNet.Components.Extensions;
+using MyNet.Components.Result;
 using MyNet.Components.WPF.Command;
 using MyNet.Components.WPF.Models;
+using MyNet.Components.WPF.Windows;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -37,6 +44,7 @@ namespace Biz.PartyBuilding.YS.Client.Daily
 
             model = cmbTaskCompleteState.DataContext as CmbModel;
             model.Bind(PartyBuildingContext.task_complete_state);
+
         }
 
         ICommand _searchCmd;
@@ -66,21 +74,55 @@ namespace Biz.PartyBuilding.YS.Client.Daily
 
         private void btnReceive_Click(object sender, RoutedEventArgs e)
         {
-            dg.ItemsSource = null;
-            var task = PartyBuildingContext.tasks_ccbsc_receive.Where(t => t.complete_detail.comp_state == "未领").FirstOrDefault();
-            if (task != null)
+            var task = dg.SelectedItem as TaskModel;
+            if (task == null)
             {
-                task.complete_detail.comp_state = "已领未完成";
+                return;
             }
-            dg.ItemsSource = PartyBuildingContext.tasks_ccbsc_receive;
+            string url = ApiHelper.GetApiUrl(PartyBuildingApiKeys.TaskTake, PartyBuildingApiKeys.Key_ApiProvider_Party);
+            var rst = HttpHelper.GetResultByPost(url, new { id = task.id });
+            if (rst.code != ResultCode.Success)
+            {
+                MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);
+                return;
+            }
+            GetTasks();
         }
 
         private void btnComplete_Click(object sender, RoutedEventArgs e)
         {
-            new DetailTaskCompleteWindow().ShowDialog();
+            var task = dg.SelectedItem as TaskModel;
+            if (task == null)
+            {
+                return;
+            }
 
-            dg.ItemsSource = null;
-            dg.ItemsSource = PartyBuildingContext.tasks_ccbsc_receive;
+            new DetailTaskCompleteWindow(task).ShowDialog();
+
+            GetTasks();
+        }
+
+        private void BasePage_Loaded(object sender, RoutedEventArgs e)
+        {
+            GetTasks();
+        }
+
+        void GetTasks()
+        {
+            var rst = HttpHelper.GetResultByGet(ApiHelper.GetApiUrl(PartyBuildingApiKeys.TaskGet, PartyBuildingApiKeys.Key_ApiProvider_Party));
+            if (rst.code != ResultCode.Success)
+            {
+                MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);
+                return;
+            }
+            if (rst.data != null && rst.data.tasks != null)
+            {
+                var tasks = JsonConvert.DeserializeObject<IEnumerable<TaskModel>>(((JArray)rst.data.tasks).ToString());
+                if (tasks != null && tasks.Count() > 0)
+                {
+                    dg.ItemsSource = tasks.Where(t => t.state != "编辑");
+                }
+            }
         }
     }
 }

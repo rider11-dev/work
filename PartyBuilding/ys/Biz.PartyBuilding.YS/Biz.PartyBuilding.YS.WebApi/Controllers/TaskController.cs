@@ -1,5 +1,4 @@
-﻿using Biz.PartyBuilding.YS.Models;
-using MyNet.Components.Extensions;
+﻿using MyNet.Components.Extensions;
 using MyNet.Components.Result;
 using MyNet.WebApi.Controllers;
 using MyNet.WebApi.Models;
@@ -11,36 +10,32 @@ using System.Net.Http;
 using System.Web.Http;
 using MyNet.WebApi.Extensions;
 using Biz.PartyBuilding.YS.WebApi.Models;
+using Biz.PartyBuilding.YS.Repository;
+using Biz.PartyBuilding.YS.Models;
+using DapperExtensions;
 
 namespace Biz.PartyBuilding.YS.WebApi.Controllers
 {
     [RoutePrefix("api/party/task")]
     public class TaskController : BaseController
     {
-        static List<TaskModel> _tasks = new List<TaskModel>
+        PartyTaskRepository _rep;
+
+        public TaskController(PartyTaskRepository rep)
         {
-            //new TaskModel
-            //{
-            //    id="8d1fd508beb641ab8883c998781a0462",
-            //    name="组织活动场所信息采集",
-            //    content="组织活动场所信息采集",
-            //    priority="高",
-            //    receiver="所有组织",
-            //    issue_time="",
-            //    expire_time="2016-11-28",
-            //    progress="",
-            //    state="编辑"
-            //}
-        };
+            _rep = rep;
+        }
 
         [HttpGet]
         [Route("get")]
         public OptResult GetTasks()
         {
+            var tasks = _rep.GetList(null);
+
             OptResult rst = OptResult.Build(ResultCode.Success, "",
                 new
                 {
-                    tasks = _tasks
+                    tasks = tasks
                 });
             return rst;
         }
@@ -56,22 +51,23 @@ namespace Biz.PartyBuilding.YS.WebApi.Controllers
                 return rst;
             }
 
-            if (string.IsNullOrEmpty(task.id) && _tasks.Count(t => t.id == task.id) == 0)
+            if (string.IsNullOrEmpty(task.id))
             {
                 task.id = GuidExtension.GetOne();
                 task.state = "编辑";
-                _tasks.Add(task);
 
+                _rep.Insert(task);
             }
             else
             {
-                var oldTask = _tasks.Where(t => t.id == task.id).First();
+                var oldTask = _rep.GetById(task.id);
                 oldTask.name = task.name;
                 oldTask.content = task.content;
                 oldTask.priority = task.priority;
                 oldTask.receiver = task.receiver;
                 oldTask.expire_time = task.expire_time;
 
+                _rep.Update(oldTask);
             }
             rst = OptResult.Build(ResultCode.Success, "保存成功");
 
@@ -86,10 +82,11 @@ namespace Biz.PartyBuilding.YS.WebApi.Controllers
         [Route("isnew")]
         public OptResult IsNew()
         {
+            var cnt = _rep.Count(Predicates.Field<TaskModel>(t => t.state, Operator.Eq, new string[] { "已领未完成", "未领" }));
             OptResult rst = OptResult.Build(ResultCode.Success, "",
                 new
                 {
-                    flag = _tasks.Count(task => task.complete_state == "已领未完成" || task.complete_state == "未领") > 0 ? "1" : "0"
+                    flag = cnt > 0 ? "1" : "0"
                 });
             return rst;
         }
@@ -102,7 +99,18 @@ namespace Biz.PartyBuilding.YS.WebApi.Controllers
         [Route("task_complete_new")]
         public OptResult TaskComplete()
         {
-            var infos = _tasks.Where(t => t.state == "已完成").Select<TaskModel, String>(t =>
+            var tasks = _rep.GetList(Predicates.Field<TaskModel>(t => t.state, Operator.Eq, "已完成"));
+            if (tasks == null || tasks.Count() < 1)
+            {
+                return OptResult.Build(ResultCode.Success, "",
+                 new
+                 {
+                     has = "0"
+                 });
+            }
+
+
+            var infos = tasks.Select<TaskModel, String>(t =>
             {
                 return string.Format("任务【{0}】已完成", t.name);
             });
@@ -111,7 +119,7 @@ namespace Biz.PartyBuilding.YS.WebApi.Controllers
             OptResult rst = OptResult.Build(ResultCode.Success, "",
                 new
                 {
-                    has = (infos == null || infos.Count() < 1) ? "0" : "1",
+                    has = "1",
                     infos = infos
                 });
             return rst;
@@ -128,7 +136,7 @@ namespace Biz.PartyBuilding.YS.WebApi.Controllers
                 return rst;
             }
 
-            var task = _tasks.Where(t => t.id == vm.id).FirstOrDefault();
+            var task = _rep.GetById(vm.id);
             if (task == null)
             {
                 rst = OptResult.Build(ResultCode.DataNotFound, "未找到指定数据", new { id = vm.id });
@@ -139,8 +147,9 @@ namespace Biz.PartyBuilding.YS.WebApi.Controllers
             task.state = "已发布";
             task.complete_state = "未领";
 
-            rst = OptResult.Build(ResultCode.Success, "发布成功");
+            _rep.Update(task);
 
+            rst = OptResult.Build(ResultCode.Success, "发布成功");
             return rst;
         }
 
@@ -154,7 +163,7 @@ namespace Biz.PartyBuilding.YS.WebApi.Controllers
                 rst = OptResult.Build(ResultCode.ParamError, "参数不能为空或格式不正确");
                 return rst;
             }
-            var task = _tasks.Where(t => t.id == vm.id).FirstOrDefault();
+            var task = _rep.GetById(vm.id);
             if (task == null)
             {
                 rst = OptResult.Build(ResultCode.DataNotFound, "未找到指定任务", new { id = vm.id });
@@ -162,6 +171,7 @@ namespace Biz.PartyBuilding.YS.WebApi.Controllers
             }
 
             task.complete_state = "已领未完成";
+            _rep.Update(task);
 
             rst = OptResult.Build(ResultCode.Success, "任务领取成功");
 
@@ -178,7 +188,7 @@ namespace Biz.PartyBuilding.YS.WebApi.Controllers
                 rst = OptResult.Build(ResultCode.ParamError, "参数不能为空或格式不正确");
                 return rst;
             }
-            var oldTask = _tasks.Where(t => t.id == task.id).FirstOrDefault();
+            var oldTask = _rep.GetById(task.id);
             if (task == null)
             {
                 rst = OptResult.Build(ResultCode.DataNotFound, "未找到指定任务", new { id = task.id });
@@ -188,6 +198,8 @@ namespace Biz.PartyBuilding.YS.WebApi.Controllers
             oldTask.progress = task.progress;
             oldTask.complete_state = "已完成";
             oldTask.state = "已完成";
+
+            _rep.Update(oldTask);
 
             rst = OptResult.Build(ResultCode.Success, "任务完成成功");
 

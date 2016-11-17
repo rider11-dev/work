@@ -7,6 +7,7 @@
         xmlns:party="clr-namespace:Biz.PartyBuilding.YS.Client"
         xmlns:daily="clr-namespace:Biz.PartyBuilding.YS.Client.Daily"
         xmlns:daily_model="clr-namespace:Biz.PartyBuilding.YS.Client.Daily.Models"
+                xmlns:model="clr-namespace:Biz.PartyBuilding.YS.Client.Models"
         WindowStartupLocation="CenterScreen"
         Style="{StaticResource popWindowStyle}"
         Title="任务完成" Height="300" Width="440">
@@ -31,7 +32,11 @@
         </Style>
         <vmwpf:CmbModel x:Key="cbVmTaskPriority"/>
         <vmwpf:CmbModel x:Key="cbVmTaskState"/>
+        <model:TaskModel x:Key="model"/>
     </Window.Resources>
+    <Window.DataContext>
+        <Binding Source="{StaticResource model}"/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1.5*"/>
@@ -53,12 +58,10 @@
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
             <Label Content="任务完成情况说明" Grid.Row="0" Grid.Column="0" Style="{StaticResource lblStyle}"/>
-            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=complete_detail.comp_remark}"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=progress}"/>
             <Label Content="附件上传" Grid.Row="1" Grid.Column="0" Style="{StaticResource lblStyle}"/>
             <ctl:HelpButton Grid.Row="1" Grid.Column="1" ForbidInput="True" x:Name="ctlHelpButton"
-                         Style="{StaticResource inputBtnAddOnStyle}" Width="240" Height="30" HorizontalAlignment="Left"
-                            Content="{Binding Path=complete_detail.attach,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                            Command="{Binding UploadAttachCmd,RelativeSource={RelativeSource AncestorType=daily:DetailTaskCompleteWindow}}"/>
+                         Style="{StaticResource inputBtnAddOnStyle}" Width="240" Height="30" HorizontalAlignment="Left"/>
         </Grid>
         <Grid Grid.Row="3" Grid.Column="0">
             <Grid.ColumnDefinitions>
@@ -66,7 +69,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Button Content="确  定" Grid.Row="0" Grid.Column="0" Style="{StaticResource btnStyle}"
-                    Command="{Binding Path=CloseCmd,RelativeSource={RelativeSource AncestorType=win:BaseWindow}}"
+                    Command="{Binding Path=CompleteCmd,RelativeSource={RelativeSource AncestorType=daily:DetailTaskCompleteWindow}}"
                     />
             <Button Content="取  消" Grid.Column="1" Style="{StaticResource btnStyle}"
                     Command="{Binding Path=CloseCmd,RelativeSource={RelativeSource AncestorType=win:BaseWindow}}"

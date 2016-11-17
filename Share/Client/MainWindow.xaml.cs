@@ -26,6 +26,8 @@ using MyNet.Client.Command;
 using MyNet.Components.Logger;
 using MyNet.Components.WPF.Windows;
 using MyNet.Model.Base;
+using System.Threading;
+using System.Windows.Threading;
 
 namespace MyNet.Client
 {
@@ -68,6 +70,7 @@ namespace MyNet.Client
             this.Close();
         }
 
+        DispatcherTimer timer;
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             //TODO：需要优化

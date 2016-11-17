@@ -139,9 +139,13 @@
     <Compile Include="Public\MyContext.cs" />
     <Compile Include="Public\DataCacheHelper.cs" />
     <Compile Include="Public\MsgConst.cs" />
+    <Compile Include="Public\NotifyHelper.cs" />
     <Compile Include="Public\OperationDesc.cs" />
     <Compile Include="Public\StyleCacheHelper.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="TaskbarNotifier.xaml.cs">
+      <DependentUpon>TaskbarNotifier.xaml</DependentUpon>
+    </Compile>
     <Page Include="LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -198,6 +202,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="TaskbarNotifier.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\LoginViewModel.cs" />
@@ -224,6 +232,7 @@
     <Resource Include="Resources\img\account_2.png" />
     <Resource Include="Resources\img\auth.png" />
     <Resource Include="Resources\img\auth_2.png" />
+    <Resource Include="Resources\img\exitico.png" />
     <Content Include="title.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

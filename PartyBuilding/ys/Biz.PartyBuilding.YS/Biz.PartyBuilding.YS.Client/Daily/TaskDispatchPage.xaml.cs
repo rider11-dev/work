@@ -57,10 +57,13 @@ namespace Biz.PartyBuilding.YS.Client.Daily
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            var model = (dg.ItemsSource as IEnumerable<TaskModel>).FirstOrDefault();
-            new DetailTaskWindow(model).ShowDialog();
+            var task = dg.SelectedItem as TaskModel;
 
+            if (task != null)
+            {
+                new DetailTaskWindow(task).ShowDialog();
 
+            }
         }
 
         private void btnDel_Click(object sender, RoutedEventArgs e)
@@ -70,12 +73,13 @@ namespace Biz.PartyBuilding.YS.Client.Daily
 
         private void btnIssue_Click(object sender, RoutedEventArgs e)
         {
-            var model = (dg.ItemsSource as IEnumerable<TaskModel>).FirstOrDefault();
-            if(model==null)
+            var task = dg.SelectedItem as TaskModel;
+
+            if (task == null)
             {
                 return;
             }
-            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(PartyBuildingApiKeys.TaskRelease, PartyBuildingApiKeys.Key_ApiProvider_Party), new { id = model.id });
+            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(PartyBuildingApiKeys.TaskRelease, PartyBuildingApiKeys.Key_ApiProvider_Party), new { id = task.id });
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, "任务发布", rst.msg);
@@ -86,13 +90,7 @@ namespace Biz.PartyBuilding.YS.Client.Daily
 
         private void btnCanel_Click(object sender, RoutedEventArgs e)
         {
-            dg.ItemsSource = null;
-            var task = PartyBuildingContext.task_dispatch.Where(t => t.state == "已发布").FirstOrDefault();
-            if (task != null)
-            {
-                task.state = "已取消";
-            }
-            dg.ItemsSource = PartyBuildingContext.task_dispatch;
+
         }
 
         private void btnCompleteDetail_Click(object sender, RoutedEventArgs e)
@@ -107,13 +105,13 @@ namespace Biz.PartyBuilding.YS.Client.Daily
 
         private void GetTasks()
         {
-            var rst = HttpHelper.GetResultByGet(ApiHelper.GetApiUrl(PartyBuildingApiKeys.TaskGet,PartyBuildingApiKeys.Key_ApiProvider_Party));
+            var rst = HttpHelper.GetResultByGet(ApiHelper.GetApiUrl(PartyBuildingApiKeys.TaskGet, PartyBuildingApiKeys.Key_ApiProvider_Party));
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);
                 return;
             }
-            if (rst.data != null&&rst.data.tasks!=null)
+            if (rst.data != null && rst.data.tasks != null)
             {
                 var tasks = JsonConvert.DeserializeObject<IEnumerable<TaskModel>>(((JArray)rst.data.tasks).ToString());
 

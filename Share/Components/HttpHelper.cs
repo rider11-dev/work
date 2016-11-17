@@ -216,7 +216,7 @@ namespace MyNet.Components
         /// <param name="url"></param>
         /// <param name="token"></param>
         /// <returns></returns>
-        public static OptResult GetResultByGet(string url,string token="")
+        public static OptResult GetResultByGet(string url, string token = "")
         {
             var strResponse = Get(url, token);
             try

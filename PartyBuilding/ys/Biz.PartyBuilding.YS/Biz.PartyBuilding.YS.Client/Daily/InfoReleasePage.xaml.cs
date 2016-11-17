@@ -1,8 +1,15 @@
 ﻿using Biz.PartyBuilding.YS.Client.Daily.Models;
+using Biz.PartyBuilding.YS.Client.Models;
 using MyNet.Client.Pages;
+using MyNet.Client.Public;
+using MyNet.Components;
 using MyNet.Components.Extensions;
+using MyNet.Components.Result;
 using MyNet.Components.WPF.Command;
 using MyNet.Components.WPF.Models;
+using MyNet.Components.WPF.Windows;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -150,43 +157,90 @@ namespace Biz.PartyBuilding.YS.Client.Daily
         }
         void Issue_SentAction(object parameter)
         {
-            var notice = DailyContext.infos.Where(n => n.state == "编辑").FirstOrDefault();
-            if (notice == null)
+            var info = dg_Sent.SelectedItem as InfoModel;
+            if (info == null)
             {
                 return;
             }
-            notice.state = "已发布";
-            Reload();
+            var url = ApiHelper.GetApiUrl(PartyBuildingApiKeys.InfoRelease, PartyBuildingApiKeys.Key_ApiProvider_Party);
+            var rst = HttpHelper.GetResultByPost(url, new { id = info.id });
+            if (rst.code != ResultCode.Success)
+            {
+                MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Save, rst.msg);
+                return;
+            }
+            GetInfos();
         }
 
-        private void Reload()
-        {
-            dg_Sent.ItemsSource = null;
-            dg_Sent.ItemsSource = DailyContext.infos;
-
-            dg_Rec.ItemsSource = null;
-            dg_Rec.ItemsSource = DailyContext.infos_rec;
-        }
         void Edit_SentAction(object parameter)
         {
-            ShowDetailWindow();
+            ShowDetailWindow(InfoOptType.InsertOrUpdate);
         }
         void Add_SentAction(object parameter)
         {
-            ShowDetailWindow();
+            ShowDetailWindow(InfoOptType.InsertOrUpdate);
+
+            GetInfos();
         }
         void View_SentAction(object parameter)
         {
-            ShowDetailWindow();
+            var info = dg_Sent.SelectedItem as InfoModel;
+            if (info == null)
+            {
+                return;
+            }
+            ShowDetailWindow(InfoOptType.View, info);
         }
         void ViewCmd_RecAction(object parameter)
         {
-            ShowDetailWindow();
+            var info = dg_Rec.SelectedItem as InfoModel;
+            if (info == null)
+            {
+                return;
+            }
+            ShowDetailWindow(InfoOptType.View, info);
+            var url = ApiHelper.GetApiUrl(PartyBuildingApiKeys.InfoRead, PartyBuildingApiKeys.Key_ApiProvider_Party);
+            var rst = HttpHelper.GetResultByPost(url, new { id = info.id });
+            if (rst.code != ResultCode.Success)
+            {
+                MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Save, rst.msg);
+                return;
+            }
+            GetInfos();
         }
 
-        void ShowDetailWindow()
+        void ShowDetailWindow(InfoOptType type, InfoModel info = null)
         {
-            new DetailInfoWindow().ShowDialog();
+            bool rst = (bool)new DetailInfoWindow(type, info).ShowDialog();
+            if (rst == true)
+            {
+                GetInfos();
+            }
+        }
+
+        private void BasePage_Loaded(object sender, RoutedEventArgs e)
+        {
+            GetInfos();
+        }
+
+
+        void GetInfos()
+        {
+            var rst = HttpHelper.GetResultByGet(ApiHelper.GetApiUrl(PartyBuildingApiKeys.InfoGet, PartyBuildingApiKeys.Key_ApiProvider_Party));
+            if (rst.code != ResultCode.Success)
+            {
+                MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);
+                return;
+            }
+            if (rst.data != null && rst.data.infos != null)
+            {
+                var infos = JsonConvert.DeserializeObject<IEnumerable<InfoModel>>(((JArray)rst.data.infos).ToString());
+                if (infos != null && infos.Count() > 0)
+                {
+                    dg_Rec.ItemsSource = infos.Where(i => i.state == "已发布");
+                    dg_Sent.ItemsSource = infos;
+                }
+            }
         }
     }
 }

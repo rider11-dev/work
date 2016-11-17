@@ -47,6 +47,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -458,6 +459,16 @@
     <Resource Include="Resources\村官.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\第一书记.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\党员.jpg" />
+    <Resource Include="Resources\村干部.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\村级活动场所.jpg" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\..\..\Share\Client\Client.csproj">
       <Project>{6aabd137-bb47-4636-8635-de0f6dc9aea1}</Project>
       <Name>Client</Name>
@@ -482,16 +493,6 @@
       <Project>{f46375cf-9fbc-4143-bb71-e9fcd6863306}</Project>
       <Name>Biz.PartyBuilding.YS.Models</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\第一书记.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\党员.jpg" />
-    <Resource Include="Resources\村干部.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\村级活动场所.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

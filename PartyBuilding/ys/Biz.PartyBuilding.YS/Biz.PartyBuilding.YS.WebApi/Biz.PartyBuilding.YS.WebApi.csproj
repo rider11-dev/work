@@ -38,22 +38,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.2\lib\net45\Dapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DapperExtensions, Version=1.4.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DapperExtensions.1.4.4\lib\net40\DapperExtensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="MyNet.Components">
-      <HintPath>..\..\..\..\Share\dlls\MyNet\MyNet.Components.dll</HintPath>
-    </Reference>
-    <Reference Include="MyNet.Components.Resource">
-      <HintPath>..\..\..\..\Share\dlls\MyNet\MyNet.Components.Resource.dll</HintPath>
-    </Reference>
-    <Reference Include="MyNet.Dto">
-      <HintPath>..\..\..\..\Share\dlls\MyNet\MyNet.Dto.dll</HintPath>
-    </Reference>
-    <Reference Include="MyNet.Model">
-      <HintPath>..\..\..\..\Share\dlls\MyNet\MyNet.Model.dll</HintPath>
-    </Reference>
-    <Reference Include="MyNet.WebApi">
-      <HintPath>..\..\..\..\Share\WebApi\bin\MyNet.WebApi.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -90,19 +83,58 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\InfoController.cs" />
+    <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\PartyActAreaController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
+    <Compile Include="Models\PartyActAreaViewModel.cs" />
     <Compile Include="Models\ProcessByIdModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Share\Components.Resource\Components.Resource.csproj">
+      <Project>{4ecb69ea-c6d9-436b-9689-90d065424f53}</Project>
+      <Name>Components.Resource</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Share\Components\Components.csproj">
+      <Project>{9ed019a0-a26a-4725-aa70-2b52bf7a5416}</Project>
+      <Name>Components</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Share\Dto\Dto.csproj">
+      <Project>{ea32f873-b280-4b79-947e-01ab4fcf6616}</Project>
+      <Name>Dto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Share\Model\Model.csproj">
+      <Project>{bb11afa2-784c-4e60-9586-6608d8338d67}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Share\Repository\Repository.csproj">
+      <Project>{0c81a4e4-bd67-4f8d-a602-ec4062a0d0c2}</Project>
+      <Name>Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Share\WebApi\WebApi.csproj">
+      <Project>{7e7c4a44-1919-4c56-8227-515544ea99f5}</Project>
+      <Name>WebApi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Biz.PartyBuilding.YS.Models\Biz.PartyBuilding.YS.Models.csproj">
       <Project>{f46375cf-9fbc-4143-bb71-e9fcd6863306}</Project>
       <Name>Biz.PartyBuilding.YS.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Biz.PartyBuilding.YS.Repository\Biz.PartyBuilding.YS.Repository.csproj">
+      <Project>{e9477ee5-9edb-4bb2-ad81-872ee6206188}</Project>
+      <Name>Biz.PartyBuilding.YS.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="web.config" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

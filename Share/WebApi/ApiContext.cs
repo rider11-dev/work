@@ -35,5 +35,23 @@ namespace MyNet.WebApi
                 return val;
             }
         }
+
+        public static string RootDirectory
+        {
+            get
+            {
+                return AppDomain.CurrentDomain.BaseDirectory;
+            }
+        }
+
+        public static bool IsDebug
+        {
+            get
+            {
+                bool debug = false;
+                bool.TryParse(AppSettingHelper.Get("debug"), out debug);
+                return debug;
+            }
+        }
     }
 }

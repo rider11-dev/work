@@ -11,6 +11,7 @@ namespace Biz.PartyBuilding.YS.Models
     public class PartyActAreaModel
     {
         public string id { get; set; }
+        public string name { get; set; }
         public string town { get; set; }
         public string village { get; set; }
         /// <summary>

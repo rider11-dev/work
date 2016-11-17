@@ -9,9 +9,9 @@ namespace Biz.PartyBuilding.YS.Client.Models
     /// <summary>
     /// 组织活动场所
     /// </summary>
-    public class PartyActAreaModel:BaseModel
+    public class PartyActAreaModel : BaseModel
     {
-         string _id;
+        string _id;
         public string id
         {
             get { return _id; }
@@ -24,7 +24,22 @@ namespace Biz.PartyBuilding.YS.Client.Models
                 }
             }
         }
-         string _town;
+
+        string _name;
+        public string name
+        {
+            get { return _name; }
+            set
+            {
+                if (_name != value)
+                {
+                    _name = value;
+                    base.RaisePropertyChanged("name");
+                }
+            }
+        }
+
+        string _town;
         public string town
         {
             get { return _town; }
@@ -37,7 +52,7 @@ namespace Biz.PartyBuilding.YS.Client.Models
                 }
             }
         }
-         string _village;
+        string _village;
         public string village
         {
             get { return _village; }
@@ -53,7 +68,7 @@ namespace Biz.PartyBuilding.YS.Client.Models
         /// <summary>
         /// 建筑面积
         /// </summary>
-         string _floor_area;
+        string _floor_area;
         public string floor_area
         {
             get { return _floor_area; }
@@ -69,7 +84,7 @@ namespace Biz.PartyBuilding.YS.Client.Models
         /// <summary>
         /// 院落面积
         /// </summary>
-         string _courtyard_area;
+        string _courtyard_area;
         public string courtyard_area
         {
             get { return _courtyard_area; }
@@ -82,7 +97,7 @@ namespace Biz.PartyBuilding.YS.Client.Models
                 }
             }
         }
-         string _levels;
+        string _levels;
         public string levels
         {
             get { return _levels; }
@@ -95,7 +110,7 @@ namespace Biz.PartyBuilding.YS.Client.Models
                 }
             }
         }
-         string _rooms;
+        string _rooms;
         public string rooms
         {
             get { return _rooms; }
@@ -111,7 +126,7 @@ namespace Biz.PartyBuilding.YS.Client.Models
         /// <summary>
         /// 坐落位置
         /// </summary>
-         string _location;
+        string _location;
         public string location
         {
             get { return _location; }
@@ -134,6 +149,7 @@ namespace Biz.PartyBuilding.YS.Client.Models
                 return;
             }
             target.id = this.id;
+            target.name = this.name;
             target.town = this.town;
             target.village = this.village;
             target.floor_area = this.floor_area;

@@ -1,7 +1,14 @@
 ﻿using Biz.PartyBuilding.YS.Client.Contacts;
 using Biz.PartyBuilding.YS.Client.Daily;
+using Biz.PartyBuilding.YS.Client.Models;
 using MyNet.Client.Pages;
+using MyNet.Client.Public;
+using MyNet.Components;
+using MyNet.Components.Result;
 using MyNet.Components.WPF.Command;
+using MyNet.Components.WPF.Windows;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,7 +53,7 @@ namespace Biz.PartyBuilding.YS.Client
         void ChatAction(object parameter)
         {
             var contact = (dynamic)parameter;
-            if(contact==null)
+            if (contact == null)
             {
                 return;
             }
@@ -73,7 +80,7 @@ namespace Biz.PartyBuilding.YS.Client
 
         void ViewNoticeAction(object parameter)
         {
-          
+
             try
             {
                 new DetailNoticeWindow().ShowDialog();
@@ -83,8 +90,45 @@ namespace Biz.PartyBuilding.YS.Client
 
         private void BasePage_Loaded(object sender, RoutedEventArgs e)
         {
-            var tasks = PartyBuildingContext.tasks_ccbsc_receive.Where(t => t.complete_detail.comp_state == "未领" || t.complete_detail.comp_state == "已领未完成");
-            dgTasks.ItemsSource = tasks;
+            GetTasks();
+            GetInfos();
+        }
+
+        void GetTasks()
+        {
+            var rst = HttpHelper.GetResultByGet(ApiHelper.GetApiUrl(PartyBuildingApiKeys.TaskGet, PartyBuildingApiKeys.Key_ApiProvider_Party));
+            if (rst.code != ResultCode.Success)
+            {
+                MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);
+                return;
+            }
+            if (rst.data != null && rst.data.tasks != null)
+            {
+                var tasks = JsonConvert.DeserializeObject<IEnumerable<TaskModel>>(((JArray)rst.data.tasks).ToString());
+                if (tasks != null && tasks.Count() > 0)
+                {
+                    tasks = tasks.Where(t => t.complete_state == "未领" || t.complete_state == "已领未完成");
+                }
+                dgTasks.ItemsSource = tasks;
+            }
+        }
+
+        void GetInfos()
+        {
+            var rst = HttpHelper.GetResultByGet(ApiHelper.GetApiUrl(PartyBuildingApiKeys.InfoGet, PartyBuildingApiKeys.Key_ApiProvider_Party));
+            if (rst.code != ResultCode.Success)
+            {
+                MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);
+                return;
+            }
+            if (rst.data != null && rst.data.infos != null)
+            {
+                var infos = JsonConvert.DeserializeObject<IEnumerable<InfoModel>>(((JArray)rst.data.infos).ToString());
+                if (infos != null && infos.Count() > 0)
+                {
+                    dgNotice.ItemsSource = infos.Where(i => i.state == "已发布");
+                }
+            }
         }
     }
 }

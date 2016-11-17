@@ -4,6 +4,8 @@
         xmlns:win="clr-namespace:MyNet.Components.WPF.Windows;assembly=MyNet.Components.WPF"
         xmlns:vmwpf="clr-namespace:MyNet.Components.WPF.Models;assembly=MyNet.Components.WPF"
         xmlns:ctl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
+        xmlns:model="clr-namespace:Biz.PartyBuilding.YS.Client.Models"
+        xmlns:org="clr-namespace:Biz.PartyBuilding.YS.Client.PartyOrg"
         WindowStartupLocation="CenterScreen"
         Style="{StaticResource popWindowStyle}"
         Title="活动场所详细信息" Height="440" Width="420">
@@ -29,7 +31,11 @@
         <vmwpf:CmbModel x:Key="cbVmSex"/>
         <vmwpf:CmbModel x:Key="cbVmNation"/>
         <vmwpf:CmbModel x:Key="cbVmXL"/>
+        <model:PartyActAreaModel x:Key="model"/>
     </Window.Resources>
+    <Window.DataContext>
+        <Binding Source="{StaticResource model}"/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1.5*"/>
@@ -50,6 +56,7 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1.2*"/>
@@ -57,22 +64,26 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
-                <Label Content="党组织" Grid.Row="0" Grid.Column="0" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource inputStyle}" Text="曹城街道马山庄党组织"/>
+                <Label Content="名称" Grid.Row="0" Grid.Column="0" Style="{StaticResource lblStyle}"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource inputStyle}" Text="{Binding Path=name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 <ctl:ControlImgSelect Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="4"
-                                      x:Name="ctlImage"
+                                      x:Name="ctlImage" BorderBrush="LightGray" BorderThickness="1"
                                       />
 
                 <Label Content="建筑面积(㎡)" Grid.Row="1" Grid.Column="0" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource inputStyle}" Text="500"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource inputStyle}" Text="{Binding Path=floor_area,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="层数" Grid.Row="2" Grid.Column="0" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource inputStyle}" Text="1"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource inputStyle}" Text="{Binding Path=levels,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="房间数" Grid.Row="3" Grid.Column="0" Style="{StaticResource lblStyle}" Margin="0"/>
-                <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource inputStyle}" Text="3"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource inputStyle}" Text="{Binding Path=rooms,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="院落面积" Grid.Row="4" Grid.Column="0" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource inputStyle}" Text="400"/>
-                <Label Content="坐落位置" Grid.Row="5" Grid.Column="0" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource inputStyle}" Text="曹城街道办事处长江西路南200米"/>
+                <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource inputStyle}" Text="{Binding Path=courtyard_area,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Content="所属乡镇" Grid.Row="5" Grid.Column="0" Style="{StaticResource lblStyle}" Margin="0"/>
+                <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource inputStyle}" Text="{Binding Path=town,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Content="所属村庄" Grid.Row="5" Grid.Column="2" Style="{StaticResource lblStyle}"/>
+                <TextBox Grid.Row="5" Grid.Column="3" Style="{StaticResource inputStyle}" Text="{Binding Path=village,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Content="坐落位置" Grid.Row="6" Grid.Column="0" Style="{StaticResource lblStyle}"/>
+                <TextBox Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource inputStyle}" Text="{Binding Path=location,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
         </GroupBox>
         <Grid Grid.Row="3" Grid.Column="0">
@@ -81,7 +92,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Button Content="确  定" Grid.Row="0" Grid.Column="0" Style="{StaticResource btnStyle}"
-                    Command="{Binding Path=CloseCmd,RelativeSource={RelativeSource AncestorType=win:BaseWindow}}"
+                    Command="{Binding Path=SaveCmd,RelativeSource={RelativeSource AncestorType=org:DetailActivityPlaceWindow}}"
                     />
             <Button Content="取  消" Grid.Column="1" Style="{StaticResource btnStyle}"
                     Command="{Binding Path=CloseCmd,RelativeSource={RelativeSource AncestorType=win:BaseWindow}}"

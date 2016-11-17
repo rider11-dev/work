@@ -106,6 +106,7 @@
     <Content Include="plugin\readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="upload\readme.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -132,6 +133,7 @@
     <Compile Include="Extensions\ExtendedAssembliesResolver.cs" />
     <Compile Include="Extensions\HttpUtils.cs" />
     <Compile Include="Extensions\ModelStateExtension.cs" />
+    <Compile Include="Extensions\UploadHelper.cs" />
     <Compile Include="Extensions\Validation\PermissionTypeAttribute.cs" />
     <Compile Include="Filters\CustomExceptionFilterAttribute.cs" />
     <Compile Include="Filters\TokenValidateFilterAttribute.cs" />

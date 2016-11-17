@@ -31,35 +31,22 @@
             <DataGrid x:Name="dgTasks" Grid.Row="0" Style="{StaticResource gridBaseStyle}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="任务名称" Binding="{Binding name}"/>
-                    <DataGridTextColumn Header="领取状态" Binding="{Binding complete_detail.comp_state}"/>
+                    <DataGridTextColumn Header="内容" Binding="{Binding content}"/>
+                    <DataGridTextColumn Header="领取状态" Binding="{Binding complete_state}"/>
                     <DataGridTextColumn Header="优先级" Binding="{Binding priority}"/>
-                    <DataGridTextColumn Header="发布组织" Binding="{Binding issue_party}"/>
                     <DataGridTextColumn Header="发布时间" Binding="{Binding issue_time}"/>
                     <DataGridTextColumn Header="到期时间" Binding="{Binding expire_time}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
-        <GroupBox Grid.Row="0" Grid.Column="1" Header="通知">
-            <DataGrid x:Name="dgNotice" Grid.Row="0" Style="{StaticResource gridBaseStyle}" ItemsSource="{x:Static daily:DailyContext.notices}">
+        <GroupBox Grid.Row="0" Grid.Column="1" Header="信息公告">
+            <DataGrid x:Name="dgNotice" Grid.Row="0" Style="{StaticResource gridBaseStyle}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="通知标题" Binding="{Binding title}"/>
-                    <DataGridTextColumn Header="通知类型" Binding="{Binding type}"/>
-                    <DataGridTextColumn Header="紧急程度" Binding="{Binding urgency}"/>
-                    <DataGridTextColumn Header="发布组织" Binding="{Binding issue_party}"/>
+                    <DataGridTextColumn Header="标题" Binding="{Binding title}"/>
+                    <DataGridTextColumn Header="内容" Binding="{Binding content}"/>
+                    <DataGridTextColumn Header="发布组织" Binding="{Binding party}"/>
                     <DataGridTextColumn Header="发布时间" Binding="{Binding issue_time}"/>
-                    <DataGridTextColumn Header="是否需要回复" Binding="{Binding need_reply}"/>
-                    <DataGridTextColumn Header="回复截止时间" Binding="{Binding reply_expire_time}"/>
-                    <DataGridTemplateColumn Header="操作" MinWidth="100">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <Button Content="查看" Width="60" Style="{StaticResource btnStyle}"
-                                        Command="{Binding Path=ViewNoticeCmd,RelativeSource={RelativeSource AncestorType=party:MainContentPage}}"
-                                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGrid},Path=SelectedItem}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="阅读状态" Binding="{Binding read_state}"/>
                 </DataGrid.Columns>
             </DataGrid>
 
@@ -72,7 +59,7 @@
                     <DataGridTextColumn Header="内容" Binding="{Binding content}" Width="100"/>
                     <DataGridTextColumn Header="发布日期" Binding="{Binding issue_time}"/>
                     <DataGridTextColumn Header="点击量" Binding="{Binding clicks}"/>
-                   
+
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>

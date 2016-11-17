@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AreaPicModel.cs" />
     <Compile Include="InfoModel.cs" />
     <Compile Include="PartyActAreaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
