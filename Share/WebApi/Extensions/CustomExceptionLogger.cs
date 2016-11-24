@@ -7,6 +7,7 @@ using log4net;
 using System.Threading;
 using System.Threading.Tasks;
 using MyNet.Components.Logger;
+using System.Web.Http;
 
 namespace MyNet.WebApi.Extensions
 {
@@ -21,7 +22,13 @@ namespace MyNet.WebApi.Extensions
             //异步日志
             Task.Run(() =>
             {
-                _logHelper.LogError(context.Exception);
+                string msg = "";
+                var responseException = context.Exception as HttpResponseException;
+                if (responseException != null && responseException.Response != null && responseException.Response.RequestMessage != null)
+                {
+                    msg = "exception request message:" + responseException.Response.RequestMessage.ToString();
+                }
+                _logHelper.LogError(msg, context.Exception);
             });
 
             //base.Log(context);
