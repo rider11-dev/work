@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : mysql-local
-Source Server Version : 50711
+Source Server         : mysql_local
+Source Server Version : 50626
 Source Host           : localhost:3306
 Source Database       : partybuilding_ys
 
 Target Server Type    : MYSQL
-Target Server Version : 50711
+Target Server Version : 50626
 File Encoding         : 65001
 
-Date: 2016-11-16 00:05:05
+Date: 2016-11-24 08:39:43
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -211,6 +211,63 @@ INSERT INTO `base_dict_type` VALUES ('partyorg', '党组织类型', '');
 INSERT INTO `base_dict_type` VALUES ('permtype', '权限类型', '');
 
 -- ----------------------------
+-- Table structure for party_area
+-- ----------------------------
+DROP TABLE IF EXISTS `party_area`;
+CREATE TABLE `party_area` (
+  `id` varchar(40) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `town` varchar(255) DEFAULT NULL,
+  `village` varchar(255) DEFAULT NULL,
+  `floor_area` varchar(255) DEFAULT NULL,
+  `courtyard_area` varchar(255) DEFAULT NULL,
+  `levels` varchar(255) DEFAULT NULL,
+  `rooms` varchar(255) DEFAULT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `gps` varchar(255) DEFAULT NULL,
+  `pic` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of party_area
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for party_area_pic
+-- ----------------------------
+DROP TABLE IF EXISTS `party_area_pic`;
+CREATE TABLE `party_area_pic` (
+  `id` varchar(40) NOT NULL,
+  `pic` blob,
+  `area_id` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of party_area_pic
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for party_info
+-- ----------------------------
+DROP TABLE IF EXISTS `party_info`;
+CREATE TABLE `party_info` (
+  `id` varchar(32) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `content` varchar(1000) DEFAULT NULL,
+  `issue_time` varchar(40) DEFAULT NULL,
+  `party` varchar(255) DEFAULT NULL,
+  `state` varchar(255) DEFAULT NULL,
+  `read_state` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of party_info
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for party_org
 -- ----------------------------
 DROP TABLE IF EXISTS `party_org`;
@@ -233,6 +290,28 @@ CREATE TABLE `party_org` (
 -- ----------------------------
 INSERT INTO `party_org` VALUES ('6953306b35ab47f8a040dbd1d8893b13', 'PartyOrgDZB', '曹县【20140101】', '2014-01-01', '2019-01-01', '', '0', '0', '0', 'asdfasdf');
 INSERT INTO `party_org` VALUES ('admin', 'PartyOrgJGDW', 'ABDCDE', '2015-12-21', '2019-01-21', '', '10', '2', '2', '阿斯蒂芬');
+
+-- ----------------------------
+-- Table structure for party_task
+-- ----------------------------
+DROP TABLE IF EXISTS `party_task`;
+CREATE TABLE `party_task` (
+  `id` varchar(40) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `content` varchar(1000) DEFAULT NULL,
+  `priority` varchar(40) DEFAULT NULL,
+  `receiver` varchar(255) DEFAULT NULL,
+  `issue_time` varchar(40) DEFAULT NULL,
+  `expire_time` varchar(40) DEFAULT NULL,
+  `progress` varchar(1000) DEFAULT NULL,
+  `state` varchar(255) DEFAULT NULL,
+  `complete_state` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of party_task
+-- ----------------------------
 
 -- ----------------------------
 -- Procedure structure for sp_page_query
