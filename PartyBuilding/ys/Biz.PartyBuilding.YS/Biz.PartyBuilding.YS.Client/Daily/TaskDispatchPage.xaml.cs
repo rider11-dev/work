@@ -4,6 +4,7 @@ using MyNet.Client.Models;
 using MyNet.Client.Pages;
 using MyNet.Client.Public;
 using MyNet.Components;
+using MyNet.Components.Extensions;
 using MyNet.Components.Result;
 using MyNet.Components.WPF.Command;
 using MyNet.Components.WPF.Models;
@@ -103,7 +104,7 @@ namespace Biz.PartyBuilding.YS.Client.Daily
             GetTasks();
         }
 
-        private void GetTasks()
+        private void GetTasks(bool all = true)
         {
             var rst = HttpHelper.GetResultByGet(ApiHelper.GetApiUrl(PartyBuildingApiKeys.TaskGet, PartyBuildingApiKeys.Key_ApiProvider_Party));
             if (rst.code != ResultCode.Success)
@@ -111,15 +112,68 @@ namespace Biz.PartyBuilding.YS.Client.Daily
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);
                 return;
             }
+            dg.ItemsSource = null;
             if (rst.data != null && rst.data.tasks != null)
             {
                 var tasks = JsonConvert.DeserializeObject<IEnumerable<TaskModel>>(((JArray)rst.data.tasks).ToString());
+                if (tasks.IsEmpty())
+                {
+                    return;
+                }
+                if (all)
+                {
+                    dg.ItemsSource = tasks;
+                }
+                else
+                {
+                    if (txtTaskName.Text.IsNotEmpty())
+                    {
+                        tasks = tasks.Where(t => t.name.Contains(txtTaskName.Text));
+                    }
+                    if (cmbTaskPriority.SelectedItem != null)
+                    {
+                        tasks = tasks.Where(t => t.priority == (cmbTaskPriority.SelectedValue as CmbItem).Text);
+                    }
+                    if (cmbTaskState.SelectedItem != null)
+                    {
+                        tasks = tasks.Where(t => t.state == (cmbTaskState.SelectedValue as CmbItem).Text);
+                    }
+                    if (cmbTaskCompleteState.SelectedItem != null)
+                    {
+                        tasks = tasks.Where(t => t.complete_state == (cmbTaskCompleteState.SelectedValue as CmbItem).Text);
+                    }
+                    var date = dtIssue_Begin.Text;
+                    if (date.IsNotEmpty())
+                    {
+                        tasks = tasks.Where(t => !(string.Compare(t.issue_time, date) < 0));
+                    }
+                    date = dtIssue_End.Text;
+                    if (date.IsNotEmpty())
+                    {
+                        tasks = tasks.Where(t => !(string.Compare(t.issue_time, date) > 0));
+                    }
+                    date = dtExpire_Begin.Text;
+                    if (date.IsNotEmpty())
+                    {
+                        tasks = tasks.Where(t => !(string.Compare(t.expire_time, date) < 0));
+                    }
+                    date = dtExpire_End.Text;
+                    if (date.IsNotEmpty())
+                    {
+                        tasks = tasks.Where(t => !(string.Compare(t.expire_time, date) > 0));
+                    }
 
-                dg.ItemsSource = tasks;
+                    dg.ItemsSource = tasks;
+                }
             }
         }
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            GetTasks(false);
+        }
+
+        private void btnAll_Click(object sender, RoutedEventArgs e)
         {
             GetTasks();
         }

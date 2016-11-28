@@ -1,12 +1,14 @@
 ﻿using Biz.PartyBuilding.YS.Client.Daily.Models;
 using Biz.PartyBuilding.YS.Client.Models;
 using Biz.PartyBuilding.YS.Client.PartyOrg.Models;
+using MyNet.Client.Help;
 using MyNet.Client.Models;
 using MyNet.Client.Public;
 using MyNet.Components;
 using MyNet.Components.Extensions;
 using MyNet.Components.Result;
 using MyNet.Components.WPF.Command;
+using MyNet.Components.WPF.Controls;
 using MyNet.Components.WPF.Models;
 using MyNet.Components.WPF.Windows;
 using System;
@@ -42,12 +44,15 @@ namespace Biz.PartyBuilding.YS.Client.Daily
             InitializeComponent();
 
             _model = this.DataContext as TaskModel;
+
+            CmbModel md = cmbPriority.DataContext as CmbModel;
+            md.Bind(DailyContext.notice_urgency);
         }
 
         public DetailTaskWindow(TaskModel vm = null)
             : this()
         {
-            if(vm!=null)
+            if (vm != null)
             {
                 vm.CopyTo(_model);
             }
@@ -68,19 +73,8 @@ namespace Biz.PartyBuilding.YS.Client.Daily
 
         void SaveAction(object parameter)
         {
-            //var taskCompleteDetail = (TaskCompleteDetail)parameter;
-            //if (taskCompleteDetail == null || string.IsNullOrEmpty(taskCompleteDetail.attach))
-            //{
-            //    return;
-            //}
-
-            //var fullPath = "";
-            //if (FileExtension.GetFileFullPath(AppDomain.CurrentDomain.BaseDirectory, taskCompleteDetail.attach, out fullPath))
-            //{
-            //    Process.Start(fullPath);
-
-            //}
-            var url = ApiHelper.GetApiUrl(PartyBuildingApiKeys.TaskSave,PartyBuildingApiKeys.Key_ApiProvider_Party);
+            _model.priority = cmbPriority.Text;
+            var url = ApiHelper.GetApiUrl(PartyBuildingApiKeys.TaskSave, PartyBuildingApiKeys.Key_ApiProvider_Party);
             var rst = HttpHelper.GetResultByPost(url, _model);
             if (rst.code != ResultCode.Success)
             {
@@ -89,6 +83,30 @@ namespace Biz.PartyBuilding.YS.Client.Daily
             }
             this.DialogResult = true;
             base.CloseCmd.Execute(null);
+        }
+
+        ICommand _goupHelpCmd;
+        public ICommand GoupHelpCmd
+        {
+            get
+            {
+                if (_goupHelpCmd == null)
+                {
+                    _goupHelpCmd = new DelegateCommand(GroupHelpAction);
+                }
+                return _goupHelpCmd;
+            }
+        }
+
+        void GroupHelpAction(object parameter)
+        {
+            TreeHelper.OpenAllGroupsHelp(true, null, nodes =>
+             {
+                 if (!nodes.IsEmpty())
+                 {
+                     _model.receiver = string.Join(",", nodes.Select(n => n.Label));
+                 }
+             });
         }
     }
 }

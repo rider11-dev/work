@@ -8,13 +8,6 @@ namespace MyNet.Components.Logger
     public class LogHelperFactory
     {
         public static ILogHelperProvider LogHelperProvider;
-        public static bool Log
-        {
-            get
-            {
-                return AppSettingHelper.Log;
-            }
-        }
         public static ILogHelper<T> GetLogHelper<T>()
         {
             if (LogHelperProvider == null)

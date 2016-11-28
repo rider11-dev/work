@@ -101,6 +101,7 @@
   <ItemGroup>
     <Compile Include="AppSettingHelper.cs" />
     <Compile Include="Extensions\AssemblyExtention.cs" />
+    <Compile Include="Extensions\CollectionExtension.cs" />
     <Compile Include="Extensions\DateTimeExtension.cs" />
     <Compile Include="Extensions\EncryptionExtension.cs" />
     <Compile Include="Extensions\BooleanExtension.cs" />

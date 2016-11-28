@@ -8,6 +8,7 @@
       xmlns:cvt="clr-namespace:MyNet.Components.WPF.Converter;assembly=MyNet.Components.WPF"
       xmlns:vmwpf="clr-namespace:MyNet.Components.WPF.Models;assembly=MyNet.Components.WPF"
       xmlns:party="clr-namespace:Biz.PartyBuilding.YS.Client"
+      xmlns:partyorg="clr-namespace:Biz.PartyBuilding.YS.Client.PartyOrg"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="600"
 	Title="两新组织">
@@ -51,7 +52,7 @@
         <Border x:Name="bdSearch" Grid.Row="1" Style="{StaticResource mngBdStyle}">
             <StackPanel Orientation="Horizontal">
                 <Label Content="企业名称" Style="{StaticResource mngLblStyle}"/>
-                <TextBox Style="{StaticResource mngInputStyle}"/>
+                <TextBox Style="{StaticResource mngInputStyle}" x:Name="txtCompName"/>
                 <Label Content="是否建立党组织" Style="{StaticResource mngLblStyle}"/>
                 <ComboBox  x:Name="cmbIsEstablish"
                   DataContext="{StaticResource cbVmIsEstablish}"
@@ -67,20 +68,24 @@
                   DataContext="{StaticResource cbVmHasActPlace}"
                   Style="{StaticResource cbStyle}"
                   />
-                <Button x:Name="btnSearch" Style="{StaticResource mngBtnStyle}" Content="查 询"
-                        Command="{Binding Path=SearchCmd,Source={RelativeSource AncestorType=Page}}"
-                        />
+                <Button x:Name="btnSearch" Style="{StaticResource mngBtnStyle}" Content="查 询"/>
+                <Button x:Name="btnAll" Style="{StaticResource mngBtnStyle}" Content="全  部"/>
             </StackPanel>
         </Border>
         <!--row3：列表内容-->
         <Border x:Name="bdMain" Grid.Row="2" Style="{StaticResource mngBdStyle}">
             <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="105*"/>
+                    <ColumnDefinition Width="466*"/>
+                    <ColumnDefinition Width="29*"/>
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
                 <DataGrid x:Name="dg" Grid.Row="0" Style="{StaticResource gridBaseStyle}"
-                          ItemsSource="{x:Static party:PartyBuildingContext.org2news}">
+                          ItemsSource="{x:Static party:PartyBuildingContext.org2news}" Grid.ColumnSpan="3">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn CellStyle="{StaticResource ckCellStyle}" HeaderStyle="{StaticResource ckCellHeaderStyle}"
                                                 CanUserResize="False"/>
@@ -98,7 +103,7 @@
                         <DataGridTextColumn Header="活动场所面积(㎡)"  Binding="{Binding atc_place_area}"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <ctl:ControlPagination x:Name="ctlPagination" Grid.Row="1" HorizontalAlignment="Center"/>
+                <ctl:ControlPagination x:Name="ctlPagination" Grid.Row="1" HorizontalAlignment="Center" Grid.ColumnSpan="2" Margin="70,2,41.264,2"/>
             </Grid>
         </Border>
     </Grid>

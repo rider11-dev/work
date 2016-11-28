@@ -9,8 +9,9 @@
       xmlns:vmwpf="clr-namespace:MyNet.Components.WPF.Models;assembly=MyNet.Components.WPF"
       xmlns:party="clr-namespace:Biz.PartyBuilding.YS.Client"
       mc:Ignorable="d" 
-      d:DesignHeight="400" d:DesignWidth="600"
-	Title="村干部管理">
+      d:DesignHeight="400" d:DesignWidth="800"
+	Title="村干部管理"
+               Loaded="BasePage_Loaded">
     <Page.Resources>
         <Style x:Key="btnStyle" TargetType="Button" BasedOn="{StaticResource btnBaseStyle}">
             <Setter Property="Width" Value="50"/>
@@ -23,18 +24,33 @@
         </Style>
         <!--model-->
         <ctl:PagingArgs x:Key="paging"/>
+        <ctl:TreeViewData x:Key="gpTreeData"/>
         <vmwpf:CmbModel x:Key="cbVmSex"/>
+        <vmwpf:CmbModel x:Key="cbVmAgeRange"/>
         <vmwpf:CmbModel x:Key="cbVmNation"/>
         <vmwpf:CmbModel x:Key="cbVmXL"/>
     </Page.Resources>
     <Grid x:Name="gridLayout">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition MaxHeight="40"/>
             <RowDefinition MaxHeight="40"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <GroupBox Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Header="村庄" 
+                  Style="{StaticResource headerBaseStyle}">
+            <TreeView x:Name="gpTree"
+                          DataContext="{StaticResource gpTreeData}"
+                          Style="{StaticResource menuTreeViewStyle}"
+                          Background="AliceBlue"
+                      SelectedItemChanged="menuTree_SelectedItemChanged"
+                          />
+        </GroupBox>
         <!--row1：工具栏-->
-        <Border x:Name="bdBtns" Grid.Row="0" Style="{StaticResource mngBdStyle}">
+        <Border x:Name="bdBtns" Grid.Row="0" Grid.Column="1" Style="{StaticResource mngBdStyle}">
             <StackPanel x:Name="panelBtns" Orientation="Horizontal">
                 <Button x:Name="btnAdd" Content="新  增" Style="{StaticResource btnStyle}"
                         Margin="10,0,0,0" Click="btnAdd_Click"
@@ -46,10 +62,15 @@
             </StackPanel>
         </Border>
         <!--row2：过滤-->
-        <Border x:Name="bdSearch" Grid.Row="1" Style="{StaticResource mngBdStyle}">
+        <Border x:Name="bdSearch" Grid.Row="1" Grid.Column="1" Style="{StaticResource mngBdStyle}">
             <StackPanel Orientation="Horizontal">
                 <Label Content="姓名" Style="{StaticResource mngLblStyle}"/>
-                <TextBox Style="{StaticResource mngInputStyle}"/>
+                <TextBox Style="{StaticResource mngInputStyle}" x:Name="txtName"/>
+                <Label Content="年龄" Style="{StaticResource mngLblStyle}"/>
+                <ComboBox  x:Name="cmbAgeRange"
+                  DataContext="{StaticResource cbVmAgeRange}"
+                  Style="{StaticResource cbStyle}"
+                  />
                 <Label Content="性别" Style="{StaticResource mngLblStyle}"/>
                 <ComboBox  x:Name="cmbSex"
                   DataContext="{StaticResource cbVmSex}"
@@ -65,13 +86,12 @@
                   DataContext="{StaticResource cbVmXL}"
                   Style="{StaticResource cbStyle}"
                   />
-                <Button x:Name="btnSearch" Style="{StaticResource mngBtnStyle}" Content="查 询"
-                        Command="{Binding Path=SearchCmd,Source={RelativeSource AncestorType=Page}}"
-                        />
+                <Button x:Name="btnSearch" Style="{StaticResource mngBtnStyle}" Content="查  询"/>
+                <Button x:Name="btnAll" Style="{StaticResource mngBtnStyle}" Content="全  部"/>
             </StackPanel>
         </Border>
         <!--row3：列表内容-->
-        <Border x:Name="bdMain" Grid.Row="2" Style="{StaticResource mngBdStyle}">
+        <Border x:Name="bdMain" Grid.Row="2" Grid.Column="1" Style="{StaticResource mngBdStyle}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -83,6 +103,8 @@
                         <DataGridTemplateColumn CellStyle="{StaticResource ckCellStyle}" HeaderStyle="{StaticResource ckCellHeaderStyle}"
                                                 CanUserResize="False"/>
                         <DataGridTextColumn Header="姓名" Binding="{Binding name}"/>
+                        <DataGridTextColumn Header="乡镇" Binding="{Binding town}"/>
+                        <DataGridTextColumn Header="村庄" Binding="{Binding village}"/>
                         <DataGridTextColumn Header="性别" Binding="{Binding sex}"/>
                         <DataGridTextColumn Header="年龄" Binding="{Binding age}"/>
                         <DataGridTextColumn Header="民族" Binding="{Binding nation}"/>

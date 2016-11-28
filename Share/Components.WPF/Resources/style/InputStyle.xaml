@@ -52,6 +52,7 @@
             </Grid.ColumnDefinitions>
             <TextBox Grid.Column="0" x:Name="txtInput" HorizontalContentAlignment="Left" Height="Auto"
                      Style="{StaticResource inputBaseStyle}" IsReadOnly="{Binding Path=ForbidInput,RelativeSource={RelativeSource TemplatedParent}}"
+                     ToolTip="{Binding Path=Text,Mode=OneWay,RelativeSource={RelativeSource Self}}"
                      Text="{Binding Path=Content,RelativeSource={RelativeSource TemplatedParent},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
             <StackPanel Grid.Column="1" Orientation="Horizontal">
                 <Button Content="选择" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"

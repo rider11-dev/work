@@ -7,8 +7,9 @@
       xmlns:ctl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
       xmlns:model="clr-namespace:Biz.PartyBuilding.YS.Client.PartyOrg.Models"
       xmlns:party="clr-namespace:Biz.PartyBuilding.YS.Client"
+      xmlns:vmwpf="clr-namespace:MyNet.Components.WPF.Models;assembly=MyNet.Components.WPF"
       mc:Ignorable="d" 
-      d:DesignHeight="400" d:DesignWidth="600"
+      d:DesignHeight="400" d:DesignWidth="800"
                Loaded="BasePage_Loaded"
 	Title="党员通讯录">
     <Page.Resources>
@@ -24,21 +25,28 @@
             <Setter Property="MaxHeight" Value="26"/>
             <Setter Property="Margin" Value="4,0,4,0"/>
         </Style>
+        <Style x:Key="cbStyle" TargetType="ComboBox" BasedOn="{StaticResource cbBaseStyle}">
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Height" Value="26"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
         <model:OrgStrucViewModel x:Key="model"/>
+        <vmwpf:CmbModel x:Key="cbVmDfScale"/>
     </Page.Resources>
     <Page.DataContext>
         <Binding Source="{StaticResource model}"/>
     </Page.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <GroupBox Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Header="组织架构" Style="{StaticResource headerBaseStyle}">
+        <GroupBox Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Header="组织架构" Style="{StaticResource headerBaseStyle}">
             <TreeView x:Name="gpTree"
                           DataContext="{StaticResource gpTreeData}"
                           Style="{StaticResource menuTreeViewStyle}"
@@ -50,7 +58,15 @@
             <Button Content="缴  费" Style="{StaticResource btnStyle}" Click="Button_Click"/>
             <Button Content="导出Excel" Style="{StaticResource btnStyle}" Width="80" x:Name="btnExport" Click="btnExport_Click"/>
         </StackPanel>
-        <GroupBox Grid.Row="1" Grid.Column="1" Header="党费缴纳信息" Style="{StaticResource headerBaseStyle}">
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+            <Label Content="党员姓名" Style="{StaticResource mngLblStyle}"/>
+            <TextBox x:Name="txtName" Style="{StaticResource inputStyle}" Width="60"/>
+            <Label Content="执行标准" Style="{StaticResource mngLblStyle}"/>
+            <ComboBox  x:Name="cmbDfScale" DataContext="{StaticResource cbVmDfScale}" Style="{StaticResource cbStyle}"/>
+            <Button x:Name="btnSearch" Style="{StaticResource mngBtnStyle}" Content="查  询" Margin="10,0,2,0"/>
+            <Button x:Name="btnAll" Style="{StaticResource mngBtnStyle}" Content="全  部" Margin="2,0,0,0"/>
+        </StackPanel>
+        <GroupBox Grid.Row="2" Grid.Column="1" Header="党费缴纳信息" Style="{StaticResource headerBaseStyle}">
             <DataGrid x:Name="dg" Style="{StaticResource gridBaseStyle}"
                       ItemsSource="{x:Static party:PartyBuildingContext.Df}">
                 <DataGrid.Columns>

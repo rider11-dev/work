@@ -33,7 +33,8 @@
         <vmwpf:CmbModel x:Key="cbVmNation"/>
         <vmwpf:CmbModel x:Key="cbVmJoininTime"/>
         <vmwpf:CmbModel x:Key="cbVmXL"/>
-        <vmwpf:CmbModel x:Key="cbVmGzgw"/>
+        <vmwpf:CmbModel x:Key="cbVmAgeRange"/>
+        <vmwpf:CmbModel x:Key="cbVmDyType"/>
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -73,22 +74,24 @@
                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
                     <Label Content="性别" Style="{StaticResource mngLblStyle}"/>
                     <ComboBox  x:Name="cmbSex" DataContext="{StaticResource cbVmSex}" Style="{StaticResource cbStyle}"/>
-                    <Label Content="民族" Style="{StaticResource mngLblStyle}"/>
-                    <ComboBox  x:Name="cmbNation" DataContext="{StaticResource cbVmNation}" Style="{StaticResource cbStyle}"/>
-                    <Label Content="入党日期" Style="{StaticResource mngLblStyle}"/>
-                    <DatePicker Style="{StaticResource dtPickerBaseStyle}"/>
-                    <Label Content="转正日期" Style="{StaticResource mngLblStyle}"/>
-                    <DatePicker Style="{StaticResource dtPickerBaseStyle}"/>
-                </StackPanel>
-                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left">
                     <Label Content="学历" Style="{StaticResource mngLblStyle}"/>
                     <ComboBox  x:Name="cmbXL" DataContext="{StaticResource cbVmXL}" Style="{StaticResource cbStyle}"/>
-                    <Label Content="现工作岗位" Style="{StaticResource mngLblStyle}"/>
-                    <ComboBox  x:Name="cmbNowGzgw" DataContext="{StaticResource cbVmGzgw}" Style="{StaticResource cbStyle}"/>
-                    <Button x:Name="btnSearch" Style="{StaticResource mngBtnStyle}" Content="查 询"
-                            Margin="20,0,0,0"
-                        Command="{Binding Path=SearchCmd,Source={RelativeSource AncestorType=Page}}"
-                        />
+                    <Label Content="年龄" Style="{StaticResource mngLblStyle}"/>
+                    <ComboBox  x:Name="cmbAgeRange" DataContext="{StaticResource cbVmAgeRange}" Style="{StaticResource cbStyle}"/>
+                    <Label Content="党员类别" Style="{StaticResource mngLblStyle}"/>
+                    <ComboBox  x:Name="cmbDyType" DataContext="{StaticResource cbVmDyType}" Style="{StaticResource cbStyle}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Label Content="入党日期" Style="{StaticResource mngLblStyle}"/>
+                    <DatePicker Style="{StaticResource dtPickerBaseStyle}" x:Name="joinDate_Begin"/>
+                    <Label Content="~" Style="{StaticResource mngLblStyle}"/>
+                    <DatePicker Style="{StaticResource dtPickerBaseStyle}" x:Name="joinDate_End"/>
+                    <Label Content="转正日期" Style="{StaticResource mngLblStyle}"/>
+                    <DatePicker Style="{StaticResource dtPickerBaseStyle}" x:Name="normalDate_Begin"/>
+                    <Label Content="~" Style="{StaticResource mngLblStyle}"/>
+                    <DatePicker Style="{StaticResource dtPickerBaseStyle}" x:Name="normalDate_End"/>
+                    <Button x:Name="btnSearch" Style="{StaticResource mngBtnStyle}" Content="查  询"/>
+                    <Button x:Name="btnAll" Style="{StaticResource mngBtnStyle}" Content="全  部"/>
                 </StackPanel>
             </Grid>
         </Border>

@@ -5,10 +5,12 @@ using MyNet.Client.Help;
 using MyNet.Client.Pages;
 using MyNet.Client.Public;
 using MyNet.Components;
+using MyNet.Components.Extensions;
 using MyNet.Components.Npoi;
 using MyNet.Components.Result;
 using MyNet.Components.WPF.Command;
 using MyNet.Components.WPF.Controls;
+using MyNet.Components.WPF.Models;
 using MyNet.Components.WPF.Windows;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -41,6 +43,21 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg
             InitializeComponent();
 
             _gpTreeData = (TreeViewData)gpTree.DataContext;
+
+            CmbModel model = cmbFloorArea.DataContext as CmbModel;
+            model.Bind(PartyBuildingContext.CmbItemsAreaRange);
+            model = cmbCourtyardArea.DataContext as CmbModel;
+            model.Bind(PartyBuildingContext.CmbItemsAreaRange);
+
+            btnSearch.Click += (o, e) =>
+            {
+                GetAreas(false);
+            };
+
+            btnAll.Click += (o, e) =>
+            {
+                GetAreas();
+            };
         }
 
         private void gpTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
@@ -70,7 +87,7 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg
             GetAreas();
         }
 
-        void GetAreas()
+        void GetAreas(bool all = true)
         {
             var rst = HttpHelper.GetResultByGet(ApiHelper.GetApiUrl(PartyBuildingApiKeys.AreaGet, PartyBuildingApiKeys.Key_ApiProvider_Party));
             if (rst.code != ResultCode.Success)
@@ -92,6 +109,74 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg
                     else if (node.Level == 3)
                     {
                         areas = areas.Where(a => a.village == node.Label);
+                    }
+                }
+                if (all)
+                {
+                    dg.ItemsSource = areas;
+                    return;
+                }
+                if (txtLevel.Text.IsNotEmpty())
+                {
+                    areas = areas.Where(a => a.levels == txtLevel.Text);
+                }
+                if (txtRooms.Text.IsNotEmpty())
+                {
+                    areas = areas.Where(a => a.rooms == txtRooms.Text);
+                }
+                //建筑面积
+                string max = "", min = "";
+                CmbItem sel = cmbFloorArea.SelectedValue as CmbItem;
+                if (sel != null)
+                {
+                    if (sel.Text.Contains("以上"))
+                    {
+                        min = sel.Text.Replace("以上", "");
+                    }
+                    else if (sel.Text.Contains("以下"))
+                    {
+                        max = sel.Text.Replace("以下", "");
+                    }
+                    else
+                    {
+                        var arr = sel.Text.Split('~');
+                        max = arr[1];
+                        min = arr[0];
+                    }
+                    if (max.IsNotEmpty())
+                    {
+                        areas = areas.Where(a => Convert.ToInt32(a.floor_area) < Convert.ToInt32(max));
+                    }
+                    if (min.IsNotEmpty())
+                    {
+                        areas = areas.Where(a => Convert.ToInt32(a.floor_area) >= Convert.ToInt32(min));
+                    }
+                }
+                //院落面积
+                sel = cmbCourtyardArea.SelectedValue as CmbItem;
+                if (sel != null)
+                {
+                    if (sel.Text.Contains("以上"))
+                    {
+                        min = sel.Text.Replace("以上", "");
+                    }
+                    else if (sel.Text.Contains("以下"))
+                    {
+                        max = sel.Text.Replace("以下", "");
+                    }
+                    else
+                    {
+                        var arr = sel.Text.Split('~');
+                        max = arr[1];
+                        min = arr[0];
+                    }
+                    if (max.IsNotEmpty())
+                    {
+                        areas = areas.Where(a => Convert.ToInt32(a.courtyard_area) < Convert.ToInt32(max));
+                    }
+                    if (min.IsNotEmpty())
+                    {
+                        areas = areas.Where(a => Convert.ToInt32(a.courtyard_area) >= Convert.ToInt32(min));
                     }
                 }
 

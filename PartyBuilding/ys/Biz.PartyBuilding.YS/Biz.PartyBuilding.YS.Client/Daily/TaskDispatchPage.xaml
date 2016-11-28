@@ -9,7 +9,7 @@
       xmlns:vmwpf="clr-namespace:MyNet.Components.WPF.Models;assembly=MyNet.Components.WPF"
       xmlns:party="clr-namespace:Biz.PartyBuilding.YS.Client"
       mc:Ignorable="d" 
-      d:DesignHeight="400" d:DesignWidth="600"
+      d:DesignHeight="400" d:DesignWidth="900"
       Loaded="BasePage_Loaded"
 	Title="任务派遣
                ">
@@ -32,7 +32,7 @@
     <Grid x:Name="gridLayout">
         <Grid.RowDefinitions>
             <RowDefinition MaxHeight="40"/>
-            <RowDefinition MaxHeight="40"/>
+            <RowDefinition MaxHeight="60"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <!--row1：工具栏-->
@@ -43,7 +43,7 @@
                         />
                 <Button x:Name="btnEdit" Content="修  改" Style="{StaticResource btnStyle}"
                         Click="btnEdit_Click"/>
-               
+
                 <Button x:Name="btnDel" Content="删  除" Style="{StaticResource btnStyle}"
                         Click="btnDel_Click"/>
                 <Button x:Name="btnIssue" Content="发  布" Style="{StaticResource btnStyle}"
@@ -54,30 +54,37 @@
         </Border>
         <!--row2：过滤-->
         <Border x:Name="bdSearch" Grid.Row="1" Style="{StaticResource mngBdStyle}">
-            <StackPanel Orientation="Horizontal">
-                <Label Content="任务名称" Style="{StaticResource mngLblStyle}"/>
-                <TextBox Style="{StaticResource mngInputStyle}"/>
-                <Label Content="优先级" Style="{StaticResource mngLblStyle}"/>
-                <ComboBox  x:Name="cmbTaskPriority"
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
+                <StackPanel Orientation="Horizontal" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                    <Label Content="任务名称" Style="{StaticResource mngLblStyle}"/>
+                    <TextBox Style="{StaticResource mngInputStyle}" x:Name="txtTaskName"/>
+                    <Label Content="优先级" Style="{StaticResource mngLblStyle}"/>
+                    <ComboBox  x:Name="cmbTaskPriority"
                   DataContext="{StaticResource cbVmTaskPriority}"
                   Style="{StaticResource cbStyle}"
                   />
-                <Label Content="状态" Style="{StaticResource mngLblStyle}"/>
-                <ComboBox  x:Name="cmbTaskState"
+                    <Label Content="状态" Style="{StaticResource mngLblStyle}"/>
+                    <ComboBox  x:Name="cmbTaskState"
                   DataContext="{StaticResource cbVmTaskState}"
                   Style="{StaticResource cbStyle}"
                   />
-                <Label Content="完成状态" Style="{StaticResource mngLblStyle}"/>
-                <ComboBox  x:Name="cmbTaskCompleteState"
+                    <Label Content="完成状态" Style="{StaticResource mngLblStyle}"/>
+                    <ComboBox  x:Name="cmbTaskCompleteState"
                   DataContext="{StaticResource cbVmTaskCompleteState}"
                   Style="{StaticResource cbStyle}"
                   />
-                <Label Content="发布时间" Style="{StaticResource mngLblStyle}"/>
-                <DatePicker Style="{StaticResource dtPickerBaseStyle}"/>
-                <Label Content="到期时间" Style="{StaticResource mngLblStyle}"/>
-                <DatePicker Style="{StaticResource dtPickerBaseStyle}"/>
-                <Button x:Name="btnSearch" Style="{StaticResource mngBtnStyle}" Content="查 询" Click="btnSearch_Click"                        />
-            </StackPanel>
+                    <Label Content="发布时间" Style="{StaticResource mngLblStyle}"/>
+                    <DatePicker Style="{StaticResource dtPickerBaseStyle}" x:Name="dtIssue_Begin"/>
+                    <Label Content="~" Style="{StaticResource mngLblStyle}"/>
+                    <DatePicker Style="{StaticResource dtPickerBaseStyle}" x:Name="dtIssue_End"/>
+                    <Label Content="到期时间" Style="{StaticResource mngLblStyle}"/>
+                    <DatePicker Style="{StaticResource dtPickerBaseStyle}" x:Name="dtExpire_Begin"/>
+                    <Label Content="~" Style="{StaticResource mngLblStyle}"/>
+                    <DatePicker Style="{StaticResource dtPickerBaseStyle}" x:Name="dtExpire_End"/>
+                    <Button x:Name="btnSearch" Style="{StaticResource mngBtnStyle}" Content="查 询" Click="btnSearch_Click"/>
+                    <Button x:Name="btnAll" Style="{StaticResource mngBtnStyle}" Content="全 部" Click="btnAll_Click"/>
+                </StackPanel>
+            </ScrollViewer>
         </Border>
         <!--row3：列表内容-->
         <Border x:Name="bdMain" Grid.Row="2" Style="{StaticResource mngBdStyle}">

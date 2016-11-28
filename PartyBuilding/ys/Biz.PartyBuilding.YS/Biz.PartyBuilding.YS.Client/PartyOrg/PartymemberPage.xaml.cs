@@ -19,6 +19,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MyNet.Components.Extensions;
 
 namespace Biz.PartyBuilding.YS.Client.PartyOrg
 {
@@ -36,14 +37,23 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg
             CmbModel model = cmbSex.DataContext as CmbModel;
             model.Bind(PartyBuildingContext.CmbItemsSex);
 
-            model = cmbNation.DataContext as CmbModel;
-            model.Bind(PartyBuildingContext.CmbItemsNation);
-
             model = cmbXL.DataContext as CmbModel;
             model.Bind(PartyBuildingContext.CmbItemsXL);
 
-            model = cmbNowGzgw.DataContext as CmbModel;
-            model.Bind(PartyBuildingContext.CmbItemsNowGzgw);
+            model = cmbAgeRange.DataContext as CmbModel;
+            model.Bind(PartyBuildingContext.CmbItemsAgeRange);
+
+            model = cmbDyType.DataContext as CmbModel;
+            model.Bind(PartyBuildingContext.CmbItemsDyType);
+
+            btnSearch.Click += (o, e) =>
+            {
+                Search();
+            };
+            btnAll.Click += (o, e) =>
+            {
+                Search(true);
+            };
         }
 
         private void BasePage_Loaded(object sender, RoutedEventArgs e)
@@ -56,14 +66,7 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg
 
         private void menuTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            dg.ItemsSource = null;
-            var node = (TreeViewData.TreeNode)e.NewValue;
-            if (node == null)
-            {
-                return;
-            }
-            var mems = PartyBuildingContext.partymembers.Where(p => p.party == node.Label);
-            dg.ItemsSource = mems;
+            Search(true);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -71,28 +74,102 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg
             new DetailPartyMemWindow().ShowDialog();
         }
 
+        private void Search(bool all = false)
+        {
+            var items = PartyBuildingContext.partymembers;
+            if (items.IsEmpty())
+            {
+                return;
+            }
+
+            var node = (TreeViewData.TreeNode)gpTree.SelectedValue;
+            if (node == null)
+            {
+                return;
+            }
+            dg.ItemsSource = null;
+
+            var mems = items.Where(p => p.party == node.Label);
+            if (all)
+            {
+                dg.ItemsSource = mems;
+                return;
+            }
+
+            if (cmbSex.SelectedItem != null)
+            {
+                mems = mems.Where(m => m.sex == (cmbSex.SelectedItem as CmbItem).Text);
+            }
+            var date = joinDate_Begin.Text;
+            if (date.IsNotEmpty())
+            {
+                mems = mems.Where(m => !(string.Compare(m.join_in_time, date, true) < 0));
+            }
+            date = joinDate_End.Text;
+            if (date.IsNotEmpty())
+            {
+                mems = mems.Where(m => !(string.Compare(m.join_in_time, date, true) > 0));
+            }
+            date = normalDate_Begin.Text;
+            if (date.IsNotEmpty())
+            {
+                mems = mems.Where(m => !(string.Compare(m.zz_time, date, true) < 0));
+            }
+            date = normalDate_End.Text;
+            if (date.IsNotEmpty())
+            {
+                mems = mems.Where(m => !(string.Compare(m.zz_time, date, true) > 0));
+            }
+            if (cmbXL.SelectedItem != null)
+            {
+                mems = mems.Where(m => m.xl == (cmbXL.SelectedItem as CmbItem).Text);
+            }
+            if (cmbAgeRange.SelectedItem != null)
+            {
+                var rangeTxt = (cmbAgeRange.SelectedValue as CmbItem).Text;
+                string max = "200", min = "20";
+                if (rangeTxt.Contains("以上"))//90以上
+                {
+                    min = "90";
+                }
+                else
+                {
+                    var arr = rangeTxt.Split('~');
+                    min = arr[0];
+                    max = arr[1];
+                }
+                mems = mems.Where(m => !(string.Compare(min, m.age) < 0) && !(string.Compare(min, m.age) > 0));
+            }
+            if (cmbDyType.SelectedItem != null)
+            {
+                mems = mems.Where(m => m.type == (cmbDyType.SelectedItem as CmbItem).Text);
+            }
+
+            dg.ItemsSource = mems;
+        }
+
         private void btnZZ_Click(object sender, RoutedEventArgs e)
         {
-            try
+            var mem = dg.SelectedItem as PartyMemberViewModel;
+            if (mem == null || mem.type != "预备党员")
             {
-                var srcOld = dg.ItemsSource as IEnumerable<PartyMemberViewModel>;
-                dg.ItemsSource = null;
-                srcOld.Where(m => m.type == "预备党员").First().type = "正式党员";
-                dg.ItemsSource = srcOld;
+                return;
             }
-            catch { }
+            mem.type = "正式党员";
+            Search(true);
+
         }
 
         private void btnZybdw_Click(object sender, RoutedEventArgs e)
         {
-            try
+            var mem = dg.SelectedItem as PartyMemberViewModel;
+            if (mem == null || mem.type != "入党积极分子")
             {
-                var srcOld = dg.ItemsSource as IEnumerable<PartyMemberViewModel>;
-                dg.ItemsSource = null;
-                srcOld.Where(m => m.type == "入党积极分子").First().type = "预备党员";
-                dg.ItemsSource = srcOld;
+                return;
             }
-            catch { }
+            mem.type = "预备党员";
+
+            Search(true);
         }
     }
 }

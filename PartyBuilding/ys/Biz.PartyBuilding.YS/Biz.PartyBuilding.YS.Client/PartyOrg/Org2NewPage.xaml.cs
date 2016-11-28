@@ -1,4 +1,5 @@
-﻿using MyNet.Client.Pages;
+﻿using Biz.PartyBuilding.YS.Client.PartyOrg.Models;
+using MyNet.Client.Pages;
 using MyNet.Components.WPF.Command;
 using MyNet.Components.WPF.Models;
 using System;
@@ -15,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MyNet.Components.Extensions;
 
 namespace Biz.PartyBuilding.YS.Client.PartyOrg
 {
@@ -35,6 +37,16 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg
 
             model = cmbHasActPlace.DataContext as CmbModel;
             model.Bind(PartyBuildingContext.CmbItemsYesNo);
+
+            btnSearch.Click += (o, e) =>
+            {
+                SearchCmd.Execute(null);
+            };
+
+            btnAll.Click += (o, e) =>
+            {
+                dg.ItemsSource = PartyBuildingContext.org2news;
+            };
         }
 
         ICommand _searchCmd;
@@ -53,7 +65,32 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg
 
         void SearchAction(object parameter)
         {
+            var items = PartyBuildingContext.org2news;
+            if (items == null || items.Count() < 1)
+            {
+                return;
+            }
+            if (txtCompName.Text.IsNotEmpty())
+            {
+                items = items.Where(m => m.comp_name.Contains(txtCompName.Text));
+            }
+            if (cmbIsEstablish.SelectedItem != null)
+            {
+                CmbItem sel = cmbIsEstablish.SelectedItem as CmbItem;
+                items = items.Where(m => m.is_dzz_establish == sel.Text);
+            }
+            if (cmbEstablishType.SelectedItem != null)
+            {
+                CmbItem sel = cmbEstablishType.SelectedItem as CmbItem;
+                items = items.Where(m => m.dzz_establish_type == sel.Text);
+            }
+            if (cmbHasActPlace != null)
+            {
+                CmbItem sel = cmbHasActPlace.SelectedItem as CmbItem;
+                items = items.Where(m => m.has_atc_place == sel.Text);
+            }
 
+            dg.ItemsSource = items;
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)

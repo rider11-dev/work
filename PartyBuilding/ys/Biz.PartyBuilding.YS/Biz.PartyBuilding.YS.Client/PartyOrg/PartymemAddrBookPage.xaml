@@ -31,14 +31,15 @@
     </Page.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <GroupBox Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Header="组织架构" Style="{StaticResource headerBaseStyle}">
+        <GroupBox Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Header="组织架构" Style="{StaticResource headerBaseStyle}">
             <TreeView x:Name="gpTree"
                           DataContext="{StaticResource gpTreeData}"
                           Style="{StaticResource menuTreeViewStyle}"
@@ -50,7 +51,13 @@
             <Button Content="修  改" Style="{StaticResource btnStyle}" Click="Button_Click"/>
             <Button Content="导出Excel" Style="{StaticResource btnStyle}" Width="80" x:Name="btnExport" Click="btnExport_Click"/>
         </StackPanel>
-        <GroupBox Grid.Row="1" Grid.Column="1" Header="党员通信录" Style="{StaticResource headerBaseStyle}">
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1">
+            <Label Content="党员姓名" Style="{StaticResource mngLblStyle}"/>
+            <TextBox Style="{StaticResource mngInputStyle}" x:Name="txtName"/>
+            <Button x:Name="btnSearch" Style="{StaticResource mngBtnStyle}" Content="查 询"/>
+            <Button x:Name="btnAll" Style="{StaticResource mngBtnStyle}" Content="全  部"/>
+        </StackPanel>
+        <GroupBox Grid.Row="2" Grid.Column="1" Header="党员通信录" Style="{StaticResource headerBaseStyle}">
             <DataGrid x:Name="dg" Style="{StaticResource gridBaseStyle}"
                       ItemsSource="{x:Static party:PartyBuildingContext.DyPhones}">
                 <DataGrid.Columns>

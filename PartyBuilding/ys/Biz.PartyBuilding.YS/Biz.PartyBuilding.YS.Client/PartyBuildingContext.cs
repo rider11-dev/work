@@ -11,7 +11,7 @@ namespace Biz.PartyBuilding.YS.Client
 {
     public class PartyBuildingContext
     {
-        public static List<dynamic> contacts = new List<dynamic> { 
+        public static List<dynamic> contacts = new List<dynamic> {
             new{name="王小林",party="曹县县委组织部",lasttime="2016-12-20 14:23:55"},
             new{name="李长江",party="曹城办事处党组织",lasttime="2015-01-20 14:23:55"},
             new{name="赵林清",party="曹城街道马山庄党组织",lasttime="2016-02-10 14:23:55"},
@@ -25,7 +25,7 @@ namespace Biz.PartyBuilding.YS.Client
             new OrgStrucViewModel{org_code="cxccbsc",org_name="曹城办事处党组织",org_parent_name="曹县县委组织部",org_contacts="王晓辉",org_phone="05301234567",org_addr="曹城办事处"}
         };
 
-        public static List<Org2NewViewModel> org2news = new List<Org2NewViewModel>
+        public static IEnumerable<Org2NewViewModel> org2news = new List<Org2NewViewModel>
         {
             new Org2NewViewModel{comp_name="长江科技发展有限公司",mem_count_dy=10,emp_count=67,is_dzz_establish="是",dzz_establish_type="单独建立",zbsj_name="王长江",zbsj_sex="男",zbsj_age=50,zbsj_xl="大专",zbsj_joinin_time="1996-10-12",has_atc_place="是",atc_place_area="50"},
             new Org2NewViewModel{comp_name="曹县一中",mem_count_dy=20,emp_count=43,is_dzz_establish="是",dzz_establish_type="联合建立",zbsj_name="付守国",zbsj_sex="男",zbsj_age=56,zbsj_xl="本科",zbsj_joinin_time="1990-01-20",has_atc_place="是",atc_place_area="60"},
@@ -54,8 +54,10 @@ namespace Biz.PartyBuilding.YS.Client
             new CmbItem{Id="xx",Text="小学"},
             new CmbItem{Id="cz",Text="初中"},
             new CmbItem{Id="gz",Text="高中"},
-            new CmbItem{Id="dx",Text="大学"},
-            new CmbItem{Id="yjs",Text="研究生"},
+            new CmbItem{Id="dx",Text="中专"},
+            new CmbItem{Id="dx",Text="大专"},
+            new CmbItem{Id="dx",Text="本科"},
+            new CmbItem{Id="yjs",Text="硕士"},
             new CmbItem{Id="bs",Text="博士"},
         };
 
@@ -103,6 +105,30 @@ namespace Biz.PartyBuilding.YS.Client
         };
 
         /// <summary>
+        /// 年龄范围
+        /// </summary>
+        public static List<CmbItem> CmbItemsAgeRange = new List<CmbItem>
+        {
+            new CmbItem{Id="1",Text="20~30"},
+            new CmbItem{Id="2",Text="30~50"},
+            new CmbItem{Id="3",Text="50~70"},
+            new CmbItem{Id="4",Text="70~90"},
+            new CmbItem{Id="5",Text="90以上"}
+        };
+
+        /// <summary>
+        /// 建筑面积、院落面积
+        /// </summary>
+        public static List<CmbItem> CmbItemsAreaRange = new List<CmbItem>
+        {
+            new CmbItem{Id="1",Text="60以下"},
+            new CmbItem{Id="2",Text="60~80"},
+            new CmbItem{Id="3",Text="80~100"},
+            new CmbItem{Id="4",Text="100~140"},
+            new CmbItem{Id="5",Text="140以上"}
+        };
+
+        /// <summary>
         /// 政治面貌
         /// </summary>
         public static List<CmbItem> CmbItemsZzmm = new List<CmbItem>
@@ -114,7 +140,7 @@ namespace Biz.PartyBuilding.YS.Client
             new CmbItem{Id="5",Text="退休人员"}
         };
 
-        public static List<PartyMemberViewModel> partymembers = new List<PartyMemberViewModel>
+        public static IEnumerable<PartyMemberViewModel> partymembers = new List<PartyMemberViewModel>
         {
             new PartyMemberViewModel{
                 type="正式党员",name="张小虎",sex="男",nation="汉族",party="曹县县委组织部",dnzw="委员",age="27",jg="山东曹县",
@@ -168,8 +194,17 @@ namespace Biz.PartyBuilding.YS.Client
             new CmbItem{Id="2",Text="离退休党员"},
             new CmbItem{Id="3",Text="学生党员"},
         };
+        /// <summary>
+        /// 第一书记类别
+        /// </summary>
+        public static List<CmbItem> CmbItemsDysjType = new List<CmbItem>
+        {
+            new CmbItem{Id="1",Text="省派"},
+            new CmbItem{Id="2",Text="市派"},
+            new CmbItem{Id="3",Text="县派"},
+        };
 
-        public static List<dynamic> Df = new List<dynamic>
+        public static IEnumerable<dynamic> Df = new List<dynamic>
         {
              new{dy_name="张明",dy_party="曹县县委组织部",df_zxbz="在职工",df_base="3000",df_month=20,df_year_plan=240,df_year_actual=240,df_year="2015"},
              new{dy_name="吴玲",dy_party="曹县县委组织部",df_zxbz="离退休党员",df_base="2000",df_month=10,df_year_plan=120,df_year_actual=100,df_year="2016"},
@@ -181,12 +216,12 @@ namespace Biz.PartyBuilding.YS.Client
         /// <summary>
         /// 干部管理
         /// </summary>
-        public static List<dynamic> cadres = new List<dynamic>
+        public static IEnumerable<dynamic> cadres = new List<dynamic>
         {
-            new{name="张三梁",sex="男",age="40",nation="汉族",xl="大专",idcard="372924198955223456",zw="村委会主任",rz_time="2014-12-20",rz_jl="",village="陈庄",lz_time="",lz_reason=""},
-            new{name="吴思清",sex="男",age="34",nation="回族",xl="高中",idcard="372924193455221111",zw="村会计",rz_time="2015-01-24",rz_jl="",village="田庄",lz_time="",lz_reason=""},
-            new{name="李新明",sex="男",age="25",nation="汉族",xl="本科",idcard="372924197855225390",zw="组织委员",rz_time="2010-06-03",rz_jl="",village="陆湾",lz_time="",lz_reason=""},
-            new{name="王玲",sex="女",age="57",nation="汉族",xl="本科",idcard="372924196012221212",zw="宣传委员",rz_time="2009-12-26",rz_jl="",village="刘集",lz_time="2016-08-08",lz_reason="退休"}
+            new{name="张三梁",type="省派",sex="男",age="40",nation="汉族",xl="大专",idcard="372924198955223456",zw="村委会主任",rz_time="2014-12-20",rz_jl="",town="王集镇",village="徐楼村",rz_xc="王集镇徐楼村",lz_time="",lz_reason=""},
+            new{name="吴思清",type="市派",sex="男",age="34",nation="回族",xl="高中",idcard="372924193455221111",zw="村会计",rz_time="2015-01-24",rz_jl="",town="王集镇",village="徐楼村",rz_xc="王集镇徐楼村",lz_time="",lz_reason=""},
+            new{name="李新明",type="市派",sex="男",age="25",nation="汉族",xl="本科",idcard="372924197855225390",zw="组织委员",rz_time="2010-06-03",rz_jl="",town="孙老家镇",village="焦庄",rz_xc="孙老家镇焦庄",lz_time="",lz_reason=""},
+            new{name="王玲",type="县派",sex="女",age="57",nation="汉族",xl="本科",idcard="372924196012221212",zw="宣传委员",rz_time="2009-12-26",rz_jl="",town="孙老家镇",village="焦庄",rz_xc="孙老家镇焦庄",lz_time="2016-08-08",lz_reason="退休"}
         };
 
         public static List<dynamic> work_news = new List<dynamic>

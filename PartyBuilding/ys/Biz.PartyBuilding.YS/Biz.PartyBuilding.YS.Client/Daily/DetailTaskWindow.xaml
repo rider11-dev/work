@@ -32,8 +32,9 @@
         <vmwpf:CmbModel x:Key="cbVmTaskPriority"/>
         <vmwpf:CmbModel x:Key="cbVmTaskState"/>
         <model:TaskModel x:Key="model"/>
+        <vmwpf:CmbModel x:Key="cbVmPriority"/>
     </Window.Resources>
-        <Window.DataContext>
+    <Window.DataContext>
         <Binding Source="{StaticResource model}"/>
     </Window.DataContext>
     <Grid>
@@ -66,9 +67,15 @@
                 <Label Content="任务名称" Grid.Row="0" Grid.Column="0" Style="{StaticResource lblStyle}"/>
                 <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource inputStyle}" Text="{Binding Path=name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="接收组织" Grid.Row="0" Grid.Column="2" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="0" Grid.Column="3" Style="{StaticResource inputStyle}" Text="{Binding Path=receiver,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                <!--<TextBox Grid.Row="0" Grid.Column="3" Style="{StaticResource inputStyle}" Text="{Binding Path=receiver,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>-->
+                <ctl:HelpButton Grid.Row="0" Grid.Column="3" Width="130" Height="26" Style="{StaticResource inputBtnAddOnStyle}" 
+                                Content="{Binding Path=receiver,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                Command="{Binding Path=GoupHelpCmd,RelativeSource={RelativeSource AncestorType=daily:DetailTaskWindow}}"/>
                 <Label Content="优先级" Grid.Row="1" Grid.Column="0" Style="{StaticResource lblStyle}" Margin="0"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource inputStyle}" Text="{Binding Path=priority,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="cmbPriority" 
+                  DataContext="{StaticResource cbVmPriority}" Text="{Binding Path=priority,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                Style="{StaticResource cbStyle}"
+                  />
                 <Label Content="任务状态" Grid.Row="1" Grid.Column="2" Style="{StaticResource lblStyle}" Margin="0"/>
                 <TextBox Grid.Row="1" Grid.Column="13" IsReadOnly="True" Style="{StaticResource inputStyle}" Text="{Binding Path=state,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="发布时间" Grid.Row="2" Grid.Column="0" Style="{StaticResource lblStyle}"/>
@@ -76,7 +83,7 @@
                 <Label Content="到期时间" Grid.Row="2" Grid.Column="2" Style="{StaticResource lblStyle}"/>
                 <DatePicker Grid.Row="2" Grid.Column="3" Style="{StaticResource dtPickerBaseStyle}" Text="{Binding Path=expire_time,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="完成情况" Grid.Row="3" Grid.Column="0" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="3" IsReadOnly="True" Grid.Column="1" Style="{StaticResource inputStyle}" Text="{Binding Path=progress,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Grid.Row="3" IsReadOnly="True" Grid.Column="1" Style="{StaticResource inputStyle}" Text="{Binding Path=complete_state,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="完成状态" Grid.Row="3" Grid.Column="2" Style="{StaticResource lblStyle}"/>
                 <TextBox Grid.Row="3" IsReadOnly="True" Grid.Column="3" Style="{StaticResource inputStyle}" Text="{Binding Path=progress,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="任务内容" Grid.Row="4" Grid.Column="0" Style="{StaticResource lblStyle}" VerticalAlignment="Center"/>
