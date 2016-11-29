@@ -1,6 +1,8 @@
 ﻿using Biz.PartyBuilding.YS.Client.Daily.Models;
+using MyNet.Client.Help;
 using MyNet.Client.Pages;
 using MyNet.Components.WPF.Command;
+using MyNet.Components.WPF.Controls;
 using MyNet.Components.WPF.Models;
 using System;
 using System.Collections.Generic;
@@ -31,7 +33,8 @@ namespace Biz.PartyBuilding.YS.Client.Daily
             InitializeComponent();
 
             CmbModel model = cmbActType.DataContext as CmbModel;
-            model.Bind(PartyBuildingContext.task_priority);
+            model.Bind(DailyContext.party_act_types);
+
         }
 
         ICommand _searchCmd;
@@ -51,6 +54,31 @@ namespace Biz.PartyBuilding.YS.Client.Daily
         void SearchAction(object parameter)
         {
 
+        }
+
+        private ICommand _gpParentHelpCmd;
+        public ICommand GpParentHelpCmd
+        {
+            get
+            {
+                if (_gpParentHelpCmd == null)
+                {
+                    _gpParentHelpCmd = new DelegateCommand(OpenGpParentHelp);
+                }
+                return _gpParentHelpCmd;
+            }
+        }
+
+        private void OpenGpParentHelp(object parameter)
+        {
+            TreeHelper.OpenAllGroupsHelp(false, node =>
+            {
+                if (node == null)
+                {
+                    return;
+                }
+                btnGroup.Content = node.Label;
+            });
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
@@ -78,6 +106,11 @@ namespace Biz.PartyBuilding.YS.Client.Daily
         private void btnView_Click(object sender, RoutedEventArgs e)
         {
             ShowDetail();
+        }
+
+        private void btnExport_Click(object sender, RoutedEventArgs e)
+        {
+            MyNet.Components.WPF.Misc.ExcelHelper.Export(dg, "党内组织生活");
         }
     }
 }

@@ -58,12 +58,16 @@
                   Style="{StaticResource cbStyle}"
                   />
                 <Label Content="党组织" Style="{StaticResource mngLblStyle}"/>
-                <TextBox Style="{StaticResource mngInputStyle}"/>
+                <ctl:HelpButton Width="130" Height="26" 
+                         Style="{StaticResource inputBtnAddOnStyle}" x:Name="btnGroup"
+                         Command="{Binding Path=GpParentHelpCmd,RelativeSource={RelativeSource AncestorType=daily:PartyActRecordPage}}"
+                         />
                 <Label Content="活动时间" Style="{StaticResource mngLblStyle}"/>
                 <DatePicker Style="{StaticResource dtPickerBaseStyle}"/>
-                <Button x:Name="btnSearch" Style="{StaticResource mngBtnStyle}" Content="查 询"
+                <Button x:Name="btnSearch" Style="{StaticResource btnStyle}" Content="查 询"
                         Command="{Binding Path=SearchCmd,Source={RelativeSource AncestorType=Page}}"
                         />
+                <Button Content="导出Excel" Style="{StaticResource btnStyle}" Width="80" x:Name="btnExport" Click="btnExport_Click"/>
             </StackPanel>
         </Border>
         <!--row3：列表内容-->

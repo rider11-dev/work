@@ -177,5 +177,10 @@ namespace Biz.PartyBuilding.YS.Client.Daily
         {
             GetTasks();
         }
+
+        private void btnExport_Click(object sender, RoutedEventArgs e)
+        {
+            MyNet.Components.WPF.Misc.ExcelHelper.Export(dg, "已派遣任务");
+        }
     }
 }

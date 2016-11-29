@@ -48,13 +48,14 @@
                         Click="btnReceive_Click"/>
                 <Button x:Name="btnComplete" Content="完  成" Style="{StaticResource btnStyle}"
                         Click="btnComplete_Click"/>
+                <Button Content="导出Excel" Style="{StaticResource btnStyle}" Width="80" x:Name="btnExport" Click="btnExport_Click"/>
             </StackPanel>
         </Border>
         <!--row2：过滤-->
         <Border x:Name="bdSearch" Grid.Row="1" Style="{StaticResource mngBdStyle}">
             <StackPanel Orientation="Horizontal">
                 <Label Content="任务名称" Style="{StaticResource mngLblStyle}"/>
-                <TextBox Style="{StaticResource mngInputStyle}"/>
+                <TextBox Style="{StaticResource mngInputStyle}" x:Name="txtTaskName"/>
                 <Label Content="优先级" Style="{StaticResource mngLblStyle}"/>
                 <ComboBox  x:Name="cmbTaskPriority"
                   DataContext="{StaticResource cbVmTaskPriority}"
@@ -65,13 +66,12 @@
                   DataContext="{StaticResource cbVmTaskCompleteState}"
                   Style="{StaticResource cbStyle}"
                   />
-                <Label Content="发布时间" Style="{StaticResource mngLblStyle}"/>
-                <DatePicker Style="{StaticResource dtPickerStyle}"/>
                 <Label Content="到期时间" Style="{StaticResource mngLblStyle}"/>
-                <DatePicker Style="{StaticResource dtPickerStyle}"/>
-                <Button x:Name="btnSearch" Style="{StaticResource mngBtnStyle}" Content="查 询"
-                        Command="{Binding Path=SearchCmd,Source={RelativeSource AncestorType=Page}}"
-                        />
+                <DatePicker Style="{StaticResource dtPickerBaseStyle}" x:Name="dtExpire_Begin"/>
+                <Label Content="~" Style="{StaticResource mngLblStyle}"/>
+                <DatePicker Style="{StaticResource dtPickerBaseStyle}" x:Name="dtExpire_End"/>
+                <Button x:Name="btnSearch" Style="{StaticResource btnStyle}" Content="查  询"/>
+                <Button x:Name="btnAll" Style="{StaticResource btnStyle}" Content="全  部"/>
             </StackPanel>
         </Border>
         <!--row3：列表内容-->
@@ -87,10 +87,10 @@
                                                 CanUserResize="False"/>
                         <DataGridTextColumn Header="任务名称" Binding="{Binding name}"/>
                         <DataGridTextColumn Header="完成状态" Binding="{Binding complete_state}"/>
-                        <DataGridTextColumn Header="完成情况" Binding="{Binding progress}"/>
-                        <DataGridTextColumn Header="内容" Binding="{Binding content}"/>
+                        <DataGridTextColumn Header="完成情况" Binding="{Binding progress}" Width="100"/>
+                        <DataGridTextColumn Header="任务内容" Binding="{Binding content}" Width="100"/>
                         <DataGridTextColumn Header="优先级" Binding="{Binding priority}"/>
-                        <DataGridTextColumn Header="接收组织" Binding="{Binding receiver}"/>
+                        <DataGridTextColumn Header="接收组织" Binding="{Binding receiver}" Width="100"/>
                         <DataGridTextColumn Header="发布时间" Binding="{Binding issue_time}"/>
                         <DataGridTextColumn Header="到期时间" Binding="{Binding expire_time}"/>
                     </DataGrid.Columns>

@@ -10,7 +10,7 @@
       xmlns:party="clr-namespace:Biz.PartyBuilding.YS.Client"
       xmlns:partyorg="clr-namespace:Biz.PartyBuilding.YS.Client.PartyOrg"
       mc:Ignorable="d" 
-      d:DesignHeight="400" d:DesignWidth="600"
+      d:DesignHeight="400" d:DesignWidth="800"
 	Title="两新组织">
     <Page.Resources>
         <Style x:Key="btnStyle" TargetType="Button" BasedOn="{StaticResource btnBaseStyle}">
@@ -68,8 +68,9 @@
                   DataContext="{StaticResource cbVmHasActPlace}"
                   Style="{StaticResource cbStyle}"
                   />
-                <Button x:Name="btnSearch" Style="{StaticResource mngBtnStyle}" Content="查 询"/>
-                <Button x:Name="btnAll" Style="{StaticResource mngBtnStyle}" Content="全  部"/>
+                <Button x:Name="btnSearch" Style="{StaticResource btnStyle}" Content="查 询"/>
+                <Button x:Name="btnAll" Style="{StaticResource btnStyle}" Content="全  部"/>
+                <Button Content="导出Excel" Style="{StaticResource btnStyle}" Width="80" x:Name="btnExport" Click="btnExport_Click"/>
             </StackPanel>
         </Border>
         <!--row3：列表内容-->
@@ -77,7 +78,8 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="105*"/>
-                    <ColumnDefinition Width="466*"/>
+                    <ColumnDefinition Width="124*"/>
+                    <ColumnDefinition Width="342*"/>
                     <ColumnDefinition Width="29*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -85,7 +87,7 @@
                     <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
                 <DataGrid x:Name="dg" Grid.Row="0" Style="{StaticResource gridBaseStyle}"
-                          ItemsSource="{x:Static party:PartyBuildingContext.org2news}" Grid.ColumnSpan="3">
+                          ItemsSource="{x:Static party:PartyBuildingContext.org2news}" Grid.ColumnSpan="4">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn CellStyle="{StaticResource ckCellStyle}" HeaderStyle="{StaticResource ckCellHeaderStyle}"
                                                 CanUserResize="False"/>
@@ -103,7 +105,7 @@
                         <DataGridTextColumn Header="活动场所面积(㎡)"  Binding="{Binding atc_place_area}"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <ctl:ControlPagination x:Name="ctlPagination" Grid.Row="1" HorizontalAlignment="Center" Grid.ColumnSpan="2" Margin="70,2,41.264,2"/>
+                <ctl:ControlPagination x:Name="ctlPagination" Grid.Row="1" HorizontalAlignment="Center" Grid.ColumnSpan="3" Margin="70,2,41,2"/>
             </Grid>
         </Border>
     </Grid>

@@ -242,5 +242,15 @@ namespace Biz.PartyBuilding.YS.Client.Daily
                 }
             }
         }
+        private void btnExport_Rec_Click(object sender, RoutedEventArgs e)
+        {
+            MyNet.Components.WPF.Misc.ExcelHelper.Export(dg_Rec, "已收信息");
+        }
+
+        private void btnExport_Sent_Click(object sender, RoutedEventArgs e)
+        {
+            MyNet.Components.WPF.Misc.ExcelHelper.Export(dg_Sent, "已发信息");
+
+        }
     }
 }

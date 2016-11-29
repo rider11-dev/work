@@ -108,5 +108,10 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg
         {
 
         }
+
+        private void btnExport_Click(object sender, RoutedEventArgs e)
+        {
+            MyNet.Components.WPF.Misc.ExcelHelper.Export(dg, "两新组织");
+        }
     }
 }

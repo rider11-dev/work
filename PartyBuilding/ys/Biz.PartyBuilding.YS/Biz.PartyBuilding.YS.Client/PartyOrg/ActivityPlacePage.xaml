@@ -72,6 +72,7 @@
             <Label Content="㎡" Style="{StaticResource mngLblStyle}"/>
             <Button Content="查  询" Style="{StaticResource btnStyle}" x:Name="btnSearch"/>
             <Button Content="全  部" Style="{StaticResource btnStyle}" x:Name="btnAll"/>
+            <Button Content="导出Excel" Style="{StaticResource btnStyle}" Width="80" x:Name="btnExport" Click="btnExport_Click"/>
         </StackPanel>
         <GroupBox Grid.Row="2" Grid.Column="1" Header="活动场所信息" Style="{StaticResource headerBaseStyle}">
             <DataGrid x:Name="dg" Style="{StaticResource gridBaseStyle}">

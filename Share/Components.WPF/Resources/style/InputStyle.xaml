@@ -47,8 +47,8 @@
     <ControlTemplate x:Key="inputBtnAddOnTemp" TargetType="ctl:HelpButton">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="6*"/>
-                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="68"/>
             </Grid.ColumnDefinitions>
             <TextBox Grid.Column="0" x:Name="txtInput" HorizontalContentAlignment="Left" Height="Auto"
                      Style="{StaticResource inputBaseStyle}" IsReadOnly="{Binding Path=ForbidInput,RelativeSource={RelativeSource TemplatedParent}}"

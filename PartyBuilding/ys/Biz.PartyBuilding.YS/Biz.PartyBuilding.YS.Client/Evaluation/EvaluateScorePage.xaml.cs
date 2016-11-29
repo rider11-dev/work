@@ -50,5 +50,10 @@ namespace Biz.PartyBuilding.YS.Client.Evaluation
             }
             catch { }
         }
+
+        private void btnExport_Click(object sender, RoutedEventArgs e)
+        {
+            MyNet.Components.WPF.Misc.ExcelHelper.Export(dgRank, "考核分数");
+        }
     }
 }

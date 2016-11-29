@@ -30,12 +30,8 @@
             <Setter Property="Height" Value="26"/>
             <Setter Property="FontSize" Value="12"/>
         </Style>
-        <model:OrgStrucViewModel x:Key="model"/>
         <vmwpf:CmbModel x:Key="cbVmDfScale"/>
     </Page.Resources>
-    <Page.DataContext>
-        <Binding Source="{StaticResource model}"/>
-    </Page.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
@@ -56,15 +52,15 @@
         </GroupBox>
         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
             <Button Content="缴  费" Style="{StaticResource btnStyle}" Click="Button_Click"/>
-            <Button Content="导出Excel" Style="{StaticResource btnStyle}" Width="80" x:Name="btnExport" Click="btnExport_Click"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
             <Label Content="党员姓名" Style="{StaticResource mngLblStyle}"/>
             <TextBox x:Name="txtName" Style="{StaticResource inputStyle}" Width="60"/>
             <Label Content="执行标准" Style="{StaticResource mngLblStyle}"/>
             <ComboBox  x:Name="cmbDfScale" DataContext="{StaticResource cbVmDfScale}" Style="{StaticResource cbStyle}"/>
-            <Button x:Name="btnSearch" Style="{StaticResource mngBtnStyle}" Content="查  询" Margin="10,0,2,0"/>
-            <Button x:Name="btnAll" Style="{StaticResource mngBtnStyle}" Content="全  部" Margin="2,0,0,0"/>
+            <Button x:Name="btnSearch" Style="{StaticResource btnStyle}" Content="查  询"/>
+            <Button x:Name="btnAll" Style="{StaticResource btnStyle}" Content="全  部"/>
+            <Button Content="导出Excel" Style="{StaticResource btnStyle}" Width="80" x:Name="btnExport" Click="btnExport_Click"/>
         </StackPanel>
         <GroupBox Grid.Row="2" Grid.Column="1" Header="党费缴纳信息" Style="{StaticResource headerBaseStyle}">
             <DataGrid x:Name="dg" Style="{StaticResource gridBaseStyle}"

@@ -63,38 +63,8 @@ namespace Biz.PartyBuilding.YS.Client.Evaluation
 
         private void btnExport_Click(object sender, RoutedEventArgs e)
         {
-            var data = dg.ItemsSource as IEnumerable<dynamic>;
-            if (data == null || data.Count() < 1)
-            {
-                return;
-            }
-
-            SaveFileDialog saveFileDialog = new SaveFileDialog { Filter = "Excel Files|*.xls;*.xlsx", FileName = "考核情况" };
-            var rst = saveFileDialog.ShowDialog();
-            if (rst == null || ((bool)rst) == false)
-            {
-                return;
-            }
-            ExcelHelper.Export(saveFileDialog.FileName,
-                () =>
-                {
-                    return new Dictionary<string, string>
-                    {
-                        {"proj","考核项目"},
-                        {"party","被考核党组织"},
-                        {"expire_time","考核截止时间"},
-                        {"check_type","考核类型"},
-                        {"upload_state","上传情况"},
-                        {"upload_time","上传时间"},
-                        {"check_time","考核时间"},
-                        {"check_result","考核结果"}
-                    };
-                }, data);
-            MessageBoxResult dia = MessageBox.Show("文件已保存至" + saveFileDialog.FileName + Environment.NewLine + "是否打开？", "导出成功", MessageBoxButton.YesNo);
-            if (dia == MessageBoxResult.Yes)
-            {
-                Process.Start(saveFileDialog.FileName);
-            }
+            var node = gpTree.SelectedValue as TreeViewData.TreeNode;
+            MyNet.Components.WPF.Misc.ExcelHelper.Export(dg, "考核情况——" + (node == null ? "全部" : node.Label));
         }
     }
 }

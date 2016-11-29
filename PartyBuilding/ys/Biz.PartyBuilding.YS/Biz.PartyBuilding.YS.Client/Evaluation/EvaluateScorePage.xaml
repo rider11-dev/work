@@ -59,6 +59,7 @@
                     <RadioButton Content="按月份" Style="{StaticResource radioStyle}" IsChecked="True"/>
                 </StackPanel>
                 <Button Style="{StaticResource btnStyle}" Margin="4,0,0,0" Content="查  询"/>
+                <Button Content="导出Excel" Style="{StaticResource btnStyle}" Width="80" x:Name="btnExport" Click="btnExport_Click"/>
             </StackPanel>
         </GroupBox>
         <GroupBox Grid.Row="1" Header="考核分数">

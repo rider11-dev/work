@@ -52,7 +52,7 @@
                 <TextBox Style="{StaticResource mngInputStyle}"/>
                 <Label Content="发布日期" Style="{StaticResource mngLblStyle}"/>
                 <DatePicker Style="{StaticResource dtPickerBaseStyle}"/>
-                <Button x:Name="btnSearch" Style="{StaticResource mngBtnStyle}" Content="查 询"
+                <Button x:Name="btnSearch" Style="{StaticResource btnStyle}" Content="查 询"
                         Command="{Binding Path=SearchCmd,Source={RelativeSource AncestorType=Page}}"
                         />
             </StackPanel>

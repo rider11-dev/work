@@ -276,5 +276,15 @@ namespace Biz.PartyBuilding.YS.Client.Daily
         {
             new DetailNoticeWindow().ShowDialog();
         }
+
+        private void btnExport_Rec_Click(object sender, RoutedEventArgs e)
+        {
+            MyNet.Components.WPF.Misc.ExcelHelper.Export(dg_Rec, "已收通知");
+        }
+
+        private void btnExport_Sent_Click(object sender, RoutedEventArgs e)
+        {
+            MyNet.Components.WPF.Misc.ExcelHelper.Export(dg_Sent, "已发通知");
+        }
     }
 }

@@ -45,31 +45,77 @@ namespace Biz.PartyBuilding.YS.Client.Daily
             model = cmbTaskCompleteState.DataContext as CmbModel;
             model.Bind(PartyBuildingContext.task_complete_state);
 
-        }
-
-        ICommand _searchCmd;
-        public ICommand SearchCmd
-        {
-            get
+            btnAll.Click += (o, e) =>
             {
-                if (_searchCmd == null)
-                {
-                    _searchCmd = new DelegateCommand(SearchAction);
-                }
-
-                return _searchCmd;
-            }
+                Search();
+            };
+            btnSearch.Click += (o, e) =>
+            {
+                Search(false);
+            };
         }
 
-        void SearchAction(object parameter)
+        private void Search(bool all = true)
         {
+            var rst = HttpHelper.GetResultByGet(ApiHelper.GetApiUrl(PartyBuildingApiKeys.TaskGet, PartyBuildingApiKeys.Key_ApiProvider_Party));
+            if (rst.code != ResultCode.Success)
+            {
+                MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);
+                return;
+            }
+            dg.ItemsSource = null;
+            if (rst.data != null && rst.data.tasks != null)
+            {
+                var tasks = JsonConvert.DeserializeObject<IEnumerable<TaskModel>>(((JArray)rst.data.tasks).ToString());
+                if (tasks.IsEmpty())
+                {
+                    return;
+                }
+                tasks = tasks.Where(t => t.state != "编辑");
+                if (all)
+                {
+                    dg.ItemsSource = tasks;
+                }
+                else
+                {
+                    if (txtTaskName.Text.IsNotEmpty())
+                    {
+                        tasks = tasks.Where(t => t.name.Contains(txtTaskName.Text));
+                    }
+                    if (cmbTaskPriority.SelectedItem != null)
+                    {
+                        tasks = tasks.Where(t => t.priority == (cmbTaskPriority.SelectedValue as CmbItem).Text);
+                    }
 
+                    if (cmbTaskCompleteState.SelectedItem != null)
+                    {
+                        tasks = tasks.Where(t => t.complete_state == (cmbTaskCompleteState.SelectedValue as CmbItem).Text);
+                    }
+                    var date = dtExpire_Begin.Text;
+                    if (date.IsNotEmpty())
+                    {
+                        tasks = tasks.Where(t => !(string.Compare(t.expire_time, date) < 0));
+                    }
+                    date = dtExpire_End.Text;
+                    if (date.IsNotEmpty())
+                    {
+                        tasks = tasks.Where(t => !(string.Compare(t.expire_time, date) > 0));
+                    }
+
+                    dg.ItemsSource = tasks;
+                }
+            }
         }
 
 
         private void btnCompleteDetail_Click(object sender, RoutedEventArgs e)
         {
-            new DetailTaskWindow().ShowDialog();
+            var task = dg.SelectedItem as TaskModel;
+
+            if (task != null)
+            {
+                new DetailTaskWindow(task).ShowDialog();
+            }
         }
 
         private void btnReceive_Click(object sender, RoutedEventArgs e)
@@ -86,7 +132,7 @@ namespace Biz.PartyBuilding.YS.Client.Daily
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);
                 return;
             }
-            GetTasks();
+            Search();
         }
 
         private void btnComplete_Click(object sender, RoutedEventArgs e)
@@ -99,30 +145,17 @@ namespace Biz.PartyBuilding.YS.Client.Daily
 
             new DetailTaskCompleteWindow(task).ShowDialog();
 
-            GetTasks();
+            Search();
         }
 
         private void BasePage_Loaded(object sender, RoutedEventArgs e)
         {
-            GetTasks();
+            Search();
         }
 
-        void GetTasks()
+        private void btnExport_Click(object sender, RoutedEventArgs e)
         {
-            var rst = HttpHelper.GetResultByGet(ApiHelper.GetApiUrl(PartyBuildingApiKeys.TaskGet, PartyBuildingApiKeys.Key_ApiProvider_Party));
-            if (rst.code != ResultCode.Success)
-            {
-                MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);
-                return;
-            }
-            if (rst.data != null && rst.data.tasks != null)
-            {
-                var tasks = JsonConvert.DeserializeObject<IEnumerable<TaskModel>>(((JArray)rst.data.tasks).ToString());
-                if (tasks != null && tasks.Count() > 0)
-                {
-                    dg.ItemsSource = tasks.Where(t => t.state != "编辑");
-                }
-            }
+            MyNet.Components.WPF.Misc.ExcelHelper.Export(dg, "我的任务");
         }
     }
 }

@@ -14,15 +14,21 @@ namespace MyNet.Components.Npoi
     {
         public static bool Export(string filename, Func<Dictionary<string, string>> colHeadersFunc, IEnumerable<object> data)
         {
-            if (data == null || data.Count() < 1 || string.IsNullOrEmpty(filename) || colHeadersFunc == null)
+            Dictionary<string, string> colHeaders = null;
+            if (colHeadersFunc != null)
+            {
+                colHeaders = colHeadersFunc();
+            }
+            return Export(filename, colHeaders, data);
+        }
+
+        public static bool Export(string filename, Dictionary<string, string> colHeaders, IEnumerable<object> data)
+        {
+            if (data == null || data.Count() < 1 || string.IsNullOrEmpty(filename) || colHeaders == null || colHeaders.Count < 1)
             {
                 return false;
             }
-            var colHeaders = colHeadersFunc();
-            if (colHeaders == null || colHeaders.Count() < 1)
-            {
-                return false;
-            }
+
             var colCount = colHeaders.Count;
 
             HSSFWorkbook book = new HSSFWorkbook();
@@ -63,6 +69,5 @@ namespace MyNet.Components.Npoi
             book = null;
             return true;
         }
-
     }
 }

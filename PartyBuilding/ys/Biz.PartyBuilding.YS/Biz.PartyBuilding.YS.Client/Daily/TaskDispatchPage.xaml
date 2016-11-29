@@ -50,6 +50,7 @@
                         Click="btnIssue_Click"/>
                 <Button x:Name="btnCanel" Content="取  消" Style="{StaticResource btnStyle}"
                         Click="btnCanel_Click"/>
+                <Button Content="导出Excel" Style="{StaticResource btnStyle}" Width="80" x:Name="btnExport" Click="btnExport_Click"/>
             </StackPanel>
         </Border>
         <!--row2：过滤-->
@@ -81,8 +82,8 @@
                     <DatePicker Style="{StaticResource dtPickerBaseStyle}" x:Name="dtExpire_Begin"/>
                     <Label Content="~" Style="{StaticResource mngLblStyle}"/>
                     <DatePicker Style="{StaticResource dtPickerBaseStyle}" x:Name="dtExpire_End"/>
-                    <Button x:Name="btnSearch" Style="{StaticResource mngBtnStyle}" Content="查 询" Click="btnSearch_Click"/>
-                    <Button x:Name="btnAll" Style="{StaticResource mngBtnStyle}" Content="全 部" Click="btnAll_Click"/>
+                    <Button x:Name="btnSearch" Style="{StaticResource btnStyle}" Content="查 询" Click="btnSearch_Click"/>
+                    <Button x:Name="btnAll" Style="{StaticResource btnStyle}" Content="全 部" Click="btnAll_Click"/>
                 </StackPanel>
             </ScrollViewer>
         </Border>
@@ -98,9 +99,9 @@
                         <DataGridTemplateColumn CellStyle="{StaticResource ckCellStyle}" HeaderStyle="{StaticResource ckCellHeaderStyle}"
                                                 CanUserResize="False"/>
                         <DataGridTextColumn Header="任务名称" Binding="{Binding name}"/>
-                        <DataGridTextColumn Header="内容" Binding="{Binding content}"/>
+                        <DataGridTextColumn Header="内容" Binding="{Binding content}" Width="100"/>
                         <DataGridTextColumn Header="优先级" Binding="{Binding priority}"/>
-                        <DataGridTextColumn Header="接收组织" Binding="{Binding receiver}"/>
+                        <DataGridTextColumn Header="接收组织" Binding="{Binding receiver}" Width="100"/>
                         <DataGridTextColumn Header="发布时间" Binding="{Binding issue_time}"/>
                         <DataGridTextColumn Header="到期时间" Binding="{Binding expire_time}"/>
                         <DataGridTextColumn Header="任务状态" Binding="{Binding state}"/>

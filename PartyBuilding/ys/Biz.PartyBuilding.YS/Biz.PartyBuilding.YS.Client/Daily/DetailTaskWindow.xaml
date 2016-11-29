@@ -70,7 +70,7 @@
                 <!--<TextBox Grid.Row="0" Grid.Column="3" Style="{StaticResource inputStyle}" Text="{Binding Path=receiver,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>-->
                 <ctl:HelpButton Grid.Row="0" Grid.Column="3" Width="130" Height="26" Style="{StaticResource inputBtnAddOnStyle}" 
                                 Content="{Binding Path=receiver,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                Command="{Binding Path=GoupHelpCmd,RelativeSource={RelativeSource AncestorType=daily:DetailTaskWindow}}"/>
+                                Command="{Binding Path=GoupHelpCmd,RelativeSource={RelativeSource AncestorType=daily:DetailTaskWindow}}" Margin="5,6,5,0" VerticalAlignment="Top"/>
                 <Label Content="优先级" Grid.Row="1" Grid.Column="0" Style="{StaticResource lblStyle}" Margin="0"/>
                 <ComboBox Grid.Row="1" Grid.Column="1" x:Name="cmbPriority" 
                   DataContext="{StaticResource cbVmPriority}" Text="{Binding Path=priority,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"

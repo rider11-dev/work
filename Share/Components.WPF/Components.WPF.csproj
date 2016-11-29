@@ -75,6 +75,7 @@
     <Compile Include="Controls\PagingArgs.cs" />
     <Compile Include="Controls\TreeViewData.cs" />
     <Compile Include="Converter\BooleanConverter.cs" />
+    <Compile Include="Converter\DateTimeConverter.cs" />
     <Compile Include="Converter\LevelMarginConverter_1.cs" />
     <Compile Include="Converter\LevelToBorderThicknessConverter.cs" />
     <Compile Include="Converter\LevelToMarginConverter.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="Extension\PasswordBoxAssistant.cs" />
     <Compile Include="Extension\TreeViewExtension.cs" />
     <Compile Include="Extension\WindowExtension.cs" />
+    <Compile Include="Misc\ExcelHelper.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\CheckableModel.cs" />
     <Compile Include="Models\CheckableModelCollection.cs" />

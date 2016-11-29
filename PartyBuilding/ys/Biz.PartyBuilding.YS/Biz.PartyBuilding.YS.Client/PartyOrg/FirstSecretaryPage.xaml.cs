@@ -151,5 +151,11 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg
             });
             _gpTreeData.Bind(nodes);
         }
+
+        private void btnExport_Click(object sender, RoutedEventArgs e)
+        {
+            var node = gpTree.SelectedValue as TreeViewData.TreeNode;
+            MyNet.Components.WPF.Misc.ExcelHelper.Export(dg, "第一书记——" + (node == null ? "全部" : (node.ParentNode == null ? node.Label : (node.ParentNode.Label + node.Label))));
+        }
     }
 }

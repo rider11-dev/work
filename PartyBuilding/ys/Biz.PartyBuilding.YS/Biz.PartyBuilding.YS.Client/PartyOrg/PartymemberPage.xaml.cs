@@ -171,5 +171,11 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg
 
             Search(true);
         }
+
+        private void btnExport_Click(object sender, RoutedEventArgs e)
+        {
+            var node = gpTree.SelectedValue as TreeViewData.TreeNode;
+            MyNet.Components.WPF.Misc.ExcelHelper.Export(dg, "党员——" + (node == null ? "全部" : node.Label));
+        }
     }
 }

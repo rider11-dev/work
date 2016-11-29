@@ -24,11 +24,11 @@
             <Setter Property="MaxHeight" Value="26"/>
             <Setter Property="Margin" Value="4,0,4,0"/>
         </Style>
-        <model:OrgStrucViewModel x:Key="model"/>
+        <!--<model:OrgStrucViewModel x:Key="model"/>-->
     </Page.Resources>
-    <Page.DataContext>
+    <!--<Page.DataContext>
         <Binding Source="{StaticResource model}"/>
-    </Page.DataContext>
+    </Page.DataContext>-->
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>

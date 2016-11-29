@@ -59,9 +59,10 @@
 
                         <Label Content="发布时间" Style="{StaticResource mngLblStyle}"/>
                         <DatePicker Style="{StaticResource dtPickerBaseStyle}"/>
-                        <Button Style="{StaticResource mngBtnStyle}" Content="查 询"
+                        <Button Style="{StaticResource btnStyle}" Content="查 询"
                         Command="{Binding Path=SearchCmd,Source={RelativeSource AncestorType=Page}}"
                         />
+                        <Button Content="导出Excel" Style="{StaticResource btnStyle}" Width="80" x:Name="btnExport_Rec" Click="btnExport_Rec_Click"/>
                     </StackPanel>
                 </Border>
                 <!--row3：列表内容-->
@@ -155,9 +156,10 @@
                   />
                         <Label Content="发布时间" Style="{StaticResource mngLblStyle}"/>
                         <DatePicker Style="{StaticResource dtPickerBaseStyle}"/>
-                        <Button Style="{StaticResource mngBtnStyle}" Content="查 询"
+                        <Button Style="{StaticResource btnStyle}" Content="查 询"
                         Command="{Binding Path=SearchCmd,Source={RelativeSource AncestorType=Page}}"
                         />
+                        <Button Content="导出Excel" Style="{StaticResource btnStyle}" Width="80" x:Name="btnExport_Sent" Click="btnExport_Sent_Click"/>
                     </StackPanel>
                 </Border>
                 <!--row3：列表内容-->
