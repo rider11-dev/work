@@ -27,8 +27,12 @@ namespace Biz.PartyBuilding.YS.Client
 
         public static IEnumerable<Org2NewViewModel> org2news = new List<Org2NewViewModel>
         {
-            new Org2NewViewModel{comp_name="长江科技发展有限公司",mem_count_dy=10,emp_count=67,is_dzz_establish="是",dzz_establish_type="单独建立",zbsj_name="王长江",zbsj_sex="男",zbsj_age=50,zbsj_xl="大专",zbsj_joinin_time="1996-10-12",has_atc_place="是",atc_place_area="50"},
-            new Org2NewViewModel{comp_name="曹县一中",mem_count_dy=20,emp_count=43,is_dzz_establish="是",dzz_establish_type="联合建立",zbsj_name="付守国",zbsj_sex="男",zbsj_age=56,zbsj_xl="本科",zbsj_joinin_time="1990-01-20",has_atc_place="是",atc_place_area="60"},
+            new Org2NewViewModel{comp_name="长江科技发展有限公司",mem_count_dy=5,emp_count=67,is_dzz_establish="是",dzz_establish_type="单独建立",zbsj_name="王长江",zbsj_sex="男",zbsj_age=50,zbsj_xl="大专",zbsj_joinin_time="1996-10-12",has_atc_place="是",atc_place_area="50"},
+            new Org2NewViewModel{comp_name="曹县一中",mem_count_dy=12,emp_count=43,is_dzz_establish="是",dzz_establish_type="联合建立",zbsj_name="付守国",zbsj_sex="男",zbsj_age=56,zbsj_xl="本科",zbsj_joinin_time="1990-01-20",has_atc_place="是",atc_place_area="60"},
+            new Org2NewViewModel{comp_name="曹县二中",mem_count_dy=16,emp_count=20,is_dzz_establish="是",dzz_establish_type="联合建立",zbsj_name="王立新",zbsj_sex="男",zbsj_age=56,zbsj_xl="大专",zbsj_joinin_time="2001-02-20",has_atc_place="是",atc_place_area="60"},
+            new Org2NewViewModel{comp_name="曹县三中",mem_count_dy=20,emp_count=23,is_dzz_establish="是",dzz_establish_type="联合建立",zbsj_name="陈建国",zbsj_sex="男",zbsj_age=56,zbsj_xl="高中",zbsj_joinin_time="2014-10-20",has_atc_place="是",atc_place_area="60"},
+            new Org2NewViewModel{comp_name="民政局",mem_count_dy=30,emp_count=22,is_dzz_establish="是",dzz_establish_type="联合建立",zbsj_name="李玖哲",zbsj_sex="男",zbsj_age=56,zbsj_xl="硕士",zbsj_joinin_time="1989-01-11",has_atc_place="是",atc_place_area="60"},
+            new Org2NewViewModel{comp_name="福利中心",mem_count_dy=31,emp_count=100,is_dzz_establish="是",dzz_establish_type="联合建立",zbsj_name="王家湾",zbsj_sex="男",zbsj_age=56,zbsj_xl="本科",zbsj_joinin_time="1999-12-20",has_atc_place="是",atc_place_area="60"},
         };
 
         public static List<CmbItem> CmbItemsYesNo = new List<CmbItem>

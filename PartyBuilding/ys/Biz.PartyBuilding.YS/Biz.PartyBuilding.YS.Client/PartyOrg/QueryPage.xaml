@@ -6,9 +6,28 @@
       xmlns:page="clr-namespace:MyNet.Client.Pages;assembly=MyNet.Client"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-	Title="查询统计">
+	Title="查询统计"
+               Loaded="BasePage_Loaded">
+    <Page.Resources>
+        <Style x:Key="radioStyle" TargetType="RadioButton">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="4,0,2,0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="BorderBrush" Value="Red"/>
+        </Style>
+    </Page.Resources>
+    <DockPanel LastChildFill="True">
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="10,10,10,2">
+            <RadioButton Content="两新组织" Style="{StaticResource radioStyle}" Command="{Binding CmdQuery}" CommandParameter="org2new" x:Name="radioOrg2New"/>
+            <RadioButton Content="党员" Style="{StaticResource radioStyle}" Command="{Binding CmdQuery}" CommandParameter="dy"/>
+            <RadioButton Content="党费" Style="{StaticResource radioStyle}" Command="{Binding CmdQuery}" CommandParameter="df"/>
+            <RadioButton Content="村干部" Style="{StaticResource radioStyle}" Command="{Binding CmdQuery}" CommandParameter="cgb"/>
+            <RadioButton Content="大学生村官" Style="{StaticResource radioStyle}" Command="{Binding CmdQuery}" CommandParameter="dxscg"/>
+            <RadioButton Content="第一书记" Style="{StaticResource radioStyle}" Command="{Binding CmdQuery}" CommandParameter="dysj"/>
+            <RadioButton Content="组织活动场所" Style="{StaticResource radioStyle}" Command="{Binding CmdQuery}" CommandParameter="zzhdcs"/>
+        </StackPanel>
+        <Frame x:Name="queryFrame" BorderThickness="0,1,0,0" BorderBrush="LightGray" Padding="4" NavigationUIVisibility="Hidden">
 
-    <Grid>
-
-    </Grid>
+        </Frame>
+    </DockPanel>
 </page:BasePage>

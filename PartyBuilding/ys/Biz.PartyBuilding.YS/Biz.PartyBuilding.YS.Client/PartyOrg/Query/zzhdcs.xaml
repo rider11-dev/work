@@ -1,0 +1,14 @@
+﻿<Page x:Class="Biz.PartyBuilding.YS.Client.PartyOrg.Query.zzhdcs"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Biz.PartyBuilding.YS.Client.PartyOrg.Query"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="组织活动场所">
+
+    <Grid>
+        <Label Content="{Binding Title}"/>
+    </Grid>
+</Page>
