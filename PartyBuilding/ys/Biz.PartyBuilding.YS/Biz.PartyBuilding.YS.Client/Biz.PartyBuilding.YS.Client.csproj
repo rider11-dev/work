@@ -183,6 +183,10 @@
     <Compile Include="MainContentPage.xaml.cs">
       <DependentUpon>MainContentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PartyOrg\Query\org.xaml.cs">
+      <DependentUpon>org.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PartyOrg\Query\ChartHelper.cs" />
     <Compile Include="PartyOrg\Query\zzhdcs.xaml.cs">
       <DependentUpon>zzhdcs.xaml</DependentUpon>
     </Compile>
@@ -235,6 +239,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="PublicHelper.cs" />
     <Compile Include="Sys\Evaluation\EvalProjAssignPage.xaml.cs">
       <DependentUpon>EvalProjAssignPage.xaml</DependentUpon>
     </Compile>
@@ -270,6 +275,21 @@
     <Content Include="api.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="data\gb.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="data\df.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="data\dy.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="data\org2new.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="data\org.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -445,6 +465,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="PartyOrg\Query\org.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="PartyOrg\Query\zzhdcs.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -528,29 +552,29 @@
     <Resource Include="Resources\村级活动场所.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Share\Client\Client.csproj">
+    <ProjectReference Include="..\..\..\..\Share\Client\MyNet.Client.csproj">
       <Project>{6aabd137-bb47-4636-8635-de0f6dc9aea1}</Project>
-      <Name>Client</Name>
+      <Name>MyNet.Client</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Share\Components.Resource\Components.Resource.csproj">
+    <ProjectReference Include="..\..\..\..\Share\Components.Resource\MyNet.Components.Resource.csproj">
       <Project>{4ecb69ea-c6d9-436b-9689-90d065424f53}</Project>
-      <Name>Components.Resource</Name>
+      <Name>MyNet.Components.Resource</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Share\Components.WPF\Components.WPF.csproj">
+    <ProjectReference Include="..\..\..\..\Share\Components.WPF\MyNet.Components.WPF.csproj">
       <Project>{6324a5cc-0daf-4af4-80a3-5d2a60769c96}</Project>
-      <Name>Components.WPF</Name>
+      <Name>MyNet.Components.WPF</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Share\Components\Components.csproj">
+    <ProjectReference Include="..\..\..\..\Share\Components\MyNet.Components.csproj">
       <Project>{9ed019a0-a26a-4725-aa70-2b52bf7a5416}</Project>
-      <Name>Components</Name>
+      <Name>MyNet.Components</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Share\Model\Model.csproj">
+    <ProjectReference Include="..\..\..\..\Share\Model\MyNet.Model.csproj">
       <Project>{bb11afa2-784c-4e60-9586-6608d8338d67}</Project>
-      <Name>Model</Name>
+      <Name>MyNet.Model</Name>
       <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Biz.PartyBuilding.YS.Models\Biz.PartyBuilding.YS.Models.csproj">

@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -177,25 +178,25 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\Components.Resource\Components.Resource.csproj">
+    <ProjectReference Include="..\Components.Resource\MyNet.Components.Resource.csproj">
       <Project>{4ecb69ea-c6d9-436b-9689-90d065424f53}</Project>
-      <Name>Components.Resource</Name>
+      <Name>MyNet.Components.Resource</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Components\Components.csproj">
+    <ProjectReference Include="..\Components\MyNet.Components.csproj">
       <Project>{9ed019a0-a26a-4725-aa70-2b52bf7a5416}</Project>
-      <Name>Components</Name>
+      <Name>MyNet.Components</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Model\Model.csproj">
+    <ProjectReference Include="..\Model\MyNet.Model.csproj">
       <Project>{bb11afa2-784c-4e60-9586-6608d8338d67}</Project>
-      <Name>Model</Name>
+      <Name>MyNet.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Repository\Repository.csproj">
+    <ProjectReference Include="..\Repository\MyNet.Repository.csproj">
       <Project>{0c81a4e4-bd67-4f8d-a602-ec4062a0d0c2}</Project>
-      <Name>Repository</Name>
+      <Name>MyNet.Repository</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Service\Service.csproj">
+    <ProjectReference Include="..\Service\MyNet.Service.csproj">
       <Project>{1ecb045c-bb92-481a-ba25-bf0b48a92dfd}</Project>
-      <Name>Service</Name>
+      <Name>MyNet.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

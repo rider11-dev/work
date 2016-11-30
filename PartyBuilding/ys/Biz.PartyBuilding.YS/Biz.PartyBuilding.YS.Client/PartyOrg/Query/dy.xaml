@@ -3,12 +3,81 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       xmlns:local="clr-namespace:Biz.PartyBuilding.YS.Client.PartyOrg.Query"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-      Title="党员">
-
-    <Grid>
-        <Label Content="{Binding Title}"/>
+      d:DesignHeight="300" d:DesignWidth="700"
+      Title="党员"
+      Loaded="Page_Loaded">
+    <Page.Resources>
+        <Style x:Key="radioStyle" TargetType="RadioButton">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="4,0,2,0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="BorderBrush" Value="Red"/>
+        </Style>
+        <Style x:Key="lblStyle" TargetType="Label" BasedOn="{StaticResource lblInputBaseStyle}">
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Right"/>
+            <Setter Property="Margin" Value="16,0,0,0"/>
+        </Style>
+        <Style x:Key="txtBlockStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Red"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+        <Style x:Key="colChartAxis" TargetType="lvc:Axis">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+    </Page.Resources>
+    <Grid x:Name="grid">
+        <Grid.RowDefinitions>
+            <RowDefinition MaxHeight="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Row="0" Header="总计" BorderBrush="LightGray" BorderThickness="1">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="党员总计：" Style="{StaticResource lblStyle}"/>
+                <TextBlock x:Name="txtDyTotal" Style="{StaticResource txtBlockStyle}"/>
+                <Label Content="正式党员：" Style="{StaticResource lblStyle}"/>
+                <TextBlock x:Name="txtZsDy" Style="{StaticResource txtBlockStyle}"/>
+                <Label Content="预备党员：" Style="{StaticResource lblStyle}"/>
+                <TextBlock x:Name="txtYbDyTotal" Style="{StaticResource txtBlockStyle}"/>
+                <Label Content="入党积极分子：" Style="{StaticResource lblStyle}"/>
+                <TextBlock x:Name="txtJjfzTotal" Style="{StaticResource txtBlockStyle}"/>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Grid.Row="1" Header="统计图表">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0">
+                    <lvc:CartesianChart Series="{Binding ColSeries}" LegendLocation="Top" x:Name="chart">
+                        <lvc:CartesianChart.AxisX>
+                            <lvc:Axis Title="乡镇" Labels="{Binding ColLabels}" Style="{StaticResource colChartAxis}"/>
+                        </lvc:CartesianChart.AxisX>
+                        <lvc:CartesianChart.AxisY>
+                            <lvc:Axis Title="党员人数" LabelFormatter="{Binding StringFormat}"  Style="{StaticResource colChartAxis}"/>
+                        </lvc:CartesianChart.AxisY>
+                    </lvc:CartesianChart>
+                </Border>
+                <Border Grid.Column="1">
+                    <DockPanel LastChildFill="True">
+                        <StackPanel Height="40" DockPanel.Dock="Top" Orientation="Horizontal">
+                            <RadioButton Style="{StaticResource radioStyle}" Content="类别" Command="{Binding CmdLoadPies}" CommandParameter="type" x:Name="radioType"/>
+                            <RadioButton Style="{StaticResource radioStyle}" Content="性别" Command="{Binding CmdLoadPies}" CommandParameter="sex"/>
+                            <RadioButton Style="{StaticResource radioStyle}" Content="民族" Command="{Binding CmdLoadPies}" CommandParameter="nation"/>
+                            <RadioButton Style="{StaticResource radioStyle}" Content="党内职务" Command="{Binding CmdLoadPies}" CommandParameter="dnzw"/>
+                            <RadioButton Style="{StaticResource radioStyle}" Content="学历" Command="{Binding CmdLoadPies}" CommandParameter="xl"/>
+                            <RadioButton Style="{StaticResource radioStyle}" Content="年龄" Command="{Binding CmdLoadPies}" CommandParameter="age"/>
+                        </StackPanel>
+                        <lvc:PieChart LegendLocation="Bottom" x:Name="chartPie" Series="{Binding PieSeries}"/>
+                    </DockPanel>
+                </Border>
+            </Grid>
+        </GroupBox>
     </Grid>
 </Page>

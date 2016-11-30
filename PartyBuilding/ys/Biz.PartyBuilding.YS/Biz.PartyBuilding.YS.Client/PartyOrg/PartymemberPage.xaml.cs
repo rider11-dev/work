@@ -76,7 +76,7 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg
 
         private void Search(bool all = false)
         {
-            var items = PartyBuildingContext.partymembers;
+            var items = PartyBuildingContext.dy;
             if (items.IsEmpty())
             {
                 return;

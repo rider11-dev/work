@@ -20,6 +20,7 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg.Models
         public string idcard { get; set; }
         public string xl { get; set; }
         public string phone { get; set; }
+        public string town { get; set; }
         /// <summary>
         /// 籍贯
         /// </summary>

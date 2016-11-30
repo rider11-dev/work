@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="MyNet.Model">
       <HintPath>..\..\..\..\Share\dlls\MyNet\MyNet.Model.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

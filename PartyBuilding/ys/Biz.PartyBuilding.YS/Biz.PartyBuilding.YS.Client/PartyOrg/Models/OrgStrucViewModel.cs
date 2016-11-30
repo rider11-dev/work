@@ -177,6 +177,91 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg.Models
             }
         }
 
+        string _org_type;
+        public string org_type
+        {
+            get
+            {
+                return _org_type;
+            }
+            set
+            {
+                if (_org_type != value)
+                {
+                    _org_type = value;
+                    base.RaisePropertyChanged("org_type");
+                }
+            }
+        }
+
+        int _dy_zs;
+        public int dy_zs
+        {
+            get
+            {
+                return _dy_zs;
+            }
+            set
+            {
+                if (_dy_zs != value)
+                {
+                    _dy_zs = value;
+                    base.RaisePropertyChanged("dy_zs");
+                }
+            }
+        }
+
+        int _dy_yb;
+        public int dy_yb
+        {
+            get
+            {
+                return _dy_yb;
+            }
+            set
+            {
+                if (_dy_yb != value)
+                {
+                    _dy_yb = value;
+                    base.RaisePropertyChanged("dy_yb");
+                }
+            }
+        }
+
+        int _dy_jjfz;
+        public int dy_jjfz
+        {
+            get
+            {
+                return _dy_jjfz;
+            }
+            set
+            {
+                if (_dy_jjfz != value)
+                {
+                    _dy_jjfz = value;
+                    base.RaisePropertyChanged("dy_jjfz");
+                }
+            }
+        }
+
+        string _town;
+        public string town
+        {
+            get
+            {
+                return _town;
+            }
+            set
+            {
+                if (_town != value)
+                {
+                    _town = value;
+                    base.RaisePropertyChanged("town");
+                }
+            }
+        }
+
         public void CopyTo(OrgStrucViewModel target)
         {
             target.org_code = this.org_code;
@@ -185,6 +270,12 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg.Models
             target.org_contacts = this.org_contacts;
             target.org_phone = this.org_phone;
             target.org_addr = this.org_addr;
+            target.org_type = this.org_type;
+
+            target.dy_zs = this.dy_zs;
+            target.dy_yb = this.dy_yb;
+            target.dy_jjfz = this.dy_jjfz;
+            target.town = this.town;
         }
 
     }

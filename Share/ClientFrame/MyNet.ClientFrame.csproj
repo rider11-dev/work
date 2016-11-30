@@ -98,21 +98,21 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Client\Client.csproj">
+    <ProjectReference Include="..\Client\MyNet.Client.csproj">
       <Project>{6aabd137-bb47-4636-8635-de0f6dc9aea1}</Project>
-      <Name>Client</Name>
+      <Name>MyNet.Client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Components.Resource\Components.Resource.csproj">
+    <ProjectReference Include="..\Components.Resource\MyNet.Components.Resource.csproj">
       <Project>{4ecb69ea-c6d9-436b-9689-90d065424f53}</Project>
-      <Name>Components.Resource</Name>
+      <Name>MyNet.Components.Resource</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Components.WPF\Components.WPF.csproj">
+    <ProjectReference Include="..\Components.WPF\MyNet.Components.WPF.csproj">
       <Project>{6324a5cc-0daf-4af4-80a3-5d2a60769c96}</Project>
-      <Name>Components.WPF</Name>
+      <Name>MyNet.Components.WPF</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Components\Components.csproj">
+    <ProjectReference Include="..\Components\MyNet.Components.csproj">
       <Project>{9ed019a0-a26a-4725-aa70-2b52bf7a5416}</Project>
-      <Name>Components</Name>
+      <Name>MyNet.Components</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

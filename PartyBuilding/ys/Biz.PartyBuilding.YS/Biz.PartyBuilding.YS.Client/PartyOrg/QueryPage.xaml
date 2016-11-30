@@ -18,7 +18,8 @@
     </Page.Resources>
     <DockPanel LastChildFill="True">
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="10,10,10,2">
-            <RadioButton Content="两新组织" Style="{StaticResource radioStyle}" Command="{Binding CmdQuery}" CommandParameter="org2new" x:Name="radioOrg2New"/>
+            <RadioButton Content="党组织" Style="{StaticResource radioStyle}" Command="{Binding CmdQuery}" CommandParameter="org" x:Name="radioOrg"/>
+            <RadioButton Content="两新组织" Style="{StaticResource radioStyle}" Command="{Binding CmdQuery}" CommandParameter="org2new"/>
             <RadioButton Content="党员" Style="{StaticResource radioStyle}" Command="{Binding CmdQuery}" CommandParameter="dy"/>
             <RadioButton Content="党费" Style="{StaticResource radioStyle}" Command="{Binding CmdQuery}" CommandParameter="df"/>
             <RadioButton Content="村干部" Style="{StaticResource radioStyle}" Command="{Binding CmdQuery}" CommandParameter="cgb"/>

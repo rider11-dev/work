@@ -39,15 +39,15 @@
   <ItemGroup>
     <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.1.50.2\lib\net45\Dapper.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="DapperExtensions, Version=1.4.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DapperExtensions.1.4.4\lib\net40\DapperExtensions.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -59,9 +59,6 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AreaRepository.cs" />
@@ -101,13 +98,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Share\Model\Model.csproj">
+    <ProjectReference Include="..\..\..\..\Share\Model\MyNet.Model.csproj">
       <Project>{bb11afa2-784c-4e60-9586-6608d8338d67}</Project>
-      <Name>Model</Name>
+      <Name>MyNet.Model</Name>
+      <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Share\Repository\Repository.csproj">
+    <ProjectReference Include="..\..\..\..\Share\Repository\MyNet.Repository.csproj">
       <Project>{0c81a4e4-bd67-4f8d-a602-ec4062a0d0c2}</Project>
-      <Name>Repository</Name>
+      <Name>MyNet.Repository</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Biz.PartyBuilding.YS.Models\Biz.PartyBuilding.YS.Models.csproj">
       <Project>{f46375cf-9fbc-4143-bb71-e9fcd6863306}</Project>

@@ -49,9 +49,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Model\Model.csproj">
+    <ProjectReference Include="..\Model\MyNet.Model.csproj">
       <Project>{bb11afa2-784c-4e60-9586-6608d8338d67}</Project>
-      <Name>Model</Name>
+      <Name>MyNet.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

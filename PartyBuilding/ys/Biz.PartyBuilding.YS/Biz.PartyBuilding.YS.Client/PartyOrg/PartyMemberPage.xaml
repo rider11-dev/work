@@ -99,7 +99,7 @@
         <!--row3：datagrid-->
         <GroupBox Grid.Row="2" Grid.Column="1" Header="党员信息列表" Style="{StaticResource headerBaseStyle}">
             <DataGrid x:Name="dg" Style="{StaticResource gridBaseStyle}"
-                          ItemsSource="{x:Static party:PartyBuildingContext.partymembers}">
+                          ItemsSource="{x:Static party:PartyBuildingContext.dy}">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn CellStyle="{StaticResource ckCellStyle}" HeaderStyle="{StaticResource ckCellHeaderStyle}"
                                                 CanUserResize="False"/>

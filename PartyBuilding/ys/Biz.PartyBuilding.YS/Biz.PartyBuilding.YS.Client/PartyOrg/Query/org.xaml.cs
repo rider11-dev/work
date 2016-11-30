@@ -1,5 +1,7 @@
-﻿using LiveCharts;
+﻿using Biz.PartyBuilding.YS.Client.PartyOrg.Models;
+using LiveCharts;
 using LiveCharts.Wpf;
+using MyNet.Components.Misc;
 using MyNet.Components.WPF.Command;
 using System;
 using System.Collections.Generic;
@@ -19,16 +21,26 @@ using System.Windows.Shapes;
 namespace Biz.PartyBuilding.YS.Client.PartyOrg.Query
 {
     /// <summary>
-    /// cgb.xaml 的交互逻辑
+    /// org.xaml 的交互逻辑
     /// </summary>
-    public partial class cgb : Page
+    public partial class org : Page
     {
-        IEnumerable<dynamic> allCgbs = PartyBuildingContext.cadres;
+        IEnumerable<OrgStrucViewModel> allOrgs = PartyBuildingContext.orgs;
         public SeriesCollection ColSeries { get; set; }
         public SeriesCollection PieSeries { get; set; }
         public List<string> ColLabels { get; set; }
         public Func<ChartPoint, string> PiePointLabel { get; set; }
-        public cgb()
+
+        public static NumberRange[] DyRanges = new NumberRange[]
+           {
+                new NumberRange {Max=10,Unit="人" },
+                new NumberRange {Min=10,Max=30,Unit="人" },
+                new NumberRange {Min=30,Max=50,Unit="人" },
+                new NumberRange {Min=50,Max=100,Unit="人" },
+                new NumberRange {Min=100,Unit="人"}
+           };
+
+        public org()
         {
             InitializeComponent();
             DataContext = this;
@@ -44,31 +56,29 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg.Query
             InitTotal();
             InitColChart();
 
-            radioTown.Command.Execute("town");
-            radioTown.IsChecked = true;
+            radioType.Command.Execute("type");
+            radioType.IsChecked = true;
         }
 
         private void InitTotal()
         {
-            txtCgbTotal.Text = allCgbs.Count().ToString();
-            txtMale.Text = allCgbs.Where(m => m.sex == "男").Count().ToString();
-            txtFemale.Text = allCgbs.Where(m => m.sex == "女").Count().ToString();
+            txtOrgTotal.Text = allOrgs.Count().ToString();
         }
 
         private void InitColChart()
         {
-            var groups = allCgbs.GroupBy(m => m.town);
+            var groups = allOrgs.GroupBy(m => m.town);
 
             ChartValues<int> values = new ChartValues<int>();
             foreach (var gp in groups)
             {
-                ColLabels.Add((string)gp.Key);
+                ColLabels.Add(gp.Key);
                 values.Add(gp.Count());
             }
 
             ColSeries.Add(new ColumnSeries
             {
-                Title = "村干部人数",
+                Title = "党组织个数",
                 Values = values,
                 Fill = new SolidColorBrush(Color.FromRgb(0, 255, 0))
             });
@@ -98,30 +108,21 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg.Query
             switch (pieType)
             {
                 case "town":
-                    ChartHelper.LoadPies(PieSeries, allCgbs.GroupBy(m => (string)m.town), PiePointLabel);
+                    ChartHelper.LoadPies(PieSeries, allOrgs.GroupBy(m => m.town), PiePointLabel);
                     break;
-                case "sex":
-                    ChartHelper.LoadPies(PieSeries, allCgbs.GroupBy(m => (string)m.sex), PiePointLabel);
+                case "type":
+                    ChartHelper.LoadPies(PieSeries, allOrgs.GroupBy(m => m.org_type), PiePointLabel);
                     break;
-                case "age":
+                case "dy_zs":
                     double min, max;
-                    foreach (var range in ChartHelper.AgeRanges)
+                    foreach (var range in DyRanges)
                     {
                         min = range.Min.HasValue ? (double)range.Min : 0;
                         max = range.Max.HasValue ? (double)range.Max : 100000;
                         ChartHelper.AddAPie(PieSeries, range.Title,
-                            new ChartValues<int> { allCgbs.Count(m => Convert.ToInt32(m.age) >= min && Convert.ToInt32(m.age) < max) },
+                            new ChartValues<int> { allOrgs.Count(m => m.dy_zs >= min && m.dy_zs < max) },
                             PiePointLabel);
                     }
-                    break;
-                case "nation":
-                    ChartHelper.LoadPies(PieSeries, allCgbs.GroupBy(m => (string)m.nation), PiePointLabel);
-                    break;
-                case "xl":
-                    ChartHelper.LoadPies(PieSeries, allCgbs.GroupBy(m => (string)m.xl), PiePointLabel);
-                    break;
-                case "zw":
-                    ChartHelper.LoadPies(PieSeries, allCgbs.GroupBy(m => (string)m.zw), PiePointLabel);
                     break;
                 default:
                     break;

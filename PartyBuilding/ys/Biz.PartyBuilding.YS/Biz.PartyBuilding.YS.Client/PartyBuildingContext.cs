@@ -19,21 +19,31 @@ namespace Biz.PartyBuilding.YS.Client
             new{name="孙晓冉",party="曹县县委组织部",lasttime="2016-12-20 14:23:55"},
         };
 
-        public static List<OrgStrucViewModel> orgs = new List<OrgStrucViewModel>
+        static List<OrgStrucViewModel> _orgs = null;
+        public static List<OrgStrucViewModel> orgs
         {
-            new OrgStrucViewModel{org_code="cxxwzzb",org_name="曹县县委组织部",org_contacts="张老师",org_phone="13525008945",org_addr="县委前街1号"},
-            new OrgStrucViewModel{org_code="cxccbsc",org_name="曹城办事处党组织",org_parent_name="曹县县委组织部",org_contacts="王晓辉",org_phone="05301234567",org_addr="曹城办事处"}
-        };
+            get
+            {
+                if (_orgs == null)
+                {
+                    _orgs = PublicHelper.GetDataFromJsonFile<OrgStrucViewModel>("org");
+                }
+                return _orgs;
+            }
+        }
 
-        public static IEnumerable<Org2NewViewModel> org2news = new List<Org2NewViewModel>
+        static IEnumerable<Org2NewViewModel> _org2news = null;
+        public static IEnumerable<Org2NewViewModel> org2news
         {
-            new Org2NewViewModel{comp_name="长江科技发展有限公司",mem_count_dy=5,emp_count=67,is_dzz_establish="是",dzz_establish_type="单独建立",zbsj_name="王长江",zbsj_sex="男",zbsj_age=50,zbsj_xl="大专",zbsj_joinin_time="1996-10-12",has_atc_place="是",atc_place_area="50"},
-            new Org2NewViewModel{comp_name="曹县一中",mem_count_dy=12,emp_count=43,is_dzz_establish="是",dzz_establish_type="联合建立",zbsj_name="付守国",zbsj_sex="男",zbsj_age=56,zbsj_xl="本科",zbsj_joinin_time="1990-01-20",has_atc_place="是",atc_place_area="60"},
-            new Org2NewViewModel{comp_name="曹县二中",mem_count_dy=16,emp_count=20,is_dzz_establish="是",dzz_establish_type="联合建立",zbsj_name="王立新",zbsj_sex="男",zbsj_age=56,zbsj_xl="大专",zbsj_joinin_time="2001-02-20",has_atc_place="是",atc_place_area="60"},
-            new Org2NewViewModel{comp_name="曹县三中",mem_count_dy=20,emp_count=23,is_dzz_establish="是",dzz_establish_type="联合建立",zbsj_name="陈建国",zbsj_sex="男",zbsj_age=56,zbsj_xl="高中",zbsj_joinin_time="2014-10-20",has_atc_place="是",atc_place_area="60"},
-            new Org2NewViewModel{comp_name="民政局",mem_count_dy=30,emp_count=22,is_dzz_establish="是",dzz_establish_type="联合建立",zbsj_name="李玖哲",zbsj_sex="男",zbsj_age=56,zbsj_xl="硕士",zbsj_joinin_time="1989-01-11",has_atc_place="是",atc_place_area="60"},
-            new Org2NewViewModel{comp_name="福利中心",mem_count_dy=31,emp_count=100,is_dzz_establish="是",dzz_establish_type="联合建立",zbsj_name="王家湾",zbsj_sex="男",zbsj_age=56,zbsj_xl="本科",zbsj_joinin_time="1999-12-20",has_atc_place="是",atc_place_area="60"},
-        };
+            get
+            {
+                if (_org2news == null)
+                {
+                    _org2news = PublicHelper.GetDataFromJsonFile<Org2NewViewModel>("org2new");
+                }
+                return _org2news;
+            }
+        }
 
         public static List<CmbItem> CmbItemsYesNo = new List<CmbItem>
         {
@@ -144,34 +154,18 @@ namespace Biz.PartyBuilding.YS.Client
             new CmbItem{Id="5",Text="退休人员"}
         };
 
-        public static IEnumerable<PartyMemberViewModel> partymembers = new List<PartyMemberViewModel>
+        static IEnumerable<PartyMemberViewModel> _dy = null;
+        public static IEnumerable<PartyMemberViewModel> dy
         {
-            new PartyMemberViewModel{
-                type="正式党员",name="张小虎",sex="男",nation="汉族",party="曹县县委组织部",dnzw="委员",age="27",jg="山东曹县",
-                join_in_time="2014-10-24",zz_time="2015-12-12",idcard="372924199912661212",xl="本科",
-                remark="作风优良",phone="13789561234",now_gzgw="企事业单位专业技术人员",month_salary="4578",
-                month_party_money="45"
-            },
-             new PartyMemberViewModel{
-                type="正式党员",name="王文哲",sex="女",nation="回族",party="曹县县委组织部",dnzw="副书记",age="50",jg="山东曹县",
-                join_in_time="1999-10-24",zz_time="2001-12-12",idcard="37292412345661212",xl="大专",
-                remark="",phone="15989561234",now_gzgw="企事业单位管理人员",month_salary="6000",
-                month_party_money="90"
-            },
-            new PartyMemberViewModel{
-                type="入党积极分子",name="陈晓冉",sex="女",nation="汉族",party="曹城办事处党组织",dnzw="委员",age="35",jg="山东菏泽",
-                join_in_time="2014-10-24",zz_time="2015-12-12",idcard="372924199912661212",xl="本科",
-                remark="",phone="13789561234",now_gzgw="企事业单位专业技术人员",month_salary="3000",
-                month_party_money="15"
-            },
-             new PartyMemberViewModel{
-                type="预备党员",name="隋庆亮",sex="男",nation="壮族",party="曹城办事处党组织",dnzw="委员",age="25",jg="山东成武",
-                join_in_time="2010-10-24",zz_time="2012-12-12",idcard="37292412345661212",xl="本科",
-                remark="",phone="15989561234",now_gzgw="企事业单位管理人员",month_salary="3000",
-                month_party_money="15"
+            get
+            {
+                if (_dy == null)
+                {
+                    _dy = PublicHelper.GetDataFromJsonFile<PartyMemberViewModel>("dy");
+                }
+                return _dy;
             }
-        };
-
+        }
         public static List<dynamic> Families = new List<dynamic>
         {
             new{cw="儿子",name="王建国",age="23",zzmm="群众",work_unit="设计院",zw="职员"},
@@ -208,25 +202,34 @@ namespace Biz.PartyBuilding.YS.Client
             new CmbItem{Id="3",Text="县派"},
         };
 
-        public static IEnumerable<dynamic> Df = new List<dynamic>
+        static IEnumerable<dynamic> _df;
+        public static IEnumerable<dynamic> Df
         {
-             new{dy_name="张明",dy_party="曹县县委组织部",df_zxbz="在职工",df_base="3000",df_month=20,df_year_plan=240,df_year_actual=240,df_year="2015"},
-             new{dy_name="吴玲",dy_party="曹县县委组织部",df_zxbz="离退休党员",df_base="2000",df_month=10,df_year_plan=120,df_year_actual=100,df_year="2016"},
+            get
+            {
+                if (_df == null)
+                {
+                    _df = PublicHelper.GetDataFromJsonFile<dynamic>("df");
+                }
+                return _df;
+            }
+        }
 
-              new{dy_name="赵明亮",dy_party="曹城办事处党组织",df_zxbz="在职工",df_base="4000",df_month=40,df_year_plan=480,df_year_actual=240,df_year="2015"},
-             new{dy_name="吴玲",dy_party="曹城办事处党组织",df_zxbz="学生党员",df_base="0",df_month=2,df_year_plan=24,df_year_actual=22,df_year="2016"},
-        };
-
+        static IEnumerable<dynamic> _cadres = null;
         /// <summary>
         /// 干部管理
         /// </summary>
-        public static IEnumerable<dynamic> cadres = new List<dynamic>
+        public static IEnumerable<dynamic> cadres
         {
-            new{name="张三梁",type="省派",sex="男",age="40",nation="汉族",xl="大专",idcard="372924198955223456",zw="村委会主任",rz_time="2014-12-20",rz_jl="",town="王集镇",village="徐楼村",rz_xc="王集镇徐楼村",lz_time="",lz_reason=""},
-            new{name="吴思清",type="市派",sex="男",age="34",nation="回族",xl="高中",idcard="372924193455221111",zw="村会计",rz_time="2015-01-24",rz_jl="",town="王集镇",village="徐楼村",rz_xc="王集镇徐楼村",lz_time="",lz_reason=""},
-            new{name="李新明",type="市派",sex="男",age="25",nation="汉族",xl="本科",idcard="372924197855225390",zw="组织委员",rz_time="2010-06-03",rz_jl="",town="孙老家镇",village="焦庄",rz_xc="孙老家镇焦庄",lz_time="",lz_reason=""},
-            new{name="王玲",type="县派",sex="女",age="57",nation="汉族",xl="本科",idcard="372924196012221212",zw="宣传委员",rz_time="2009-12-26",rz_jl="",town="孙老家镇",village="焦庄",rz_xc="孙老家镇焦庄",lz_time="2016-08-08",lz_reason="退休"}
-        };
+            get
+            {
+                if (_cadres == null)
+                {
+                    _cadres = PublicHelper.GetDataFromJsonFile<dynamic>("gb");
+                }
+                return _cadres;
+            }
+        }
 
         public static List<dynamic> work_news = new List<dynamic>
         {

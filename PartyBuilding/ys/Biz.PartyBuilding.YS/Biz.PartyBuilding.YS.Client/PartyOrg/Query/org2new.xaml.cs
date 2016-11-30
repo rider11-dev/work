@@ -29,11 +29,12 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg.Query
         public Func<ChartPoint, string> PiePointLabel { get; set; }
         public NumberRange[] NumRanges = new NumberRange[]
         {
-            new NumberRange {Max=10 },
-            new NumberRange {Min=10,Max=20 },
-            new NumberRange {Min=20,Max=30 },
-            new NumberRange {Min=30}
+            new NumberRange {Max=10,Unit="人" },
+            new NumberRange {Min=10,Max=20,Unit="人" },
+            new NumberRange {Min=20,Max=30,Unit="人" },
+            new NumberRange {Min=30,Unit="人"}
         };
+
 
         public org2new()
         {
@@ -45,13 +46,25 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg.Query
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            InitTotal();
+
             InitColChart();
 
-            PiePointLabel = chartPoint => { return string.Format("{0}（{1:P}）", chartPoint.Y, chartPoint.Participation); };
+            PiePointLabel = ChartHelper.PiePointLabel;
 
             pieByDyCount.IsChecked = true;
 
             DataContext = this;
+        }
+
+        private void InitTotal()
+        {
+            txtOrgTotal.Text = PartyBuildingContext.org2news.Count().ToString();
+            int dyTotal = PartyBuildingContext.org2news.Sum(m => m.mem_count_dy);
+            int empTotal = PartyBuildingContext.org2news.Sum(m => m.emp_count);
+            txtDyTotal.Text = dyTotal.ToString();
+            txtEmpTotal.Text = empTotal.ToString();
+            txtDyPercent.Text = (dyTotal * 100.0 / empTotal).ToString("f2") + "%";
         }
 
         private void InitColChart()

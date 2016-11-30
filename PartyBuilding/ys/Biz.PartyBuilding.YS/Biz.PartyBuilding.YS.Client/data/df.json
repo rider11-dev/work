@@ -1,0 +1,42 @@
+﻿[
+    {
+        "dy_name": "张明",
+        "dy_party": "曹县县委组织部",
+        "df_zxbz": "在职工",
+        "df_base": 3000,
+        "df_month": 20,
+        "df_year_plan": 240,
+        "df_year_actual": 240,
+        "df_year": "2015"
+    },
+    {
+        "dy_name": "吴玲",
+        "dy_party": "曹县县委组织部",
+        "df_zxbz": "离退休党员",
+        "df_base": 2000,
+        "df_month": 10,
+        "df_year_plan": 120,
+        "df_year_actual": 100,
+        "df_year": "2016"
+    },
+    {
+        "dy_name": "赵明亮",
+        "dy_party": "曹城办事处党组织",
+        "df_zxbz": "在职工",
+        "df_base": 4000,
+        "df_month": 40,
+        "df_year_plan": 480,
+        "df_year_actual": 480,
+        "df_year": "2015"
+    },
+    {
+        "dy_name": "吴玲",
+        "dy_party": "曹城办事处党组织",
+        "df_zxbz": "学生党员",
+        "df_base": 0,
+        "df_month": 2,
+        "df_year_plan": 24,
+        "df_year_actual": 22,
+        "df_year": "2016"
+    }
+]

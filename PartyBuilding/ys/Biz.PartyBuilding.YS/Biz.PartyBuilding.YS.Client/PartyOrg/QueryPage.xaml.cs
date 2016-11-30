@@ -54,8 +54,8 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg
 
         private void BasePage_Loaded(object sender, RoutedEventArgs e)
         {
-            radioOrg2New.Command.Execute("org2new");
-            radioOrg2New.IsChecked = true;
+            radioOrg.Command.Execute("org");
+            radioOrg.IsChecked = true;
         }
     }
 }
