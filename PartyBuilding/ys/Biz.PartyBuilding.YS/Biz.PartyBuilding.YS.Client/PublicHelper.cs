@@ -13,7 +13,7 @@ namespace Biz.PartyBuilding.YS.Client
     {
         public static List<TReturn> GetDataFromJsonFile<TReturn>(string filename)
         {
-            var dllPath = Path.GetDirectoryName(new Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).AbsolutePath);
+            var dllPath = Path.GetDirectoryName(new Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath);
             var file = dllPath + "/data/" + filename + ".json";
             if (!File.Exists(file))
             {
