@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50626
 File Encoding         : 65001
 
-Date: 2016-11-24 13:51:15
+Date: 2016-12-01 11:47:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -63,24 +63,22 @@ CREATE TABLE `auth_permission` (
 -- ----------------------------
 INSERT INTO `auth_permission` VALUES ('061f1473a00411e6a0a014dda9275f65', 'func_party_org_actplace', '组织活动场所管理', 'PermTypeFunc', 'func_party_org', '1009', '', null, '/Biz.PartyBuilding.YS.Client;component/PartyOrg/ActivityPlacePage.xaml', null, null, 'Left');
 INSERT INTO `auth_permission` VALUES ('15077f0d1fa340819f041905516a9c57', 'func_party_org_orgstruct', '组织架构', 'PermTypeFunc', 'func_party_org', '1001', '', null, '/Biz.PartyBuilding.YS.Client;component/PartyOrg/OrgStructPage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('1d70ef2c51a54a08adb6f2dac18d9db9', 'func_party_sys', '系统设置', 'PermTypeFunc', null, '14', '', null, null, null, '/Biz.PartyBuilding.YS.Client;component/Resources/img/party_sys.png', 'Center');
 INSERT INTO `auth_permission` VALUES ('1d9195a7a00411e6a0a014dda9275f65', 'func_party_org_query', '查询统计', 'PermTypeFunc', 'func_party_org', '1010', '', null, '/Biz.PartyBuilding.YS.Client;component/PartyOrg/QueryPage.xaml', null, null, 'Left');
 INSERT INTO `auth_permission` VALUES ('1d999f9625ec403b84bbe9eefa2be065', 'func_party_learn', '党建学习', 'PermTypeFunc', null, '13', '', null, null, null, '/Biz.PartyBuilding.YS.Client;component/Resources/img/party_learn.png', 'Center');
 INSERT INTO `auth_permission` VALUES ('3828bf62a00311e6a0a014dda9275f65', 'func_party_org_2new', '两新组织', 'PermTypeFunc', 'func_party_org', '1002', '', null, '/Biz.PartyBuilding.YS.Client;component/PartyOrg/Org2NewPage.xaml', null, null, 'Left');
 INSERT INTO `auth_permission` VALUES ('468f84c5a00511e6a0a014dda9275f65', 'func_party_daily_taskrec', '我的任务', 'PermTypeFunc', 'func_party_daily', '1102', '', null, '/Biz.PartyBuilding.YS.Client;component/Daily/TaskReceivePage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('50c8ccbf9853454080aa80c6feab88fc', 'func_party_sys_eval_proj', '考核项目设置', 'PermTypeFunc', 'func_party_sys_eval', '140201', '', null, '/Biz.PartyBuilding.YS.Client;component/Sys/Evaluation/EvaluateProjectPage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('54bd6fd248d345eeab8cb51ed844aa3a', 'func_party_sys_eval_projassign', '考核项目分配', 'PermTypeFunc', 'func_party_sys_eval', '140202', '', null, '/Biz.PartyBuilding.YS.Client;component/Sys/Evaluation/EvalProjAssignPage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('50c8ccbf9853454080aa80c6feab88fc', 'func_party_sys_eval_proj', '考核项目设置', 'PermTypeFunc', 'func_party_eval', '1205', '', null, '/Biz.PartyBuilding.YS.Client;component/Sys/Evaluation/EvaluateProjectPage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('54bd6fd248d345eeab8cb51ed844aa3a', 'func_party_sys_eval_projassign', '考核项目分配', 'PermTypeFunc', 'func_party_eval', '1206', '', null, '/Biz.PartyBuilding.YS.Client;component/Sys/Evaluation/EvalProjAssignPage.xaml', null, null, 'Left');
 INSERT INTO `auth_permission` VALUES ('5a6203d3a00511e6a0a014dda9275f65', 'func_party_daily_notice', '通知管理', 'PermTypeFunc', 'func_party_daily', '1103', '', null, '/Biz.PartyBuilding.YS.Client;component/Daily/NoticePage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('5c3f2bd9a00b11e6a0a014dda9275f65', 'func_party_sys_learn_channel', '栏目设置', 'PermTypeFunc', 'func_party_sys_learn', '140101', '', null, '/Biz.PartyBuilding.YS.Client;component/Sys/Learn/ChannelSetPage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('5c3f2bd9a00b11e6a0a014dda9275f65', 'func_party_sys_learn_channel', '栏目设置', 'PermTypeFunc', 'func_party_learn', '1305', '', null, '/Biz.PartyBuilding.YS.Client;component/Sys/Learn/ChannelSetPage.xaml', null, null, 'Left');
 INSERT INTO `auth_permission` VALUES ('63d9d648a00311e6a0a014dda9275f65', 'func_party_org_mem', '党员管理', 'PermTypeFunc', 'func_party_org', '1003', '', null, '/Biz.PartyBuilding.YS.Client;component/PartyOrg/PartyMemberPage.xaml', null, null, 'Left');
 INSERT INTO `auth_permission` VALUES ('69872d59a00511e6a0a014dda9275f65', 'func_party_daily_inforelease', '信息发布', 'PermTypeFunc', 'func_party_daily', '1104', '', null, '/Biz.PartyBuilding.YS.Client;component/Daily/InfoReleasePage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('7392abf3a00b11e6a0a014dda9275f65', 'func_party_sys_learn_article', '文章发布', 'PermTypeFunc', 'func_party_sys_learn', '140102', '', null, '/Biz.PartyBuilding.YS.Client;component/Sys/Learn/ArticlesPage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('7392abf3a00b11e6a0a014dda9275f65', 'func_party_sys_learn_article', '文章发布', 'PermTypeFunc', 'func_party_learn', '1306', '', null, '/Biz.PartyBuilding.YS.Client;component/Sys/Learn/ArticlesPage.xaml', null, null, 'Left');
 INSERT INTO `auth_permission` VALUES ('760de1580c9d48608e94da6324f35933', 'func_party_daily_taskdisp', '任务派遣', 'PermTypeFunc', 'func_party_daily', '1101', '', null, '/Biz.PartyBuilding.YS.Client;component/Daily/TaskDispatchPage.xaml', null, null, 'Left');
 INSERT INTO `auth_permission` VALUES ('7668a42fa00311e6a0a014dda9275f65', 'func_party_org_memaddbook', '党员通讯录', 'PermTypeFunc', 'func_party_org', '1004', '', null, '/Biz.PartyBuilding.YS.Client;component/PartyOrg/PartymemAddrBookPage.xaml', null, null, 'Left');
 INSERT INTO `auth_permission` VALUES ('809ef779a9ff43bf902a9f2d3ef6b207', 'func_party_daily', '日常管理', 'PermTypeFunc', null, '11', '', null, null, null, '/Biz.PartyBuilding.YS.Client;component/Resources/img/party_daily.png', 'Center');
 INSERT INTO `auth_permission` VALUES ('81944bfca00511e6a0a014dda9275f65', 'func_party_daily_partyactrecord', '党内组织生活', 'PermTypeFunc', 'func_party_daily', '1105', '', null, '/Biz.PartyBuilding.YS.Client;component/Daily/PartyActRecordPage.xaml', null, null, 'Left');
 INSERT INTO `auth_permission` VALUES ('91e3bcd4a00311e6a0a014dda9275f65', 'func_party_org_memdues', '党费管理', 'PermTypeFunc', 'func_party_org', '1005', '', null, '/Biz.PartyBuilding.YS.Client;component/PartyOrg/PartyMemDuesPage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('9533b43759b649b4be2625986ec35331', 'func_party_sys_learn', '党建学习', 'PermTypeFunc', 'func_party_sys', '1401', '', null, null, null, null, 'Left');
 INSERT INTO `auth_permission` VALUES ('ac72bb5ba00311e6a0a014dda9275f65', 'func_party_org_villagecadres', '村干部管理', 'PermTypeFunc', 'func_party_org', '1006', '', null, '/Biz.PartyBuilding.YS.Client;component/PartyOrg/VillageCadresPage.xaml', null, null, 'Left');
 INSERT INTO `auth_permission` VALUES ('b393d5078e9e451dace2d369769d46b9', 'func_party_eval', '考核管理', 'PermTypeFunc', null, '12', '', null, null, null, '/Biz.PartyBuilding.YS.Client;component/Resources/img/party_evaluation.png', 'Center');
 INSERT INTO `auth_permission` VALUES ('b3da249ba00911e6a0a014dda9275f65', 'func_party_learn_cleangov', '廉政建设', 'PermTypeFunc', 'func_party_learn', '1301', '', null, '/Biz.PartyBuilding.YS.Client;component/Learn/PartyLearnPage.xaml', null, null, 'Left');
@@ -90,7 +88,6 @@ INSERT INTO `auth_permission` VALUES ('cdabebee2c0f4dcc9520d7045e0e161f', 'func_
 INSERT INTO `auth_permission` VALUES ('d2afbb0da00311e6a0a014dda9275f65', 'func_party_org_collstuofficer', '大学生村官管理', 'PermTypeFunc', 'func_party_org', '1007', '', null, '/Biz.PartyBuilding.YS.Client;component/PartyOrg/CollegeStuOfficerPage.xaml', null, null, 'Left');
 INSERT INTO `auth_permission` VALUES ('d581b580a00911e6a0a014dda9275f65', 'func_party_learn_school', '网上党校', 'PermTypeFunc', 'func_party_learn', '1303', '', null, '/Biz.PartyBuilding.YS.Client;component/Learn/PartyLearnPage.xaml', null, null, 'Left');
 INSERT INTO `auth_permission` VALUES ('df2d7f48a00811e6a0a014dda9275f65', 'func_party_eval_evaldetail', '考核情况查询', 'PermTypeFunc', 'func_party_eval', '1203', '', null, '/Biz.PartyBuilding.YS.Client;component/Evaluation/EvaluateDetailPage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('eba3d856a53e446385fefd26773c6f52', 'func_party_sys_eval', '考核评价', 'PermTypeFunc', 'func_party_sys', '1402', '', null, null, null, null, 'Left');
 INSERT INTO `auth_permission` VALUES ('ebadfada1d2c49408132f732b6d96b1e', 'func_party_eval_upload', '资料上传', 'PermTypeFunc', 'func_party_eval', '1201', '', null, '/Biz.PartyBuilding.YS.Client;component/Evaluation/FileuploadPage.xaml', null, null, 'Left');
 INSERT INTO `auth_permission` VALUES ('ecd4b83aa00311e6a0a014dda9275f65', 'func_party_org_firstsecretary', '第一书记管理', 'PermTypeFunc', 'func_party_org', '1008', '', null, '/Biz.PartyBuilding.YS.Client;component/PartyOrg/FirstSecretaryPage.xaml', null, null, 'Left');
 INSERT INTO `auth_permission` VALUES ('ef3a914ca00811e6a0a014dda9275f65', 'func_party_eval_evalscore', '考核分数统计', 'PermTypeFunc', 'func_party_eval', '1204', '', null, '/Biz.PartyBuilding.YS.Client;component/Evaluation/EvaluateScorePage.xaml', null, null, 'Left');
@@ -225,29 +222,24 @@ CREATE TABLE `party_area` (
   `rooms` varchar(255) DEFAULT NULL,
   `location` varchar(255) DEFAULT NULL,
   `gps` varchar(255) DEFAULT NULL,
-  `pic` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of party_area
 -- ----------------------------
-INSERT INTO `party_area` VALUES ('da9e260636df4aeb896b49b9e659f25e', '一帮一一对红', '王集镇', '谷庄村', '145', '75', '4', '3', '配电室东100米', '', null);
-
--- ----------------------------
--- Table structure for party_area_pic
--- ----------------------------
-DROP TABLE IF EXISTS `party_area_pic`;
-CREATE TABLE `party_area_pic` (
-  `id` varchar(40) NOT NULL,
-  `pic` blob,
-  `area_id` varchar(40) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of party_area_pic
--- ----------------------------
+INSERT INTO `party_area` VALUES ('064B4E05B1BD8403235D5948F7274066', '曹城石庄', '曹城街道办事处', '石庄', '120', '140', '2', '2', '曹城街道办事处石庄', null);
+INSERT INTO `party_area` VALUES ('146DF94996AC6BDDD4AF6DA11E99B43C', '曹城北街', '曹城街道办事处', '北街', '90', '91', '1', '1', '曹城街道办事处北街', null);
+INSERT INTO `party_area` VALUES ('1545766bf6674114be87b14dc6ebc536', '徐楼村活动室', '王集镇', '徐楼村', '100', '120', '1', '1', '王集镇徐楼村', '');
+INSERT INTO `party_area` VALUES ('35636ED005DC1F62C42EBDB4920C3E90\r\n\r\n', '邵庄活动室', '孙老家镇', '邵庄', '120', '130', '4', '10', '孙老家镇邵庄村', null);
+INSERT INTO `party_area` VALUES ('469ec38305be4078a4e650ed9ad9741e', '谷庄村活动室', '王集镇', '谷庄村', '80', '110', '2', '1', '王集镇谷庄村', '');
+INSERT INTO `party_area` VALUES ('61AA01B1202E943183E0F35861C98837\r\n\r\n', '曹城西城', '曹城街道办事处', '西城', '79', '88', '1', '1', '曹城街道办事处西城', null);
+INSERT INTO `party_area` VALUES ('6f877692fca14aaa88ed7d2f52dadf8f', '张店活动室', '王集镇', '张店村', '60', '70', '3', '2', '王集镇张店村', '');
+INSERT INTO `party_area` VALUES ('765c0319bbda40c6ba9d8541554cf989', '白楼活动室', '孙老家镇', '白楼村', '65', '85', '1', '1', '孙老家镇白楼村', '');
+INSERT INTO `party_area` VALUES ('7FECFFDCA677568FAF21D983EC6EA82F\r\n\r\n', '焦庄活动室', '孙老家镇', '焦庄', '99', '102', '1', '1', '孙老家镇焦庄村', null);
+INSERT INTO `party_area` VALUES ('A00E0AABF7638205EAD0B7A0396B78CF\r\n\r\n', '曹城南关', '曹城街道办事处', '南关', '65', '78', '1', '1', '曹城街道办事处南关', null);
+INSERT INTO `party_area` VALUES ('BF04158F5E99150598891CAA6B1587FD\r\n\r\n', '曹城八里庙', '曹城街道办事处', '八里庙', '66', '78', '1', '1', '曹城街道办事处八里庙', null);
+INSERT INTO `party_area` VALUES ('C3B8608D4A09C401EEEB07A98FAB392A\r\n\r\n', '曹城马山庄', '曹城街道办事处', '马山庄', '130', '150', '1', '2', '曹城街道办事处马山庄', null);
 
 -- ----------------------------
 -- Table structure for party_info
@@ -270,7 +262,8 @@ CREATE TABLE `party_info` (
 INSERT INTO `party_info` VALUES ('55066b57be704b54b12ad063846e46f2', '推动非公党建工作取得新突破', '前不久，中共中央办公厅下发的《关于加强和改进非公有制企业党的建设工作的意见（试行）》，明确了非公企业党建工作许多重大问题，集中体现了改革开放以来非公企业党建工作实践成果和重大理论创新。我们要进一步加强学习和研究，在实践中不断深化认识、加深理解、贯彻落实。', '2016-11-24 08:52:37', '曹县县委组织部', '已发布', '已读');
 INSERT INTO `party_info` VALUES ('6dcf5421bdea4409942b89c522c8ca24', '曹县“党建+电商”带动群众脱贫致富', '曹县大集镇常庙村村民胡影，之前，他由于没有技术，在外打工收入甚微，自从前年在家开网店以来，收入一年比一年高，去年，他算算帐，20多万元稳拿手中。2013年7月，曹县探索建立了大集镇淘宝行业商会党支部，在发展壮大电子商务产业的同时，帮助更多的像胡影这样的贫困村民在家就能找到致富门路，全镇电子商务产值从2013年的2亿元，在2015年突破到12亿元。', '2016-11-24 08:52:52', '曹县县委组织部', '已发布', '已读');
 INSERT INTO `party_info` VALUES ('99dfcd09bfd242e9a80694b9eac765ac', '充分发挥非公企业党组织实质作用', '近年来，我省各级党组织将非公企业党建工作摆在更加突出的位置来抓，坚持围绕打造基层服务型党组织，以“双强争先”活动为总载体，积极探索发挥党组织实质作用的有效方法和途径，取得了显著成效。面对新的形势和任务，我们要以推动实质作用发挥为着力点，进一步提升非公企业党建工作整体水平。', '2016-11-24 08:53:28', '曹县县委组织部', '已发布', '已读');
-INSERT INTO `party_info` VALUES ('d54a2d57092a425bbc2f8b7244af97f9', '曹县一乡镇狠抓就业扶贫，解决就业人数8000余人', '凝心聚力抓好全民创业，精准施策助力就业扶贫。据悉，仅去年一年，曹县梁堤头镇新增规模以上企业6家，个体工商户839家，农民专业合作社60余家，发展电商网店400余家。今年第一季度，该镇新培植“一村一品”重点村6个，新增电商网店120余家，吸纳就业8000余人。', null, '曹县县委组织部', '编辑', null);
+INSERT INTO `party_info` VALUES ('d54a2d57092a425bbc2f8b7244af97f9', '曹县一乡镇狠抓就业扶贫，解决就业人数8000余人', '凝心聚力抓好全民创业，精准施策助力就业扶贫。据悉，仅去年一年，曹县梁堤头镇新增规模以上企业6家，个体工商户839家，农民专业合作社60余家，发展电商网店400余家。今年第一季度，该镇新培植“一村一品”重点村6个，新增电商网店120余家，吸纳就业8000余人。', null, '曹县县委组织部', '编辑', '已读');
+INSERT INTO `party_info` VALUES ('e4d8b9d8fe444233b19623043221dfec', 'asdf', 'asdf', '2016-11-24 15:45:25', '曹县县委组织部', '已发布', '已读');
 
 -- ----------------------------
 -- Table structure for party_org
@@ -318,7 +311,11 @@ CREATE TABLE `party_task` (
 -- Records of party_task
 -- ----------------------------
 INSERT INTO `party_task` VALUES ('441031032cbf4866b5abaf7dc55e5450', '尽快组织党员思想建设活', '请各级党组织尽快落实党员思想建设工作，并总结汇报成果，截止日期2016年12月10日', '高', '全部', '2016-11-24 08:57:45', '2016/12/10', '已完成任务，共开展党员思想建设课程3次，总计参与28人次', '已完成', '已完成');
+INSERT INTO `party_task` VALUES ('7e2411cad9294728ab691f55b916b8e2', 'sdf', 'asdf', '中', '曹县县委组织部,曹城办事处党组织,曹县王集镇党组织,曹县孙老家镇党组织', '', '2016/12/3', null, '编辑', null);
+INSERT INTO `party_task` VALUES ('7f31f885b47f4cac894cb4a4224ab7d9', 'zpf', '张鹏飞', '高', '曹县县委组织部,曹城办事处党组织,曹县王集镇党组织,曹县孙老家镇党组织', '2016-11-29 09:30:38', '2016/12/10', 'sdfgsdfg', '已完成', '已完成');
 INSERT INTO `party_task` VALUES ('83b6f08386e3493dabce7876f480abc9', '活动场所信息采集', '请各级党组织尽快采集活动场所信息，并录入系统！', '高', '全部', '2016-11-24 11:06:07', '2016/12/10', '王集镇徐楼村已采集并上传', '已完成', '已完成');
+INSERT INTO `party_task` VALUES ('8bbdeb51397c4383ae4110cdeb126123', 'aaa', 'asdfs', '中', 'aaa', '2016-11-24 15:46:08', '2016/11/24', null, '已发布', '未领');
+INSERT INTO `party_task` VALUES ('98c80605b0a24373abe5b07c1172b24c', 'bbb', 'bbb', '低', 'bb', '2016-11-24 17:02:18', '', null, '已发布', '未领');
 
 -- ----------------------------
 -- Procedure structure for sp_page_query
