@@ -555,27 +555,27 @@
     <Resource Include="Resources\村级活动场所.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Share\Client\MyNet.Client.csproj">
+    <ProjectReference Include="..\..\..\..\Share\MyNet.Client\MyNet.Client.csproj">
       <Project>{6aabd137-bb47-4636-8635-de0f6dc9aea1}</Project>
       <Name>MyNet.Client</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Share\Components.Resource\MyNet.Components.Resource.csproj">
+    <ProjectReference Include="..\..\..\..\Share\MyNet.Components.Resource\MyNet.Components.Resource.csproj">
       <Project>{4ecb69ea-c6d9-436b-9689-90d065424f53}</Project>
       <Name>MyNet.Components.Resource</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Share\Components.WPF\MyNet.Components.WPF.csproj">
+    <ProjectReference Include="..\..\..\..\Share\MyNet.Components.WPF\MyNet.Components.WPF.csproj">
       <Project>{6324a5cc-0daf-4af4-80a3-5d2a60769c96}</Project>
       <Name>MyNet.Components.WPF</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Share\Components\MyNet.Components.csproj">
+    <ProjectReference Include="..\..\..\..\Share\MyNet.Components\MyNet.Components.csproj">
       <Project>{9ed019a0-a26a-4725-aa70-2b52bf7a5416}</Project>
       <Name>MyNet.Components</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Share\Model\MyNet.Model.csproj">
+    <ProjectReference Include="..\..\..\..\Share\MyNet.Model\MyNet.Model.csproj">
       <Project>{bb11afa2-784c-4e60-9586-6608d8338d67}</Project>
       <Name>MyNet.Model</Name>
       <Private>False</Private>

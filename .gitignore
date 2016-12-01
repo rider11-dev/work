@@ -58,3 +58,15 @@
 /Share/.vs
 /PartyBuilding/ys/Biz.PartyBuilding.YS/.vs
 /Share/WebApi/upload
+/Share/MyNet.Client/obj
+/Share/MyNet.ClientFrame/obj
+/Share/MyNet.ClientFrame/bin
+/Share/MyNet.Components/obj
+/Share/MyNet.Components.Resource/obj
+/Share/MyNet.Components.WPF/obj
+/Share/MyNet.Dto/obj
+/Share/MyNet.Model/obj
+/Share/MyNet.Repository/obj
+/Share/MyNet.Service/obj
+/Share/MyNet.WebApi/obj
+/Share/MyNet.WebApi/bin

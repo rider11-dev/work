@@ -4,113 +4,105 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E9477EE5-9EDB-4BB2-AD81-872EE6206188}</ProjectGuid>
+    <ProjectGuid>{1ECB045C-BB92-481A-BA25-BF0B48A92DFD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Biz.PartyBuilding.YS.Repository</RootNamespace>
-    <AssemblyName>Biz.PartyBuilding.YS.Repository</AssemblyName>
+    <RootNamespace>MyNet.Service</RootNamespace>
+    <AssemblyName>MyNet.Service</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\</OutputPath>
+    <OutputPath>..\dlls\MyNet\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\</OutputPath>
+    <OutputPath>..\dlls\MyNet\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Dapper">
       <HintPath>..\packages\Dapper.1.50.2\lib\net45\Dapper.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="DapperExtensions, Version=1.4.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\DapperExtensions.1.4.4\lib\net40\DapperExtensions.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AreaRepository.cs" />
-    <Compile Include="AreaPicRepository.cs" />
-    <Compile Include="Mapper\AreaPicModelMapper.cs" />
-    <Compile Include="Mapper\InfoModelMapper.cs" />
-    <Compile Include="Mapper\PartyActAreaModelMapper.cs" />
-    <Compile Include="Mapper\TaskModelMapper.cs" />
-    <Compile Include="InfoRepository.cs" />
-    <Compile Include="PartyTaskRepository.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <AppDesigner Include="Properties\" />
-    <None Include="sql.party.mysql">
+    <Compile Include="Auth\GroupService.cs" />
+    <Compile Include="Auth\Mapper\PermissionCacheDtoMapper.cs" />
+    <Compile Include="Auth\PermissionService.cs" />
+    <Compile Include="Auth\UserPermissionRelService.cs" />
+    <Compile Include="Auth\UserService.cs" />
+    <Compile Include="BaseService.cs" />
+    <Compile Include="Base\DictService.cs" />
+    <Compile Include="Base\DictTypeService.cs" />
+    <Compile Include="Base\Mapper\DictDtoMapper.cs" />
+    <Compile Include="Card\CardInfoService.cs" />
+    <Compile Include="Card\CardMoneyService.cs" />
+    <Compile Include="Card\CardBillService.cs" />
+    <Compile Include="Card\CardRecordService.cs" />
+    <Compile Include="Card\MallAccountService.cs" />
+    <Compile Include="Card\Models\API.cs" />
+    <Compile Include="Card\Models\SetMoneySingleProcessParam.cs" />
+    <Compile Include="Card\Models\SingleProcessParam.cs" />
+    <Compile Include="Card\Models\PayEntity.cs" />
+    <Compile Include="Card\Models\RefundEntity.cs" />
+    <Compile Include="Context.cs" />
+    <Compile Include="IBaseService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="api_card.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Share\MyNet.Model\MyNet.Model.csproj">
+    <ProjectReference Include="..\MyNet.Components\MyNet.Components.csproj">
+      <Project>{9ed019a0-a26a-4725-aa70-2b52bf7a5416}</Project>
+      <Name>MyNet.Components</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyNet.Dto\MyNet.Dto.csproj">
+      <Project>{ea32f873-b280-4b79-947e-01ab4fcf6616}</Project>
+      <Name>MyNet.Dto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyNet.Model\MyNet.Model.csproj">
       <Project>{bb11afa2-784c-4e60-9586-6608d8338d67}</Project>
       <Name>MyNet.Model</Name>
-      <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Share\MyNet.Repository\MyNet.Repository.csproj">
+    <ProjectReference Include="..\MyNet.Repository\MyNet.Repository.csproj">
       <Project>{0c81a4e4-bd67-4f8d-a602-ec4062a0d0c2}</Project>
       <Name>MyNet.Repository</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\Biz.PartyBuilding.YS.Models\Biz.PartyBuilding.YS.Models.csproj">
-      <Project>{f46375cf-9fbc-4143-bb71-e9fcd6863306}</Project>
-      <Name>Biz.PartyBuilding.YS.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

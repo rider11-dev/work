@@ -5,25 +5,25 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controls.WinForm", "Controls.WinForm\Controls.WinForm.csproj", "{0CA1494C-37E6-4F89-8EE9-771AB8904EF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNet.Client", "Client\MyNet.Client.csproj", "{6AABD137-BB47-4636-8635-DE0F6DC9AEA1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNet.Client", "MyNet.Client\MyNet.Client.csproj", "{6AABD137-BB47-4636-8635-DE0F6DC9AEA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNet.ClientFrame", "ClientFrame\MyNet.ClientFrame.csproj", "{A7BB4884-C2A9-474C-A7F4-F7A4EF4BE87D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNet.ClientFrame", "MyNet.ClientFrame\MyNet.ClientFrame.csproj", "{A7BB4884-C2A9-474C-A7F4-F7A4EF4BE87D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNet.Components", "Components\MyNet.Components.csproj", "{9ED019A0-A26A-4725-AA70-2B52BF7A5416}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNet.Components", "MyNet.Components\MyNet.Components.csproj", "{9ED019A0-A26A-4725-AA70-2B52BF7A5416}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNet.Components.Resource", "Components.Resource\MyNet.Components.Resource.csproj", "{4ECB69EA-C6D9-436B-9689-90D065424F53}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNet.Components.Resource", "MyNet.Components.Resource\MyNet.Components.Resource.csproj", "{4ECB69EA-C6D9-436B-9689-90D065424F53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNet.Components.WPF", "Components.WPF\MyNet.Components.WPF.csproj", "{6324A5CC-0DAF-4AF4-80A3-5D2A60769C96}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNet.Components.WPF", "MyNet.Components.WPF\MyNet.Components.WPF.csproj", "{6324A5CC-0DAF-4AF4-80A3-5D2A60769C96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNet.Dto", "Dto\MyNet.Dto.csproj", "{EA32F873-B280-4B79-947E-01AB4FCF6616}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNet.Dto", "MyNet.Dto\MyNet.Dto.csproj", "{EA32F873-B280-4B79-947E-01AB4FCF6616}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNet.Model", "Model\MyNet.Model.csproj", "{BB11AFA2-784C-4E60-9586-6608D8338D67}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNet.Model", "MyNet.Model\MyNet.Model.csproj", "{BB11AFA2-784C-4E60-9586-6608D8338D67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNet.Repository", "Repository\MyNet.Repository.csproj", "{0C81A4E4-BD67-4F8D-A602-EC4062A0D0C2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNet.Repository", "MyNet.Repository\MyNet.Repository.csproj", "{0C81A4E4-BD67-4F8D-A602-EC4062A0D0C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNet.Service", "Service\MyNet.Service.csproj", "{1ECB045C-BB92-481A-BA25-BF0B48A92DFD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNet.Service", "MyNet.Service\MyNet.Service.csproj", "{1ECB045C-BB92-481A-BA25-BF0B48A92DFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNet.WebApi", "WebApi\MyNet.WebApi.csproj", "{7E7C4A44-1919-4C56-8227-515544EA99F5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNet.WebApi", "MyNet.WebApi\MyNet.WebApi.csproj", "{7E7C4A44-1919-4C56-8227-515544EA99F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

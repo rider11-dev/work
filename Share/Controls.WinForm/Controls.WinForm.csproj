@@ -105,7 +105,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Components\MyNet.Components.csproj">
+    <ProjectReference Include="..\MyNet.Components\MyNet.Components.csproj">
       <Project>{9ed019a0-a26a-4725-aa70-2b52bf7a5416}</Project>
       <Name>MyNet.Components</Name>
     </ProjectReference>
