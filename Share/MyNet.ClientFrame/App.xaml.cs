@@ -1,13 +1,6 @@
-﻿using MyNet.Client.Public;
-using MyNet.Components.Extensions;
+﻿using MyNet.Components.Extensions;
 using MyNet.Components.Logger;
-using MyNet.Components.WPF.Windows;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ClientFrame
@@ -21,7 +14,7 @@ namespace ClientFrame
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             //加载插件目录程序集
-            AssemblyExtention.LoadAssemblies(MyContext.BaseDirectory + "plugin", "^*.dll$");
+            AssemblyExtention.LoadAssemblies(AppDomain.CurrentDomain.BaseDirectory + "plugin", "^*.dll$");
         }
 
         //程序出错时触发的事件
@@ -29,11 +22,9 @@ namespace ClientFrame
         {
             e.Handled = true;
             _logHelper.LogError(e.Exception);
-            var rst = MessageWindow.ShowMsg(MessageType.Error, "程序错误", e.Exception.Message + Environment.NewLine + "是否退出？");
-            if (rst != null && (bool)rst == true)
+            var rst = MessageBox.Show(e.Exception.Message + Environment.NewLine + "是否退出？", "程序错误", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (rst == MessageBoxResult.Yes)
             {
-                //这里需要加一些退出前处理
-                //TODO
                 this.Shutdown(-1);
             }
         }
