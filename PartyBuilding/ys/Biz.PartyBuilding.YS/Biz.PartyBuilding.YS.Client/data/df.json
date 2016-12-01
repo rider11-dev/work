@@ -1,42 +1,162 @@
 ﻿[
-    {
-        "dy_name": "张明",
-        "dy_party": "曹县县委组织部",
-        "df_zxbz": "在职工",
-        "df_base": 3000,
-        "df_month": 20,
-        "df_year_plan": 240,
-        "df_year_actual": 240,
-        "df_year": "2015"
-    },
-    {
-        "dy_name": "吴玲",
-        "dy_party": "曹县县委组织部",
-        "df_zxbz": "离退休党员",
-        "df_base": 2000,
-        "df_month": 10,
-        "df_year_plan": 120,
-        "df_year_actual": 100,
-        "df_year": "2016"
-    },
-    {
-        "dy_name": "赵明亮",
-        "dy_party": "曹城办事处党组织",
-        "df_zxbz": "在职工",
-        "df_base": 4000,
-        "df_month": 40,
-        "df_year_plan": 480,
-        "df_year_actual": 480,
-        "df_year": "2015"
-    },
-    {
-        "dy_name": "吴玲",
-        "dy_party": "曹城办事处党组织",
-        "df_zxbz": "学生党员",
-        "df_base": 0,
-        "df_month": 2,
-        "df_year_plan": 24,
-        "df_year_actual": 22,
-        "df_year": "2016"
-    }
+  {
+    "dy_name": "王琦",
+    "dy_party": "曹县县委组织部",
+    "df_zxbz": "在职工",
+    "df_base": 3000,
+    "df_month": 20,
+    "df_year_plan": 240,
+    "df_year_actual": 327,
+    "df_year": 2013
+  },
+  {
+    "dy_name": "王琦",
+    "dy_party": "曹县县委组织部",
+    "df_zxbz": "在职工",
+    "df_base": 3000,
+    "df_month": 20,
+    "df_year_plan": 240,
+    "df_year_actual": 100,
+    "df_year": 2014
+  },
+  {
+    "dy_name": "王琦",
+    "dy_party": "曹县县委组织部",
+    "df_zxbz": "在职工",
+    "df_base": 3000,
+    "df_month": 20,
+    "df_year_plan": 240,
+    "df_year_actual": 241,
+    "df_year": 2015
+  },
+  {
+    "dy_name": "王琦",
+    "dy_party": "曹县县委组织部",
+    "df_zxbz": "离退休党员",
+    "df_base": 2000,
+    "df_month": 10,
+    "df_year_plan": 120,
+    "df_year_actual": 303,
+    "df_year": 2016
+  },
+  {
+    "dy_name": "隋长明",
+    "dy_party": "曹城办事处党组织",
+    "df_zxbz": "在职工",
+    "df_base": 3000,
+    "df_month": 20,
+    "df_year_plan": 240,
+    "df_year_actual": 248,
+    "df_year": 2013
+  },
+  {
+    "dy_name": "隋长明",
+    "dy_party": "曹城办事处党组织",
+    "df_zxbz": "在职工",
+    "df_base": 3000,
+    "df_month": 20,
+    "df_year_plan": 240,
+    "df_year_actual": 205,
+    "df_year": 2014
+  },
+  {
+    "dy_name": "隋长明",
+    "dy_party": "曹城办事处党组织",
+    "df_zxbz": "在职工",
+    "df_base": 4000,
+    "df_month": 40,
+    "df_year_plan": 480,
+    "df_year_actual": 368,
+    "df_year": 2015
+  },
+  {
+    "dy_name": "隋长明",
+    "dy_party": "曹城办事处党组织",
+    "df_zxbz": "学生党员",
+    "df_base": 0,
+    "df_month": 2,
+    "df_year_plan": 24,
+    "df_year_actual": 279,
+    "df_year": 2016
+  },
+  {
+    "dy_name": "李国庆",
+    "dy_party": "曹县孙老家镇党组织",
+    "df_zxbz": "在职工",
+    "df_base": 3000,
+    "df_month": 20,
+    "df_year_plan": 240,
+    "df_year_actual": 329,
+    "df_year": 2013
+  },
+  {
+    "dy_name": "李国庆",
+    "dy_party": "曹县孙老家镇党组织",
+    "df_zxbz": "在职工",
+    "df_base": 3000,
+    "df_month": 20,
+    "df_year_plan": 240,
+    "df_year_actual": 133,
+    "df_year": 2014
+  },
+  {
+    "dy_name": "李国庆",
+    "dy_party": "曹县孙老家镇党组织",
+    "df_zxbz": "在职工",
+    "df_base": 4000,
+    "df_month": 40,
+    "df_year_plan": 480,
+    "df_year_actual": 120,
+    "df_year": 2015
+  },
+  {
+    "dy_name": "李国庆",
+    "dy_party": "曹县孙老家镇党组织",
+    "df_zxbz": "学生党员",
+    "df_base": 0,
+    "df_month": 2,
+    "df_year_plan": 24,
+    "df_year_actual": 361,
+    "df_year": 2016
+  },
+  {
+    "dy_name": "周亮",
+    "dy_party": "曹县王集镇党组织",
+    "df_zxbz": "在职工",
+    "df_base": 3000,
+    "df_month": 20,
+    "df_year_plan": 240,
+    "df_year_actual": 166,
+    "df_year": 2013
+  },
+  {
+    "dy_name": "周亮",
+    "dy_party": "曹县王集镇党组织",
+    "df_zxbz": "在职工",
+    "df_base": 3000,
+    "df_month": 20,
+    "df_year_plan": 240,
+    "df_year_actual": 295,
+    "df_year": 2014
+  },
+  {
+    "dy_name": "周亮",
+    "dy_party": "曹县王集镇党组织",
+    "df_zxbz": "在职工",
+    "df_base": 4000,
+    "df_month": 40,
+    "df_year_plan": 480,
+    "df_year_actual": 264,
+    "df_year": 2015
+  },
+  {
+    "dy_name": "周亮",
+    "dy_party": "曹县王集镇党组织",
+    "df_zxbz": "学生党员",
+    "df_base": 0,
+    "df_month": 2,
+    "df_year_plan": 24,
+    "df_year_actual": 250,
+    "df_year": 2016
+  }
 ]

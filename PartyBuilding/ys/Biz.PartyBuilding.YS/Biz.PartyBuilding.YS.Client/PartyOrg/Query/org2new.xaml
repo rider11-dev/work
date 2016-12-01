@@ -43,7 +43,7 @@
                 <TextBlock x:Name="txtOrgTotal" Style="{StaticResource txtBlockStyle}"/>
                 <Label Content="党员总数：" Style="{StaticResource lblStyle}"/>
                 <TextBlock x:Name="txtDyTotal" Style="{StaticResource txtBlockStyle}"/>
-                <Label Content="党员职工总数：" Style="{StaticResource lblStyle}"/>
+                <Label Content="职工总数：" Style="{StaticResource lblStyle}"/>
                 <TextBlock x:Name="txtEmpTotal" Style="{StaticResource txtBlockStyle}"/>
                 <Label Content="党员占比：" Style="{StaticResource lblStyle}"/>
                 <TextBlock x:Name="txtDyPercent" Style="{StaticResource txtBlockStyle}"/>

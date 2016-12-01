@@ -93,6 +93,7 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg.Query
             {
                 ColLabels.Add(gp.Key);
             }
+            axisX.MaxValue = ColLabels.Count;
 
             StackedColumnSeries series = null;
             foreach (var gpY in gpYears)
@@ -105,8 +106,6 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg.Query
                 }
                 ColSeries.Add(series);
             }
-
-
         }
 
         ICommand _cmdPies;
@@ -134,10 +133,10 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg.Query
             switch (pieType)
             {
                 case "dzz":
-                    ChartHelper.LoadPies(PieSeries, dfAll.GroupBy(m => (string)m.dy_party), PiePointLabel);
+                    LoadPies(dfAll.GroupBy(m => (string)m.dy_party));
                     break;
                 case "year":
-                    ChartHelper.LoadPies(PieSeries, dfAll.GroupBy(m => (string)m.df_year), PiePointLabel);
+                    LoadPies(dfAll.GroupBy(m => (string)m.df_year));
                     break;
                 case "base":
                     double min, max;
@@ -153,6 +152,53 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg.Query
                 default:
                     break;
             }
+        }
+
+        private void LoadPies(IEnumerable<IGrouping<string, dynamic>> groups)
+        {
+            foreach (var gp in groups)
+            {
+                ChartHelper.AddAPie(PieSeries, gp.Key, new ChartValues<int> { gp.Sum(m => m.df_year_actual) }, PiePointLabel);
+            }
+        }
+
+        private void radioTrend_Click(object sender, RoutedEventArgs e)
+        {
+            //党费缴纳趋势（年度）
+            //x：年份，y：指定年份的党组织缴纳总额
+            //有几个党组织就有几条线
+
+            ColSeries.Clear();
+            ColLabels.Clear();
+
+            IEnumerable<IGrouping<string, dynamic>> gpYears = dfAll.GroupBy(m => (string)m.df_year);
+            foreach (var gpY in gpYears)
+            {
+                ColLabels.Add(gpY.Key);
+            }
+
+            axisX.MaxValue = ColLabels.Count;
+
+            IEnumerable<IGrouping<string, dynamic>> gpOrgs = dfAll.GroupBy(m => (string)m.dy_party);
+            LineSeries series = null;
+            foreach (var gpOrg in gpOrgs)
+            {
+                series = new LineSeries
+                {
+                    Title = gpOrg.Key,
+                    Values = new ChartValues<double>(),
+                    Fill = Brushes.Transparent,
+                    //PointGeometry = DefaultGeometries.Square,
+                    //PointGeometrySize = 15
+                };
+                foreach (var gpY in gpYears)
+                {
+                    //计算该党组织各年份缴纳党费总金额
+                    series.Values.Add((double)gpY.Where(m => m.dy_party == gpOrg.Key).Sum(m => m.df_year_actual));
+                }
+                ColSeries.Add(series);
+            }
+
         }
     }
 }

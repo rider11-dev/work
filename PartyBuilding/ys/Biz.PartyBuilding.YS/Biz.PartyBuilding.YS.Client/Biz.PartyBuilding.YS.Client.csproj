@@ -275,6 +275,9 @@
     <Content Include="api.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="data\xzdw.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="data\gb.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
