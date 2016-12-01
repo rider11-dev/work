@@ -70,3 +70,5 @@
 /Share/MyNet.Service/obj
 /Share/MyNet.WebApi/obj
 /Share/MyNet.WebApi/bin
+/Share/MyNet.WebApi/log
+/Share/MyNet.WebApi/upload
