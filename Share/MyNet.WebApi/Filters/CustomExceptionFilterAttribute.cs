@@ -1,12 +1,5 @@
-﻿using log4net;
-using MyNet.Components.Result;
-using MyNet.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using MyNet.Components.Result;
 using System.Net.Http;
-using System.Web;
 using System.Web.Http.Filters;
 
 namespace MyNet.WebApi.Filters

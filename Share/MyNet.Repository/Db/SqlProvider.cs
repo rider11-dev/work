@@ -1,4 +1,5 @@
 ﻿using MyNet.Components.Extensions;
+using MyNet.Components.Logger;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,7 +13,6 @@ namespace MyNet.Repository.Db
     public class SqlProvider
     {
         static Dictionary<string, XDocument> SqlCfgs = new Dictionary<string, XDocument>();
-
         static SqlProvider()
         {
             LoadSqlCfgs();
@@ -28,7 +28,7 @@ namespace MyNet.Repository.Db
             //2、加载sql配置文件
             try
             {
-                var files = FileExtension.GetFiles(AppDomain.CurrentDomain.BaseDirectory + "/bin", searchPattern);
+                var files = FileExtension.GetFiles(AppDomain.CurrentDomain.BaseDirectory, searchPattern);
                 if (files != null && files.Count > 0)
                 {
                     files.ForEach(f =>

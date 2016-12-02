@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http.ExceptionHandling;
-using log4net;
-using System.Threading;
+﻿using System.Web.Http.ExceptionHandling;
 using System.Threading.Tasks;
 using MyNet.Components.Logger;
 using System.Web.Http;

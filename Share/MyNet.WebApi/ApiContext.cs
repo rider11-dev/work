@@ -1,16 +1,12 @@
-﻿using Autofac;
-using MyNet.Components;
+﻿using MyNet.Components;
 using MyNet.Components.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace MyNet.WebApi
 {
     public class ApiContext
     {
-        const string JwtRawKey = "sddfh_one_card";
+        const string JwtRawKey = "mynet.zpf";
         const int DefaultTokenExpire = 30;//默认token失效时间：30分钟
         public static readonly string JwtSecretKey;
 

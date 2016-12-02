@@ -1,18 +1,13 @@
 ﻿using MyNet.Components.Extensions;
 using MyNet.Components.Logger;
-using MyNet.Model;
 using MyNet.Service.Auth;
 using MyNet.WebApi.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
-using Autofac;
-using System.Web.Http;
 using MyNet.Components.Result;
 
 namespace MyNet.WebApi.Filters

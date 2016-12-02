@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Web;
 using System.Web.Http.Dispatcher;
 using MyNet.Components.Extensions;
 
@@ -13,6 +9,7 @@ namespace MyNet.WebHostService
     {
         public ExtendedAssembliesResolver()
         {
+            AssemblyExtention.LoadAssemblies(AppDomain.CurrentDomain.BaseDirectory, "^*.dll$", SearchOption.TopDirectoryOnly);
             AssemblyExtention.LoadAssemblies(AppDomain.CurrentDomain.BaseDirectory + "/apis", "^*.dll$");
         }
     }

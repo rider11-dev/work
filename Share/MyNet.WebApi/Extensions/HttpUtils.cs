@@ -1,12 +1,7 @@
 ﻿using Newtonsoft.Json;
-using MyNet.Components.Logger;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace MyNet.WebApi.Extensions
 {

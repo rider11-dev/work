@@ -1,9 +1,11 @@
 ﻿using Autofac;
 using Autofac.Integration.WebApi;
+using MyNet.Components.Logger;
 using MyNet.Repository.Db;
 using Owin;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,19 +18,35 @@ namespace MyNet.WebHostService
     public class Startup
     {
         static HttpConfiguration _httpConfig;
-
+        static ILogHelper<Startup> _logHelper = LogHelperFactory.GetLogHelper<Startup>();
         public void Configuration(IAppBuilder appBuilder)
         {
             // Configure Web API for self-host.  
             _httpConfig = new HttpConfiguration();
             //1、加载所有扩展api相关dll
             _httpConfig.Services.Replace(typeof(IAssembliesResolver), new ExtendedAssembliesResolver());
-
-            //2、默认路由
+            //if (HostContext.IsDebug)
+            //{
+            //    //打印所有加载的dll
+            //    var asses = AppDomain.CurrentDomain.GetAssemblies();
+            //    StringBuilder sb = new StringBuilder();
+            //    foreach (var ass in asses)
+            //    {
+            //        sb.Append(ass.FullName + Environment.NewLine);
+            //    }
+            //    _logHelper.LogInfo("当前加载dll：" + Environment.NewLine + sb.ToString());
+            //}
+            //2、自定义路由
+            //defaults: new { opt = RouteParameter.Optional }
+            _httpConfig.MapHttpAttributeRoutes();//映射RouteAttribute属性
             _httpConfig.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
+                );
+            _httpConfig.Routes.MapHttpRoute(
+                name: "ModuleApi",
+                routeTemplate: "api/{module}/{controller}/{action}"
                 );
             //3、序列化器
             //干掉xml序列化器
@@ -53,7 +71,8 @@ namespace MyNet.WebHostService
             //注册当前应用程序域中指定程序集的类型
             var assDomain = AppDomain.CurrentDomain.GetAssemblies();
             builder.RegisterType<DbSession>().As<IDbSession>().InstancePerRequest();//DbSession
-            builder.RegisterApiControllers(assDomain).PropertiesAutowired(PropertyWiringOptions.None);//ApiController
+            builder.RegisterApiControllers(assDomain.Where(ass => ass.FullName.Contains("WebApi")).ToArray())
+                .PropertiesAutowired(PropertyWiringOptions.None);//ApiController
             builder.RegisterAssemblyTypes(assDomain)
                 .Where(t => t.Name.EndsWith("Repository"));//Repository
             builder.RegisterAssemblyTypes(assDomain)
