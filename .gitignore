@@ -72,3 +72,7 @@
 /Share/MyNet.WebApi/bin
 /Share/MyNet.WebApi/log
 /Share/MyNet.WebApi/upload
+/Share/MyNet.WebApi.Test/bin
+/Share/MyNet.WebApi.Test/obj
+/Share/MyNet.WebHostService/obj
+/Share/MyNet.WebHostService/bin
