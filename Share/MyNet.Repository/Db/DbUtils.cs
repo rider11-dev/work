@@ -118,5 +118,6 @@ namespace MyNet.Repository.Db
             }
         }
 
+        public static ISqlGenerator SqlGenerator { get; set; }
     }
 }

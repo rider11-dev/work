@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <sqlarea name="customquery">
+    <sqlgroup name="tables">
+      <sql name="querywithfields" type="txt">
+        select qt.* ,qf.id,qf.fieldname,qf.displayname
+        from query_tables qt
+        left join query_fields qf on qt.id=qf.tbid
+        where 1=1
+      </sql>
+      <sql name="pagequery"
+           type="sp"
+           sp_name="sp_page_query"
+           fields=" qt.*"
+           tables=" query_tables qt "
+           where=" 1=1 "
+           order=" qt.tbname asc"
+           >
+      </sql>
+    </sqlgroup>
+    <sqlgroup name="fields">
+      <sql name="pagequery"
+           type="sp"
+           sp_name="sp_page_query"
+           fields=" qf.* "
+           tables=" query_fields qf join query_tables qt on qf.tbid=qt.id "
+           where=" 1=1 "
+           order=" qt.tbname asc"
+           >
+      </sql>
+    </sqlgroup>
+  </sqlarea>
+</configuration>

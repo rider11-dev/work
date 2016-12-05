@@ -76,3 +76,13 @@
 /Share/MyNet.WebApi.Test/obj
 /Share/MyNet.WebHostService/obj
 /Share/MyNet.WebHostService/bin
+/CustomQuery/packages
+/CustomQuery/.vs
+/CustomQuery/MyNet.CustomQuery.Model/obj
+/CustomQuery/MyNet.CustomQuery.Model/bin
+/CustomQuery/MyNet.CustomQuery.Repository/obj
+/CustomQuery/MyNet.CustomQuery.Repository/bin
+/CustomQuery/MyNet.CustomQuery.Service/obj
+/CustomQuery/MyNet.CustomQuery.Service/bin
+/CustomQuery/MyNet.CustomQuery.WebApi/obj
+/CustomQuery/MyNet.CustomQuery.WebApi/bin

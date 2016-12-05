@@ -293,11 +293,11 @@ namespace MyNet.Service.Auth
 
         public OptResult GetAllFuncs()
         {
-            return GetPermByType(PermType.PermTypeFunc);
+            return GetPermByType(PermType.Func);
         }
         public OptResult GetAllOpts()
         {
-            return GetPermByType(PermType.PermTypeOpt);
+            return GetPermByType(PermType.Opt);
         }
 
         //私有方法

@@ -1,0 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MyNet.CustomQuery.WebApi.Models
+{
+    public class AddFieldViewModel
+    {
+        [Required(ErrorMessage = "查询表不能为空")]
+        public string tbid { get; set; }
+        [Required(ErrorMessage = "字段名不能为空")]
+        [MaxLength(20, ErrorMessage = "字段名最大为20个字符")]
+        public string fieldname { get; set; }
+        [MaxLength(40, ErrorMessage = "字段显示名称最大为40个字符")]
+        public string displayname { get; set; }
+        [MaxLength(255, ErrorMessageResourceName = "Remark_Length", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
+        public string remark { get; set; }
+    }
+}

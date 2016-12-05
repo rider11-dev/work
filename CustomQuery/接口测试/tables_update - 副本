@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rest-client version="3.4.2"><request><http-version>1.1</http-version><http-follow-redirects/><URL>http://192.168.18.89/aaa/api/customquery/tables/update</URL><method>POST</method><body><string content-type="application/json" charset="UTF-8">{
+"id":"",
+"tbname":"0",
+"alias":"20",
+"remark":"哈斯卡党费"
+}</string></body></request></rest-client>

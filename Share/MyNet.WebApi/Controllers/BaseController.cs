@@ -7,6 +7,7 @@ using System.Web.Http;
 using MyNet.Model;
 using System.Web.Http.Controllers;
 using System.Net.Http;
+using MyNet.Components.Extensions;
 
 namespace MyNet.WebApi.Controllers
 {
@@ -19,6 +20,10 @@ namespace MyNet.WebApi.Controllers
 
         protected TokenData ParseToken(HttpActionContext actionContext)
         {
+            if (actionContext.ActionArguments.IsEmpty() || !actionContext.ActionArguments.ContainsKey("token"))
+            {
+                return null;
+            }
             TokenData token = actionContext.ActionArguments["token"] as TokenData;
 
             return token;

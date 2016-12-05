@@ -1,5 +1,8 @@
 ﻿using Autofac;
 using Autofac.Integration.WebApi;
+using DapperExtensions;
+using DapperExtensions.Mapper;
+using DapperExtensions.Sql;
 using MyNet.Components.Logger;
 using MyNet.Repository.Db;
 using Owin;
@@ -85,11 +88,16 @@ namespace MyNet.WebHostService
         private void InitDapper()
         {
             DapperExtensions.DapperExtensions.SqlDialect = DbUtils.GetSqlDialect();
-            DapperExtensions.DapperExtensions.SetMappingAssemblies(
-                AppDomain.CurrentDomain.GetAssemblies()
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies()
                 .Where(ass => ass.FullName.Contains("Repository") || ass.FullName.Contains("Service"))
-                .ToList()
-                );
+                .ToList();
+            DapperExtensions.DapperExtensions.SetMappingAssemblies(assemblies);
+            DbUtils.SqlGenerator = new SqlGeneratorImpl(
+                new DapperExtensionsConfiguration(
+                    typeof(AutoClassMapper<>),
+                    assemblies,
+                    DapperExtensions.DapperExtensions.SqlDialect));
+
         }
     }
 }
