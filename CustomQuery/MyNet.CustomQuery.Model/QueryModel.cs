@@ -1,4 +1,5 @@
-﻿using MyNet.CustomQuery.Model.Criteria;
+﻿using MyNet.Model;
+using MyNet.Repository.Db;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,15 +8,12 @@ using System.Threading.Tasks;
 
 namespace MyNet.CustomQuery.Model
 {
-    /// <summary>
-    /// 通用查询模型
-    /// </summary>
     public class QueryModel
     {
-        public IList<ICriteria> Criterias { get; set; }
-
-        public IList<Table> Tables { get; set; }
-
-        public IList<Field> Fields { get; set; }
+        public IList<string> Fields { get; set; }
+        public TableRelation TableRelation { get; set; }
+        public IList<Condition> Conditions { get; set; }
+        public IList<Sort> Sorts { get; set; }
+        public PageQuery Page { get; set; }
     }
 }

@@ -29,5 +29,16 @@
            >
       </sql>
     </sqlgroup>
+    <!--这里提供通用查询的配置信息，fields、tables、where、order为空，因为要在代码中转换-->
+    <sqlgroup name="base">
+      <sql name="pagequery"
+                type="sp"
+                sp_name="sp_page_query"
+                fields=""
+                tables=""
+                where=" 1=1 "
+                order=""
+           />
+    </sqlgroup>
   </sqlarea>
 </configuration>

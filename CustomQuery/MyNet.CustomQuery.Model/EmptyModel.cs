@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyNet.CustomQuery.Model.Criteria
+namespace MyNet.CustomQuery.Model
 {
-    public interface ICriteria
+    /// <summary>
+    /// 空模型
+    /// </summary>
+    public class EmptyModel
     {
-        string FieldName { get; set; }
 
-        string Parse();
     }
 }

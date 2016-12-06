@@ -28,7 +28,7 @@ namespace MyNet.Client.Pages
             {
                 return;
             }
-            var opts = MyContext.Pers.Where(p => p.per_parent == FuncCode && p.PermType == PermType.PermTypeOpt);
+            var opts = MyContext.Pers.Where(p => p.per_parent == FuncCode && p.PermType == PermType.Opt);
             if (opts.Count() <= 0)
             {
                 return;

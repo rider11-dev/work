@@ -6,14 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using MyNet.Repository.Db;
 using MyNet.CustomQuery.Model;
+using MyNet.Components.Extensions;
 
 namespace MyNet.CustomQuery.Repository
 {
-    public class SqlExecutorRepository : BaseRepository<QueryModel>, IBaseRepository<QueryModel>
+    public class CustomQueryRepository : BaseRepository<EmptyModel>
     {
-        public SqlExecutorRepository(IDbSession session) : base(session)
+        public CustomQueryRepository(IDbSession session) : base(session)
         {
-
+            SqlConf = new SqlConfEntity { area = "customquery", group = "base" };
         }
     }
 }

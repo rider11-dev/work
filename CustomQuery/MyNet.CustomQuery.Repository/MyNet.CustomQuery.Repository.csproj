@@ -51,7 +51,7 @@
     <Compile Include="FieldRepository.cs" />
     <Compile Include="Mapper\FieldMapper.cs" />
     <Compile Include="Mapper\TableMapper.cs" />
-    <Compile Include="SqlExecutorRepository.cs" />
+    <Compile Include="CustomQueryRepository.cs" />
     <Compile Include="TableRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

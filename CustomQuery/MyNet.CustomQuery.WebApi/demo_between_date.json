@@ -1,0 +1,21 @@
+﻿{
+  "Fields": [ "pi.*" ],
+  "TableRelation": { "PrimeTable": "party_info pi"},
+  "Conditions": [
+    {
+      "Field": "pi.issue_time",
+      "CompositeType": "None",
+      "ConditionType": "Between",
+      "FieldType": "String",
+      "Not": "true",
+      "Value":{
+      	"Min":"2016-11-24 08:52:37",
+      	"Max":"2016-11-24 08:53:28"
+      }
+    }
+  ],
+  "Page": {
+    "pageIndex": "0",
+    "pageSize": "20"
+  }
+}

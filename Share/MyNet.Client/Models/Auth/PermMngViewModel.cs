@@ -92,7 +92,7 @@ namespace MyNet.Client.Models.Auth
             }
             MessageWindow.ShowMsg(MessageType.Info, OperationDesc.Delete, MsgConst.Msg_Succeed);
             //清除垃圾缓存
-            var funcCodes = items.Where(m => ((PermViewModel)m).per_type == PermType.PermTypeFunc.ToString())
+            var funcCodes = items.Where(m => ((PermViewModel)m).per_type == PermType.Func.ToString())
                                 .Select(m => ((PermViewModel)m).per_code);
             if (funcCodes != null && funcCodes.Count() > 0 && DataCacheHelper.AllFuncs.Count > 0)
             {

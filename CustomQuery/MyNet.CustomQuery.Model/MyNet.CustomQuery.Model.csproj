@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,16 +44,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Criteria\BaseCriteria.cs" />
-    <Compile Include="Criteria\BetweenCriteria.cs" />
+    <Compile Include="Condition.cs" />
     <Compile Include="Field.cs" />
-    <Compile Include="FieldType.cs" />
-    <Compile Include="Criteria\CompareCriteria.cs" />
-    <Compile Include="Criteria\ICriteria.cs" />
+    <Compile Include="EmptyModel.cs" />
     <Compile Include="QueryModel.cs" />
-    <Compile Include="Relation.cs" />
+    <Compile Include="BoundaryValue.cs" />
+    <Compile Include="Sort.cs" />
     <Compile Include="Table.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TableRelation.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Share\MyNet.Components\MyNet.Components.csproj">
@@ -61,6 +64,13 @@
       <Name>MyNet.Model</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\..\Share\MyNet.Repository\MyNet.Repository.csproj">
+      <Project>{0C81A4E4-BD67-4F8D-A602-EC4062A0D0C2}</Project>
+      <Name>MyNet.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

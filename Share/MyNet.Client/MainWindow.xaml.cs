@@ -99,7 +99,7 @@ namespace MyNet.Client
             MyContext.Pers = pers;
 
             //功能菜单
-            var funcs = pers.Where(p => p.per_type == PermType.PermTypeFunc.ToString());
+            var funcs = pers.Where(p => p.per_type == PermType.Func.ToString());
             if (funcs != null && funcs.Count() > 0)
             {
                 List<TreeViewData.NodeViewModel> datas = new List<TreeViewData.NodeViewModel>();

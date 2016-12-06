@@ -8,7 +8,13 @@ namespace MyNet.Model
     /// <summary>
     /// 分页查询模型
     /// </summary>
-    public class PageQuery
+    public class PageQuery : Page
+    {
+        public Dictionary<string, object> conditions { get; set; }
+
+    }
+
+    public class Page
     {
         private int _idx;
         public int pageIndex
@@ -45,8 +51,5 @@ namespace MyNet.Model
         /// 总页数
         /// </summary>
         public int pageTotal { get; set; }
-
-        public Dictionary<string, object> conditions { get; set; }
-
     }
 }

@@ -61,7 +61,7 @@ namespace MyNet.Client.Models.Auth
             }
             MessageWindow.ShowMsg(MessageType.Info, this.IsNew ? OperationDesc.Add : OperationDesc.Edit, MsgConst.Msg_Succeed);
             //如果保存的是功能权限，则添加或更新缓存
-            if (base.per_type == PermType.PermTypeFunc.ToString())
+            if (base.per_type == PermType.Func.ToString())
             {
                 var funcPermDto = OOMapper.Map<PermViewModel, PermissionCacheDto>(this);
                 if (DataCacheHelper.AllFuncs.ContainsKey(base.per_code))

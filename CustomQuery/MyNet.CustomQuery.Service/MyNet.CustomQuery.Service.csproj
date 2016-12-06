@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomQueryService.cs" />
     <Compile Include="FieldService.cs" />
     <Compile Include="TableService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
