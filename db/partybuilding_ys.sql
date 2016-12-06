@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50626
 File Encoding         : 65001
 
-Date: 2016-12-01 11:47:23
+Date: 2016-12-06 17:24:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -33,6 +33,7 @@ CREATE TABLE `auth_group` (
 -- Records of auth_group
 -- ----------------------------
 INSERT INTO `auth_group` VALUES ('313cb71fa40b4c12b05ff34b89c9a652', 'cx_sljz', '曹县孙老家镇党组织', '\0', 'cxxwzzb', '0103');
+INSERT INTO `auth_group` VALUES ('4d299198b4d0416eb9deebeaadbaf365', 'cxwjzxlc', '曹县王集镇徐楼村党组织', '\0', 'cx_wagnjizhen', '010201');
 INSERT INTO `auth_group` VALUES ('4d93696b61cf4ea5acbda0a6e7122c89', 'cxccbsc', '曹城办事处党组织', '\0', 'cxxwzzb', '0101');
 INSERT INTO `auth_group` VALUES ('6953306b35ab47f8a040dbd1d8893b13', 'cxxwzzb', '曹县县委组织部', '\0', null, '01');
 INSERT INTO `auth_group` VALUES ('7b82c887950c491fa0fd2122dfe623d6', 'cx_wagnjizhen', '曹县王集镇党组织', '\0', 'cxxwzzb', '0102');
@@ -61,56 +62,60 @@ CREATE TABLE `auth_permission` (
 -- ----------------------------
 -- Records of auth_permission
 -- ----------------------------
-INSERT INTO `auth_permission` VALUES ('061f1473a00411e6a0a014dda9275f65', 'func_party_org_actplace', '组织活动场所管理', 'PermTypeFunc', 'func_party_org', '1009', '', null, '/Biz.PartyBuilding.YS.Client;component/PartyOrg/ActivityPlacePage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('15077f0d1fa340819f041905516a9c57', 'func_party_org_orgstruct', '组织架构', 'PermTypeFunc', 'func_party_org', '1001', '', null, '/Biz.PartyBuilding.YS.Client;component/PartyOrg/OrgStructPage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('1d9195a7a00411e6a0a014dda9275f65', 'func_party_org_query', '查询统计', 'PermTypeFunc', 'func_party_org', '1010', '', null, '/Biz.PartyBuilding.YS.Client;component/PartyOrg/QueryPage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('1d999f9625ec403b84bbe9eefa2be065', 'func_party_learn', '党建学习', 'PermTypeFunc', null, '13', '', null, null, null, '/Biz.PartyBuilding.YS.Client;component/Resources/img/party_learn.png', 'Center');
-INSERT INTO `auth_permission` VALUES ('3828bf62a00311e6a0a014dda9275f65', 'func_party_org_2new', '两新组织', 'PermTypeFunc', 'func_party_org', '1002', '', null, '/Biz.PartyBuilding.YS.Client;component/PartyOrg/Org2NewPage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('468f84c5a00511e6a0a014dda9275f65', 'func_party_daily_taskrec', '我的任务', 'PermTypeFunc', 'func_party_daily', '1102', '', null, '/Biz.PartyBuilding.YS.Client;component/Daily/TaskReceivePage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('50c8ccbf9853454080aa80c6feab88fc', 'func_party_sys_eval_proj', '考核项目设置', 'PermTypeFunc', 'func_party_eval', '1205', '', null, '/Biz.PartyBuilding.YS.Client;component/Sys/Evaluation/EvaluateProjectPage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('54bd6fd248d345eeab8cb51ed844aa3a', 'func_party_sys_eval_projassign', '考核项目分配', 'PermTypeFunc', 'func_party_eval', '1206', '', null, '/Biz.PartyBuilding.YS.Client;component/Sys/Evaluation/EvalProjAssignPage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('5a6203d3a00511e6a0a014dda9275f65', 'func_party_daily_notice', '通知管理', 'PermTypeFunc', 'func_party_daily', '1103', '', null, '/Biz.PartyBuilding.YS.Client;component/Daily/NoticePage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('5c3f2bd9a00b11e6a0a014dda9275f65', 'func_party_sys_learn_channel', '栏目设置', 'PermTypeFunc', 'func_party_learn', '1305', '', null, '/Biz.PartyBuilding.YS.Client;component/Sys/Learn/ChannelSetPage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('63d9d648a00311e6a0a014dda9275f65', 'func_party_org_mem', '党员管理', 'PermTypeFunc', 'func_party_org', '1003', '', null, '/Biz.PartyBuilding.YS.Client;component/PartyOrg/PartyMemberPage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('69872d59a00511e6a0a014dda9275f65', 'func_party_daily_inforelease', '信息发布', 'PermTypeFunc', 'func_party_daily', '1104', '', null, '/Biz.PartyBuilding.YS.Client;component/Daily/InfoReleasePage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('7392abf3a00b11e6a0a014dda9275f65', 'func_party_sys_learn_article', '文章发布', 'PermTypeFunc', 'func_party_learn', '1306', '', null, '/Biz.PartyBuilding.YS.Client;component/Sys/Learn/ArticlesPage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('760de1580c9d48608e94da6324f35933', 'func_party_daily_taskdisp', '任务派遣', 'PermTypeFunc', 'func_party_daily', '1101', '', null, '/Biz.PartyBuilding.YS.Client;component/Daily/TaskDispatchPage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('7668a42fa00311e6a0a014dda9275f65', 'func_party_org_memaddbook', '党员通讯录', 'PermTypeFunc', 'func_party_org', '1004', '', null, '/Biz.PartyBuilding.YS.Client;component/PartyOrg/PartymemAddrBookPage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('809ef779a9ff43bf902a9f2d3ef6b207', 'func_party_daily', '日常管理', 'PermTypeFunc', null, '11', '', null, null, null, '/Biz.PartyBuilding.YS.Client;component/Resources/img/party_daily.png', 'Center');
-INSERT INTO `auth_permission` VALUES ('81944bfca00511e6a0a014dda9275f65', 'func_party_daily_partyactrecord', '党内组织生活', 'PermTypeFunc', 'func_party_daily', '1105', '', null, '/Biz.PartyBuilding.YS.Client;component/Daily/PartyActRecordPage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('91e3bcd4a00311e6a0a014dda9275f65', 'func_party_org_memdues', '党费管理', 'PermTypeFunc', 'func_party_org', '1005', '', null, '/Biz.PartyBuilding.YS.Client;component/PartyOrg/PartyMemDuesPage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('ac72bb5ba00311e6a0a014dda9275f65', 'func_party_org_villagecadres', '村干部管理', 'PermTypeFunc', 'func_party_org', '1006', '', null, '/Biz.PartyBuilding.YS.Client;component/PartyOrg/VillageCadresPage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('b393d5078e9e451dace2d369769d46b9', 'func_party_eval', '考核管理', 'PermTypeFunc', null, '12', '', null, null, null, '/Biz.PartyBuilding.YS.Client;component/Resources/img/party_evaluation.png', 'Center');
-INSERT INTO `auth_permission` VALUES ('b3da249ba00911e6a0a014dda9275f65', 'func_party_learn_cleangov', '廉政建设', 'PermTypeFunc', 'func_party_learn', '1301', '', null, '/Biz.PartyBuilding.YS.Client;component/Learn/PartyLearnPage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('c3a2fc90a00811e6a0a014dda9275f65', 'func_party_eval_evaluate', '考核评价', 'PermTypeFunc', 'func_party_eval', '1202', '', null, '/Biz.PartyBuilding.YS.Client;component/Evaluation/EvaluatePage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('c6df3d18a00911e6a0a014dda9275f65', 'func_party_learn_theory', '理论制度', 'PermTypeFunc', 'func_party_learn', '1302', '', null, '/Biz.PartyBuilding.YS.Client;component/Learn/PartyLearnPage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('cdabebee2c0f4dcc9520d7045e0e161f', 'func_party_org', '党组织管理', 'PermTypeFunc', null, '10', '', null, null, null, '/Biz.PartyBuilding.YS.Client;component/Resources/img/party_base.png', 'Center');
-INSERT INTO `auth_permission` VALUES ('d2afbb0da00311e6a0a014dda9275f65', 'func_party_org_collstuofficer', '大学生村官管理', 'PermTypeFunc', 'func_party_org', '1007', '', null, '/Biz.PartyBuilding.YS.Client;component/PartyOrg/CollegeStuOfficerPage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('d581b580a00911e6a0a014dda9275f65', 'func_party_learn_school', '网上党校', 'PermTypeFunc', 'func_party_learn', '1303', '', null, '/Biz.PartyBuilding.YS.Client;component/Learn/PartyLearnPage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('df2d7f48a00811e6a0a014dda9275f65', 'func_party_eval_evaldetail', '考核情况查询', 'PermTypeFunc', 'func_party_eval', '1203', '', null, '/Biz.PartyBuilding.YS.Client;component/Evaluation/EvaluateDetailPage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('ebadfada1d2c49408132f732b6d96b1e', 'func_party_eval_upload', '资料上传', 'PermTypeFunc', 'func_party_eval', '1201', '', null, '/Biz.PartyBuilding.YS.Client;component/Evaluation/FileuploadPage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('ecd4b83aa00311e6a0a014dda9275f65', 'func_party_org_firstsecretary', '第一书记管理', 'PermTypeFunc', 'func_party_org', '1008', '', null, '/Biz.PartyBuilding.YS.Client;component/PartyOrg/FirstSecretaryPage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('ef3a914ca00811e6a0a014dda9275f65', 'func_party_eval_evalscore', '考核分数统计', 'PermTypeFunc', 'func_party_eval', '1204', '', null, '/Biz.PartyBuilding.YS.Client;component/Evaluation/EvaluateScorePage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('f044577ea00911e6a0a014dda9275f65', 'func_party_learn_pubedu', '宣传教育', 'PermTypeFunc', 'func_party_learn', '1304', '', null, '/Biz.PartyBuilding.YS.Client;component/Learn/PartyLearnPage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('func_auth', 'func_auth', '权限管理', 'PermTypeFunc', '', '20', '', '', '', null, '/MyNet.Client;component/Resources/img/auth.png', 'Center');
-INSERT INTO `auth_permission` VALUES ('func_auth_group', 'func_auth_group', '组织管理', 'PermTypeFunc', 'func_auth', '200', '', null, '/MyNet.Client;component/Pages/Auth/GroupMngPage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('func_auth_per', 'func_auth_per', '权限管理', 'PermTypeFunc', 'func_auth', '202', '', '', '/MyNet.Client;component/Pages/Auth/PermissionMngPage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('func_auth_usr', 'func_auth_usr', '用户管理', 'PermTypeFunc', 'func_auth', '201', '', '', '/MyNet.Client;component/Pages/Auth/UserMngPage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('func_changepwd', 'func_changepwd', '密码修改', 'PermTypeFunc', 'func_myaccount', '302', '', 'asdfasdf', '/MyNet.Client;component/Pages/Account/ChangePwdPage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('func_myaccount', 'func_myaccount', '我的账户', 'PermTypeFunc', '', '30', '', null, '', null, '/MyNet.Client;component/Resources/img/account.png', 'Center');
-INSERT INTO `auth_permission` VALUES ('func_mydetail', 'func_mydetail', '我的信息', 'PermTypeFunc', 'func_myaccount', '301', '', null, '/MyNet.Client;component/Pages/Account/DetailPage.xaml', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('opt_changepwd_sav', 'opt_changepwd_sav', '保存密码', 'PermTypeOpt', 'func_changepwd', '30201', '', '', '', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('opt_group_add', 'opt_group_add', '新增组织', 'PermTypeOpt', 'func_auth_group', '20001', '', null, null, 'Add', null, 'Left');
-INSERT INTO `auth_permission` VALUES ('opt_group_del', 'opt_group_del', '删除组织', 'PermTypeOpt', 'func_auth_group', '20003', '', null, null, 'Delete', null, 'Left');
-INSERT INTO `auth_permission` VALUES ('opt_group_edit', 'opt_group_edit', '修改组织', 'PermTypeOpt', 'func_auth_group', '20002', '', null, null, 'Edit', null, 'Left');
-INSERT INTO `auth_permission` VALUES ('opt_myinfo_save', 'opt_myinfo_save', '保存我的信息', 'PermTypeOpt', 'func_myinfo', '30101', '', '', '', null, null, 'Left');
-INSERT INTO `auth_permission` VALUES ('opt_per_add', 'opt_per_add', '新增权限', 'PermTypeOpt', 'func_auth_per', '20201', '', '', '', 'Add', null, 'Left');
-INSERT INTO `auth_permission` VALUES ('opt_per_del', 'opt_per_del', '删除权限', 'PermTypeOpt', 'func_auth_per', '20203', '', '', '', 'Delete', null, 'Left');
-INSERT INTO `auth_permission` VALUES ('opt_per_edit', 'opt_per_edit', '修改权限', 'PermTypeOpt', 'func_auth_per', '20202', '', '', '', 'Edit', null, 'Left');
-INSERT INTO `auth_permission` VALUES ('opt_usr_add', 'opt_usr_add', '新增用户', 'PermTypeOpt', 'func_auth_usr', '20101', '', '', '', 'Add', null, 'Left');
-INSERT INTO `auth_permission` VALUES ('opt_usr_assign_per', 'opt_usr_assign_per', '分配权限', 'PermTypeOpt', 'func_auth_usr', '20104', '', '', '', 'Assign', null, 'Left');
-INSERT INTO `auth_permission` VALUES ('opt_usr_del', 'opt_usr_del', '删除用户', 'PermTypeOpt', 'func_auth_usr', '20103', '', '', '', 'Delete', null, 'Left');
-INSERT INTO `auth_permission` VALUES ('opt_usr_edit', 'opt_usr_edit', '修改用户', 'PermTypeOpt', 'func_auth_usr', '20102', '', '', '', 'Edit', null, 'Left');
+INSERT INTO `auth_permission` VALUES ('061f1473a00411e6a0a014dda9275f65', 'func_party_org_actplace', '组织活动场所管理', 'Func', 'func_party_org', '1009', '', null, '/Biz.PartyBuilding.YS.Client;component/PartyOrg/ActivityPlacePage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('15077f0d1fa340819f041905516a9c57', 'func_party_org_orgstruct', '组织架构', 'Func', 'func_party_org', '1001', '', null, '/Biz.PartyBuilding.YS.Client;component/PartyOrg/OrgStructPage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('1b83bc5a188c44aebbb47d67d79420a2', 'func_cq_table', '查询表管理', 'Func', 'func_cq', '2201', '', null, 'asfasdfasdf', null, null, null);
+INSERT INTO `auth_permission` VALUES ('1d9195a7a00411e6a0a014dda9275f65', 'func_party_org_query', '查询统计', 'Func', 'func_party_org', '1010', '', null, '/Biz.PartyBuilding.YS.Client;component/PartyOrg/QueryPage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('1d999f9625ec403b84bbe9eefa2be065', 'func_party_learn', '党建学习', 'Func', null, '13', '', null, null, null, '/Biz.PartyBuilding.YS.Client;component/Resources/img/party_learn.png', 'Center');
+INSERT INTO `auth_permission` VALUES ('3828bf62a00311e6a0a014dda9275f65', 'func_party_org_2new', '两新组织', 'Func', 'func_party_org', '1002', '', null, '/Biz.PartyBuilding.YS.Client;component/PartyOrg/Org2NewPage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('468f84c5a00511e6a0a014dda9275f65', 'func_party_daily_taskrec', '我的任务', 'Func', 'func_party_daily', '1102', '', null, '/Biz.PartyBuilding.YS.Client;component/Daily/TaskReceivePage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('50c8ccbf9853454080aa80c6feab88fc', 'func_party_sys_eval_proj', '考核项目设置', 'Func', 'func_party_eval', '1205', '', null, '/Biz.PartyBuilding.YS.Client;component/Sys/Evaluation/EvaluateProjectPage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('54bd6fd248d345eeab8cb51ed844aa3a', 'func_party_sys_eval_projassign', '考核项目分配', 'Func', 'func_party_eval', '1206', '', null, '/Biz.PartyBuilding.YS.Client;component/Sys/Evaluation/EvalProjAssignPage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('5a6203d3a00511e6a0a014dda9275f65', 'func_party_daily_notice', '通知管理', 'Func', 'func_party_daily', '1103', '', null, '/Biz.PartyBuilding.YS.Client;component/Daily/NoticePage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('5c3f2bd9a00b11e6a0a014dda9275f65', 'func_party_sys_learn_channel', '栏目设置', 'Func', 'func_party_learn', '1305', '', null, '/Biz.PartyBuilding.YS.Client;component/Sys/Learn/ChannelSetPage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('63d9d648a00311e6a0a014dda9275f65', 'func_party_org_mem', '党员管理', 'Func', 'func_party_org', '1003', '', null, '/Biz.PartyBuilding.YS.Client;component/PartyOrg/PartyMemberPage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('69872d59a00511e6a0a014dda9275f65', 'func_party_daily_inforelease', '信息发布', 'Func', 'func_party_daily', '1104', '', null, '/Biz.PartyBuilding.YS.Client;component/Daily/InfoReleasePage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('7392abf3a00b11e6a0a014dda9275f65', 'func_party_sys_learn_article', '文章发布', 'Func', 'func_party_learn', '1306', '', null, '/Biz.PartyBuilding.YS.Client;component/Sys/Learn/ArticlesPage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('760de1580c9d48608e94da6324f35933', 'func_party_daily_taskdisp', '任务派遣', 'Func', 'func_party_daily', '1101', '', null, '/Biz.PartyBuilding.YS.Client;component/Daily/TaskDispatchPage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('7668a42fa00311e6a0a014dda9275f65', 'func_party_org_memaddbook', '党员通讯录', 'Func', 'func_party_org', '1004', '', null, '/Biz.PartyBuilding.YS.Client;component/PartyOrg/PartymemAddrBookPage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('809ef779a9ff43bf902a9f2d3ef6b207', 'func_party_daily', '日常管理', 'Func', null, '11', '', null, null, null, '/Biz.PartyBuilding.YS.Client;component/Resources/img/party_daily.png', 'Center');
+INSERT INTO `auth_permission` VALUES ('81944bfca00511e6a0a014dda9275f65', 'func_party_daily_partyactrecord', '党内组织生活', 'Func', 'func_party_daily', '1105', '', null, '/Biz.PartyBuilding.YS.Client;component/Daily/PartyActRecordPage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('91e3bcd4a00311e6a0a014dda9275f65', 'func_party_org_memdues', '党费管理', 'Func', 'func_party_org', '1005', '', null, '/Biz.PartyBuilding.YS.Client;component/PartyOrg/PartyMemDuesPage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('ac72bb5ba00311e6a0a014dda9275f65', 'func_party_org_villagecadres', '村干部管理', 'Func', 'func_party_org', '1006', '', null, '/Biz.PartyBuilding.YS.Client;component/PartyOrg/VillageCadresPage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('b236bc1414a44f5c882080c7f28b418c', 'func_cq_query', '自定义查询', 'Func', 'func_cq', '2203', '', null, 'asdfqwerqwer', null, null, null);
+INSERT INTO `auth_permission` VALUES ('b393d5078e9e451dace2d369769d46b9', 'func_party_eval', '考核管理', 'Func', null, '12', '', null, null, null, '/Biz.PartyBuilding.YS.Client;component/Resources/img/party_evaluation.png', 'Center');
+INSERT INTO `auth_permission` VALUES ('b3da249ba00911e6a0a014dda9275f65', 'func_party_learn_cleangov', '廉政建设', 'Func', 'func_party_learn', '1301', '', null, '/Biz.PartyBuilding.YS.Client;component/Learn/PartyLearnPage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('bb058684485b47218e552c6347091b2e', 'func_cq', '自定义查询', 'Func', null, '22', '', null, null, null, null, null);
+INSERT INTO `auth_permission` VALUES ('c3a2fc90a00811e6a0a014dda9275f65', 'func_party_eval_evaluate', '考核评价', 'Func', 'func_party_eval', '1202', '', null, '/Biz.PartyBuilding.YS.Client;component/Evaluation/EvaluatePage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('c6df3d18a00911e6a0a014dda9275f65', 'func_party_learn_theory', '理论制度', 'Func', 'func_party_learn', '1302', '', null, '/Biz.PartyBuilding.YS.Client;component/Learn/PartyLearnPage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('cdabebee2c0f4dcc9520d7045e0e161f', 'func_party_org', '党组织管理', 'Func', null, '10', '', null, null, null, '/Biz.PartyBuilding.YS.Client;component/Resources/img/party_base.png', 'Center');
+INSERT INTO `auth_permission` VALUES ('cdb3623e5fc14c1abcea94eeed2f1fb2', 'func_cq_field', '查询字段管理', 'Func', 'func_cq', '2202', '', null, 'weqr234rq4rq3', null, null, null);
+INSERT INTO `auth_permission` VALUES ('d2afbb0da00311e6a0a014dda9275f65', 'func_party_org_collstuofficer', '大学生村官管理', 'Func', 'func_party_org', '1007', '', null, '/Biz.PartyBuilding.YS.Client;component/PartyOrg/CollegeStuOfficerPage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('d581b580a00911e6a0a014dda9275f65', 'func_party_learn_school', '网上党校', 'Func', 'func_party_learn', '1303', '', null, '/Biz.PartyBuilding.YS.Client;component/Learn/PartyLearnPage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('df2d7f48a00811e6a0a014dda9275f65', 'func_party_eval_evaldetail', '考核情况查询', 'Func', 'func_party_eval', '1203', '', null, '/Biz.PartyBuilding.YS.Client;component/Evaluation/EvaluateDetailPage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('ebadfada1d2c49408132f732b6d96b1e', 'func_party_eval_upload', '资料上传', 'Func', 'func_party_eval', '1201', '', null, '/Biz.PartyBuilding.YS.Client;component/Evaluation/FileuploadPage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('ecd4b83aa00311e6a0a014dda9275f65', 'func_party_org_firstsecretary', '第一书记管理', 'Func', 'func_party_org', '1008', '', null, '/Biz.PartyBuilding.YS.Client;component/PartyOrg/FirstSecretaryPage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('ef3a914ca00811e6a0a014dda9275f65', 'func_party_eval_evalscore', '考核分数统计', 'Func', 'func_party_eval', '1204', '', null, '/Biz.PartyBuilding.YS.Client;component/Evaluation/EvaluateScorePage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('f044577ea00911e6a0a014dda9275f65', 'func_party_learn_pubedu', '宣传教育', 'Func', 'func_party_learn', '1304', '', null, '/Biz.PartyBuilding.YS.Client;component/Learn/PartyLearnPage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('func_auth', 'func_auth', '权限管理', 'Func', '', '20', '', '', '', null, '/MyNet.Client;component/Resources/img/auth.png', 'Center');
+INSERT INTO `auth_permission` VALUES ('func_auth_group', 'func_auth_group', '组织管理', 'Func', 'func_auth', '200', '', null, '/MyNet.Client;component/Pages/Auth/GroupMngPage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('func_auth_per', 'func_auth_per', '权限管理', 'Func', 'func_auth', '202', '', '', '/MyNet.Client;component/Pages/Auth/PermissionMngPage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('func_auth_usr', 'func_auth_usr', '用户管理', 'Func', 'func_auth', '201', '', '', '/MyNet.Client;component/Pages/Auth/UserMngPage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('func_changepwd', 'func_changepwd', '密码修改', 'Func', 'func_myaccount', '302', '', 'asdfasdf', '/MyNet.Client;component/Pages/Account/ChangePwdPage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('func_myaccount', 'func_myaccount', '我的账户', 'Func', '', '30', '', null, '', null, '/MyNet.Client;component/Resources/img/account.png', 'Center');
+INSERT INTO `auth_permission` VALUES ('func_mydetail', 'func_mydetail', '我的信息', 'Func', 'func_myaccount', '301', '', null, '/MyNet.Client;component/Pages/Account/DetailPage.xaml', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('opt_changepwd_sav', 'opt_changepwd_sav', '保存密码', 'Opt', 'func_changepwd', '30201', '', '', '', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('opt_group_add', 'opt_group_add', '新增组织', 'Opt', 'func_auth_group', '20001', '', null, null, 'Add', null, 'Left');
+INSERT INTO `auth_permission` VALUES ('opt_group_del', 'opt_group_del', '删除组织', 'Opt', 'func_auth_group', '20003', '', null, null, 'Delete', null, 'Left');
+INSERT INTO `auth_permission` VALUES ('opt_group_edit', 'opt_group_edit', '修改组织', 'Opt', 'func_auth_group', '20002', '', null, null, 'Edit', null, 'Left');
+INSERT INTO `auth_permission` VALUES ('opt_myinfo_save', 'opt_myinfo_save', '保存我的信息', 'Opt', 'func_myinfo', '30101', '', '', '', null, null, 'Left');
+INSERT INTO `auth_permission` VALUES ('opt_per_add', 'opt_per_add', '新增权限', 'Opt', 'func_auth_per', '20201', '', '', '', 'Add', null, 'Left');
+INSERT INTO `auth_permission` VALUES ('opt_per_del', 'opt_per_del', '删除权限', 'Opt', 'func_auth_per', '20203', '', '', '', 'Delete', null, 'Left');
+INSERT INTO `auth_permission` VALUES ('opt_per_edit', 'opt_per_edit', '修改权限', 'Opt', 'func_auth_per', '20202', '', '', '', 'Edit', null, 'Left');
+INSERT INTO `auth_permission` VALUES ('opt_usr_add', 'opt_usr_add', '新增用户', 'Opt', 'func_auth_usr', '20101', '', '', '', 'Add', null, 'Left');
+INSERT INTO `auth_permission` VALUES ('opt_usr_assign_per', 'opt_usr_assign_per', '分配权限', 'Opt', 'func_auth_usr', '20104', '', '', '', 'Assign', null, 'Left');
+INSERT INTO `auth_permission` VALUES ('opt_usr_del', 'opt_usr_del', '删除用户', 'Opt', 'func_auth_usr', '20103', '', '', '', 'Delete', null, 'Left');
+INSERT INTO `auth_permission` VALUES ('opt_usr_edit', 'opt_usr_edit', '修改用户', 'Opt', 'func_auth_usr', '20102', '', '', '', 'Edit', null, 'Left');
 
 -- ----------------------------
 -- Table structure for auth_user
@@ -168,7 +173,7 @@ CREATE TABLE `base_dict` (
   `dict_id` varchar(32) NOT NULL,
   `dict_code` varchar(40) NOT NULL COMMENT '字典编号，相同类型下，编号不能为空',
   `dict_name` varchar(20) NOT NULL COMMENT '字典名称',
-  `dict_type` varchar(10) NOT NULL COMMENT '字典类型',
+  `dict_type` varchar(40) NOT NULL COMMENT '字典类型',
   `dict_system` bit(1) NOT NULL DEFAULT b'0' COMMENT '是否系统预制(系统预制的不允许删除）',
   `dict_default` bit(1) NOT NULL DEFAULT b'0' COMMENT '是否默认值',
   `dict_order` int(10) NOT NULL DEFAULT '0' COMMENT '排序号',
@@ -178,16 +183,21 @@ CREATE TABLE `base_dict` (
 -- ----------------------------
 -- Records of base_dict
 -- ----------------------------
-INSERT INTO `base_dict` VALUES ('cardstate_loss', 'CardStateLoss', '挂失', 'cardstate', '', '\0', '2');
-INSERT INTO `base_dict` VALUES ('cardstate_normal', 'CardStateNormal', '正常', 'cardstate', '', '', '1');
-INSERT INTO `base_dict` VALUES ('cardstate_off', 'CardStateOff', '注销', 'cardstate', '', '\0', '3');
-INSERT INTO `base_dict` VALUES ('partyorg_dw', 'PartyOrgDW', '党委', 'partyorg', '', '', '1');
-INSERT INTO `base_dict` VALUES ('partyorg_dzb', 'PartyOrgDZB', '党支部', 'partyorg', '', '\0', '5');
-INSERT INTO `base_dict` VALUES ('partyorg_dzzb', 'PartyOrgDZZB', '党总支部', 'partyorg', '', '\0', '4');
-INSERT INTO `base_dict` VALUES ('partyorg_jcdw', 'PartyOrgJCDW', '基层党委', 'partyorg', '', '\0', '3');
-INSERT INTO `base_dict` VALUES ('partyorg_jgdw', 'PartyOrgJGDW', '机关党委', 'partyorg', '', '\0', '2');
-INSERT INTO `base_dict` VALUES ('permtype_func', 'PermTypeFunc', '功能权限', 'permtype', '', '', '1');
-INSERT INTO `base_dict` VALUES ('permtype_opt', 'PermTypeOpt', '操作权限', 'permtype', '', '\0', '2');
+INSERT INTO `base_dict` VALUES ('cardstate_loss', 'Loss', '挂失', 'card.cardstate', '', '\0', '2');
+INSERT INTO `base_dict` VALUES ('cardstate_normal', 'Normal', '正常', 'card.cardstate', '', '', '1');
+INSERT INTO `base_dict` VALUES ('cardstate_off', 'Off', '注销', 'card.cardstate', '', '\0', '3');
+INSERT INTO `base_dict` VALUES ('fieldtype_boolean', 'Boolean', '布尔类型', 'query.fieldtype', '', '\0', '5');
+INSERT INTO `base_dict` VALUES ('fieldtype_date', 'Date', '日期类型', 'query.fieldtype', '', '\0', '3');
+INSERT INTO `base_dict` VALUES ('fieldtype_number', 'Number', '数值类型', 'query.fieldtype', '', '\0', '2');
+INSERT INTO `base_dict` VALUES ('fieldtype_string', 'String', '字符串类型', 'query.fieldtype', '', '', '1');
+INSERT INTO `base_dict` VALUES ('fieldtype_time', 'Time', '时间类型', 'query.fieldtype', '', '\0', '4');
+INSERT INTO `base_dict` VALUES ('partyorg_dw', 'DW', '党委', 'pb.org', '', '', '1');
+INSERT INTO `base_dict` VALUES ('partyorg_dzb', 'DZB', '党支部', 'pb.org', '', '\0', '5');
+INSERT INTO `base_dict` VALUES ('partyorg_dzzb', 'DZZB', '党总支部', 'pb.org', '', '\0', '4');
+INSERT INTO `base_dict` VALUES ('partyorg_jcdw', 'JCDW', '基层党委', 'pb.org', '', '\0', '3');
+INSERT INTO `base_dict` VALUES ('partyorg_jgdw', 'JGDW', '机关党委', 'pb.org', '', '\0', '2');
+INSERT INTO `base_dict` VALUES ('permtype_func', 'Func', '功能权限', 'auth.permtype', '', '', '1');
+INSERT INTO `base_dict` VALUES ('permtype_opt', 'Opt', '操作权限', 'auth.permtype', '', '\0', '2');
 
 -- ----------------------------
 -- Table structure for base_dict_type
@@ -203,9 +213,11 @@ CREATE TABLE `base_dict_type` (
 -- ----------------------------
 -- Records of base_dict_type
 -- ----------------------------
-INSERT INTO `base_dict_type` VALUES ('cardstate', '一卡通状态', '');
-INSERT INTO `base_dict_type` VALUES ('partyorg', '党组织类型', '');
-INSERT INTO `base_dict_type` VALUES ('permtype', '权限类型', '');
+INSERT INTO `base_dict_type` VALUES ('auth.permtype', '权限类型', '');
+INSERT INTO `base_dict_type` VALUES ('card.cardstate', '一卡通状态', '');
+INSERT INTO `base_dict_type` VALUES ('pb.org', '党组织类型', '');
+INSERT INTO `base_dict_type` VALUES ('query.fieldtype', '字段类型', '');
+INSERT INTO `base_dict_type` VALUES ('query.rel', '查询关系符', '');
 
 -- ----------------------------
 -- Table structure for party_area
@@ -316,6 +328,52 @@ INSERT INTO `party_task` VALUES ('7f31f885b47f4cac894cb4a4224ab7d9', 'zpf', '张
 INSERT INTO `party_task` VALUES ('83b6f08386e3493dabce7876f480abc9', '活动场所信息采集', '请各级党组织尽快采集活动场所信息，并录入系统！', '高', '全部', '2016-11-24 11:06:07', '2016/12/10', '王集镇徐楼村已采集并上传', '已完成', '已完成');
 INSERT INTO `party_task` VALUES ('8bbdeb51397c4383ae4110cdeb126123', 'aaa', 'asdfs', '中', 'aaa', '2016-11-24 15:46:08', '2016/11/24', null, '已发布', '未领');
 INSERT INTO `party_task` VALUES ('98c80605b0a24373abe5b07c1172b24c', 'bbb', 'bbb', '低', 'bb', '2016-11-24 17:02:18', '', null, '已发布', '未领');
+
+-- ----------------------------
+-- Table structure for query_fields
+-- ----------------------------
+DROP TABLE IF EXISTS `query_fields`;
+CREATE TABLE `query_fields` (
+  `id` char(32) NOT NULL,
+  `tbid` char(32) NOT NULL,
+  `fieldname` varchar(20) NOT NULL,
+  `displayname` varchar(40) DEFAULT NULL,
+  `fieldtype` varchar(20) NOT NULL,
+  `remark` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_Reference_fields_tables` (`tbid`),
+  CONSTRAINT `FK_Reference_fields_tables` FOREIGN KEY (`tbid`) REFERENCES `query_tables` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='查询字段定义';
+
+-- ----------------------------
+-- Records of query_fields
+-- ----------------------------
+INSERT INTO `query_fields` VALUES ('33ec5f83dbe241aaa372004637845040', '9f20661fef644b41b4e9d019b32cd550', 'dict_order', '排序号', 'String', null);
+INSERT INTO `query_fields` VALUES ('943bdb1719264aa8b02a5194cb7e4ab8', '9f20661fef644b41b4e9d019b32cd550', 'dict_name', '字典名称', 'String', null);
+INSERT INTO `query_fields` VALUES ('b86d38b0736d4abf9e0dbcc84f545467', 'd0d069aefaba4025a3f3d76619f18ee4', 'type_code', '类型编号', 'String', null);
+INSERT INTO `query_fields` VALUES ('b8c87e091e064799b9659bfcfd57cce7', 'd0d069aefaba4025a3f3d76619f18ee4', 'type_name', '类型名称', 'String', null);
+INSERT INTO `query_fields` VALUES ('ca12e9540f304e498d5e091670027e8f', '9f20661fef644b41b4e9d019b32cd550', 'dict_type', '字典类型', 'String', null);
+INSERT INTO `query_fields` VALUES ('d4235d5246eb49829e76960437844ca2', '9f20661fef644b41b4e9d019b32cd550', 'dict_id', '字典id', 'String', null);
+INSERT INTO `query_fields` VALUES ('d7be376e2b2c46cdac7ab5056d30b652', '9f20661fef644b41b4e9d019b32cd550', 'dict_default', '是否默认', 'Boolean', null);
+INSERT INTO `query_fields` VALUES ('ead9fedc598141bebf88c2e17b275c42', '9f20661fef644b41b4e9d019b32cd550', 'dict_code', '字典编号', 'String', null);
+
+-- ----------------------------
+-- Table structure for query_tables
+-- ----------------------------
+DROP TABLE IF EXISTS `query_tables`;
+CREATE TABLE `query_tables` (
+  `id` char(32) NOT NULL,
+  `tbname` varchar(100) NOT NULL,
+  `alias` varchar(20) NOT NULL,
+  `remark` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='查询表定义';
+
+-- ----------------------------
+-- Records of query_tables
+-- ----------------------------
+INSERT INTO `query_tables` VALUES ('9f20661fef644b41b4e9d019b32cd550', 'base_dict', 'bd', '字典表');
+INSERT INTO `query_tables` VALUES ('d0d069aefaba4025a3f3d76619f18ee4', 'base_dict_type', 'bdt', '字典类型表');
 
 -- ----------------------------
 -- Procedure structure for sp_page_query
