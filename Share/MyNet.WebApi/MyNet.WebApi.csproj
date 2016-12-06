@@ -86,15 +86,10 @@
     <Compile Include="Controllers\Card\MallAccountController.cs" />
     <Compile Include="Controllers\Common\MiscController.cs" />
     <Compile Include="Controllers\Auth\UserController.cs" />
-    <Compile Include="Extensions\CustomExceptionLogger.cs" />
-    <Compile Include="Extensions\CustomMessageHandler.cs" />
-    <Compile Include="Extensions\ExtendedAssembliesResolver.cs" />
-    <Compile Include="Extensions\HttpUtils.cs" />
     <Compile Include="Extensions\ModelStateExtension.cs" />
     <Compile Include="Extensions\UploadHelper.cs" />
-    <Compile Include="Extensions\Validation\PermissionTypeAttribute.cs" />
-    <Compile Include="Filters\CustomExceptionFilterAttribute.cs" />
     <Compile Include="Filters\TokenValidateFilterAttribute.cs" />
+    <Compile Include="Filters\ValidateModelFilterAttribute.cs" />
     <Compile Include="Models\Auth\Group\AddGroupViewModel.cs" />
     <Compile Include="Models\Auth\Group\EditGroupViewModel.cs" />
     <Compile Include="Models\Auth\Permission\AddPermissionViewModel.cs" />
@@ -153,6 +148,11 @@
     <ProjectReference Include="..\MyNet.Service\MyNet.Service.csproj">
       <Project>{1ecb045c-bb92-481a-ba25-bf0b48a92dfd}</Project>
       <Name>MyNet.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyNet.WebHostService\MyNet.WebHostService.csproj">
+      <Project>{e7ff678f-9988-46fe-a2b0-eaae2699e7db}</Project>
+      <Name>MyNet.WebHostService</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

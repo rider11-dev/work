@@ -17,6 +17,7 @@ namespace MyNet.WebApi.Controllers.Base
 {
     [RoutePrefix("api/base/dicttype")]
     [TokenValidateFilter]
+    [ValidateModelFilter]
     public class DictTypeController : BaseController
     {
         const string Msg_QueryByPage = "分页查询字典类型";
@@ -54,11 +55,7 @@ namespace MyNet.WebApi.Controllers.Base
         public OptResult Add(AddDictTypeViewModel vmAddDictType)
         {
             OptResult rst = null;
-            if (!ModelState.IsValid)
-            {
-                rst = OptResult.Build(ResultCode.ParamError, ModelState.Parse());
-                return rst;
-            }
+
             var dictType = OOMapper.Map<AddDictTypeViewModel, DictType>(vmAddDictType);
             rst = _dictTypeSrv.Add(dictType);
 
@@ -70,11 +67,6 @@ namespace MyNet.WebApi.Controllers.Base
         public OptResult Delete(DelByPkViewModel vmDel)
         {
             OptResult rst = null;
-            if (!ModelState.IsValid)
-            {
-                rst = OptResult.Build(ResultCode.ParamError, ModelState.Parse());
-                return rst;
-            }
 
             var token = base.ParseToken(ActionContext);
 

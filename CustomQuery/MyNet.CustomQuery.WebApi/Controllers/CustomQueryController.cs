@@ -3,6 +3,7 @@ using MyNet.CustomQuery.Model;
 using MyNet.CustomQuery.Service;
 using MyNet.WebApi.Controllers;
 using MyNet.WebApi.Extensions;
+using MyNet.WebApi.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ using System.Web.Http;
 namespace MyNet.CustomQuery.WebApi.Controllers
 {
     [RoutePrefix("api/customquery/query")]
+    [ValidateModelFilter]
     public class CustomQueryController : BaseController
     {
         private CustomQueryService _cqSrv;
@@ -25,11 +27,7 @@ namespace MyNet.CustomQuery.WebApi.Controllers
         public OptResult Query(QueryModel model)
         {
             OptResult rst = null;
-            if (!ModelState.IsValid)
-            {
-                rst = OptResult.Build(ResultCode.ParamError, ModelState.Parse());
-                return rst;
-            }
+
             var token = base.ParseToken(ActionContext);
             rst = _cqSrv.Query(model);
 

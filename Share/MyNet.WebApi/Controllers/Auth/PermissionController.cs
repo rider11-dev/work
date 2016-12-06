@@ -17,6 +17,7 @@ namespace MyNet.WebApi.Controllers.Auth
 {
     [RoutePrefix("api/auth/permission")]
     [TokenValidateFilter]
+    [ValidateModelFilter]
     public class PermissionController : BaseController
     {
         //私有变量
@@ -32,11 +33,12 @@ namespace MyNet.WebApi.Controllers.Auth
         public OptResult Add(AddPermissionViewModel vmAddPer)
         {
             OptResult rst = null;
-            if (!ModelState.IsValid)
+            if (vmAddPer == null)
             {
-                rst = OptResult.Build(ResultCode.ParamError, ModelState.Parse());
+                rst = OptResult.Build(ResultCode.ParamError, "参数不能为空");
                 return rst;
             }
+
             //
             var token = base.ParseToken(ActionContext);
             var per = OOMapper.Map<AddPermissionViewModel, Permission>(vmAddPer);
@@ -50,11 +52,7 @@ namespace MyNet.WebApi.Controllers.Auth
         public OptResult Update(EditPermissionViewModel vmEditPer)
         {
             OptResult rst = null;
-            if (!ModelState.IsValid)
-            {
-                rst = OptResult.Build(ResultCode.ParamError, ModelState.Parse());
-                return rst;
-            }
+
             //
             var token = base.ParseToken(ActionContext);
 
@@ -69,11 +67,6 @@ namespace MyNet.WebApi.Controllers.Auth
         public OptResult Delete(DelByPkViewModel vmDel)
         {
             OptResult rst = null;
-            if (!ModelState.IsValid)
-            {
-                rst = OptResult.Build(ResultCode.ParamError, ModelState.Parse());
-                return rst;
-            }
 
             var token = base.ParseToken(ActionContext);
 
@@ -87,11 +80,6 @@ namespace MyNet.WebApi.Controllers.Auth
         public OptResult Delete(DelByIdsViewModel vmDels)
         {
             OptResult rst = null;
-            if (!ModelState.IsValid)
-            {
-                rst = OptResult.Build(ResultCode.ParamError, ModelState.Parse());
-                return rst;
-            }
 
             var token = base.ParseToken(ActionContext);
 

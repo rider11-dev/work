@@ -1,5 +1,4 @@
 ﻿using MyNet.Components.Extensions;
-using MyNet.WebApi.Extensions.Validation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

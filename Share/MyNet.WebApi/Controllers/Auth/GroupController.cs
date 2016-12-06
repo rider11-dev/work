@@ -18,6 +18,7 @@ namespace MyNet.WebApi.Controllers.Auth
 {
     [RoutePrefix("api/auth/group")]
     [TokenValidateFilter]
+    [ValidateModelFilter]
     public class GroupController : BaseController
     {
         //私有变量
@@ -32,11 +33,7 @@ namespace MyNet.WebApi.Controllers.Auth
         public OptResult Add(AddGroupViewModel vmAddGroup)
         {
             OptResult rst = null;
-            if (!ModelState.IsValid)
-            {
-                rst = OptResult.Build(ResultCode.ParamError, ModelState.Parse());
-                return rst;
-            }
+
             //
             var token = base.ParseToken(ActionContext);
             var group = OOMapper.Map<AddGroupViewModel, Group>(vmAddGroup);
@@ -50,11 +47,7 @@ namespace MyNet.WebApi.Controllers.Auth
         public OptResult Update(EditGroupViewModel vmEditGroup)
         {
             OptResult rst = null;
-            if (!ModelState.IsValid)
-            {
-                rst = OptResult.Build(ResultCode.ParamError, ModelState.Parse());
-                return rst;
-            }
+
             //
             var token = base.ParseToken(ActionContext);
 
@@ -69,11 +62,6 @@ namespace MyNet.WebApi.Controllers.Auth
         public OptResult Delete(DelByIdsViewModel vmDels)
         {
             OptResult rst = null;
-            if (!ModelState.IsValid)
-            {
-                rst = OptResult.Build(ResultCode.ParamError, ModelState.Parse());
-                return rst;
-            }
 
             var token = base.ParseToken(ActionContext);
 

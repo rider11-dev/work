@@ -6,6 +6,7 @@ using MyNet.CustomQuery.WebApi.Models;
 using MyNet.Model;
 using MyNet.WebApi.Controllers;
 using MyNet.WebApi.Extensions;
+using MyNet.WebApi.Filters;
 using MyNet.WebApi.Models;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ using System.Web.Http;
 namespace MyNet.CustomQuery.WebApi.Controllers
 {
     [RoutePrefix("api/customquery/fields")]
+    [ValidateModelFilter]
     public class FieldController : BaseController
     {
         private FieldService _fieldSrv;
@@ -41,11 +43,6 @@ namespace MyNet.CustomQuery.WebApi.Controllers
         public OptResult Add(AddFieldViewModel vmAddField)
         {
             OptResult rst = null;
-            if (!ModelState.IsValid)
-            {
-                rst = OptResult.Build(ResultCode.ParamError, ModelState.Parse());
-                return rst;
-            }
             //
             var token = base.ParseToken(ActionContext);
             var field = OOMapper.Map<AddFieldViewModel, Field>(vmAddField);
@@ -59,11 +56,6 @@ namespace MyNet.CustomQuery.WebApi.Controllers
         public OptResult Update(EditFieldViewModel vmEditField)
         {
             OptResult rst = null;
-            if (!ModelState.IsValid)
-            {
-                rst = OptResult.Build(ResultCode.ParamError, ModelState.Parse());
-                return rst;
-            }
             //
             var token = base.ParseToken(ActionContext);
 
@@ -78,11 +70,6 @@ namespace MyNet.CustomQuery.WebApi.Controllers
         public OptResult Delete(DelByIdsViewModel vm)
         {
             OptResult rst = null;
-            if (!ModelState.IsValid)
-            {
-                rst = OptResult.Build(ResultCode.ParamError, ModelState.Parse());
-                return rst;
-            }
 
             var token = base.ParseToken(ActionContext);
 

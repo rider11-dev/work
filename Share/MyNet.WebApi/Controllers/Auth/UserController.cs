@@ -15,6 +15,7 @@ namespace MyNet.WebApi.Controllers.Auth
 {
     [RoutePrefix("api/auth/user")]
     [TokenValidateFilter]
+    [ValidateModelFilter]
     public class UserController : BaseController
     {
 
@@ -34,9 +35,9 @@ namespace MyNet.WebApi.Controllers.Auth
         public OptResult Login(LoginViewModel vmLogin)
         {
             OptResult rst = null;
-            if (!ModelState.IsValid)
+            if (vmLogin == null)
             {
-                rst = OptResult.Build(ResultCode.ParamError, ModelState.Parse());
+                rst = OptResult.Build(ResultCode.ParamError, "参数不能为空");
                 return rst;
             }
 
@@ -63,11 +64,6 @@ namespace MyNet.WebApi.Controllers.Auth
         public OptResult Add(AddUserViewModel vmUsr)
         {
             OptResult rst = null;
-            if (!ModelState.IsValid)
-            {
-                rst = OptResult.Build(ResultCode.ParamError, ModelState.Parse());
-                return rst;
-            }
 
             //
             var token = base.ParseToken(ActionContext);
@@ -83,11 +79,6 @@ namespace MyNet.WebApi.Controllers.Auth
         public OptResult Update(EditUserViewModel vmUsr)
         {
             OptResult rst = null;
-            if (!ModelState.IsValid)
-            {
-                rst = OptResult.Build(ResultCode.ParamError, ModelState.Parse());
-                return rst;
-            }
 
             var token = base.ParseToken(ActionContext);
             var usr = OOMapper.Map<EditUserViewModel, User>(vmUsr);
@@ -102,11 +93,6 @@ namespace MyNet.WebApi.Controllers.Auth
         public OptResult DeleteBatch(DelByIdsViewModel vmDels)
         {
             OptResult rst = null;
-            if (!ModelState.IsValid)
-            {
-                rst = OptResult.Build(ResultCode.ParamError, ModelState.Parse());
-                return rst;
-            }
 
             var token = base.ParseToken(ActionContext);
             rst = _usrSrv.DeleteBatch(vmDels.pks);
@@ -119,11 +105,7 @@ namespace MyNet.WebApi.Controllers.Auth
         public OptResult ChangePwd(ChangePwdViewModel vmChangePwd)
         {
             OptResult rst = null;
-            if (!ModelState.IsValid)
-            {
-                rst = OptResult.Build(ResultCode.ParamError, ModelState.Parse());
-                return rst;
-            }
+
             rst = _usrSrv.ChangePwd(vmChangePwd.userid, vmChangePwd.oldpwd, vmChangePwd.newpwd);
 
             return rst;
@@ -151,11 +133,7 @@ namespace MyNet.WebApi.Controllers.Auth
                 rst = OptResult.Build(ResultCode.ParamError, "参数不能为空或格式不正确");
                 return rst;
             }
-            if (!ModelState.IsValid)
-            {
-                rst = OptResult.Build(ResultCode.ParamError, ModelState.Parse());
-                return rst;
-            }
+
             rst = _usrSrv.Find(vmGetById.pk);
             return rst;
         }
@@ -168,11 +146,6 @@ namespace MyNet.WebApi.Controllers.Auth
             if (vmAssignPer == null)
             {
                 rst = OptResult.Build(ResultCode.ParamError, "参数不能为空或格式不正确");
-                return rst;
-            }
-            if (!ModelState.IsValid)
-            {
-                rst = OptResult.Build(ResultCode.ParamError, ModelState.Parse());
                 return rst;
             }
 
@@ -192,11 +165,7 @@ namespace MyNet.WebApi.Controllers.Auth
                 rst = OptResult.Build(ResultCode.ParamError, "参数不能为空或格式不正确");
                 return rst;
             }
-            if (!ModelState.IsValid)
-            {
-                rst = OptResult.Build(ResultCode.ParamError, ModelState.Parse());
-                return rst;
-            }
+
             rst = _usrPerRelSrv.GetPermissions(vmGetById.pk);
 
             return rst;

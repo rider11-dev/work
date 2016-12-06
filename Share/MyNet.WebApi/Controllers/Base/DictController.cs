@@ -17,6 +17,7 @@ namespace MyNet.WebApi.Controllers.Base
 {
     [RoutePrefix("api/base/dict")]
     [TokenValidateFilter]
+    [ValidateModelFilter]
     public class DictController : BaseController
     {
         DictService _dictSrv;
@@ -31,11 +32,7 @@ namespace MyNet.WebApi.Controllers.Base
         public OptResult Add(AddDictViewModel vmAddDict)
         {
             OptResult rst = null;
-            if (!ModelState.IsValid)
-            {
-                rst = OptResult.Build(ResultCode.ParamError, ModelState.Parse());
-                return rst;
-            }
+
             var dict = OOMapper.Map<AddDictViewModel, Dict>(vmAddDict);
             rst = _dictSrv.Add(dict);
 
@@ -47,11 +44,6 @@ namespace MyNet.WebApi.Controllers.Base
         public OptResult Delete(DelByPkViewModel vmDel)
         {
             OptResult rst = null;
-            if (!ModelState.IsValid)
-            {
-                rst = OptResult.Build(ResultCode.ParamError, ModelState.Parse());
-                return rst;
-            }
 
             var token = base.ParseToken(ActionContext);
 

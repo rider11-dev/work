@@ -10,6 +10,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Drawing;
 using MyNet.Components.Result;
+using MyNet.Components.Extensions;
 
 namespace MyNet.Components
 {
@@ -90,7 +91,7 @@ namespace MyNet.Components
                 request = WebRequest.Create(url) as HttpWebRequest;
             }
             request.Method = "POST";
-            request.ContentType = "application/json";
+            request.ContentType = "application/json;charset=utf-8";
 
             if (!string.IsNullOrEmpty(userAgent))
             {
@@ -110,6 +111,10 @@ namespace MyNet.Components
                 request.CookieContainer = new CookieContainer();
                 request.CookieContainer.Add(cookies);
             }
+            if (token.IsNotEmpty())
+            {
+                AddToken(request, token);
+            }
             //如果需要POST数据  
             if (jsonData != null)
             {
@@ -124,10 +129,6 @@ namespace MyNet.Components
             {
                 //由于IIS7中POST请求限制的原因造成的,在IIS7中站点被以POST方式请求时,必须要求传递参数,如果调用的API无须传递参数,那么请加上一句即可解决411异常
                 request.ContentLength = 0;
-            }
-            if (!string.IsNullOrEmpty(token))
-            {
-                AddToken(request, token);
             }
 
             return request.GetResponse() as HttpWebResponse;
