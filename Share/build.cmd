@@ -1,0 +1,1 @@
+msbuild.exe MyNet.sln /t:Rebuild /p:Configuration=Release /p:VisualStudioVersion=12.0 /l:FileLogger,Microsoft.Build.Engine;logfile=build.log
