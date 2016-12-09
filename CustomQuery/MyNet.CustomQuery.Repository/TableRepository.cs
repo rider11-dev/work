@@ -1,6 +1,8 @@
 ﻿using MyNet.CustomQuery.Model;
 using MyNet.Repository;
 using MyNet.Repository.Db;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace MyNet.CustomQuery.Repository
 {

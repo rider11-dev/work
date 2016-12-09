@@ -87,7 +87,7 @@ namespace MyNet.Components.WPF.Models
 
         protected IEnumerable<CheckableModel> GetSelectedModels()
         {
-            return Models == null ? null : Models.Where(m => m.IsChecked == true);
+            return Models == null ? null : Models.Where(m => m.IsChecked == true).ToList();
         }
 
     }

@@ -1,4 +1,5 @@
-﻿using MyNet.Components.Misc;
+﻿using MyNet.Components.Extensions;
+using MyNet.Components.Misc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,7 +77,7 @@ namespace MyNet.Components.WPF.Extension
         /// <typeparam name="TModel"></typeparam>
         /// <param name="grid"></param>
         /// <returns></returns>
-        public static IList<TModel> GetCheckedItems<TModel>(this DataGrid grid) where TModel : class,ICheckable
+        public static IList<TModel> GetCheckedItems<TModel>(this DataGrid grid) where TModel : class, ICheckable
         {
             IList<TModel> models = new List<TModel>();
             var rows = grid.Items.Count;
@@ -104,5 +105,35 @@ namespace MyNet.Components.WPF.Extension
             return models;
         }
 
+        public static void AddColumns(this DataGrid dg, IEnumerable<DataGridColModel> cols, bool clearBefore = false)
+        {
+            if (dg == null || cols.IsEmpty())
+            {
+                return;
+            }
+            if (clearBefore)
+            {
+                dg.Columns.Clear();
+            }
+            foreach (var col in cols)
+            {
+                dg.Columns.Add(new DataGridTextColumn
+                {
+                    Header = col.Header,
+                    Binding = new Binding(col.Field)
+                });
+            }
+        }
+
+    }
+
+    public class DataGridColModel
+    {
+        public string Header { get; set; }
+        public string Field { get; set; }
+        /// <summary>
+        /// 样式名称
+        /// </summary>
+        public string Style { get; set; }
     }
 }

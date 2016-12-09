@@ -87,3 +87,5 @@
 /CustomQuery/MyNet.CustomQuery.WebApi/obj
 /CustomQuery/MyNet.CustomQuery.WebApi/bin
 /Share/build.log
+/CustomQuery/MyNet.CustomQuery.Client/obj
+/CustomQuery/MyNet.CustomQuery.Client/bin

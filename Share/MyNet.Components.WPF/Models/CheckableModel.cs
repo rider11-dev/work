@@ -13,7 +13,8 @@ namespace MyNet.Components.WPF.Models
     {
         [JsonIgnore]
         public CheckableModelCollection BelongTo { get; set; }
-
+        [JsonIgnore]
+        public bool IsSingleSelect { get; set; }
         bool _checked;
         [JsonIgnore]
         public bool IsChecked
@@ -28,16 +29,28 @@ namespace MyNet.Components.WPF.Models
                 {
                     _checked = value;
                     base.RaisePropertyChanged("IsChecked");
-                    //设置全选checkbox
                     if (BelongTo != null)
                     {
-                        if (_checked == false)
+                        if (IsSingleSelect)
                         {
-                            BelongTo.IsChecked = false;
+                            //单选
+                            if (_checked == true)
+                            {
+                                var others = BelongTo.Models.Where(m => m != this).ToList();
+                                others.ForEach(m => m.IsChecked = false);
+                            }
                         }
-                        else if (BelongTo.Models != null && BelongTo.Models.Count(m => m.IsChecked == false) == 0)
+                        else
                         {
-                            BelongTo.IsChecked = true;
+                            //设置全选checkbox
+                            if (_checked == false)
+                            {
+                                BelongTo.IsChecked = false;
+                            }
+                            else if (BelongTo.Models != null && BelongTo.Models.Count(m => m.IsChecked == false) == 0)
+                            {
+                                BelongTo.IsChecked = true;
+                            }
                         }
                     }
                 }

@@ -45,6 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Condition.cs" />
+    <Compile Include="DbTable.cs" />
+    <Compile Include="CqDictType.cs" />
+    <Compile Include="Dto\FieldDto.cs" />
     <Compile Include="Field.cs" />
     <Compile Include="EmptyModel.cs" />
     <Compile Include="QueryModel.cs" />
@@ -63,10 +66,6 @@
       <Project>{bb11afa2-784c-4e60-9586-6608d8338d67}</Project>
       <Name>MyNet.Model</Name>
       <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Share\MyNet.Repository\MyNet.Repository.csproj">
-      <Project>{0C81A4E4-BD67-4F8D-A602-EC4062A0D0C2}</Project>
-      <Name>MyNet.Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

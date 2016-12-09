@@ -13,7 +13,6 @@ namespace MyNet.CustomQuery.Repository.Mapper
         public FieldMapper()
         {
             Table("query_fields");
-            Map(f => f.FieldType).Ignore();
 
             AutoMap();
         }

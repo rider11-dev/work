@@ -1,0 +1,59 @@
+﻿<win:BaseWindow x:Class="MyNet.Components.WPF.Windows.GridHelpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ctl="clr-namespace:MyNet.Components.WPF.Controls"
+        xmlns:win="clr-namespace:MyNet.Components.WPF.Windows"
+        FontSize="14"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResize"
+        Style="{StaticResource popWindowStyle}"
+        Title="GridHelpWindow" Height="400" Width="600" Loaded="GridHelpWindow_Loaded"
+        >
+    <Window.Resources>
+        <Style x:Key="btnStyle" TargetType="Button" BasedOn="{StaticResource btnBaseStyle}">
+            <Setter Property="Width" Value="90"/>
+            <Setter Property="Height" Value="36"/>
+        </Style>
+        <win:GridHelpViewModel x:Key="model"/>
+    </Window.Resources>
+    <Window.DataContext>
+        <Binding Source="{StaticResource model}"/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Border x:Name="bdToolbar">
+            <StackPanel Orientation="Horizontal">
+                <Button Style="{StaticResource btnBaseStyle}" Width="60" Height="32" Content="刷  新"
+                Command="{Binding Path=RefreshCmd,Source={StaticResource model}}"/>
+            </StackPanel>
+        </Border>
+        <Border Grid.Row="1">
+            <DataGrid x:Name="dg" Style="{StaticResource gridBaseStyle}" 
+                      DataContext="{Binding Path=Models}"
+                      ItemsSource="{Binding Path=DataContext,RelativeSource={RelativeSource Self},Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
+            </DataGrid>
+        </Border>
+        <Border Grid.Row="2">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Row="2" Grid.Column="0"
+                Style="{StaticResource btnStyle}"
+                Command="{Binding Path=SelectCmd,Source={StaticResource model}}"
+                Content="确  定"
+                />
+                <Button Grid.Row="2" Grid.Column="1"
+                Style="{StaticResource btnStyle}"
+                Command="{Binding Path=CloseCmd,RelativeSource={RelativeSource AncestorType=Window}}"
+                Content="取  消"
+                />
+            </Grid>
+        </Border>
+    </Grid>
+</win:BaseWindow>

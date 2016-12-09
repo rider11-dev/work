@@ -20,18 +20,14 @@ namespace MyNet.WebHostService
         {
             if (HostContext.IsDebug)
             {
-                //异步写日志——记录请求数据
-                Task.Run(() =>
+                string msg = string.Format("{0}本次请求:{0}{1}{0}", Environment.NewLine, request.ToString());
+
+                if (request.Content != null)
                 {
-                    string msg = string.Format("{0}本次请求:{0}{1}{0}", Environment.NewLine, request.ToString());
-
-                    if (request.Content != null)
-                    {
-                        msg += string.Format("Content:{0}\t{1}", Environment.NewLine, request.Content.ReadAsStringAsync().Result);
-                    }
-
-                    _logHelper.LogInfo(msg);
-                });
+                    var content = request.Content.ReadAsStringAsync().Result;
+                    msg += string.Format("Content:{0}\t{1}", Environment.NewLine, content);
+                }
+                _logHelper.LogInfo(msg);
             }
 
             return base.SendAsync(request, cancellationToken)

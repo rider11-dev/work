@@ -66,6 +66,7 @@ namespace MyNet.Components.WPF.Windows
             this.DragWhenLeftMouseDown();
 
             this.Icon = AppDomain.CurrentDomain.BaseDirectory + AppSettingHelper.Get("icon");
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
         private void CloseAction(object parameter)
         {

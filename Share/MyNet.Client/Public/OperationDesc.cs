@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyNet.Client.Public
 {
-    public struct OperationDesc
+    public class OperationDesc
     {
         public const string OpenFunc = "打开功能菜单";
         public const string GetUsrs = "获取用户信息";

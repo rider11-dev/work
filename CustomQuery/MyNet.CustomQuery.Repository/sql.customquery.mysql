@@ -17,13 +17,16 @@
            order=" qt.tbname asc"
            >
       </sql>
+      <sql name="getdbtables" type="txt">
+        show table status
+      </sql>
     </sqlgroup>
     <sqlgroup name="fields">
       <sql name="pagequery"
            type="sp"
            sp_name="sp_page_query"
-           fields=" qf.* "
-           tables=" query_fields qf join query_tables qt on qf.tbid=qt.id "
+           fields=" qf.*,qt.tbname,bd.dict_name fieldtype_name "
+           tables=" query_fields qf join query_tables qt on qf.tbid=qt.id join base_dict bd on qf.fieldtype=bd.dict_code "
            where=" 1=1 "
            order=" qt.tbname asc"
            >

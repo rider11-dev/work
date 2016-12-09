@@ -93,10 +93,28 @@
             </CheckBox>
         </Border>
     </ControlTemplate>
+    <!--radio单元格模板：radio绑定到模型的IsChecked属性-->
+    <ControlTemplate x:Key="radioCellTemplate">
+        <Border>
+            <RadioButton x:Name="radioCell" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       BorderThickness="1" BorderBrush="#a40000"
+                  IsChecked="{Binding Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            </RadioButton>
+        </Border>
+    </ControlTemplate>
     <!--checkbox单元格样式-->
     <Style x:Key="ckCellStyle" TargetType="DataGridCell">
         <Setter Property="Template" Value="{StaticResource ckCellTemplate}"/>
         <Setter Property="Width" Value="36"/>
+    </Style>
+    <!--radio单元格样式-->
+    <Style x:Key="radioCellStyle" TargetType="DataGridCell">
+        <Setter Property="Template" Value="{StaticResource radioCellTemplate}"/>
+        <Setter Property="Width" Value="30"/>
+    </Style>
+    <!--radio header样式-->
+    <Style x:Key="radioCellHeaderStyle" TargetType="DataGridColumnHeader">
+        <Setter Property="Width" Value="30"/>
     </Style>
     <!--checkbox header样式-->
     <Style x:Key="ckCellHeaderStyle" TargetType="DataGridColumnHeader">

@@ -19,7 +19,7 @@ namespace MyNet.CustomQuery.Model
         /// </summary>
         public string tbname { get; set; }
         public string alias { get; set; }
-        public string remark { get; set; }
+        public string comment { get; set; }
         public IList<Field> fields { get; set; }
     }
 }

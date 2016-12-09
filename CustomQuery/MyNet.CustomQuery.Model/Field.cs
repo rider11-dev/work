@@ -15,17 +15,6 @@ namespace MyNet.CustomQuery.Model
         public string fieldname { get; set; }
         public string displayname { get; set; }
         public string fieldtype { get; set; }
-        public FieldType FieldType
-        {
-            get
-            {
-                if (fieldtype.IsEmpty())
-                {
-                    return FieldType.String;
-                }
-                return fieldtype.ToEnum<FieldType>();
-            }
-        }
         public string remark { get; set; }
     }
 

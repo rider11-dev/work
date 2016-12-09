@@ -29,10 +29,7 @@ namespace MyNet.Client.Models
                 _ctlPage = value;
                 _ctlPage.QueryHandler = (e) =>
                 {
-                    if (SearchAction != null)
-                    {
-                        SearchAction(e);
-                    }
+                    SearchAction?.Invoke(e);
                 };
             }
         }

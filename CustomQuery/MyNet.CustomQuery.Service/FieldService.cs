@@ -2,6 +2,7 @@
 using MyNet.Components.Extensions;
 using MyNet.Components.Result;
 using MyNet.CustomQuery.Model;
+using MyNet.CustomQuery.Model.Dto;
 using MyNet.CustomQuery.Repository;
 using MyNet.Model;
 using MyNet.Repository.Db;
@@ -70,7 +71,7 @@ namespace MyNet.CustomQuery.Service
             #endregion
             try
             {
-                var fields = _fieldRep.PageQueryBySp<Field>(sqlEntity: sqlEntity, page: page);
+                var fields = _fieldRep.PageQueryBySp<FieldDto>(sqlEntity: sqlEntity, page: page);
                 rst = OptResult.Build(ResultCode.Success, Msg_QueryByPage, new
                 {
                     total = page.total,
@@ -149,6 +150,7 @@ namespace MyNet.CustomQuery.Service
             {
                 oldField.fieldname = field.fieldname;
                 oldField.displayname = field.displayname;
+                oldField.fieldtype = field.fieldtype;
                 oldField.remark = field.remark;
                 bool val = _fieldRep.Update(oldField);
                 rst = OptResult.Build(val ? ResultCode.Success : ResultCode.Fail, Msg_UpdateField);
@@ -200,7 +202,7 @@ namespace MyNet.CustomQuery.Service
             //排除主键
             if (field.id.IsNotEmpty())
             {
-                gp.Predicates.Add(Predicates.Field<Table>(t => t.id, Operator.Eq, field.id, true));//主键不等
+                gp.Predicates.Add(Predicates.Field<Field>(f => f.id, Operator.Eq, field.id, true));//主键不等
             }
 
             var count = _fieldRep.Count(gp);

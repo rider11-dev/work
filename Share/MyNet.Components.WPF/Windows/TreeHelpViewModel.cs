@@ -52,10 +52,7 @@ namespace MyNet.Components.WPF.Windows
                 return false;
             }
 
-            if (SingleSelectCallback != null)
-            {
-                SingleSelectCallback(selNode as TreeViewData.TreeNode);
-            }
+            SingleSelectCallback?.Invoke(selNode as TreeViewData.TreeNode);
             return true;
         }
 
@@ -80,10 +77,7 @@ namespace MyNet.Components.WPF.Windows
                 return false;
             }
 
-            if (MultiSelectCallback != null)
-            {
-                MultiSelectCallback(selNodes);
-            }
+            MultiSelectCallback?.Invoke(selNodes);
 
             return true;
         }

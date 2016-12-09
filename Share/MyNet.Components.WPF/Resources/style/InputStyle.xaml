@@ -68,4 +68,14 @@
         <Setter Property="Template" Value="{StaticResource inputBtnAddOnTemp}"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
     </Style>
+    <!--多行输入框样式-->
+    <Style x:Key="inputMultiLineBaseStyle" TargetType="TextBox" BasedOn="{StaticResource inputBaseStyle}">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="AcceptsReturn" Value="True"/>
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Top"/>
+        <Setter Property="Width" Value="220"/>
+    </Style>
 </ResourceDictionary>

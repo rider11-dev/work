@@ -1,5 +1,4 @@
 ﻿using MyNet.Model;
-using MyNet.Repository.Db;
 using System;
 using System.Collections.Generic;
 using System.Linq;

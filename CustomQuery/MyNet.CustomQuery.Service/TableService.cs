@@ -18,9 +18,12 @@ namespace MyNet.CustomQuery.Service
         const string Msg_UpdateTable = "修改查询表信息";
         const string Msg_BatchDeleteTable = "批量删除查询表信息";
         const string Msg_QueryWithFields = "获取查询表信息（包含查询字段信息）";
+        const string Msg_GetDbTables = "获取数据库所有表信息";
+        const string Msg_Init = "初始化自定义查询信息";
 
         const string SqlName_PageQuery = "pagequery";
         const string SqlName_QueryWithFields = "querywithfields";
+        const string SqlName_GetDbTables = "getdbtables";
 
         TableRepository _tableRep;
         FieldRepository _fieldRep;
@@ -47,6 +50,10 @@ namespace MyNet.CustomQuery.Service
                 if (conditions.ContainsKey("alias") && !conditions["alias"].IsEmpty())
                 {
                     where += string.Format(" and qt.alias = '{0}' ", conditions["alias"]);
+                }
+                if (conditions.ContainsKey("comment") && !conditions["comment"].IsEmpty())
+                {
+                    where += string.Format(" and qt.comment = '{0}' ", conditions["comment"]);
                 }
             }
             try
@@ -102,6 +109,10 @@ namespace MyNet.CustomQuery.Service
                 if (page.conditions.ContainsKey("alias") && !page.conditions["alias"].IsEmpty())
                 {
                     sqlEntity.where.AppendFormat(" and qt.alias like '%{0}%' ", page.conditions["alias"]);
+                }
+                if (page.conditions.ContainsKey("comment") && !page.conditions["comment"].IsEmpty())
+                {
+                    sqlEntity.where.AppendFormat(" and qt.comment like '%{0}%' ", page.conditions["comment"]);
                 }
             }
             #endregion
@@ -179,7 +190,7 @@ namespace MyNet.CustomQuery.Service
             {
                 oldTable.tbname = table.tbname;
                 oldTable.alias = table.alias;
-                oldTable.remark = table.remark;
+                oldTable.comment = table.comment;
                 bool val = _tableRep.Update(oldTable);
                 rst = OptResult.Build(val ? ResultCode.Success : ResultCode.Fail, Msg_UpdateTable);
             }
@@ -255,6 +266,68 @@ namespace MyNet.CustomQuery.Service
             var count = _fieldRep.Count(Predicates.Field<Field>(f => f.tbid, Operator.Eq, tbIds));
 
             return count > 0;
+        }
+
+        public OptResult GetDbTables()
+        {
+            OptResult rst = null;
+            try
+            {
+                var dbTables = _tableRep.QueryBySqlName<DbTable>(SqlName_GetDbTables);
+                rst = OptResult.Build(ResultCode.Success, Msg_GetDbTables, new { rows = dbTables });
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(Msg_UpdateTable, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_GetDbTables);
+            }
+
+            return rst;
+        }
+
+
+        public OptResult Init(IEnumerable<Table> tables)
+        {
+            OptResult rst = null;
+            if (tables.IsEmpty())
+            {
+                rst = OptResult.Build(ResultCode.ParamError, string.Format("{0}，参数不能为空！", Msg_Init));
+                return rst;
+            }
+            //预处理
+            List<Field> fields = new List<Field>();
+            foreach (var t in tables)
+            {
+                //主键、别名
+                t.id = GuidExtension.GetOne();
+                if (t.alias.IsEmpty())
+                {
+                    t.alias = t.tbname;
+                }
+                fields.AddRange(t.fields);
+            }
+            var tran = _tableRep.Begin();
+            try
+            {
+                //1、清除查询表所有信息、查询字段所有信息
+                //TODO，如果后续还有查询模板啥的，是不是都得清除？
+                _fieldRep.Delete(Predicates.Field<Field>(f => f.id, Operator.Eq, null, true), tran);
+                _tableRep.Delete(Predicates.Field<Table>(t => t.id, Operator.Eq, null, true), tran);
+                //2、新增
+                _tableRep.InsertBatch(tables, tran);
+                if (fields.IsNotEmpty())
+                {
+                    _fieldRep.InsertBatch(fields, tran);
+                }
+                _tableRep.Commit();
+                rst = OptResult.Build(ResultCode.Success, Msg_Init);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(Msg_Init, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_Init);
+            }
+            return rst;
         }
 
     }

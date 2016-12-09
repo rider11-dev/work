@@ -15,7 +15,8 @@ namespace MyNet.CustomQuery.WebApi.Models
         [Required(ErrorMessage = "表别名不能为空")]
         [MaxLength(20, ErrorMessage = "表别名最大为20个字符")]
         public string alias { get; set; }
-        [MaxLength(255, ErrorMessageResourceName = "Remark_Length", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
-        public string remark { get; set; }
+        [Required(ErrorMessage = "表注释不能为空")]
+        [MaxLength(20, ErrorMessage = "表注释最大为20个字符")]
+        public string comment { get; set; }
     }
 }
