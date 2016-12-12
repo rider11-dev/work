@@ -1,4 +1,6 @@
 ﻿using MyNet.Client.Pages;
+using MyNet.CustomQuery.Client.Models;
+using MyNet.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +23,17 @@ namespace MyNet.CustomQuery.Client.Pages
     /// </summary>
     public partial class ExecQueryPage : BasePage
     {
+        ExecQueryModel model = null;
         public ExecQueryPage()
         {
             InitializeComponent();
+
+            model = this.DataContext as ExecQueryModel;
+        }
+
+        private void ExecQueryPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            model.InitDataSources();
         }
     }
 }

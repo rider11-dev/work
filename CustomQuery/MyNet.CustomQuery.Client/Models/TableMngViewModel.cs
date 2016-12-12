@@ -97,14 +97,15 @@ namespace MyNet.CustomQuery.Client.Models
                         {"alias",Filter_Alias}
                     }
             };
-            base.Models = GetTables(pageQuery);
+            base.Models = ((IEnumerable<CheckableModel>)GetTables(pageQuery)).ToList();
             page.PageIndex = pageQuery.pageIndex;
             page.PageSize = pageQuery.pageSize;
             page.PageCount = pageQuery.pageTotal;
         }
 
-        public static IList<TableViewModel> GetTables(PageQuery page)
+        public static IEnumerable<TableViewModel> GetTables(PageQuery page)
         {
+            IEnumerable<TableViewModel> empty = new List<TableViewModel>();
             var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(CustomQueryApiKeys.TablePage, CustomQueryApiKeys.Key_ApiProvider_CustomQuery),
               new
               {
@@ -125,13 +126,13 @@ namespace MyNet.CustomQuery.Client.Models
                 {
                     page.pageTotal = 0;
                     page.pageIndex = 1;
-                    return null;
+                    return empty;
                 }
                 page.pageTotal = Convert.ToInt32(Math.Ceiling(page.total * 1.0 / page.pageSize));
-                var models = JsonConvert.DeserializeObject<IList<TableViewModel>>(((JArray)rst.data.rows).ToString());
+                var models = JsonConvert.DeserializeObject<IEnumerable<TableViewModel>>(((JArray)rst.data.rows).ToString());
                 return models;
             }
-            return null;
+            return empty;
         }
 
         #region 查询条件

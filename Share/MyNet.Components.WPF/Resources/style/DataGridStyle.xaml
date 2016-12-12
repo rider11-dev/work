@@ -98,7 +98,7 @@
         <Border>
             <RadioButton x:Name="radioCell" HorizontalAlignment="Center" VerticalAlignment="Center"
                        BorderThickness="1" BorderBrush="#a40000"
-                  IsChecked="{Binding Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                  IsChecked="{Binding Path=IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,RelativeSource={RelativeSource AncestorType=DataGridRow}}">
             </RadioButton>
         </Border>
     </ControlTemplate>
@@ -169,5 +169,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 </ResourceDictionary>

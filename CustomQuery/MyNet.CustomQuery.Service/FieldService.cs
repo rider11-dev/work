@@ -9,6 +9,7 @@ using MyNet.Repository.Db;
 using MyNet.Service;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MyNet.CustomQuery.Service
 {
@@ -18,8 +19,11 @@ namespace MyNet.CustomQuery.Service
         const string Msg_AddField = "新增查询字段信息";
         const string Msg_UpdateField = "修改查询字段信息";
         const string Msg_BatchDeleteField = "批量删除查询字段信息";
+        const string Msg_GetDbFields = "获取数据库字段信息";
+        const string Msg_InitFields = "初始化查询字段信息";
 
         const string SqlName_PageQuery = "pagequery";
+        const string SqlName_GetDbFields = "getdbfields";
 
         FieldRepository _fieldRep;
         TableRepository _tableRep;
@@ -207,6 +211,91 @@ namespace MyNet.CustomQuery.Service
 
             var count = _fieldRep.Count(gp);
             return count > 0;
+        }
+
+        public OptResult GetDbFields(IEnumerable<string> tbids)
+        {
+            OptResult rst = null;
+            if (tbids.IsEmpty())
+            {
+                rst = OptResult.Build(ResultCode.ParamError, "查询表不能为空！");
+                return rst;
+            }
+            try
+            {
+                //1、查询表是否存在
+                var tables = _tableRep.GetList(Predicates.Field<Table>(t => t.id, Operator.Eq, tbids));
+                if (tables.IsEmpty())
+                {
+                    rst = OptResult.Build(ResultCode.ParamError, "查询表不存在！");
+                    return rst;
+                }
+                var dbFields = _fieldRep.QueryBySqlName<DbField>(SqlName_GetDbFields, new { tbnames = tables.Select(t => t.tbname) });
+                List<dynamic> values = new List<dynamic>();
+                if (dbFields.IsNotEmpty())
+                {
+                    foreach (var field in dbFields)
+                    {
+                        values.Add(new
+                        {
+                            fieldname = field.column_name,
+                            displayname = field.column_comment,
+                            fieldtype = field.field_type,
+                            tbname = field.table_name,
+                            tbid = tables.Where(t => t.tbname == field.table_name).First().id
+                        });
+                    }
+                }
+                rst = OptResult.Build(ResultCode.Success, Msg_GetDbFields, new { rows = values });
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(Msg_GetDbFields, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_GetDbFields);
+            }
+
+            return rst;
+        }
+
+        public OptResult Init(IEnumerable<Field> fields)
+        {
+            OptResult rst = null;
+            if (fields.IsEmpty())
+            {
+                rst = OptResult.Build(ResultCode.ParamError, string.Format("{0}，参数不能为空！", Msg_InitFields));
+                return rst;
+            }
+            //1、查询表是否存在
+            var count = _tableRep.Count(Predicates.Field<Table>(t => t.id, Operator.Eq, fields.Select(f => f.id), true));
+            if (count > 0)
+            {
+                rst = OptResult.Build(ResultCode.ParamError, string.Format("{0}，查询表不存在！", Msg_InitFields));
+                return rst;
+            }
+            //2、预处理
+            foreach (var f in fields)
+            {
+                f.id = GuidExtension.GetOne();
+                if (f.displayname.IsEmpty())
+                {
+                    f.displayname = f.fieldname;
+                }
+            }
+            //3、清空当前查询字段后，保存
+            var tran = _fieldRep.Begin();
+            try
+            {
+                _fieldRep.Delete(Predicates.Field<Field>(f => f.id, Operator.Eq, null, true), tran);
+                _fieldRep.InsertBatch(fields, tran);
+                _fieldRep.Commit();
+                rst = OptResult.Build(ResultCode.Success, Msg_InitFields);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogError(Msg_InitFields, ex);
+                rst = OptResult.Build(ResultCode.DbError, Msg_InitFields);
+            }
+            return rst;
         }
 
     }

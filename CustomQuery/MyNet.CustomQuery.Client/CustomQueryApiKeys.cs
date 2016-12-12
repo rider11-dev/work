@@ -23,5 +23,7 @@ namespace MyNet.CustomQuery.Client
         public const string FieldAdd = "field_add";
         public const string FieldUpdate = "field_update";
         public const string FieldDel = "field_del";
+        public const string FieldDbFields = "field_dbfields";
+        public const string FieldInit = "field_init";
     }
 }

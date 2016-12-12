@@ -70,7 +70,7 @@ namespace MyNet.Components.WPF.Windows
                 MessageWindow.ShowMsg(MessageType.Warning, "帮助选择", "请选择至少一条数据");
                 return false;
             }
-            MultiSelectCallback?.Invoke(sels as IEnumerable<CheckableModel>);
+            MultiSelectCallback?.Invoke(sels as IList<CheckableModel>);
             return true;
         }
 
@@ -91,7 +91,11 @@ namespace MyNet.Components.WPF.Windows
         {
             if (DataProvider != null)
             {
-                Models = DataProvider();
+                var data = DataProvider();
+                if (data.IsNotEmpty())
+                {
+                    Models = data.ToList();
+                }
             }
         }
     }

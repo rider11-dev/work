@@ -5,11 +5,131 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:page="clr-namespace:MyNet.Client.Pages;assembly=MyNet.Client"
       xmlns:local="clr-namespace:MyNet.CustomQuery.Client.Pages"
+      xmlns:model="clr-namespace:MyNet.CustomQuery.Client.Models"
+      xmlns:vmwpf="clr-namespace:MyNet.Components.WPF.Models;assembly=MyNet.Components.WPF"
       mc:Ignorable="d" 
-      d:DesignHeight="400" d:DesignWidth="600"
+      d:DesignHeight="400" d:DesignWidth="600" Loaded="ExecQueryPage_Loaded"
       Title="ExecQueryPage">
-
+    <Page.Resources>
+        <model:ExecQueryModel x:Key="model" />
+        <vmwpf:CmbModel x:Key="cbVmTb"/>
+        <Style x:Key="btnStyle" TargetType="Button" BasedOn="{StaticResource mngBtnStyle}">
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Height" Value="26"/>
+        </Style>
+        <Style x:Key="cbStyle" TargetType="ComboBox" BasedOn="{StaticResource cbBaseStyle}">
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Height" Value="26"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+    </Page.Resources>
+    <Page.DataContext>
+        <Binding Source="{StaticResource model}"/>
+    </Page.DataContext>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Border x:Name="bdToolbar" Grid.Row="0"  Style="{StaticResource mngBdStyle}">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="模板编号" Style="{StaticResource mngLblStyle}"/>
+                <TextBox Style="{StaticResource mngInputStyle}"
+                         Text="{Binding Path=QueryTCode,Source={StaticResource model}}"
+                         />
+                <Button Style="{StaticResource btnStyle}"
+                        Content="保存模板"
+                        Command="{Binding Path=SaveTCmd,Source={StaticResource model}}"
+                        />
+                <Button Style="{StaticResource btnStyle}"
+                        Content="重置模板"
+                        Command="{Binding Path=ResetTCmd,Source={StaticResource model}}"
+                        />
+                <Button Style="{StaticResource btnStyle}"
+                        Content="执行查询"
+                        Command="{Binding Path=ExecQCmd,Source={StaticResource model}}"
+                        />
+            </StackPanel>
+        </Border>
+        <GroupBox Header="查询模板" Grid.Row="1">
+            <TabControl Background="Transparent">
+                <TabItem Header="查询表" x:Name="tabTables">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="2"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <Label Content="主表" Style="{StaticResource mngLblStyle}"/>
+                            <ComboBox Grid.Row="3" Grid.Column="1" Style="{StaticResource cbStyle}"
+                                      ItemsSource="{Binding Path=Tables,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+                                      SelectedValuePath="tbname" DisplayMemberPath="comment"
+                              /> 
+                        </StackPanel>
+                        <GroupBox Grid.Row="1" Header="表连接">
+                            <DataGrid x:Name="dgJoinTables" Style="{StaticResource gridBaseStyle}" IsReadOnly="False"
+                                      ItemsSource="{Binding Path=JoinTables,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      >
+                                <DataGrid.Columns>
+                                    <DataGridComboBoxColumn Header="连接方式" SelectedValuePath="id" TextBinding="{Binding JoinType}" DisplayMemberPath="Text"  ItemsSource="{Binding Path=JoinTypes}"/>
+                                    <DataGridComboBoxColumn Header="右表" SelectedValuePath="tbname" TextBinding="{Binding Table}" DisplayMemberPath="comment" ItemsSource="{Binding Path=Tables}"/>
+                                    <DataGridTemplateColumn Header="操作" Width="80" CanUserResize="False">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Content="删除" Style="{StaticResource gridBtnStyle}"
+                                                Command="{Binding Path=DelCmd}"
+                                                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGrid},Path=SelectedItem}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                                <DataGrid.ContextMenu>
+                                    <ContextMenu x:Name="ctxJoinTb">
+                                        <MenuItem Header="添加" Command="{Binding Path=AddJoinTbCmd,Source={StaticResource model}}"/>
+                                        <MenuItem Header="删除" Command="{Binding Path=DelJoinTbCmd,Source={StaticResource model}}"/>
+                                    </ContextMenu>
+                                </DataGrid.ContextMenu>
+                            </DataGrid>
+                        </GroupBox>
+                        <GridSplitter Grid.Row="2" VerticalAlignment="Stretch"/>
+                        <GroupBox Grid.Row="3" Header="关联字段">
+                            <DataGrid x:Name="dgRelFields" Style="{StaticResource gridBaseStyle}" IsReadOnly="False"
+                                       ItemsSource="{Binding Path=RelFields,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                                <DataGrid.Columns>
+                                    <DataGridComboBoxColumn Header="关联字段1" SelectedValuePath="fieldname" TextBinding="{Binding Field1}" DisplayMemberPath="displayname"  ItemsSource="{Binding Path=Fields}"/>
+                                    <DataGridComboBoxColumn Header="关联字段2" SelectedValuePath="fieldname" TextBinding="{Binding Field2}" DisplayMemberPath="displayname" ItemsSource="{Binding Path=Fields}"/>
+                                    <DataGridTemplateColumn Header="操作" Width="80" CanUserResize="False">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Content="删除" Style="{StaticResource gridBtnStyle}"
+                                                Command="{Binding Path=DelCmd}"
+                                                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGrid},Path=SelectedItem}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                                <DataGrid.ContextMenu>
+                                    <ContextMenu x:Name="ctxRelField">
+                                        <MenuItem Header="添加" Command="{Binding Path=AddRelFieldCmd,Source={StaticResource model}}"/>
+                                        <MenuItem Header="删除" Command="{Binding Path=DelRelFieldCmd,Source={StaticResource model}}"/>
+                                    </ContextMenu>
+                                </DataGrid.ContextMenu>
+                            </DataGrid>
+                        </GroupBox>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="查询字段" x:Name="tabFields">
 
+                </TabItem>
+                <TabItem Header="过滤" x:Name="tabFilter">
+
+                </TabItem>
+                <TabItem Header="排序" x:Name="tabSort">
+
+                </TabItem>
+            </TabControl>
+        </GroupBox>
     </Grid>
 </page:BasePage>

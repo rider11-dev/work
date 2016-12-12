@@ -1,5 +1,6 @@
 ﻿using MyNet.Components.Misc;
 using MyNet.Components.WPF.Models;
+using MyNet.CustomQuery.Model;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
@@ -71,5 +72,6 @@ namespace MyNet.CustomQuery.Client.Models
             vmTable.alias = this.alias;
             vmTable.comment = this.comment;
         }
+
     }
 }

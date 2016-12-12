@@ -1,5 +1,8 @@
-﻿using MyNet.Components.Misc;
+﻿using EmitMapper.MappingConfiguration;
+using MyNet.Components.Mapper;
+using MyNet.Components.Misc;
 using MyNet.Components.WPF.Models;
+using MyNet.CustomQuery.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -130,6 +133,24 @@ namespace MyNet.CustomQuery.Client.Models
             vmField.fieldtype = this.fieldtype;
             vmField.fieldtype_name = this.fieldtype_name;
             vmField.remark = this.remark;
+        }
+
+        public static FieldViewModel Parse(DbField dbField)
+        {
+            if (dbField == null)
+            {
+                return null;
+            }
+            FieldViewModel fvm = OOMapper.Map<DbField, FieldViewModel>(dbField,
+                new DefaultMapConfig()
+                .ConvertUsing<DbField, FieldViewModel>(f => new FieldViewModel
+                {
+                    fieldname = f.column_name,
+                    displayname = f.column_comment,
+                    fieldtype = f.field_type,
+                    tbname = f.table_name
+                }));
+            return fvm;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,8 +25,11 @@ namespace MyNet.CustomQuery.Model
 
     public enum TableJoinType
     {
+        [Description("左连接")]
         Left,
+        [Description("右连接")]
         Right,
+        [Description("内连接")]
         Inner
     }
 

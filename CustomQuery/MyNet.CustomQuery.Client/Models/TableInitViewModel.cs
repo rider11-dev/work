@@ -34,7 +34,9 @@ namespace MyNet.CustomQuery.Client.Models
             }
         }
 
+        [JsonIgnore]
         private ICommand _getDbTablesCmd;
+        [JsonIgnore]
         public ICommand GetDbTablesCmd
         {
             get
@@ -57,19 +59,23 @@ namespace MyNet.CustomQuery.Client.Models
             if (rst.data != null && rst.data.rows != null)
             {
                 var dbTables = JsonConvert.DeserializeObject<IEnumerable<DbTable>>(((JArray)rst.data.rows).ToString());
-                IList<TableViewModel> tbModels = new List<TableViewModel>();
                 if (dbTables.IsNotEmpty())
                 {
-                    foreach (var tb in dbTables)
-                    {
-                        tbModels.Add(new TableViewModel { tbname = tb.Name, comment = tb.Comment });
-                    }
+                    base.Models = (dbTables
+                        .Select(dt => new TableViewModel { tbname = dt.table_name, comment = dt.table_comment })
+                            as IEnumerable<CheckableModel>)
+                        .ToList();
                 }
-                base.Models = tbModels;
+                else
+                {
+                    base.Models = null;
+                }
             }
         }
 
+        [JsonIgnore]
         private ICommand _clearCmd;
+        [JsonIgnore]
         public ICommand ClearCmd
         {
             get
@@ -87,7 +93,9 @@ namespace MyNet.CustomQuery.Client.Models
             base.Models = null;
         }
 
+        [JsonIgnore]
         private ICommand _saveCmd;
+        [JsonIgnore]
         public ICommand SaveCmd
         {
             get
@@ -102,12 +110,19 @@ namespace MyNet.CustomQuery.Client.Models
 
         private void SaveAction(object obj)
         {
-            if (base.Models.IsEmpty())
+            var sels = base.GetSelectedModels();
+            if (sels.IsEmpty())
             {
                 MessageWindow.ShowMsg(MessageType.Warning, OperationDesc.Save, "没有要保存的数据！");
                 return;
             }
-            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(CustomQueryApiKeys.TableInit, CustomQueryApiKeys.Key_ApiProvider_CustomQuery), base.Models, MyContext.Token);
+            //
+            var askRst = MessageWindow.ShowMsg(MessageType.Ask, CustomQueryOptDesc.InitTables, "初始化操作将清空当前查询表以及查询字段，是否继续？");
+            if (askRst != true)
+            {
+                return;
+            }
+            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(CustomQueryApiKeys.TableInit, CustomQueryApiKeys.Key_ApiProvider_CustomQuery), sels, MyContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, CustomQueryOptDesc.InitTables, rst.msg);
@@ -127,21 +142,18 @@ namespace MyNet.CustomQuery.Client.Models
             if (model != null)
             {
                 //行内删除
-                base.Models = base.Models.Where(m => m != model);
+                base.Models = base.Models.Except(new List<TableViewModel> { model }).ToList();
                 return;
             }
             //工具栏删除（批量）
             var sels = base.GetSelectedModels();
             if (sels.IsEmpty())
             {
+                MessageWindow.ShowMsg(MessageType.Info, OperationDesc.Delete, "请选择要删除的数据！");
                 return;
             }
-            var newModels = base.Models;
-            foreach (var sel in sels)
-            {
-                newModels = newModels.Where(m => m != sel);
-            }
-            base.Models = newModels;
+
+            base.Models = base.Models.Except(sels).ToList();
         }
 
     }

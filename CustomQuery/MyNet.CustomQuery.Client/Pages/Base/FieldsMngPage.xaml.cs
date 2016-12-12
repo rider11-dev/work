@@ -1,8 +1,11 @@
 ﻿using MyNet.Client.Pages;
 using MyNet.Client.Public;
 using MyNet.Components.WPF.Extension;
+using MyNet.Components.WPF.Models;
 using MyNet.CustomQuery.Client.Models;
 using MyNet.Model;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -36,7 +39,8 @@ namespace MyNet.CustomQuery.Client.Pages.Base
             model.CtlPage = ctlPagination;
 
             //加载表信息列表
-            model.TbMngModel.Models = TableMngViewModel.GetTables(new PageQuery { pageIndex = 1, pageSize = 1000 });//pageSize = 1000，加载所有表信息
+            var tables = TableMngViewModel.GetTables(new PageQuery { pageIndex = 1, pageSize = 1000 });//pageSize = 1000，加载所有表信息
+            model.TbMngModel.Models = ((IEnumerable<CheckableModel>)tables).ToList();
             foreach (var tb in model.TbMngModel.Models)
             {
                 tb.IsSingleSelect = true;

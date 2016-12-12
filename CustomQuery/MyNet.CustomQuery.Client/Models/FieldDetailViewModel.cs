@@ -20,7 +20,7 @@ namespace MyNet.CustomQuery.Client.Models
 {
     public class FieldDetailViewModel : FieldViewModel
     {
-        IEnumerable<DataGridColModel> Cols = new List<DataGridColModel>
+        IList<DataGridColModel> Cols = new List<DataGridColModel>
                 {
                     new DataGridColModel { Field="comment",Header="表注释"},
                     new DataGridColModel { Field="tbname",Header="表名称"}
@@ -115,13 +115,13 @@ namespace MyNet.CustomQuery.Client.Models
                 cols: Cols);
         }
 
-        private IEnumerable<CheckableModel> GetTables()
+        private IList<CheckableModel> GetTables()
         {
             return TableMngViewModel.GetTables(new PageQuery
             {
                 pageIndex = 1,
                 pageSize = 1000
-            });
+            }) as IList<CheckableModel>;
         }
 
         private void AfterSelect(CheckableModel m)

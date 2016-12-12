@@ -278,7 +278,7 @@ namespace MyNet.CustomQuery.Service
             }
             catch (Exception ex)
             {
-                LogHelper.LogError(Msg_UpdateTable, ex);
+                LogHelper.LogError(Msg_GetDbTables, ex);
                 rst = OptResult.Build(ResultCode.DbError, Msg_GetDbTables);
             }
 

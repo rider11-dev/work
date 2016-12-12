@@ -18,7 +18,9 @@
            >
       </sql>
       <sql name="getdbtables" type="txt">
-        show table status
+        select table_name, table_comment
+        from information_schema.`tables`
+        where table_schema = (select database())
       </sql>
     </sqlgroup>
     <sqlgroup name="fields">
@@ -29,7 +31,23 @@
            tables=" query_fields qf join query_tables qt on qf.tbid=qt.id join base_dict bd on qf.fieldtype=bd.dict_code "
            where=" 1=1 "
            order=" qt.tbname asc"
-           >
+           />
+      <sql name="getdbfields" type="txt">
+        select table_name,column_name,data_type,
+        case data_type
+        when 'varchar' then 'String'
+        when 'char' then 'String'
+        when 'bit' then 'Boolean'
+        when 'int' then 'Number'
+        when 'decimal' then 'Number'
+        when 'number' then 'Number'
+        when 'date' then 'Date'
+        when 'datetime' then 'Time'
+        end field_type,
+        column_key,column_comment
+        from information_schema.columns
+        where table_schema = (select database()) and table_name in @tbnames
+        order by table_name asc,ordinal_position asc
       </sql>
     </sqlgroup>
     <!--这里提供通用查询的配置信息，fields、tables、where、order为空，因为要在代码中转换-->

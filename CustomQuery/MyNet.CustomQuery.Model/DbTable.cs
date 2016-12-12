@@ -8,7 +8,7 @@ namespace MyNet.CustomQuery.Model
 {
     public class DbTable
     {
-        public string Name { get; set; }
-        public string Comment { get; set; }
+        public string table_name { get; set; }
+        public string table_comment { get; set; }
     }
 }

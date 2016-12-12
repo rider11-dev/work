@@ -8,6 +8,7 @@ using MyNet.Components.WPF.Controls;
 using MyNet.Components.WPF.Models;
 using MyNet.Components.WPF.Windows;
 using MyNet.CustomQuery.Client.Pages.Base;
+using MyNet.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -112,42 +113,55 @@ namespace MyNet.CustomQuery.Client.Models
             //当前选中的表数据
             var selTb = DgTables.SelectedItem as TableViewModel;
             var tbid = selTb == null ? "" : selTb.id;
-            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(CustomQueryApiKeys.FieldPage, CustomQueryApiKeys.Key_ApiProvider_CustomQuery),
-               new
-               {
-                   pageIndex = page.PageIndex,
-                   pageSize = page.PageSize,
-                   conditions = new Dictionary<string, string>
+            PageQuery pageQuery = new PageQuery
+            {
+                pageIndex = page.PageIndex,
+                pageSize = page.PageSize,
+                conditions = new Dictionary<string, object>
                     {
                         {"tbid",tbid},
                         {"fieldname",Filter_Fieldname},
                         {"displayname",Filter_DisplayName}
                     }
-               },
-               MyContext.Token);
+            };
+            base.Models = ((IEnumerable<CheckableModel>)GetFields(pageQuery)).ToList();
+            page.PageIndex = pageQuery.pageIndex;
+            page.PageSize = pageQuery.pageSize;
+            page.PageCount = pageQuery.pageTotal;
+        }
+
+        public static IEnumerable<FieldViewModel> GetFields(PageQuery page)
+        {
+            IEnumerable<FieldViewModel> empty = new List<FieldViewModel>();
+            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(CustomQueryApiKeys.FieldPage, CustomQueryApiKeys.Key_ApiProvider_CustomQuery),
+              new
+              {
+                  pageIndex = page.pageIndex,
+                  pageSize = page.pageSize,
+                  conditions = page.conditions
+              },
+              MyContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);
-                return;
+                return null;
             }
             if (rst.data != null && rst.data.total != null)
             {
-                page.RecordsCount = (int)rst.data.total;
-                if (page.RecordsCount == 0)
+                page.total = (int)rst.data.total;
+                if (page.total == 0)
                 {
-                    page.PageCount = 0;
-                    page.PageIndex = 1;
-                    base.Models = null;
-                    return;
+                    page.pageTotal = 0;
+                    page.pageIndex = 1;
+                    return empty;
                 }
-                page.PageCount = Convert.ToInt32(Math.Ceiling(page.RecordsCount * 1.0 / page.PageSize));
-
-                var models = JsonConvert.DeserializeObject<IList<FieldDetailViewModel>>(((JArray)rst.data.rows).ToString());
-                //
-                base.PageStart = page.Start;
-                base.Models = models;
+                page.pageTotal = Convert.ToInt32(Math.Ceiling(page.total * 1.0 / page.pageSize));
+                var models = JsonConvert.DeserializeObject<IEnumerable<FieldViewModel>>(((JArray)rst.data.rows).ToString());
+                return models;
             }
+            return empty;
         }
+
         #region 查询条件
         string _filter_fieldname;
         public string Filter_Fieldname
@@ -192,11 +206,11 @@ namespace MyNet.CustomQuery.Client.Models
 
         private void InitAction(object parameter)
         {
-            //var rst = new TableInitWindow().ShowDialog();
-            //if (rst.HasValue && rst.Value == true)
-            //{
-            //    base.SearchCmd.Execute(null);
-            //}
+            var rst = new FieldInitWindow(TbMngModel.Models.Select(m => (TableViewModel)m)).ShowDialog();
+            if (rst.HasValue && rst.Value == true)
+            {
+                base.SearchCmd.Execute(null);
+            }
         }
     }
 }

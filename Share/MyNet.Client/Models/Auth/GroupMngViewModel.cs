@@ -151,7 +151,7 @@ namespace MyNet.Client.Models.Auth
                 var models = JsonConvert.DeserializeObject<IEnumerable<GroupViewModel>>(((JArray)rst.data.rows).ToString());
 
                 base.PageStart = page.Start;
-                base.Models = models;
+                base.Models = (models as IEnumerable<CheckableModel>).ToList();
             }
         }
         #endregion

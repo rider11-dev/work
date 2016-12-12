@@ -156,7 +156,7 @@ namespace MyNet.Client.Models.Auth
                 var models = JsonConvert.DeserializeObject<IEnumerable<PermViewModel>>(((JArray)rst.data.rows).ToString());
 
                 base.PageStart = page.Start;
-                base.Models = models;
+                base.Models = (models as IList<CheckableModel>).ToList();
             }
         }
         #endregion

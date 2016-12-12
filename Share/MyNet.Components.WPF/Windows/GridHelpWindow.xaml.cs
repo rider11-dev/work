@@ -43,7 +43,7 @@ namespace MyNet.Components.WPF.Windows
             bool multiSel = false,
             Action<CheckableModel> singleSelAction = null,
             Action<IEnumerable<CheckableModel>> multiSelAction = null,
-            IEnumerable<DataGridColModel> cols = null)
+            IList<DataGridColModel> cols = null)
             : this()
         {
             base.Title = title;
@@ -62,7 +62,7 @@ namespace MyNet.Components.WPF.Windows
             bool multiSel = false,
             Action<CheckableModel> singleSelAction = null,
             Action<IEnumerable<CheckableModel>> multiSelAction = null,
-            IEnumerable<DataGridColModel> cols = null)
+            IList<DataGridColModel> cols = null)
         {
             var win = new GridHelpWindow(title, dataProvider, multiSel, singleSelAction, multiSelAction, cols);
             win.ShowDialog();

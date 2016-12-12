@@ -30,8 +30,11 @@ namespace MyNet.Components.WPF.Models
 
         public int PageStart { get; set; }
 
-        IEnumerable<CheckableModel> _models;
-        public IEnumerable<CheckableModel> Models
+        IList<CheckableModel> _models;
+        /// <summary>
+        /// Models必须是IList<T>集合，而不能是IEnumerable<T>，否则WPF中datagrid删除行后，再编辑将报错
+        /// </summary>
+        public IList<CheckableModel> Models
         {
             get { return _models; }
             set
@@ -85,7 +88,7 @@ namespace MyNet.Components.WPF.Models
             }
         }
 
-        protected IEnumerable<CheckableModel> GetSelectedModels()
+        protected IList<CheckableModel> GetSelectedModels()
         {
             return Models == null ? null : Models.Where(m => m.IsChecked == true).ToList();
         }

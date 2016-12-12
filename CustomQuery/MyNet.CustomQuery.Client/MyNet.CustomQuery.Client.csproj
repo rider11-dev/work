@@ -72,10 +72,12 @@
   <ItemGroup>
     <Compile Include="CustomQueryApiKeys.cs" />
     <Compile Include="CustomQueryOptDesc.cs" />
+    <Compile Include="Models\ExecQueryModel.cs" />
     <Compile Include="Models\FieldMngViewModel.cs" />
     <Compile Include="Models\FieldViewModel.cs" />
     <Compile Include="Models\FieldDetailViewModel.cs" />
     <Compile Include="Models\TableDetailViewModel.cs" />
+    <Compile Include="Models\FieldInitViewModel.cs" />
     <Compile Include="Models\TableInitViewModel.cs" />
     <Compile Include="Models\TableMngViewModel.cs" />
     <Compile Include="Models\TableViewModel.cs" />
@@ -84,6 +86,9 @@
     </Compile>
     <Compile Include="Pages\Base\TableDetailWindow.xaml.cs">
       <DependentUpon>TableDetailWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Base\FieldInitWindow.xaml.cs">
+      <DependentUpon>FieldInitWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Base\TableInitWindow.xaml.cs">
       <DependentUpon>TableInitWindow.xaml</DependentUpon>
@@ -167,6 +172,10 @@
     <Page Include="Pages\Base\TableDetailWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Base\FieldInitWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\Base\TableInitWindow.xaml">
       <SubType>Designer</SubType>

@@ -1,4 +1,5 @@
-﻿using MyNet.Components.Mapper;
+﻿using MyNet.Components.Extensions;
+using MyNet.Components.Mapper;
 using MyNet.Components.Result;
 using MyNet.CustomQuery.Model;
 using MyNet.CustomQuery.Service;
@@ -74,6 +75,32 @@ namespace MyNet.CustomQuery.WebApi.Controllers
             var token = base.ParseToken(ActionContext);
 
             rst = _fieldSrv.DeleteBatch(vm.pks);
+
+            return rst;
+        }
+
+        [HttpPost]
+        [Route("dbfields")]
+        public OptResult GetDbFields(IEnumerable<string> tbids)
+        {
+            OptResult rst = null;
+
+            rst = _fieldSrv.GetDbFields(tbids);
+
+            return rst;
+        }
+
+        [HttpPost]
+        [Route("init")]
+        public OptResult InitFields(IEnumerable<Field> fields)
+        {
+            OptResult rst = null;
+            if (fields.IsEmpty())
+            {
+                rst = OptResult.Build(ResultCode.ParamError, "参数不能为空！");
+                return rst;
+            }
+            rst = _fieldSrv.Init(fields);
 
             return rst;
         }
