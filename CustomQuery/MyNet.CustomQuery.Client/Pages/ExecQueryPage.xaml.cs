@@ -1,4 +1,6 @@
 ﻿using MyNet.Client.Pages;
+using MyNet.Components.Extensions;
+using MyNet.Components.WPF.Command;
 using MyNet.CustomQuery.Client.Models;
 using MyNet.Model;
 using System;
@@ -29,11 +31,37 @@ namespace MyNet.CustomQuery.Client.Pages
             InitializeComponent();
 
             model = this.DataContext as ExecQueryModel;
+            model.ViewSrcFields = this.FindResource("viewSrcFields") as CollectionViewSource;
+            model.ViewSrcSelFields = this.FindResource("viewSrcSelFields") as CollectionViewSource;
         }
 
         private void ExecQueryPage_Loaded(object sender, RoutedEventArgs e)
         {
-            model.InitDataSources();
+            Init();
+        }
+
+        private void Init()
+        {
+        }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //datagrid的行改变时也会触发该事件，故这里过滤一下
+            if (e.OriginalSource is TabControl)
+            {
+                //e.Handled = true;
+                //return;
+                if (!e.AddedItems.IsEmpty())
+                {
+                    var tab = e.AddedItems[0] as TabItem;
+                    if (tab != tabTables)
+                    {
+                        model.FilterFields();
+                        model.FilterSelFieldsSrc();
+                    }
+                }
+            }
+
         }
     }
 }

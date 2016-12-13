@@ -106,13 +106,15 @@ namespace MyNet.CustomQuery.Service
                 return rst;
             }
             //2、查询表是否存在
-            var count = _tableRep.Count(Predicates.Field<Table>(t => t.id, Operator.Eq, field.tbid));
-            if (count < 1)
+            var table = _tableRep.GetById(field.tbid);
+            if (table == null)
             {
                 rst = OptResult.Build(ResultCode.DataNotFound, string.Format("{0},对应查询表不存在！", Msg_AddField));
                 return rst;
             }
-            //3、插入数据库
+            //3、修改查询字段名称
+            ProcessFieldName(field, table);
+            //4、插入数据库
             field.id = GuidExtension.GetOne();
             try
             {
@@ -149,6 +151,15 @@ namespace MyNet.CustomQuery.Service
                 rst = OptResult.Build(ResultCode.DataRepeat, string.Format("{0},字段名称已存在！", Msg_UpdateField));
                 return rst;
             }
+            //3、table是否存在
+            var table = _tableRep.GetById(field.tbid);
+            if (table == null)
+            {
+                rst = OptResult.Build(ResultCode.DataNotFound, string.Format("{0},对应查询表不存在！", Msg_UpdateField));
+                return rst;
+            }
+            //3、处理fieldname
+            ProcessFieldName(field, table);
             //3、更新
             try
             {
@@ -265,23 +276,15 @@ namespace MyNet.CustomQuery.Service
                 rst = OptResult.Build(ResultCode.ParamError, string.Format("{0}，参数不能为空！", Msg_InitFields));
                 return rst;
             }
-            //1、查询表是否存在
-            var count = _tableRep.Count(Predicates.Field<Table>(t => t.id, Operator.Eq, fields.Select(f => f.id), true));
-            if (count > 0)
+            //1、预处理——字段名
+            var tables = _tableRep.GetList(Predicates.Field<Table>(t => t.id, Operator.Eq, fields.Select(f => f.tbid).Distinct()));
+            rst = ProcessFieldName(fields, tables);
+            if (rst.code != ResultCode.Success)
             {
-                rst = OptResult.Build(ResultCode.ParamError, string.Format("{0}，查询表不存在！", Msg_InitFields));
                 return rst;
             }
-            //2、预处理
-            foreach (var f in fields)
-            {
-                f.id = GuidExtension.GetOne();
-                if (f.displayname.IsEmpty())
-                {
-                    f.displayname = f.fieldname;
-                }
-            }
-            //3、清空当前查询字段后，保存
+
+            //2、清空当前查询字段后，保存
             var tran = _fieldRep.Begin();
             try
             {
@@ -298,5 +301,50 @@ namespace MyNet.CustomQuery.Service
             return rst;
         }
 
+        private void ProcessFieldName(Field field, Table table)
+        {
+            if (field == null || table == null)
+            {
+                return;
+            }
+            if (!field.fieldname.Contains(table.alias + "."))
+            {
+                field.fieldname = table.alias + "." + field.fieldname;
+            }
+        }
+
+        private OptResult ProcessFieldName(IEnumerable<Field> fields, IEnumerable<Table> tables)
+        {
+            OptResult rst;
+            if (tables.IsEmpty())
+            {
+                rst = OptResult.Build(ResultCode.DataNotFound, string.Format("{0}，查询表不存在！", Msg_InitFields));
+                return rst;
+            }
+            var groups = fields.GroupBy(f => f.tbid);
+            Table tb = null;
+            foreach (var gp in groups)
+            {
+                tb = tables.Where(t => t.id == gp.Key).FirstOrDefault();
+                if (tb == null)
+                {
+                    rst = OptResult.Build(ResultCode.DataNotFound, string.Format("{0}，查询表不存在！", Msg_InitFields));
+                    return rst;
+                }
+
+                foreach (var field in gp)
+                {
+                    ProcessFieldName(field, tb);
+
+                    field.id = GuidExtension.GetOne();
+                    if (field.displayname.IsEmpty())
+                    {
+                        field.displayname = field.fieldname;
+                    }
+                }
+            }
+            rst = OptResult.Build(ResultCode.Success, Msg_InitFields);
+            return rst;
+        }
     }
 }

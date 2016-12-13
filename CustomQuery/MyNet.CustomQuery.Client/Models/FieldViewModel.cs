@@ -3,6 +3,7 @@ using MyNet.Components.Mapper;
 using MyNet.Components.Misc;
 using MyNet.Components.WPF.Models;
 using MyNet.CustomQuery.Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -118,6 +119,9 @@ namespace MyNet.CustomQuery.Client.Models
             }
         }
 
+        [JsonIgnore]
+        public string fieldfullname { get { return string.Format("{0}.{1}[{2}]", tbname, displayname, fieldname); } }
+
         public void CopyTo(IBaseModel targetModel)
         {
             if (targetModel == null)
@@ -151,6 +155,11 @@ namespace MyNet.CustomQuery.Client.Models
                     tbname = f.table_name
                 }));
             return fvm;
+        }
+
+        public override string ToString()
+        {
+            return fieldfullname;
         }
     }
 }

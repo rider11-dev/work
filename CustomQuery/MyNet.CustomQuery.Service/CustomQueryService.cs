@@ -103,7 +103,7 @@ namespace MyNet.CustomQuery.Service
 
             //关联表sql模板： join base_dict_type bdt on bd.dict_type=bdt.type_code
             StringBuilder sbInner = new StringBuilder();
-            sbInner.AppendFormat("{0} join {1} on ", joinTable.JoinType.ToString(), joinTable.Table);
+            sbInner.AppendFormat("{0} join {1} on ", joinTable.JoinType, joinTable.Table);
             RelationField relField = null;
             for (int idx = 0; idx < joinTable.RelFields.Count; idx++)
             {

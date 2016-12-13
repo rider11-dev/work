@@ -15,7 +15,7 @@ namespace MyNet.Components.Extensions
 
         }
 
-        public static Dictionary<string, string> ToDict<TEnum>()
+        public static Dictionary<string, string> ConvertEnumToDict<TEnum>()
         {
             Dictionary<string, string> dict = new Dictionary<string, string>();
             var arr = Enum.GetValues(typeof(TEnum));
@@ -23,7 +23,6 @@ namespace MyNet.Components.Extensions
             {
                 dict.Add(item.ToString(), item.GetDescription());
             }
-
             return dict;
         }
     }

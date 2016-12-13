@@ -18,7 +18,7 @@ namespace MyNet.Repository.Card
             {
                 if (_dataSrc == null)
                 {
-                    _dataSrc = EnumExtension.ToDict<CardOperation>();
+                    _dataSrc = EnumExtension.ConvertEnumToDict<CardOperation>();
                 }
 
                 return _dataSrc;

@@ -90,7 +90,7 @@ namespace MyNet.Client.Public
         /// </summary>
         private static void PreLoadSomeDicts()
         {
-            var boolTypes = EnumExtension.ToDict<BoolType>();
+            var boolTypes = EnumExtension.ConvertEnumToDict<BoolType>();
             System.Collections.Generic.List<CmbItem> items = new List<CmbItem>();
             foreach (var t in boolTypes)
             {

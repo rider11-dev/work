@@ -21,6 +21,11 @@ namespace MyNet.CustomQuery.Model
         /// 关联字段集合
         /// </summary>
         public IList<RelationField> RelFields { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("{0},{1}", Table, JoinType);
+        }
     }
 
     public enum TableJoinType
@@ -35,13 +40,19 @@ namespace MyNet.CustomQuery.Model
 
     public class RelationField
     {
+        public string Table2 { get; set; }
         /// <summary>
-        /// 关联字段1，如au.user_group
+        /// 关联字段1
         /// </summary>
         public string Field1 { get; set; }
         /// <summary>
-        /// 关联字段2，如ag.gp_id
+        /// 关联字段2
         /// </summary>
         public string Field2 { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("{0},{1}", Field1, Field2);
+        }
     }
 }
