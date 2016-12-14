@@ -3,6 +3,7 @@ using MyNet.CustomQuery.Client.Models;
 using MyNet.Components.WPF.Windows;
 using MyNet.Client.Public;
 using MyNet.CustomQuery.Model;
+using MyNet.Model.Base;
 
 namespace MyNet.CustomQuery.Client.Pages.Base
 {
@@ -35,6 +36,8 @@ namespace MyNet.CustomQuery.Client.Pages.Base
             _vmField.CanValidate = true;
             //设置字段类型
             DataCacheHelper.SetCmbSource(cbFieldType, CqDictType.FieldType, _vmField.fieldtype);
+            //设置可见性
+            DataCacheHelper.SetCmbSource(cbVisible, DictType.Bool, _vmField.visible);
         }
     }
 }

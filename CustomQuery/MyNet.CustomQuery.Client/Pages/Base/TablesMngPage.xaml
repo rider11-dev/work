@@ -50,10 +50,6 @@
         <!--row3：内容-->
         <Border x:Name="bdMain" Grid.Row="2" Style="{StaticResource mngBdStyle}">
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="91*"/>
-                    <ColumnDefinition Width="109*"/>
-                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition Height="40"/>

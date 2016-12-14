@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:page="clr-namespace:MyNet.Client.Pages;assembly=MyNet.Client"
       xmlns:usrCtl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
+      xmlns:cvt="clr-namespace:MyNet.Components.WPF.Converter;assembly=MyNet.Components.WPF"
       xmlns:local="clr-namespace:MyNet.CustomQuery.Client.Pages"
       xmlns:model="clr-namespace:MyNet.CustomQuery.Client.Models"
       mc:Ignorable="d" 
@@ -13,6 +14,7 @@
     <Page.Resources>
         <model:FieldMngViewModel x:Key="model"/>
         <usrCtl:PagingArgs x:Key="page"/>
+        <cvt:BooleanConverter x:Key="cvtBool"/>
     </Page.Resources>
     <Page.DataContext>
         <Binding Source="{StaticResource model}"/>
@@ -75,6 +77,7 @@
                             <DataGridTextColumn Header="显示名称" Binding="{Binding displayname}" />
                             <DataGridTextColumn Header="字段类型" Binding="{Binding fieldtype_name}" />
                             <DataGridTextColumn Header="从属表" Binding="{Binding tbname}" />
+                            <DataGridTextColumn Header="是否可见" Binding="{Binding visible,Converter={StaticResource cvtBool}}"/>
                             <DataGridTextColumn Header="备注" Binding="{Binding remark}" />
                         </DataGrid.Columns>
                     </DataGrid>

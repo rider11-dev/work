@@ -14,5 +14,14 @@ namespace MyNet.CustomQuery.Model
         public IList<Condition> Conditions { get; set; }
         public IList<Sort> Sorts { get; set; }
         public PageQuery Page { get; set; }
+
+        public QueryModel()
+        {
+            Fields = new List<string>();
+            TableRelation = new TableRelation();
+            Conditions = new List<Condition>();
+            Sorts = new List<Sort>();
+            Page = new PageQuery { pageIndex = 1, pageSize = 20 };
+        }
     }
 }

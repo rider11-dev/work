@@ -60,6 +60,19 @@ namespace MyNet.CustomQuery.Client.Models
             }
         }
 
+        public string tbnamealias
+        {
+            get
+            {
+                return string.Format("{0} {1}", tbname, alias);
+            }
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0}[{1}]", comment, tbnamealias);
+        }
+
         public void CopyTo(IBaseModel targetModel)
         {
             if (targetModel == null)

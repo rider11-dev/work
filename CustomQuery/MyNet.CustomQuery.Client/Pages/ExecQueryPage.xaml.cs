@@ -1,10 +1,13 @@
 ﻿using MyNet.Client.Pages;
 using MyNet.Components.Extensions;
 using MyNet.Components.WPF.Command;
+using MyNet.Components.WPF.Extension;
 using MyNet.CustomQuery.Client.Models;
+using MyNet.CustomQuery.Client.Models.ExecQuery;
 using MyNet.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,8 +34,13 @@ namespace MyNet.CustomQuery.Client.Pages
             InitializeComponent();
 
             model = this.DataContext as ExecQueryModel;
-            model.ViewSrcFields = this.FindResource("viewSrcFields") as CollectionViewSource;
+            model.ViewSrcBaseFields = this.FindResource("viewSrcBaseFields") as CollectionViewSource;
             model.ViewSrcSelFields = this.FindResource("viewSrcSelFields") as CollectionViewSource;
+            model.ViewSrcFilterFields = this.FindResource("viewSrcFilterFields") as CollectionViewSource;
+            model.ViewSrcSortFields = this.FindResource("viewSrcSortFields") as CollectionViewSource;
+            model.ViewSelectedFields = this.FindResource("viewSelectedFields") as CollectionViewSource;
+            model.QueryExecutor.DgResults = dgResults;
+            model.QueryExecutor.CtlPage = ctlPagination;
         }
 
         private void ExecQueryPage_Loaded(object sender, RoutedEventArgs e)
@@ -42,6 +50,7 @@ namespace MyNet.CustomQuery.Client.Pages
 
         private void Init()
         {
+
         }
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -54,10 +63,9 @@ namespace MyNet.CustomQuery.Client.Pages
                 if (!e.AddedItems.IsEmpty())
                 {
                     var tab = e.AddedItems[0] as TabItem;
-                    if (tab != tabTables)
+                    if (tab == tabSelField || tab == tabFilter || tab == tabSort)
                     {
-                        model.FilterFields();
-                        model.FilterSelFieldsSrc();
+                        model.FilterBaseFieldsSrc();
                     }
                 }
             }

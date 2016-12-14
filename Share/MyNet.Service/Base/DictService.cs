@@ -155,7 +155,6 @@ namespace MyNet.Service.Base
             }
             #endregion
 
-            long total = 0;
             try
             {
                 var dicts = _dictRep.PageQueryBySp<DictDto>(sqlEntity: sqlEntity, page: page);

@@ -20,5 +20,7 @@ namespace MyNet.CustomQuery.Client
         public const string AddRelField = "添加关联字段";
         public const string DelRelField = "删除关联字段";
 
+        public const string ExecQuery = "执行自定义查询";
+
     }
 }

@@ -16,6 +16,7 @@ namespace MyNet.CustomQuery.Model
         public string displayname { get; set; }
         public string fieldtype { get; set; }
         public string remark { get; set; }
+        public bool visible { get; set; }
     }
 
     public enum FieldType

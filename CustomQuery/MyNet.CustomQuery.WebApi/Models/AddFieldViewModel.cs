@@ -21,5 +21,6 @@ namespace MyNet.CustomQuery.WebApi.Models
         public string fieldtype { get; set; }
         [MaxLength(255, ErrorMessageResourceName = "Remark_Length", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
         public string remark { get; set; }
+        public bool visible { get; set; }
     }
 }

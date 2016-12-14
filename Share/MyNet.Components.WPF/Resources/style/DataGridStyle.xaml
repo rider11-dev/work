@@ -46,6 +46,7 @@
         <Setter Property="MaxHeight" Value="40"/>
         <Setter Property="Foreground" Value="Black" />
         <Style.Triggers>
+            <!--多个trigger时，如果设置的属性发生冲突，则靠后的trigger设置优先-->
             <!--隔行换色，需要DataGrid设置AlternationCount属性-->
             <Trigger Property="AlternationIndex" Value="0">
                 <Setter Property="Background" Value="#e7e7e7" />
@@ -53,12 +54,13 @@
             <Trigger Property="AlternationIndex" Value="1" >
                 <Setter Property="Background" Value="#f2f2f2" />
             </Trigger>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="Background" Value="LightBlue"/>
+            </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="LightGray"/>
                 <!--<Setter Property="Foreground" Value="White"/>-->
-            </Trigger>
-            <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Foreground" Value="Black"/>
             </Trigger>
         </Style.Triggers>
     </Style>

@@ -3,6 +3,7 @@ using MyNet.Components.Misc;
 using MyNet.Components.WPF.Command;
 using MyNet.Components.WPF.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

@@ -129,6 +129,12 @@ namespace MyNet.Components.WPF.Extension
 
     public class DataGridColModel
     {
+        public DataGridColModel(string header, string field, string style = "")
+        {
+            Header = header;
+            Field = field;
+            Style = style;
+        }
         public string Header { get; set; }
         public string Field { get; set; }
         /// <summary>

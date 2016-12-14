@@ -85,10 +85,7 @@ namespace MyNet.Client.Models
             {
                 if (_searchCmd == null)
                 {
-                    _searchCmd = new DelegateCommand(o =>
-                    {
-                        CtlPage.Bind();
-                    });
+                    _searchCmd = new DelegateCommand(o => { CtlPage.Bind(); });
                 }
                 return _searchCmd;
             }

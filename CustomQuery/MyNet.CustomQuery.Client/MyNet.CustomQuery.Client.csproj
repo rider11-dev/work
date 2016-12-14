@@ -70,12 +70,16 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converter\SortTypeConverter.cs" />
     <Compile Include="CustomQueryApiKeys.cs" />
     <Compile Include="CustomQueryOptDesc.cs" />
-    <Compile Include="Models\ExecQueryModel.cs" />
+    <Compile Include="Models\ExecQuery\DataSourceInitalizer.cs" />
+    <Compile Include="Models\ExecQuery\QueryExecutor.cs" />
+    <Compile Include="Models\ExecQuery\ExecQueryModel.cs" />
     <Compile Include="Models\FieldMngViewModel.cs" />
     <Compile Include="Models\FieldViewModel.cs" />
     <Compile Include="Models\FieldDetailViewModel.cs" />
+    <Compile Include="Models\SortViewModel.cs" />
     <Compile Include="Models\TableDetailViewModel.cs" />
     <Compile Include="Models\FieldInitViewModel.cs" />
     <Compile Include="Models\TableInitViewModel.cs" />

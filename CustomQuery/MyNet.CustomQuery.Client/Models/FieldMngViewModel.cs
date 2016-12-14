@@ -125,6 +125,7 @@ namespace MyNet.CustomQuery.Client.Models
                     }
             };
             base.Models = ((IEnumerable<CheckableModel>)GetFields(pageQuery)).ToList();
+            page.RecordsCount = pageQuery.total;
             page.PageIndex = pageQuery.pageIndex;
             page.PageSize = pageQuery.pageSize;
             page.PageCount = pageQuery.pageTotal;

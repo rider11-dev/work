@@ -10,7 +10,7 @@
         xmlns:vmwpf="clr-namespace:MyNet.Components.WPF.Models;assembly=MyNet.Components.WPF"
         mc:Ignorable="d"
         Style="{StaticResource popWindowStyle}" Loaded="FieldDetailWindow_Loaded"
-        Title="FieldDetailWindow" Height="360" Width="360">
+        Title="FieldDetailWindow" Height="380" Width="360">
     <Window.Resources>
         <Style x:Key="lblStyle" TargetType="Label" BasedOn="{StaticResource lblInputBaseStyle}">
             <Setter Property="Margin" Value="16,0,0,0"/>
@@ -28,6 +28,7 @@
         </Style>
         <model:FieldDetailViewModel x:Key="model"/>
         <vmwpf:CmbModel x:Key="cbVmFieldType"/>
+        <vmwpf:CmbModel x:Key="cbVmVisible"/>
     </Window.Resources>
     <Window.DataContext>
         <Binding Source="{StaticResource model}"/>
@@ -35,6 +36,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
+            <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
@@ -77,11 +79,17 @@
                   Style="{StaticResource cbStyle}"
                   SelectedValue="{Binding Path=SelFieldType,Source={StaticResource model}}"
                   />
-        <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource lblStyle}" Content="备注"/>
-        <TextBox Grid.Row="5" Grid.Column="1"  Style="{StaticResource inputMultiLineBaseStyle}" Height="Auto" 
+        <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource lblStyle}" Content="是否可见"/>
+        <ComboBox x:Name="cbVisible" Grid.Row="5" Grid.Column="1" 
+                  DataContext="{StaticResource cbVmVisible}"
+                  Style="{StaticResource cbStyle}"
+                  SelectedValue="{Binding Path=SelVisible,Source={StaticResource model}}"
+                  />
+        <Label Grid.Row="6" Grid.Column="0" Style="{StaticResource lblStyle}" Content="备注"/>
+        <TextBox Grid.Row="6" Grid.Column="1"  Style="{StaticResource inputMultiLineBaseStyle}" Height="Auto" 
                 Text="{Binding Path=remark,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                  />
-        <Grid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2">
+        <Grid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>

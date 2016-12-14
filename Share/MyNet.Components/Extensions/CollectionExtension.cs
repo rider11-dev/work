@@ -14,6 +14,11 @@ namespace MyNet.Components.Extensions
             return collection == null || collection.Count() < 1;
         }
 
+        public static bool IsNotEmpty<T>(this IEnumerable<T> collection)
+        {
+            return !IsEmpty(collection);
+        }
+
         public static void DeleteBatch<T>(this IList<T> src, IEnumerable<T> lstToDel)
         {
             if (src.IsEmpty() || lstToDel.IsEmpty())

@@ -65,7 +65,11 @@ namespace MyNet.CustomQuery.Service
             {
                 throw new Exception("查询字段不能为空！");
             }
-            sqlEntity.fields = string.Join(",", queryModel.Fields);
+            //重建表名——将bd.dict_code转换为bd.dict_code 'bd.dict_code',bd.dict_code bd_dict_code
+            //var fields = queryModel.Fields.ToList();
+            var fields = new List<string>();
+            queryModel.Fields.ToList().ForEach(f => fields.Add(string.Format("{0} {1}", f, f.Replace('.', '_'))));
+            sqlEntity.fields = string.Join(",", fields);
             //2、TableRelations——tables
             if (queryModel.TableRelation == null || queryModel.TableRelation.PrimeTable.IsEmpty())
             {

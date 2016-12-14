@@ -97,6 +97,19 @@ namespace MyNet.Components.WPF.Controls
             }
         }
 
+        public int PageStart
+        {
+            get
+            {
+                int idx = (PageIndex - 1) * PageSize;
+                if (idx < 0)
+                {
+                    idx = 0;
+                }
+                return idx;
+            }
+        }
+
         Action<PagingArgs> _actionSetPagination = null;
 
         public ControlPagination()

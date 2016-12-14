@@ -119,9 +119,38 @@ namespace MyNet.CustomQuery.Client.Models
             }
         }
 
+        private string _visible;
+        public string visible
+        {
+            get { return _visible; }
+            set
+            {
+                if (_visible == value)
+                {
+                    return;
+                }
+                _visible = value;
+                base.RaisePropertyChanged("visible");
+            }
+        }
+
         [JsonIgnore]
         public string fieldfullname { get { return string.Format("{0}.{1}[{2}]", tbname, displayname, fieldname); } }
-
+        [JsonIgnore]
+        private int _order;
+        [JsonIgnore]
+        public int order
+        {
+            get { return _order; }
+            set
+            {
+                if (_order != value)
+                {
+                    _order = value;
+                    base.RaisePropertyChanged("order");
+                }
+            }
+        }
         public void CopyTo(IBaseModel targetModel)
         {
             if (targetModel == null)
@@ -136,6 +165,7 @@ namespace MyNet.CustomQuery.Client.Models
             vmField.fieldname = this.fieldname;
             vmField.fieldtype = this.fieldtype;
             vmField.fieldtype_name = this.fieldtype_name;
+            vmField.visible = this.visible;
             vmField.remark = this.remark;
         }
 

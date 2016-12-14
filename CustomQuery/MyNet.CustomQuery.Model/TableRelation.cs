@@ -11,6 +11,11 @@ namespace MyNet.CustomQuery.Model
     {
         public string PrimeTable { get; set; }
         public IList<JoinTable> JoinTables { get; set; }
+
+        public TableRelation()
+        {
+            JoinTables = new List<JoinTable>();
+        }
     }
 
     public class JoinTable
@@ -21,6 +26,12 @@ namespace MyNet.CustomQuery.Model
         /// 关联字段集合
         /// </summary>
         public IList<RelationField> RelFields { get; set; }
+
+        public JoinTable()
+        {
+            JoinType = TableJoinType.Left;
+            RelFields = new List<RelationField>();
+        }
 
         public override string ToString()
         {

@@ -166,6 +166,7 @@ namespace MyNet.CustomQuery.Service
                 oldField.fieldname = field.fieldname;
                 oldField.displayname = field.displayname;
                 oldField.fieldtype = field.fieldtype;
+                oldField.visible = field.visible;
                 oldField.remark = field.remark;
                 bool val = _fieldRep.Update(oldField);
                 rst = OptResult.Build(val ? ResultCode.Success : ResultCode.Fail, Msg_UpdateField);

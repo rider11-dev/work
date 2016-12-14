@@ -22,8 +22,8 @@ namespace MyNet.CustomQuery.Client.Models
     {
         IList<DataGridColModel> Cols = new List<DataGridColModel>
                 {
-                    new DataGridColModel { Field="comment",Header="表注释"},
-                    new DataGridColModel { Field="tbname",Header="表名称"}
+                    new DataGridColModel(field:"comment",header:"表注释"),
+                    new DataGridColModel(field:"tbname",header:"表名称")
                 };
         [JsonIgnore]
         public BaseWindow Window { get; set; }
@@ -34,7 +34,8 @@ namespace MyNet.CustomQuery.Client.Models
             get { return base.id.IsEmpty(); }
         }
 
-        CmbItem _selFieldType;
+        [JsonIgnore]
+        private CmbItem _selFieldType;
         [JsonIgnore]
         public CmbItem SelFieldType
         {
@@ -49,6 +50,23 @@ namespace MyNet.CustomQuery.Client.Models
                         base.fieldtype = _selFieldType.Id;
                     }
                     base.RaisePropertyChanged("SelFieldType");
+                }
+            }
+        }
+
+        [JsonIgnore]
+        private CmbItem _selVisible;
+        [JsonIgnore]
+        public CmbItem SelVisible
+        {
+            get { return _selFieldType; }
+            set
+            {
+                if (_selVisible != value)
+                {
+                    _selVisible = value;
+                    base.visible = value.Id;
+                    base.RaisePropertyChanged("SelVisible");
                 }
             }
         }
@@ -115,13 +133,9 @@ namespace MyNet.CustomQuery.Client.Models
                 cols: Cols);
         }
 
-        private IList<CheckableModel> GetTables()
+        private IEnumerable<CheckableModel> GetTables()
         {
-            return TableMngViewModel.GetTables(new PageQuery
-            {
-                pageIndex = 1,
-                pageSize = 1000
-            }) as IList<CheckableModel>;
+            return TableMngViewModel.GetTables(new PageQuery { pageIndex = 1, pageSize = 1000 });
         }
 
         private void AfterSelect(CheckableModel m)
