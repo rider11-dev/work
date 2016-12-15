@@ -125,6 +125,33 @@ namespace MyNet.Components.WPF.Extension
                 });
             }
         }
+
+        /// <summary>
+        /// 添加右键菜单——清除排序
+        /// </summary>
+        /// <param name="dg"></param>
+        public static void CanClearSort(this DataGrid dg)
+        {
+            if (dg == null)
+            {
+                return;
+            }
+            if (dg.ContextMenu == null)
+            {
+                dg.ContextMenu = new ContextMenu();
+            }
+
+            var menuItem = new MenuItem { Header = "清除排序" };
+            menuItem.Click += (o, e) =>
+            {
+                if (dg.Items != null && dg.Items.SortDescriptions.IsNotEmpty())
+                {
+                    dg.Items.SortDescriptions.Clear();
+                }
+            };
+
+            dg.ContextMenu.Items.Add(menuItem);
+        }
     }
 
     public class DataGridColModel

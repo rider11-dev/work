@@ -52,7 +52,7 @@ namespace MyNet.Client.Pages.Auth
             //设置权限类型
             DataCacheHelper.SetCmbSource(cbPermType, DictType.Perm, _vmPermDetail.per_type);
             //是否系统下拉框
-            DataCacheHelper.SetCmbSource(cbIsSystem, DictType.Bool, _vmPermDetail.per_system);
+            DataCacheHelper.SetEnumCmbSource<BoolType>(cbIsSystem, _vmPermDetail.per_system);
         }
     }
 }

@@ -2,6 +2,7 @@
 using MyNet.Components.Extensions;
 using MyNet.Components.WPF.Command;
 using MyNet.Components.WPF.Extension;
+using MyNet.Components.WPF.Windows;
 using MyNet.CustomQuery.Client.Models;
 using MyNet.CustomQuery.Client.Models.ExecQuery;
 using MyNet.Model;
@@ -35,12 +36,24 @@ namespace MyNet.CustomQuery.Client.Pages
 
             model = this.DataContext as ExecQueryModel;
             model.ViewSrcBaseFields = this.FindResource("viewSrcBaseFields") as CollectionViewSource;
-            model.ViewSrcSelFields = this.FindResource("viewSrcSelFields") as CollectionViewSource;
-            model.ViewSrcFilterFields = this.FindResource("viewSrcFilterFields") as CollectionViewSource;
-            model.ViewSrcSortFields = this.FindResource("viewSrcSortFields") as CollectionViewSource;
-            model.ViewSelectedFields = this.FindResource("viewSelectedFields") as CollectionViewSource;
+
+            model.TableSelector.ViewRelFields = this.FindResource("viewRelFields") as CollectionViewSource;
+
+            model.SelFieldsSelector.ViewSrcSelFields = this.FindResource("viewSrcSelFields") as CollectionViewSource;
+            model.SelFieldsSelector.ViewSelectedFields = this.FindResource("viewSelectedFields") as CollectionViewSource;
+
+            model.FilterFieldsSelector.ViewSrcFilterFields = this.FindResource("viewSrcFilterFields") as CollectionViewSource;
+            model.FilterFieldsSelector.DgColConditionType = dgColConditionType;
+            model.FilterFieldsSelector.DgColFieldType = dgColFieldType;
+            model.FilterFieldsSelector.DgColValue = dgColValue;
+
+            model.SortFieldsSelector.ViewSrcSortFields = this.FindResource("viewSrcSortFields") as CollectionViewSource;
+            model.SortFieldsSelector.ViewSortFields = this.FindResource("viewSortFields") as CollectionViewSource;
+
             model.QueryExecutor.DgResults = dgResults;
             model.QueryExecutor.CtlPage = ctlPagination;
+
+
         }
 
         private void ExecQueryPage_Loaded(object sender, RoutedEventArgs e)
@@ -50,7 +63,9 @@ namespace MyNet.CustomQuery.Client.Pages
 
         private void Init()
         {
+            dgResults.CanClearSort();
 
+            dgColValue.CellEditingTemplate = this.FindResource("txtCellEditorTemplate") as DataTemplate;
         }
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -58,8 +73,6 @@ namespace MyNet.CustomQuery.Client.Pages
             //datagrid的行改变时也会触发该事件，故这里过滤一下
             if (e.OriginalSource is TabControl)
             {
-                //e.Handled = true;
-                //return;
                 if (!e.AddedItems.IsEmpty())
                 {
                     var tab = e.AddedItems[0] as TabItem;
@@ -70,6 +83,11 @@ namespace MyNet.CustomQuery.Client.Pages
                 }
             }
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var dd = dgRelFields.ContextMenu;
         }
     }
 }

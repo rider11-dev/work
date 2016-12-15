@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyNet.CustomQuery.Client.Models
+namespace MyNet.CustomQuery.Client.Models.ExecQuery
 {
     public class SortViewModel : BaseModel
     {
@@ -60,6 +60,25 @@ namespace MyNet.CustomQuery.Client.Models
             {
                 return Sort.FieldFullName;
             }
+        }
+
+        private int _order;
+        public int Order
+        {
+            get { return _order; }
+            set
+            {
+                if (_order != value)
+                {
+                    _order = value;
+                    base.RaisePropertyChanged("Order");
+                }
+            }
+        }
+
+        public void ResetOrder()
+        {
+            Order = 0;
         }
 
         public override string ToString()

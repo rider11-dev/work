@@ -1,4 +1,5 @@
 ﻿using EmitMapper.MappingConfiguration;
+using MyNet.Components.Extensions;
 using MyNet.Components.Mapper;
 using MyNet.Components.Misc;
 using MyNet.Components.WPF.Models;
@@ -83,6 +84,22 @@ namespace MyNet.CustomQuery.Client.Models
             }
         }
 
+        private string _visible;
+        public string visible
+        {
+            get { return _visible; }
+            set
+            {
+                if (_visible == value)
+                {
+                    return;
+                }
+                _visible = value;
+                base.RaisePropertyChanged("visible");
+            }
+        }
+
+        [JsonIgnore]
         private string _tbname;
         public string tbname
         {
@@ -98,39 +115,6 @@ namespace MyNet.CustomQuery.Client.Models
                         tbid = "";
                     }
                 }
-            }
-        }
-
-        private string _fieldtype_name;
-        public string fieldtype_name
-        {
-            get { return _fieldtype_name; }
-            set
-            {
-                if (_fieldtype_name != value)
-                {
-                    _fieldtype_name = value;
-                    base.RaisePropertyChanged("fieldtype_name");
-                    if (string.IsNullOrEmpty(_fieldtype_name))
-                    {
-                        tbid = "";
-                    }
-                }
-            }
-        }
-
-        private string _visible;
-        public string visible
-        {
-            get { return _visible; }
-            set
-            {
-                if (_visible == value)
-                {
-                    return;
-                }
-                _visible = value;
-                base.RaisePropertyChanged("visible");
             }
         }
 
@@ -151,6 +135,32 @@ namespace MyNet.CustomQuery.Client.Models
                 }
             }
         }
+
+        private string _mydisplayname;
+        /// <summary>
+        /// 查询指定显示名称
+        /// </summary>
+        public string mydisplayname
+        {
+            get
+            {
+                if (_mydisplayname.IsEmpty())
+                {
+                    return displayname;
+                }
+                return _mydisplayname;
+            }
+            set
+            {
+                if (_mydisplayname == value)
+                {
+                    return;
+                }
+                _mydisplayname = value;
+                base.RaisePropertyChanged("mydisplayname");
+            }
+        }
+
         public void CopyTo(IBaseModel targetModel)
         {
             if (targetModel == null)
@@ -164,7 +174,6 @@ namespace MyNet.CustomQuery.Client.Models
             vmField.displayname = this.displayname;
             vmField.fieldname = this.fieldname;
             vmField.fieldtype = this.fieldtype;
-            vmField.fieldtype_name = this.fieldtype_name;
             vmField.visible = this.visible;
             vmField.remark = this.remark;
         }
@@ -186,6 +195,12 @@ namespace MyNet.CustomQuery.Client.Models
                 }));
             return fvm;
         }
+
+        public void ResetOrder()
+        {
+            order = 0;
+        }
+
 
         public override string ToString()
         {

@@ -14,6 +14,7 @@
                 <ResourceDictionary Source="/MyNet.Components.WPF;component/Resources/Style/MiscStyle.xaml"/>
                 <ResourceDictionary Source="/MyNet.Components.WPF;component/Resources/Style/DataGridStyle.xaml"/>
                 <ResourceDictionary Source="/MyNet.Components.WPF;component/Resources/Style/MngPageStyle.xaml"/>
+                <ResourceDictionary Source="/MyNet.Components.WPF;component/Resources/Style/DataGridEditorStyle.xaml"/>
                 <ResourceDictionary Source="/MyNet.Client;component/Resources/style/Login.xaml"/>
                 <ResourceDictionary Source="/MyNet.Client;component/Resources/style/MenuTreeStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>

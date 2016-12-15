@@ -9,6 +9,5 @@ namespace MyNet.CustomQuery.Model.Dto
     public class FieldDto : Field
     {
         public string tbname { get; set; }
-        public string fieldtype_name { get; set; }
     }
 }

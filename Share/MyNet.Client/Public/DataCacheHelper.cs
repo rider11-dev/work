@@ -28,6 +28,7 @@ namespace MyNet.Client.Public
         /// 字典缓存
         /// </summary>
         private static Dictionary<DictType, IList<CmbItem>> DictSource = new Dictionary<DictType, IList<CmbItem>>();
+        private static Dictionary<Type, IList<CmbItem>> EnumDictSource = new Dictionary<Type, IList<CmbItem>>();
 
         private static Dictionary<string, PermissionCacheDto> _allFuncs = null;
         /// <summary>
@@ -90,13 +91,7 @@ namespace MyNet.Client.Public
         /// </summary>
         private static void PreLoadSomeDicts()
         {
-            var boolTypes = EnumExtension.ConvertEnumToDict<BoolType>();
-            System.Collections.Generic.List<CmbItem> items = new List<CmbItem>();
-            foreach (var t in boolTypes)
-            {
-                items.Add(new CmbItem { Id = t.Key, Text = t.Value });
-            }
-            DictSource.Add(DictType.Bool, items);
+            GetEnumCmbSource<BoolType>();
         }
 
         /// <summary>
@@ -114,11 +109,40 @@ namespace MyNet.Client.Public
                 return;
             }
 
+            var dicts = GetCmbSource(dictType);
             CmbModel model = cmb.DataContext as CmbModel;
+            model.Bind(dicts, selectedTypeCode, setSelect, needBlankItem);
+        }
+        /// <summary>
+        /// 设置ComboBox数据源（解析枚举）
+        /// </summary>
+        /// <param name="cmb">ComboBox控件</param>
+        /// <param name="dictType">枚举类型</param>
+        /// <param name="selectedTypeCode">设置要选中的子项</param>
+        /// <param name="setSelect">是否设置选中项</param>
+        /// <param name="needBlankItem">是否需要一个空项</param>
+        public static void SetEnumCmbSource<TEnum>(ComboBox cmb, string selectedTypeCode = "", bool setSelect = true, bool needBlankItem = false)
+        {
+            if (cmb == null)
+            {
+                return;
+            }
+
+            var dicts = GetEnumCmbSource<TEnum>();
+            CmbModel model = cmb.DataContext as CmbModel;
+            model.Bind(dicts, selectedTypeCode, setSelect, needBlankItem);
+        }
+        /// <summary>
+        /// 获取数据库字典数据
+        /// </summary>
+        /// <param name="dictType"></param>
+        /// <returns></returns>
+        public static IList<CmbItem> GetCmbSource(DictType dictType)
+        {
             if (DataCacheHelper.DictSource.ContainsKey(dictType))
             {
                 //取缓存数据
-                model.Bind(DictSource[dictType], selectedTypeCode, setSelect, needBlankItem);
+                return DictSource[dictType];
             }
             else
             {
@@ -130,15 +154,35 @@ namespace MyNet.Client.Public
                 if (rst.code != ResultCode.Success)
                 {
                     MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);
-                    return;
+                    return null;
                 }
                 if (rst.data != null && rst.data.rows != null)
                 {
                     var dicts = JsonConvert.DeserializeObject<IList<CmbItem>>(((JArray)rst.data.rows).ToString());
-                    model.Bind(dicts, selectedTypeCode, setSelect, needBlankItem);
                     DataCacheHelper.DictSource.Add(dictType, dicts);
+                    return dicts;
                 }
             }
+            return null;
+        }
+
+        /// <summary>
+        /// 获取枚举字典数据
+        /// </summary>
+        /// <typeparam name="TEnum"></typeparam>
+        /// <returns></returns>
+        public static IList<CmbItem> GetEnumCmbSource<TEnum>()
+        {
+            var type = typeof(TEnum);
+            if (EnumDictSource.ContainsKey(type))
+            {
+                return EnumDictSource[type];
+            }
+            var dicts = EnumExtension.ConvertEnumToDict<TEnum>()
+                 .Select(kvp => new CmbItem { Id = kvp.Key, Text = kvp.Value })
+                 .ToList();
+            EnumDictSource.Add(type, dicts);
+            return dicts;
         }
 
         private static void LoadPerms(string apiKey, Dictionary<string, PermissionCacheDto> target)

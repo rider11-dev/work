@@ -47,7 +47,6 @@
     <Compile Include="Condition.cs" />
     <Compile Include="DbField.cs" />
     <Compile Include="DbTable.cs" />
-    <Compile Include="CqDictType.cs" />
     <Compile Include="Dto\FieldDto.cs" />
     <Compile Include="Field.cs" />
     <Compile Include="EmptyModel.cs" />

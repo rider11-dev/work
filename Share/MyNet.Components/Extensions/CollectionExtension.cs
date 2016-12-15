@@ -76,5 +76,23 @@ namespace MyNet.Components.Extensions
             }
             AddRange(src, lstToAdd);
         }
+
+        public static int GetMax<T>(this IEnumerable<T> src, Func<T, int> selector)
+        {
+            if (src.IsEmpty())
+            {
+                return 0;
+            }
+            return src.Max(selector);
+        }
+        public static int GetMin<T>(this IEnumerable<T> src, Func<T, int> selector)
+        {
+            if (src.IsEmpty())
+            {
+                return 0;
+            }
+            return src.Min(selector);
+        }
+
     }
 }

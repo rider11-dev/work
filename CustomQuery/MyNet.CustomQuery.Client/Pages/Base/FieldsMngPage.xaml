@@ -75,7 +75,7 @@
                                                 CanUserResize="False"/>
                             <DataGridTextColumn Header="字段名称" Binding="{Binding fieldname}" />
                             <DataGridTextColumn Header="显示名称" Binding="{Binding displayname}" />
-                            <DataGridTextColumn Header="字段类型" Binding="{Binding fieldtype_name}" />
+                            <DataGridTextColumn Header="字段类型" Binding="{Binding fieldtype}" />
                             <DataGridTextColumn Header="从属表" Binding="{Binding tbname}" />
                             <DataGridTextColumn Header="是否可见" Binding="{Binding visible,Converter={StaticResource cvtBool}}"/>
                             <DataGridTextColumn Header="备注" Binding="{Binding remark}" />

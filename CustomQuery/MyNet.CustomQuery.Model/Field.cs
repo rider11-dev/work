@@ -21,15 +21,15 @@ namespace MyNet.CustomQuery.Model
 
     public enum FieldType
     {
-        [Description("字符串类型")]
+        [Description("字符串")]
         String,
-        [Description("数值类型")]
+        [Description("数值")]
         Number,
-        [Description("日期类型")]
+        [Description("日期")]
         Date,
-        [Description("时间类型")]
+        [Description("时间")]
         Time,
-        [Description("布尔类型")]
+        [Description("布尔")]
         Boolean
     }
 }

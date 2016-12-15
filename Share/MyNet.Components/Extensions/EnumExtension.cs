@@ -17,6 +17,10 @@ namespace MyNet.Components.Extensions
 
         public static Dictionary<string, string> ConvertEnumToDict<TEnum>()
         {
+            if (!typeof(TEnum).IsEnum)
+            {
+                return null;
+            }
             Dictionary<string, string> dict = new Dictionary<string, string>();
             var arr = Enum.GetValues(typeof(TEnum));
             foreach (var item in arr)

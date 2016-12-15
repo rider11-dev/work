@@ -20,11 +20,6 @@ namespace MyNet.Model.Base
         /// </summary>
         public static readonly DictType CardState = new DictType { type_code = "card.cardstate", type_name = "一卡通状态", type_system = true };
 
-        /// <summary>
-        /// 逻辑类型，对应BoolType枚举
-        /// </summary>
-        public static readonly DictType Bool = new DictType { type_code = "booltype", type_name = "逻辑类型" };
-
         public string type_code { get; set; }
         public string type_name { get; set; }
         public bool type_system { get; set; }

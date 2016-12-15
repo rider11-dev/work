@@ -33,9 +33,19 @@
         <!--<Setter Property="Template" Value="{StaticResource colHeaderTemplage}"/>-->
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="ToolTip" Value="单击以排序"/>
                 <Setter Property="Foreground" Value="Green"/>
             </Trigger>
+            <!--MultiDataTrigger，Condition可以使用绑定；MultiTrigger，Condition只能使用Property-->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Path=IsMouseOver,RelativeSource={RelativeSource Self}}" Value="True"/>
+                    <Condition Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGrid},Path=CanUserSortColumns}" Value="True"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter Property="ToolTip" Value="单击以排序"/>
+                </MultiDataTrigger.Setters>
+            </MultiDataTrigger>
+
         </Style.Triggers>
     </Style>
     <!--表格行基础样式-->

@@ -6,6 +6,7 @@
       xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
       xmlns:page="clr-namespace:MyNet.Client.Pages;assembly=MyNet.Client"
       xmlns:usrCtl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
+      xmlns:cvt="clr-namespace:MyNet.Components.WPF.Converter;assembly=MyNet.Components.WPF"
       xmlns:local="clr-namespace:MyNet.CustomQuery.Client.Pages"
       xmlns:localcvt="clr-namespace:MyNet.CustomQuery.Client.Converter"
       xmlns:model="clr-namespace:MyNet.CustomQuery.Client.Models.ExecQuery"
@@ -16,6 +17,7 @@
     <Page.Resources>
         <model:ExecQueryModel x:Key="model" />
         <vmwpf:CmbModel x:Key="cbVmTb"/>
+        <cvt:BooleanConverter x:Key="cvtBool"/>
         <usrCtl:PagingArgs x:Key="page"/>
         <Style x:Key="btnStyle" TargetType="Button" BasedOn="{StaticResource mngBtnStyle}">
             <Setter Property="Width" Value="70"/>
@@ -32,14 +34,22 @@
         </Style>
         <CollectionViewSource x:Key="viewSrcBaseFields" 
                               Source="{Binding Fields,Source={StaticResource model},Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
-        <CollectionViewSource x:Key="viewSrcSelFields" 
-                              Source="{Binding Fields,Source={StaticResource model},Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
+
+        <CollectionViewSource x:Key="viewRelFields" 
+                              Source="{Binding RelFields,Source={StaticResource model},Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
+
         <CollectionViewSource x:Key="viewSrcFilterFields" 
                               Source="{Binding Fields,Source={StaticResource model},Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
-        <CollectionViewSource x:Key="viewSrcSortFields" 
+
+        <CollectionViewSource x:Key="viewSrcSelFields" 
                               Source="{Binding Fields,Source={StaticResource model},Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
         <CollectionViewSource x:Key="viewSelectedFields" 
                               Source="{Binding SelectedFields,Source={StaticResource model},Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
+
+        <CollectionViewSource x:Key="viewSrcSortFields" 
+                              Source="{Binding Fields,Source={StaticResource model},Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
+        <CollectionViewSource x:Key="viewSortFields" 
+                              Source="{Binding SelectedSorts,Source={StaticResource model},Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
     </Page.Resources>
     <Page.DataContext>
         <Binding Source="{StaticResource model}"/>
@@ -58,6 +68,7 @@
                 <Button Style="{StaticResource btnStyle}"
                         Content="保存模板"
                         Command="{Binding Path=SaveTCmd,Source={StaticResource model}}"
+                        Click="Button_Click"
                         />
                 <Button Style="{StaticResource btnStyle}"
                         Content="重置模板"
@@ -94,16 +105,17 @@
                         <GroupBox Grid.Row="1" Grid.Column="0" Header="表连接" Grid.ColumnSpan="2">
                             <DockPanel LastChildFill="True">
                                 <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="32">
-                                    <Button Style="{StaticResource btnStyle}" Content="添加" Command="{Binding Path=AddJoinTbCmd,Source={StaticResource model}}"/>
+                                    <Button Style="{StaticResource btnStyle}" Content="添加" Command="{Binding Path=TableSelector.AddJoinTbCmd,Source={StaticResource model}}"/>
                                 </StackPanel>
                                 <DataGrid x:Name="dgJoinTables" Style="{StaticResource gridBaseStyle}" IsReadOnly="False"
                                       ItemsSource="{Binding Path=JoinTables,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      CanUserSortColumns="False"
                                       >
                                     <DataGrid.Columns>
                                         <DataGridTemplateColumn CellStyle="{StaticResource radioCellStyle}" HeaderStyle="{StaticResource radioCellHeaderStyle}" CanUserResize="False"/>
                                         <DataGridComboBoxColumn Header="连接方式" EditingElementStyle="{StaticResource gridCbStyle}"
                                                             SelectedValueBinding="{Binding Path=JoinType}"
-                                                            ItemsSource="{Binding Path=JoinTypes,Mode=OneWay,Source={StaticResource model}}"
+                                                            ItemsSource="{Binding Path=TableSelector.JoinTypes,Mode=OneWay,Source={StaticResource model}}"
                                                             SelectedValuePath="Id" DisplayMemberPath="Text"/>
                                         <DataGridComboBoxColumn Header="关联表"  EditingElementStyle="{StaticResource gridCbStyle}"
                                                             SelectedValueBinding="{Binding Path=Table}"
@@ -113,7 +125,7 @@
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <Button Content="删除" Style="{StaticResource gridBtnStyle}"
-                                                Command="{Binding Path=DelJoinTbCmd,Source={StaticResource model}}"
+                                                Command="{Binding Path=TableSelector.DelJoinTbCmd,Source={StaticResource model}}"
                                                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGrid},Path=SelectedItem}"/>
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.CellTemplate>
@@ -121,7 +133,7 @@
                                     </DataGrid.Columns>
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="SelectionChanged">
-                                            <i:InvokeCommandAction Command="{Binding Path=FilterRelFieldCmd,Source={StaticResource model}}" 
+                                            <i:InvokeCommandAction Command="{Binding Path=TableSelector.FilterRelFieldCmd,Source={StaticResource model}}" 
                                                                CommandParameter="{Binding ElementName=dgJoinTables,Path=SelectedItem}"/>
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
@@ -133,12 +145,13 @@
                             <DockPanel LastChildFill="True">
                                 <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="32">
                                     <Button Style="{StaticResource btnStyle}" Content="添加"
-                                            Command="{Binding Path=AddRelFieldCmd,Source={StaticResource model}}"
+                                            Command="{Binding Path=TableSelector.AddRelFieldCmd,Source={StaticResource model}}"
                                             CommandParameter="{Binding ElementName=dgJoinTables,Path=SelectedItem}"
                                     />
                                 </StackPanel>
-                                <DataGrid x:Name="dgRelFields" Style="{StaticResource gridBaseStyle}" IsReadOnly="False"
-                                       ItemsSource="{Binding Path=RelFields,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                                <DataGrid x:Name="dgRelFields" Style="{StaticResource gridBaseStyle}" IsReadOnly="False" CanUserSortColumns="False"
+                                       ItemsSource="{Binding Source={StaticResource viewRelFields},UpdateSourceTrigger=PropertyChanged}">
+
                                     <DataGrid.Columns>
                                         <DataGridComboBoxColumn Header="关联字段1" 
                                                             SelectedValueBinding="{Binding Path=Field1}" EditingElementStyle="{StaticResource gridCbStyle}"
@@ -153,7 +166,7 @@
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <Button Content="删除" Style="{StaticResource gridBtnStyle}"
-                                                Command="{Binding Path=DelRelFieldCmd,Source={StaticResource model}}"
+                                                Command="{Binding Path=TableSelector.DelRelFieldCmd,Source={StaticResource model}}"
                                                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGrid},Path=SelectedItem}"/>
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.CellTemplate>
@@ -167,9 +180,9 @@
                 <TabItem Header="查询字段" x:Name="tabSelField">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="4*"/>
                             <ColumnDefinition Width="74"/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="6*"/>
                             <ColumnDefinition Width="74"/>
                         </Grid.ColumnDefinitions>
                         <GroupBox Grid.Column="0" Header="源字段">
@@ -187,21 +200,25 @@
                                 <RowDefinition Height="2.5*"/>
                             </Grid.RowDefinitions>
                             <Button Grid.Row="1" Style="{StaticResource btnStyle}" Content="＞" 
-                                    Command="{Binding Path=AddSelFieldsCmd,Source={StaticResource model}}" 
+                                    Command="{Binding Path=SelFieldsSelector.AddSelFieldsCmd,Source={StaticResource model}}" 
                                     CommandParameter="{Binding ElementName=lstFrom_Sel,Path=SelectedItems}"/>
                             <Button Grid.Row="2" Style="{StaticResource btnStyle}" Content="＜" 
-                                    Command="{Binding Path=DelSelFieldsCmd,Source={StaticResource model}}"
-                                    CommandParameter="{Binding ElementName=lstTo_Sel,Path=SelectedItems}"/>
+                                    Command="{Binding Path=SelFieldsSelector.DelSelFieldsCmd,Source={StaticResource model}}"
+                                    CommandParameter="{Binding ElementName=dgTo_Sel,Path=SelectedItems}"/>
                             <Button Grid.Row="3" Style="{StaticResource btnStyle}" Content="＞＞" 
-                                    Command="{Binding Path=AddAllSelFieldsCmd,Source={StaticResource model}}"
-                                    CommandParameter="{Binding ElementName=lstFrom_Sel,Path=Items}"/>
+                                    Command="{Binding Path=SelFieldsSelector.AddAllSelFieldsCmd,Source={StaticResource model}}"/>
                             <Button Grid.Row="4" Style="{StaticResource btnStyle}" Content="＜＜" 
-                                    Command="{Binding Path=DelAllSelFieldsCmd,Source={StaticResource model}}"/>
+                                    Command="{Binding Path=SelFieldsSelector.DelAllSelFieldsCmd,Source={StaticResource model}}"/>
                         </Grid>
                         <GroupBox Grid.Column="2" Header="结果字段">
-                            <ListBox x:Name="lstTo_Sel" 
-                                     ItemsSource="{Binding Source={StaticResource viewSelectedFields}}"
-                                     SelectionMode="Extended"/>
+                            <DataGrid x:Name="dgTo_Sel" Style="{StaticResource gridBaseStyle}"
+                                      SelectionMode="Extended"  CanUserSortColumns="False" IsReadOnly="False"
+                                      ItemsSource="{Binding Source={StaticResource viewSelectedFields}}">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="字段名称" Binding="{Binding fieldfullname}" IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="显示名称" Binding="{Binding mydisplayname}" />
+                                </DataGrid.Columns>
+                            </DataGrid>
                         </GroupBox>
                         <Grid Grid.Column="3">
                             <Grid.RowDefinitions>
@@ -211,16 +228,72 @@
                                 <RowDefinition Height="7*"/>
                             </Grid.RowDefinitions>
                             <Button Grid.Row="1" Style="{StaticResource btnStyle}" Content="上移" 
-                                    Command="{Binding Path=MoveUpSelFieldCmd,Source={StaticResource model}}" 
-                                    CommandParameter="{Binding ElementName=lstTo_Sel,Path=SelectedItem}"/>
+                                    Command="{Binding Path=SelFieldsSelector.MoveUpSelFieldCmd,Source={StaticResource model}}" 
+                                    CommandParameter="{Binding ElementName=dgTo_Sel,Path=SelectedItem}"/>
                             <Button Grid.Row="2" Style="{StaticResource btnStyle}" Content="下移" 
-                                    Command="{Binding Path=MoveDownSelFieldCmd,Source={StaticResource model}}"
-                                    CommandParameter="{Binding ElementName=lstTo_Sel,Path=SelectedItem}"/>
+                                    Command="{Binding Path=SelFieldsSelector.MoveDownSelFieldCmd,Source={StaticResource model}}"
+                                    CommandParameter="{Binding ElementName=dgTo_Sel,Path=SelectedItem}"/>
                         </Grid>
                     </Grid>
                 </TabItem>
                 <TabItem Header="过滤" x:Name="tabFilter">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2.5*"/>
+                            <ColumnDefinition Width="74"/>
+                            <ColumnDefinition Width="7.5*"/>
+                        </Grid.ColumnDefinitions>
+                        <GroupBox Header="源字段">
+                            <ListBox x:Name="lstFrom_Filter" 
+                                     ItemsSource="{Binding Source={StaticResource viewSrcFilterFields}}"
+                                     SelectionMode="Extended"/>
+                        </GroupBox>
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="2.5*"/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition Height="2.5*"/>
+                            </Grid.RowDefinitions>
+                            <Button Grid.Row="2" Style="{StaticResource btnStyle}" Content="＞" 
+                                    Command="{Binding Path=FilterFieldsSelector.AddFilterFieldsCmd,Source={StaticResource model}}" 
+                                    CommandParameter="{Binding ElementName=lstFrom_Filter,Path=SelectedItems}"/>
+                            <Button Grid.Row="3" Style="{StaticResource btnStyle}" Content="＜" 
+                                    Command="{Binding Path=FilterFieldsSelector.DelFilterFieldsCmd,Source={StaticResource model}}"
+                                    CommandParameter="{Binding ElementName=dgTo_Filter,Path=SelectedItems}"/>
+                        </Grid>
+                        <GroupBox Header="过滤条件" Grid.Column="2">
+                            <DataGrid x:Name="dgTo_Filter" 
+                                      Style="{StaticResource gridBaseStyle}"
+                                      ItemsSource="{Binding Source={StaticResource model},Path=SelectedConditions,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      CanUserSortColumns="False" IsReadOnly="False" SelectionMode="Extended">
+                                <DataGrid.Resources>
 
+                                </DataGrid.Resources>
+                                <DataGrid.Columns>
+                                    <DataGridComboBoxColumn Header="组合类型" EditingElementStyle="{StaticResource gridCbStyle}"
+                                                            SelectedValueBinding="{Binding Path=CmpType}"
+                                                            ItemsSource="{Binding Path=FilterFieldsSelector.CmpTypes,Source={StaticResource model},Mode=OneWay}"
+                                                            SelectedValuePath="Id" DisplayMemberPath="Text"/>
+                                    <DataGridTextColumn Binding="{Binding FieldFullName}" Header="字段" IsReadOnly="True"/>
+                                    <DataGridComboBoxColumn x:Name="dgColFieldType" Header="字段类型" EditingElementStyle="{StaticResource gridCbStyle}" IsReadOnly="True"
+                                                            SelectedValueBinding="{Binding Path=FieldType}"
+                                                            ItemsSource="{Binding Path=FilterFieldsSelector.FieldTypes,Mode=OneWay,Source={StaticResource model}}"
+                                                            SelectedValuePath="Id" DisplayMemberPath="Text"/>
+                                    <DataGridComboBoxColumn x:Name="dgColConditionType" Header="条件类型" EditingElementStyle="{StaticResource gridCbStyle}"
+                                                            SelectedValueBinding="{Binding Path=ConditionType}"
+                                                            ItemsSource="{Binding Path=FilterFieldsSelector.ConditionTypes,Source={StaticResource model},Mode=OneWay}"
+                                                            SelectedValuePath="Id" DisplayMemberPath="Text"/>
+                                    <!--<DataGridTextColumn Binding="{Binding Value}" Header="值"/>-->
+                                    <DataGridTemplateColumn Header="值" x:Name="dgColValue"/>
+                                    <DataGridTemplateColumn CellStyle="{StaticResource ckCellStyle}" Header="取反"
+                                                CanUserResize="False"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </GroupBox>
+                    </Grid>
                 </TabItem>
                 <TabItem Header="排序" x:Name="tabSort">
                     <Grid>
@@ -228,6 +301,7 @@
                             <ColumnDefinition/>
                             <ColumnDefinition Width="74"/>
                             <ColumnDefinition/>
+                            <ColumnDefinition Width="74"/>
                         </Grid.ColumnDefinitions>
                         <GroupBox Grid.Column="0" Header="源字段">
                             <ListBox x:Name="lstFrom_Sort" 
@@ -244,21 +318,18 @@
                                 <RowDefinition Height="2.5*"/>
                             </Grid.RowDefinitions>
                             <Button Grid.Row="2" Style="{StaticResource btnStyle}" Content="＞" 
-                                    Command="{Binding Path=AddSortFieldsCmd,Source={StaticResource model}}" 
+                                    Command="{Binding Path=SortFieldsSelector.AddSortFieldsCmd,Source={StaticResource model}}" 
                                     CommandParameter="{Binding ElementName=lstFrom_Sort,Path=SelectedItems}"/>
                             <Button Grid.Row="3" Style="{StaticResource btnStyle}" Content="＜" 
-                                    Command="{Binding Path=DelSortFieldsCmd,Source={StaticResource model}}"
+                                    Command="{Binding Path=SortFieldsSelector.DelSortFieldsCmd,Source={StaticResource model}}"
                                     CommandParameter="{Binding ElementName=dgTo_Sort,Path=SelectedItems}"/>
                         </Grid>
                         <GroupBox Grid.Column="2" Header="排序字段">
-                            <!--<ListBox x:Name="lstTo_Sort" 
-                                     ItemsSource="{Binding Source={StaticResource model},Path=SelectedSorts}"
-                                     SelectionMode="Extended"/>-->
                             <DataGrid x:Name="dgTo_Sort" 
                                       Style="{StaticResource gridBaseStyle}"
                                       DataContext="{StaticResource model}"
-                                      ItemsSource="{Binding Path=SelectedSorts,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      SelectionMode="Extended"
+                                      ItemsSource="{Binding Source={StaticResource viewSortFields},UpdateSourceTrigger=PropertyChanged}"
+                                      SelectionMode="Extended" CanUserSortColumns="False"
                                       >
                                 <DataGrid.Resources>
                                     <localcvt:SortTypeConverter x:Key="cvtSortType"/>
@@ -270,22 +341,36 @@
                                 <DataGrid.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="升序" 
-                                                  Command="{Binding Path=AscSortCmd,Source={StaticResource model}}"
+                                                  Command="{Binding Path=SortFieldsSelector.AscSortCmd,Source={StaticResource model}}"
                                                   CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu},Path=PlacementTarget.SelectedItems}"/>
                                         <MenuItem Header="降序" 
-                                                  Command="{Binding Path=DescSortCmd,Source={StaticResource model}}"
+                                                  Command="{Binding Path=SortFieldsSelector.DescSortCmd,Source={StaticResource model}}"
                                                   CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu},Path=PlacementTarget.SelectedItems}"/>
                                     </ContextMenu>
                                 </DataGrid.ContextMenu>
                             </DataGrid>
                         </GroupBox>
+                        <Grid Grid.Column="3">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="7*"/>
+                            </Grid.RowDefinitions>
+                            <Button Grid.Row="1" Style="{StaticResource btnStyle}" Content="上移" 
+                                    Command="{Binding Path=SortFieldsSelector.MoveUpSortFieldCmd,Source={StaticResource model}}" 
+                                    CommandParameter="{Binding ElementName=dgTo_Sort,Path=SelectedItem}"/>
+                            <Button Grid.Row="2" Style="{StaticResource btnStyle}" Content="下移" 
+                                    Command="{Binding Path=SortFieldsSelector.MoveDownSortFieldCmd,Source={StaticResource model}}"
+                                    CommandParameter="{Binding ElementName=dgTo_Sort,Path=SelectedItem}"/>
+                        </Grid>
                     </Grid>
 
                 </TabItem>
                 <TabItem Header="查询结果">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="130"/>
+                            <RowDefinition Height="100"/>
                             <RowDefinition Height="4"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
@@ -296,7 +381,11 @@
                         <GroupBox Header="查询结果" Grid.Row="2">
                             <DockPanel LastChildFill="True">
                                 <usrCtl:ControlPagination x:Name="ctlPagination" DockPanel.Dock="Bottom" HorizontalAlignment="Center"/>
-                                <DataGrid x:Name="dgResults" Style="{StaticResource gridBaseStyle}" ItemsSource="{Binding Source={StaticResource model},Path=QueryExecutor.Results,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                <DataGrid x:Name="dgResults" Style="{StaticResource gridBaseStyle}" ItemsSource="{Binding Source={StaticResource model},Path=QueryExecutor.Results,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu/>
+                                    </DataGrid.ContextMenu>
+                                </DataGrid>
                             </DockPanel>
                         </GroupBox>
                     </Grid>

@@ -241,7 +241,7 @@ namespace MyNet.CustomQuery.Client.Models.ExecQuery
             DgResults.AddColumns(ExecQModel.SelectedFields
                 .Where(f => Convert.ToBoolean(f.visible) == true)
                 .OrderBy(f => f.order)
-                .Select(f => new DataGridColModel(field: f.fieldname.Replace('.', '_'), header: f.displayname)));
+                .Select(f => new DataGridColModel(field: f.fieldname.Replace('.', '_'), header: f.mydisplayname)));
         }
     }
 }

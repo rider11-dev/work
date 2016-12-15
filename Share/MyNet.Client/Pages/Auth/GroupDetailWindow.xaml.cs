@@ -49,7 +49,7 @@ namespace MyNet.Client.Pages.Auth
             model.CanValidate = true;
 
             //是否系统下拉框
-            DataCacheHelper.SetCmbSource(cbIsSystem, DictType.Bool, model.gp_system);
+            DataCacheHelper.SetEnumCmbSource<BoolType>(cbIsSystem, model.gp_system);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyNet.Components.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -46,7 +47,7 @@ namespace MyNet.Components.WPF.Models
 
         public void Bind(IList<CmbItem> dataSrc, string selectedId = "", bool setSelect = true, bool needBlankItem = false)
         {
-            if (dataSrc == null || dataSrc.Count < 1)
+            if (dataSrc.IsEmpty())
             {
                 return;
             }

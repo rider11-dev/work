@@ -18,7 +18,10 @@ namespace MyNet.CustomQuery.Model
         /// 如,ag.gp_id
         /// </summary>
         public string Field { get; set; }
-        public CompositeType CompositeType { get; set; }
+        /// <summary>
+        /// 组合类型
+        /// </summary>
+        public CompositeType CmpType { get; set; }
         public ConditionType ConditionType { get; set; }
         public FieldType FieldType { get; set; }
         public bool Not { get; set; }
@@ -34,7 +37,7 @@ namespace MyNet.CustomQuery.Model
         public string Parse(bool isFirst = false)
         {
             //条件模板：and/or ag.gp_name like '%asdfasd%'
-            string sql = string.Format(" {0} {1} ", (isFirst || CompositeType == CompositeType.None) ? "" : CompositeType.ToString(), Field);
+            string sql = string.Format(" {0} {1} ", (isFirst || CmpType == CompositeType.None) ? "" : CmpType.ToString(), Field);
             switch (ConditionType)
             {
                 //字符串
@@ -175,8 +178,11 @@ namespace MyNet.CustomQuery.Model
     /// </summary>
     public enum CompositeType
     {
+        [Description("并且")]
         And,
+        [Description("或者")]
         Or,
+        [Description("无")]
         None
     }
 }

@@ -35,9 +35,9 @@ namespace MyNet.CustomQuery.Client.Pages.Base
         {
             _vmField.CanValidate = true;
             //设置字段类型
-            DataCacheHelper.SetCmbSource(cbFieldType, CqDictType.FieldType, _vmField.fieldtype);
+            DataCacheHelper.SetEnumCmbSource<FieldType>(cbFieldType, _vmField.fieldtype);
             //设置可见性
-            DataCacheHelper.SetCmbSource(cbVisible, DictType.Bool, _vmField.visible);
+            DataCacheHelper.SetEnumCmbSource<BoolType>(cbVisible, _vmField.visible);
         }
     }
 }
