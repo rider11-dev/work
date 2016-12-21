@@ -84,6 +84,7 @@
     <Compile Include="Controllers\Card\CardBillController.cs" />
     <Compile Include="Controllers\Card\CardRecordController.cs" />
     <Compile Include="Controllers\Card\MallAccountController.cs" />
+    <Compile Include="Controllers\Client\ClientApiController.cs" />
     <Compile Include="Controllers\Common\MiscController.cs" />
     <Compile Include="Controllers\Auth\UserController.cs" />
     <Compile Include="Extensions\ModelStateExtension.cs" />
@@ -155,6 +156,7 @@
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

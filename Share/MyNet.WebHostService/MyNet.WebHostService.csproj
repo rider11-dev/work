@@ -133,6 +133,10 @@
       <Project>{0c81a4e4-bd67-4f8d-a602-ec4062a0d0c2}</Project>
       <Name>MyNet.Repository</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MyNet.WindowsService\MyNet.WindowsService.csproj">
+      <Project>{56d06311-5d98-410f-a137-4b8fc81ea691}</Project>
+      <Name>MyNet.WindowsService</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
