@@ -1,6 +1,8 @@
-﻿using MyNet.Components.Extensions;
+﻿using MyNet.Components;
+using MyNet.Components.Extensions;
 using MyNet.Components.Logger;
 using System;
+using System.Diagnostics;
 using System.Windows;
 
 namespace ClientFrame
@@ -13,6 +15,11 @@ namespace ClientFrame
         static ILogHelper<App> _logHelper = LogHelperFactory.GetLogHelper<App>();
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            //先检查更新
+            var app = AppDomain.CurrentDomain.BaseDirectory.TrimEnd('/', '\\') + "/" + AppSettingHelper.Get("upgradeapp");
+            var process = Process.Start(app);
+            process.WaitForExit();
+
             //加载插件目录程序集
             AssemblyExtention.LoadAssemblies(AppDomain.CurrentDomain.BaseDirectory + "plugin", "^*.dll$");
         }

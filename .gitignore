@@ -89,3 +89,5 @@
 /Share/build.log
 /CustomQuery/MyNet.CustomQuery.Client/obj
 /CustomQuery/MyNet.CustomQuery.Client/bin
+/Share/MyNet.WindowsService/obj
+/Share/MyNet.WindowsService/bin
