@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BootstrapWpfStyle", "BootstrapWpfStyle\BootstrapWpfStyle.csproj", "{1C0F2E8B-E47B-4581-9D0A-A90BD88D204E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{043FE702-DF25-4F3C-9002-A38C5AA2FDFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{1C0F2E8B-E47B-4581-9D0A-A90BD88D204E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C0F2E8B-E47B-4581-9D0A-A90BD88D204E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C0F2E8B-E47B-4581-9D0A-A90BD88D204E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{043FE702-DF25-4F3C-9002-A38C5AA2FDFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{043FE702-DF25-4F3C-9002-A38C5AA2FDFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{043FE702-DF25-4F3C-9002-A38C5AA2FDFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{043FE702-DF25-4F3C-9002-A38C5AA2FDFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
