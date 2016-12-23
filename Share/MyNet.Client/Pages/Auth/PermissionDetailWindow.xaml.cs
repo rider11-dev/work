@@ -50,9 +50,9 @@ namespace MyNet.Client.Pages.Auth
             _vmPermDetail.CanValidate = true;
 
             //设置权限类型
-            DataCacheHelper.SetCmbSource(cbPermType, DictType.Perm, _vmPermDetail.per_type);
+            DataCacheUtils.SetCmbSource(cbPermType, DictType.Perm, _vmPermDetail.per_type);
             //是否系统下拉框
-            DataCacheHelper.SetEnumCmbSource<BoolType>(cbIsSystem, _vmPermDetail.per_system);
+            DataCacheUtils.SetEnumCmbSource<BoolType>(cbIsSystem, _vmPermDetail.per_system);
         }
     }
 }

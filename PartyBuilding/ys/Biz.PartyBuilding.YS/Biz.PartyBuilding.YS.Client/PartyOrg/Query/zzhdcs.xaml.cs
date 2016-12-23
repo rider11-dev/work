@@ -3,6 +3,7 @@ using LiveCharts;
 using LiveCharts.Wpf;
 using MyNet.Client.Public;
 using MyNet.Components;
+using MyNet.Components.Http;
 using MyNet.Components.Misc;
 using MyNet.Components.Result;
 using MyNet.Components.WPF.Command;
@@ -74,7 +75,7 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg.Query
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            var rst = HttpHelper.GetResultByGet(ApiHelper.GetApiUrl(PartyBuildingApiKeys.AreaGet, PartyBuildingApiKeys.Key_ApiProvider_Party));
+            var rst = HttpUtils.GetResult(ApiUtils.GetApiUrl(PartyBuildingApiKeys.AreaGet, PartyBuildingApiKeys.Key_ApiProvider_Party));
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);

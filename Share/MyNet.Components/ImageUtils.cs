@@ -10,7 +10,7 @@ using System.Drawing.Drawing2D;
 
 namespace MyNet.Components
 {
-    public class ImageHelper
+    public class ImageUtils
     {
         /// <summary>
         /// 将图片转换成字节
@@ -60,7 +60,7 @@ namespace MyNet.Components
                 {
                     return null;
                 }
-                img = ImageHelper.CopyImage(img, img.Width, img.Height);
+                img = ImageUtils.CopyImage(img, img.Width, img.Height);
                 return img;
             }
         }
@@ -111,7 +111,7 @@ namespace MyNet.Components
             {
                 return "";
             }
-            byte[] bytes = ImageHelper.ImageToByteArray(img);
+            byte[] bytes = ImageUtils.ImageToByteArray(img);
 
             return Convert.ToBase64String(bytes);
         }
@@ -130,7 +130,7 @@ namespace MyNet.Components
 
             using (Image img = Image.FromFile(filePath))
             {
-                byte[] bytes = ImageHelper.ImageToByteArray(img);
+                byte[] bytes = ImageUtils.ImageToByteArray(img);
 
                 return Convert.ToBase64String(bytes);
             }
@@ -146,7 +146,7 @@ namespace MyNet.Components
             try
             {
                 var bytes = Convert.FromBase64String(strBase64);
-                return ImageHelper.ByteArrayToImage(bytes);
+                return ImageUtils.ByteArrayToImage(bytes);
             }
             catch (Exception ex)
             {

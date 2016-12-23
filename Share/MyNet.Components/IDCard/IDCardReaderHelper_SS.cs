@@ -188,7 +188,7 @@ namespace MyNet.Components.IDCard
                 objIDCardData_SS.EndDate = objStreamReader.ReadLine();
                 objIDCardData_SS.AddressEx = objStreamReader.ReadLine();
                 objIDCardData_SS.PhotoPath = _saveFilePath + @"zp.bmp";
-                objIDCardData_SS.ArrPhotoByte = ImageHelper.ImageToByteArray(objIDCardData_SS.PhotoPath);
+                objIDCardData_SS.ArrPhotoByte = ImageUtils.ImageToByteArray(objIDCardData_SS.PhotoPath);
 
                 return objIDCardData_SS;
             }

@@ -39,7 +39,7 @@ namespace ClientFrame
         private void Upgrade()
         {
             //先检查更新
-            var app = AppDomain.CurrentDomain.BaseDirectory.TrimEnd('/', '\\') + "/" + AppSettingHelper.Get("upgradeapp");
+            var app = AppDomain.CurrentDomain.BaseDirectory.TrimEnd('/', '\\') + "/" + AppSettingUtils.Get("upgradeapp");
             var process = Process.Start(app);
             process.WaitForExit();
         }

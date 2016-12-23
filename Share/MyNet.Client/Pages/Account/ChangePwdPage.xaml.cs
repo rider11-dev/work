@@ -18,6 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MyNet.Components.Http;
 
 namespace MyNet.Client.Pages.Account
 {
@@ -49,7 +50,7 @@ namespace MyNet.Client.Pages.Account
                 MessageWindow.ShowMsg(MessageType.Warning, OperationDesc.Validate, msg);
                 return;
             }
-            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.ChangePwd),
+            var rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(ApiKeys.ChangePwd),
                 new
                 {
                     userid = ClientContext.CurrentUser.user_id,

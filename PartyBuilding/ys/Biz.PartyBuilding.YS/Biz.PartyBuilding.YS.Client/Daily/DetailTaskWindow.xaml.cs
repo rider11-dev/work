@@ -6,6 +6,7 @@ using MyNet.Client.Models;
 using MyNet.Client.Public;
 using MyNet.Components;
 using MyNet.Components.Extensions;
+using MyNet.Components.Http;
 using MyNet.Components.Result;
 using MyNet.Components.WPF.Command;
 using MyNet.Components.WPF.Controls;
@@ -74,8 +75,8 @@ namespace Biz.PartyBuilding.YS.Client.Daily
         void SaveAction(object parameter)
         {
             _model.priority = cmbPriority.Text;
-            var url = ApiHelper.GetApiUrl(PartyBuildingApiKeys.TaskSave, PartyBuildingApiKeys.Key_ApiProvider_Party);
-            var rst = HttpHelper.GetResultByPost(url, _model);
+            var url = ApiUtils.GetApiUrl(PartyBuildingApiKeys.TaskSave, PartyBuildingApiKeys.Key_ApiProvider_Party);
+            var rst = HttpUtils.PostResult(url, _model);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, this.IsNew ? OperationDesc.Add : OperationDesc.Edit, rst.msg);

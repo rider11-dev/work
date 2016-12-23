@@ -5,6 +5,7 @@ using MyNet.Client.Pages;
 using MyNet.Client.Public;
 using MyNet.Components;
 using MyNet.Components.Extensions;
+using MyNet.Components.Http;
 using MyNet.Components.Result;
 using MyNet.Components.WPF.Command;
 using MyNet.Components.WPF.Models;
@@ -57,7 +58,7 @@ namespace Biz.PartyBuilding.YS.Client.Daily
 
         private void Search(bool all = true)
         {
-            var rst = HttpHelper.GetResultByGet(ApiHelper.GetApiUrl(PartyBuildingApiKeys.TaskGet, PartyBuildingApiKeys.Key_ApiProvider_Party));
+            var rst = HttpUtils.GetResult(ApiUtils.GetApiUrl(PartyBuildingApiKeys.TaskGet, PartyBuildingApiKeys.Key_ApiProvider_Party));
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);
@@ -125,8 +126,8 @@ namespace Biz.PartyBuilding.YS.Client.Daily
             {
                 return;
             }
-            string url = ApiHelper.GetApiUrl(PartyBuildingApiKeys.TaskTake, PartyBuildingApiKeys.Key_ApiProvider_Party);
-            var rst = HttpHelper.GetResultByPost(url, new { id = task.id });
+            string url = ApiUtils.GetApiUrl(PartyBuildingApiKeys.TaskTake, PartyBuildingApiKeys.Key_ApiProvider_Party);
+            var rst = HttpUtils.PostResult(url, new { id = task.id });
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);

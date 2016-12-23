@@ -4,6 +4,7 @@ using Biz.PartyBuilding.YS.Client.PartyOrg.Models;
 using Microsoft.Win32;
 using MyNet.Client.Public;
 using MyNet.Components;
+using MyNet.Components.Http;
 using MyNet.Components.Result;
 using MyNet.Components.WPF.Command;
 using MyNet.Components.WPF.Extension;
@@ -52,7 +53,7 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg
                 //设置图片
                 if (area.pic != null && area.pic.Count > 0)
                 {
-                    System.Drawing.Image img = ImageHelper.Base64Decode(area.pic[0]);
+                    System.Drawing.Image img = ImageUtils.Base64Decode(area.pic[0]);
                     string file = AppDomain.CurrentDomain.BaseDirectory + "temp.jpg";
                     img.Save(file, ImageFormat.Jpeg);
                     img.Dispose();
@@ -94,8 +95,8 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg
                 }
             }
             //保存
-            var url = ApiHelper.GetApiUrl(PartyBuildingApiKeys.AreaSave, PartyBuildingApiKeys.Key_ApiProvider_Party);
-            var rst = HttpHelper.GetResultByPost(url, _model);
+            var url = ApiUtils.GetApiUrl(PartyBuildingApiKeys.AreaSave, PartyBuildingApiKeys.Key_ApiProvider_Party);
+            var rst = HttpUtils.PostResult(url, _model);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Save, rst.msg);

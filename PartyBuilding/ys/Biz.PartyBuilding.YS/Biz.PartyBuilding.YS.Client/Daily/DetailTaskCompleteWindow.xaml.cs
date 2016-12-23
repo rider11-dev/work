@@ -5,6 +5,7 @@ using Microsoft.Win32;
 using MyNet.Client.Public;
 using MyNet.Components;
 using MyNet.Components.Extensions;
+using MyNet.Components.Http;
 using MyNet.Components.Result;
 using MyNet.Components.WPF.Command;
 using MyNet.Components.WPF.Models;
@@ -88,8 +89,8 @@ namespace Biz.PartyBuilding.YS.Client.Daily
 
         void CompleteAction(object parameter)
         {
-            string url = ApiHelper.GetApiUrl(PartyBuildingApiKeys.TaskComplete, PartyBuildingApiKeys.Key_ApiProvider_Party);
-            var rst = HttpHelper.GetResultByPost(url, new { id = _model.id, progress = _model.progress });
+            string url = ApiUtils.GetApiUrl(PartyBuildingApiKeys.TaskComplete, PartyBuildingApiKeys.Key_ApiProvider_Party);
+            var rst = HttpUtils.PostResult(url, new { id = _model.id, progress = _model.progress });
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, "任务完成", rst.msg);

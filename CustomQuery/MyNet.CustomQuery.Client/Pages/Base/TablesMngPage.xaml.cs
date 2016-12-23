@@ -36,7 +36,7 @@ namespace MyNet.CustomQuery.Client.Pages.Base
         {
             InitDataGrid();
 
-            base.LoadButtons(panelBtns, StyleCacheHelper.MngBtnStyle);
+            base.LoadButtons(panelBtns, StyleCacheUtils.MngBtnStyle);
 
             if (panelBtns.Children == null || panelBtns.Children.Count < 1)
             {

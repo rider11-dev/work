@@ -38,5 +38,9 @@ namespace MyNet.Components.Result
         IllegalOpt = 12,
         [Description("管理员数据")]
         DataAddmin = 13,
+        [Description("已是最新版本")]
+        NewestVersion = 14,
+        [Description("有新版本")]
+        NewVersion = 15,
     }
 }

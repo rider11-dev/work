@@ -65,7 +65,7 @@ namespace MyNet.Components.WPF.Controls
                     var file = dd.UriSource.LocalPath;
                     if (File.Exists(file))
                     {
-                        data = ImageHelper.Base64Encode(file);
+                        data = ImageUtils.Base64Encode(file);
                     }
                 }
                 catch { }

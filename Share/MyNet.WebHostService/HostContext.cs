@@ -11,7 +11,7 @@ namespace MyNet.WebHostService
         {
             get
             {
-                var url = AppSettingHelper.Get("host");
+                var url = AppSettingUtils.Get("host");
                 return url;
             }
         }
@@ -21,7 +21,7 @@ namespace MyNet.WebHostService
             get
             {
                 bool debug = false;
-                bool.TryParse(AppSettingHelper.Get("debug"), out debug);
+                bool.TryParse(AppSettingUtils.Get("debug"), out debug);
                 return debug;
             }
         }
@@ -39,7 +39,7 @@ namespace MyNet.WebHostService
             {
                 if (_svrName.IsEmpty())
                 {
-                    var val = AppSettingHelper.Get("svrname");
+                    var val = AppSettingUtils.Get("svrname");
                     _svrName = val.IsEmpty() ? _defaultSvrName : val;
                 }
 

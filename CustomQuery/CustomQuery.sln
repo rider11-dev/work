@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNet.Client", "..\Share\My
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNet.Components.Mapper", "..\Share\MyNet.Components.Mapper\MyNet.Components.Mapper.csproj", "{A657507D-0F59-49C5-A6DC-0C788E0C63B1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNet.Components.Office", "..\Share\MyNet.Components.Office\MyNet.Components.Office.csproj", "{AB21ABF0-D796-4E4C-8D3F-F9035D4965A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -173,6 +175,14 @@ Global
 		{A657507D-0F59-49C5-A6DC-0C788E0C63B1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A657507D-0F59-49C5-A6DC-0C788E0C63B1}.Release|x86.ActiveCfg = Release|Any CPU
 		{A657507D-0F59-49C5-A6DC-0C788E0C63B1}.Release|x86.Build.0 = Release|Any CPU
+		{AB21ABF0-D796-4E4C-8D3F-F9035D4965A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB21ABF0-D796-4E4C-8D3F-F9035D4965A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB21ABF0-D796-4E4C-8D3F-F9035D4965A4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AB21ABF0-D796-4E4C-8D3F-F9035D4965A4}.Debug|x86.Build.0 = Debug|Any CPU
+		{AB21ABF0-D796-4E4C-8D3F-F9035D4965A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB21ABF0-D796-4E4C-8D3F-F9035D4965A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB21ABF0-D796-4E4C-8D3F-F9035D4965A4}.Release|x86.ActiveCfg = Release|Any CPU
+		{AB21ABF0-D796-4E4C-8D3F-F9035D4965A4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -189,5 +199,6 @@ Global
 		{A7BB4884-C2A9-474C-A7F4-F7A4EF4BE87D} = {97DACD15-9461-4A0F-9BDB-369B9FA3A574}
 		{6AABD137-BB47-4636-8635-DE0F6DC9AEA1} = {97DACD15-9461-4A0F-9BDB-369B9FA3A574}
 		{A657507D-0F59-49C5-A6DC-0C788E0C63B1} = {97DACD15-9461-4A0F-9BDB-369B9FA3A574}
+		{AB21ABF0-D796-4E4C-8D3F-F9035D4965A4} = {97DACD15-9461-4A0F-9BDB-369B9FA3A574}
 	EndGlobalSection
 EndGlobal

@@ -17,13 +17,14 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using MyNet.Components.Extensions;
 using MyNet.Model.Dto.Auth;
+using MyNet.Components.Http;
 
 namespace MyNet.Client.Public
 {
     /// <summary>
     /// 缓存辅助类
     /// </summary>
-    public class DataCacheHelper
+    public class DataCacheUtils
     {
         /// <summary>
         /// 字典缓存
@@ -82,7 +83,7 @@ namespace MyNet.Client.Public
             }
         }
 
-        static DataCacheHelper()
+        static DataCacheUtils()
         {
             PreLoadSomeDicts();
         }
@@ -140,7 +141,7 @@ namespace MyNet.Client.Public
         /// <returns></returns>
         public static IList<CmbItem> GetCmbSource(DictType dictType)
         {
-            if (DataCacheHelper.DictSource.ContainsKey(dictType))
+            if (DataCacheUtils.DictSource.ContainsKey(dictType))
             {
                 //取缓存数据
                 return DictSource[dictType];
@@ -148,7 +149,7 @@ namespace MyNet.Client.Public
             else
             {
                 //从服务器获取
-                var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.GetDict), new
+                var rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(ApiKeys.GetDict), new
                 {
                     dict_type = dictType.type_code
                 }, ClientContext.Token);
@@ -160,7 +161,7 @@ namespace MyNet.Client.Public
                 if (rst.data != null && rst.data.rows != null)
                 {
                     var dicts = JsonConvert.DeserializeObject<IList<CmbItem>>(((JArray)rst.data.rows).ToString());
-                    DataCacheHelper.DictSource.Add(dictType, dicts);
+                    DataCacheUtils.DictSource.Add(dictType, dicts);
                     return dicts;
                 }
             }
@@ -189,7 +190,7 @@ namespace MyNet.Client.Public
         private static void LoadPerms(string apiKey, Dictionary<string, PermissionCacheDto> target)
         {
             //从服务器获取
-            var rst = HttpHelper.GetResultByPost(url: ApiHelper.GetApiUrl(apiKey), token: ClientContext.Token);
+            var rst = HttpUtils.GetResult(url: ApiUtils.GetApiUrl(apiKey), token: ClientContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);
@@ -210,7 +211,7 @@ namespace MyNet.Client.Public
         private static void LoadGroups(string apiKey, Dictionary<string, Group> target)
         {
             //从服务器获取
-            var rst = HttpHelper.GetResultByPost(url: ApiHelper.GetApiUrl(apiKey), token: ClientContext.Token);
+            var rst = HttpUtils.GetResult(url: ApiUtils.GetApiUrl(apiKey), token: ClientContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);

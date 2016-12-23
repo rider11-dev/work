@@ -1,6 +1,7 @@
 ﻿using MyNet.Client.Public;
 using MyNet.Components;
 using MyNet.Components.Extensions;
+using MyNet.Components.Http;
 using MyNet.Components.Result;
 using MyNet.Components.WPF.Command;
 using MyNet.Components.WPF.Windows;
@@ -46,8 +47,8 @@ namespace MyNet.CustomQuery.Client.Models
                 MessageWindow.ShowMsg(MessageType.Warning, OperationDesc.Validate, this.Error);
                 return;
             }
-            var url = ApiHelper.GetApiUrl(this.IsNew ? CustomQueryApiKeys.TableAdd : CustomQueryApiKeys.TableUpdate, CustomQueryApiKeys.Key_ApiProvider_CustomQuery);
-            var rst = HttpHelper.GetResultByPost(url, (TableViewModel)this, ClientContext.Token);
+            var url = ApiUtils.GetApiUrl(this.IsNew ? CustomQueryApiKeys.TableAdd : CustomQueryApiKeys.TableUpdate, CustomQueryApiKeys.Key_ApiProvider_CustomQuery);
+            var rst = HttpUtils.PostResult(url, (TableViewModel)this, ClientContext.Token);
             string opt = this.IsNew ? OperationDesc.Add : OperationDesc.Edit;
             if (rst.code != ResultCode.Success)
             {

@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using MyNet.Components.WPF.Windows;
 using MyNet.Client.Help;
+using MyNet.Components.Http;
 
 namespace MyNet.Client.Models.Auth
 {
@@ -60,7 +61,7 @@ namespace MyNet.Client.Models.Auth
                     {
                         return;
                     }
-                    var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.Assign),
+                    var rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(ApiKeys.Assign),
                         new
                         {
                             userId = usr.user_id,
@@ -133,7 +134,7 @@ namespace MyNet.Client.Models.Auth
                 return;
             }
             var ids = items.Select(m => ((UserViewModel)m).user_id);
-            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.MultiDeleteUsr),
+            var rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(ApiKeys.MultiDeleteUsr),
                 new
                 {
                     pks = ids.ToArray()
@@ -156,7 +157,7 @@ namespace MyNet.Client.Models.Auth
         }
         private void Search(PagingArgs page)
         {
-            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.GetUsrByPage),
+            var rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(ApiKeys.GetUsrByPage),
                new
                {
                    pageIndex = page.PageIndex,

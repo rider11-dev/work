@@ -4,6 +4,7 @@ using MyNet.Client.Pages;
 using MyNet.Client.Public;
 using MyNet.Components;
 using MyNet.Components.Extensions;
+using MyNet.Components.Http;
 using MyNet.Components.Result;
 using MyNet.Components.WPF.Command;
 using MyNet.Components.WPF.Models;
@@ -162,8 +163,8 @@ namespace Biz.PartyBuilding.YS.Client.Daily
             {
                 return;
             }
-            var url = ApiHelper.GetApiUrl(PartyBuildingApiKeys.InfoRelease, PartyBuildingApiKeys.Key_ApiProvider_Party);
-            var rst = HttpHelper.GetResultByPost(url, new { id = info.id });
+            var url = ApiUtils.GetApiUrl(PartyBuildingApiKeys.InfoRelease, PartyBuildingApiKeys.Key_ApiProvider_Party);
+            var rst = HttpUtils.PostResult(url, new { id = info.id });
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Save, rst.msg);
@@ -199,8 +200,8 @@ namespace Biz.PartyBuilding.YS.Client.Daily
                 return;
             }
             ShowDetailWindow(InfoOptType.View, info);
-            var url = ApiHelper.GetApiUrl(PartyBuildingApiKeys.InfoRead, PartyBuildingApiKeys.Key_ApiProvider_Party);
-            var rst = HttpHelper.GetResultByPost(url, new { id = info.id });
+            var url = ApiUtils.GetApiUrl(PartyBuildingApiKeys.InfoRead, PartyBuildingApiKeys.Key_ApiProvider_Party);
+            var rst = HttpUtils.PostResult(url, new { id = info.id });
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Save, rst.msg);
@@ -226,7 +227,7 @@ namespace Biz.PartyBuilding.YS.Client.Daily
 
         void GetInfos()
         {
-            var rst = HttpHelper.GetResultByGet(ApiHelper.GetApiUrl(PartyBuildingApiKeys.InfoGet, PartyBuildingApiKeys.Key_ApiProvider_Party));
+            var rst = HttpUtils.GetResult(ApiUtils.GetApiUrl(PartyBuildingApiKeys.InfoGet, PartyBuildingApiKeys.Key_ApiProvider_Party));
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);

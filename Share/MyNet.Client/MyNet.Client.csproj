@@ -137,13 +137,12 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PageHelper.cs" />
-    <Compile Include="Public\ApiHelper.cs" />
+    <Compile Include="Public\ApiUtils.cs" />
     <Compile Include="Public\ClientContext.cs" />
-    <Compile Include="Public\DataCacheHelper.cs" />
+    <Compile Include="Public\DataCacheUtils.cs" />
     <Compile Include="Public\MsgConst.cs" />
-    <Compile Include="Public\NotifyHelper.cs" />
     <Compile Include="Public\OperationDesc.cs" />
-    <Compile Include="Public\StyleCacheHelper.cs" />
+    <Compile Include="Public\StyleCacheUtils.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="TaskbarNotifier.xaml.cs">
       <DependentUpon>TaskbarNotifier.xaml</DependentUpon>

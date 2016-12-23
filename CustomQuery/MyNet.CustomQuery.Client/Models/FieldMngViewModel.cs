@@ -1,6 +1,7 @@
 ﻿using MyNet.Client.Models;
 using MyNet.Client.Public;
 using MyNet.Components;
+using MyNet.Components.Http;
 using MyNet.Components.Misc;
 using MyNet.Components.Result;
 using MyNet.Components.WPF.Command;
@@ -87,7 +88,7 @@ namespace MyNet.CustomQuery.Client.Models
                 return;
             }
             var ids = items.Select(m => ((FieldViewModel)m).id);
-            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(CustomQueryApiKeys.FieldDel, CustomQueryApiKeys.Key_ApiProvider_CustomQuery),
+            var rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(CustomQueryApiKeys.FieldDel, CustomQueryApiKeys.Key_ApiProvider_CustomQuery),
                 new
                 {
                     pks = ids.ToArray()
@@ -134,7 +135,7 @@ namespace MyNet.CustomQuery.Client.Models
         public static IEnumerable<FieldViewModel> GetFields(PageQuery page)
         {
             IEnumerable<FieldViewModel> empty = new List<FieldViewModel>();
-            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(CustomQueryApiKeys.FieldPage, CustomQueryApiKeys.Key_ApiProvider_CustomQuery),
+            var rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(CustomQueryApiKeys.FieldPage, CustomQueryApiKeys.Key_ApiProvider_CustomQuery),
               new
               {
                   pageIndex = page.pageIndex,

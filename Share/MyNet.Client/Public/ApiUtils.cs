@@ -13,7 +13,7 @@ using MyNet.Components.WPF.Windows;
 
 namespace MyNet.Client.Public
 {
-    public class ApiHelper
+    public class ApiUtils
     {
         const string ApiFile = "api.config";
         const string Key_ApiProvider_Frame = "frame";
@@ -21,7 +21,7 @@ namespace MyNet.Client.Public
         public static List<Api> Apis { get; private set; }
         public static bool ApiEnabled { get; private set; }
 
-        static ApiHelper()
+        static ApiUtils()
         {
             LoadApis();
         }
@@ -70,7 +70,7 @@ namespace MyNet.Client.Public
         /// <returns></returns>
         public static string GetApiUrl(string apiName, string apiProvider = Key_ApiProvider_Frame)
         {
-            var api = ApiHelper.Apis.Find(a =>
+            var api = ApiUtils.Apis.Find(a =>
                 string.Equals(a.Name, apiName, StringComparison.CurrentCultureIgnoreCase) &&
                 string.Equals(a.Provider, apiProvider, StringComparison.CurrentCultureIgnoreCase));
             if (api == null || string.IsNullOrEmpty(api.RelativeUrl))

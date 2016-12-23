@@ -23,7 +23,7 @@ namespace MyNet.WebApi
             get
             {
                 int val = 0;
-                if (!int.TryParse(AppSettingHelper.Get("token_expire"), out val))
+                if (!int.TryParse(AppSettingUtils.Get("token_expire"), out val))
                 {
                     val = DefaultTokenExpire;
                 }
@@ -45,7 +45,7 @@ namespace MyNet.WebApi
             get
             {
                 bool debug = false;
-                bool.TryParse(AppSettingHelper.Get("debug"), out debug);
+                bool.TryParse(AppSettingUtils.Get("debug"), out debug);
                 return debug;
             }
         }

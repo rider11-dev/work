@@ -21,6 +21,7 @@ using MyNet.Components.Extensions;
 using System.ComponentModel;
 using System.Windows.Data;
 using System.Windows.Controls;
+using MyNet.Components.Http;
 
 namespace MyNet.CustomQuery.Client.Models
 {
@@ -65,8 +66,8 @@ namespace MyNet.CustomQuery.Client.Models
                 MessageWindow.ShowMsg(MessageType.Error, CustomQueryOptDesc.GetDbFields, "未定义查询表！");
                 return;
             }
-            var url = ApiHelper.GetApiUrl(CustomQueryApiKeys.FieldDbFields, CustomQueryApiKeys.Key_ApiProvider_CustomQuery);
-            var rst = HttpHelper.GetResultByPost(url, Tables.Select(t => t.id), ClientContext.Token);
+            var url = ApiUtils.GetApiUrl(CustomQueryApiKeys.FieldDbFields, CustomQueryApiKeys.Key_ApiProvider_CustomQuery);
+            var rst = HttpUtils.PostResult(url, Tables.Select(t => t.id), ClientContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, CustomQueryOptDesc.GetDbFields, rst.msg);
@@ -128,7 +129,7 @@ namespace MyNet.CustomQuery.Client.Models
             {
                 return;
             }
-            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(CustomQueryApiKeys.FieldInit, CustomQueryApiKeys.Key_ApiProvider_CustomQuery), sels, ClientContext.Token);
+            var rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(CustomQueryApiKeys.FieldInit, CustomQueryApiKeys.Key_ApiProvider_CustomQuery), sels, ClientContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, CustomQueryOptDesc.InitFields, rst.msg);

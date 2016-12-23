@@ -10,7 +10,7 @@ namespace MyNet.WebApi.Extensions
 {
     public class UploadHelper
     {
-        static string _uploadRootPath = ApiContext.RootDirectory + AppSettingHelper.Get("upload_path");
+        static string _uploadRootPath = ApiContext.RootDirectory + AppSettingUtils.Get("upload_path");
 
         public static void Upload(string subPath, string content)
         {

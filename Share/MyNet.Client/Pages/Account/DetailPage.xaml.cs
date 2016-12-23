@@ -20,6 +20,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MyNet.Components.Http;
 
 namespace MyNet.Client.Pages.Account
 {
@@ -48,7 +49,7 @@ namespace MyNet.Client.Pages.Account
                 MessageWindow.ShowMsg(MessageType.Warning, OperationDesc.Validate, vmUsr.Error);
                 return;
             }
-            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.EditUsr),
+            var rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(ApiKeys.EditUsr),
                 new
                 {
                     user_id = vmUsr.user_id,

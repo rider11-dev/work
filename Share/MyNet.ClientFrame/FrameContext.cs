@@ -15,7 +15,7 @@ namespace ClientFrame
         {
             get
             {
-                return AppSettingHelper.Get("startWindow");
+                return AppSettingUtils.Get("startWindow");
             }
         }
 

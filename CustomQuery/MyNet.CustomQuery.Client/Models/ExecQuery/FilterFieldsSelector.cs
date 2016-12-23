@@ -38,10 +38,10 @@ namespace MyNet.CustomQuery.Client.Models.ExecQuery
         {
             QModel = qModel;
 
-            CmpTypes = new ObservableCollection<CmbItem>(DataCacheHelper.GetEnumCmbSource<CompositeType>());
-            ConditionTypes = new ObservableCollection<CmbItem>(DataCacheHelper.GetEnumCmbSource<ConditionType>());
-            FieldTypes = new ObservableCollection<CmbItem>(DataCacheHelper.GetEnumCmbSource<FieldType>());
-            Booleans = new ObservableCollection<CmbItem>(DataCacheHelper.GetEnumCmbSource<BoolType>());
+            CmpTypes = new ObservableCollection<CmbItem>(DataCacheUtils.GetEnumCmbSource<CompositeType>());
+            ConditionTypes = new ObservableCollection<CmbItem>(DataCacheUtils.GetEnumCmbSource<ConditionType>());
+            FieldTypes = new ObservableCollection<CmbItem>(DataCacheUtils.GetEnumCmbSource<FieldType>());
+            Booleans = new ObservableCollection<CmbItem>(DataCacheUtils.GetEnumCmbSource<BoolType>());
         }
 
         public void FilterFilterFieldsSrc(IEnumerable<FieldViewModel> baseFields = null)

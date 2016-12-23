@@ -5,6 +5,7 @@ using MyNet.Client.Pages;
 using MyNet.Client.Public;
 using MyNet.Components;
 using MyNet.Components.Extensions;
+using MyNet.Components.Http;
 using MyNet.Components.Result;
 using MyNet.Components.WPF.Command;
 using MyNet.Components.WPF.Models;
@@ -80,7 +81,7 @@ namespace Biz.PartyBuilding.YS.Client.Daily
             {
                 return;
             }
-            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(PartyBuildingApiKeys.TaskRelease, PartyBuildingApiKeys.Key_ApiProvider_Party), new { id = task.id });
+            var rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(PartyBuildingApiKeys.TaskRelease, PartyBuildingApiKeys.Key_ApiProvider_Party), new { id = task.id });
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, "任务发布", rst.msg);
@@ -106,7 +107,7 @@ namespace Biz.PartyBuilding.YS.Client.Daily
 
         private void GetTasks(bool all = true)
         {
-            var rst = HttpHelper.GetResultByGet(ApiHelper.GetApiUrl(PartyBuildingApiKeys.TaskGet, PartyBuildingApiKeys.Key_ApiProvider_Party));
+            var rst = HttpUtils.GetResult(ApiUtils.GetApiUrl(PartyBuildingApiKeys.TaskGet, PartyBuildingApiKeys.Key_ApiProvider_Party));
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);

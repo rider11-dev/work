@@ -6,7 +6,7 @@ using MyNet.Client.Pages;
 using MyNet.Client.Public;
 using MyNet.Components;
 using MyNet.Components.Extensions;
-
+using MyNet.Components.Http;
 using MyNet.Components.Result;
 using MyNet.Components.WPF.Command;
 using MyNet.Components.WPF.Controls;
@@ -71,7 +71,7 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg
         private void BasePage_Loaded(object sender, RoutedEventArgs e)
         {
             //组织树
-            //var nodes = TreeHelper.ParseGroupsTreeData(DataCacheHelper.AllGroups.Where(kvp => kvp.Value.gp_system == false).Select(kvp => kvp.Value));
+            //var nodes = TreeHelper.ParseGroupsTreeData(DataCacheUtils.AllGroups.Where(kvp => kvp.Value.gp_system == false).Select(kvp => kvp.Value));
             List<TreeViewData.NodeViewModel> nodes = new List<TreeViewData.NodeViewModel>();
             DailyContext.town_villages.ForEach(v =>
             {
@@ -89,7 +89,7 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg
 
         void GetAreas(bool all = true)
         {
-            var rst = HttpHelper.GetResultByGet(ApiHelper.GetApiUrl(PartyBuildingApiKeys.AreaGet, PartyBuildingApiKeys.Key_ApiProvider_Party));
+            var rst = HttpUtils.GetResult(ApiUtils.GetApiUrl(PartyBuildingApiKeys.AreaGet, PartyBuildingApiKeys.Key_ApiProvider_Party));
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);
@@ -208,7 +208,7 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg
             var picContent = area.pic[0];
             if (!string.IsNullOrEmpty(picContent))
             {
-                System.Drawing.Image img = ImageHelper.Base64Decode(picContent);
+                System.Drawing.Image img = ImageUtils.Base64Decode(picContent);
                 string file = AppDomain.CurrentDomain.BaseDirectory + "temp.jpg";
                 img.Save(file, ImageFormat.Jpeg);
                 img.Dispose();

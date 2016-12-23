@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MyNet.Components.Http;
 
 namespace MyNet.Service.Card
 {
@@ -52,7 +53,7 @@ namespace MyNet.Service.Card
             //调用商城接口：查询账户信息
             try
             {
-                rst = HttpHelper.GetResultByPost(apiUrl, new { idcard = idcard });
+                rst = HttpUtils.PostResult(apiUrl, new { idcard = idcard });
             }
             catch (Exception ex)
             {
@@ -93,7 +94,7 @@ namespace MyNet.Service.Card
             }
             try
             {
-                rst = HttpHelper.GetResultByPost(apiUrl, entity);
+                rst = HttpUtils.PostResult(apiUrl, entity);
             }
             catch (Exception ex)
             {
@@ -122,7 +123,7 @@ namespace MyNet.Service.Card
             //调用商城接口：封停账户
             try
             {
-                rst = HttpHelper.GetResultByPost(apiUrl, new { idcard = idcard });
+                rst = HttpUtils.PostResult(apiUrl, new { idcard = idcard });
             }
             catch (Exception ex)
             {
@@ -153,7 +154,7 @@ namespace MyNet.Service.Card
             //调用商城接口：修改手机号
             try
             {
-                rst = HttpHelper.GetResultByPost(apiUrl, new { idcard = idcard, phone = phone });
+                rst = HttpUtils.PostResult(apiUrl, new { idcard = idcard, phone = phone });
             }
             catch (Exception ex)
             {

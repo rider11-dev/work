@@ -37,7 +37,7 @@ namespace MyNet.Components.Logger
 
         public void LogInfo(string msg, Exception ex = null)
         {
-            if (logger == null || !AppSettingHelper.Log)
+            if (logger == null || !AppSettingUtils.Log)
             {
                 return;
             }
@@ -46,7 +46,7 @@ namespace MyNet.Components.Logger
 
         public void LogInfo(Exception ex)
         {
-            if (logger == null || !AppSettingHelper.Log)
+            if (logger == null || !AppSettingUtils.Log)
             {
                 return;
             }
@@ -55,7 +55,7 @@ namespace MyNet.Components.Logger
 
         public void LogWarning(string msg, Exception ex = null)
         {
-            if (logger == null || !AppSettingHelper.Log)
+            if (logger == null || !AppSettingUtils.Log)
             {
                 return;
             }
@@ -65,7 +65,7 @@ namespace MyNet.Components.Logger
         public void LogWarning(Exception ex)
         {
 
-            if (logger == null || !AppSettingHelper.Log)
+            if (logger == null || !AppSettingUtils.Log)
             {
                 return;
             }

@@ -15,6 +15,7 @@ using MyNet.Client.Models.Auth;
 using MyNet.Components.Serialize;
 using MyNet.Components.WPF.Windows;
 using MyNet.Components.Logger;
+using MyNet.Components.Http;
 
 namespace MyNet.Client
 {
@@ -99,8 +100,8 @@ namespace MyNet.Client
                 return;
             }
             //登录
-            var url = ApiHelper.GetApiUrl(ApiKeys.Login);
-            var rst = HttpHelper.GetResultByPost(url, new { username = vmLogin.UserName, pwd = vmLogin.Pwd });
+            var url = ApiUtils.GetApiUrl(ApiKeys.Login);
+            var rst = HttpUtils.PostResult(url, new { username = vmLogin.UserName, pwd = vmLogin.Pwd });
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Warning, OperationDesc.Login, rst.msg);
@@ -109,7 +110,7 @@ namespace MyNet.Client
             //登录成功，记录token
             ClientContext.Token = rst.data.token;
             //获取用户信息
-            rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.GetUsr), new { pk = rst.data.usrid }, ClientContext.Token);
+            rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(ApiKeys.GetUsr), new { pk = rst.data.usrid }, ClientContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Warning, OperationDesc.GetUsr, rst.msg);

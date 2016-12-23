@@ -17,6 +17,7 @@ using System.Windows.Input;
 using MyNet.Components.WPF.Controls;
 using MyNet.Client.Help;
 using MyNet.Model.Dto.Auth;
+using MyNet.Components.Http;
 
 namespace MyNet.Client.Models.Auth
 {
@@ -53,8 +54,8 @@ namespace MyNet.Client.Models.Auth
                 MessageWindow.ShowMsg(MessageType.Warning, OperationDesc.Validate, this.Error);
                 return;
             }
-            var url = ApiHelper.GetApiUrl(this.IsNew ? ApiKeys.AddPer : ApiKeys.EditPer);
-            var rst = HttpHelper.GetResultByPost(url, (PermViewModel)this, ClientContext.Token);
+            var url = ApiUtils.GetApiUrl(this.IsNew ? ApiKeys.AddPer : ApiKeys.EditPer);
+            var rst = HttpUtils.PostResult(url, (PermViewModel)this, ClientContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, this.IsNew ? OperationDesc.Add : OperationDesc.Edit, rst.msg);
@@ -65,13 +66,13 @@ namespace MyNet.Client.Models.Auth
             if (base.per_type == PermType.Func.ToString())
             {
                 var funcPermDto = OOMapper.Map<PermViewModel, PermissionCacheDto>(this);
-                if (DataCacheHelper.AllFuncs.ContainsKey(base.per_code))
+                if (DataCacheUtils.AllFuncs.ContainsKey(base.per_code))
                 {
-                    DataCacheHelper.AllFuncs[base.per_code] = funcPermDto;
+                    DataCacheUtils.AllFuncs[base.per_code] = funcPermDto;
                 }
                 else
                 {
-                    DataCacheHelper.AllFuncs.Add(base.per_code, funcPermDto);
+                    DataCacheUtils.AllFuncs.Add(base.per_code, funcPermDto);
                 }
             }
             if (Window != null)

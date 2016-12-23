@@ -2,6 +2,7 @@
 using MyNet.Client.Pages.Auth;
 using MyNet.Client.Public;
 using MyNet.Components;
+using MyNet.Components.Http;
 using MyNet.Components.Result;
 using MyNet.Components.WPF.Command;
 using MyNet.Components.WPF.Controls;
@@ -77,7 +78,7 @@ namespace MyNet.Client.Models.Auth
                 return;
             }
             var ids = items.Select(m => ((GroupViewModel)m).gp_id);
-            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.MultiDeleteGroup),
+            var rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(ApiKeys.MultiDeleteGroup),
                 new
                 {
                     pks = ids.ToArray()
@@ -90,13 +91,13 @@ namespace MyNet.Client.Models.Auth
             MessageWindow.ShowMsg(MessageType.Info, OperationDesc.Delete, MsgConst.Msg_Succeed);
             //清除垃圾缓存
             var gpCodes = items.Select(m => ((GroupViewModel)m).gp_code);
-            if (gpCodes != null && gpCodes.Count() > 0 && DataCacheHelper.AllGroups.Count > 0)
+            if (gpCodes != null && gpCodes.Count() > 0 && DataCacheUtils.AllGroups.Count > 0)
             {
                 foreach (var code in gpCodes)
                 {
-                    if (DataCacheHelper.AllGroups.ContainsKey(code))
+                    if (DataCacheUtils.AllGroups.ContainsKey(code))
                     {
-                        DataCacheHelper.AllGroups.Remove(code);
+                        DataCacheUtils.AllGroups.Remove(code);
                     }
                 }
             }
@@ -117,7 +118,7 @@ namespace MyNet.Client.Models.Auth
         }
         private void Search(PagingArgs page)
         {
-            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.GetGroupByPage),
+            var rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(ApiKeys.GetGroupByPage),
                new
                {
                    pageIndex = page.PageIndex,

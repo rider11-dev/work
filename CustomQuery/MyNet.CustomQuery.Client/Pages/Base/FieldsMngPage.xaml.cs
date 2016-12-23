@@ -51,7 +51,7 @@ namespace MyNet.CustomQuery.Client.Pages.Base
 
         private void LoadToolBar()
         {
-            base.LoadButtons(panelBtns, StyleCacheHelper.MngBtnStyle);
+            base.LoadButtons(panelBtns, StyleCacheUtils.MngBtnStyle);
             if (panelBtns.Children == null || panelBtns.Children.Count < 1)
             {
                 //“隐藏”工具栏——列表布局第一行，高度设为0

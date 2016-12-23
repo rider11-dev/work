@@ -12,6 +12,7 @@ using MyNet.Components.WPF.Windows;
 using System.Windows.Input;
 using MyNet.Client.Help;
 using MyNet.Components.WPF.Controls;
+using MyNet.Components.Http;
 
 namespace MyNet.Client.Models.Auth
 {
@@ -72,8 +73,8 @@ namespace MyNet.Client.Models.Auth
                 MessageWindow.ShowMsg(MessageType.Warning, OperationDesc.Validate, this.Error);
                 return;
             }
-            var url = ApiHelper.GetApiUrl(this.IsNew ? ApiKeys.AddUsr : ApiKeys.EditUsr);
-            var rst = HttpHelper.GetResultByPost(url, (UserViewModel)this, ClientContext.Token);
+            var url = ApiUtils.GetApiUrl(this.IsNew ? ApiKeys.AddUsr : ApiKeys.EditUsr);
+            var rst = HttpUtils.PostResult(url, (UserViewModel)this, ClientContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, this.IsNew ? OperationDesc.Add : OperationDesc.Edit, rst.msg);

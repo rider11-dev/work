@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace MyNet.Client.Public
 {
-    public class StyleCacheHelper
+    public class StyleCacheUtils
     {
         static Style _mngBtnStyle;
         public static Style MngBtnStyle

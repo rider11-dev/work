@@ -1,6 +1,7 @@
 ﻿using MyNet.Client.Help;
 using MyNet.Client.Public;
 using MyNet.Components;
+using MyNet.Components.Http;
 using MyNet.Components.Mapper;
 using MyNet.Components.Result;
 using MyNet.Components.WPF.Command;
@@ -51,8 +52,8 @@ namespace MyNet.Client.Models.Auth
                 MessageWindow.ShowMsg(MessageType.Warning, OperationDesc.Validate, this.Error);
                 return;
             }
-            var url = ApiHelper.GetApiUrl(this.IsNew ? ApiKeys.AddGroup : ApiKeys.EditGroup);
-            var rst = HttpHelper.GetResultByPost(url, (GroupViewModel)this, ClientContext.Token);
+            var url = ApiUtils.GetApiUrl(this.IsNew ? ApiKeys.AddGroup : ApiKeys.EditGroup);
+            var rst = HttpUtils.PostResult(url, (GroupViewModel)this, ClientContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, this.IsNew ? OperationDesc.Add : OperationDesc.Edit, rst.msg);
@@ -61,13 +62,13 @@ namespace MyNet.Client.Models.Auth
             MessageWindow.ShowMsg(MessageType.Info, this.IsNew ? OperationDesc.Add : OperationDesc.Edit, MsgConst.Msg_Succeed);
             //如果保存成功，则添加或更新缓存
             var group = OOMapper.Map<GroupViewModel, Group>(this);
-            if (DataCacheHelper.AllGroups.ContainsKey(base.gp_code))
+            if (DataCacheUtils.AllGroups.ContainsKey(base.gp_code))
             {
-                DataCacheHelper.AllGroups[base.gp_code] = group;
+                DataCacheUtils.AllGroups[base.gp_code] = group;
             }
             else
             {
-                DataCacheHelper.AllGroups.Add(base.gp_code, group);
+                DataCacheUtils.AllGroups.Add(base.gp_code, group);
             }
             if (Window != null)
             {

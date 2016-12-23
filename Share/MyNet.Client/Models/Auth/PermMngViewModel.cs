@@ -17,6 +17,7 @@ using MyNet.Model.Auth;
 using MyNet.Components.Mapper;
 using MyNet.Components.WPF.Command;
 using MyNet.Client.Help;
+using MyNet.Components.Http;
 
 namespace MyNet.Client.Models.Auth
 {
@@ -79,7 +80,7 @@ namespace MyNet.Client.Models.Auth
                 return;
             }
             var ids = items.Select(m => ((PermViewModel)m).per_id);
-            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.MultiDeletePer),
+            var rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(ApiKeys.MultiDeletePer),
                 new
                 {
                     pks = ids.ToArray()
@@ -93,13 +94,13 @@ namespace MyNet.Client.Models.Auth
             //清除垃圾缓存
             var funcCodes = items.Where(m => ((PermViewModel)m).per_type == PermType.Func.ToString())
                                 .Select(m => ((PermViewModel)m).per_code);
-            if (funcCodes != null && funcCodes.Count() > 0 && DataCacheHelper.AllFuncs.Count > 0)
+            if (funcCodes != null && funcCodes.Count() > 0 && DataCacheUtils.AllFuncs.Count > 0)
             {
                 foreach (var code in funcCodes)
                 {
-                    if (DataCacheHelper.AllFuncs.ContainsKey(code))
+                    if (DataCacheUtils.AllFuncs.ContainsKey(code))
                     {
-                        DataCacheHelper.AllFuncs.Remove(code);
+                        DataCacheUtils.AllFuncs.Remove(code);
                     }
                 }
             }
@@ -120,7 +121,7 @@ namespace MyNet.Client.Models.Auth
         }
         private void Search(PagingArgs page)
         {
-            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.GetPerByPage),
+            var rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(ApiKeys.GetPerByPage),
                new
                {
                    pageIndex = page.PageIndex,

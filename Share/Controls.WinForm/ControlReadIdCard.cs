@@ -66,7 +66,7 @@ namespace MyNet.Components.WinForm
                 {
                     using (Image img = Image.FromStream(ms))
                     {
-                        picIDCard.Image = ImageHelper.CopyImage(img, img.Width, img.Height);
+                        picIDCard.Image = ImageUtils.CopyImage(img, img.Width, img.Height);
                     }
                 }
             };

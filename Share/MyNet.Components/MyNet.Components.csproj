@@ -86,7 +86,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppSettingHelper.cs" />
+    <Compile Include="AppSettingUtils.cs" />
     <Compile Include="Extensions\AssemblyExtention.cs" />
     <Compile Include="Extensions\CollectionExtension.cs" />
     <Compile Include="Extensions\DateTimeExtension.cs" />
@@ -101,7 +101,8 @@
     <Compile Include="Extensions\NumberExtension.cs" />
     <Compile Include="Extensions\ObjectExtension.cs" />
     <Compile Include="Extensions\RegexExtension.cs" />
-    <Compile Include="HttpHelper.cs" />
+    <Compile Include="Http\HttpEntities.cs" />
+    <Compile Include="Http\HttpUtils.cs" />
     <Compile Include="Misc\IBaseModel.cs" />
     <Compile Include="Misc\ICheckable.cs" />
     <Compile Include="IDCard\IDCardData_SS.cs" />
@@ -110,7 +111,7 @@
     <Compile Include="IDCard\IDCardDriver_XZX.cs" />
     <Compile Include="IDCard\IDCardReaderHelper_SS.cs" />
     <Compile Include="IDCard\IDCardReaderHelper_XZX.cs" />
-    <Compile Include="ImageHelper.cs" />
+    <Compile Include="ImageUtils.cs" />
     <Compile Include="Logger\ILogHelper.cs" />
     <Compile Include="Logger\ILogHelperProvider.cs" />
     <Compile Include="Logger\Log4NetHelper.cs" />
@@ -218,6 +219,9 @@
     <Compile Include="Serializer\Protobuf\Protobuf\WireType.cs" />
     <Compile Include="Serializer\Serializer.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
+    <Compile Include="Upgrade\AppClient.cs" />
+    <Compile Include="Upgrade\UpgradeConf.cs" />
+    <Compile Include="Compress\ZipCompresser.cs" />
     <Compile Include="ValidateHelper.cs" />
     <Compile Include="VerificationCodeHelper.cs" />
     <Compile Include="WindowsService\WindowsServiceManager.cs" />
@@ -231,6 +235,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Logger\log4net.config" />
     <None Include="packages.config" />
   </ItemGroup>

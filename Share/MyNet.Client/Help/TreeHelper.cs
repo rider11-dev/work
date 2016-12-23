@@ -22,7 +22,7 @@ namespace MyNet.Client.Help
             TreeHelpWindow.ShowHelp("功能菜单帮助", () =>
             {
                 List<TreeViewData.NodeViewModel> datas = new List<TreeViewData.NodeViewModel>();
-                foreach (var kvp in DataCacheHelper.AllFuncs)
+                foreach (var kvp in DataCacheUtils.AllFuncs)
                 {
                     var func = kvp.Value;
                     datas.Add(new TreeViewData.NodeViewModel { Id = func.per_code, Label = func.per_name, Parent = func.per_parent, Order = func.per_sort, Data = func, DataId = func.per_id });
@@ -36,13 +36,13 @@ namespace MyNet.Client.Help
             TreeHelpWindow.ShowHelp("所有权限", () =>
             {
                 List<TreeViewData.NodeViewModel> datas = new List<TreeViewData.NodeViewModel>();
-                foreach (var kvp in DataCacheHelper.AllFuncs)
+                foreach (var kvp in DataCacheUtils.AllFuncs)
                 {
                     var func = kvp.Value;
                     datas.Add(new TreeViewData.NodeViewModel { Id = func.per_code, Label = func.per_name, Parent = func.per_parent, Order = func.per_sort, Data = func, DataId = func.per_id });
                 }
 
-                foreach (var kvp in DataCacheHelper.AllOpts)
+                foreach (var kvp in DataCacheUtils.AllOpts)
                 {
                     var opt = kvp.Value;
                     datas.Add(new TreeViewData.NodeViewModel { Id = opt.per_code, Label = opt.per_name, Parent = opt.per_parent, Order = opt.per_sort, Data = opt, DataId = opt.per_id });
@@ -57,7 +57,7 @@ namespace MyNet.Client.Help
         {
             TreeHelpWindow.ShowHelp("组织帮助", () =>
             {
-                return ParseGroupsTreeData(DataCacheHelper.AllGroups.Select(kvp => kvp.Value));
+                return ParseGroupsTreeData(DataCacheUtils.AllGroups.Select(kvp => kvp.Value));
             }, multiSel, singleSelAction, multiSelAction);
         }
 

@@ -5,6 +5,7 @@ using Microsoft.Win32;
 using MyNet.Client.Public;
 using MyNet.Components;
 using MyNet.Components.Extensions;
+using MyNet.Components.Http;
 using MyNet.Components.Result;
 using MyNet.Components.WPF.Command;
 using MyNet.Components.WPF.Models;
@@ -97,8 +98,8 @@ namespace Biz.PartyBuilding.YS.Client.Daily
 
             //保存
             _model.party = "曹县县委组织部";
-            var url = ApiHelper.GetApiUrl(PartyBuildingApiKeys.InfoSave, PartyBuildingApiKeys.Key_ApiProvider_Party);
-            var rst = HttpHelper.GetResultByPost(url, _model);
+            var url = ApiUtils.GetApiUrl(PartyBuildingApiKeys.InfoSave, PartyBuildingApiKeys.Key_ApiProvider_Party);
+            var rst = HttpUtils.PostResult(url, _model);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Save, rst.msg);

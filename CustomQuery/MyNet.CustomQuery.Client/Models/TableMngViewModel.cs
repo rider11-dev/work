@@ -16,6 +16,7 @@ using MyNet.Components.WPF.Windows;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using MyNet.Model;
+using MyNet.Components.Http;
 
 namespace MyNet.CustomQuery.Client.Models
 {
@@ -64,7 +65,7 @@ namespace MyNet.CustomQuery.Client.Models
                 return;
             }
             var ids = items.Select(m => ((TableViewModel)m).id);
-            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(CustomQueryApiKeys.TableDel, CustomQueryApiKeys.Key_ApiProvider_CustomQuery),
+            var rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(CustomQueryApiKeys.TableDel, CustomQueryApiKeys.Key_ApiProvider_CustomQuery),
                 new
                 {
                     pks = ids.ToArray()
@@ -107,7 +108,7 @@ namespace MyNet.CustomQuery.Client.Models
         public static IEnumerable<TableViewModel> GetTables(PageQuery page)
         {
             IEnumerable<TableViewModel> empty = new List<TableViewModel>();
-            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(CustomQueryApiKeys.TablePage, CustomQueryApiKeys.Key_ApiProvider_CustomQuery),
+            var rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(CustomQueryApiKeys.TablePage, CustomQueryApiKeys.Key_ApiProvider_CustomQuery),
               new
               {
                   pageIndex = page.pageIndex,

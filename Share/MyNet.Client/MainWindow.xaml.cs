@@ -28,6 +28,7 @@ using MyNet.Components.WPF.Windows;
 using MyNet.Model.Base;
 using System.Threading;
 using System.Windows.Threading;
+using MyNet.Components.Http;
 
 namespace MyNet.Client
 {
@@ -80,7 +81,7 @@ namespace MyNet.Client
         {
             _menuTreeData = (TreeViewData)menuTree.DataContext;
 
-            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.GetPer), new { pk = ClientContext.CurrentUser.user_id }, ClientContext.Token);
+            var rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(ApiKeys.GetPer), new { pk = ClientContext.CurrentUser.user_id }, ClientContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Warning, "获取权限失败", rst.msg);

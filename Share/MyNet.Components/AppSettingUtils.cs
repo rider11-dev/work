@@ -6,7 +6,7 @@ using System.Configuration;
 
 namespace MyNet.Components
 {
-    public class AppSettingHelper
+    public class AppSettingUtils
     {
         const string KEY_LOG = "log";
         /// <summary>
@@ -30,6 +30,18 @@ namespace MyNet.Components
                 return string.Empty;
             }
             return ConfigurationManager.AppSettings[key].ToString();
+        }
+
+        public static void Update(string key, string value)
+        {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            if (config.AppSettings.Settings.AllKeys.Contains(key))
+            {
+                config.AppSettings.Settings.Remove(key);
+            }
+            config.AppSettings.Settings.Add(key, value);
+            config.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection("appSettings");
         }
     }
 }

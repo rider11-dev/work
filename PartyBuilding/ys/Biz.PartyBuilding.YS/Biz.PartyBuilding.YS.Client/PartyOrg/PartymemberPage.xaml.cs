@@ -59,7 +59,7 @@ namespace Biz.PartyBuilding.YS.Client.PartyOrg
         private void BasePage_Loaded(object sender, RoutedEventArgs e)
         {
             //组织树
-            var nodes = TreeHelper.ParseGroupsTreeData(DataCacheHelper.AllGroups.Where(kvp => kvp.Value.gp_system == false).Select(kvp => kvp.Value));
+            var nodes = TreeHelper.ParseGroupsTreeData(DataCacheUtils.AllGroups.Where(kvp => kvp.Value.gp_system == false).Select(kvp => kvp.Value));
 
             _gpTreeData.Bind(nodes);
         }

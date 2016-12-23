@@ -25,7 +25,7 @@ namespace MyNet.CustomQuery.Client.Models.ExecQuery
         public TableSelector(ExecQueryModel qModel)
         {
             QModel = qModel;
-            JoinTypes = new ObservableCollection<CmbItem>(DataCacheHelper.GetEnumCmbSource<TableJoinType>());
+            JoinTypes = new ObservableCollection<CmbItem>(DataCacheUtils.GetEnumCmbSource<TableJoinType>());
         }
         private ICommand _addJoinTbCmd;
         public ICommand AddJoinTbCmd
