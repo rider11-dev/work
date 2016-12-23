@@ -1,13 +1,6 @@
-﻿using MyNet.Components.Extensions;
-using MyNet.WindowsService;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
+﻿using MyNet.Components.WindowsService;
 using System.Linq;
 using System.ServiceProcess;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyNet.WebHostService
 {

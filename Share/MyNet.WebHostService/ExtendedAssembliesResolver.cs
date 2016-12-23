@@ -10,7 +10,7 @@ namespace MyNet.WebHostService
         public ExtendedAssembliesResolver()
         {
             AssemblyExtention.LoadAssemblies(AppDomain.CurrentDomain.BaseDirectory, "^*.dll$", SearchOption.TopDirectoryOnly);
-            AssemblyExtention.LoadAssemblies(AppDomain.CurrentDomain.BaseDirectory + "/apis", "^*.dll$");
+            AssemblyExtention.LoadAssemblies(AppDomain.CurrentDomain.BaseDirectory.TrimEnd('/', '\\') + "/apis", "^*.dll$");
         }
     }
 }

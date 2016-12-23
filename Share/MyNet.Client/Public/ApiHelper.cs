@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.IO;
+using MyNet.Components.WPF.Windows;
 
 namespace MyNet.Client.Public
 {
@@ -28,7 +29,8 @@ namespace MyNet.Client.Public
         static void LoadApis()
         {
             Apis = new List<Api>();
-            var files = FileExtension.GetFiles(MyContext.BaseDirectory, "api.config", SearchOption.AllDirectories);
+            //查找同级目录所有api配置文件
+            var files = FileExtension.GetFiles(new DirectoryInfo(ClientContext.BaseDirectory).Parent, "api.config", SearchOption.AllDirectories);
             try
             {
                 foreach (var file in files)
@@ -74,7 +76,8 @@ namespace MyNet.Client.Public
             if (api == null || string.IsNullOrEmpty(api.RelativeUrl))
             {
                 string msg = "未找到api接口信息或接口url不存在，请检查配置是否正确";
-                throw new Exception(msg);
+                MessageWindow.ShowMsg(MessageType.Error, "查找api接口", msg);
+                return null;
             }
 
             return api.AbsoluteUrl;

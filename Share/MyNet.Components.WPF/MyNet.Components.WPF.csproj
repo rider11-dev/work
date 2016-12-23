@@ -220,6 +220,14 @@
     <Resource Include="Resources\img\node_+.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MyNet.Components.Mapper\MyNet.Components.Mapper.csproj">
+      <Project>{a657507d-0f59-49c5-a6dc-0c788e0c63b1}</Project>
+      <Name>MyNet.Components.Mapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyNet.Components.Office\MyNet.Components.Office.csproj">
+      <Project>{ab21abf0-d796-4e4c-8d3f-f9035d4965a4}</Project>
+      <Name>MyNet.Components.Office</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyNet.Components\MyNet.Components.csproj">
       <Project>{9ed019a0-a26a-4725-aa70-2b52bf7a5416}</Project>
       <Name>MyNet.Components</Name>

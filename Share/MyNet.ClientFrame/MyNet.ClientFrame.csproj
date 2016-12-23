@@ -40,6 +40,10 @@
     <Reference Include="log4net">
       <HintPath>..\dlls\log4net\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -69,6 +73,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FrameContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -86,18 +91,19 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Content Include="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <Content Include="plugin\base\readme.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="upgrade\AutoUpdater.Client.exe.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="upgrade\AutoUpdater.Client.vshost.exe.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="upgrade\AutoUpdater.Client.vshost.exe.manifest">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="upgrade\log4net.config">
@@ -110,18 +116,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MyNet.Client\MyNet.Client.csproj">
-      <Project>{6aabd137-bb47-4636-8635-de0f6dc9aea1}</Project>
-      <Name>MyNet.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MyNet.Components.Resource\MyNet.Components.Resource.csproj">
-      <Project>{4ecb69ea-c6d9-436b-9689-90d065424f53}</Project>
-      <Name>MyNet.Components.Resource</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MyNet.Components.WPF\MyNet.Components.WPF.csproj">
-      <Project>{6324a5cc-0daf-4af4-80a3-5d2a60769c96}</Project>
-      <Name>MyNet.Components.WPF</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MyNet.Components\MyNet.Components.csproj">
       <Project>{9ed019a0-a26a-4725-aa70-2b52bf7a5416}</Project>
       <Name>MyNet.Components</Name>
@@ -138,9 +132,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="upgrade\AutoUpdater.Client.pdb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="upgrade\AutoUpdater.Client.vshost.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="upgrade\AutoUpdater.Components.dll">

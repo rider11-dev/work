@@ -1,7 +1,7 @@
 ﻿using DapperExtensions;
 using MyNet.Components.Extensions;
 using MyNet.Components.Result;
-using MyNet.Dto.Auth;
+
 using MyNet.Model;
 using MyNet.Model.Auth;
 using MyNet.Repository.Auth;

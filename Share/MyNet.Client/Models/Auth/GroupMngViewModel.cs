@@ -81,7 +81,7 @@ namespace MyNet.Client.Models.Auth
                 new
                 {
                     pks = ids.ToArray()
-                }, MyContext.Token);
+                }, ClientContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Delete, rst.msg);
@@ -130,7 +130,7 @@ namespace MyNet.Client.Models.Auth
                         {"gp_parent_name",Filter_GpParent_Name}
                     }
                },
-               MyContext.Token);
+               ClientContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);

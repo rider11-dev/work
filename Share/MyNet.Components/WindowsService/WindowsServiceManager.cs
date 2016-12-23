@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyNet.WindowsService
+namespace MyNet.Components.WindowsService
 {
     public class WindowsServiceManager
     {

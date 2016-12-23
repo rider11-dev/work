@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using MyNet.Components.Extensions;
 
-namespace MyNet.Components.Npoi
+namespace MyNet.Components.Office
 {
-    public class ExcelHelper
+    public class ExcelUtils
     {
         public static bool Export(string filename, Func<Dictionary<string, string>> colHeadersFunc, IEnumerable<object> data)
         {

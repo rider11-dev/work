@@ -2,7 +2,7 @@
 using MyNet.Components.Result;
 using MyNet.Components.WPF.Models;
 using MyNet.Components.WPF.Windows;
-using MyNet.Dto.Auth;
+
 using MyNet.Model.Auth;
 using MyNet.Model.Base;
 using Newtonsoft.Json;
@@ -16,6 +16,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using MyNet.Components.Extensions;
+using MyNet.Model.Dto.Auth;
 
 namespace MyNet.Client.Public
 {
@@ -150,7 +151,7 @@ namespace MyNet.Client.Public
                 var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.GetDict), new
                 {
                     dict_type = dictType.type_code
-                }, MyContext.Token);
+                }, ClientContext.Token);
                 if (rst.code != ResultCode.Success)
                 {
                     MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);
@@ -188,7 +189,7 @@ namespace MyNet.Client.Public
         private static void LoadPerms(string apiKey, Dictionary<string, PermissionCacheDto> target)
         {
             //从服务器获取
-            var rst = HttpHelper.GetResultByPost(url: ApiHelper.GetApiUrl(apiKey), token: MyContext.Token);
+            var rst = HttpHelper.GetResultByPost(url: ApiHelper.GetApiUrl(apiKey), token: ClientContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);
@@ -209,7 +210,7 @@ namespace MyNet.Client.Public
         private static void LoadGroups(string apiKey, Dictionary<string, Group> target)
         {
             //从服务器获取
-            var rst = HttpHelper.GetResultByPost(url: ApiHelper.GetApiUrl(apiKey), token: MyContext.Token);
+            var rst = HttpHelper.GetResultByPost(url: ApiHelper.GetApiUrl(apiKey), token: ClientContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);

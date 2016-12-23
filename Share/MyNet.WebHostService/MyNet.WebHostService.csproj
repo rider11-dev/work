@@ -43,14 +43,6 @@
       <HintPath>..\packages\Autofac.WebApi2.4.0.1\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapper.1.50.2\lib\net45\Dapper.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DapperExtensions, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DapperExtensions.1.5.0\lib\net45\DapperExtensions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.Owin, Version=2.0.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.2.0.2\lib\net45\Microsoft.Owin.dll</HintPath>
       <Private>True</Private>
@@ -115,8 +107,10 @@
     <Content Include="upload\readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="App.config" />
-    <Content Include="apis\readme.txt">
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="apis\base\readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="log4net.config">
@@ -128,14 +122,6 @@
     <ProjectReference Include="..\MyNet.Components\MyNet.Components.csproj">
       <Project>{9ed019a0-a26a-4725-aa70-2b52bf7a5416}</Project>
       <Name>MyNet.Components</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MyNet.Repository\MyNet.Repository.csproj">
-      <Project>{0c81a4e4-bd67-4f8d-a602-ec4062a0d0c2}</Project>
-      <Name>MyNet.Repository</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MyNet.WindowsService\MyNet.WindowsService.csproj">
-      <Project>{56d06311-5d98-410f-a137-4b8fc81ea691}</Project>
-      <Name>MyNet.WindowsService</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

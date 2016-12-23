@@ -88,7 +88,7 @@ namespace MyNet.CustomQuery.Client.Models.ExecQuery
             qModel.Page = new PageQuery { pageIndex = page.PageIndex, pageSize = page.PageSize };
             //6、执行查询，返回结果，绑定Results
             var url = ApiHelper.GetApiUrl(CustomQueryApiKeys.ExecQuery, CustomQueryApiKeys.Key_ApiProvider_CustomQuery);
-            var rst = HttpHelper.GetResultByPost(url, qModel, MyContext.Token);
+            var rst = HttpHelper.GetResultByPost(url, qModel, ClientContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, CustomQueryOptDesc.ExecQuery, rst.msg);

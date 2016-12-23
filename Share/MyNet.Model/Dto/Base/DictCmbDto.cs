@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyNet.Dto.Auth
+namespace MyNet.Model.Dto.Auth
 {
     public class DictCmbDto
     {

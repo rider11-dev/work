@@ -13,9 +13,10 @@ using MyNet.Components.Extensions;
 using MyNet.Components.Mapper;
 using MyNet.Repository.Db;
 using MyNet.Components.Result;
-using MyNet.Dto.Auth;
+
 using System.Data;
 using Dapper;
+using MyNet.Model.Dto.Auth;
 
 namespace MyNet.Service.Auth
 {

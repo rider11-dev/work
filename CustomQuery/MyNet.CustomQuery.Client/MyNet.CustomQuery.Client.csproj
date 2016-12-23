@@ -143,6 +143,11 @@
       <Name>MyNet.Client</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\..\Share\MyNet.Components.Mapper\MyNet.Components.Mapper.csproj">
+      <Project>{a657507d-0f59-49c5-a6dc-0c788e0c63b1}</Project>
+      <Name>MyNet.Components.Mapper</Name>
+      <Private>False</Private>
+    </ProjectReference>
     <ProjectReference Include="..\..\Share\MyNet.Components.Resource\MyNet.Components.Resource.csproj">
       <Project>{4ecb69ea-c6d9-436b-9689-90d065424f53}</Project>
       <Name>MyNet.Components.Resource</Name>

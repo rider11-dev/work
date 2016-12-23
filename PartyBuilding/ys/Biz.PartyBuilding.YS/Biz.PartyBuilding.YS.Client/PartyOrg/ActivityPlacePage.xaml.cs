@@ -6,7 +6,7 @@ using MyNet.Client.Pages;
 using MyNet.Client.Public;
 using MyNet.Components;
 using MyNet.Components.Extensions;
-using MyNet.Components.Npoi;
+
 using MyNet.Components.Result;
 using MyNet.Components.WPF.Command;
 using MyNet.Components.WPF.Controls;

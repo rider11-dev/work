@@ -91,7 +91,7 @@ namespace MyNet.CustomQuery.Client.Models
                 new
                 {
                     pks = ids.ToArray()
-                }, MyContext.Token);
+                }, ClientContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Delete, rst.msg);
@@ -141,7 +141,7 @@ namespace MyNet.CustomQuery.Client.Models
                   pageSize = page.pageSize,
                   conditions = page.conditions
               },
-              MyContext.Token);
+              ClientContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);

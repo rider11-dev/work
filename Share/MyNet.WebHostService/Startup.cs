@@ -1,71 +1,49 @@
 ﻿using Autofac;
 using Autofac.Integration.WebApi;
-using DapperExtensions;
-using DapperExtensions.Mapper;
-using DapperExtensions.Sql;
+using MyNet.Components.Extensions;
 using MyNet.Components.Logger;
-using MyNet.Repository.Db;
+using MyNet.Components.Misc;
 using Owin;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Dispatcher;
-using System.Web.Http.ExceptionHandling;
 
 namespace MyNet.WebHostService
 {
     public class Startup
     {
-        static HttpConfiguration _httpConfig;
-        static ILogHelper<Startup> _logHelper = LogHelperFactory.GetLogHelper<Startup>();
+        ILogHelper<Startup> _logHelper = LogHelperFactory.GetLogHelper<Startup>();
         public void Configuration(IAppBuilder appBuilder)
         {
             // Configure Web API for self-host.  
-            _httpConfig = new HttpConfiguration();
+            HostContext.Configration = new HttpConfiguration();
             //1、加载所有扩展api相关dll
-            _httpConfig.Services.Replace(typeof(IAssembliesResolver), new ExtendedAssembliesResolver());
-            //if (HostContext.IsDebug)
-            //{
-            //    //打印所有加载的dll
-            //    var asses = AppDomain.CurrentDomain.GetAssemblies();
-            //    StringBuilder sb = new StringBuilder();
-            //    foreach (var ass in asses)
-            //    {
-            //        sb.Append(ass.FullName + Environment.NewLine);
-            //    }
-            //    _logHelper.LogInfo("当前加载dll：" + Environment.NewLine + sb.ToString());
-            //}
+            HostContext.Configration.Services.Replace(typeof(IAssembliesResolver), new ExtendedAssembliesResolver());
+
             //2、自定义路由
             //defaults: new { opt = RouteParameter.Optional }
-            _httpConfig.MapHttpAttributeRoutes();//映射RouteAttribute属性
-            _httpConfig.Routes.MapHttpRoute(
+            HostContext.Configration.MapHttpAttributeRoutes();//映射RouteAttribute属性
+            HostContext.Configration.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
                 );
-            _httpConfig.Routes.MapHttpRoute(
+            HostContext.Configration.Routes.MapHttpRoute(
                 name: "ModuleApi",
                 routeTemplate: "api/{module}/{controller}/{action}"
                 );
             //3、序列化器
             //干掉xml序列化器
-            var jsonFormatter = _httpConfig.Formatters.JsonFormatter;
             //解决json序列化时的循环引用问题
-            jsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-            HostContext.CurrentMediaTypeFormatter = jsonFormatter;
-            _httpConfig.Formatters.Remove(_httpConfig.Formatters.XmlFormatter);
+            HostContext.Configration.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            HostContext.Configration.Formatters.Remove(HostContext.Configration.Formatters.XmlFormatter);
             //4、自定义消息处理程序
-            _httpConfig.MessageHandlers.Add(new CustomMessageHandler());
+            HostContext.Configration.MessageHandlers.Add(new CustomMessageHandler());
             //5、容器注册
             IocRegister();
-            //6、初始化dapper
-            InitDapper();
 
-            appBuilder.UseWebApi(_httpConfig);
+            appBuilder.UseWebApi(HostContext.Configration);
         }
 
         private void IocRegister()
@@ -73,7 +51,6 @@ namespace MyNet.WebHostService
             var builder = new ContainerBuilder();
             //注册当前应用程序域中指定程序集的类型
             var assDomain = AppDomain.CurrentDomain.GetAssemblies();
-            builder.RegisterType<DbSession>().As<IDbSession>().InstancePerRequest();//DbSession
             builder.RegisterApiControllers(assDomain.Where(ass => ass.FullName.Contains("WebApi")).ToArray())
                 .PropertiesAutowired(PropertyWiringOptions.None);//ApiController
             builder.RegisterAssemblyTypes(assDomain)
@@ -81,23 +58,22 @@ namespace MyNet.WebHostService
             builder.RegisterAssemblyTypes(assDomain)
                 .Where(t => t.Name.EndsWith("Service"));//Service
 
+            Init(builder);
+
             var container = builder.Build();
-            _httpConfig.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+            HostContext.Configration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
         }
 
-        private void InitDapper()
+        private void Init(ContainerBuilder builder)
         {
-            DapperExtensions.DapperExtensions.SqlDialect = DbUtils.GetSqlDialect();
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies()
-                .Where(ass => ass.FullName.Contains("Repository") || ass.FullName.Contains("Service"))
-                .ToList();
-            DapperExtensions.DapperExtensions.SetMappingAssemblies(assemblies);
-            DbUtils.SqlGenerator = new SqlGeneratorImpl(
-                new DapperExtensionsConfiguration(
-                    typeof(AutoClassMapper<>),
-                    assemblies,
-                    DapperExtensions.DapperExtensions.SqlDialect));
-
+            var allTypes = AppDomain.CurrentDomain.GetLoadedTypes();
+            var iname = typeof(Iinit).Name;
+            var initTypes = allTypes.Where(t => t.GetInterface(iname) != null);
+            if (initTypes.IsNotEmpty())
+            {
+                //_logHelper.LogInfo(string.Join("\r\n", initTypes.Select(a => a.FullName)));
+                initTypes.ToList().ForEach(t => (t.Assembly.CreateInstance(t.FullName, false) as Iinit).Init(builder));
+            }
         }
     }
 }

@@ -1,12 +1,12 @@
 ﻿using MyNet.Components.Result;
 using MyNet.WebApi.Extensions;
-using MyNet.WebHostService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web;
+using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 
@@ -20,7 +20,8 @@ namespace MyNet.WebApi.Filters
             {
                 actionContext.Response = new HttpResponseMessage(HttpStatusCode.OK)
                 {
-                    Content = new ObjectContent<object>(OptResult.Build(ResultCode.ParamError, actionContext.ModelState.Parse()), HostContext.CurrentMediaTypeFormatter)
+                    Content = new ObjectContent<object>(OptResult.Build(ResultCode.ParamError, actionContext.ModelState.Parse()),
+                    GlobalConfiguration.Configuration.Formatters.JsonFormatter)
                 };
                 return;
             };

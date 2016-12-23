@@ -66,7 +66,7 @@ namespace MyNet.CustomQuery.Client.Models
                 return;
             }
             var url = ApiHelper.GetApiUrl(CustomQueryApiKeys.FieldDbFields, CustomQueryApiKeys.Key_ApiProvider_CustomQuery);
-            var rst = HttpHelper.GetResultByPost(url, Tables.Select(t => t.id), MyContext.Token);
+            var rst = HttpHelper.GetResultByPost(url, Tables.Select(t => t.id), ClientContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, CustomQueryOptDesc.GetDbFields, rst.msg);
@@ -128,7 +128,7 @@ namespace MyNet.CustomQuery.Client.Models
             {
                 return;
             }
-            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(CustomQueryApiKeys.FieldInit, CustomQueryApiKeys.Key_ApiProvider_CustomQuery), sels, MyContext.Token);
+            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(CustomQueryApiKeys.FieldInit, CustomQueryApiKeys.Key_ApiProvider_CustomQuery), sels, ClientContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, CustomQueryOptDesc.InitFields, rst.msg);

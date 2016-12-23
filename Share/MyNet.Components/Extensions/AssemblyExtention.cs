@@ -68,5 +68,50 @@ namespace MyNet.Components.Extensions
             }
             return target;
         }
+
+        public static string GetAssemblyDirectory(this Assembly ass)
+        {
+            if (ass == null)
+            {
+                return null;
+            }
+            return new FileInfo(ass.Location).Directory.FullName.TrimEnd('/', '\\');
+        }
+
+        public static IEnumerable<Type> GetTypes(this Assembly ass)
+        {
+            if (ass == null)
+            {
+                yield break;
+            }
+            Type[] types;
+            try
+            {
+                types = ass.GetTypes();
+            }
+            catch
+            {
+                yield break;
+            }
+            foreach (var t in types)
+            {
+                yield return t;
+            }
+        }
+
+        public static IEnumerable<Type> GetLoadedTypes(this AppDomain appdomain)
+        {
+            if (appdomain == null)
+            {
+                yield break;
+            }
+            foreach (var ass in appdomain.GetAssemblies())
+            {
+                foreach (var t in ass.GetTypes())
+                {
+                    yield return t;
+                }
+            }
+        }
     }
 }

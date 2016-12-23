@@ -1,20 +1,8 @@
 ﻿using MyNet.Components;
 using MyNet.Client.Models;
 using System;
-using System.Collections.Generic;
-using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using MyNet.Components.WPF.Extension;
 using MyNet.Client.Public;
 using MyNet.Components.Result;
@@ -26,6 +14,7 @@ using System.IO;
 using MyNet.Client.Models.Auth;
 using MyNet.Components.Serialize;
 using MyNet.Components.WPF.Windows;
+using MyNet.Components.Logger;
 
 namespace MyNet.Client
 {
@@ -37,7 +26,7 @@ namespace MyNet.Client
         /// <summary>
         /// 存储上次登录信息的文件
         /// </summary>
-        static string LoginFile = MyContext.BaseDirectory + "login";
+        static string LoginFile = ClientContext.BaseDirectory + "/login";
         /*
          * TODO：改进点
          * 1、passwordbox，模型验证不起作用
@@ -46,6 +35,7 @@ namespace MyNet.Client
          * 4、分页进度条！！！
          */
         LoginViewModel vmLogin;
+        ILogHelper<LoginWindow> _logHelper = LogHelperFactory.GetLogHelper<LoginWindow>();
         public LoginWindow()
         {
             vmLogin = LoadLoginViewModel();
@@ -79,6 +69,11 @@ namespace MyNet.Client
             using (var stream = new MemoryStream(code.ImageBytes))
             {
                 var img = System.Drawing.Image.FromStream(stream);
+                var fileInfo = new FileInfo(file);
+                if (!fileInfo.Directory.Exists)
+                {
+                    fileInfo.Directory.Create();
+                }
                 img.Save(file);
             }
         }
@@ -112,16 +107,16 @@ namespace MyNet.Client
                 return;
             }
             //登录成功，记录token
-            MyContext.Token = rst.data.token;
+            ClientContext.Token = rst.data.token;
             //获取用户信息
-            rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.GetUsr), new { pk = rst.data.usrid }, MyContext.Token);
+            rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.GetUsr), new { pk = rst.data.usrid }, ClientContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Warning, OperationDesc.GetUsr, rst.msg);
                 return;
             }
             var user = JsonConvert.DeserializeObject<User>(((JObject)rst.data).ToString());
-            MyContext.CurrentUser = OOMapper.Map<User, UserViewModel>(user);
+            ClientContext.CurrentUser = OOMapper.Map<User, UserViewModel>(user);
             //记住我？
             RememberMe();
 

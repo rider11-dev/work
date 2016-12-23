@@ -47,7 +47,7 @@ namespace MyNet.CustomQuery.Client.Models
                 return;
             }
             var url = ApiHelper.GetApiUrl(this.IsNew ? CustomQueryApiKeys.TableAdd : CustomQueryApiKeys.TableUpdate, CustomQueryApiKeys.Key_ApiProvider_CustomQuery);
-            var rst = HttpHelper.GetResultByPost(url, (TableViewModel)this, MyContext.Token);
+            var rst = HttpHelper.GetResultByPost(url, (TableViewModel)this, ClientContext.Token);
             string opt = this.IsNew ? OperationDesc.Add : OperationDesc.Edit;
             if (rst.code != ResultCode.Success)
             {

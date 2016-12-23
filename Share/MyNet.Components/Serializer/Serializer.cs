@@ -197,6 +197,7 @@ namespace MyNet.Components.Serialize
             using (MemoryStream ms = new MemoryStream(data))
             {
                 BinaryFormatter bf = new BinaryFormatter();
+                bf.Binder = new DomainSerializationBinder();//这里设置目标类型从当前应用程序域加载的所有程序集取
                 return (T)bf.Deserialize(ms);
             }
         }

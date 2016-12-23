@@ -34,7 +34,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\dlls\MyNet\</OutputPath>
+    <OutputPath>..\MyNet.ClientFrame\bin\plugin\base\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -43,7 +43,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\dlls\MyNet\</OutputPath>
+    <OutputPath>..\MyNet.ClientFrame\bin\plugin\base\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -58,10 +58,11 @@
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\dlls\log4net\log4net.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -73,6 +74,7 @@
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dlls\WPF\System.Windows.Interactivity.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -136,7 +138,7 @@
     </Compile>
     <Compile Include="Pages\PageHelper.cs" />
     <Compile Include="Public\ApiHelper.cs" />
-    <Compile Include="Public\MyContext.cs" />
+    <Compile Include="Public\ClientContext.cs" />
     <Compile Include="Public\DataCacheHelper.cs" />
     <Compile Include="Public\MsgConst.cs" />
     <Compile Include="Public\NotifyHelper.cs" />
@@ -222,6 +224,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Content Include="resconf.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="clientconf.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Resources\img\logo.png" />
     <Content Include="footer.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -252,9 +260,6 @@
     <Content Include="download\readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="log4net.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="api.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -279,6 +284,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\MyNet.Components.Mapper\MyNet.Components.Mapper.csproj">
+      <Project>{a657507d-0f59-49c5-a6dc-0c788e0c63b1}</Project>
+      <Name>MyNet.Components.Mapper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyNet.Components.Resource\MyNet.Components.Resource.csproj">
       <Project>{4ecb69ea-c6d9-436b-9689-90d065424f53}</Project>
       <Name>MyNet.Components.Resource</Name>
@@ -290,10 +299,7 @@
     <ProjectReference Include="..\MyNet.Components\MyNet.Components.csproj">
       <Project>{9ed019a0-a26a-4725-aa70-2b52bf7a5416}</Project>
       <Name>MyNet.Components</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MyNet.Dto\MyNet.Dto.csproj">
-      <Project>{ea32f873-b280-4b79-947e-01ab4fcf6616}</Project>
-      <Name>MyNet.Dto</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\MyNet.Model\MyNet.Model.csproj">
       <Project>{bb11afa2-784c-4e60-9586-6608d8338d67}</Project>

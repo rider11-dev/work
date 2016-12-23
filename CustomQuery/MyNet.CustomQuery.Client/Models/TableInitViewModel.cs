@@ -50,7 +50,7 @@ namespace MyNet.CustomQuery.Client.Models
         }
         private void GetDbTablesAction(object parameter)
         {
-            var rst = HttpHelper.GetResultByGet(ApiHelper.GetApiUrl(CustomQueryApiKeys.TableDbTables, CustomQueryApiKeys.Key_ApiProvider_CustomQuery), MyContext.Token);
+            var rst = HttpHelper.GetResultByGet(ApiHelper.GetApiUrl(CustomQueryApiKeys.TableDbTables, CustomQueryApiKeys.Key_ApiProvider_CustomQuery), ClientContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, CustomQueryOptDesc.GetDbTables, rst.msg);
@@ -122,7 +122,7 @@ namespace MyNet.CustomQuery.Client.Models
             {
                 return;
             }
-            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(CustomQueryApiKeys.TableInit, CustomQueryApiKeys.Key_ApiProvider_CustomQuery), sels, MyContext.Token);
+            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(CustomQueryApiKeys.TableInit, CustomQueryApiKeys.Key_ApiProvider_CustomQuery), sels, ClientContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, CustomQueryOptDesc.InitTables, rst.msg);

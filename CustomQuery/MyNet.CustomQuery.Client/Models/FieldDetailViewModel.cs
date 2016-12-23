@@ -93,7 +93,7 @@ namespace MyNet.CustomQuery.Client.Models
                 return;
             }
             var url = ApiHelper.GetApiUrl(this.IsNew ? CustomQueryApiKeys.FieldAdd : CustomQueryApiKeys.FieldUpdate, CustomQueryApiKeys.Key_ApiProvider_CustomQuery);
-            var rst = HttpHelper.GetResultByPost(url, (FieldViewModel)this, MyContext.Token);
+            var rst = HttpHelper.GetResultByPost(url, (FieldViewModel)this, ClientContext.Token);
             string opt = this.IsNew ? OperationDesc.Add : OperationDesc.Edit;
             if (rst.code != ResultCode.Success)
             {

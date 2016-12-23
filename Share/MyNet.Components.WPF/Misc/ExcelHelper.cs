@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using MyNet.Components.Office;
 using MyNet.Components.WPF.Windows;
 using System;
 using System.Collections.Generic;
@@ -47,7 +48,7 @@ namespace MyNet.Components.WPF.Misc
             }
 
 
-            Npoi.ExcelHelper.Export(saveFileDialog.FileName, colHeaders, data);
+            ExcelUtils.Export(saveFileDialog.FileName, colHeaders, data);
             MessageBoxResult dia = MessageBox.Show("文件已保存至" + saveFileDialog.FileName + Environment.NewLine + "是否打开？", "导出成功", MessageBoxButton.YesNo);
             if (dia == MessageBoxResult.Yes)
             {

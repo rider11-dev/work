@@ -106,11 +106,6 @@
       <Name>MyNet.Components</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Share\MyNet.Dto\MyNet.Dto.csproj">
-      <Project>{ea32f873-b280-4b79-947e-01ab4fcf6616}</Project>
-      <Name>MyNet.Dto</Name>
-      <Private>False</Private>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\..\Share\MyNet.Model\MyNet.Model.csproj">
       <Project>{bb11afa2-784c-4e60-9586-6608d8338d67}</Project>
       <Name>MyNet.Model</Name>

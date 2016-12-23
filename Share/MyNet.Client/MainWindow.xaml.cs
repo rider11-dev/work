@@ -36,9 +36,6 @@ namespace MyNet.Client
     /// </summary>
     public partial class MainWindow : BaseWindow
     {
-        readonly static string imgFileHeader = MyContext.BaseDirectory + AppSettingHelper.Get("header");
-        readonly static string imgFileTitle = MyContext.BaseDirectory + AppSettingHelper.Get("title");
-        readonly static string imgFileFooter = MyContext.BaseDirectory + AppSettingHelper.Get("footer");
         private TreeViewData _menuTreeData = null;
         private OpenFuncCmd _cmdOpenFunc = new OpenFuncCmd();
         private ILogHelper<MainWindow> _logHelper = LogHelperFactory.GetLogHelper<MainWindow>();
@@ -53,9 +50,9 @@ namespace MyNet.Client
 
             _cmdOpenFunc.Container = framePage;
             //设置header背景
-            gridHeader.SetBackgroundImg(imgFileHeader);
-            panelFooter.SetBackgroundImg(imgFileFooter);
-            imgTitle.SetSource(imgFileTitle);
+            gridHeader.SetBackgroundImg(ClientContext.GetFullPath(ClientContext.Conf.header));
+            panelFooter.SetBackgroundImg(ClientContext.GetFullPath(ClientContext.Conf.footer));
+            imgTitle.SetSource(ClientContext.GetFullPath(ClientContext.Conf.title));
         }
 
         private void imgBtnUserInfo_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -70,7 +67,6 @@ namespace MyNet.Client
             this.Close();
         }
 
-        DispatcherTimer timer;
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             //TODO：需要优化
@@ -84,7 +80,7 @@ namespace MyNet.Client
         {
             _menuTreeData = (TreeViewData)menuTree.DataContext;
 
-            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.GetPer), new { pk = MyContext.CurrentUser.user_id }, MyContext.Token);
+            var rst = HttpHelper.GetResultByPost(ApiHelper.GetApiUrl(ApiKeys.GetPer), new { pk = ClientContext.CurrentUser.user_id }, ClientContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Warning, "获取权限失败", rst.msg);
@@ -96,7 +92,7 @@ namespace MyNet.Client
                 return;
             }
             var pers = JsonConvert.DeserializeObject<IEnumerable<Permission>>(((JArray)rst.data.pers).ToString());
-            MyContext.Pers = pers;
+            ClientContext.Pers = pers;
 
             //功能菜单
             var funcs = pers.Where(p => p.per_type == PermType.Func.ToString());
@@ -108,7 +104,7 @@ namespace MyNet.Client
                     Id = "main",
                     Label = "主页",
                     Order = "0",
-                    Data = new Permission { per_uri = AppSettingHelper.Get("mainpage") },
+                    Data = new Permission { per_uri = ClientContext.Conf.mainpage },
                     IconUri = "/MyNet.Client;component/Resources/img/icon_home.png",
                     HAlign = "Center"
                 });

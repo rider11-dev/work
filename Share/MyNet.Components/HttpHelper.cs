@@ -171,6 +171,10 @@ namespace MyNet.Components
         /// <returns></returns>
         public static string Get(string url, string token = "")
         {
+            if (url.IsEmpty())
+            {
+                return "";
+            }
             try
             {
                 var reqEncoding = Encoding.UTF8;

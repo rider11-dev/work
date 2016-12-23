@@ -29,7 +29,7 @@ namespace MyNet.Client.Pages
 
             //lblWelcome.Content = string.Format("欢迎进入{0}", MyContext.SysName);
 
-            frameMain.Source = new Uri(AppSettingHelper.Get("maincontent"), UriKind.Relative);
+            frameMain.Source = new Uri(ClientContext.Conf.maincontent, UriKind.Relative);
         }
     }
 }

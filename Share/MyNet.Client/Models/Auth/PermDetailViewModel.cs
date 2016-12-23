@@ -12,10 +12,11 @@ using MyNet.Components.WPF.Windows;
 using MyNet.Components.WPF.Models;
 using MyNet.Model.Auth;
 using MyNet.Components.Mapper;
-using MyNet.Dto.Auth;
+
 using System.Windows.Input;
 using MyNet.Components.WPF.Controls;
 using MyNet.Client.Help;
+using MyNet.Model.Dto.Auth;
 
 namespace MyNet.Client.Models.Auth
 {
@@ -53,7 +54,7 @@ namespace MyNet.Client.Models.Auth
                 return;
             }
             var url = ApiHelper.GetApiUrl(this.IsNew ? ApiKeys.AddPer : ApiKeys.EditPer);
-            var rst = HttpHelper.GetResultByPost(url, (PermViewModel)this, MyContext.Token);
+            var rst = HttpHelper.GetResultByPost(url, (PermViewModel)this, ClientContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, this.IsNew ? OperationDesc.Add : OperationDesc.Edit, rst.msg);

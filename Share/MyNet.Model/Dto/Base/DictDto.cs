@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyNet.Dto.Base
+namespace MyNet.Model.Dto.Base
 {
     public class DictDto : Dict
     {

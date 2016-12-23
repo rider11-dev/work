@@ -3,7 +3,7 @@ using MyNet.Client.Help;
 using MyNet.Client.Pages;
 using MyNet.Client.Public;
 using MyNet.Components.Extensions;
-using MyNet.Components.Npoi;
+
 using MyNet.Components.WPF.Controls;
 using MyNet.Components.WPF.Models;
 using System;

@@ -560,6 +560,10 @@
       <Name>MyNet.Client</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Share\MyNet.Components.Office\MyNet.Components.Office.csproj">
+      <Project>{ab21abf0-d796-4e4c-8d3f-f9035d4965a4}</Project>
+      <Name>MyNet.Components.Office</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\Share\MyNet.Components.Resource\MyNet.Components.Resource.csproj">
       <Project>{4ecb69ea-c6d9-436b-9689-90d065424f53}</Project>
       <Name>MyNet.Components.Resource</Name>

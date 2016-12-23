@@ -88,13 +88,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MyNet.Components.Mapper\MyNet.Components.Mapper.csproj">
+      <Project>{a657507d-0f59-49c5-a6dc-0c788e0c63b1}</Project>
+      <Name>MyNet.Components.Mapper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyNet.Components\MyNet.Components.csproj">
       <Project>{9ed019a0-a26a-4725-aa70-2b52bf7a5416}</Project>
       <Name>MyNet.Components</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MyNet.Dto\MyNet.Dto.csproj">
-      <Project>{ea32f873-b280-4b79-947e-01ab4fcf6616}</Project>
-      <Name>MyNet.Dto</Name>
     </ProjectReference>
     <ProjectReference Include="..\MyNet.Model\MyNet.Model.csproj">
       <Project>{bb11afa2-784c-4e60-9586-6608d8338d67}</Project>

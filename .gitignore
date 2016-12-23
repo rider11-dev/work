@@ -91,3 +91,7 @@
 /CustomQuery/MyNet.CustomQuery.Client/bin
 /Share/MyNet.WindowsService/obj
 /Share/MyNet.WindowsService/bin
+/Share/MyNet.Components.Mapper/obj
+/Share/MyNet.Components.Mapper/bin
+/Share/MyNet.Components.Office/obj
+/Share/MyNet.Components.Office/bin

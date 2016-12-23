@@ -1,0 +1,12 @@
+﻿[
+  "/MyNet.Components.WPF;component/Resources/Style/ButtonStyle.xaml",
+  "/MyNet.Components.WPF;component/Resources/Style/WindowStyle.xaml",
+  "/MyNet.Components.WPF;component/Resources/Style/InputStyle.xaml",
+  "/MyNet.Components.WPF;component/Resources/Style/TreeViewStyle.xaml",
+  "/MyNet.Components.WPF;component/Resources/Style/MiscStyle.xaml",
+  "/MyNet.Components.WPF;component/Resources/Style/DataGridStyle.xaml",
+  "/MyNet.Components.WPF;component/Resources/Style/MngPageStyle.xaml",
+  "/MyNet.Components.WPF;component/Resources/Style/DataGridEditorStyle.xaml",
+  "/MyNet.Client;component/Resources/style/Login.xaml",
+  "/MyNet.Client;component/Resources/style/MenuTreeStyle.xaml"
+]

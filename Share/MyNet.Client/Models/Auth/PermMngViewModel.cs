@@ -15,7 +15,6 @@ using System.Windows.Input;
 using MyNet.Components.WPF.Windows;
 using MyNet.Model.Auth;
 using MyNet.Components.Mapper;
-using MyNet.Dto.Auth;
 using MyNet.Components.WPF.Command;
 using MyNet.Client.Help;
 
@@ -84,7 +83,7 @@ namespace MyNet.Client.Models.Auth
                 new
                 {
                     pks = ids.ToArray()
-                }, MyContext.Token);
+                }, ClientContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Delete, rst.msg);
@@ -135,7 +134,7 @@ namespace MyNet.Client.Models.Auth
                         {"per_parent_name",Filter_PerParent_Name},
                     }
                },
-               MyContext.Token);
+               ClientContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);

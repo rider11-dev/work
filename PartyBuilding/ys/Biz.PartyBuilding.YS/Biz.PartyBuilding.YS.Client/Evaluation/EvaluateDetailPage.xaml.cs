@@ -2,7 +2,7 @@
 using MyNet.Client.Help;
 using MyNet.Client.Pages;
 using MyNet.Client.Public;
-using MyNet.Components.Npoi;
+
 using MyNet.Components.WPF.Controls;
 using System;
 using System.Collections.Generic;

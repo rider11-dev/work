@@ -1,8 +1,8 @@
 ﻿using DapperExtensions;
 using MyNet.Components.Extensions;
 using MyNet.Components.Result;
-using MyNet.Dto.Auth;
-using MyNet.Dto.Base;
+
+using MyNet.Model.Dto.Base;
 using MyNet.Model;
 using MyNet.Model.Base;
 using MyNet.Repository.Base;
@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MyNet.Model.Dto.Auth;
 
 namespace MyNet.Service.Base
 {

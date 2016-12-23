@@ -1,6 +1,7 @@
 ﻿using MyNet.Components;
 using MyNet.Components.Extensions;
 using System.Net.Http.Formatting;
+using System.Web.Http;
 
 namespace MyNet.WebHostService
 {
@@ -25,7 +26,7 @@ namespace MyNet.WebHostService
             }
         }
 
-        public static MediaTypeFormatter CurrentMediaTypeFormatter
+        public static HttpConfiguration Configration
         {
             get; set;
         }

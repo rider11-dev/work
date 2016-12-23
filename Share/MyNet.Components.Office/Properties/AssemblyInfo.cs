@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("MyNet.WindowsService")]
+[assembly: AssemblyTitle("MyNet.Components.Office")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("MyNet.WindowsService")]
+[assembly: AssemblyProduct("MyNet.Components.Office")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("56d06311-5d98-410f-a137-4b8fc81ea691")]
+[assembly: Guid("ab21abf0-d796-4e4c-8d3f-f9035d4965a4")]
 
 // 程序集的版本信息由下列四个值组成: 
 //

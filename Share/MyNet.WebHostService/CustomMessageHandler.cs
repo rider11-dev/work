@@ -1,12 +1,9 @@
 ﻿using MyNet.Components.Logger;
 using MyNet.Components.Result;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace MyNet.WebHostService
 {
@@ -46,7 +43,7 @@ namespace MyNet.WebHostService
                                  {
                                      code = ResultCode.Fail,
                                      msg = ((int)task.Result.StatusCode).ToString() + ":" + task.Result.ReasonPhrase
-                                 }, HostContext.CurrentMediaTypeFormatter);
+                                 }, HostContext.Configration.Formatters.JsonFormatter);
                              }
                              return task.Result;
                          }
