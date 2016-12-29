@@ -75,6 +75,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -87,6 +88,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppSettingUtils.cs" />
+    <Compile Include="Emit\DynamicModelBuilder.cs" />
+    <Compile Include="Emit\PropertyCustomAttributeUnit.cs" />
     <Compile Include="Extensions\AssemblyExtention.cs" />
     <Compile Include="Extensions\CollectionExtension.cs" />
     <Compile Include="Extensions\DateTimeExtension.cs" />
@@ -103,6 +106,7 @@
     <Compile Include="Extensions\RegexExtension.cs" />
     <Compile Include="Http\HttpEntities.cs" />
     <Compile Include="Http\HttpUtils.cs" />
+    <Compile Include="Misc\BaseModel.cs" />
     <Compile Include="Misc\IBaseModel.cs" />
     <Compile Include="Misc\ICheckable.cs" />
     <Compile Include="IDCard\IDCardData_SS.cs" />
@@ -126,12 +130,6 @@
     <Compile Include="NFC\NFCCardReaderHelper.cs" />
     <Compile Include="PinYinConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resource.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resource.resx</DependentUpon>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
     <Compile Include="Result\OptResult.cs" />
     <Compile Include="Result\ResultCode.cs" />
     <Compile Include="Serializer\DomainSerializationBinder.cs" />
@@ -227,17 +225,10 @@
     <Compile Include="WindowsService\WindowsServiceManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resource.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Emit\PropAttributes\base_group.json" />
     <None Include="Logger\log4net.config" />
     <None Include="packages.config" />
   </ItemGroup>

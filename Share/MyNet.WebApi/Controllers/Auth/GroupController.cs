@@ -1,7 +1,7 @@
 ﻿using MyNet.Components.Result;
 using MyNet.Service.Auth;
 using MyNet.WebApi.Filters;
-using MyNet.WebApi.Models.Auth.Group;
+using MyNet.ViewModel.Auth.Group;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +13,8 @@ using MyNet.Components.Mapper;
 using MyNet.Model.Auth;
 using MyNet.WebApi.Models;
 using MyNet.Model;
+using MyNet.Model.Interface.Auth;
+using MyNet.Components.Emit;
 
 namespace MyNet.WebApi.Controllers.Auth
 {
@@ -33,7 +35,8 @@ namespace MyNet.WebApi.Controllers.Auth
         public OptResult Add(AddGroupViewModel vmAddGroup)
         {
             OptResult rst = null;
-
+            Type type = typeof(AddGroupViewModel);
+            
             //
             var token = base.ParseToken(ActionContext);
             var group = OOMapper.Map<AddGroupViewModel, Group>(vmAddGroup);

@@ -69,7 +69,7 @@ namespace MyNet.CustomQuery.Client.Models
         }
 
         private string _remark;
-        [MaxLength(255, ErrorMessageResourceName = "Remark_Length", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
+        [MaxLength(255, ErrorMessageResourceName = "Remark_Length", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         public string remark
         {
             get { return _remark; }

@@ -9,6 +9,7 @@ using MyNet.Components.Extensions;
 using MyNet.Model.Auth;
 using System.Windows;
 using System.Windows.Input;
+using MyNet.Model.Interface.Auth;
 
 namespace MyNet.Client.Pages
 {

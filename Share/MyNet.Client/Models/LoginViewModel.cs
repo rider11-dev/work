@@ -1,4 +1,5 @@
-﻿using MyNet.Components.WPF.Models;
+﻿using MyNet.Components.Misc;
+using MyNet.Components.WPF.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

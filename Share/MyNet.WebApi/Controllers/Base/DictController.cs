@@ -1,7 +1,7 @@
 ﻿using MyNet.Model;
 using MyNet.Service.Base;
 using MyNet.WebApi.Filters;
-using MyNet.WebApi.Models.Base;
+using MyNet.ViewModel.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;

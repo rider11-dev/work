@@ -56,16 +56,19 @@
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
@@ -90,25 +93,6 @@
     <Compile Include="Extensions\UploadHelper.cs" />
     <Compile Include="Filters\TokenValidateFilterAttribute.cs" />
     <Compile Include="Filters\ValidateModelFilterAttribute.cs" />
-    <Compile Include="Models\Auth\Group\AddGroupViewModel.cs" />
-    <Compile Include="Models\Auth\Group\EditGroupViewModel.cs" />
-    <Compile Include="Models\Auth\Permission\AddPermissionViewModel.cs" />
-    <Compile Include="Models\Auth\Permission\EditPermissionViewModel.cs" />
-    <Compile Include="Models\Auth\User\AssignPermissionViewModel.cs" />
-    <Compile Include="Models\Auth\User\ChangePwdViewModel.cs" />
-    <Compile Include="Models\Auth\User\EditUserViewModel.cs" />
-    <Compile Include="Models\Auth\User\LoginViewModel.cs" />
-    <Compile Include="Models\Auth\User\AddUserViewModel.cs" />
-    <Compile Include="Models\Base\AddDictTypeViewModel.cs" />
-    <Compile Include="Models\Base\AddDictViewModel.cs" />
-    <Compile Include="Models\Card\ChangePhoneViewModel.cs" />
-    <Compile Include="Models\Card\EditByIdcardsViewModel.cs" />
-    <Compile Include="Models\Card\EditByIdcardViewModel.cs" />
-    <Compile Include="Models\Card\MakeupCardViewModel.cs" />
-    <Compile Include="Models\Card\PayViewModel.cs" />
-    <Compile Include="Models\Card\RefundViewModel.cs" />
-    <Compile Include="Models\Card\RegisterCardViewModel.cs" />
-    <Compile Include="Models\Card\SetMoneyViewModel.cs" />
     <Compile Include="Models\DelByIdsViewModel.cs" />
     <Compile Include="Models\DelByIdViewModel.cs" />
     <Compile Include="Models\GetByIdViewModel.cs" />
@@ -132,10 +116,6 @@
       <Project>{a657507d-0f59-49c5-a6dc-0c788e0c63b1}</Project>
       <Name>MyNet.Components.Mapper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MyNet.Components.Resource\MyNet.Components.Resource.csproj">
-      <Project>{4ecb69ea-c6d9-436b-9689-90d065424f53}</Project>
-      <Name>MyNet.Components.Resource</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MyNet.Components\MyNet.Components.csproj">
       <Project>{9ed019a0-a26a-4725-aa70-2b52bf7a5416}</Project>
       <Name>MyNet.Components</Name>
@@ -152,6 +132,10 @@
     <ProjectReference Include="..\MyNet.Service\MyNet.Service.csproj">
       <Project>{1ecb045c-bb92-481a-ba25-bf0b48a92dfd}</Project>
       <Name>MyNet.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyNet.ViewModel\MyNet.ViewModel.csproj">
+      <Project>{d61d6f00-3662-4eef-84fe-7c038cabab23}</Project>
+      <Name>MyNet.ViewModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

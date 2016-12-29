@@ -1,4 +1,5 @@
 ﻿using MyNet.Components.Extensions;
+using MyNet.Components.Misc;
 using MyNet.Components.WPF.Models;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace MyNet.Client.Models.Account
     public class ChangePwdViewModel : BaseModel
     {
         string _oldpwd;
-        [Required(ErrorMessageResourceName = "OldPwd_Require", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
+        [Required(ErrorMessageResourceName = "OldPwd_Require", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         public string oldpwd
         {
             get { return _oldpwd; }
@@ -26,8 +27,8 @@ namespace MyNet.Client.Models.Account
         }
 
         string _newpwd;
-        [Required(ErrorMessageResourceName = "NewPwd_Require", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
-        [RegularExpression(RegexExtension.Regex_Pwd, ErrorMessageResourceName = "Pwd_Regex", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
+        [Required(ErrorMessageResourceName = "NewPwd_Require", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
+        [RegularExpression(RegexExtension.Regex_Pwd, ErrorMessageResourceName = "Pwd_Regex", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         public string newpwd
         {
             get { return _newpwd; }
@@ -42,7 +43,7 @@ namespace MyNet.Client.Models.Account
         }
 
         string _newpwd2;
-        [Required(ErrorMessageResourceName = "NewPwd2_Require", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
+        [Required(ErrorMessageResourceName = "NewPwd2_Require", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         //TODO
         //[Compare("newpwd", ErrorMessage = "两次输入新密码不相同")]//报错，暂不启用，后续处理
         public string newpwd2

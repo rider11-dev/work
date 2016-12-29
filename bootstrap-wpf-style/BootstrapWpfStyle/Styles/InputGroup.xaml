@@ -456,10 +456,19 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <!--验证模板-->
+    <ControlTemplate x:Key="TempValidateError">
+        <DockPanel>
+            <!--AdornedElementPlaceholder表示需要装饰的控件-->
+            <AdornedElementPlaceholder/>
+            <Image Width="20" Source="/BootstrapWpfStyle;component/Images/error.png" Margin="0,0,4,0"/>
+        </DockPanel>
+    </ControlTemplate>
     <Style x:Key="input-group-addon-img right" BasedOn="{StaticResource InputGroupAddonBaseStyle}" TargetType="{x:Type Control}">
         <Style.Resources>
             <cvt:ImgSourceConverter x:Key="cvtImgSrc"/>
         </Style.Resources>
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource TempValidateError}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Control}">
@@ -468,7 +477,6 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition Width="40"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="1" Content="{TemplateBinding Tag}" Style="{DynamicResource InputGroupLabelRightStyle}" Margin="-1,0,0,0"></Label>
                         <Border Grid.Column="1" x:Name="imgBorder" CornerRadius="0,4,4,0" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="2" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
                             <Image Source="{TemplateBinding Tag,Converter={StaticResource cvtImgSrc}}" Width="40"/>
                         </Border>
@@ -515,5 +523,10 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="True">
+                <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self},Path=(Validation.Errors)[0].ErrorContent}"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>

@@ -29,6 +29,7 @@ using MyNet.Model.Base;
 using System.Threading;
 using System.Windows.Threading;
 using MyNet.Components.Http;
+using MyNet.Model.Interface.Auth;
 
 namespace MyNet.Client
 {

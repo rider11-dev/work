@@ -4,10 +4,11 @@ using MyNet.Components.Result;
 using MyNet.Model;
 using MyNet.Model.Auth;
 using MyNet.Service.Auth;
+using MyNet.ViewModel.Auth.User;
 using MyNet.WebApi.Extensions;
 using MyNet.WebApi.Filters;
 using MyNet.WebApi.Models;
-using MyNet.WebApi.Models.Auth.User;
+using MyNet.ViewModel.Auth.User;
 using System;
 using System.Web.Http;
 

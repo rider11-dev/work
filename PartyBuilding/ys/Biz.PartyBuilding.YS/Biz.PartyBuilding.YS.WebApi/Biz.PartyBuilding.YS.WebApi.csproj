@@ -96,11 +96,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Share\MyNet.Components.Resource\MyNet.Components.Resource.csproj">
-      <Project>{4ecb69ea-c6d9-436b-9689-90d065424f53}</Project>
-      <Name>MyNet.Components.Resource</Name>
-      <Private>False</Private>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\..\Share\MyNet.Components\MyNet.Components.csproj">
       <Project>{9ed019a0-a26a-4725-aa70-2b52bf7a5416}</Project>
       <Name>MyNet.Components</Name>

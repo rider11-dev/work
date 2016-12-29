@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyNet.Model.Interface.Auth;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyNet.Model.Auth
 {
-    public class Group
+    public class Group : IGroup
     {
         public string gp_id { get; set; }
         public string gp_code { get; set; }

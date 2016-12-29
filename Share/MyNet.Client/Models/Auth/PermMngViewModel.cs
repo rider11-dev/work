@@ -18,6 +18,7 @@ using MyNet.Components.Mapper;
 using MyNet.Components.WPF.Command;
 using MyNet.Client.Help;
 using MyNet.Components.Http;
+using MyNet.Model.Interface.Auth;
 
 namespace MyNet.Client.Models.Auth
 {
@@ -156,7 +157,7 @@ namespace MyNet.Client.Models.Auth
                 var models = JsonConvert.DeserializeObject<IEnumerable<PermViewModel>>(((JArray)rst.data.rows).ToString());
 
                 base.PageStart = page.Start;
-                base.Models = (models as IList<CheckableModel>).ToList();
+                base.Models = (models as IEnumerable<CheckableModel>).ToList();
             }
         }
         #endregion

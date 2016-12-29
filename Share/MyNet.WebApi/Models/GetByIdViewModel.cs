@@ -8,7 +8,7 @@ namespace MyNet.WebApi.Models
 {
     public class GetByIdViewModel
     {
-        [Required(ErrorMessageResourceName = "GetByPk_Require", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
+        [Required(ErrorMessageResourceName = "GetByPk_Require", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         public string pk { get; set; }
     }
 }

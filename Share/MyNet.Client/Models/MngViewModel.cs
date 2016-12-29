@@ -34,6 +34,13 @@ namespace MyNet.Client.Models
             }
         }
 
+        public virtual Dictionary<string, ICommand> Commands
+        {
+            get
+            {
+                return null;
+            }
+        }
 
         #region 所有命令
         private ICommand _addCmd;

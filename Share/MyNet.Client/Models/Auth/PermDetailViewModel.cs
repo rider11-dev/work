@@ -18,6 +18,7 @@ using MyNet.Components.WPF.Controls;
 using MyNet.Client.Help;
 using MyNet.Model.Dto.Auth;
 using MyNet.Components.Http;
+using MyNet.Model.Interface.Auth;
 
 namespace MyNet.Client.Models.Auth
 {

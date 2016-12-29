@@ -8,7 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using MyNet.WebApi.Extensions;
-using MyNet.WebApi.Models.Card;
+using MyNet.ViewModel.Card;
 using MyNet.Components.Result;
 
 namespace MyNet.WebApi.Controllers.Card

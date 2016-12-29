@@ -95,3 +95,8 @@
 /Share/MyNet.Components.Mapper/bin
 /Share/MyNet.Components.Office/obj
 /Share/MyNet.Components.Office/bin
+/Share/MyNet.ViewModel/bin
+/Share/MyNet.ViewModel/obj
+/bootstrap-wpf-style/packages
+/CustomQuery/MyNet.CustomQuery.ViewModel/bin
+/CustomQuery/MyNet.CustomQuery.ViewModel/obj

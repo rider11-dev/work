@@ -1,0 +1,15 @@
+﻿[
+  {
+    "prop_name": "username",
+    "attrs": [
+      {
+        "attr_type": "System.ComponentModel.DataAnnotations.MaxLengthAttribute,System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+        "ctor_arg_types": "System.Int32", //以逗号隔开
+        "ctor_arg_values": [ 2 ],
+        "error_msg": "",
+        "error_msg_res_name": "max_length",
+        "error_msg_res_type": "Client.Resource,Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+      }
+    ]
+  }
+]

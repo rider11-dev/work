@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyNet.Model.Interface.Auth;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace MyNet.Model.Auth
     /// <summary>
     /// 权限控制——用户
     /// </summary>
-    public class User
+    public class User : IUser
     {
         public string user_id { get; set; }
         public string user_name { get; set; }

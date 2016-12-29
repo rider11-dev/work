@@ -1,7 +1,7 @@
 ﻿using MyNet.Model;
 using MyNet.Service.Auth;
 using MyNet.WebApi.Filters;
-using MyNet.WebApi.Models.Auth.Permission;
+using MyNet.ViewModel.Auth.Permission;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -99,7 +99,7 @@ namespace MyNet.WebApi.Controllers.Auth
             return rst;
         }
 
-        [HttpPost]
+        
         [Route("getallfuncs")]
         public OptResult GetAllFuncs()
         {
@@ -108,7 +108,7 @@ namespace MyNet.WebApi.Controllers.Auth
 
             return rst;
         }
-        [HttpPost]
+        
         [Route("getallopts")]
         public OptResult GetAllOpts()
         {

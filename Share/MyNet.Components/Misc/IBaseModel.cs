@@ -8,5 +8,6 @@ namespace MyNet.Components.Misc
 {
     public interface IBaseModel
     {
+        bool CanValidate { get; set; }
     }
 }

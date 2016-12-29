@@ -1,0 +1,73 @@
+﻿[
+  {
+    "prop_name": "gp_code",
+    "attrs": [
+      {
+        "attr_type": "System.ComponentModel.DataAnnotations.RequiredAttribute,System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+        "ctor_arg_types": "",
+        "ctor_arg_values": [ ],
+        "error_msg": "",
+        "error_msg_res_name": "Code_Require",
+        "error_msg_res_type": "MyNet.ViewModel.Resource.ViewModelResource,MyNet.ViewModel, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+      },
+      {
+        "attr_type": "System.ComponentModel.DataAnnotations.MaxLengthAttribute,System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+        "ctor_arg_types": "System.Int32", //以逗号隔开
+        "ctor_arg_values": [ 40 ],
+        "error_msg": "",
+        "error_msg_res_name": "Group_Code_Length",
+        "error_msg_res_type": "MyNet.ViewModel.Resource.ViewModelResource,MyNet.ViewModel, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+      }
+    ]
+  },
+  {
+    "prop_name": "gp_name",
+    "attrs": [
+      {
+        "attr_type": "System.ComponentModel.DataAnnotations.RequiredAttribute,System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+        "ctor_arg_types": "",
+        "ctor_arg_values": [ ],
+        "error_msg": "",
+        "error_msg_res_name": "Name_Require",
+        "error_msg_res_type": "MyNet.ViewModel.Resource.ViewModelResource,MyNet.ViewModel, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+      },
+      {
+        "attr_type": "System.ComponentModel.DataAnnotations.MaxLengthAttribute,System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+        "ctor_arg_types": "System.Int32", //以逗号隔开
+        "ctor_arg_values": [ 40 ],
+        "error_msg": "",
+        "error_msg_res_name": "Group_Name_Length",
+        "error_msg_res_type": "MyNet.ViewModel.Resource.ViewModelResource,MyNet.ViewModel, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+      }
+    ]
+  },
+  {
+    "prop_name": "gp_sort",
+    "attrs": [
+      {
+        "attr_type": "System.ComponentModel.DataAnnotations.RequiredAttribute,System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+        "ctor_arg_types": "",
+        "ctor_arg_values": [ ],
+        "error_msg": "",
+        "error_msg_res_name": "Sort_Require",
+        "error_msg_res_type": "MyNet.ViewModel.Resource.ViewModelResource,MyNet.ViewModel, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+      },
+      {
+        "attr_type": "System.ComponentModel.DataAnnotations.MaxLengthAttribute,System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+        "ctor_arg_types": "System.Int32", //以逗号隔开
+        "ctor_arg_values": [ 10 ],
+        "error_msg": "",
+        "error_msg_res_name": "Sort_Length",
+        "error_msg_res_type": "MyNet.ViewModel.Resource.ViewModelResource,MyNet.ViewModel, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+      },
+      {
+        "attr_type": "System.ComponentModel.DataAnnotations.RegularExpressionAttribute,System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+        "ctor_arg_types": "System.String", 
+        "ctor_arg_values": [ "^\d{0,10}$" ],
+        "error_msg": "",
+        "error_msg_res_name": "Sort_Regex",
+        "error_msg_res_type": "MyNet.ViewModel.Resource.ViewModelResource,MyNet.ViewModel, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+      }
+    ]
+  }
+]

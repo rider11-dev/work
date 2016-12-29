@@ -15,8 +15,8 @@ namespace MyNet.Client.Models.Auth
         public string per_id { get; set; }
 
         string _per_code;
-        [Required(ErrorMessageResourceName = "Code_Require", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
-        [MaxLength(40, ErrorMessageResourceName = "Per_Code_Length", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
+        [Required(ErrorMessageResourceName = "Code_Require", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
+        [MaxLength(40, ErrorMessageResourceName = "Per_Code_Length", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         public string per_code
         {
             get { return _per_code; }
@@ -31,8 +31,8 @@ namespace MyNet.Client.Models.Auth
         }
 
         string _per_name;
-        [Required(ErrorMessageResourceName = "Name_Require", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
-        [MaxLength(40, ErrorMessageResourceName = "Per_Name_Length", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
+        [Required(ErrorMessageResourceName = "Name_Require", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
+        [MaxLength(40, ErrorMessageResourceName = "Per_Name_Length", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         public string per_name
         {
             get { return _per_name; }
@@ -47,7 +47,7 @@ namespace MyNet.Client.Models.Auth
         }
 
         string _per_type;
-        [Required(ErrorMessageResourceName = "Per_Type_Require", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
+        [Required(ErrorMessageResourceName = "Per_Type_Require", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         public string per_type
         {
             get { return _per_type; }
@@ -76,7 +76,7 @@ namespace MyNet.Client.Models.Auth
         }
 
         string _per_uri;
-        [MaxLength(255, ErrorMessageResourceName = "Per_Uri_Length", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
+        [MaxLength(255, ErrorMessageResourceName = "Per_Uri_Length", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         public string per_uri
         {
             get { return _per_uri; }
@@ -91,7 +91,7 @@ namespace MyNet.Client.Models.Auth
         }
 
         string _per_method;
-        [MaxLength(255, ErrorMessageResourceName = "Per_Method_Length", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
+        [MaxLength(255, ErrorMessageResourceName = "Per_Method_Length", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         public string per_method
         {
             get { return _per_method; }
@@ -134,9 +134,9 @@ namespace MyNet.Client.Models.Auth
         }
 
         string _per_sort;
-        [Required(ErrorMessageResourceName = "Sort_Require", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
-        [RegularExpression(RegexExtension.Regex_Sort, ErrorMessageResourceName = "Sort_Regex", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
-        [MaxLength(10, ErrorMessageResourceName = "Sort_Length", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
+        [Required(ErrorMessageResourceName = "Sort_Require", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
+        [RegularExpression(RegexExtension.Regex_Sort, ErrorMessageResourceName = "Sort_Regex", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
+        [MaxLength(10, ErrorMessageResourceName = "Sort_Length", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         public string per_sort
         {
             get { return _per_sort; }
@@ -165,7 +165,7 @@ namespace MyNet.Client.Models.Auth
         }
 
         string _per_remark;
-        [MaxLength(200, ErrorMessageResourceName = "Remark_Length", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
+        [MaxLength(200, ErrorMessageResourceName = "Remark_Length", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         public string per_remark
         {
             get { return _per_remark; }

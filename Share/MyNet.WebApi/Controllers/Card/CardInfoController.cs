@@ -1,7 +1,7 @@
 ﻿using MyNet.Model.Card;
 using MyNet.Service.Card;
 using MyNet.WebApi.Filters;
-using MyNet.WebApi.Models.Card;
+using MyNet.ViewModel.Card;
 using System;
 using System.Collections.Generic;
 using System.Linq;

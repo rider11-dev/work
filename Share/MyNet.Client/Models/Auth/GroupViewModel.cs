@@ -14,8 +14,8 @@ namespace MyNet.Client.Models.Auth
     {
         public string gp_id { get; set; }
         string _gp_code;
-        [Required(ErrorMessageResourceName = "Code_Require", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
-        [MaxLength(40, ErrorMessageResourceName = "Group_Code_Length", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
+        [Required(ErrorMessageResourceName = "Code_Require", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
+        [MaxLength(40, ErrorMessageResourceName = "Group_Code_Length", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         public string gp_code
         {
             get { return _gp_code; }
@@ -30,8 +30,8 @@ namespace MyNet.Client.Models.Auth
         }
 
         string _gp_name;
-        [Required(ErrorMessageResourceName = "Name_Require", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
-        [MaxLength(40, ErrorMessageResourceName = "Group_Name_Length", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
+        [Required(ErrorMessageResourceName = "Name_Require", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
+        [MaxLength(40, ErrorMessageResourceName = "Group_Name_Length", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         public string gp_name
         {
             get { return _gp_name; }
@@ -92,9 +92,9 @@ namespace MyNet.Client.Models.Auth
         }
 
         string _gp_sort;
-        [Required(ErrorMessageResourceName = "Sort_Require", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
-        [RegularExpression(RegexExtension.Regex_Sort, ErrorMessageResourceName = "Sort_Regex", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
-        [MaxLength(10, ErrorMessageResourceName = "Sort_Length", ErrorMessageResourceType = typeof(MyNet.Components.Resource.ViewModelResource))]
+        [Required(ErrorMessageResourceName = "Sort_Require", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
+        [RegularExpression(RegexExtension.Regex_Sort, ErrorMessageResourceName = "Sort_Regex", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
+        [MaxLength(10, ErrorMessageResourceName = "Sort_Length", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         public string gp_sort
         {
             get { return _gp_sort; }

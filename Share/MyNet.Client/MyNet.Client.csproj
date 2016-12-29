@@ -287,10 +287,6 @@
       <Project>{a657507d-0f59-49c5-a6dc-0c788e0c63b1}</Project>
       <Name>MyNet.Components.Mapper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MyNet.Components.Resource\MyNet.Components.Resource.csproj">
-      <Project>{4ecb69ea-c6d9-436b-9689-90d065424f53}</Project>
-      <Name>MyNet.Components.Resource</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MyNet.Components.WPF\MyNet.Components.WPF.csproj">
       <Project>{6324a5cc-0daf-4af4-80a3-5d2a60769c96}</Project>
       <Name>MyNet.Components.WPF</Name>
@@ -303,6 +299,10 @@
     <ProjectReference Include="..\MyNet.Model\MyNet.Model.csproj">
       <Project>{bb11afa2-784c-4e60-9586-6608d8338d67}</Project>
       <Name>MyNet.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyNet.ViewModel\MyNet.ViewModel.csproj">
+      <Project>{d61d6f00-3662-4eef-84fe-7c038cabab23}</Project>
+      <Name>MyNet.ViewModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

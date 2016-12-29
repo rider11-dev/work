@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MyNet.Model.Interface.Auth
+{
+    /// <summary>
+    /// 权限类别
+    /// </summary>
+    public enum PermType
+    {
+        [Description("功能权限")]
+        Func = 0,
+        [Description("操作权限")]
+        Opt = 1
+    }
+}

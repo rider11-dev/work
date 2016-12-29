@@ -3,11 +3,16 @@ using Autofac.Integration.WebApi;
 using MyNet.Components.Extensions;
 using MyNet.Components.Logger;
 using MyNet.Components.Misc;
+using MyNet.WebHostService.Extension;
 using Owin;
 using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Dispatcher;
+using System.Web.Http.ModelBinding;
+using System.Web.Http.ModelBinding.Binders;
+using System.Web.Http.ValueProviders;
 
 namespace MyNet.WebHostService
 {
@@ -43,6 +48,15 @@ namespace MyNet.WebHostService
             //5、容器注册
             IocRegister();
 
+            //HostContext.Configration.Services.ReplaceRange(typeof(ModelBinderProvider),
+            //    new ModelBinderProvider[]
+            //    {
+            //        new MyTypeConverterModelBinderProvider(),
+            //        new MyComplexModelDtoModelBinderProvider(),
+            //        new MyMutableObjectModelBinderProvider()
+            //    });
+            //HostContext.Configration.Services.ReplaceRange(typeof(ValueProviderFactory), new ValueProviderFactory[] { new StaticValueProviderFactory() });
+
             appBuilder.UseWebApi(HostContext.Configration);
         }
 
@@ -74,6 +88,7 @@ namespace MyNet.WebHostService
                 //_logHelper.LogInfo(string.Join("\r\n", initTypes.Select(a => a.FullName)));
                 initTypes.ToList().ForEach(t => (t.Assembly.CreateInstance(t.FullName, false) as Iinit).Init(builder));
             }
+
         }
     }
 }

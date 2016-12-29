@@ -89,7 +89,6 @@
     <Compile Include="Extension\VisualExtension.cs" />
     <Compile Include="Extension\WindowExtension.cs" />
     <Compile Include="Misc\ExcelHelper.cs" />
-    <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\CheckableModel.cs" />
     <Compile Include="Models\CheckableModelCollection.cs" />
     <Compile Include="Models\CmbItem.cs" />

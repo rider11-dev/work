@@ -64,21 +64,12 @@
     <Compile Include="Controllers\CustomQueryController.cs" />
     <Compile Include="Controllers\FieldController.cs" />
     <Compile Include="Controllers\TableController.cs" />
-    <Compile Include="Models\EditFieldViewModel.cs" />
-    <Compile Include="Models\AddFieldViewModel.cs" />
-    <Compile Include="Models\EditTableViewModel.cs" />
-    <Compile Include="Models\AddTableViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Share\MyNet.Components.Mapper\MyNet.Components.Mapper.csproj">
       <Project>{a657507d-0f59-49c5-a6dc-0c788e0c63b1}</Project>
       <Name>MyNet.Components.Mapper</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Share\MyNet.Components.Resource\MyNet.Components.Resource.csproj">
-      <Project>{4ecb69ea-c6d9-436b-9689-90d065424f53}</Project>
-      <Name>MyNet.Components.Resource</Name>
       <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\Share\MyNet.Components\MyNet.Components.csproj">
@@ -96,6 +87,11 @@
       <Name>MyNet.Service</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\..\Share\MyNet.ViewModel\MyNet.ViewModel.csproj">
+      <Project>{d61d6f00-3662-4eef-84fe-7c038cabab23}</Project>
+      <Name>MyNet.ViewModel</Name>
+      <Private>False</Private>
+    </ProjectReference>
     <ProjectReference Include="..\..\Share\MyNet.WebApi\MyNet.WebApi.csproj">
       <Project>{7e7c4a44-1919-4c56-8227-515544ea99f5}</Project>
       <Name>MyNet.WebApi</Name>
@@ -108,6 +104,10 @@
     <ProjectReference Include="..\MyNet.CustomQuery.Service\MyNet.CustomQuery.Service.csproj">
       <Project>{07ab4f76-2851-4208-a369-365168b2cf3c}</Project>
       <Name>MyNet.CustomQuery.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyNet.CustomQuery.ViewModel\MyNet.CustomQuery.ViewModel.csproj">
+      <Project>{95b346be-650c-4268-a792-eabdb63e7df9}</Project>
+      <Name>MyNet.CustomQuery.ViewModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

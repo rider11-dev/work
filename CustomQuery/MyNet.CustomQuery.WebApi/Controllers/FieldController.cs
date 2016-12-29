@@ -3,7 +3,7 @@ using MyNet.Components.Mapper;
 using MyNet.Components.Result;
 using MyNet.CustomQuery.Model;
 using MyNet.CustomQuery.Service;
-using MyNet.CustomQuery.WebApi.Models;
+using MyNet.CustomQuery.ViewModel;
 using MyNet.Model;
 using MyNet.WebApi.Controllers;
 using MyNet.WebApi.Extensions;

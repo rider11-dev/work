@@ -90,8 +90,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiDemo\Contact.cs" />
+    <Compile Include="ApiDemo\IContact.cs" />
     <Compile Include="CustomMessageHandler.cs" />
+    <Compile Include="ApiDemo\DemoController.cs" />
+    <Compile Include="Extension\ModelNameBuilder.cs" />
+    <Compile Include="Extension\MyComplexModelDtoModelBinder.cs" />
+    <Compile Include="Extension\MyComplexModelDtoModelBinderProvider.cs" />
+    <Compile Include="Extension\MyMutableObjectModelBinderProvider.cs" />
+    <Compile Include="Extension\MyTypeConverterModelBinder.cs" />
+    <Compile Include="Extension\MyTypeConverterModelBinderProvider.cs" />
     <Compile Include="ExtendedAssembliesResolver.cs" />
+    <Compile Include="Extension\StaticValueProviderFactory.cs" />
     <Compile Include="HostContext.cs" />
     <Compile Include="HostService.cs">
       <SubType>Component</SubType>
@@ -99,6 +109,7 @@
     <Compile Include="HostService.Designer.cs">
       <DependentUpon>HostService.cs</DependentUpon>
     </Compile>
+    <Compile Include="Extension\MyMutableObjectModelBinder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
