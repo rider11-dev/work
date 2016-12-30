@@ -10,7 +10,7 @@ using System.Web;
 
 namespace MyNet.Client.Models.Auth
 {
-    public class PermViewModel : CheckableModel, Iindexer, ICopytToable
+    public class PermViewModel : CheckableModel, Iindexer, ICopyable
     {
         public string per_id { get; set; }
 
@@ -179,13 +179,13 @@ namespace MyNet.Client.Models.Auth
             }
         }
 
-        public void CopyTo(IBaseModel targetModel)
+        public void CopyTo(object target)
         {
-            if (targetModel == null)
+            if (target == null)
             {
                 return;
             }
-            var vmPerm = (PermViewModel)targetModel;
+            var vmPerm = (PermViewModel)target;
             vmPerm.per_id = this.per_id;
             vmPerm.per_code = this.per_code;
             vmPerm.per_name = this.per_name;

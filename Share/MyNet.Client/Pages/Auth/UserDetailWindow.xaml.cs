@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MyNet.Components.Extensions;
 using MyNet.Components.WPF.Windows;
+using MyNet.ViewModel.Auth.User;
 
 namespace MyNet.Client.Pages.Auth
 {
@@ -28,20 +29,19 @@ namespace MyNet.Client.Pages.Auth
         {
             InitializeComponent();
 
-            _vmUsrDetail = this.DataContext as UserDetailViewModel;
+            _vmUsrDetail = new UserDetailViewModel();
+            this.DataContext = _vmUsrDetail;
             _vmUsrDetail.Window = this;
         }
 
-        public UserDetailWindow(UserViewModel vm = null)
-            : this()
+        public UserDetailWindow(UserDetailViewModel usrVM) : this()
         {
-            if (vm != null)
+            if (usrVM != null)
             {
-                vm.CopyTo(_vmUsrDetail);
+                usrVM.CopyTo(_vmUsrDetail);
             }
-
-            base.Title = string.IsNullOrEmpty(_vmUsrDetail.user_id) ? "新增用户" : "修改用户";
-            txtUserName.IsReadOnly = _vmUsrDetail.user_name.IsNotEmpty();
+            base.Title = _vmUsrDetail.IsNew ? "新增用户" : "修改用户";
+            txtUserName.IsReadOnly = _vmUsrDetail.userdata.user_name.IsNotEmpty();
         }
 
         private void UserDetailWindow_Loaded(object sender, RoutedEventArgs e)

@@ -52,11 +52,11 @@
 
         <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource lblStyle}" Content="组织编号"/>
         <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtGpCode" Style="{StaticResource inputStyle}"
-                Text="{Binding Path=gp_code,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                Text="{Binding Path=gp_code,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
         />
         <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource lblStyle}" Content="组织名称"/>
         <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource inputStyle}"
-                Text="{Binding Path=gp_name,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                Text="{Binding Path=gp_name,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
                  />
         <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource lblStyle}" Content="是否系统"/>
         <ComboBox Grid.Row="3" Grid.Column="1" x:Name="cbIsSystem"
@@ -73,7 +73,7 @@
                 />
         <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource lblStyle}" Content="排序号"/>
         <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource inputStyle}"
-                Text="{Binding Path=gp_sort,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                Text="{Binding Path=gp_sort,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
                  />
 
         <Grid Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2">

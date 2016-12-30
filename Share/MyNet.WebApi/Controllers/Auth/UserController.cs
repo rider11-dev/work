@@ -33,7 +33,7 @@ namespace MyNet.WebApi.Controllers.Auth
         [HttpPost]
         [Route("login")]
         [TokenValidateFilter(true)]
-        public OptResult Login(LoginViewModel vmLogin)
+        public OptResult Login(LoginVM vmLogin)
         {
             OptResult rst = null;
             if (vmLogin == null)
@@ -62,14 +62,14 @@ namespace MyNet.WebApi.Controllers.Auth
 
         [HttpPost]
         [Route("add")]
-        public OptResult Add(AddUserViewModel vmUsr)
+        public OptResult Add(UserDetailVM vmUsr)
         {
             OptResult rst = null;
 
             //
             var token = base.ParseToken(ActionContext);
 
-            var usr = OOMapper.Map<AddUserViewModel, User>(vmUsr);
+            var usr = OOMapper.Map<UserDetailVM, User>(vmUsr);
             usr.user_creator = token.iss;
             rst = _usrSrv.Add(usr);
             return rst;
@@ -77,12 +77,12 @@ namespace MyNet.WebApi.Controllers.Auth
 
         [HttpPost]
         [Route("update")]
-        public OptResult Update(EditUserViewModel vmUsr)
+        public OptResult Update(UserDetailVM vmUsr)
         {
             OptResult rst = null;
 
             var token = base.ParseToken(ActionContext);
-            var usr = OOMapper.Map<EditUserViewModel, User>(vmUsr);
+            var usr = OOMapper.Map<UserDetailVM, User>(vmUsr);
 
             rst = _usrSrv.Update(usr);
 
@@ -103,7 +103,7 @@ namespace MyNet.WebApi.Controllers.Auth
 
         [HttpPost]
         [Route("changepwd")]
-        public OptResult ChangePwd(ChangePwdViewModel vmChangePwd)
+        public OptResult ChangePwd(ChgPwdVM vmChangePwd)
         {
             OptResult rst = null;
 
@@ -141,7 +141,7 @@ namespace MyNet.WebApi.Controllers.Auth
 
         [HttpPost]
         [Route("assign")]
-        public OptResult AssignPermissions(AssignPermissionViewModel vmAssignPer)
+        public OptResult AssignPermissions(AssignPermVM vmAssignPer)
         {
             OptResult rst = null;
             if (vmAssignPer == null)

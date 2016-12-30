@@ -30,7 +30,7 @@ namespace MyNet.WebApi.Controllers.Auth
 
         [HttpPost]
         [Route("add")]
-        public OptResult Add(AddPermissionViewModel vmAddPer)
+        public OptResult Add(PermDetailVM vmAddPer)
         {
             OptResult rst = null;
             if (vmAddPer == null)
@@ -41,7 +41,7 @@ namespace MyNet.WebApi.Controllers.Auth
 
             //
             var token = base.ParseToken(ActionContext);
-            var per = OOMapper.Map<AddPermissionViewModel, Permission>(vmAddPer);
+            var per = OOMapper.Map<PermDetailVM, Permission>(vmAddPer);
             rst = _perSrv.Add(per);
 
             return rst;

@@ -36,7 +36,7 @@ namespace MyNet.WebApi.Controllers.Auth
         {
             OptResult rst = null;
             Type type = typeof(AddGroupViewModel);
-            
+
             //
             var token = base.ParseToken(ActionContext);
             var group = OOMapper.Map<AddGroupViewModel, Group>(vmAddGroup);
@@ -83,7 +83,6 @@ namespace MyNet.WebApi.Controllers.Auth
             return rst;
         }
 
-        [HttpPost]
         [Route("getall")]
         public OptResult GetAllGroups()
         {

@@ -47,13 +47,16 @@
   <ItemGroup>
     <Compile Include="Auth\Group\AddGroupViewModel.cs" />
     <Compile Include="Auth\Group\EditGroupViewModel.cs" />
-    <Compile Include="Auth\Permission\AddPermissionViewModel.cs" />
+    <Compile Include="Auth\Permission\IPermDetailVM.cs" />
+    <Compile Include="Auth\Permission\PermDetailVM.cs" />
     <Compile Include="Auth\Permission\EditPermissionViewModel.cs" />
-    <Compile Include="Auth\User\AddUserViewModel.cs" />
-    <Compile Include="Auth\User\AssignPermissionViewModel.cs" />
-    <Compile Include="Auth\User\ChangePwdViewModel.cs" />
-    <Compile Include="Auth\User\EditUserViewModel.cs" />
-    <Compile Include="Auth\User\LoginViewModel.cs" />
+    <Compile Include="Auth\User\IChgPwdVM.cs" />
+    <Compile Include="Auth\User\IUserDetailVM.cs" />
+    <Compile Include="Auth\User\UserDetailVM.cs" />
+    <Compile Include="Auth\User\AssignPermVM.cs" />
+    <Compile Include="Auth\User\ChgPwdVM.cs" />
+    <Compile Include="Auth\User\ILoginVM.cs" />
+    <Compile Include="Auth\User\LoginVM.cs" />
     <Compile Include="Base\AddDictTypeViewModel.cs" />
     <Compile Include="Base\AddDictViewModel.cs" />
     <Compile Include="Card\ChangePhoneViewModel.cs" />
@@ -72,6 +75,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MyNet.Components.Mapper\MyNet.Components.Mapper.csproj">
+      <Project>{A657507D-0F59-49C5-A6DC-0C788E0C63B1}</Project>
+      <Name>MyNet.Components.Mapper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyNet.Components\MyNet.Components.csproj">
       <Project>{9ed019a0-a26a-4725-aa70-2b52bf7a5416}</Project>
       <Name>MyNet.Components</Name>

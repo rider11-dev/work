@@ -28,21 +28,21 @@ namespace MyNet.Client.Pages.Auth
         PermDetailViewModel _vmPermDetail;
         private PermissionDetailWindow()
         {
-            InitializeComponent();
-
-            _vmPermDetail = this.DataContext as PermDetailViewModel;
+            _vmPermDetail = new PermDetailViewModel();
             _vmPermDetail.Window = this;
+            this.DataContext = _vmPermDetail;
+            InitializeComponent();
         }
 
-        public PermissionDetailWindow(PermViewModel vm = null)
+        public PermissionDetailWindow(PermDetailViewModel vm = null)
             : this()
         {
             if (vm != null)
             {
                 vm.CopyTo(_vmPermDetail);
             }
-            base.Title = string.IsNullOrEmpty(_vmPermDetail.per_id) ? "新增权限" : "修改权限";
-            txtPerCode.IsReadOnly = _vmPermDetail.per_code.IsNotEmpty();
+            base.Title = _vmPermDetail.IsNew ? "新增权限" : "修改权限";
+            txtPerCode.IsReadOnly = _vmPermDetail.permdata.per_code.IsNotEmpty();
         }
 
         private void PermissionDetailWindow_Loaded(object sender, RoutedEventArgs e)
@@ -50,9 +50,9 @@ namespace MyNet.Client.Pages.Auth
             _vmPermDetail.CanValidate = true;
 
             //设置权限类型
-            DataCacheUtils.SetCmbSource(cbPermType, DictType.Perm, _vmPermDetail.per_type);
+            DataCacheUtils.SetCmbSource(cbPermType, DictType.Perm, _vmPermDetail.permdata.per_type);
             //是否系统下拉框
-            DataCacheUtils.SetEnumCmbSource<BoolType>(cbIsSystem, _vmPermDetail.per_system);
+            DataCacheUtils.SetEnumCmbSource<BoolType>(cbIsSystem, _vmPermDetail.permdata.per_system.ToString());
         }
     }
 }

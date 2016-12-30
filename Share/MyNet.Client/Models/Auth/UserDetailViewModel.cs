@@ -13,22 +13,38 @@ using System.Windows.Input;
 using MyNet.Client.Help;
 using MyNet.Components.WPF.Controls;
 using MyNet.Components.Http;
+using MyNet.ViewModel.Auth.User;
+using MyNet.Components.Emit;
+using MyNet.Components.Misc;
+using MyNet.Components.WPF.Models;
+using MyNet.Components.Validation;
 
 namespace MyNet.Client.Models.Auth
 {
-    public class UserDetailViewModel : UserViewModel
+    public partial class UserDetailViewModel : CheckableModel
     {
-        [JsonIgnore]
-        public bool IsNew
+        public IUserDetailVM userdata { get; private set; }
+
+        public UserDetailViewModel(bool needValidate = true) : base(needValidate)
         {
-            get { return string.IsNullOrEmpty(base.user_id); }
+            userdata = DynamicModelBuilder.GetInstance<IUserDetailVM>(parent: typeof(BaseModel), ctorArgs: needValidate);
+            userdata.ValidateMetadataType = typeof(UserDetailVM);
         }
 
         [JsonIgnore]
+        [ValidateIgnore]
+        public bool IsNew
+        {
+            get { return string.IsNullOrEmpty(userdata.user_id); }
+        }
+
+        [JsonIgnore]
+        [ValidateIgnore]
         public BaseWindow Window { get; set; }
 
         [JsonIgnore]
         private DelegateCommand _saveCmd;
+        [ValidateIgnore]
         public DelegateCommand SaveCmd
         {
             get
@@ -44,6 +60,7 @@ namespace MyNet.Client.Models.Auth
         [JsonIgnore]
         private ICommand _groupHelpCmd;
         [JsonIgnore]
+        [ValidateIgnore]
         public ICommand GroupHelpCmd
         {
             get
@@ -61,8 +78,8 @@ namespace MyNet.Client.Models.Auth
             TreeHelper.OpenAllGroupsHelp(false, node =>
             {
                 var tNode = node;
-                base.user_group_name = tNode.Label;
-                base.user_group = tNode.DataId;
+                user_group_name = tNode.Label;
+                userdata.user_group = tNode.DataId;
             });
         }
 
@@ -74,7 +91,7 @@ namespace MyNet.Client.Models.Auth
                 return;
             }
             var url = ApiUtils.GetApiUrl(this.IsNew ? ApiKeys.AddUsr : ApiKeys.EditUsr);
-            var rst = HttpUtils.PostResult(url, (UserViewModel)this, ClientContext.Token);
+            var rst = HttpUtils.PostResult(url, this.userdata, ClientContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, this.IsNew ? OperationDesc.Add : OperationDesc.Edit, rst.msg);
@@ -86,6 +103,36 @@ namespace MyNet.Client.Models.Auth
                 Window.DialogResult = true;
                 Window.CloseCmd.Execute(null);
             }
+        }
+
+    }
+
+    //扩展属性
+    public partial class UserDetailViewModel : ICopyable
+    {
+        string _user_group_name;
+        public string user_group_name
+        {
+            get { return _user_group_name; }
+            set
+            {
+                if (_user_group_name != value)
+                {
+                    _user_group_name = value;
+                    base.RaisePropertyChanged("user_group_name");
+                }
+            }
+        }
+
+        public void CopyTo(object target)
+        {
+            if (target == null)
+            {
+                return;
+            }
+            var vmUsr = (UserDetailViewModel)target;
+            this.userdata.CopyTo(vmUsr.userdata);
+            vmUsr.user_group_name = this.user_group_name;
         }
     }
 }

@@ -42,21 +42,19 @@ namespace MyNet.Components.Emit
                 return _moduleBuilder;
             }
         }
-        public static TInterface GetInstance<TInterface>(Type parent = null, string nmspace = "", Func<IEnumerable<PropertyCustomAttributeUnit>> propAttrProvider = null)
+        public static TInterface GetInstance<TInterface>(Type parent = null, string nmspace = "", Func<IEnumerable<PropertyCustomAttributeUnit>> propAttrProvider = null, params object[] ctorArgs)
         {
             IEnumerable<PropertyCustomAttributeUnit> propAttrs = null;
             if (propAttrProvider != null)
             {
                 propAttrs = propAttrProvider();
             }
-            return GetInstanceInternal<TInterface>(parent: parent, nmspace: nmspace, propAttrs: propAttrs);
+            var newType = GetTypeInternal<TInterface>(parent: parent, nmspace: nmspace, propAttrs: propAttrs);
+            var obj = Activator.CreateInstance(newType, ctorArgs);
+            return (TInterface)obj;
         }
-        private static TInterface GetInstance<TInterface>(Type parent = null, string nmspace = "", Type propAttrSrcType = null)
-        {
-            IEnumerable<PropertyCustomAttributeUnit> propAttrs = GetPropAttrsFromType(propAttrSrcType);
-            return GetInstanceInternal<TInterface>(parent: parent, nmspace: nmspace, propAttrs: propAttrs);
-        }
-        private static TInterface GetInstanceInternal<TInterface>(Type parent = null, string nmspace = "", IEnumerable<PropertyCustomAttributeUnit> propAttrs = null)
+
+        private static Type GetTypeInternal<TInterface>(Type parent = null, string nmspace = "", IEnumerable<PropertyCustomAttributeUnit> propAttrs = null)
         {
             var iType = typeof(TInterface);
             if (!iType.IsInterface)
@@ -68,49 +66,32 @@ namespace MyNet.Components.Emit
             {
                 TypeBuilder typeBuilder = ModuleBuilder.DefineType(string.Format("{0}.{1}_Impl", AsmName + (nmspace.IsEmpty() ? "" : "." + nmspace), iType.Name),
                 TypeAttributes.Public, parent, new Type[] { iType });
-
+                //1、构造函数
+                if (parent != null)
+                {
+                    var parentCtors = parent.GetConstructors(BindingFlags.Public | BindingFlags.Instance);
+                    if (parentCtors.IsNotEmpty())
+                    {
+                        foreach (var ctor in parentCtors)
+                        {
+                            DefineCtorInvokingParent(typeBuilder, ctor);
+                        }
+                    }
+                }
+                //2、属性
                 var props = typeof(TInterface).GetProperties();
                 foreach (var prop in props)
                 {
                     DefineProperty(typeBuilder, prop, propAttrs == null ? null : propAttrs.Where(u => u.prop_name == prop.Name).FirstOrDefault());
                 }
+                //3、ICopyable接口
+                DefineCopyToMethod<TInterface>(typeBuilder, props);
+
                 var type = typeBuilder.CreateType();
                 _vmTypes.Add(iType, type);
-                //AsmBuilder.Save(AsmName + ".dll");
+                //AsmBuilder.Save(AsmName + "." + type.Name + ".dll");
             }
-            var obj = Activator.CreateInstance(_vmTypes[iType]);
-            return (TInterface)obj;
-        }
-        private static IEnumerable<PropertyCustomAttributeUnit> GetPropAttrsFromType(Type type)
-        {
-            //未实现
-            //IList<PropertyCustomAttributeUnit> propAttrs = new List<PropertyCustomAttributeUnit>();
-            //if (type == null)
-            //{
-            //    return propAttrs;
-            //}
-            //var props = type.GetProperties();
-            //if (props.IsEmpty())
-            //{
-            //    return propAttrs;
-            //}
-            //IEnumerable<ValidationAttribute> src_attrs = null;
-            //foreach (var prop in props)
-            //{
-            //    src_attrs = prop.GetCustomAttributes(typeof(ValidationAttribute)) as IEnumerable<ValidationAttribute>;
-            //    if (src_attrs.IsEmpty())
-            //    {
-            //        continue;
-            //    }
-            //    var propAttrUnit = new PropertyCustomAttributeUnit { prop_name = prop.Name, attrs = new List<PropertyCustomAttribute>() };
-            //    foreach (var src_attr in src_attrs)
-            //    {
-            //        var pAttr = new PropertyCustomAttribute { attr_type = src_attr.GetType().FullName };
-            //        src_attr.GetType().GetConstructors()
-            //    }
-            //}
-
-            return null;
+            return _vmTypes[iType];
         }
         private static void DefineProperty(TypeBuilder typeBuilder, PropertyInfo prop, PropertyCustomAttributeUnit attrUnit = null)
         {
@@ -218,6 +199,88 @@ namespace MyNet.Components.Emit
                 }
             }
 
+        }
+        private static void DefineCtorInvokingParent(TypeBuilder typeBuilder, ConstructorInfo parentCtor)
+        {
+            var pCtorParams = parentCtor.GetParameters();
+            var paramTypes = pCtorParams.Select(p => p.ParameterType).ToArray();
+            ConstructorBuilder ctorBuilder = typeBuilder.DefineConstructor(parentCtor.Attributes, parentCtor.CallingConvention, paramTypes);
+            ILGenerator ctorIL = ctorBuilder.GetILGenerator();
+
+            ctorIL.Emit(OpCodes.Ldarg_0);
+            if (pCtorParams.Length >= 1)//加载第一个参数
+            {
+                ctorIL.Emit(OpCodes.Ldarg_1);
+            }
+            if (pCtorParams.Length >= 2)
+            {
+                ctorIL.Emit(OpCodes.Ldarg_2);
+            }
+            if (pCtorParams.Length >= 3)
+            {
+                ctorIL.Emit(OpCodes.Ldarg_3);
+            }
+            //The ldarg.s instruction is an efficient encoding for loading arguments indexed from 4 through 255.
+            //https://msdn.microsoft.com/en-us/library/system.reflection.emit.opcodes.ldarg_s.aspx
+            if (pCtorParams.Length >= 4)//第4个以及以后的参数
+            {
+                for (int idx = 3; idx < pCtorParams.Length; idx++)
+                {
+                    ctorIL.Emit(OpCodes.Ldarg_S, idx + 1);
+                }
+            }
+            ctorIL.Emit(OpCodes.Call, parentCtor);
+            ctorIL.Emit(OpCodes.Ret);
+        }
+        private static void DefineCopyToMethod<TInterface>(TypeBuilder typeBuilder, PropertyInfo[] props)
+        {
+            Type iType = typeof(TInterface);
+            if (iType.GetInterface(typeof(ICopyable).Name) == null)
+            {
+                return;
+            }
+            var method = typeof(ICopyable).GetMethod("CopyTo");
+            var copyParams = method.GetParameters();
+            MethodBuilder copyMBuilder = typeBuilder.DefineMethod(method.Name,
+                //实现接口方法时，MethodAttributes.Virtual不能少
+                MethodAttributes.Public | MethodAttributes.Final | MethodAttributes.HideBySig | MethodAttributes.NewSlot | MethodAttributes.Virtual,
+                CallingConventions.HasThis | CallingConventions.Standard,
+                method.ReturnType,
+                copyParams.IsEmpty() ? null : copyParams.Select(p => p.ParameterType).ToArray());
+            ILGenerator copyIL = copyMBuilder.GetILGenerator();
+            //声明连个临时变量
+            LocalBuilder localIType = copyIL.DeclareLocal(iType);
+            LocalBuilder isnull = copyIL.DeclareLocal(typeof(bool));
+            //声明两个控制标签
+            Label lblExit = copyIL.DefineLabel();
+            Label lblCopy = copyIL.DefineLabel();
+
+            //是否为空
+            copyIL.Emit(OpCodes.Ldarg_1);
+            copyIL.Emit(OpCodes.Ldnull);
+            copyIL.Emit(OpCodes.Ceq);
+            copyIL.Emit(OpCodes.Stloc_1);//给isnull变量赋值
+            copyIL.Emit(OpCodes.Ldloc_1);//加载isnull变量的值
+            copyIL.Emit(OpCodes.Brfalse_S, lblCopy);//不为空，跳转到copy主体
+            copyIL.Emit(OpCodes.Br_S, lblExit);//为空，跳转到结束标记
+
+            copyIL.MarkLabel(lblCopy);//标记开始复制操作
+            copyIL.Emit(OpCodes.Ldarg_1);
+            copyIL.Emit(OpCodes.Isinst, iType);
+            copyIL.Emit(OpCodes.Stloc_0);
+            if (props.IsNotEmpty())
+            {
+                foreach (var prop in props)
+                {
+                    copyIL.Emit(OpCodes.Ldloc_0);
+                    copyIL.Emit(OpCodes.Ldarg_0);
+                    copyIL.Emit(OpCodes.Call, iType.GetMethod("get_" + prop.Name));
+                    copyIL.Emit(OpCodes.Callvirt, iType.GetMethod("set_" + prop.Name, new Type[] { prop.PropertyType }));
+                }
+            }
+
+            copyIL.MarkLabel(lblExit);//标记结束
+            copyIL.Emit(OpCodes.Ret);
         }
     }
 }

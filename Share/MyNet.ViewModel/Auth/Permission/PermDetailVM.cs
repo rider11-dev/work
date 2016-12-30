@@ -1,4 +1,5 @@
 ﻿using MyNet.Components.Extensions;
+using MyNet.Components.Mapper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,8 +8,9 @@ using System.Web;
 
 namespace MyNet.ViewModel.Auth.Permission
 {
-    public class AddPermissionViewModel
+    public class PermDetailVM : IPermDetailVM
     {
+        public string per_id { get; set; }
         [Required(ErrorMessageResourceName = "Code_Require", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         [MaxLength(40, ErrorMessageResourceName = "Per_Code_Length", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         public string per_code { get; set; }
@@ -36,5 +38,16 @@ namespace MyNet.ViewModel.Auth.Permission
 
         [MaxLength(200, ErrorMessageResourceName = "Remark_Length", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         public string per_remark { get; set; }
+
+        public Type ValidateMetadataType { get { return this.GetType(); } set { } }
+
+        public void CopyTo(object target)
+        {
+            if (target == null)
+            {
+                return;
+            }
+            OOMapper.Map(this.GetType(), this.GetType(), this, target);
+        }
     }
 }

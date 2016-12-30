@@ -95,7 +95,7 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Account\ChangePwdViewModel.cs" />
+    <Compile Include="Models\Account\ChgPwdDetailViewModel.cs" />
     <Compile Include="Models\Api.cs" />
     <Compile Include="Models\ApiKeys.cs" />
     <Compile Include="Models\Auth\GroupDetailViewModel.cs" />
@@ -106,7 +106,6 @@
     <Compile Include="Models\Auth\PermViewModel.cs" />
     <Compile Include="Models\Auth\UserDetailViewModel.cs" />
     <Compile Include="Models\Auth\UserMngViewModel.cs" />
-    <Compile Include="Models\Auth\UserViewModel.cs" />
     <Compile Include="Models\MngViewModel.cs" />
     <Compile Include="Pages\Account\DetailPage.xaml.cs">
       <DependentUpon>DetailPage.xaml</DependentUpon>

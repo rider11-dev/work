@@ -271,7 +271,7 @@ namespace MyNet.Service.Auth
 
             try
             {
-                var usrs = _usrRep.PageQueryBySp<UserDto>(sqlEntity: sqlEntity, page: page);
+                var usrs = _usrRep.PageQueryBySp<dynamic>(sqlEntity: sqlEntity, page: page);
                 rst = OptResult.Build(ResultCode.Success, Msg_QueryByPage, new
                 {
                     total = page.total,

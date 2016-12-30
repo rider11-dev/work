@@ -36,21 +36,21 @@
         </Grid.ColumnDefinitions>
         <Label Content="用户名" Grid.Row="0" Grid.Column="0" Style="{StaticResource lblStyle}"/>
         <Label Grid.Row="0" Grid.Column="1"
-               Content="{Binding Path=user_name,Source={StaticResource model},Mode=OneTime}"
+               Content="{Binding Path=userdata.user_name,Mode=OneTime}"
                FontWeight="Normal"
                Style="{StaticResource lblStyle}"
                />
         <Label Content="真实姓名" Grid.Row="1" Grid.Column="0" Style="{StaticResource lblStyle}"/>
         <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource inputStyle}"
-                Text="{Binding Path=user_truename,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                Text="{Binding Path=userdata.user_truename,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
                  />
         <Label Content="身份证号" Grid.Row="2" Grid.Column="0" Style="{StaticResource lblStyle}"/>
         <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource inputStyle}"
-                Text="{Binding Path=user_idcard,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                Text="{Binding Path=userdata.user_idcard,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
                  />
         <Label Content="所属区域" Grid.Row="3" Grid.Column="0" Style="{StaticResource lblStyle}"/>
         <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource inputStyle}"
-                Text="{Binding Path=user_regioncode,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                Text="{Binding Path=userdata.user_regioncode,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
                  />
         <Label Content="备注" Grid.Row="4" Grid.Column="0" 
                Style="{StaticResource lblStyle}"
@@ -59,7 +59,7 @@
         <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource inputStyle}"
                  TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"
                  Height="Auto" HorizontalContentAlignment="Left" VerticalContentAlignment="Top"
-                Text="{Binding Path=user_remark,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                Text="{Binding Path=userdata.user_remark,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
                  />
         <Button Name="btn" Grid.Row="5" Grid.Column="1" 
                 Width="240" Height="40" 

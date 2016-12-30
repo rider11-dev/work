@@ -158,7 +158,7 @@ namespace MyNet.Service.Base
 
             try
             {
-                var dicts = _dictRep.PageQueryBySp<DictDto>(sqlEntity: sqlEntity, page: page);
+                var dicts = _dictRep.PageQueryBySp<dynamic>(sqlEntity: sqlEntity, page: page);
                 rst = OptResult.Build(ResultCode.Success, Msg_QueryByPage, new
                 {
                     total = page.total,

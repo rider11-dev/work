@@ -38,7 +38,7 @@
         <TextBox Name="txtUsrName" Grid.Row="1" Grid.ColumnSpan="2" 
                  Style="{StaticResource inputStyle}"
                  Tag="/MyNet.Client;component/Resources/img/username.jpg"
-                 Text="{Binding Path=UserName,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                 Text="{Binding Path=logindata.username,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,  ValidatesOnDataErrors=True}"
                  />
 
         <!--row3-->
@@ -46,19 +46,19 @@
                  Tag="/MyNet.Client;component/Resources/img/pwd.jpg"
                  Style="{StaticResource inputStyle}"
                  ext:PasswordBoxAssistant.BindPassword="True"
-                 ext:PasswordBoxAssistant.BoundPassword="{Binding Path=Pwd,Source={StaticResource model},Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                 ext:PasswordBoxAssistant.BoundPassword="{Binding Path=logindata.pwd,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,  ValidatesOnDataErrors=True}"/>
         <!--row4-->
         <TextBox Name="txtVerifyCode" Grid.Row="3" Grid.ColumnSpan="2" 
                  Style="{StaticResource inputStyle}"
                  Tag="download/img/verifycode.jpg"
-                 Text="{Binding Path=VerifyCode,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                 Text="{Binding Path=VerifyCode,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,  ValidatesOnDataErrors=True}"
                  />
         <!--row5-->
         <CheckBox Name="ckRememberMe" Grid.Row="4" Grid.Column="0" 
                   HorizontalAlignment="Center" VerticalAlignment="Center"
                   Margin="12,0,0,0"
                   Content="记住我"
-                  IsChecked="{Binding Path=RememberMe,Source={StaticResource model}}"/>
+                  IsChecked="{Binding Path=RememberMe}"/>
         <TextBlock Grid.Row="4" Grid.Column="1"
                   HorizontalAlignment="Center" VerticalAlignment="Center"
                   Margin="-15,0,0,0"

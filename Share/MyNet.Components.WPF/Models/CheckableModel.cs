@@ -6,17 +6,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MyNet.Components.Validation;
 
 namespace MyNet.Components.WPF.Models
 {
     public class CheckableModel : BaseModel, ICheckable, Iindexer
     {
+        public CheckableModel() : this(true)
+        {
+
+        }
+        public CheckableModel(bool needValidate) : base(needValidate)
+        {
+
+        }
         [JsonIgnore]
+        [ValidateIgnore]
         public CheckableModelCollection BelongTo { get; set; }
         [JsonIgnore]
+        [ValidateIgnore]
         public bool IsSingleSelect { get; set; }
         bool _checked;
         [JsonIgnore]
+        [ValidateIgnore]
         public bool IsChecked
         {
             get
@@ -58,6 +70,7 @@ namespace MyNet.Components.WPF.Models
         }
 
         [JsonIgnore]
+        [ValidateIgnore]
         public int RowNumber { get; set; }
     }
 }

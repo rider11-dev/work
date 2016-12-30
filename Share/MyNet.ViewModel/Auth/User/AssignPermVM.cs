@@ -6,7 +6,7 @@ using System.Web;
 
 namespace MyNet.ViewModel.Auth.User
 {
-    public class AssignPermissionViewModel
+    public class AssignPermVM
     {
         [Required(ErrorMessageResourceName = "UserId_Require", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         public string userId { get; set; }

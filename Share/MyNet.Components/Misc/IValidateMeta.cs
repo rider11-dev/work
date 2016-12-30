@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace MyNet.Components.Misc
 {
-    public interface ICopytToable
+    public interface IValidateMeta
     {
-        void CopyTo(IBaseModel targetModel);
+        Type ValidateMetadataType { get; set; }
     }
 }

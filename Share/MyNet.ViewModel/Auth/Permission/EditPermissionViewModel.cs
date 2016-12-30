@@ -7,7 +7,7 @@ using System.Web;
 
 namespace MyNet.ViewModel.Auth.Permission
 {
-    public class EditPermissionViewModel : AddPermissionViewModel
+    public class EditPermissionViewModel : PermDetailVM
     {
         [Required(ErrorMessageResourceName = "Edit_By_Id", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         public string per_id { get; set; }

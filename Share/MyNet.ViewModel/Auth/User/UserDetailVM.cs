@@ -1,4 +1,5 @@
 ﻿using MyNet.Components.Extensions;
+using MyNet.Components.Mapper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,8 +8,9 @@ using System.Web;
 
 namespace MyNet.ViewModel.Auth.User
 {
-    public class AddUserViewModel
+    public class UserDetailVM : IUserDetailVM
     {
+        public string user_id { get; set; }
         [Required(ErrorMessageResourceName = "User_Name_Require", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         [StringLength(10, MinimumLength = 3, ErrorMessageResourceName = "User_Name_Length", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         public string user_name { get; set; }
@@ -30,5 +32,24 @@ namespace MyNet.ViewModel.Auth.User
 
         [Required(ErrorMessageResourceName = "User_Group_Require", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         public string user_group { get; set; }
+
+        public Type ValidateMetadataType
+        {
+            get
+            {
+                return this.GetType();
+            }
+            set { }
+        }
+
+        public void CopyTo(object target)
+        {
+            if (target == null)
+            {
+                return;
+            }
+
+            OOMapper.Map(this.GetType(), this.GetType(), this, target);
+        }
     }
 }

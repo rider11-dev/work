@@ -17,6 +17,9 @@ using System.Windows.Input;
 using MyNet.Components.WPF.Windows;
 using MyNet.Client.Help;
 using MyNet.Components.Http;
+using MyNet.Components.Extensions;
+using MyNet.Components.Mapper;
+using MyNet.ViewModel.Auth.User;
 
 namespace MyNet.Client.Models.Auth
 {
@@ -54,7 +57,7 @@ namespace MyNet.Client.Models.Auth
             CheckableModel vm;
             if (base.GetSelectedOne(out vm, OperationDesc.Assign))
             {
-                var usr = vm as UserViewModel;
+                var usr = vm as UserDetailViewModel;
                 TreeHelper.OpenAllPermsHelp((selNodes) =>
                 {
                     if (selNodes == null || selNodes.Count < 1)
@@ -64,7 +67,7 @@ namespace MyNet.Client.Models.Auth
                     var rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(ApiKeys.Assign),
                         new
                         {
-                            userId = usr.user_id,
+                            userId = usr.userdata.user_id,
                             perIds = selNodes.Select(n => n.DataId),
                             assignAll = false
                         }, ClientContext.Token);
@@ -113,11 +116,11 @@ namespace MyNet.Client.Models.Auth
             CheckableModel vm;
             if (base.GetSelectedOne(out vm, OperationDesc.Edit))
             {
-                AddOrEdit(vm as UserViewModel);
+                AddOrEdit(vm as UserDetailViewModel);
             }
         }
 
-        private void AddOrEdit(UserViewModel vmUsr)
+        private void AddOrEdit(UserDetailViewModel vmUsr)
         {
             var win = new UserDetailWindow(vmUsr);
             var rst = win.ShowDialog();
@@ -133,7 +136,7 @@ namespace MyNet.Client.Models.Auth
             {
                 return;
             }
-            var ids = items.Select(m => ((UserViewModel)m).user_id);
+            var ids = items.Select(m => ((UserDetailViewModel)m).userdata.user_id);
             var rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(ApiKeys.MultiDeleteUsr),
                 new
                 {
@@ -157,6 +160,10 @@ namespace MyNet.Client.Models.Auth
         }
         private void Search(PagingArgs page)
         {
+            if (base.Models != null)
+            {
+                base.Models.Clear();
+            }
             var rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(ApiKeys.GetUsrByPage),
                new
                {
@@ -177,6 +184,7 @@ namespace MyNet.Client.Models.Auth
                 MessageWindow.ShowMsg(MessageType.Error, OperationDesc.Search, rst.msg);
                 return;
             }
+
             if (rst.data != null && rst.data.total != null)
             {
                 page.RecordsCount = (int)rst.data.total;
@@ -184,15 +192,26 @@ namespace MyNet.Client.Models.Auth
                 {
                     page.PageCount = 0;
                     page.PageIndex = 1;
-                    base.Models = null;
                     return;
                 }
                 page.PageCount = Convert.ToInt32(Math.Ceiling(page.RecordsCount * 1.0 / page.PageSize));
 
-                var models = JsonConvert.DeserializeObject<IEnumerable<UserViewModel>>(((JArray)rst.data.rows).ToString());
-                //
-                base.PageStart = page.Start;
-                base.Models = (models as IEnumerable<CheckableModel>).ToList();
+                var datas = rst.data.rows as JArray;
+                if (datas.IsNotEmpty())
+                {
+                    IEnumerable<UserDetailViewModel> usrs = datas.Select(obj =>
+                    {
+                        UserDetailViewModel usrVM = new UserDetailViewModel(needValidate: false);//列表数据只读时，不需要进行验证;
+                        var ins = JsonConvert.DeserializeObject(obj.ToString(), usrVM.userdata.GetType());
+                        (ins as IUserDetailVM).CopyTo(usrVM.userdata);
+                        usrVM.user_group_name = obj["user_group_name"].Value<string>();
+                        return usrVM;
+                    });
+
+                    base.PageStart = page.Start;
+                    base.Models = (usrs as IEnumerable<CheckableModel>).ToList();
+                }
+
             }
         }
         #endregion

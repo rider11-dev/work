@@ -70,12 +70,12 @@
                     <DataGrid.Columns>
                         <DataGridTemplateColumn CellStyle="{StaticResource ckCellStyle}" HeaderStyle="{StaticResource ckCellHeaderStyle}"
                                                 CanUserResize="False"/>
-                        <DataGridTextColumn Header="用户名" Binding="{Binding user_name}" />
-                        <DataGridTextColumn Header="身份证号" Binding="{Binding user_idcard}" />
-                        <DataGridTextColumn Header="真实姓名" Binding="{Binding user_truename}" />
-                        <DataGridTextColumn Header="所属区域" Binding="{Binding user_regioncode}" />
+                        <DataGridTextColumn Header="用户名" Binding="{Binding userdata.user_name}" />
+                        <DataGridTextColumn Header="身份证号" Binding="{Binding userdata.user_idcard}" />
+                        <DataGridTextColumn Header="真实姓名" Binding="{Binding userdata.user_truename}" />
+                        <DataGridTextColumn Header="所属区域" Binding="{Binding userdata.user_regioncode}" />
                         <DataGridTextColumn Header="所属组织" Binding="{Binding user_group_name}" />
-                        <DataGridTextColumn Header="备注"  Binding="{Binding user_remark}" />
+                        <DataGridTextColumn Header="备注"  Binding="{Binding userdata.user_remark}" />
                     </DataGrid.Columns>
                 </DataGrid>
                 <usrCtl:ControlPagination x:Name="ctlPagination" Grid.Row="1" HorizontalAlignment="Center"/>

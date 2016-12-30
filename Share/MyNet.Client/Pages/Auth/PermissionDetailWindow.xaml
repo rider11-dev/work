@@ -22,13 +22,9 @@
             <Setter Property="Height" Value="28"/>
             <Setter Property="FontSize" Value="14"/>
         </Style>
-        <vmauth:PermDetailViewModel x:Key="model"/>
         <vmwpf:CmbModel x:Key="cbVmPermType"/>
         <vmwpf:CmbModel x:Key="cbVmBoolType"/>
     </Window.Resources>
-    <Window.DataContext>
-        <Binding Source="{StaticResource model}"/>
-    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -57,49 +53,49 @@
         <!--row2：编号-->
         <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource lblStyle}" Content="权限编号"/>
         <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtPerCode" Style="{StaticResource inputStyle}"
-                Text="{Binding Path=per_code,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                Text="{Binding Path=permdata.per_code,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
         />
 
         <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource lblStyle}" Content="权限名称"/>
         <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource inputStyle}"
-                Text="{Binding Path=per_name,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                Text="{Binding Path=permdata.per_name,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
                  />
         <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource lblStyle}" Content="权限类型"/>
         <ComboBox x:Name="cbPermType" Grid.Row="3" Grid.Column="1" 
                   DataContext="{StaticResource cbVmPermType}"
                   Style="{StaticResource cbStyle}"
-                  SelectedValue="{Binding Path=SelectedPermType,Source={StaticResource model}}"
+                  SelectedValue="{Binding Path=SelectedPermType}"
                   />
         <Label Grid.Row="4" Grid.Column="0" Style="{StaticResource lblStyle}" Content="上级权限"/>
         <ctl:HelpButton Grid.Row="4" Grid.Column="1" 
                 Width="240" Height="28" ForbidInput="True"
                 Style="{StaticResource inputBtnAddOnStyle}" 
-                Content="{Binding Path=per_parent_name,Source={StaticResource model},Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
-                Command="{Binding Path=PermParentHelpCmd,Source={StaticResource model}}"
+                Content="{Binding Path=per_parent_name,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+                Command="{Binding Path=PermParentHelpCmd}"
                 />
         <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource lblStyle}" Content="排序号"/>
         <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource inputStyle}"
-                Text="{Binding Path=per_sort,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                Text="{Binding Path=permdata.per_sort,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
                  />
         <Label Grid.Row="6" Grid.Column="0" Style="{StaticResource lblStyle}" Content="是否系统"/>
         <ComboBox Grid.Row="6" Grid.Column="1" x:Name="cbIsSystem"
                   DataContext="{StaticResource cbVmBoolType}"
                   Style="{StaticResource cbStyle}"
-                  SelectedValue="{Binding Path=SelectedIsSystem,Source={StaticResource model}}"
+                  SelectedValue="{Binding Path=SelectedIsSystem,RelativeSource={RelativeSource AncestorType=vmauth:PermDetailViewModel}}"
                   />
         <Label Grid.Row="7" Grid.Column="0" Style="{StaticResource lblStyle}" Content="菜单uri"/>
         <TextBox Grid.Row="7" Grid.Column="1" Style="{StaticResource inputStyle}"
-                Text="{Binding Path=per_uri,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                Text="{Binding Path=permdata.per_uri,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
                  />
         <Label Grid.Row="8" Grid.Column="0" Style="{StaticResource lblStyle}" Content="动作"/>
         <TextBox Grid.Row="8" Grid.Column="1" Style="{StaticResource inputStyle}"
-                Text="{Binding Path=per_method,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                Text="{Binding Path=permdata.per_method,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
                  />
         <Label Grid.Row="9" Grid.Column="0" Style="{StaticResource lblStyle}" Content="备注"/>
         <TextBox Grid.Row="9" Grid.Column="1" Style="{StaticResource inputStyle}"
                  TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"
                  Height="Auto" HorizontalContentAlignment="Left" VerticalContentAlignment="Top"
-                Text="{Binding Path=user_remark,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                Text="{Binding Path=permdata.user_remark,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
                  />
         <Grid Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
@@ -110,7 +106,7 @@
                     Width="90" Height="36"
                     Margin="0,0,-20,0"
                     Style="{StaticResource btnBaseStyle}"
-                    Command="{Binding Path=SaveCmd,Source={StaticResource model}}"
+                    Command="{Binding Path=SaveCmd}"
                     Content="保   存"
                     />
             <Button Name="btnCancel" Grid.Row="0" Grid.Column="1"

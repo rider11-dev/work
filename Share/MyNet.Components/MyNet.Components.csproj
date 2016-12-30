@@ -104,6 +104,7 @@
     <Compile Include="Extensions\NumberExtension.cs" />
     <Compile Include="Extensions\ObjectExtension.cs" />
     <Compile Include="Extensions\RegexExtension.cs" />
+    <Compile Include="Extensions\TypeExtension.cs" />
     <Compile Include="Http\HttpEntities.cs" />
     <Compile Include="Http\HttpUtils.cs" />
     <Compile Include="Misc\BaseModel.cs" />
@@ -122,9 +123,10 @@
     <Compile Include="Logger\LogHelperFactory.cs" />
     <Compile Include="Logger\LogHelperProvider.cs" />
     <Compile Include="Misc\IClearable.cs" />
-    <Compile Include="Misc\ICopytToable.cs" />
+    <Compile Include="Misc\ICopyable.cs" />
     <Compile Include="Misc\Iindexer.cs" />
     <Compile Include="Misc\Iinit.cs" />
+    <Compile Include="Misc\IValidateMeta.cs" />
     <Compile Include="Misc\NumberRange.cs" />
     <Compile Include="NFC\LotusNFCCardDriver.cs" />
     <Compile Include="NFC\NFCCardReaderHelper.cs" />
@@ -221,6 +223,8 @@
     <Compile Include="Upgrade\UpgradeConf.cs" />
     <Compile Include="Compress\ZipCompresser.cs" />
     <Compile Include="ValidateHelper.cs" />
+    <Compile Include="Validation\ValidateIgnoreAttribute.cs" />
+    <Compile Include="Validation\ValidationExtension.cs" />
     <Compile Include="VerificationCodeHelper.cs" />
     <Compile Include="WindowsService\WindowsServiceManager.cs" />
   </ItemGroup>

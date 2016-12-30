@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MyNet.Client.Models.Auth
 {
-    public class GroupViewModel : CheckableModel, Iindexer, ICopytToable
+    public class GroupViewModel : CheckableModel, Iindexer, ICopyable
     {
         public string gp_id { get; set; }
         string _gp_code;
@@ -108,13 +108,13 @@ namespace MyNet.Client.Models.Auth
             }
         }
 
-        public void CopyTo(IBaseModel targetModel)
+        public void CopyTo(object target)
         {
-            if (targetModel == null)
+            if (target == null)
             {
                 return;
             }
-            var vmGroup = (GroupViewModel)targetModel;
+            var vmGroup = (GroupViewModel)target;
             vmGroup.gp_id = this.gp_id;
             vmGroup.gp_code = this.gp_code;
             vmGroup.gp_name = this.gp_name;

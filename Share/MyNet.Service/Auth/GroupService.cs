@@ -214,7 +214,7 @@ namespace MyNet.Service.Auth
             #endregion
             try
             {
-                var groups = _groupRep.PageQueryBySp<GroupDto>(sqlEntity: sqlEntity, page: page);
+                var groups = _groupRep.PageQueryBySp<dynamic>(sqlEntity: sqlEntity, page: page);
                 rst = OptResult.Build(ResultCode.Success, Msg_QueryByPage, new
                 {
                     total = page.total,

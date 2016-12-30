@@ -17,13 +17,14 @@ using MyNet.Client.Command;
 using System.Reflection;
 using System.IO;
 using Newtonsoft.Json;
+using MyNet.ViewModel.Auth.User;
 
 namespace MyNet.Client.Public
 {
     public class ClientContext
     {
         public static string Token { get; set; }
-        public static UserViewModel CurrentUser { get; set; }
+        public static UserDetailVM CurrentUser { get; set; }
         /// <summary>
         /// dll所在目录
         /// </summary>

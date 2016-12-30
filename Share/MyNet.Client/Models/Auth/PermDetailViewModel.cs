@@ -19,15 +19,27 @@ using MyNet.Client.Help;
 using MyNet.Model.Dto.Auth;
 using MyNet.Components.Http;
 using MyNet.Model.Interface.Auth;
+using MyNet.ViewModel.Auth.Permission;
+using MyNet.Components.Emit;
+using MyNet.Components.Misc;
+using MyNet.Components.Validation;
 
 namespace MyNet.Client.Models.Auth
 {
-    public class PermDetailViewModel : PermViewModel
+    public partial class PermDetailViewModel : CheckableModel
     {
+        public IPermDetailVM permdata { get; private set; }
+
+        public PermDetailViewModel(bool needValidate = true) : base(needValidate)
+        {
+            permdata = DynamicModelBuilder.GetInstance<IPermDetailVM>(parent: typeof(BaseModel), ctorArgs: needValidate);
+            permdata.ValidateMetadataType = typeof(PermDetailVM);
+        }
+
         [JsonIgnore]
         public bool IsNew
         {
-            get { return string.IsNullOrEmpty(base.per_id); }
+            get { return string.IsNullOrEmpty(permdata.per_id); }
         }
 
         [JsonIgnore]
@@ -36,6 +48,7 @@ namespace MyNet.Client.Models.Auth
         [JsonIgnore]
         private DelegateCommand _saveCmd;
         [JsonIgnore]
+        [ValidateIgnore]
         public DelegateCommand SaveCmd
         {
             get
@@ -56,7 +69,7 @@ namespace MyNet.Client.Models.Auth
                 return;
             }
             var url = ApiUtils.GetApiUrl(this.IsNew ? ApiKeys.AddPer : ApiKeys.EditPer);
-            var rst = HttpUtils.PostResult(url, (PermViewModel)this, ClientContext.Token);
+            var rst = HttpUtils.PostResult(url, permdata, ClientContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, this.IsNew ? OperationDesc.Add : OperationDesc.Edit, rst.msg);
@@ -64,16 +77,16 @@ namespace MyNet.Client.Models.Auth
             }
             MessageWindow.ShowMsg(MessageType.Info, this.IsNew ? OperationDesc.Add : OperationDesc.Edit, MsgConst.Msg_Succeed);
             //如果保存的是功能权限，则添加或更新缓存
-            if (base.per_type == PermType.Func.ToString())
+            if (permdata.per_type == PermType.Func.ToString())
             {
-                var funcPermDto = OOMapper.Map<PermViewModel, PermissionCacheDto>(this);
-                if (DataCacheUtils.AllFuncs.ContainsKey(base.per_code))
+                var funcPermDto = OOMapper.Map<IPermDetailVM, PermissionCacheDto>(permdata);
+                if (DataCacheUtils.AllFuncs.ContainsKey(permdata.per_code))
                 {
-                    DataCacheUtils.AllFuncs[base.per_code] = funcPermDto;
+                    DataCacheUtils.AllFuncs[permdata.per_code] = funcPermDto;
                 }
                 else
                 {
-                    DataCacheUtils.AllFuncs.Add(base.per_code, funcPermDto);
+                    DataCacheUtils.AllFuncs.Add(permdata.per_code, funcPermDto);
                 }
             }
             if (Window != null)
@@ -87,6 +100,7 @@ namespace MyNet.Client.Models.Auth
         [JsonIgnore]
         private ICommand _permParentHelpCmd;
         [JsonIgnore]
+        [ValidateIgnore]
         public ICommand PermParentHelpCmd
         {
             get
@@ -104,13 +118,14 @@ namespace MyNet.Client.Models.Auth
             TreeHelper.OpenAllFuncsHelp(false, node =>
             {
                 var tNode = (TreeViewData.TreeNode)node;
-                base.per_parent_name = tNode.Label;
-                base.per_parent = tNode.Id;
+                this.per_parent_name = tNode.Label;
+                permdata.per_parent = tNode.Id;
             });
         }
 
         CmbItem _selectedPermType;
         [JsonIgnore]
+        [ValidateIgnore]
         public CmbItem SelectedPermType
         {
             get { return _selectedPermType; }
@@ -119,9 +134,9 @@ namespace MyNet.Client.Models.Auth
                 if (_selectedPermType != value)
                 {
                     _selectedPermType = value;
-                    if (_selectedPermType != null && base.per_type != _selectedPermType.Id)
+                    if (_selectedPermType != null && permdata.per_type != _selectedPermType.Id)
                     {
-                        base.per_type = _selectedPermType.Id;
+                        permdata.per_type = _selectedPermType.Id;
                     }
                     base.RaisePropertyChanged("SelectedPermType");
                 }
@@ -130,6 +145,7 @@ namespace MyNet.Client.Models.Auth
 
         CmbItem _selectedIsSystem;
         [JsonIgnore]
+        [ValidateIgnore]
         public CmbItem SelectedIsSystem
         {
             get { return _selectedIsSystem; }
@@ -138,13 +154,56 @@ namespace MyNet.Client.Models.Auth
                 if (_selectedIsSystem != value)
                 {
                     _selectedIsSystem = value;
-                    if (_selectedIsSystem != null && base.per_type != _selectedIsSystem.Id)
+                    if (_selectedIsSystem != null && permdata.per_type != _selectedIsSystem.Id)
                     {
-                        base.per_system = _selectedIsSystem.Id;
+                        permdata.per_system = Convert.ToBoolean(_selectedIsSystem.Id);
                     }
                     base.RaisePropertyChanged("SelectedIsSystem");
                 }
             }
+        }
+    }
+
+    public partial class PermDetailViewModel : ICopyable
+    {
+        string _per_type_name;
+        public string per_type_name
+        {
+            get { return _per_type_name; }
+            set
+            {
+                if (_per_type_name != value)
+                {
+                    _per_type_name = value;
+                    base.RaisePropertyChanged("per_type_name");
+                }
+            }
+        }
+
+        string _per_parent_name;
+        public string per_parent_name
+        {
+            get { return _per_parent_name; }
+            set
+            {
+                if (_per_parent_name != value)
+                {
+                    _per_parent_name = value;
+                    base.RaisePropertyChanged("per_parent_name");
+                }
+            }
+        }
+
+        public void CopyTo(object target)
+        {
+            if (target == null)
+            {
+                return;
+            }
+            var vmPerm = (PermDetailViewModel)target;
+            this.permdata.CopyTo(vmPerm.permdata);
+            vmPerm.per_type_name = this.per_type_name;
+            vmPerm.per_parent_name = this.per_parent_name;
         }
     }
 }

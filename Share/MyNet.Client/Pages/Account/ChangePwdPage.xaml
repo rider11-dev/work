@@ -38,19 +38,19 @@
         <PasswordBox Name="txtOldPwd" Grid.Row="0" Grid.Column="1" 
                  Style="{StaticResource inputStyle}"
                  ext:PasswordBoxAssistant.BindPassword="True"
-                 ext:PasswordBoxAssistant.BoundPassword="{Binding Path=oldpwd,Source={StaticResource model},Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 ext:PasswordBoxAssistant.BoundPassword="{Binding Path=chgpwddata.oldpwd,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                  />
         <Label Content="新密码" Grid.Row="1" Grid.Column="0" Style="{StaticResource lblStyle}"/>
         <PasswordBox Name="txtNewPwd" Grid.Row="1" Grid.Column="1" 
                  Style="{StaticResource inputStyle}"
                  ext:PasswordBoxAssistant.BindPassword="True"
-                 ext:PasswordBoxAssistant.BoundPassword="{Binding Path=newpwd,Source={StaticResource model},Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 ext:PasswordBoxAssistant.BoundPassword="{Binding Path=chgpwddata.newpwd,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"
                  />
         <Label Content="密码确认" Grid.Row="2" Grid.Column="0" Style="{StaticResource lblStyle}"/>
         <PasswordBox Name="txtNewPwd2" Grid.Row="2" Grid.Column="1" 
                  Style="{StaticResource inputStyle}"
                  ext:PasswordBoxAssistant.BindPassword="True"
-                 ext:PasswordBoxAssistant.BoundPassword="{Binding Path=newpwd2,Source={StaticResource model},Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 ext:PasswordBoxAssistant.BoundPassword="{Binding Path=chgpwddata.newpwd2,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"
                  />
         <Button Name="btnOk" Grid.Row="5" Grid.Column="1" 
                 Width="220" Height="40"

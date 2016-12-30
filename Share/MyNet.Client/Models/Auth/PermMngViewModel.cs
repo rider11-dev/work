@@ -19,6 +19,8 @@ using MyNet.Components.WPF.Command;
 using MyNet.Client.Help;
 using MyNet.Components.Http;
 using MyNet.Model.Interface.Auth;
+using MyNet.Components.Extensions;
+using MyNet.ViewModel.Auth.Permission;
 
 namespace MyNet.Client.Models.Auth
 {
@@ -70,7 +72,7 @@ namespace MyNet.Client.Models.Auth
             CheckableModel vm;
             if (base.GetSelectedOne(out vm, OperationDesc.Edit))
             {
-                AddOrEdit(vm as PermViewModel);
+                AddOrEdit(vm as PermDetailViewModel);
             }
         }
         protected override void DelAction(object parameter)
@@ -80,7 +82,7 @@ namespace MyNet.Client.Models.Auth
             {
                 return;
             }
-            var ids = items.Select(m => ((PermViewModel)m).per_id);
+            var ids = items.Select(m => ((PermDetailViewModel)m).permdata.per_id);
             var rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(ApiKeys.MultiDeletePer),
                 new
                 {
@@ -93,8 +95,8 @@ namespace MyNet.Client.Models.Auth
             }
             MessageWindow.ShowMsg(MessageType.Info, OperationDesc.Delete, MsgConst.Msg_Succeed);
             //清除垃圾缓存
-            var funcCodes = items.Where(m => ((PermViewModel)m).per_type == PermType.Func.ToString())
-                                .Select(m => ((PermViewModel)m).per_code);
+            var funcCodes = items.Where(m => ((PermDetailViewModel)m).permdata.per_type == PermType.Func.ToString())
+                                .Select(m => ((PermDetailViewModel)m).permdata.per_code);
             if (funcCodes != null && funcCodes.Count() > 0 && DataCacheUtils.AllFuncs.Count > 0)
             {
                 foreach (var code in funcCodes)
@@ -107,7 +109,7 @@ namespace MyNet.Client.Models.Auth
             }
             base.SearchCmd.Execute(null);
         }
-        private void AddOrEdit(PermViewModel vmPerm)
+        private void AddOrEdit(PermDetailViewModel vmPerm)
         {
             var win = new PermissionDetailWindow(vmPerm);
             var rst = win.ShowDialog();
@@ -122,6 +124,10 @@ namespace MyNet.Client.Models.Auth
         }
         private void Search(PagingArgs page)
         {
+            if (base.Models != null)
+            {
+                base.Models.Clear();
+            }
             var rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(ApiKeys.GetPerByPage),
                new
                {
@@ -149,15 +155,26 @@ namespace MyNet.Client.Models.Auth
                 {
                     page.PageCount = 0;
                     page.PageIndex = 1;
-                    base.Models = null;
                     return;
                 }
                 page.PageCount = Convert.ToInt32(Math.Ceiling(page.RecordsCount * 1.0 / page.PageSize));
 
-                var models = JsonConvert.DeserializeObject<IEnumerable<PermViewModel>>(((JArray)rst.data.rows).ToString());
+                var datas = rst.data.rows as JArray;
+                if (datas.IsNotEmpty())
+                {
+                    IEnumerable<PermDetailViewModel> perms = datas.Select(obj =>
+                    {
+                        PermDetailViewModel permVM = new PermDetailViewModel(needValidate: false);
+                        var ins = JsonConvert.DeserializeObject(obj.ToString(), permVM.permdata.GetType());
+                        (ins as IPermDetailVM).CopyTo(permVM.permdata);
+                        permVM.per_parent_name = obj["per_parent_name"].Value<string>();
+                        permVM.per_type_name = obj["per_type_name"].Value<string>();
+                        return permVM;
+                    });
 
-                base.PageStart = page.Start;
-                base.Models = (models as IEnumerable<CheckableModel>).ToList();
+                    base.PageStart = page.Start;
+                    base.Models = (perms as IEnumerable<CheckableModel>).ToList();
+                }
             }
         }
         #endregion

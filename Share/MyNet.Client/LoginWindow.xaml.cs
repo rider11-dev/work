@@ -16,6 +16,9 @@ using MyNet.Components.Serialize;
 using MyNet.Components.WPF.Windows;
 using MyNet.Components.Logger;
 using MyNet.Components.Http;
+using MyNet.ViewModel.Auth.User;
+using MyNet.Components.Emit;
+using MyNet.Components.Misc;
 
 namespace MyNet.Client
 {
@@ -39,9 +42,9 @@ namespace MyNet.Client
         ILogHelper<LoginWindow> _logHelper = LogHelperFactory.GetLogHelper<LoginWindow>();
         public LoginWindow()
         {
-            vmLogin = LoadLoginViewModel();
+            LoadLoginViewModel();
 
-            this.Resources.Add("model", vmLogin);
+            this.DataContext = vmLogin;
 
             InitializeComponent();
             //允许拖拽
@@ -51,6 +54,7 @@ namespace MyNet.Client
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             vmLogin.CanValidate = true;
+
             GenerateVerifyCode();
             SetInputImgAddOn();
 
@@ -101,7 +105,7 @@ namespace MyNet.Client
             }
             //登录
             var url = ApiUtils.GetApiUrl(ApiKeys.Login);
-            var rst = HttpUtils.PostResult(url, new { username = vmLogin.UserName, pwd = vmLogin.Pwd });
+            var rst = HttpUtils.PostResult(url, new { username = vmLogin.logindata.username, pwd = vmLogin.logindata.pwd });
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Warning, OperationDesc.Login, rst.msg);
@@ -117,7 +121,7 @@ namespace MyNet.Client
                 return;
             }
             var user = JsonConvert.DeserializeObject<User>(((JObject)rst.data).ToString());
-            ClientContext.CurrentUser = OOMapper.Map<User, UserViewModel>(user);
+            ClientContext.CurrentUser = OOMapper.Map<User, UserDetailVM>(user);
             //记住我？
             RememberMe();
 
@@ -136,25 +140,33 @@ namespace MyNet.Client
                 return;
             }
             //将vmLogin进行序列化，存储到指定文件
-            var loginData = OOMapper.Map<LoginViewModel, LoginData>(vmLogin);
-            var buffer = Serializer.BinaryByteSerialize(loginData);
+            var buffer = Serializer.BinaryByteSerialize(new LoginData
+            {
+                UserName = vmLogin.logindata.username,
+                Pwd = vmLogin.logindata.pwd,
+                RememberMe = vmLogin.RememberMe
+            });
             using (FileStream fs = new FileStream(LoginFile, FileMode.Create, FileAccess.Write))
             {
                 await fs.WriteAsync(buffer, 0, buffer.Length);
             }
         }
 
-        private LoginViewModel LoadLoginViewModel()
+        private void LoadLoginViewModel()
         {
-            LoginViewModel vm = new LoginViewModel();
+            vmLogin = new LoginViewModel();
             if (File.Exists(LoginFile))
             {
                 var bytes = File.ReadAllBytes(LoginFile);
                 var loginData = Serializer.BinaryByteDeserialize<LoginData>(bytes);
-                vm = OOMapper.Map<LoginData, LoginViewModel>(loginData);
+                if (vmLogin.logindata != null)
+                {
+                    vmLogin.logindata.username = loginData.UserName;
+                    vmLogin.logindata.pwd = loginData.Pwd;
+                    vmLogin.RememberMe = loginData.RememberMe;
+                }
             }
 
-            return vm;
         }
 
         [Serializable]

@@ -79,13 +79,8 @@
     <Compile Include="Courses\Course.cs" />
     <Compile Include="Courses\CourseRepeatSet.cs" />
     <Compile Include="Courses\CourseTaken.cs" />
-    <Compile Include="Dto\Auth\GroupDto.cs" />
     <Compile Include="Dto\Auth\PermissionCacheDto.cs" />
-    <Compile Include="Dto\Auth\PermissionDto.cs" />
-    <Compile Include="Dto\Auth\PermissionParentDto.cs" />
-    <Compile Include="Dto\Auth\UserDto.cs" />
     <Compile Include="Dto\Base\DictCmbDto.cs" />
-    <Compile Include="Dto\Base\DictDto.cs" />
     <Compile Include="Interface\Auth\IGroup.cs" />
     <Compile Include="Interface\Auth\IPermission.cs" />
     <Compile Include="Interface\Auth\IUser.cs" />

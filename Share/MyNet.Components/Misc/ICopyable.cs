@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace MyNet.Components.Misc
 {
-    public interface IBaseModel
+    public interface ICopyable
     {
-        bool CanValidate { get; set; }
-        bool IsValid { get; }
-        string Error { get; }
+        void CopyTo(object target);
     }
 }

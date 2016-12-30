@@ -74,8 +74,8 @@
                     <DataGrid.Columns>
                         <DataGridTemplateColumn CellStyle="{StaticResource ckCellStyle}" HeaderStyle="{StaticResource ckCellHeaderStyle}"
                                                 CanUserResize="False"/>
-                        <DataGridTextColumn Header="编号" Binding="{Binding per_code}"/>
-                        <DataGridTextColumn Header="名称" Binding="{Binding per_name}"/>
+                        <DataGridTextColumn Header="编号" Binding="{Binding permdata.per_code}"/>
+                        <DataGridTextColumn Header="名称" Binding="{Binding permdata.per_name}"/>
                         <DataGridTemplateColumn Header="类型">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -90,17 +90,17 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="排序"  Binding="{Binding per_sort}"/>
+                        <DataGridTextColumn Header="排序"  Binding="{Binding permdata.per_sort}"/>
                         <DataGridTemplateColumn Header="是否系统">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Path=per_system,Converter={StaticResource boolConverter}}"/>
+                                    <TextBlock Text="{Binding Path=permdata.per_system,Converter={StaticResource boolConverter}}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="菜单uri"  Binding="{Binding per_uri}"/>
-                        <DataGridTextColumn Header="动作"  Binding="{Binding per_method}"/>
-                        <DataGridTextColumn Header="备注"  Binding="{Binding per_remark}"/>
+                        <DataGridTextColumn Header="菜单uri"  Binding="{Binding permdata.per_uri}"/>
+                        <DataGridTextColumn Header="动作"  Binding="{Binding permdata.per_method}"/>
+                        <DataGridTextColumn Header="备注"  Binding="{Binding permdata.per_remark}"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <ctl:ControlPagination x:Name="ctlPagination" Grid.Row="1" HorizontalAlignment="Center"/>

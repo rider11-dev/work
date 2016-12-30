@@ -21,6 +21,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MyNet.Components.Http;
+using MyNet.ViewModel.Auth.User;
 
 namespace MyNet.Client.Pages.Account
 {
@@ -33,39 +34,38 @@ namespace MyNet.Client.Pages.Account
     /// </summary>
     public partial class DetailPage : BasePage
     {
-        UserViewModel vmUsr;
+        UserDetailViewModel vmUsr;
         public DetailPage()
         {
-            vmUsr = ClientContext.CurrentUser;
-            this.Resources.Add("model", vmUsr);
+            vmUsr = new UserDetailViewModel();
+            ClientContext.CurrentUser.CopyTo(vmUsr.userdata);
+
+            this.DataContext = vmUsr;
+
             InitializeComponent();
         }
 
         private void btnOk_Click(object sender, RoutedEventArgs e)
         {
             e.Handled = true;
+            DoChg();
+
+        }
+
+        private void DoChg()
+        {
             if (!vmUsr.IsValid)
             {
                 MessageWindow.ShowMsg(MessageType.Warning, OperationDesc.Validate, vmUsr.Error);
                 return;
             }
-            var rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(ApiKeys.EditUsr),
-                new
-                {
-                    user_id = vmUsr.user_id,
-                    user_truename = vmUsr.user_truename,
-                    user_idcard = vmUsr.user_idcard,
-                    user_regioncode = vmUsr.user_regioncode,
-                    user_remark = vmUsr.user_remark
-                },
-                ClientContext.Token);
+            var rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(ApiKeys.EditUsr), vmUsr.userdata, ClientContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Warning, OperationDesc.Edit, rst.msg);
                 return;
             }
             MessageWindow.ShowMsg(MessageType.Info, OperationDesc.Edit, "修改成功");
-
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

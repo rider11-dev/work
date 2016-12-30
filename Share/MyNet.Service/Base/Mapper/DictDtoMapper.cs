@@ -1,5 +1,5 @@
 ﻿using DapperExtensions.Mapper;
-using MyNet.Model.Dto.Auth;
+using MyNet.Model.Dto.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
