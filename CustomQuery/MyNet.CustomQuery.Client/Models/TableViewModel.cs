@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MyNet.CustomQuery.Client.Models
 {
-    public class TableViewModel : CheckableModel, ICopytToable
+    public class TableViewModel : CheckableModel, ICopyable
     {
         public string id { get; set; }
         private string _tbname;
@@ -73,13 +73,13 @@ namespace MyNet.CustomQuery.Client.Models
             return string.Format("{0}[{1}]", comment, tbnamealias);
         }
 
-        public void CopyTo(IBaseModel targetModel)
+        public void CopyTo(object target)
         {
-            if (targetModel == null)
+            if (target == null)
             {
                 return;
             }
-            var vmTable = (TableViewModel)targetModel;
+            var vmTable = (TableViewModel)target;
             vmTable.id = this.id;
             vmTable.tbname = this.tbname;
             vmTable.alias = this.alias;

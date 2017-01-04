@@ -12,13 +12,9 @@
       d:DesignHeight="600" d:DesignWidth="700" Loaded="FieldsMngPage_Loaded"
       Title="查询字段管理">
     <Page.Resources>
-        <model:FieldMngViewModel x:Key="model"/>
         <usrCtl:PagingArgs x:Key="page"/>
         <cvt:BooleanConverter x:Key="cvtBool"/>
     </Page.Resources>
-    <Page.DataContext>
-        <Binding Source="{StaticResource model}"/>
-    </Page.DataContext>
     <Grid x:Name="gridLayout">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="240"/>
@@ -26,8 +22,8 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <GroupBox x:Name="gpTables" Grid.Column="0" Header="表信息">
-            <DataGrid x:Name="dgTables" Style="{StaticResource gridBaseStyle}" DataContext="{StaticResource model}" 
-                          ItemsSource="{Binding Path=DataContext.TbMngModel.Models,RelativeSource={RelativeSource Self},Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid x:Name="dgTables" Style="{StaticResource gridBaseStyle}"
+                          ItemsSource="{Binding Path=TbMngModel.Models,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn CellStyle="{StaticResource radioCellStyle}" HeaderStyle="{StaticResource radioCellHeaderStyle}" CanUserResize="False"/>
                     <DataGridTextColumn Header="表名称" Binding="{Binding tbname}" />
@@ -54,22 +50,21 @@
                     <StackPanel Orientation="Horizontal">
                         <Label Content="字段名称" Style="{StaticResource mngLblStyle}"/>
                         <TextBox Style="{StaticResource mngInputStyle}"
-                         Text="{Binding Path=Filter_Fieldname,Source={StaticResource model}}"
+                         Text="{Binding Path=Filter_Fieldname}"
                          />
                         <Label Content="显示名称" Style="{StaticResource mngLblStyle}"/>
                         <TextBox Style="{StaticResource mngInputStyle}"
-                         Text="{Binding Path=Filter_DisplayName,Source={StaticResource model}}"
+                         Text="{Binding Path=Filter_DisplayName}"
                          />
                         <Button x:Name="btnSearch" Style="{StaticResource mngBtnStyle}" Content="查 询"
-                        Command="{Binding Path=SearchCmd,Source={StaticResource model}}"
+                        Command="{Binding Path=SearchCmd}"
                         CommandParameter="{StaticResource page}"
                         />
                     </StackPanel>
                 </Border>
                 <Border x:Name="bdFields" Grid.Row="2" Style="{StaticResource mngBdStyle}" Grid.RowSpan="2">
                     <DataGrid x:Name="dgFields" Grid.Row="0" Style="{StaticResource gridBaseStyle}"
-                          DataContext="{StaticResource model}"
-                          ItemsSource="{Binding Path=DataContext.Models,RelativeSource={RelativeSource Self},Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
+                          ItemsSource="{Binding Path=Models,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn CellStyle="{StaticResource ckCellStyle}" HeaderStyle="{StaticResource ckCellHeaderStyle}"
                                                 CanUserResize="False"/>

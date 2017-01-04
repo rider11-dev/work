@@ -19,10 +19,12 @@ namespace MyNet.CustomQuery.Client.Pages.Base
         FieldMngViewModel model;
         public FieldsMngPage()
         {
+            model = new FieldMngViewModel();
+            this.DataContext = model;
+            base.Commands = model.Commands;
+
             InitializeComponent();
 
-            model = this.DataContext as FieldMngViewModel;
-            base.Commands = model.Commands;
             model.DgTables = dgTables;
         }
 

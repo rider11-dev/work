@@ -14,11 +14,7 @@
             <Setter Property="Width" Value="90"/>
             <Setter Property="Height" Value="36"/>
         </Style>
-        <model:TableInitViewModel x:Key="model"/>
     </Window.Resources>
-    <Window.DataContext>
-        <Binding Source="{StaticResource model}"/>
-    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -38,19 +34,18 @@
                 <Border x:Name="bdBtns" Grid.Row="0" Style="{StaticResource mngBdStyle}">
                     <StackPanel x:Name="panelBtns" Orientation="Horizontal">
                         <Button Style="{StaticResource mngBtnStyle}" x:Name="btnInit"
-                        Content="初始化" Command="{Binding Path=GetDbTablesCmd,Source={StaticResource model}}"/>
+                        Content="初始化" Command="{Binding Path=GetDbTablesCmd}"/>
                         <Button Style="{StaticResource mngBtnStyle}"
-                        Content="删除" Command="{Binding Path=DelCmd,Source={StaticResource model}}"/>
+                        Content="删除" Command="{Binding Path=DelCmd}"/>
                         <Button Style="{StaticResource mngBtnStyle}"
-                        Content="清空" Command="{Binding Path=ClearCmd,Source={StaticResource model}}"/>
+                        Content="清空" Command="{Binding Path=ClearCmd}"/>
                         <Button Style="{StaticResource mngBtnStyle}"
-                        Content="保存" Command="{Binding Path=SaveCmd,Source={StaticResource model}}"/>
+                        Content="保存" Command="{Binding Path=SaveCmd}"/>
                     </StackPanel>
                 </Border>
-                <DataGrid x:Name="dgTables" Style="{StaticResource gridBaseStyle}" Grid.Row="1"
-                      DataContext="{StaticResource model}"
-                      ItemsSource="{Binding Path=DataContext.Models,RelativeSource={RelativeSource Self},Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
-                          IsReadOnly="False">
+                <DataGrid x:Name="dgTables" Style="{StaticResource gridBaseStyle}" Grid.Row="1" IsReadOnly="False"
+                      ItemsSource="{Binding Path=Models,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+                      >
                     <DataGrid.Columns>
                         <DataGridTemplateColumn CellStyle="{StaticResource ckCellStyle}" HeaderStyle="{StaticResource ckCellHeaderStyle}"
                                                 CanUserResize="False"/>
@@ -58,7 +53,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Content="删除" Style="{StaticResource gridBtnStyle}"
-                                        Command="{Binding Path=DelCmd,Source={StaticResource model}}"
+                                        Command="{Binding Path=DelCmd}"
                                         CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGrid},Path=SelectedItem}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

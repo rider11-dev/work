@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace MyNet.CustomQuery.ViewModel
 {
-    public class AddTableViewModel
+    public class TableVM
     {
+        public string id { get; set; }
         [Required(ErrorMessage = "表名称不能为空")]
         [MaxLength(100, ErrorMessage = "表名称最大为100个字符")]
         public string tbname { get; set; }

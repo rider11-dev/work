@@ -50,12 +50,12 @@ namespace MyNet.CustomQuery.WebApi.Controllers
 
         [HttpPost]
         [Route("add")]
-        public OptResult Add(AddTableViewModel vmAddTable)
+        public OptResult Add(TableVM vmAddTable)
         {
             OptResult rst = null;
             //
             var token = base.ParseToken(ActionContext);
-            var table = OOMapper.Map<AddTableViewModel, Table>(vmAddTable);
+            var table = OOMapper.Map<TableVM, Table>(vmAddTable);
             rst = _tableSrv.Add(table);
 
             return rst;
@@ -63,13 +63,13 @@ namespace MyNet.CustomQuery.WebApi.Controllers
 
         [HttpPost]
         [Route("update")]
-        public OptResult Update(EditTableViewModel vmEditTable)
+        public OptResult Update(TableVM vmEditTable)
         {
             OptResult rst = null;
             //
             var token = base.ParseToken(ActionContext);
 
-            var table = OOMapper.Map<EditTableViewModel, Table>(vmEditTable);
+            var table = OOMapper.Map<TableVM, Table>(vmEditTable);
             rst = _tableSrv.Update(table);
 
             return rst;

@@ -25,9 +25,9 @@ namespace MyNet.CustomQuery.Client.Pages.Base
         TableInitViewModel _model;
         public TableInitWindow()
         {
+            _model = new TableInitViewModel { Window = this };
+            this.DataContext = _model;
             InitializeComponent();
-            _model = this.DataContext as TableInitViewModel;
-            _model.Window = this;
         }
 
         private void TableInitWindow_Loaded(object sender, RoutedEventArgs e)

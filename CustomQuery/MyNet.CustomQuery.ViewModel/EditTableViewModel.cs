@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyNet.CustomQuery.ViewModel
 {
-    public class EditTableViewModel : AddTableViewModel
+    public class EditTableViewModel : TableVM
     {
         [Required(ErrorMessageResourceName = "Edit_By_Id", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         public string id { get; set; }

@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace MyNet.CustomQuery.Client.Models
 {
-    public class FieldViewModel : CheckableModel, ICopytToable
+    public class FieldViewModel : CheckableModel, ICopyable
     {
         public string id { get; set; }
         public string tbid { get; set; }
@@ -161,13 +161,13 @@ namespace MyNet.CustomQuery.Client.Models
             }
         }
 
-        public void CopyTo(IBaseModel targetModel)
+        public void CopyTo(object target)
         {
-            if (targetModel == null)
+            if (target == null)
             {
                 return;
             }
-            var vmField = (FieldDetailViewModel)targetModel;
+            var vmField = (FieldDetailViewModel)target;
             vmField.id = this.id;
             vmField.tbid = this.tbid;
             vmField.tbname = this.tbname;

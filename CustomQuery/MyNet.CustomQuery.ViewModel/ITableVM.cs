@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace MyNet.CustomQuery.ViewModel
 {
-    public class EditFieldViewModel : FieldVM
+    public interface ITableVM
     {
-        [Required(ErrorMessageResourceName = "Edit_By_Id", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
-        public string id { get; set; }
+        string id { get; set; }
+        string tbname { get; set; }
+        string alias { get; set; }
+        string comment { get; set; }
     }
 }

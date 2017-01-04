@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace MyNet.CustomQuery.ViewModel
 {
-    public class AddFieldViewModel
+    public class FieldVM
     {
+        public string id { get; set; }
         [Required(ErrorMessage = "查询表不能为空")]
         public string tbid { get; set; }
         [Required(ErrorMessage = "查询字段名不能为空")]

@@ -51,7 +51,7 @@ namespace MyNet.CustomQuery.Client.Models
         }
         private void GetDbTablesAction(object parameter)
         {
-            var rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(CustomQueryApiKeys.TableDbTables, CustomQueryApiKeys.Key_ApiProvider_CustomQuery), ClientContext.Token);
+            var rst = HttpUtils.GetResult(ApiUtils.GetApiUrl(CustomQueryApiKeys.TableDbTables, CustomQueryApiKeys.Key_ApiProvider_CustomQuery), ClientContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, CustomQueryOptDesc.GetDbTables, rst.msg);

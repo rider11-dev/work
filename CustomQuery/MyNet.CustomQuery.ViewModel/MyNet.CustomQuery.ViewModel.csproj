@@ -46,8 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddFieldViewModel.cs" />
-    <Compile Include="AddTableViewModel.cs" />
+    <Compile Include="IFieldVM.cs" />
+    <Compile Include="FieldVM.cs" />
+    <Compile Include="ITableVM.cs" />
+    <Compile Include="TableVM.cs" />
     <Compile Include="EditFieldViewModel.cs" />
     <Compile Include="EditTableViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

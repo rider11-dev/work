@@ -41,12 +41,12 @@ namespace MyNet.CustomQuery.WebApi.Controllers
 
         [HttpPost]
         [Route("add")]
-        public OptResult Add(AddFieldViewModel vmAddField)
+        public OptResult Add(FieldVM vmAddField)
         {
             OptResult rst = null;
             //
             var token = base.ParseToken(ActionContext);
-            var field = OOMapper.Map<AddFieldViewModel, Field>(vmAddField);
+            var field = OOMapper.Map<FieldVM, Field>(vmAddField);
             rst = _fieldSrv.Add(field);
 
             return rst;
@@ -54,13 +54,13 @@ namespace MyNet.CustomQuery.WebApi.Controllers
 
         [HttpPost]
         [Route("update")]
-        public OptResult Update(EditFieldViewModel vmEditField)
+        public OptResult Update(FieldVM vmEditField)
         {
             OptResult rst = null;
             //
             var token = base.ParseToken(ActionContext);
 
-            var field = OOMapper.Map<EditFieldViewModel, Field>(vmEditField);
+            var field = OOMapper.Map<FieldVM, Field>(vmEditField);
             rst = _fieldSrv.Update(field);
 
             return rst;
