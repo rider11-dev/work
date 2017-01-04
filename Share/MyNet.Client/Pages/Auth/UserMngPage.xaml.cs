@@ -15,7 +15,8 @@ namespace MyNet.Client.Pages.Auth
         {
             InitializeComponent();
 
-            model = (UserMngViewModel)dgUsers.DataContext;
+            model = new UserMngViewModel();
+            this.DataContext = model;
             base.Commands = model.Commands;
         }
 

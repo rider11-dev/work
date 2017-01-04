@@ -112,8 +112,9 @@ namespace MyNet.Client.Public
             }
 
             var dicts = GetCmbSource(dictType);
-            CmbModel model = cmb.DataContext as CmbModel;
+            CmbModel model = new CmbModel();
             model.Bind(dicts, selectedTypeCode, setSelect, needBlankItem);
+            cmb.DataContext = model;
         }
         /// <summary>
         /// 设置ComboBox数据源（解析枚举）
@@ -131,8 +132,9 @@ namespace MyNet.Client.Public
             }
 
             var dicts = GetEnumCmbSource<TEnum>();
-            CmbModel model = cmb.DataContext as CmbModel;
+            CmbModel model = new CmbModel();
             model.Bind(dicts, selectedTypeCode, setSelect, needBlankItem);
+            cmb.DataContext = model;
         }
         /// <summary>
         /// 获取数据库字典数据

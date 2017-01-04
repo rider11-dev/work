@@ -10,7 +10,7 @@ using System.Web;
 
 namespace MyNet.Client.Models.Auth
 {
-    public class PermViewModel : CheckableModel, Iindexer, ICopyable
+    public class PermViewModel : CheckableModel, IRowNumber, ICopyable
     {
         public string per_id { get; set; }
 

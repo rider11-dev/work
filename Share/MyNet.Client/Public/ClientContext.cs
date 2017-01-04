@@ -24,7 +24,7 @@ namespace MyNet.Client.Public
     public class ClientContext
     {
         public static string Token { get; set; }
-        public static UserDetailVM CurrentUser { get; set; }
+        public static UserVM CurrentUser { get; set; }
         /// <summary>
         /// dll所在目录
         /// </summary>

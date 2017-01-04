@@ -8,7 +8,7 @@ using System.Web;
 
 namespace MyNet.ViewModel.Auth.Permission
 {
-    public interface IPermDetailVM : IValidateMeta, ICopyable
+    public interface IPermVM : IValidateMeta, ICopyable
     {
         string per_id { get; set; }
         string per_code { get; set; }

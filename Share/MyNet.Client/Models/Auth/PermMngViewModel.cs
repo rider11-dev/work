@@ -124,10 +124,7 @@ namespace MyNet.Client.Models.Auth
         }
         private void Search(PagingArgs page)
         {
-            if (base.Models != null)
-            {
-                base.Models.Clear();
-            }
+            base.Models = null;
             var rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(ApiKeys.GetPerByPage),
                new
                {
@@ -166,7 +163,7 @@ namespace MyNet.Client.Models.Auth
                     {
                         PermDetailViewModel permVM = new PermDetailViewModel(needValidate: false);
                         var ins = JsonConvert.DeserializeObject(obj.ToString(), permVM.permdata.GetType());
-                        (ins as IPermDetailVM).CopyTo(permVM.permdata);
+                        (ins as IPermVM).CopyTo(permVM.permdata);
                         permVM.per_parent_name = obj["per_parent_name"].Value<string>();
                         permVM.per_type_name = obj["per_type_name"].Value<string>();
                         return permVM;

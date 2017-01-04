@@ -121,7 +121,8 @@ namespace MyNet.Client
                 return;
             }
             var user = JsonConvert.DeserializeObject<User>(((JObject)rst.data).ToString());
-            ClientContext.CurrentUser = OOMapper.Map<User, UserDetailVM>(user);
+            ClientContext.CurrentUser = new UserVM();
+            OOMapper.Map(typeof(User), typeof(UserVM), user, ClientContext.CurrentUser);
             //记住我？
             RememberMe();
 

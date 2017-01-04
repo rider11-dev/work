@@ -7,7 +7,7 @@ using System.Web;
 
 namespace MyNet.ViewModel.Auth.User
 {
-    public class ChgPwdVM : IChgPwdVM
+    public class ChgPwdVM
     {
         [Required(ErrorMessageResourceName = "UserId_Require", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         public string userid { get; set; }
@@ -22,7 +22,5 @@ namespace MyNet.ViewModel.Auth.User
         //TODO
         //[Compare("newpwd", ErrorMessage = "两次输入新密码不相同")]//报错，暂不启用，后续处理
         public string newpwd2 { get; set; }
-
-        public Type ValidateMetadataType { get { return this.GetType(); } set { } }
     }
 }

@@ -160,10 +160,7 @@ namespace MyNet.Client.Models.Auth
         }
         private void Search(PagingArgs page)
         {
-            if (base.Models != null)
-            {
-                base.Models.Clear();
-            }
+            base.Models = null;//没有使用ObservableCollection;这里不能用base.Models.Clear()，因为并不会触发base.RaisePropertyChanged
             var rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(ApiKeys.GetUsrByPage),
                new
                {
@@ -203,7 +200,7 @@ namespace MyNet.Client.Models.Auth
                     {
                         UserDetailViewModel usrVM = new UserDetailViewModel(needValidate: false);//列表数据只读时，不需要进行验证;
                         var ins = JsonConvert.DeserializeObject(obj.ToString(), usrVM.userdata.GetType());
-                        (ins as IUserDetailVM).CopyTo(usrVM.userdata);
+                        (ins as IUserVM).CopyTo(usrVM.userdata);
                         usrVM.user_group_name = obj["user_group_name"].Value<string>();
                         return usrVM;
                     });

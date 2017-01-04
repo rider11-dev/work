@@ -23,20 +23,22 @@ using MyNet.ViewModel.Auth.Permission;
 using MyNet.Components.Emit;
 using MyNet.Components.Misc;
 using MyNet.Components.Validation;
+using MyNet.Components.Extensions;
 
 namespace MyNet.Client.Models.Auth
 {
     public partial class PermDetailViewModel : CheckableModel
     {
-        public IPermDetailVM permdata { get; private set; }
+        public IPermVM permdata { get; private set; }
 
         public PermDetailViewModel(bool needValidate = true) : base(needValidate)
         {
-            permdata = DynamicModelBuilder.GetInstance<IPermDetailVM>(parent: typeof(BaseModel), ctorArgs: needValidate);
-            permdata.ValidateMetadataType = typeof(PermDetailVM);
+            permdata = DynamicModelBuilder.GetInstance<IPermVM>(parent: typeof(BaseModel), ctorArgs: needValidate);
+            permdata.ValidateMetadataType = typeof(PermVM);
         }
 
         [JsonIgnore]
+        [ValidateIgnore]
         public bool IsNew
         {
             get { return string.IsNullOrEmpty(permdata.per_id); }
@@ -79,7 +81,7 @@ namespace MyNet.Client.Models.Auth
             //如果保存的是功能权限，则添加或更新缓存
             if (permdata.per_type == PermType.Func.ToString())
             {
-                var funcPermDto = OOMapper.Map<IPermDetailVM, PermissionCacheDto>(permdata);
+                var funcPermDto = OOMapper.Map<IPermVM, PermissionCacheDto>(permdata);
                 if (DataCacheUtils.AllFuncs.ContainsKey(permdata.per_code))
                 {
                     DataCacheUtils.AllFuncs[permdata.per_code] = funcPermDto;
@@ -154,7 +156,7 @@ namespace MyNet.Client.Models.Auth
                 if (_selectedIsSystem != value)
                 {
                     _selectedIsSystem = value;
-                    if (_selectedIsSystem != null && permdata.per_type != _selectedIsSystem.Id)
+                    if (_selectedIsSystem != null)
                     {
                         permdata.per_system = Convert.ToBoolean(_selectedIsSystem.Id);
                     }
@@ -175,6 +177,10 @@ namespace MyNet.Client.Models.Auth
                 if (_per_type_name != value)
                 {
                     _per_type_name = value;
+                    if (_per_type_name.IsEmpty())
+                    {
+                        permdata.per_type = "";
+                    }
                     base.RaisePropertyChanged("per_type_name");
                 }
             }
@@ -189,6 +195,10 @@ namespace MyNet.Client.Models.Auth
                 if (_per_parent_name != value)
                 {
                     _per_parent_name = value;
+                    if (_per_parent_name.IsEmpty())
+                    {
+                        permdata.per_parent = "";
+                    }
                     base.RaisePropertyChanged("per_parent_name");
                 }
             }

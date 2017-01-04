@@ -9,12 +9,7 @@
         Style="{StaticResource popWindowStyle}"
         Title="HelpWindow" Height="400" Width="340"
         >
-    <Window.Resources>
-        <win:TreeHelpViewModel x:Key="model"/>
-    </Window.Resources>
-    <Window.DataContext>
-        <Binding Source="{StaticResource model}"/>
-    </Window.DataContext>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -28,7 +23,7 @@
         <Button Grid.Row="1" Grid.Column="0"
                 Width="90" Height="36"
                 Style="{StaticResource btnBaseStyle}"
-                Command="{Binding Path=SelectCmd,Source={StaticResource model}}"
+                Command="{Binding Path=SelectCmd}"
                 Content="确  定"
                 />
         <Button Grid.Row="1" Grid.Column="1"

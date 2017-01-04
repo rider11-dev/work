@@ -10,7 +10,7 @@ using MyNet.Components.Validation;
 
 namespace MyNet.Components.WPF.Models
 {
-    public class CheckableModel : BaseModel, ICheckable, Iindexer
+    public class CheckableModel : BaseModel, ICheckable, IRowNumber
     {
         public CheckableModel() : this(true)
         {

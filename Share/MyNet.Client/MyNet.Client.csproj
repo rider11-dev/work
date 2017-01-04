@@ -100,7 +100,6 @@
     <Compile Include="Models\ApiKeys.cs" />
     <Compile Include="Models\Auth\GroupDetailViewModel.cs" />
     <Compile Include="Models\Auth\GroupMngViewModel.cs" />
-    <Compile Include="Models\Auth\GroupViewModel.cs" />
     <Compile Include="Models\Auth\PermDetailViewModel.cs" />
     <Compile Include="Models\Auth\PermMngViewModel.cs" />
     <Compile Include="Models\Auth\PermViewModel.cs" />

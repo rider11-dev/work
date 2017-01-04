@@ -9,7 +9,7 @@ namespace MyNet.Components.Misc
     /// <summary>
     /// 索引指示器接口
     /// </summary>
-    public interface Iindexer
+    public interface IRowNumber
     {
         int RowNumber { get; set; }
     }

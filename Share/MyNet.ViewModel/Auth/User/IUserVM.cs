@@ -8,7 +8,7 @@ using System.Web;
 
 namespace MyNet.ViewModel.Auth.User
 {
-    public interface IUserDetailVM : ICopyable, IValidateMeta
+    public interface IUserVM : ICopyable, IValidateMeta
     {
         string user_id { get; set; }
         string user_name { get; set; }

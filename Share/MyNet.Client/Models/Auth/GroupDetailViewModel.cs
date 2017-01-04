@@ -1,14 +1,19 @@
 ﻿using MyNet.Client.Help;
 using MyNet.Client.Public;
 using MyNet.Components;
+using MyNet.Components.Emit;
+using MyNet.Components.Extensions;
 using MyNet.Components.Http;
 using MyNet.Components.Mapper;
+using MyNet.Components.Misc;
 using MyNet.Components.Result;
+using MyNet.Components.Validation;
 using MyNet.Components.WPF.Command;
 using MyNet.Components.WPF.Controls;
 using MyNet.Components.WPF.Models;
 using MyNet.Components.WPF.Windows;
 using MyNet.Model.Auth;
+using MyNet.ViewModel.Auth.Group;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -19,12 +24,20 @@ using System.Windows.Input;
 
 namespace MyNet.Client.Models.Auth
 {
-    public class GroupDetailViewModel : GroupViewModel
+    public partial class GroupDetailViewModel : CheckableModel
     {
+        public IGroupVM groupdata { get; private set; }
+
+        public GroupDetailViewModel(bool needValidate = true) : base(needValidate)
+        {
+            groupdata = DynamicModelBuilder.GetInstance<IGroupVM>(parent: typeof(BaseModel), ctorArgs: needValidate);
+            groupdata.ValidateMetadataType = typeof(GroupVM);
+        }
         [JsonIgnore]
+        [ValidateIgnore]
         public bool IsNew
         {
-            get { return string.IsNullOrEmpty(base.gp_id); }
+            get { return string.IsNullOrEmpty(groupdata.gp_id); }
         }
 
         [JsonIgnore]
@@ -33,6 +46,7 @@ namespace MyNet.Client.Models.Auth
         [JsonIgnore]
         private DelegateCommand _saveCmd;
         [JsonIgnore]
+        [ValidateIgnore]
         public DelegateCommand SaveCmd
         {
             get
@@ -53,7 +67,7 @@ namespace MyNet.Client.Models.Auth
                 return;
             }
             var url = ApiUtils.GetApiUrl(this.IsNew ? ApiKeys.AddGroup : ApiKeys.EditGroup);
-            var rst = HttpUtils.PostResult(url, (GroupViewModel)this, ClientContext.Token);
+            var rst = HttpUtils.PostResult(url, groupdata, ClientContext.Token);
             if (rst.code != ResultCode.Success)
             {
                 MessageWindow.ShowMsg(MessageType.Error, this.IsNew ? OperationDesc.Add : OperationDesc.Edit, rst.msg);
@@ -61,14 +75,14 @@ namespace MyNet.Client.Models.Auth
             }
             MessageWindow.ShowMsg(MessageType.Info, this.IsNew ? OperationDesc.Add : OperationDesc.Edit, MsgConst.Msg_Succeed);
             //如果保存成功，则添加或更新缓存
-            var group = OOMapper.Map<GroupViewModel, Group>(this);
-            if (DataCacheUtils.AllGroups.ContainsKey(base.gp_code))
+            var group = OOMapper.Map<IGroupVM, Group>(groupdata);
+            if (DataCacheUtils.AllGroups.ContainsKey(groupdata.gp_code))
             {
-                DataCacheUtils.AllGroups[base.gp_code] = group;
+                DataCacheUtils.AllGroups[groupdata.gp_code] = group;
             }
             else
             {
-                DataCacheUtils.AllGroups.Add(base.gp_code, group);
+                DataCacheUtils.AllGroups.Add(groupdata.gp_code, group);
             }
             if (Window != null)
             {
@@ -81,6 +95,7 @@ namespace MyNet.Client.Models.Auth
         [JsonIgnore]
         private ICommand _groupParentHelpCmd;
         [JsonIgnore]
+        [ValidateIgnore]
         public ICommand GroupParentHelpCmd
         {
             get
@@ -98,13 +113,14 @@ namespace MyNet.Client.Models.Auth
             TreeHelper.OpenAllGroupsHelp(false, node =>
             {
                 var tNode = (TreeViewData.TreeNode)node;
-                base.gp_parent_name = tNode.Label;
-                base.gp_parent = tNode.Id;
+                gp_parent_name = tNode.Label;
+                groupdata.gp_parent = tNode.Id;
             });
         }
 
         CmbItem _selectedIsSystem;
         [JsonIgnore]
+        [ValidateIgnore]
         public CmbItem SelectedIsSystem
         {
             get { return _selectedIsSystem; }
@@ -113,13 +129,45 @@ namespace MyNet.Client.Models.Auth
                 if (_selectedIsSystem != value)
                 {
                     _selectedIsSystem = value;
-                    if (_selectedIsSystem != null && base.gp_system != _selectedIsSystem.Id)
+                    if (_selectedIsSystem != null)
                     {
-                        base.gp_system = _selectedIsSystem.Id;
+                        groupdata.gp_system = Convert.ToBoolean(_selectedIsSystem.Id);
                     }
                     base.RaisePropertyChanged("SelectedIsSystem");
                 }
             }
+        }
+    }
+
+    public partial class GroupDetailViewModel : ICopyable
+    {
+        private string _gp_parent_name;
+        public string gp_parent_name
+        {
+            get { return _gp_parent_name; }
+            set
+            {
+                if (_gp_parent_name != value)
+                {
+                    _gp_parent_name = value;
+                    if (_gp_parent_name.IsEmpty())
+                    {
+                        groupdata.gp_parent = "";
+                    }
+                    base.RaisePropertyChanged("gp_parent_name");
+                }
+            }
+        }
+
+        public void CopyTo(object target)
+        {
+            if (target == null)
+            {
+                return;
+            }
+            var vmGroup = (GroupDetailViewModel)target;
+            groupdata.CopyTo(vmGroup.groupdata);
+            vmGroup.gp_parent_name = this.gp_parent_name;
         }
     }
 }

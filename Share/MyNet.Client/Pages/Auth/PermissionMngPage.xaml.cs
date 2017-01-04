@@ -29,10 +29,11 @@ namespace MyNet.Client.Pages.Auth
         PermMngViewModel model;
         public PermissionMngPage()
         {
-            InitializeComponent();
-
-            model = (PermMngViewModel)dgPers.DataContext;
+            model = new PermMngViewModel();
+            this.DataContext = model;
+            this.AddModel(model);
             base.Commands = model.Commands;
+            InitializeComponent();
         }
 
         private void PermissionMngPage_Loaded(object sender, RoutedEventArgs e)

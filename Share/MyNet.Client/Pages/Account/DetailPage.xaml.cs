@@ -34,15 +34,26 @@ namespace MyNet.Client.Pages.Account
     /// </summary>
     public partial class DetailPage : BasePage
     {
-        UserDetailViewModel vmUsr;
+        private UserDetailViewModel vmUsr;
         public DetailPage()
         {
             vmUsr = new UserDetailViewModel();
-            ClientContext.CurrentUser.CopyTo(vmUsr.userdata);
+            SetUserData();
 
             this.DataContext = vmUsr;
 
             InitializeComponent();
+        }
+
+        private void SetUserData()
+        {
+            vmUsr.userdata.user_id = ClientContext.CurrentUser.user_id;
+            vmUsr.userdata.user_name = ClientContext.CurrentUser.user_name;
+            vmUsr.userdata.user_idcard = ClientContext.CurrentUser.user_idcard;
+            vmUsr.userdata.user_truename = ClientContext.CurrentUser.user_truename;
+            vmUsr.userdata.user_regioncode = ClientContext.CurrentUser.user_regioncode;
+            vmUsr.userdata.user_remark = ClientContext.CurrentUser.user_remark;
+            vmUsr.userdata.user_group = ClientContext.CurrentUser.user_group;
         }
 
         private void btnOk_Click(object sender, RoutedEventArgs e)
@@ -66,6 +77,16 @@ namespace MyNet.Client.Pages.Account
                 return;
             }
             MessageWindow.ShowMsg(MessageType.Info, OperationDesc.Edit, "修改成功");
+            //更新用户缓存
+            UpdateUsrCache();
+        }
+
+        private void UpdateUsrCache()
+        {
+            ClientContext.CurrentUser.user_idcard = vmUsr.userdata.user_idcard;
+            ClientContext.CurrentUser.user_truename = vmUsr.userdata.user_truename;
+            ClientContext.CurrentUser.user_regioncode = vmUsr.userdata.user_regioncode;
+            ClientContext.CurrentUser.user_remark = vmUsr.userdata.user_remark;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

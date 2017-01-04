@@ -62,14 +62,14 @@ namespace MyNet.WebApi.Controllers.Auth
 
         [HttpPost]
         [Route("add")]
-        public OptResult Add(UserDetailVM vmUsr)
+        public OptResult Add(UserVM vmUsr)
         {
             OptResult rst = null;
 
             //
             var token = base.ParseToken(ActionContext);
 
-            var usr = OOMapper.Map<UserDetailVM, User>(vmUsr);
+            var usr = OOMapper.Map<UserVM, User>(vmUsr);
             usr.user_creator = token.iss;
             rst = _usrSrv.Add(usr);
             return rst;
@@ -77,12 +77,12 @@ namespace MyNet.WebApi.Controllers.Auth
 
         [HttpPost]
         [Route("update")]
-        public OptResult Update(UserDetailVM vmUsr)
+        public OptResult Update(UserVM vmUsr)
         {
             OptResult rst = null;
 
             var token = base.ParseToken(ActionContext);
-            var usr = OOMapper.Map<UserDetailVM, User>(vmUsr);
+            var usr = OOMapper.Map<UserVM, User>(vmUsr);
 
             rst = _usrSrv.Update(usr);
 

@@ -98,5 +98,23 @@ namespace MyNet.Components.WPF.Extension
 
             img.Source = MiscExtension.GetImageSource(imgFile);
         }
+
+        public static void AddModel(this FrameworkElement ele, object model)
+        {
+            if (ele == null)
+            {
+                return;
+            }
+            var key = "model";
+            var res = ele.TryFindResource(key);
+            if (res == null)
+            {
+                ele.Resources.Add(key, model);
+            }
+            else
+            {
+                ele.Resources[key] = model;
+            }
+        }
     }
 }

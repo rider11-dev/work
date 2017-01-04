@@ -1,4 +1,5 @@
 ﻿using MyNet.Components.Extensions;
+using MyNet.Components.Mapper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,8 +8,9 @@ using System.Web;
 
 namespace MyNet.ViewModel.Auth.Group
 {
-    public class AddGroupViewModel
+    public class GroupVM 
     {
+        public string gp_id { get; set; }
         [Required(ErrorMessageResourceName = "Code_Require", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         [MaxLength(40, ErrorMessageResourceName = "Group_Code_Length", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         public string gp_code { get; set; }

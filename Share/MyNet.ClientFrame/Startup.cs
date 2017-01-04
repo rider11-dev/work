@@ -1,62 +1,62 @@
 ﻿using MyNet.Components;
 using MyNet.Components.Extensions;
-using MyNet.Components.Logger;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Threading;
+using System.Windows.Input;
 
 namespace ClientFrame
 {
-    /// <summary>
-    /// App.xaml 的交互逻辑
-    /// </summary>
-    public partial class App : Application
+    public class Startup
     {
-        static ILogHelper<App> _logHelper = LogHelperFactory.GetLogHelper<App>();
-        private void Application_Startup(object sender, StartupEventArgs e)
+        [STAThread]
+        static void Main()
         {
             Upgrade();
-            Start();
+            Start(new Application());
         }
 
-        //程序出错时触发的事件
-        private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
-        {
-            e.Handled = true;
-            _logHelper.LogError(e.Exception);
-            var rst = MessageBox.Show(e.Exception.Message + Environment.NewLine + "是否退出？", "程序错误", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (rst == MessageBoxResult.Yes)
-            {
-                this.Shutdown(-1);
-            }
-        }
-
-        private void Upgrade()
+        private static void Upgrade()
         {
             //先检查更新
-            var app = AppDomain.CurrentDomain.BaseDirectory.TrimEnd('/', '\\') + "/" + AppSettingUtils.Get("upgradeapp");
-            var process = Process.Start(app);
+            var upgradeApp = AppDomain.CurrentDomain.BaseDirectory.TrimEnd('/', '\\') + "/" + AppSettingUtils.Get("upgradeapp");
+            var process = Process.Start(upgradeApp);
             process.WaitForExit();
+            process.Dispose();
         }
 
-        private void Start()
+        private static void Start(Application app)
         {
-            LoadResources();
+            LoadResources(app);
             //打开第一个窗口
             if (string.IsNullOrEmpty(FrameContext.StartupWindow))
             {
                 MessageBox.Show("未能找到启动窗口，请检查配置文件！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-                this.Shutdown(-1);
+                app.Shutdown(-1);
+
             }
-            Application.Current.StartupUri = new Uri(FrameContext.StartupWindow, UriKind.Relative);
+            app.StartupUri = new Uri(FrameContext.StartupWindow, UriKind.Relative);
+            app.Activated += App_Activated;
+            app.Run();
         }
 
-        private void LoadResources()
+        private static void App_Activated(object sender, EventArgs e)
+        {
+            var app = sender as Application;
+            if (app.MainWindow != null)
+            {
+                app.MainWindow.Activate();
+            }
+        }
+
+        private static void LoadResources(Application app)
         {
             //加载插件目录程序集
             AssemblyExtention.LoadAssemblies(FrameContext.PluginPath, "^*.dll$");
@@ -80,12 +80,12 @@ namespace ClientFrame
             {
                 foreach (var file in resFiles)
                 {
-                    LoadResourseFromFile(file);
+                    LoadResourseFromFile(file, app);
                 }
             }
         }
 
-        private void LoadResourseFromFile(FileInfo file)
+        private static void LoadResourseFromFile(FileInfo file, Application app = null)
         {
             if (file == null || !file.Exists)
             {
@@ -95,8 +95,11 @@ namespace ClientFrame
             var reses = JsonConvert.DeserializeObject<IList<string>>(confData);
             if (reses != null && reses.Count > 0)
             {
-                Application.Current.Resources.MergedDictionaries.AddRange(reses.Select(s => new ResourceDictionary { Source = new Uri(s, UriKind.Relative) }));
+                app.Resources.MergedDictionaries.AddRange(reses.Select(s => new ResourceDictionary { Source = new Uri(s, UriKind.Relative) }));
             }
         }
+
+        [DllImport("User32.dll", EntryPoint = "SetForegroundWindow")]
+        public static extern int SetForegroundWindow(IntPtr hWnd);
     }
 }

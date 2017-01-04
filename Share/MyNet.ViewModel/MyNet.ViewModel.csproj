@@ -45,14 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Auth\Group\AddGroupViewModel.cs" />
-    <Compile Include="Auth\Group\EditGroupViewModel.cs" />
-    <Compile Include="Auth\Permission\IPermDetailVM.cs" />
-    <Compile Include="Auth\Permission\PermDetailVM.cs" />
-    <Compile Include="Auth\Permission\EditPermissionViewModel.cs" />
+    <Compile Include="Auth\Group\IGroupVM.cs" />
+    <Compile Include="Auth\Group\GroupVM.cs" />
+    <Compile Include="Auth\Permission\IPermVM.cs" />
+    <Compile Include="Auth\Permission\PermVM.cs" />
     <Compile Include="Auth\User\IChgPwdVM.cs" />
-    <Compile Include="Auth\User\IUserDetailVM.cs" />
-    <Compile Include="Auth\User\UserDetailVM.cs" />
+    <Compile Include="Auth\User\IUserVM.cs" />
+    <Compile Include="Auth\User\UserVM.cs" />
     <Compile Include="Auth\User\AssignPermVM.cs" />
     <Compile Include="Auth\User\ChgPwdVM.cs" />
     <Compile Include="Auth\User\ILoginVM.cs" />

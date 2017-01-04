@@ -4,7 +4,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:MyNet.Client.Models"
         xmlns:vmauth="clr-namespace:MyNet.Client.Models.Auth"
-        xmlns:vmwpf="clr-namespace:MyNet.Components.WPF.Models;assembly=MyNet.Components.WPF"
         xmlns:ctl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
         Style="{StaticResource popWindowStyle}"
         WindowStartupLocation="CenterScreen"
@@ -23,12 +22,8 @@
             <Setter Property="Height" Value="28"/>
             <Setter Property="FontSize" Value="14"/>
         </Style>
-        <vmauth:GroupDetailViewModel x:Key="model"/>
-        <vmwpf:CmbModel x:Key="cbVmBoolType"/>
     </Window.Resources>
-    <Window.DataContext>
-        <Binding Source="{StaticResource model}"/>
-    </Window.DataContext>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -52,28 +47,27 @@
 
         <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource lblStyle}" Content="组织编号"/>
         <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtGpCode" Style="{StaticResource inputStyle}"
-                Text="{Binding Path=gp_code,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
+                Text="{Binding Path=groupdata.gp_code,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
         />
         <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource lblStyle}" Content="组织名称"/>
         <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource inputStyle}"
-                Text="{Binding Path=gp_name,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
+                Text="{Binding Path=groupdata.gp_name,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
                  />
         <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource lblStyle}" Content="是否系统"/>
         <ComboBox Grid.Row="3" Grid.Column="1" x:Name="cbIsSystem"
-                  DataContext="{StaticResource cbVmBoolType}"
                   Style="{StaticResource cbStyle}"
-                  SelectedValue="{Binding Path=SelectedIsSystem,Source={StaticResource model}}"
+                  SelectedValue="{Binding Path=SelectedIsSystem,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                   />
         <Label Grid.Row="4" Grid.Column="0" Style="{StaticResource lblStyle}" Content="上级组织"/>
         <ctl:HelpButton Grid.Row="4" Grid.Column="1" 
                 Width="220" Height="28" ForbidInput="True"
                 Style="{StaticResource inputBtnAddOnStyle}" 
-                Content="{Binding Path=gp_parent_name,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                Command="{Binding Path=GroupParentHelpCmd,Source={StaticResource model}}"
+                Content="{Binding Path=gp_parent_name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                Command="{Binding Path=GroupParentHelpCmd}"
                 />
         <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource lblStyle}" Content="排序号"/>
         <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource inputStyle}"
-                Text="{Binding Path=gp_sort,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
+                Text="{Binding Path=groupdata.gp_sort,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
                  />
 
         <Grid Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2">
@@ -85,7 +79,7 @@
                     Width="90" Height="36"
                     Margin="0,0,-20,0"
                     Style="{StaticResource btnBaseStyle}"
-                    Command="{Binding Path=SaveCmd,Source={StaticResource model}}"
+                    Command="{Binding Path=SaveCmd}"
                     Content="保   存"
                     />
             <Button Name="btnCancel" Grid.Row="0" Grid.Column="1"

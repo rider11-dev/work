@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using MyNet.Components.Extensions;
 using MyNet.Client.Public;
 using MyNet.Model.Base;
+using MyNet.Components.WPF.Extension;
 
 namespace MyNet.Client.Pages.Auth
 {
@@ -27,21 +28,24 @@ namespace MyNet.Client.Pages.Auth
         GroupDetailViewModel model;
         private GroupDetailWindow()
         {
-            InitializeComponent();
-
-            model = this.DataContext as GroupDetailViewModel;
+            model = new GroupDetailViewModel();
+            this.DataContext = model;
             model.Window = this;
+
+            this.AddModel(model);
+
+            InitializeComponent();
         }
 
-        public GroupDetailWindow(GroupViewModel vmGroup = null)
+        public GroupDetailWindow(GroupDetailViewModel vmGroup = null)
             : this()
         {
             if (vmGroup != null)
             {
                 vmGroup.CopyTo(model);
             }
-            base.Title = string.IsNullOrEmpty(model.gp_id) ? "新增组织" : "修改组织";
-            txtGpCode.IsReadOnly = model.gp_code.IsNotEmpty();
+            base.Title = model.IsNew ? "新增组织" : "修改组织";
+            txtGpCode.IsReadOnly = model.groupdata.gp_code.IsNotEmpty();
         }
 
         private void GroupDetailWindow_Loaded(object sender, RoutedEventArgs e)
@@ -49,7 +53,7 @@ namespace MyNet.Client.Pages.Auth
             model.CanValidate = true;
 
             //是否系统下拉框
-            DataCacheUtils.SetEnumCmbSource<BoolType>(cbIsSystem, model.gp_system);
+            DataCacheUtils.SetEnumCmbSource<BoolType>(cbIsSystem, model.groupdata.gp_system.ToString());
         }
     }
 }

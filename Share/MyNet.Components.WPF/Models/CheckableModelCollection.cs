@@ -49,7 +49,7 @@ namespace MyNet.Components.WPF.Models
                         foreach (var model in _models)
                         {
                             model.BelongTo = this;
-                            (model as Iindexer).RowNumber = PageStart + (i++) + 1;
+                            (model as IRowNumber).RowNumber = PageStart + (i++) + 1;
                         }
                     }
                 }

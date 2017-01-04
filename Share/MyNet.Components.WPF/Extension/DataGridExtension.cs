@@ -60,9 +60,9 @@ namespace MyNet.Components.WPF.Extension
             dg.LoadingRow += (o, e) =>
             {
                 var item = e.Row.Item;
-                if (item != null && item is Iindexer)
+                if (item != null && item is IRowNumber)
                 {
-                    e.Row.Header = ((Iindexer)item).RowNumber;
+                    e.Row.Header = ((IRowNumber)item).RowNumber;
                 }
                 else
                 {

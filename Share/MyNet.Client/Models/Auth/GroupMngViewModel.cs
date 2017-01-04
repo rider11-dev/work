@@ -2,12 +2,14 @@
 using MyNet.Client.Pages.Auth;
 using MyNet.Client.Public;
 using MyNet.Components;
+using MyNet.Components.Extensions;
 using MyNet.Components.Http;
 using MyNet.Components.Result;
 using MyNet.Components.WPF.Command;
 using MyNet.Components.WPF.Controls;
 using MyNet.Components.WPF.Models;
 using MyNet.Components.WPF.Windows;
+using MyNet.ViewModel.Auth.Group;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -67,7 +69,7 @@ namespace MyNet.Client.Models.Auth
             CheckableModel vm;
             if (base.GetSelectedOne(out vm, OperationDesc.Edit))
             {
-                AddOrEdit(vm as GroupViewModel);
+                AddOrEdit(vm as GroupDetailViewModel);
             }
         }
         protected override void DelAction(object parameter)
@@ -77,7 +79,7 @@ namespace MyNet.Client.Models.Auth
             {
                 return;
             }
-            var ids = items.Select(m => ((GroupViewModel)m).gp_id);
+            var ids = items.Select(m => ((GroupDetailViewModel)m).groupdata.gp_id);
             var rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(ApiKeys.MultiDeleteGroup),
                 new
                 {
@@ -90,7 +92,7 @@ namespace MyNet.Client.Models.Auth
             }
             MessageWindow.ShowMsg(MessageType.Info, OperationDesc.Delete, MsgConst.Msg_Succeed);
             //清除垃圾缓存
-            var gpCodes = items.Select(m => ((GroupViewModel)m).gp_code);
+            var gpCodes = items.Select(m => ((GroupDetailViewModel)m).groupdata.gp_code);
             if (gpCodes != null && gpCodes.Count() > 0 && DataCacheUtils.AllGroups.Count > 0)
             {
                 foreach (var code in gpCodes)
@@ -103,7 +105,7 @@ namespace MyNet.Client.Models.Auth
             }
             base.SearchCmd.Execute(null);
         }
-        private void AddOrEdit(GroupViewModel vmGroup)
+        private void AddOrEdit(GroupDetailViewModel vmGroup)
         {
             var win = new GroupDetailWindow(vmGroup);
             var rst = win.ShowDialog();
@@ -118,6 +120,7 @@ namespace MyNet.Client.Models.Auth
         }
         private void Search(PagingArgs page)
         {
+            base.Models = null;
             var rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(ApiKeys.GetGroupByPage),
                new
                {
@@ -148,11 +151,20 @@ namespace MyNet.Client.Models.Auth
                     return;
                 }
                 page.PageCount = Convert.ToInt32(Math.Ceiling(page.RecordsCount * 1.0 / page.PageSize));
-
-                var models = JsonConvert.DeserializeObject<IEnumerable<GroupViewModel>>(((JArray)rst.data.rows).ToString());
-
-                base.PageStart = page.Start;
-                base.Models = (models as IEnumerable<CheckableModel>).ToList();
+                var datas = rst.data.rows as JArray;
+                if (datas.IsNotEmpty())
+                {
+                    IEnumerable<GroupDetailViewModel> groups = datas.Select(obj =>
+                    {
+                        GroupDetailViewModel gpVm = new GroupDetailViewModel(needValidate: false);
+                        var ins = JsonConvert.DeserializeObject(obj.ToString(), gpVm.groupdata.GetType());
+                        (ins as IGroupVM).CopyTo(gpVm.groupdata);
+                        gpVm.gp_parent_name = obj["gp_parent_name"].Value<string>();
+                        return gpVm;
+                    });
+                    base.PageStart = page.Start;
+                    base.Models = (groups as IEnumerable<CheckableModel>).ToList();
+                }
             }
         }
         #endregion

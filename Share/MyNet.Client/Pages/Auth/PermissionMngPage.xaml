@@ -14,10 +14,8 @@
 	Title="PermissionMngPage">
     <Page.Resources>
         <!--model-->
-        <vmauth:PermMngViewModel x:Key="model"/>
         <ctl:PagingArgs x:Key="paging"/>
         <cvt:BooleanConverter x:Key="boolConverter"/>
-        <vmwpf:CmbModel x:Key="cbVm"/>
     </Page.Resources>
     <Grid x:Name="gridLayout">
         <Grid.RowDefinitions>
@@ -35,28 +33,27 @@
             <StackPanel Orientation="Horizontal">
                 <Label Content="编号" Style="{StaticResource mngLblStyle}"/>
                 <TextBox Style="{StaticResource mngInputStyle}"
-                         Text="{Binding Path=Filter_PerCode,Source={StaticResource model}}"
+                         Text="{Binding Path=Filter_PerCode}"
                          IsReadOnly="{Binding}"
                          />
                 <Label Content="名称" Style="{StaticResource mngLblStyle}"/>
                 <TextBox Style="{StaticResource mngInputStyle}"
-                         Text="{Binding Path=Filter_PerName,Source={StaticResource model}}"
+                         Text="{Binding Path=Filter_PerName}"
                          />
                 <Label Content="类型" Style="{StaticResource mngLblStyle}"/>
                 <ComboBox x:Name="cbPermType" Grid.Row="3" Grid.Column="1" 
-                  DataContext="{StaticResource cbVm}"
                   Style="{StaticResource cbBaseStyle}"
                   Width="80" Height="26" FontSize="12"
-                  SelectedValue="{Binding Path=Filter_PerType,Source={StaticResource model}}"
+                  SelectedValue="{Binding Path=Filter_PerType,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                   />
                 <Label Content="上级" Style="{StaticResource mngLblStyle}"/>
                 <ctl:HelpButton Width="180" Height="26" 
                          Style="{StaticResource inputBtnAddOnStyle}" 
-                         Content="{Binding Path=Filter_PerParent_Name,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                         Command="{Binding Path=PermParentHelpCmd,Source={StaticResource model}}"
+                         Content="{Binding Path=Filter_PerParent_Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                         Command="{Binding Path=PermParentHelpCmd}"
                          />
                 <Button x:Name="btnSearch" Style="{StaticResource mngBtnStyle}" Content="查 询"
-                        Command="{Binding Path=SearchCmd,Source={StaticResource model}}"
+                        Command="{Binding Path=SearchCmd}"
                         CommandParameter="{StaticResource paging}"
                         />
             </StackPanel>
@@ -69,8 +66,7 @@
                     <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
                 <DataGrid x:Name="dgPers" Grid.Row="0" Style="{StaticResource gridBaseStyle}"
-                          DataContext="{StaticResource model}"
-                          ItemsSource="{Binding Path=DataContext.Models,RelativeSource={RelativeSource Self},Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
+                          ItemsSource="{Binding Path=Models,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Margin="-10,0,10,0">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn CellStyle="{StaticResource ckCellStyle}" HeaderStyle="{StaticResource ckCellHeaderStyle}"
                                                 CanUserResize="False"/>

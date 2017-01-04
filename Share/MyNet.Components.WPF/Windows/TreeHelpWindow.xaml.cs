@@ -34,7 +34,8 @@ namespace MyNet.Components.WPF.Windows
 
             _treeData = ctlTree.Tree.DataContext as TreeViewData;
 
-            _model = this.DataContext as TreeHelpViewModel;
+            _model = new TreeHelpViewModel();
+            this.DataContext = _model;
             _model.TreeCtl = ctlTree;
             _model.Window = this;
         }

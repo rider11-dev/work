@@ -27,7 +27,9 @@ namespace MyNet.Client.Pages.Auth
         {
             InitializeComponent();
 
-            model = (GroupMngViewModel)dgGroups.DataContext;
+            model = new GroupMngViewModel();
+            this.DataContext = model;
+
             base.Commands = model.Commands;
         }
 

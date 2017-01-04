@@ -8,7 +8,7 @@ using System.Web;
 
 namespace MyNet.ViewModel.Auth.User
 {
-    public class UserDetailVM : IUserDetailVM
+    public class UserVM
     {
         public string user_id { get; set; }
         [Required(ErrorMessageResourceName = "User_Name_Require", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
@@ -32,24 +32,5 @@ namespace MyNet.ViewModel.Auth.User
 
         [Required(ErrorMessageResourceName = "User_Group_Require", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         public string user_group { get; set; }
-
-        public Type ValidateMetadataType
-        {
-            get
-            {
-                return this.GetType();
-            }
-            set { }
-        }
-
-        public void CopyTo(object target)
-        {
-            if (target == null)
-            {
-                return;
-            }
-
-            OOMapper.Map(this.GetType(), this.GetType(), this, target);
-        }
     }
 }

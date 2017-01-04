@@ -4,7 +4,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:MyNet.Client.Models"
         xmlns:vmauth="clr-namespace:MyNet.Client.Models.Auth"
-        xmlns:vmwpf="clr-namespace:MyNet.Components.WPF.Models;assembly=MyNet.Components.WPF"
         xmlns:ctl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
         Style="{StaticResource popWindowStyle}"
         WindowStartupLocation="CenterScreen"
@@ -22,8 +21,6 @@
             <Setter Property="Height" Value="28"/>
             <Setter Property="FontSize" Value="14"/>
         </Style>
-        <vmwpf:CmbModel x:Key="cbVmPermType"/>
-        <vmwpf:CmbModel x:Key="cbVmBoolType"/>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -61,16 +58,14 @@
                 Text="{Binding Path=permdata.per_name,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
                  />
         <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource lblStyle}" Content="权限类型"/>
-        <ComboBox x:Name="cbPermType" Grid.Row="3" Grid.Column="1" 
-                  DataContext="{StaticResource cbVmPermType}"
-                  Style="{StaticResource cbStyle}"
-                  SelectedValue="{Binding Path=SelectedPermType}"
+        <ComboBox x:Name="cbPermType" Grid.Row="3" Grid.Column="1"  Style="{StaticResource cbStyle}"
+                  SelectedValue="{Binding Path=SelectedPermType,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                   />
         <Label Grid.Row="4" Grid.Column="0" Style="{StaticResource lblStyle}" Content="上级权限"/>
         <ctl:HelpButton Grid.Row="4" Grid.Column="1" 
                 Width="240" Height="28" ForbidInput="True"
                 Style="{StaticResource inputBtnAddOnStyle}" 
-                Content="{Binding Path=per_parent_name,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+                Content="{Binding Path=per_parent_name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                 Command="{Binding Path=PermParentHelpCmd}"
                 />
         <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource lblStyle}" Content="排序号"/>
@@ -79,9 +74,8 @@
                  />
         <Label Grid.Row="6" Grid.Column="0" Style="{StaticResource lblStyle}" Content="是否系统"/>
         <ComboBox Grid.Row="6" Grid.Column="1" x:Name="cbIsSystem"
-                  DataContext="{StaticResource cbVmBoolType}"
                   Style="{StaticResource cbStyle}"
-                  SelectedValue="{Binding Path=SelectedIsSystem,RelativeSource={RelativeSource AncestorType=vmauth:PermDetailViewModel}}"
+                  SelectedValue="{Binding Path=SelectedIsSystem,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                   />
         <Label Grid.Row="7" Grid.Column="0" Style="{StaticResource lblStyle}" Content="菜单uri"/>
         <TextBox Grid.Row="7" Grid.Column="1" Style="{StaticResource inputStyle}"
@@ -95,7 +89,7 @@
         <TextBox Grid.Row="9" Grid.Column="1" Style="{StaticResource inputStyle}"
                  TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"
                  Height="Auto" HorizontalContentAlignment="Left" VerticalContentAlignment="Top"
-                Text="{Binding Path=permdata.user_remark,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
+                Text="{Binding Path=permdata.per_remark,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                  />
         <Grid Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>

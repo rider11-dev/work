@@ -30,7 +30,7 @@ namespace MyNet.WebApi.Controllers.Auth
 
         [HttpPost]
         [Route("add")]
-        public OptResult Add(PermDetailVM vmAddPer)
+        public OptResult Add(PermVM vmAddPer)
         {
             OptResult rst = null;
             if (vmAddPer == null)
@@ -41,7 +41,7 @@ namespace MyNet.WebApi.Controllers.Auth
 
             //
             var token = base.ParseToken(ActionContext);
-            var per = OOMapper.Map<PermDetailVM, Permission>(vmAddPer);
+            var per = OOMapper.Map<PermVM, Permission>(vmAddPer);
             rst = _perSrv.Add(per);
 
             return rst;
@@ -49,14 +49,14 @@ namespace MyNet.WebApi.Controllers.Auth
 
         [HttpPost]
         [Route("update")]
-        public OptResult Update(EditPermissionViewModel vmEditPer)
+        public OptResult Update(PermVM vmEditPer)
         {
             OptResult rst = null;
 
             //
             var token = base.ParseToken(ActionContext);
 
-            var per = OOMapper.Map<EditPermissionViewModel, Permission>(vmEditPer);
+            var per = OOMapper.Map<PermVM, Permission>(vmEditPer);
             rst = _perSrv.Update(per);
 
             return rst;

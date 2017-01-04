@@ -124,7 +124,7 @@
     <Compile Include="Logger\LogHelperProvider.cs" />
     <Compile Include="Misc\IClearable.cs" />
     <Compile Include="Misc\ICopyable.cs" />
-    <Compile Include="Misc\Iindexer.cs" />
+    <Compile Include="Misc\IRowNumber.cs" />
     <Compile Include="Misc\Iinit.cs" />
     <Compile Include="Misc\IValidateMeta.cs" />
     <Compile Include="Misc\NumberRange.cs" />

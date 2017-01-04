@@ -18,17 +18,18 @@ using MyNet.Components.Emit;
 using MyNet.Components.Misc;
 using MyNet.Components.WPF.Models;
 using MyNet.Components.Validation;
+using MyNet.Components.Extensions;
 
 namespace MyNet.Client.Models.Auth
 {
     public partial class UserDetailViewModel : CheckableModel
     {
-        public IUserDetailVM userdata { get; private set; }
+        public IUserVM userdata { get; private set; }
 
         public UserDetailViewModel(bool needValidate = true) : base(needValidate)
         {
-            userdata = DynamicModelBuilder.GetInstance<IUserDetailVM>(parent: typeof(BaseModel), ctorArgs: needValidate);
-            userdata.ValidateMetadataType = typeof(UserDetailVM);
+            userdata = DynamicModelBuilder.GetInstance<IUserVM>(parent: typeof(BaseModel), ctorArgs: needValidate);
+            userdata.ValidateMetadataType = typeof(UserVM);
         }
 
         [JsonIgnore]
@@ -119,6 +120,10 @@ namespace MyNet.Client.Models.Auth
                 if (_user_group_name != value)
                 {
                     _user_group_name = value;
+                    if (_user_group_name.IsEmpty())
+                    {
+                        userdata.user_group = "";
+                    }
                     base.RaisePropertyChanged("user_group_name");
                 }
             }

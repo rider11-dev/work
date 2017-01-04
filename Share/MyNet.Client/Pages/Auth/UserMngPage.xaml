@@ -5,15 +5,12 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:usrCtl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
       xmlns:local="clr-namespace:MyNet.Client.Pages" 
-      xmlns:vmauth="clr-namespace:MyNet.Client.Models.Auth"
-      xmlns:pub="clr-namespace:MyNet.Client.Public"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="700"
       Title="UserMngPage"
       Loaded="Page_Loaded">
     <Page.Resources>
         <!--model-->
-        <vmauth:UserMngViewModel x:Key="model"/>
         <usrCtl:PagingArgs x:Key="paging"/>
     </Page.Resources>
     <Grid x:Name="gridLayout">
@@ -32,27 +29,27 @@
             <StackPanel Orientation="Horizontal">
                 <Label Content="用户名" Style="{StaticResource mngLblStyle}"/>
                 <TextBox x:Name="txtUserName" Style="{StaticResource mngInputStyle}"
-                         Text="{Binding Path=Filter_UserName,Source={StaticResource model}}"
+                         Text="{Binding Path=Filter_UserName}"
                          IsReadOnly="{Binding}"
                          />
                 <Label Content="真实姓名" Style="{StaticResource mngLblStyle}"/>
                 <TextBox x:Name="txtTrueName" Style="{StaticResource mngInputStyle}"
-                         Text="{Binding Path=Filter_TrueName,Source={StaticResource model}}"
+                         Text="{Binding Path=Filter_TrueName}"
                          />
                 <Label Content="所属区域" Style="{StaticResource mngLblStyle}"/>
                 <TextBox x:Name="txtRegion" Style="{StaticResource mngInputStyle}"
-                         Text="{Binding Path=Filter_RegionCode,Source={StaticResource model}}"
+                         Text="{Binding Path=Filter_RegionCode}"
                          />
                 <Label Content="所属组织" Style="{StaticResource mngLblStyle}"/>
                 <usrCtl:HelpButton Width="180" Height="26" 
                          Style="{StaticResource inputBtnAddOnStyle}" 
-                         Content="{Binding Path=Filter_Group_Name,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                         Command="{Binding Path=GroupHelpCmd,Source={StaticResource model}}"
+                         Content="{Binding Path=Filter_Group_Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                         Command="{Binding Path=GroupHelpCmd}"
                          />
                 <Button x:Name="btnSearch"
                         Style="{StaticResource mngBtnStyle}"
                         Content="查 询"
-                        Command="{Binding Path=SearchCmd,Source={StaticResource model}}"
+                        Command="{Binding Path=SearchCmd}"
                         CommandParameter="{StaticResource paging}"
                         />
             </StackPanel>
@@ -65,8 +62,7 @@
                     <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
                 <DataGrid x:Name="dgUsers" Grid.Row="0" Style="{StaticResource gridBaseStyle}"
-                          DataContext="{StaticResource model}"
-                          ItemsSource="{Binding Path=DataContext.Models,RelativeSource={RelativeSource Self},Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
+                          ItemsSource="{Binding Path=Models,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn CellStyle="{StaticResource ckCellStyle}" HeaderStyle="{StaticResource ckCellHeaderStyle}"
                                                 CanUserResize="False"/>

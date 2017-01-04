@@ -6,7 +6,7 @@ using System.Web;
 
 namespace MyNet.ViewModel.Auth.User
 {
-    public class LoginVM : ILoginVM
+    public class LoginVM
     {
         [Required(ErrorMessageResourceName = "User_Name_Require", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         [MaxLength(6, ErrorMessage = "最大长度为{1}个字符")]
@@ -14,18 +14,5 @@ namespace MyNet.ViewModel.Auth.User
 
         [Required(ErrorMessageResourceName = "Pwd_Require", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         public string pwd { get; set; }
-
-        public Type ValidateMetadataType
-        {
-            get
-            {
-                return this.GetType();
-            }
-
-            set
-            {
-
-            }
-        }
     }
 }

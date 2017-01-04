@@ -32,14 +32,14 @@ namespace MyNet.WebApi.Controllers.Auth
 
         [HttpPost]
         [Route("add")]
-        public OptResult Add(AddGroupViewModel vmAddGroup)
+        public OptResult Add(GroupVM vmAddGroup)
         {
             OptResult rst = null;
-            Type type = typeof(AddGroupViewModel);
+            Type type = typeof(GroupVM);
 
             //
             var token = base.ParseToken(ActionContext);
-            var group = OOMapper.Map<AddGroupViewModel, Group>(vmAddGroup);
+            var group = OOMapper.Map<GroupVM, Group>(vmAddGroup);
             rst = _groupSrv.Add(group);
 
             return rst;
@@ -47,14 +47,14 @@ namespace MyNet.WebApi.Controllers.Auth
 
         [HttpPost]
         [Route("update")]
-        public OptResult Update(EditGroupViewModel vmEditGroup)
+        public OptResult Update(GroupVM vmEditGroup)
         {
             OptResult rst = null;
 
             //
             var token = base.ParseToken(ActionContext);
 
-            var group = OOMapper.Map<EditGroupViewModel, Group>(vmEditGroup);
+            var group = OOMapper.Map<GroupVM, Group>(vmEditGroup);
             rst = _groupSrv.Update(group);
 
             return rst;

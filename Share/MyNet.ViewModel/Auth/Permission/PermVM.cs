@@ -8,7 +8,7 @@ using System.Web;
 
 namespace MyNet.ViewModel.Auth.Permission
 {
-    public class PermDetailVM : IPermDetailVM
+    public class PermVM
     {
         public string per_id { get; set; }
         [Required(ErrorMessageResourceName = "Code_Require", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
@@ -39,15 +39,5 @@ namespace MyNet.ViewModel.Auth.Permission
         [MaxLength(200, ErrorMessageResourceName = "Remark_Length", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         public string per_remark { get; set; }
 
-        public Type ValidateMetadataType { get { return this.GetType(); } set { } }
-
-        public void CopyTo(object target)
-        {
-            if (target == null)
-            {
-                return;
-            }
-            OOMapper.Map(this.GetType(), this.GetType(), this, target);
-        }
     }
 }

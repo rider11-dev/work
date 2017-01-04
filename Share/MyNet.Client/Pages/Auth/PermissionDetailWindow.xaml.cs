@@ -17,6 +17,7 @@ using MyNet.Components.Extensions;
 using MyNet.Client.Public;
 using MyNet.Model.Base;
 using MyNet.Components.WPF.Windows;
+using MyNet.Components.WPF.Extension;
 
 namespace MyNet.Client.Pages.Auth
 {
@@ -31,6 +32,8 @@ namespace MyNet.Client.Pages.Auth
             _vmPermDetail = new PermDetailViewModel();
             _vmPermDetail.Window = this;
             this.DataContext = _vmPermDetail;
+            this.AddModel(_vmPermDetail);//PermDetailViewModel.SelectedPermType绑定时，需要指定source，故添加
+
             InitializeComponent();
         }
 
