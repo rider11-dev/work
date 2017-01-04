@@ -4,6 +4,7 @@ using MyNet.Components;
 using MyNet.Components.Extensions;
 using MyNet.Components.Http;
 using MyNet.Components.Result;
+using MyNet.Components.Validation;
 using MyNet.Components.WPF.Command;
 using MyNet.Components.WPF.Extension;
 using MyNet.Components.WPF.Models;
@@ -27,17 +28,21 @@ namespace MyNet.CustomQuery.Client.Models
                     new DataGridColModel(field:"tbname",header:"表名称")
                 };
         [JsonIgnore]
+        [ValidateIgnore]
         public BaseWindow Window { get; set; }
 
         [JsonIgnore]
+        [ValidateIgnore]
         public bool IsNew
         {
             get { return base.id.IsEmpty(); }
         }
 
         [JsonIgnore]
+        [ValidateIgnore]
         private CmbItem _selFieldType;
         [JsonIgnore]
+        [ValidateIgnore]
         public CmbItem SelFieldType
         {
             get { return _selFieldType; }
@@ -56,8 +61,10 @@ namespace MyNet.CustomQuery.Client.Models
         }
 
         [JsonIgnore]
+        [ValidateIgnore]
         private CmbItem _selVisible;
         [JsonIgnore]
+        [ValidateIgnore]
         public CmbItem SelVisible
         {
             get { return _selFieldType; }
@@ -73,8 +80,10 @@ namespace MyNet.CustomQuery.Client.Models
         }
 
         [JsonIgnore]
+        [ValidateIgnore]
         private ICommand _saveCmd;
         [JsonIgnore]
+        [ValidateIgnore]
         public ICommand SaveCmd
         {
             get
@@ -110,8 +119,10 @@ namespace MyNet.CustomQuery.Client.Models
         }
 
         [JsonIgnore]
+        [ValidateIgnore]
         private ICommand _tableHelpCmd;
         [JsonIgnore]
+        [ValidateIgnore]
         public ICommand TableHelpCmd
         {
             get

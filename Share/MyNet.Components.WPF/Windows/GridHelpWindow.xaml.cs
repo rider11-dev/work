@@ -28,14 +28,12 @@ namespace MyNet.Components.WPF.Windows
 
         private GridHelpWindow()
         {
+            _model = new GridHelpViewModel { Window = this };
+            this.DataContext = _model;
             InitializeComponent();
             //允许拖拽
             this.DragWhenLeftMouseDown();
-
-            _model = this.DataContext as GridHelpViewModel;
-            _model.Window = this;
             _model.DataGrid = dg;
-
         }
 
         private GridHelpWindow(string title,

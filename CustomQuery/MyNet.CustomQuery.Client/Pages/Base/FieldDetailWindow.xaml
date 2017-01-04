@@ -26,13 +26,7 @@
             <Setter Property="Height" Value="28"/>
             <Setter Property="FontSize" Value="14"/>
         </Style>
-        <model:FieldDetailViewModel x:Key="model"/>
-        <vmwpf:CmbModel x:Key="cbVmFieldType"/>
-        <vmwpf:CmbModel x:Key="cbVmVisible"/>
     </Window.Resources>
-    <Window.DataContext>
-        <Binding Source="{StaticResource model}"/>
-    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -57,37 +51,35 @@
 
         <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource lblStyle}" Content="字段名称"/>
         <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource inputStyle}" 
-                Text="{Binding Path=fieldname,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                Text="{Binding Path=fieldname,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
         />
         <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource lblStyle}" Content="显示名称"/>
         <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource inputStyle}" 
-                Text="{Binding Path=displayname,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                Text="{Binding Path=displayname,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
                  />
         <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource lblStyle}" Content="从属表"/>
         <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource inputStyle}" 
-                Text="{Binding Path=alias,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                Text="{Binding Path=alias,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
                  />
         <ctl:HelpButton Grid.Row="3" Grid.Column="1" 
                 Width="220" Height="28" ForbidInput="True"
                 Style="{StaticResource inputBtnAddOnStyle}" 
-                Content="{Binding Path=tbname,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                Command="{Binding Path=TableHelpCmd,Source={StaticResource model}}"
+                Content="{Binding Path=tbname,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                Command="{Binding Path=TableHelpCmd}"
                 />
         <Label Grid.Row="4" Grid.Column="0" Style="{StaticResource lblStyle}" Content="字段类型"/>
         <ComboBox x:Name="cbFieldType" Grid.Row="4" Grid.Column="1" 
-                  DataContext="{StaticResource cbVmFieldType}"
                   Style="{StaticResource cbStyle}"
-                  SelectedValue="{Binding Path=SelFieldType,Source={StaticResource model}}"
+                  SelectedValue="{Binding Path=SelFieldType,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                   />
         <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource lblStyle}" Content="是否可见"/>
         <ComboBox x:Name="cbVisible" Grid.Row="5" Grid.Column="1" 
-                  DataContext="{StaticResource cbVmVisible}"
                   Style="{StaticResource cbStyle}"
-                  SelectedValue="{Binding Path=SelVisible,Source={StaticResource model}}"
+                  SelectedValue="{Binding Path=SelVisible,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                   />
         <Label Grid.Row="6" Grid.Column="0" Style="{StaticResource lblStyle}" Content="备注"/>
         <TextBox Grid.Row="6" Grid.Column="1"  Style="{StaticResource inputMultiLineBaseStyle}" Height="Auto" 
-                Text="{Binding Path=remark,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=LostFocus,ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                Text="{Binding Path=remark,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
                  />
         <Grid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
@@ -97,7 +89,7 @@
             <Button Grid.Row="0" Grid.Column="0"
                     Margin="0,0,-20,0"
                     Style="{StaticResource btnStyle}"
-                    Command="{Binding Path=SaveCmd,Source={StaticResource model}}"
+                    Command="{Binding Path=SaveCmd}"
                     Content="保   存"
                     />
             <Button Grid.Row="0" Grid.Column="1"

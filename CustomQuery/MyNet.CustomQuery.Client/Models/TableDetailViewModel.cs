@@ -3,6 +3,7 @@ using MyNet.Components;
 using MyNet.Components.Extensions;
 using MyNet.Components.Http;
 using MyNet.Components.Result;
+using MyNet.Components.Validation;
 using MyNet.Components.WPF.Command;
 using MyNet.Components.WPF.Windows;
 using Newtonsoft.Json;
@@ -19,16 +20,20 @@ namespace MyNet.CustomQuery.Client.Models
     {
 
         [JsonIgnore]
+        [ValidateIgnore]
         public BaseWindow Window { get; set; }
 
         [JsonIgnore]
+        [ValidateIgnore]
         public bool IsNew
         {
             get { return base.id.IsEmpty(); }
         }
 
         [JsonIgnore]
+        [ValidateIgnore]
         private ICommand _saveCmd;
+        [ValidateIgnore]
         public ICommand SaveCmd
         {
             get

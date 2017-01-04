@@ -25,13 +25,12 @@
         <Border x:Name="bdToolbar">
             <StackPanel Orientation="Horizontal">
                 <Button Style="{StaticResource btnBaseStyle}" Width="60" Height="32" Content="刷  新"
-                Command="{Binding Path=RefreshCmd,Source={StaticResource model}}"/>
+                Command="{Binding Path=RefreshCmd}"/>
             </StackPanel>
         </Border>
         <Border Grid.Row="1">
             <DataGrid x:Name="dg" Style="{StaticResource gridBaseStyle}" 
-                      DataContext="{Binding Path=Models}"
-                      ItemsSource="{Binding Path=DataContext,RelativeSource={RelativeSource Self},Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
+                      ItemsSource="{Binding Path=Models,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
             </DataGrid>
         </Border>
         <Border Grid.Row="2">
@@ -42,7 +41,7 @@
                 </Grid.ColumnDefinitions>
                 <Button Grid.Row="2" Grid.Column="0"
                 Style="{StaticResource btnStyle}"
-                Command="{Binding Path=SelectCmd,Source={StaticResource model}}"
+                Command="{Binding Path=SelectCmd}"
                 Content="确  定"
                 />
                 <Button Grid.Row="2" Grid.Column="1"

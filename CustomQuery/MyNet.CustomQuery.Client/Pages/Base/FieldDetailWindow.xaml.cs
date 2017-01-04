@@ -4,6 +4,7 @@ using MyNet.Components.WPF.Windows;
 using MyNet.Client.Public;
 using MyNet.CustomQuery.Model;
 using MyNet.Model.Base;
+using MyNet.Components.WPF.Extension;
 
 namespace MyNet.CustomQuery.Client.Pages.Base
 {
@@ -16,10 +17,10 @@ namespace MyNet.CustomQuery.Client.Pages.Base
 
         private FieldDetailWindow()
         {
+            _vmField = new FieldDetailViewModel() { Window = this };
+            this.DataContext = _vmField;
+            this.AddModel(_vmField);
             InitializeComponent();
-
-            _vmField = this.DataContext as FieldDetailViewModel;
-            _vmField.Window = this;
         }
 
         public FieldDetailWindow(FieldViewModel vmField = null) : this()
@@ -33,7 +34,7 @@ namespace MyNet.CustomQuery.Client.Pages.Base
 
         private void FieldDetailWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            _vmField.CanValidate = true;
+            //_vmField.CanValidate = true;
             //设置字段类型
             DataCacheUtils.SetEnumCmbSource<FieldType>(cbFieldType, _vmField.fieldtype);
             //设置可见性

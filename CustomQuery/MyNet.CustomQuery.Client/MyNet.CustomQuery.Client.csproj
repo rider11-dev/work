@@ -39,7 +39,7 @@
   <ItemGroup>
     <Reference Include="EmitMapper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\EmitMapper.1.0.0\lib\EmitMapper.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\Share\dlls\log4net\log4net.dll</HintPath>
