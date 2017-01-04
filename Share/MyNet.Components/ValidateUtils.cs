@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyNet.Components
 {
-    public class ValidateHelper
+    public class ValidateUtils
     {
         /// <summary>
         /// 是否身份证号

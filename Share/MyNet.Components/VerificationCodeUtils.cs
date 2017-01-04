@@ -13,7 +13,7 @@ namespace MyNet.Components
     /// <summary>
     /// 验证码
     /// </summary>
-    public class VerificationCodeHelper
+    public class VerificationCodeUtils
     {
         public static int DefaultLength = 4;
 

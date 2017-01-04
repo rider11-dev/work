@@ -22,7 +22,7 @@ namespace MyNet.WebApi.Controllers.Common
         [Route("verifycode")]
         public HttpResponseMessage GetVerifyCode()
         {
-            var verifyCode = VerificationCodeHelper.Create(4);
+            var verifyCode = VerificationCodeUtils.Create(4);
             if (!verifyCode.Check())
             {
                 return null;

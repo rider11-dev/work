@@ -42,5 +42,15 @@ namespace ClientFrame
                 return BasePath + "/plugin";
             }
         }
+
+        public static bool CheckUpdate
+        {
+            get
+            {
+                bool ck = true;
+                Boolean.TryParse(AppSettingUtils.Get("checkupdate"), out ck);
+                return ck;
+            }
+        }
     }
 }

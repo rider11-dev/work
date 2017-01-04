@@ -32,8 +32,8 @@
                  Text="{Binding username,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                  />
         <PasswordBox Grid.Row="2" Style="{StaticResource inputStyle}" Tag="/Client;component/pwd.jpg"/>
-        <!--<TextBox Grid.Row="3" Style="{StaticResource inputStyle}" Tag="/Client;component/verifycode.jpg"/>-->
-        <TextBox Grid.Row="3" Style="{StaticResource input-group-addon left}" Tag="验证码："/>
+        <TextBox Grid.Row="3" Style="{StaticResource inputStyle}" Tag="/Client;component/verifycode.jpg"/>
+        <!--<TextBox Grid.Row="3" Style="{StaticResource input-group-addon left}" Tag="验证码："/>-->
         <CheckBox Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Content="记住我" Margin="40,0,0,0"/>
         <!--<CheckBox Grid.Row="4" Grid.Column="1" Content="记住我" Margin="20,0,0,0"/>-->
         <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,40,0">

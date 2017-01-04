@@ -19,7 +19,11 @@ namespace ClientFrame
         [STAThread]
         static void Main()
         {
-            Upgrade();
+            if (FrameContext.CheckUpdate)
+            {
+                Upgrade();
+            }
+
             Start(new Application());
         }
 
@@ -99,7 +103,5 @@ namespace ClientFrame
             }
         }
 
-        [DllImport("User32.dll", EntryPoint = "SetForegroundWindow")]
-        public static extern int SetForegroundWindow(IntPtr hWnd);
     }
 }

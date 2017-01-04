@@ -7,25 +7,23 @@
         xmlns:pub="clr-namespace:MyNet.Client.Public"
         x:Class="MyNet.Client.LoginWindow"
         Style="{StaticResource popWindowStyle}"
-        Title="{x:Static pub:ClientContext.SysName}" Height="300" Width="344" 
+        Title="{x:Static pub:ClientContext.SysName}" Height="300" Width="320" 
         FocusManager.FocusedElement="{Binding ElementName=txtUsrName}"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
         Loaded="Window_Loaded">
     <Window.Resources>
-        <Style x:Key="inputStyle" TargetType="Control" BasedOn="{StaticResource inputBaseStyle}">
-            <Setter Property="Width" Value="210"/>
-            <Setter Property="Height" Value="32"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="FontSize" Value="14"/>
+        <Style x:Key="inputStyle" TargetType="Control" BasedOn="{StaticResource input-group-addon-img right}">
+            <Setter Property="Margin" Value="30,0,30,0"/>
+            <Setter Property="Grid.ColumnSpan" Value="2"/>
         </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition Height="20"/>
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -35,44 +33,28 @@
         <!--row1-->
         <Image Grid.Row="0" Grid.ColumnSpan="2" Source="/MyNet.Client;component/Resources/img/logo.png"/>
         <!--row2-->
-        <TextBox Name="txtUsrName" Grid.Row="1" Grid.ColumnSpan="2" 
-                 Style="{StaticResource inputStyle}"
-                 Tag="/MyNet.Client;component/Resources/img/username.jpg"
+        <TextBox Name="txtUsrName" Grid.Row="1" Style="{StaticResource inputStyle}" Tag="/MyNet.Client;component/Resources/img/username.jpg"
                  Text="{Binding Path=logindata.username,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,  ValidatesOnDataErrors=True}"
                  />
-
         <!--row3-->
-        <PasswordBox Name="txtPwd" Grid.Row="2" Grid.ColumnSpan="2"
-                 Tag="/MyNet.Client;component/Resources/img/pwd.jpg"
-                 Style="{StaticResource inputStyle}"
-                 ext:PasswordBoxAssistant.BindPassword="True"
-                 ext:PasswordBoxAssistant.BoundPassword="{Binding Path=logindata.pwd,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,  ValidatesOnDataErrors=True}"/>
+        <PasswordBox Grid.Row="2" Style="{StaticResource inputStyle}" Tag="/MyNet.Client;component/Resources/img/pwd.jpg"
+                     ext:PasswordBoxAssistant.BindPassword="True"
+                     ext:PasswordBoxAssistant.BoundPassword="{Binding Path=logindata.pwd,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,  ValidatesOnDataErrors=True}"/>
         <!--row4-->
-        <TextBox Name="txtVerifyCode" Grid.Row="3" Grid.ColumnSpan="2" 
-                 Style="{StaticResource inputStyle}"
-                 Tag="download/img/verifycode.jpg"
-                 Text="{Binding Path=VerifyCode,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,  ValidatesOnDataErrors=True}"
-                 />
+        <TextBox Grid.Row="3" Style="{StaticResource inputStyle}" Tag="/verifycode.jpg" x:Name="txtVerifyCode"
+                 Text="{Binding Path=VerifyCode,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,  ValidatesOnDataErrors=True}"/>
         <!--row5-->
-        <CheckBox Name="ckRememberMe" Grid.Row="4" Grid.Column="0" 
-                  HorizontalAlignment="Center" VerticalAlignment="Center"
-                  Margin="12,0,0,0"
-                  Content="记住我"
-                  IsChecked="{Binding Path=RememberMe}"/>
-        <TextBlock Grid.Row="4" Grid.Column="1"
-                  HorizontalAlignment="Center" VerticalAlignment="Center"
-                  Margin="-15,0,0,0"
-                   >
-            <Hyperlink>
-                找回密码
-            </Hyperlink>
+        <CheckBox Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Content="记住我" Margin="40,0,0,0" IsChecked="{Binding Path=RememberMe}"/>
+        <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,40,0">
+            <Hyperlink>找回密码</Hyperlink>
         </TextBlock>
         <!--row6-->
-        <Button Name="btnLogin" Grid.Row="5" Grid.ColumnSpan="2" 
+        <!--<Button Name="btnLogin" Grid.Row="5" Grid.ColumnSpan="2" 
                 Width="210" Height="40" FontSize="16" 
                 Style="{StaticResource btnLoginStyle}"
                 Content="登   录"
                 Click="btnLogin_Click"
-                />
+                />-->
+        <Button Grid.Row="5" Grid.ColumnSpan="2" Style="{DynamicResource btn-danger}" Width="240" Height="34" Content="登  录" Click="btnLogin_Click"/>
     </Grid>
 </winEx:BaseWindow>

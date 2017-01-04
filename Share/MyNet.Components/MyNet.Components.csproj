@@ -222,10 +222,10 @@
     <Compile Include="Upgrade\AppClient.cs" />
     <Compile Include="Upgrade\UpgradeConf.cs" />
     <Compile Include="Compress\ZipCompresser.cs" />
-    <Compile Include="ValidateHelper.cs" />
+    <Compile Include="ValidateUtils.cs" />
     <Compile Include="Validation\ValidateIgnoreAttribute.cs" />
     <Compile Include="Validation\ValidationExtension.cs" />
-    <Compile Include="VerificationCodeHelper.cs" />
+    <Compile Include="VerificationCodeUtils.cs" />
     <Compile Include="WindowsService\WindowsServiceManager.cs" />
   </ItemGroup>
   <ItemGroup>

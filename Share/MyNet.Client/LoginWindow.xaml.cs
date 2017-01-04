@@ -45,7 +45,7 @@ namespace MyNet.Client
             LoadLoginViewModel();
 
             this.DataContext = vmLogin;
-
+            GenerateVerifyCode();
             InitializeComponent();
             //允许拖拽
             this.DragWhenLeftMouseDown();
@@ -54,10 +54,6 @@ namespace MyNet.Client
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             vmLogin.CanValidate = true;
-
-            GenerateVerifyCode();
-            SetInputImgAddOn();
-
             //设置焦点
             if (vmLogin.RememberMe)
             {
@@ -68,8 +64,8 @@ namespace MyNet.Client
         private void GenerateVerifyCode()
         {
             //获取验证码
-            string file = AppDomain.CurrentDomain.BaseDirectory + "download/img/verifycode.jpg";
-            var code = VerificationCodeHelper.Create();
+            string file = new DirectoryInfo(ClientContext.BaseDirectory).Parent.Parent.FullName.TrimEnd() + "/verifycode.jpg";
+            var code = VerificationCodeUtils.Create();
             vmLogin.VerifyCodeTarget = code.Code;
             using (var stream = new MemoryStream(code.ImageBytes))
             {
@@ -81,13 +77,6 @@ namespace MyNet.Client
                 }
                 img.Save(file);
             }
-        }
-
-        private void SetInputImgAddOn()
-        {
-            txtUsrName.BindImageAddOn();
-            txtPwd.BindImageAddOn();
-            txtVerifyCode.BindImageAddOn();
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
