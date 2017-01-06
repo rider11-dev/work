@@ -23,6 +23,7 @@ namespace MyNet.Client.Models
 
         string _verifyCode;
         [Required(ErrorMessage = "验证码不能为空")]
+        //TODO：加Compare的话，会报错，原因不明， 暂不加
         //[Compare("VerifyCodeTarget", ErrorMessage = "验证码错误")]
         public string VerifyCode
         {

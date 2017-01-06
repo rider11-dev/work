@@ -34,6 +34,8 @@
             <StackPanel>
                 <Path Stroke="Gray" Data="M 0,8 H 16 M 8,0 V 16"/>
                 <Path Stroke="Red" Data="M 0,5 H 10 "/>
+                <Path Stroke="Green" Data="M 0,0 L 6,6 L 12,0 Z" Fill="Green"/>
+                <Path Stroke="Green" Data="M 0,6 L 6,0 L 12,6 Z" Fill="Green"/>
             </StackPanel>
         </Border>
     </Grid>

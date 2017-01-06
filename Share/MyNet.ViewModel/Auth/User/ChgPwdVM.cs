@@ -18,9 +18,9 @@ namespace MyNet.ViewModel.Auth.User
         [Required(ErrorMessageResourceName = "NewPwd_Require", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         [RegularExpression(RegexExtension.Regex_Pwd, ErrorMessageResourceName = "Pwd_Regex", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
         public string newpwd { get; set; }
+
         [Required(ErrorMessageResourceName = "NewPwd2_Require", ErrorMessageResourceType = typeof(MyNet.ViewModel.ViewModelResource))]
-        //TODO
-        //[Compare("newpwd", ErrorMessage = "两次输入新密码不相同")]//报错，暂不启用，后续处理
+        [Compare("newpwd", ErrorMessage = "两次输入新密码不相同")]
         public string newpwd2 { get; set; }
     }
 }

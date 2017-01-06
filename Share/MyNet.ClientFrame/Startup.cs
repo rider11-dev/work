@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -16,9 +17,18 @@ namespace ClientFrame
 {
     public class Startup
     {
+        private static Mutex myMutex;
+        private static bool requestInitialOwnership = true;
+        private static bool mutexWasCreated;
+
         [STAThread]
         static void Main()
         {
+            myMutex = new Mutex(requestInitialOwnership, "singleton", out mutexWasCreated);
+            if(mutexWasCreated==false)
+            {
+                return;
+            }
             if (FrameContext.CheckUpdate)
             {
                 Upgrade();

@@ -159,6 +159,10 @@ namespace MyNet.Components.Misc
             if (_properties.ContainsKey(columnName) && _validators.ContainsKey(columnName) && _validators[columnName].Count() > 0)
             {
                 object value = _properties[columnName].GetValue(this);
+                foreach (var _val in _validators[columnName])
+                {
+                    var valRst = _val.IsValid(value);
+                }
                 var rst = _validators[columnName].Where(v => !v.IsValid(value)).FirstOrDefault();
                 return rst == null ? string.Empty : rst.FormatErrorMessage(rst.ErrorMessage);
 
