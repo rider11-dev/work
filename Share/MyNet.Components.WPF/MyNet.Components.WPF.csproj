@@ -76,15 +76,17 @@
     <Compile Include="Controls\TreeViewData.cs" />
     <Compile Include="Converter\BooleanConverter.cs" />
     <Compile Include="Converter\DateTimeConverter.cs" />
-    <Compile Include="Converter\LevelMarginConverter_1.cs" />
+    <Compile Include="Converter\ImgSourceConverter.cs" />
+    <Compile Include="Converter\LevelBgColorConverter.cs" />
+    <Compile Include="Converter\LevelIndentConverter.cs" />
     <Compile Include="Converter\LevelToBorderThicknessConverter.cs" />
     <Compile Include="Converter\LevelToMarginConverter.cs" />
     <Compile Include="Extension\ControlReadOnly.cs" />
     <Compile Include="Extension\DataGridExtension.cs" />
+    <Compile Include="Extension\InputAddonExtension.cs" />
     <Compile Include="Extension\InputExtension.cs" />
-    <Compile Include="Extension\InputImgAddOnAdorner.cs" />
     <Compile Include="Extension\MiscExtension.cs" />
-    <Compile Include="Extension\PasswordBoxAssistant.cs" />
+    <Compile Include="Extension\PasswordBoxExtension.cs" />
     <Compile Include="Extension\TreeViewExtension.cs" />
     <Compile Include="Extension\VisualExtension.cs" />
     <Compile Include="Extension\WindowExtension.cs" />
@@ -123,6 +125,58 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\style\bootstrap\BaseStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\style\bootstrap\Bootstrap.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\style\bootstrap\Button.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\style\bootstrap\Colors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\style\bootstrap\Fonts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\style\bootstrap\FormControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\style\bootstrap\InputGroup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\style\bootstrap\Label.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\style\bootstrap\MenuTree.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\style\bootstrap\Panel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\style\bootstrap\ProgressBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\style\bootstrap\Sizes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\style\bootstrap\Window.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resources\style\ButtonStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -156,10 +210,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\style\TreeViewStyle.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Resources\style\WindowStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

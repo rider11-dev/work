@@ -6,7 +6,7 @@
         FontSize="14"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResize"
-        Style="{StaticResource popWindowStyle}"
+        Style="{StaticResource FlatWindowStyle}"
         Title="GridHelpWindow" Height="400" Width="600" Loaded="GridHelpWindow_Loaded"
         >
     <Window.Resources>

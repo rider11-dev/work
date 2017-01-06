@@ -220,4 +220,49 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <!--关闭窗体按钮样式-->
+    <Style x:Key="btn-close-win" BasedOn="{StaticResource ButtonBaseStyle}" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Canvas>
+                        <Rectangle x:Name="rect" Width="30" Height="30" Stroke="Transparent">
+                        </Rectangle>
+                        <Line x:Name="line1" X1="7.5" Y1="7.5" X2="22.5" Y2="22.5" Stroke="Gray" StrokeThickness="2"></Line>
+                        <Line x:Name="line2" X1="7.5" Y1="22.5" X2="22.5" Y2="7.5" Stroke="Gray" StrokeThickness="2"></Line>
+                    </Canvas>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Button.IsMouseOver" Value="True">
+                            <Setter TargetName="rect" Property="Fill" Value="{DynamicResource Foreground-Danger}"/>
+                            <Setter TargetName="line1" Property="Stroke" Value="White"/>
+                            <Setter TargetName="line2" Property="Stroke" Value="White"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--最小化窗体按钮样式-->
+    <Style x:Key="btn-min-win" BasedOn="{StaticResource ButtonBaseStyle}" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Canvas>
+                        <Rectangle x:Name="rect" Width="30" Height="30" Stroke="Transparent">
+                        </Rectangle>
+                        <Line x:Name="line1" X1="7.5" Y1="15" X2="22.5" Y2="15" Stroke="Gray" StrokeThickness="2"></Line>
+                    </Canvas>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Button.IsMouseOver" Value="True">
+                            <Setter TargetName="rect" Property="Fill" Value="{DynamicResource Foreground-Muted}"/>
+                            <Setter TargetName="line1" Property="Stroke" Value="White"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

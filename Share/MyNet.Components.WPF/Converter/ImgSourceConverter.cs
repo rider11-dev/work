@@ -4,20 +4,25 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media.Imaging;
 
 namespace MyNet.Components.WPF.Converter
 {
-    public class LevelMarginConverter_1 : IValueConverter
+    public class ImgSourceConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var level = (int)value;
-            //return new Thickness(8 * level + 10 * (level - 1), 0, 0, 0);
-            int delta = level < 3 ? 40 : 8;
+            if (value == null || string.IsNullOrEmpty(value.ToString()))
+            {
+                return null;
+            }
+            BitmapImage bitmapImg = new BitmapImage();
+            bitmapImg.BeginInit();
+            bitmapImg.UriSource = new Uri(value.ToString(), UriKind.RelativeOrAbsolute);
+            bitmapImg.EndInit();
 
-            return new Thickness(delta * level, 0, 0, 0);
+            return bitmapImg;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -6,30 +6,27 @@
         xmlns:vm="clr-namespace:MyNet.Client.Models"
         xmlns:pub="clr-namespace:MyNet.Client.Public"
         WindowStartupLocation="CenterScreen" Height="Auto" Width="Auto"
-        Style="{StaticResource baseWindowStyle}"
+        Style="{StaticResource FlatWindowStyle}"
         Title="{x:Static pub:ClientContext.SysName}" 
         Loaded="MainWindow_Loaded">
     <Window.Resources>
-        <Style x:Key="headerTextStyle" TargetType="TextBlock">
+        <Style x:Key="HeaderStyle" TargetType="Label" BasedOn="{StaticResource h5}">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="14"/>
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Margin" Value="8,0,20,0"/>
         </Style>
-        <Style x:Key="locationTextStyle" TargetType="TextBlock" BasedOn="{StaticResource headerTextStyle}">
-            <Setter Property="Foreground" Value="Gray"/>
+        <Style x:Key="LocationStyle" TargetType="Label" BasedOn="{StaticResource HeaderStyle}">
+            <Setter Property="Foreground" Value="{DynamicResource Foreground-Default1}"/>
             <Setter Property="Margin" Value="8,0,0,0"/>
         </Style>
-        <ctlExt:TreeViewData x:Key="menuTreeData"/>
     </Window.Resources>
-    <Border BorderBrush="LightGray" BorderThickness="1">
+    <Border BorderBrush="{DynamicResource BorderBrush-Default1}" BorderThickness="1">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="126"/>
                 <RowDefinition/>
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="36"/>
             </Grid.RowDefinitions>
             <!--header-->
             <Grid x:Name="gridHeader" MouseDown="gridHeader_MouseDown">
@@ -50,18 +47,18 @@
                     <Image x:Name="imgBtnUserInfo" Source="/MyNet.Client;component/Resources/img/userhead.png" 
                            Height="32" Width="32" Cursor="Hand"
                            MouseLeftButtonUp="imgBtnUserInfo_MouseLeftButtonUp"/>
-                    <TextBlock Style="{StaticResource headerTextStyle}" 
+                    <Label Style="{StaticResource HeaderStyle}" 
                                Margin="8,0,0,0"
-                               Text="{Binding Path=user_name,Source={x:Static pub:ClientContext.CurrentUser }}"/>
-                    <TextBlock Text="，你好！欢迎登陆" 
+                               Content="{Binding Path=user_name,Source={x:Static pub:ClientContext.CurrentUser }}"/>
+                    <Label Content="，你好！欢迎登陆" 
                                Margin="0,0,20,0"
-                               Style="{StaticResource headerTextStyle}"/>
+                               Style="{StaticResource HeaderStyle}"/>
                     <Image x:Name="imgBtnExit" Source="/MyNet.Client;component/Resources/img/logoff.png" 
                            Height="15" Width="15"
                            Margin="0,0,0,0" Cursor="Hand" 
                            MouseLeftButtonUp="imgBtnExit_MouseLeftButtonUp"/>
-                    <TextBlock Text="退出" 
-                               Style="{StaticResource headerTextStyle}"/>
+                    <Label Content="退出" 
+                               Style="{StaticResource HeaderStyle}"/>
                 </StackPanel>
             </Grid>
             <!--content-->
@@ -77,20 +74,14 @@
                 <!--菜单区-->
                 <TreeView x:Name="menuTree"
                           Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
-                          DataContext="{StaticResource menuTreeData}"
-                          Style="{StaticResource menuTreeViewStyle_1}"
+                          Style="{StaticResource menuTreeViewStyle_1}" Margin="0,20,0,0"
                           SelectedItemChanged="menuTree_SelectedItemChanged"/>
                 <!--当前位置-->
-                <Border Grid.Row="0" Grid.Column="1" BorderBrush="LightGray" BorderThickness="0,0,0,1">
+                <Border Grid.Row="0" Grid.Column="1" BorderBrush="{DynamicResource BorderBrush-Default1}" BorderThickness="0,0,0,1">
                     <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                        <Image Source="/MyNet.Client;component/Resources/img/location.png" 
-                           Height="15" Width="15" Margin="10,0,0,0"
-                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <TextBlock Style="{StaticResource locationTextStyle}"
-                            Text="当前位置："/>
-                        <TextBlock Name="lblCurrLocation"
-                                   Style="{StaticResource locationTextStyle}"
-                                   Text=""/>
+                        <Image Source="/MyNet.Client;component/Resources/img/location.png" Height="15" Margin="10,0,0,0"/>
+                        <Label Style="{StaticResource LocationStyle}" Content="当前位置："/>
+                        <Label Name="lblCurrLocation" Style="{StaticResource LocationStyle}" Content=""/>
                     </StackPanel>
                 </Border>
                 <Frame Name="framePage" Grid.Row="1" Grid.Column="1" NavigationUIVisibility="Hidden" Padding="0,0,4,0">
@@ -98,13 +89,12 @@
                 </Frame>
             </Grid>
             <!--footer-->
-            <StackPanel Grid.Row="2" x:Name="panelFooter" >
-                <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                       Margin="0,0,14,0" 
-                       Text="DFH山东东方红信息科技有限公司 版权所有"/>
-                </StackPanel>-->
-            </StackPanel>
+            <Border Grid.Row="2" BorderBrush="{DynamicResource BorderBrush-Default1}" BorderThickness="1">
+                <StackPanel x:Name="panelFooter" >
+                    <Label HorizontalAlignment="Right"  Margin="0,7,32,0" Style="{DynamicResource text-danger}"
+                       Content="DFH山东东方红信息科技有限公司 版权所有"/>
+                </StackPanel>
+            </Border>
         </Grid>
     </Border>
 </winEx:BaseWindow>

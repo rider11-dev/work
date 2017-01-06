@@ -39,12 +39,14 @@
     <Color x:Key="DangerColor3">#f2dede</Color>
     <Color x:Key="DangerColor4">#ebccd1</Color>
     <Color x:Key="DangerColor5">#a94442</Color>
+    <!--弹窗边框颜色-->
+    <Color x:Key="PopBorderColor">#5bc0de</Color>
 
     <!--画刷-->
     <SolidColorBrush x:Key="FormControlBackground" Color="{DynamicResource WhiteColor}"/>
     <SolidColorBrush x:Key="FormControlBorderBrush" Color="#ccc"/>
     <SolidColorBrush x:Key="FormControlForeground" Color="#555"/>
-    
+
     <!--按钮-->
     <SolidColorBrush x:Key="ButtonForeground" Color="{DynamicResource WhiteColor}"/>
 
@@ -56,6 +58,9 @@
     <SolidColorBrush x:Key="BorderBrush-Default1" Color="{DynamicResource DefaultColor2}"/>
     <SolidColorBrush x:Key="Background-Default2" Color="{DynamicResource DefaultColor3}"/>
     <SolidColorBrush x:Key="BorderBrush-Default2" Color="{DynamicResource DefaultColor4}"/>
+    <SolidColorBrush x:Key="Foreground-Default1" Color="{DynamicResource DefaultColor2}"/>
+    <SolidColorBrush x:Key="Foreground-Default2" Color="{DynamicResource DefaultColor4}"/>
+    <SolidColorBrush x:Key="Background-Default3" Color="{DynamicResource DefaultColor4}"/>
     <SolidColorBrush x:Key="Foreground-Default" Color="{DynamicResource DefaultColor5}"/>
     <!--主要-->
     <SolidColorBrush x:Key="Background-Primary1" Color="{DynamicResource PrimaryColor1}"/>
@@ -90,6 +95,7 @@
     <SolidColorBrush x:Key="Background-Danger2" Color="{DynamicResource DangerColor3}"/>
     <SolidColorBrush x:Key="BorderBrush-Danger2" Color="{DynamicResource DangerColor4}"/>
     <SolidColorBrush x:Key="Foreground-Danger" Color="{DynamicResource DangerColor5}"/>
+    <SolidColorBrush x:Key="Background-Danger3" Color="{DynamicResource DangerColor5}"/>
     <SolidColorBrush x:Key="BorderBrush-Danger3" Color="{DynamicResource DangerColor5}"/>
 
     <!--主体内容-->
@@ -103,5 +109,8 @@
     <!--副标题-->
     <!--前景色-->
     <SolidColorBrush x:Key="SmallForeground" Color="{DynamicResource MutedForegroundColor}"/>
+
+    <!--弹窗边框-->
+    <SolidColorBrush x:Key="PopBorder" Color="{DynamicResource PopBorderColor}"/>
 
 </ResourceDictionary>

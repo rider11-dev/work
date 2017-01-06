@@ -2,32 +2,18 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using MyNet.Components.WPF.Extension;
-using MyNet.Components;
 using MyNet.Client.Models;
 using MyNet.Components.Result;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using MyNet.Model.Auth;
 using MyNet.Components.WPF.Controls;
-using MyNet.Components.Extensions;
-using MyNet.Components.Mapper;
 using MyNet.Client.Command;
 using MyNet.Components.Logger;
 using MyNet.Components.WPF.Windows;
-using MyNet.Model.Base;
-using System.Threading;
-using System.Windows.Threading;
 using MyNet.Components.Http;
 using MyNet.Model.Interface.Auth;
 
@@ -80,7 +66,8 @@ namespace MyNet.Client
 
         private void InitMenutTree()
         {
-            _menuTreeData = (TreeViewData)menuTree.DataContext;
+            _menuTreeData = new TreeViewData();
+            menuTree.DataContext = _menuTreeData;
 
             var rst = HttpUtils.PostResult(ApiUtils.GetApiUrl(ApiKeys.GetPer), new { pk = ClientContext.CurrentUser.user_id }, ClientContext.Token);
             if (rst.code != ResultCode.Success)
@@ -154,7 +141,7 @@ namespace MyNet.Client
             var per = node.Data as Permission;
             _cmdOpenFunc.Execute(new OpenFuncParam { PageUri = per.per_uri, FuncCode = per.per_code });
             //报告当前位置
-            lblCurrLocation.Text = node.GetNodePath();
+            lblCurrLocation.Content = node.GetNodePath();
         }
 
         private void gridHeader_MouseDown(object sender, MouseButtonEventArgs e)

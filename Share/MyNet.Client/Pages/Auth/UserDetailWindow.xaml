@@ -5,7 +5,7 @@
         xmlns:vm="clr-namespace:MyNet.Client.Models"
         xmlns:vmauth="clr-namespace:MyNet.Client.Models.Auth"
         xmlns:ctl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
-        Style="{StaticResource popWindowStyle}"
+        Style="{StaticResource FlatPopWinStyle}"
         WindowStartupLocation="CenterScreen"
         Title="UserDetailWindow" Height="450" Width="400"
                   Loaded="UserDetailWindow_Loaded">

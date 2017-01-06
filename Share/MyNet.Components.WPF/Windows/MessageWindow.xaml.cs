@@ -20,7 +20,7 @@ namespace MyNet.Components.WPF.Windows
     /// </summary>
     public partial class MessageWindow : Window
     {
-        const string msgWindowTemplateName = "msgWindowTemplate";
+        const string msgWinTemplateName = "FlatMsgWinTemplate";
         public MessageType MsgType { get; set; }
         public string MsgTitle { get; private set; }
         public string Msg { get; private set; }
@@ -47,10 +47,10 @@ namespace MyNet.Components.WPF.Windows
 
         void Bind()
         {
-            ControlTemplate msgWindowTemplate = (ControlTemplate)Application.Current.Resources[msgWindowTemplateName];
+            ControlTemplate msgWindowTemplate = this.Template;
             //
             Image img = (Image)msgWindowTemplate.FindName("imgTitle", this);
-            BitmapImage bitmap = new BitmapImage(new Uri(GetIconFile(), UriKind.Relative));
+            BitmapImage bitmap = new BitmapImage(new Uri(GetIconFile(), UriKind.RelativeOrAbsolute));
             img.Source = bitmap;
             //
             TextBlock txt = (TextBlock)msgWindowTemplate.FindName("txtTitle", this);

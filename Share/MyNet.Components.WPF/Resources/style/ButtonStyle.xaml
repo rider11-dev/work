@@ -11,7 +11,7 @@
         </Canvas>
         <ControlTemplate.Triggers>
             <Trigger Property="Button.IsMouseOver" Value="True">
-                <Setter TargetName="rect" Property="Fill" Value="Maroon"/>
+                <Setter TargetName="rect" Property="Fill" Value="{DynamicResource Foreground-Danger}"/>
                 <Setter TargetName="line1" Property="Stroke" Value="White"/>
                 <Setter TargetName="line2" Property="Stroke" Value="White"/>
                 <Setter Property="Cursor" Value="Hand"/>
@@ -27,7 +27,7 @@
         </Canvas>
         <ControlTemplate.Triggers>
             <Trigger Property="Button.IsMouseOver" Value="True">
-                <Setter TargetName="rect" Property="Fill" Value="LightGray"/>
+                <Setter TargetName="rect" Property="Fill" Value="{DynamicResource Foreground-Muted}"/>
                 <Setter TargetName="line1" Property="Stroke" Value="White"/>
                 <Setter Property="Cursor" Value="Hand"/>
             </Trigger>

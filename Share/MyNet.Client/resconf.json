@@ -1,12 +1,24 @@
 ﻿[
+  "/MyNet.Components.WPF;component/Resources/style/bootstrap/Colors.xaml",
+  "/MyNet.Components.WPF;component/Resources/style/bootstrap/Fonts.xaml",
+  "/MyNet.Components.WPF;component/Resources/style/bootstrap/Sizes.xaml",
+  "/MyNet.Components.WPF;component/Resources/style/bootstrap/BaseStyle.xaml",
+  "/MyNet.Components.WPF;component/Resources/style/bootstrap/Button.xaml",
+  "/MyNet.Components.WPF;component/Resources/style/bootstrap/FormControl.xaml",
+  "/MyNet.Components.WPF;component/Resources/style/bootstrap/Label.xaml",
+  "/MyNet.Components.WPF;component/Resources/style/bootstrap/InputGroup.xaml",
+  "/MyNet.Components.WPF;component/Resources/style/bootstrap/Panel.xaml",
+  "/MyNet.Components.WPF;component/Resources/style/bootstrap/ProgressBar.xaml",
+  "/MyNet.Components.WPF;component/Resources/style/bootstrap/Window.xaml",
+  "/MyNet.Components.WPF;component/Resources/style/bootstrap/MenuTree.xaml",
+
   "/MyNet.Components.WPF;component/Resources/Style/ButtonStyle.xaml",
-  "/MyNet.Components.WPF;component/Resources/Style/WindowStyle.xaml",
+  
   "/MyNet.Components.WPF;component/Resources/Style/InputStyle.xaml",
   "/MyNet.Components.WPF;component/Resources/Style/TreeViewStyle.xaml",
   "/MyNet.Components.WPF;component/Resources/Style/MiscStyle.xaml",
   "/MyNet.Components.WPF;component/Resources/Style/DataGridStyle.xaml",
   "/MyNet.Components.WPF;component/Resources/Style/MngPageStyle.xaml",
   "/MyNet.Components.WPF;component/Resources/Style/DataGridEditorStyle.xaml",
-  "/MyNet.Client;component/Resources/style/Login.xaml",
-  "/MyNet.Client;component/Resources/style/MenuTreeStyle.xaml"
+  "/MyNet.Client;component/Resources/style/Login.xaml"
 ]

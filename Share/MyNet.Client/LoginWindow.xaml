@@ -6,10 +6,10 @@
         xmlns:ext="clr-namespace:MyNet.Components.WPF.Extension;assembly=MyNet.Components.WPF"
         xmlns:pub="clr-namespace:MyNet.Client.Public"
         x:Class="MyNet.Client.LoginWindow"
-        Style="{StaticResource popWindowStyle}"
         Title="{x:Static pub:ClientContext.SysName}" Height="300" Width="320" 
         FocusManager.FocusedElement="{Binding ElementName=txtUsrName}"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        Style="{StaticResource FlatPopWinStyle}"
         Loaded="Window_Loaded">
     <Window.Resources>
         <Style x:Key="inputStyle" TargetType="Control" BasedOn="{StaticResource input-group-addon-img right}">
@@ -38,23 +38,22 @@
                  />
         <!--row3-->
         <PasswordBox Grid.Row="2" Style="{StaticResource inputStyle}" Tag="/MyNet.Client;component/Resources/img/pwd.jpg"
-                     ext:PasswordBoxAssistant.BindPassword="True"
-                     ext:PasswordBoxAssistant.BoundPassword="{Binding Path=logindata.pwd,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,  ValidatesOnDataErrors=True}"/>
+                     ext:PasswordBoxExtension.BindPassword="True"
+                     ext:PasswordBoxExtension.BoundPassword="{Binding Path=logindata.pwd,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,  ValidatesOnDataErrors=True}"/>
         <!--row4-->
-        <TextBox Grid.Row="3" Style="{StaticResource inputStyle}" Tag="/verifycode.jpg" x:Name="txtVerifyCode"
+        <TextBox Grid.Row="3" Style="{StaticResource inputStyle}" Tag="pack://SiteOfOrigin:,,,/plugin/base/verifycode.jpg" x:Name="txtVerifyCode"
                  Text="{Binding Path=VerifyCode,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,  ValidatesOnDataErrors=True}"/>
         <!--row5-->
         <CheckBox Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Content="记住我" Margin="40,0,0,0" IsChecked="{Binding Path=RememberMe}"/>
         <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,40,0">
-            <Hyperlink>找回密码</Hyperlink>
+            <Hyperlink FontSize="{Binding Path=FontSize, RelativeSource={RelativeSource TemplatedParent}}"
+                       FontFamily="{Binding Path=FontFamily, RelativeSource={RelativeSource TemplatedParent}}">
+                找回密码
+            </Hyperlink>
         </TextBlock>
         <!--row6-->
-        <!--<Button Name="btnLogin" Grid.Row="5" Grid.ColumnSpan="2" 
-                Width="210" Height="40" FontSize="16" 
-                Style="{StaticResource btnLoginStyle}"
-                Content="登   录"
-                Click="btnLogin_Click"
-                />-->
-        <Button Grid.Row="5" Grid.ColumnSpan="2" Style="{DynamicResource btn-danger}" Width="240" Height="34" Content="登  录" Click="btnLogin_Click"/>
+        <Button Grid.Row="5" Grid.ColumnSpan="2" Style="{DynamicResource btn-danger}"
+                Width="240" Height="34" IsDefault="True"
+                Content="登  录" Click="btnLogin_Click"/>
     </Grid>
 </winEx:BaseWindow>

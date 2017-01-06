@@ -4,18 +4,16 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MyNet.Client.Pages"
+      xmlns:ext="clr-namespace:MyNet.Components.WPF.Extension;assembly=MyNet.Components.WPF"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="400"
 	Title="AccountInfoPage"
       Loaded="Page_Loaded">
     <Page.Resources>
-        <Style x:Key="inputStyle" TargetType="Control" BasedOn="{StaticResource inputBaseStyle}">
-            <Setter Property="Width" Value="240"/>
-            <Setter Property="Height" Value="32"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Style x:Key="inputStyle" TargetType="Control" BasedOn="{StaticResource input-group-addon left}">
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="ext:InputAddonExtension.AddonWidth" Value="84"/>
         </Style>
         <Style x:Key="lblStyle" TargetType="Label" BasedOn="{StaticResource lblInputBaseStyle}">
             <Setter Property="Margin" Value="6,0,0,0"/>
@@ -23,49 +21,22 @@
     </Page.Resources>
     <Grid MaxWidth="400" MaxHeight="370">
         <Grid.RowDefinitions>
-            <RowDefinition MaxHeight="40"/>
-            <RowDefinition MaxHeight="40"/>
-            <RowDefinition MaxHeight="40"/>
-            <RowDefinition MaxHeight="40"/>
-            <RowDefinition MaxHeight="120"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2.5*"/>
-            <ColumnDefinition Width="7.5*"/>
-        </Grid.ColumnDefinitions>
-        <Label Content="用户名" Grid.Row="0" Grid.Column="0" Style="{StaticResource lblStyle}"/>
-        <Label Grid.Row="0" Grid.Column="1"
-               Content="{Binding Path=userdata.user_name,Mode=OneTime}"
-               FontWeight="Normal"
-               Style="{StaticResource lblStyle}"
-               />
-        <Label Content="真实姓名" Grid.Row="1" Grid.Column="0" Style="{StaticResource lblStyle}"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource inputStyle}"
-                Text="{Binding Path=userdata.user_truename,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
-                 />
-        <Label Content="身份证号" Grid.Row="2" Grid.Column="0" Style="{StaticResource lblStyle}"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource inputStyle}"
-                Text="{Binding Path=userdata.user_idcard,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
-                 />
-        <Label Content="所属区域" Grid.Row="3" Grid.Column="0" Style="{StaticResource lblStyle}"/>
-        <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource inputStyle}"
-                Text="{Binding Path=userdata.user_regioncode,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
-                 />
-        <Label Content="备注" Grid.Row="4" Grid.Column="0" 
-               Style="{StaticResource lblStyle}"
-               VerticalAlignment="Top"
-               />
-        <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource inputStyle}"
+        <TextBox Grid.Row="0" Tag="用户名" Style="{StaticResource inputStyle}" IsReadOnly="True"
+                 Text="{Binding Path=userdata.user_name,Mode=OneTime}"/>
+        <TextBox Grid.Row="1" Tag="真实姓名" Style="{StaticResource inputStyle}" Text="{Binding Path=userdata.user_truename,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"/>
+        <TextBox Grid.Row="2" Tag="身份证号" Style="{StaticResource inputStyle}" Text="{Binding Path=userdata.user_idcard,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"/>
+        <TextBox Grid.Row="3" Tag="所属区域" Style="{StaticResource inputStyle}" Text="{Binding Path=userdata.user_regioncode,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"/>
+        <TextBox Grid.Row="4" Tag="备注" Style="{StaticResource inputStyle}"
                  TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"
                  Height="Auto" HorizontalContentAlignment="Left" VerticalContentAlignment="Top"
-                Text="{Binding Path=userdata.user_remark,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
-                 />
-        <Button Name="btn" Grid.Row="5" Grid.Column="1" 
-                Width="240" Height="40" 
-                Style="{StaticResource btnBaseStyle}" VerticalAlignment="Center" HorizontalAlignment="Left"
-                Content="保   存"
-                Click="btnOk_Click"
-                />
+                Text="{Binding Path=userdata.user_remark,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}" />
+        <Button Name="btn" Grid.Row="5" Width="240" Style="{DynamicResource btn-danger}" Content="保   存" Click="btnOk_Click"/>
     </Grid>
 </local:BasePage>

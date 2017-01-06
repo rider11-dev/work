@@ -14,16 +14,16 @@ namespace MyNet.Components.WPF.Extension
     /// ext:PasswordBoxAssistant.BindPassword="true"
     ///ext:PasswordBoxAssistant.BoundPassword="{Binding Path=Pwd,Source={StaticResource vmLogin},Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
     /// </summary>
-    public class PasswordBoxAssistant
+    public class PasswordBoxExtension
     {
         public static readonly DependencyProperty BoundPassword =
-           DependencyProperty.RegisterAttached("BoundPassword", typeof(string), typeof(PasswordBoxAssistant), new FrameworkPropertyMetadata(string.Empty, OnBoundPasswordChanged));
+           DependencyProperty.RegisterAttached("BoundPassword", typeof(string), typeof(PasswordBoxExtension), new FrameworkPropertyMetadata(string.Empty, OnBoundPasswordChanged));
 
         public static readonly DependencyProperty BindPassword = DependencyProperty.RegisterAttached(
-            "BindPassword", typeof(bool), typeof(PasswordBoxAssistant), new PropertyMetadata(false, OnBindPasswordChanged));
+            "BindPassword", typeof(bool), typeof(PasswordBoxExtension), new PropertyMetadata(false, OnBindPasswordChanged));
 
         private static readonly DependencyProperty UpdatingPassword =
-            DependencyProperty.RegisterAttached("UpdatingPassword", typeof(bool), typeof(PasswordBoxAssistant));
+            DependencyProperty.RegisterAttached("UpdatingPassword", typeof(bool), typeof(PasswordBoxExtension));
 
         private static void OnBoundPasswordChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

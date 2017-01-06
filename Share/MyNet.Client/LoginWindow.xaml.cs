@@ -64,7 +64,7 @@ namespace MyNet.Client
         private void GenerateVerifyCode()
         {
             //获取验证码
-            string file = new DirectoryInfo(ClientContext.BaseDirectory).Parent.Parent.FullName.TrimEnd() + "/verifycode.jpg";
+            string file = new DirectoryInfo(ClientContext.BaseDirectory).FullName.TrimEnd() + "/verifycode.jpg";
             var code = VerificationCodeUtils.Create();
             vmLogin.VerifyCodeTarget = code.Code;
             using (var stream = new MemoryStream(code.ImageBytes))
