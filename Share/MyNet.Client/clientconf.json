@@ -4,8 +4,8 @@
   "icon": "icon.ico",
   "maincontent": "/Biz.PartyBuilding.YS.Client;component/MainContentPage.xaml",
   "mainpage": "/MyNet.Client;component/Pages/MainPage.xaml",
-  //"srvroot": "http://192.168.18.89/aaa/",
-  "srvroot": "http://192.168.1.103/",
+  "srvroot": "http://192.168.18.89/aaa/",
+  //"srvroot": "http://192.168.1.103/",
   "sysname": "党建工作信息化管理平台",
   "title": "title.png"
 }

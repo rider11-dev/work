@@ -92,8 +92,11 @@
                                 <TextBlock x:Name="txtMsg" Text="消息内容" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
                             </ScrollViewer>
                             <!--row3：button-->
-                            <Button x:Name="btnOK" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Margin="0,0,24,0" Content="确定(_O)" Width="76" Height="28" IsDefault="True"/>
-                            <Button x:Name="btnCancel" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="24,0,0,0" Content="取消(_C)" Width="76" Height="28"/>
+                            <Button x:Name="btnOK" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Margin="0,0,24,0" 
+                                    Content="确定(_O)" IsDefault="True"
+                                    Style="{DynamicResource btn-danger}" Height="28"/>
+                            <Button x:Name="btnCancel" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="24,0,0,0" Content="取消(_C)" 
+                                    Style="{DynamicResource btn-danger}" Height="28"/>
                         </Grid>
 
                     </Border>

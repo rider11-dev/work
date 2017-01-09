@@ -23,17 +23,6 @@ namespace MyNet.Components.WPF.Extension
             }
             ele.Loaded -= ItemContainerLoaded;
             ele.Loaded += ItemContainerLoaded;
-            //ContentPresenter cntPresenter = ctl.FindVisualChild<ContentPresenter>();
-            //if (cntPresenter == null || cntPresenter.ContentTemplate == null)
-            //{
-            //    return;
-            //}
-            //var addonCtl = cntPresenter.ContentTemplate.FindName("addon", cntPresenter) as Control;
-            //if (addonCtl == null)
-            //{
-            //    return;
-            //}
-            //addonCtl.Width = (int)e.NewValue;
         }
 
         public static int GetAddonWidth(DependencyObject obj)
@@ -55,11 +44,43 @@ namespace MyNet.Components.WPF.Extension
                 return;
             }
             var addonCtl = ctl.Template.FindName("addon", ctl) as Control;
-            if (addonCtl == null)
+            if (addonCtl != null)
+            {
+                addonCtl.Width = GetAddonWidth(ctl);
+            }
+
+            var cntCtl = ctl.Template.FindName("PART_ContentHost", ctl) as Control;
+            if (cntCtl != null)
+            {
+                cntCtl.Width = GetContentWidth(ctl);
+            }
+
+        }
+
+        public static readonly DependencyProperty ContentWidthProperty = DependencyProperty.RegisterAttached("ContentWidth",
+           typeof(int),
+           typeof(InputAddonExtension), new PropertyMetadata(0, OnContentWidthChanged));
+
+        public static int GetContentWidth(DependencyObject obj)
+        {
+            return (int)obj.GetValue(ContentWidthProperty);
+        }
+
+        public static void SetContentWidth(DependencyObject obj, int value)
+        {
+            obj.SetValue(ContentWidthProperty, value);
+        }
+
+        private static void OnContentWidthChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            var ele = obj as FrameworkElement;
+            if (ele == null)
             {
                 return;
             }
-            addonCtl.Width = GetAddonWidth(ctl);
+            ele.Loaded -= ItemContainerLoaded;
+            ele.Loaded += ItemContainerLoaded;
         }
+
     }
 }

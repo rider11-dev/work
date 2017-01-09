@@ -16,7 +16,7 @@ namespace MyNet.Client.Public
             {
                 if (_mngBtnStyle == null)
                 {
-                    _mngBtnStyle = Application.Current.FindResource("mngBtnStyle") as Style;
+                    _mngBtnStyle = Application.Current.FindResource("MngBtnStyle") as Style;
                 }
                 return _mngBtnStyle;
             }

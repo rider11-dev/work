@@ -1,6 +1,4 @@
-﻿using MyNet.Client.Public;
-using MyNet.Components;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,24 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MyNet.Client.Pages
+namespace Client
 {
     /// <summary>
-    /// MainPage.xaml 的交互逻辑
+    /// AnimateWin.xaml 的交互逻辑
     /// </summary>
-    public partial class MainPage : BasePage
+    public partial class AnimateWin : Window
     {
-        public MainPage()
-            : base()
+        public AnimateWin()
         {
             InitializeComponent();
-
-            //lblWelcome.Content = string.Format("欢迎进入{0}", MyContext.SysName);
-
-            //frameMain.Source = new Uri(ClientContext.Conf.maincontent, UriKind.Relative);
         }
     }
 }

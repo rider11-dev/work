@@ -29,7 +29,7 @@
             </StackPanel>
         </Border>
         <Border Grid.Row="1">
-            <DataGrid x:Name="dg" Style="{StaticResource gridBaseStyle}" 
+            <DataGrid x:Name="dg" Style="{StaticResource GridBaseStyle}" 
                       ItemsSource="{Binding Path=Models,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
             </DataGrid>
         </Border>

@@ -68,6 +68,7 @@
     <Compile Include="Controls\ControlTree.xaml.cs">
       <DependentUpon>ControlTree.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\InputHelp.cs" />
     <Compile Include="Controls\HelpButton.cs" />
     <Compile Include="Controls\ControlPagination.xaml.cs">
       <DependentUpon>ControlPagination.xaml</DependentUpon>
@@ -161,6 +162,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Resources\style\bootstrap\DetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resources\style\bootstrap\Panel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -185,7 +190,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Resources\style\DataGridStyle.xaml">
+    <Page Include="Resources\style\bootstrap\DataGrid.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -193,7 +198,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Resources\style\MngPageStyle.xaml">
+    <Page Include="Resources\style\bootstrap\MngPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

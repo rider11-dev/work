@@ -72,8 +72,8 @@ namespace MyNet.Components.WPF.Windows
             {
                 dg.Columns.Add(new DataGridTemplateColumn
                 {
-                    CellStyle = this.FindResource("ckCellStyle") as Style,
-                    HeaderStyle = this.FindResource("ckCellHeaderStyle") as Style,
+                    CellStyle = this.FindResource("CkCellStyle") as Style,
+                    HeaderStyle = this.FindResource("CkCellHeaderStyle") as Style,
                     CanUserResize = false,
                 });
             }

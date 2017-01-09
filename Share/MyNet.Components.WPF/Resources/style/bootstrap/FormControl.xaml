@@ -547,6 +547,8 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <Style BasedOn="{StaticResource FormControlBaseStyle}" TargetType="{x:Type ComboBox}">
+        <Setter Property="SelectedValue" Value="Id"/>
+        <Setter Property="DisplayMemberPath" Value="Text"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>

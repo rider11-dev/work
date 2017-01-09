@@ -59,6 +59,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AnimateWin.xaml.cs">
+      <DependentUpon>AnimateWin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ICanValidate.cs" />
     <Compile Include="ILoginViewModel.cs" />
     <Compile Include="LoginModel.cs" />
@@ -72,6 +75,10 @@
       <DependentUpon>TreeViewTest.xaml</DependentUpon>
     </Compile>
     <Compile Include="ValidationExtension.cs" />
+    <Page Include="AnimateWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

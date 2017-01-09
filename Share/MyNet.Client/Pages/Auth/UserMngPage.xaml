@@ -61,10 +61,10 @@
                     <RowDefinition/>
                     <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
-                <DataGrid x:Name="dgUsers" Grid.Row="0" Style="{StaticResource gridBaseStyle}"
+                <DataGrid x:Name="dgUsers" Grid.Row="0" Style="{StaticResource GridBaseStyle}"
                           ItemsSource="{Binding Path=Models,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn CellStyle="{StaticResource ckCellStyle}" HeaderStyle="{StaticResource ckCellHeaderStyle}"
+                        <DataGridTemplateColumn CellStyle="{StaticResource CkCellStyle}" HeaderStyle="{StaticResource CkCellHeaderStyle}"
                                                 CanUserResize="False"/>
                         <DataGridTextColumn Header="用户名" Binding="{Binding userdata.user_name}" />
                         <DataGridTextColumn Header="身份证号" Binding="{Binding userdata.user_idcard}" />
