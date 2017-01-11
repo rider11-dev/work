@@ -553,8 +553,9 @@
                         <!--×，放在第2列，是为了包在边框内-->
                         <Button Grid.Column="1" Background="Transparent" BorderThickness="0" Width="20" Margin="-10,2,2,2" Padding="0" FontSize="{TemplateBinding FontSize}" Content="×" HorizontalAlignment="Right" VerticalAlignment="Center"
                                  Command="{Binding ClearCmd,RelativeSource={RelativeSource AncestorType=ctl:InputHelp}}"/>
-                        <Border Grid.Column="2" BorderThickness="1" BorderBrush="{DynamicResource BorderBrush-Danger1}" CornerRadius="0,4,4,0">
-                            <Button Style="{DynamicResource btn-danger}" FontSize="{TemplateBinding FontSize}" Content="…" Width="26" Padding="0"
+                        <Border Grid.Column="2" BorderThickness="1" Background="{DynamicResource BorderBrush-Danger1}" BorderBrush="{DynamicResource BorderBrush-Danger1}" CornerRadius="0,4,4,0">
+                            <Button Background="Transparent" BorderBrush="Transparent"
+                                    FontSize="{TemplateBinding FontSize}" Content="…" Width="26" Padding="0"
                                     Command="{Binding OpenHelpCmd,RelativeSource={RelativeSource AncestorType=ctl:InputHelp}}"/>
                         </Border>
 
@@ -601,10 +602,12 @@
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" x:Name="addon" Content="{TemplateBinding Tag}" Style="{DynamicResource InputGroupLabelLeftStyle}" FontSize="{TemplateBinding FontSize}"/>
-                        <ComboBox Grid.Column="1" Margin="-2,0,0,0"
-                                  DataContext="{TemplateBinding DataContext}"
-                                  ItemsSource="{Binding Path=DataContext.DataSource,RelativeSource={RelativeSource Self},Mode=OneWay}"
-                                  SelectedValue="{Binding Path=SelectedValue,RelativeSource={RelativeSource TemplatedParent},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                        <!--TODO:样式待调整-->
+                        <Border Grid.Column="1" x:Name="border" CornerRadius="0,4,4,0" Margin="-1,0,0,0" 
+                                BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
+                                Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                        </Border>
+                        <ComboBox Grid.Column="1" SelectedValue="{Binding Path=SelectedValue,RelativeSource={RelativeSource TemplatedParent},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

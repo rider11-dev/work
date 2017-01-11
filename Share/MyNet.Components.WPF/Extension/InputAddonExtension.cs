@@ -52,7 +52,11 @@ namespace MyNet.Components.WPF.Extension
             var cntCtl = ctl.Template.FindName("PART_ContentHost", ctl) as Control;
             if (cntCtl != null)
             {
-                cntCtl.Width = GetContentWidth(ctl);
+                var cntWidth = GetContentWidth(ctl);
+                if (cntWidth != 0)
+                {
+                    cntCtl.Width = cntWidth;
+                }
             }
 
         }
