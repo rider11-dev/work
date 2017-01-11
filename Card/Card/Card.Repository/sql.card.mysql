@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <sqlarea name="card">
+    <sqlgroup name="account">
+      <sql name="pagequery"
+           type="sp"
+           sp_name="sp_page_query"
+           fields=" ci.number num,ci.username,ci.idcard,ci.govmoney,ci.mymoney,ifnull(ci.govmoney+ci.mymoney,0) allmoney,ci.state ,ci.phone,ci.remark "
+           tables=" card_info ci  "
+           where=" 1=1 "
+           order=" usr.user_name asc"
+           >
+      </sql>
+    </sqlgroup>
+    <sqlgroup name="info">
+      <sql name="pagequery"
+           type="sp"
+           sp_name="sp_page_query"
+           fields=" cn.* "
+           tables=" card_number cn  "
+           where=" 1=1 "
+           order=" cn.number asc"
+           >
+      </sql>
+    </sqlgroup>
+  </sqlarea>
+</configuration>

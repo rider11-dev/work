@@ -100,3 +100,17 @@
 /bootstrap-wpf-style/packages
 /CustomQuery/MyNet.CustomQuery.ViewModel/bin
 /CustomQuery/MyNet.CustomQuery.ViewModel/obj
+/Card/Card/packages
+/Card/Card/.vs
+/Card/Card/Card.Client/obj
+/Card/Card/Card.Client/bin
+/Card/Card/Card.Model/obj
+/Card/Card/Card.Model/bin
+/Card/Card/Card.Repository/obj
+/Card/Card/Card.Repository/bin
+/Card/Card/Card.Service/obj
+/Card/Card/Card.Service/bin
+/Card/Card/Card.ViewModel/obj
+/Card/Card/Card.ViewModel/bin
+/Card/Card/Card.WebApi/obj
+/Card/Card/Card.WebApi/bin
