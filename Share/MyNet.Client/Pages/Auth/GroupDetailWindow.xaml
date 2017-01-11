@@ -6,61 +6,32 @@
         xmlns:vmauth="clr-namespace:MyNet.Client.Models.Auth"
         xmlns:ctl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
         xmlns:ext="clr-namespace:MyNet.Components.WPF.Extension;assembly=MyNet.Components.WPF"
-        Style="{StaticResource FlatPopWinStyle}"
+        Style="{StaticResource FlatDetailWinStyle}"
         WindowStartupLocation="CenterScreen"
         Title="GroupDetailWindow" 
         Height="400" Width="400"
         Loaded="GroupDetailWindow_Loaded">
     <Window.Resources>
-        <Style x:Key="lblStyle" TargetType="Label" BasedOn="{StaticResource lblInputBaseStyle}">
-            <Setter Property="Margin" Value="34,0,0,0"/>
-        </Style>
-        <Style x:Key="inputStyle" TargetType="Control" BasedOn="{StaticResource input-group-addon left}">
-            <Setter Property="Width" Value="220"/>
+        <Style x:Key="inputStyle" TargetType="TextBox" BasedOn="{StaticResource DetailInputStyle}">
             <Setter Property="ext:InputAddonExtension.AddonWidth" Value="84"/>
-        </Style>
-        <Style x:Key="cbStyle" TargetType="ComboBox" BasedOn="{StaticResource cbBaseStyle}">
-            <Setter Property="Width" Value="120"/>
-            <Setter Property="Height" Value="28"/>
-            <Setter Property="FontSize" Value="14"/>
         </Style>
     </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition Height="64"/>
         </Grid.RowDefinitions>
-        <!--row1：title-->
-        <Label x:Name="lblTitle" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{DynamicResource DetailHeaderStyle}"
-               Content="{Binding Path=Title,RelativeSource={RelativeSource AncestorType=win:BaseWindow},Mode=OneWay}"
-                   />
-
-        <TextBox x:Name="txtGpCode" Grid.Row="1" Tag="组织编号" Style="{DynamicResource DetailInputStyle}" Text="{Binding Path=groupdata.gp_code,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"/>
-        <TextBox Grid.Row="2" Tag="组织名称" Style="{DynamicResource DetailInputStyle}" Text="{Binding Path=groupdata.gp_name,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"/>
-        <ComboBox x:Name="cbIsSystem" Grid.Row="3" Tag="是否系统" Style="{DynamicResource DetailCmbStyle}" 
+        <TextBox x:Name="txtGpCode" Grid.Row="0" Tag="组织编号" Style="{StaticResource inputStyle}" Text="{Binding Path=groupdata.gp_code,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"/>
+        <TextBox Grid.Row="1" Tag="组织名称" Style="{StaticResource inputStyle}" Text="{Binding Path=groupdata.gp_name,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"/>
+        <ComboBox x:Name="cbIsSystem" Grid.Row="2" Tag="是否系统" Style="{DynamicResource DetailCmbStyle}" 
                   SelectedValue="{Binding Path=SelectedIsSystem,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-        <ctl:InputHelp Grid.Row="4" Tag="上级组织" Style="{DynamicResource DetailHelpInputStyle}" 
+        <ctl:InputHelp Grid.Row="3" Tag="上级组织" Style="{DynamicResource DetailHelpInputStyle}" 
                          OpenHelpCmd="{Binding Path=GroupParentHelpCmd}" ForbidInput="True"
                          Text="{Binding Path=gp_parent_name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox Grid.Row="5" Tag="排序号" Style="{DynamicResource DetailInputStyle}" Text="{Binding Path=groupdata.gp_sort,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"/>
-
-        <Grid Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Button Name="btnSave" Grid.Column="0" Style="{StaticResource DetailBtnStyle}" Content="保   存(_O)"
-                    Command="{Binding Path=SaveCmd}"
-                    />
-            <Button Name="btnCancel" Grid.Column="1" Style="{StaticResource DetailBtnStyle}" Content="取   消(_C)"
-                    Command="{Binding Path=CloseCmd,RelativeSource={RelativeSource AncestorType=win:BaseWindow}}"
-                    />
-        </Grid>
+        <TextBox Grid.Row="4" Tag="排序号" Style="{StaticResource inputStyle}" Text="{Binding Path=groupdata.gp_sort,Mode=TwoWay,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"/>
     </Grid>
 </win:BaseWindow>
