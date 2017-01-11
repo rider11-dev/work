@@ -1,0 +1,26 @@
+﻿<Application x:Class="FileManager.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:FileManager"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/MyNet.Components.WPF;component/Resources/style/bootstrap/Colors.xaml"/>
+                <ResourceDictionary Source="/MyNet.Components.WPF;component/Resources/style/bootstrap/Fonts.xaml"/>
+                <ResourceDictionary Source="/MyNet.Components.WPF;component/Resources/style/bootstrap/Sizes.xaml"/>
+                <ResourceDictionary Source="/MyNet.Components.WPF;component/Resources/style/bootstrap/BaseStyle.xaml"/>
+                <ResourceDictionary Source="/MyNet.Components.WPF;component/Resources/style/bootstrap/Button.xaml"/>
+                <ResourceDictionary Source="/MyNet.Components.WPF;component/Resources/style/bootstrap/FormControl.xaml"/>
+                <ResourceDictionary Source="/MyNet.Components.WPF;component/Resources/style/bootstrap/Label.xaml"/>
+                <ResourceDictionary Source="/MyNet.Components.WPF;component/Resources/style/bootstrap/InputGroup.xaml"/>
+                <ResourceDictionary Source="/MyNet.Components.WPF;component/Resources/style/bootstrap/Panel.xaml"/>
+                <ResourceDictionary Source="/MyNet.Components.WPF;component/Resources/style/bootstrap/ProgressBar.xaml"/>
+                <ResourceDictionary Source="/MyNet.Components.WPF;component/Resources/style/bootstrap/Window.xaml"/>
+                <ResourceDictionary Source="/MyNet.Components.WPF;component/Resources/style/bootstrap/MenuTree.xaml"/>
+                <ResourceDictionary Source="/MyNet.Components.WPF;component/Resources/style/bootstrap/DataGrid.xaml"/>
+                <ResourceDictionary Source="/MyNet.Components.WPF;component/Resources/style/bootstrap/MngPage.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
