@@ -46,6 +46,7 @@ namespace MyNet.Components.WPF.Windows
         }
 
         public static readonly DependencyProperty CustomTitleProperty = DependencyProperty.Register("CustomTitle", typeof(string), typeof(BaseWindow), new PropertyMetadata(null));
+
         public new string Icon
         {
             get { return (string)GetValue(IconProperty); }
@@ -53,6 +54,16 @@ namespace MyNet.Components.WPF.Windows
         }
 
         public new static readonly DependencyProperty IconProperty = DependencyProperty.Register("Icon", typeof(string), typeof(BaseWindow), new PropertyMetadata(null));
+
+        public bool CanResize
+        {
+            get { return (bool)GetValue(CanResizeProperty); }
+            set { SetValue(CanResizeProperty, value); }
+        }
+
+        public static readonly DependencyProperty CanResizeProperty = DependencyProperty.Register("CanResize", typeof(bool), typeof(BaseWindow), new PropertyMetadata(false, null));
+
+
         public BaseWindow()
             : base()
         {
@@ -67,7 +78,23 @@ namespace MyNet.Components.WPF.Windows
 
             this.Icon = AppDomain.CurrentDomain.BaseDirectory + AppSettingUtils.Get("icon");
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+            this.MouseDown += BaseWindow_MouseDown;
         }
+
+        private void BaseWindow_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (CanResize == false)
+            {
+                return;
+            }
+            if (e.ClickCount == 2)
+            {
+                Resize();
+                e.Handled = true;
+            }
+        }
+
         private void CloseAction(object parameter)
         {
             BeforeClose();

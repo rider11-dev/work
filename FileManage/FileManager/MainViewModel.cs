@@ -7,6 +7,8 @@ using MyNet.Components.Office;
 using MyNet.Components.WPF.Command;
 using MyNet.Components.WPF.Windows;
 using Newtonsoft.Json;
+using Novacode;
+using NPOI.XWPF.UserModel;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -19,39 +21,58 @@ using System.Windows.Input;
 
 namespace FileManager
 {
-    public class MainViewModel:BaseModel
+    public partial class MainViewModel : BaseModel
     {
         const string Key_MngFile = "last_mng_file";
+        const string Key_TempFile = "last_temp_file";
         const string Key_TargetDir = "last_target_dir";
         const string Key_DelNotList = "del_not_list";
         const string Key_OpenAfterSubmit = "open_after_submit";
         public MainViewModel()
         {
             MngFile = AppSettingUtils.Get(Key_MngFile);
-            TargetDir= AppSettingUtils.Get(Key_TargetDir);
+            TempFile = AppSettingUtils.Get(Key_TempFile);
+            TargetDir = AppSettingUtils.Get(Key_TargetDir);
             DelFileNotList = Convert.ToBoolean(AppSettingUtils.Get(Key_DelNotList));
             OpenAfterSubmit = Convert.ToBoolean(AppSettingUtils.Get(Key_OpenAfterSubmit));
         }
 
         private IEnumerable<FileContent> _fileCnts;
-        public IEnumerable<FileContent> FileContents { get { return _fileCnts; }
-            set {
-                if(_fileCnts!=value)
+        public IEnumerable<FileContent> FileContents
+        {
+            get { return _fileCnts; }
+            set
+            {
+                if (_fileCnts != value)
                 {
                     _fileCnts = value;
                     base.RaisePropertyChanged("FileContents");
                 }
-            } }
+            }
+        }
         private string _mngFile;
         public string MngFile
         {
             get { return _mngFile; }
             set
             {
-                if(_mngFile!=value)
+                if (_mngFile != value)
                 {
                     _mngFile = value;
                     base.RaisePropertyChanged("MngFile");
+                }
+            }
+        }
+        private string _tempFile;
+        public string TempFile
+        {
+            get { return _tempFile; }
+            set
+            {
+                if (_tempFile != value)
+                {
+                    _tempFile = value;
+                    base.RaisePropertyChanged("TempFile");
                 }
             }
         }
@@ -101,7 +122,7 @@ namespace FileManager
         {
             get
             {
-                if(_selectMngFileCmd==null)
+                if (_selectMngFileCmd == null)
                 {
                     _selectMngFileCmd = new DelegateCommand(SelectMngFileAction);
                 }
@@ -114,10 +135,34 @@ namespace FileManager
             Microsoft.Win32.OpenFileDialog openFileDia = new Microsoft.Win32.OpenFileDialog();
             openFileDia.Filter = "Excel Files|*.xls;*.xlsx";
             var rst = openFileDia.ShowDialog();
-            if(rst.HasValue && rst == true)
+            if (rst.HasValue && rst == true)
             {
                 MngFile = openFileDia.FileName;
                 AppSettingUtils.Update(Key_MngFile, MngFile);
+            }
+        }
+        ICommand _selectTempFileCmd;
+        public ICommand SelectTempFileCmd
+        {
+            get
+            {
+                if (_selectTempFileCmd == null)
+                {
+                    _selectTempFileCmd = new DelegateCommand(SelectTempFileAction);
+                }
+                return _selectTempFileCmd;
+            }
+        }
+
+        private void SelectTempFileAction(object obj)
+        {
+            Microsoft.Win32.OpenFileDialog openFileDia = new Microsoft.Win32.OpenFileDialog();
+            openFileDia.Filter = "Word Files|*.doc;*.docx";
+            var rst = openFileDia.ShowDialog();
+            if (rst.HasValue && rst == true)
+            {
+                TempFile = openFileDia.FileName;
+                AppSettingUtils.Update(Key_TempFile, TempFile);
             }
         }
 
@@ -136,12 +181,12 @@ namespace FileManager
 
         private void ParseMngFileAction(object obj)
         {
-            if(MngFile.IsEmpty())
+            if (MngFile.IsEmpty())
             {
                 MessageWindow.ShowMsg(MessageType.Info, "提示", "请选择管理文件");
                 return;
             }
-            if(!File.Exists(MngFile))
+            if (!File.Exists(MngFile))
             {
                 MessageWindow.ShowMsg(MessageType.Info, "提示", "管理文件不存在");
                 return;
@@ -152,13 +197,13 @@ namespace FileManager
 
         private IEnumerable<FileContent> ReadMngFile(string filename)
         {
-            var colNames = new string[] { "filename", "filecode", "versioncode", "efdate", "draftdept", "checkdept1", "checkdept2", "checkdept3", "checker", "logo" };
+            var colNames = new string[] { "filename", "filecode", "versioncode", "efdate", "writer", "remark", "draftdept", "checkdept1", "checkdept2", "checkdept3", "approver", "logo" };
             var cols = new Dictionary<int, string>();
-            for(int idx=0;idx<10;idx++)
+            for (int idx = 0; idx < colNames.Length; idx++)
             {
                 cols.Add(idx, colNames[idx]);
             }
-            var datas= ExcelUtils.ReadFile(filename:filename,cols: cols);
+            var datas = ExcelUtils.ReadFile(filename: filename, cols: cols);
             return JsonConvert.DeserializeObject<IEnumerable<FileContent>>(JsonConvert.SerializeObject(datas));
         }
 
@@ -179,12 +224,44 @@ namespace FileManager
         {
             FolderBrowserDialog folderDia = new FolderBrowserDialog();
             DialogResult rst = folderDia.ShowDialog();
-            if(rst==DialogResult.Cancel)
+            if (rst == DialogResult.Cancel)
             {
                 return;
             }
             TargetDir = folderDia.SelectedPath;
             AppSettingUtils.Update(Key_TargetDir, TargetDir);
+        }
+
+        ICommand _clearTargetDirCmd;
+        public ICommand ClearTargetDirCmd
+        {
+            get
+            {
+                if (_clearTargetDirCmd == null)
+                {
+                    _clearTargetDirCmd = new DelegateCommand(ClearTargetDirAction);
+                }
+                return _clearTargetDirCmd;
+            }
+        }
+
+        private void ClearTargetDirAction(object obj)
+        {
+            if (TargetDir.IsEmpty())
+            {
+                return;
+            }
+            var rst = MessageWindow.ShowMsg(MessageType.Ask, "询问", "清空目标目录将不能恢复，是否继续？");
+            if (rst.HasValue == false || rst == false)
+            {
+                return;
+            }
+            if (Directory.Exists(TargetDir))
+            {
+                Directory.Delete(TargetDir, true);
+            }
+            Directory.CreateDirectory(TargetDir);
+            MessageWindow.ShowMsg(MessageType.Info, "提示", "目标目录已清空");
         }
 
         ICommand _submitCmd;
@@ -200,50 +277,5 @@ namespace FileManager
             }
         }
 
-        private void SubmitAction(object obj)
-        {
-            if(TargetDir.IsEmpty())
-            {
-                MessageWindow.ShowMsg(MessageType.Info, "提示", "请选择目标目录");
-                return;
-            }
-            if(!Directory.Exists(TargetDir))
-            {
-                MessageWindow.ShowMsg(MessageType.Info, "提示", "目标目录不存在");
-                return;
-            }
-            DirectoryInfo dirTarget = new DirectoryInfo(TargetDir);
-            //1、删除列表中不存在的文件
-            //1.1清空
-            if(FileContents.IsEmpty())
-            {
-                //将要清空目标目录
-                dirTarget.Delete(true);
-                dirTarget.Create();
-                return;
-            }
-            //1.2删除部分多余文件
-            var lstNames = FileContents.Select(fc => fc.filecode + fc.filename);
-            var filesToDel = dirTarget.GetFiles().Where(f => !lstNames.Contains(f.Name.Substring(0, f.Name.IndexOf('.'))));
-            if(filesToDel.IsNotEmpty())
-            {
-                filesToDel.ToList().ForEach(f => f.Delete());
-            }
-
-            //2、新建文件
-            var filesToAdd = lstNames.Where(n => !dirTarget.GetFiles().Select(f => f.Name.Substring(0, f.Name.IndexOf('.'))).Contains(n));
-            if(filesToAdd.IsNotEmpty())
-            {
-                filesToAdd.ToList().ForEach(name => File.Create(TargetDir.TrimEnd('/', '\\')+"/"+name + ".docx"));
-            }
-            //3、修改文件
-
-            MessageWindow.ShowMsg(MessageType.Info, "提示", "修改成功");
-
-            if(OpenAfterSubmit)
-            {
-                Process.Start("Explorer.exe", TargetDir);
-            }
-        }
     }
 }

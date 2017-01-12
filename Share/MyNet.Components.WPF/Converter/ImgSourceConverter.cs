@@ -1,6 +1,8 @@
-﻿using System;
+﻿using MyNet.Components.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,9 +19,14 @@ namespace MyNet.Components.WPF.Converter
             {
                 return null;
             }
+            Uri uri = new Uri(value.ToString(), UriKind.RelativeOrAbsolute);
+            if (uri.IsAbsoluteUri && (uri.AbsolutePath.IsEmpty() || !File.Exists(uri.AbsolutePath)))
+            {
+                return null;
+            }
             BitmapImage bitmapImg = new BitmapImage();
             bitmapImg.BeginInit();
-            bitmapImg.UriSource = new Uri(value.ToString(), UriKind.RelativeOrAbsolute);
+            bitmapImg.UriSource = uri;
             bitmapImg.EndInit();
 
             return bitmapImg;

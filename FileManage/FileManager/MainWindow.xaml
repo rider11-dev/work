@@ -7,15 +7,22 @@
         xmlns:win="clr-namespace:MyNet.Components.WPF.Windows;assembly=MyNet.Components.WPF"
         xmlns:ctl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
         xmlns:ext="clr-namespace:MyNet.Components.WPF.Extension;assembly=MyNet.Components.WPF"
+        xmlns:cvt="clr-namespace:MyNet.Components.WPF.Converter;assembly=MyNet.Components.WPF"
         mc:Ignorable="d"
         Title="文件管理工具" CustomTitle="文件管理工具" 
-        Height="500" Width="800"
-        Style="{DynamicResource FlatPopWinStyle}">
+        Height="640" Width="1024" CanResize="True"
+        Style="{DynamicResource FlatPopWinStyle}"
+                Loaded="MainWindow_Loaded"
+                MouseDown="MainWindow_MouseDown">
+    <Window.Resources>
+        <cvt:ImgSourceConverter x:Key="ImgSrcConverter"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="7*"/>
-            <RowDefinition Height="1"/>
+            <RowDefinition Height="2"/>
             <RowDefinition Height="80"/>
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
         <GroupBox Header="文件列表" Grid.Row="0">
             <Grid>
@@ -24,12 +31,11 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <StackPanel Orientation="Horizontal" Grid.Row="0">
-                    <ctl:InputHelp Tag="管理文件" Style="{DynamicResource MngHelpInputStyle}"
+                    <ctl:InputHelp Tag="管理文件" Style="{DynamicResource MngHelpInputStyle}" Width="400"
                                     ext:InputAddonExtension.AddonWidth="74" 
-                                   ext:InputAddonExtension.ContentWidth="200"
                                     OpenHelpCmd="{Binding Path=SelectMngFileCmd}"
                                    Text="{Binding Path=MngFile,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-                    <Button Style="{DynamicResource MngBtnStyle}" Content="解析管理文件" Command="{Binding ParseMngFileCmd}"/>
+                    <Button Style="{DynamicResource MngBtnStyle}" Content="解析管理文件(_P)" Command="{Binding ParseMngFileCmd}"/>
                 </StackPanel>
                 <GroupBox Header="解析结果" Grid.Row="1">
                     <DataGrid x:Name="dg" Style="{DynamicResource GridBaseStyle}" 
@@ -39,31 +45,56 @@
                             <DataGridTextColumn Header="文件编号" Binding="{Binding filecode}"/>
                             <DataGridTextColumn Header="版本号" Binding="{Binding versioncode}"/>
                             <DataGridTextColumn Header="生效日期" Binding="{Binding efdate}"/>
+                            <DataGridTextColumn Header="编写人" Binding="{Binding writer}"/>
+                            <DataGridTextColumn Header="修订描述" Binding="{Binding remark}"/>
                             <DataGridTextColumn Header="起草部门" Binding="{Binding draftdept}"/>
                             <DataGridTextColumn Header="审核部门1" Binding="{Binding checkdept1}"/>
                             <DataGridTextColumn Header="审核部门2" Binding="{Binding checkdept2}"/>
                             <DataGridTextColumn Header="审核部门3" Binding="{Binding checkdept3}"/>
-                            <DataGridTextColumn Header="批准人" Binding="{Binding checker}"/>
-                            <DataGridTextColumn Header="公司logo" Binding="{Binding logo}"/>
+                            <DataGridTextColumn Header="批准人" Binding="{Binding approver}"/>
+                            <DataGridTemplateColumn Header="logo(双击选择图片)">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Width="100" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                               Source="{Binding logo,Converter={StaticResource ImgSrcConverter},Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </GroupBox>
             </Grid>
         </GroupBox>
         <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-        <GroupBox Header="目标目录" Grid.Row="2">
+        <GroupBox Header="文件模板" Grid.Row="2">
             <StackPanel Orientation="Horizontal">
-                <ctl:InputHelp Tag="目标目录" Style="{DynamicResource MngHelpInputStyle}"
+                <ctl:InputHelp Tag="模板文件" Style="{DynamicResource MngHelpInputStyle}" Width="500"
                                     ext:InputAddonExtension.AddonWidth="74"
-                                    ext:InputAddonExtension.ContentWidth="200"
-                                    OpenHelpCmd="{Binding Path=SelectTargetDirCmd}"
-                                   Text="{Binding Path=TargetDir,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-                <Button Style="{DynamicResource MngBtnStyle}" Content="确认修改" Command="{Binding SubmitCmd}"/>
-                <CheckBox Margin="10,0,0,0" Style="{DynamicResource checkbox has-error}" 
-                          Content="删除列表中不存在的文件" IsChecked="{Binding DelFileNotList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-                <CheckBox Margin="10,0,0,0" Style="{DynamicResource checkbox has-error}" 
-                          Content="修改完成后打开目标目录" IsChecked="{Binding OpenAfterSubmit,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                    OpenHelpCmd="{Binding Path=SelectTempFileCmd}"
+                                    Text="{Binding Path=TempFile,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
+        </GroupBox>
+        <GroupBox Header="目标目录" Grid.Row="3">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Row="0">
+                    <ctl:InputHelp Tag="目标目录" Style="{DynamicResource MngHelpInputStyle}" Width="400"
+                                    ext:InputAddonExtension.AddonWidth="74"
+                                    OpenHelpCmd="{Binding Path=SelectTargetDirCmd}"
+                                    Text="{Binding Path=TargetDir,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button Style="{DynamicResource MngBtnStyle}" Content="确认修改(_M)" Command="{Binding SubmitCmd}"/>
+                    <Button Style="{DynamicResource MngBtnStyle}" Content="清空(_C)" Command="{Binding ClearTargetDirCmd}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="1">
+                    <CheckBox Margin="10,0,0,0" Style="{DynamicResource checkbox has-error}" 
+                          Content="删除列表中不存在的文件(_E)" IsChecked="{Binding DelFileNotList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    <CheckBox Margin="10,0,0,0" Style="{DynamicResource checkbox has-error}" 
+                          Content="修改完成后打开目标目录(_O)" IsChecked="{Binding OpenAfterSubmit,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+            </Grid>
         </GroupBox>
     </Grid>
 </win:BaseWindow>

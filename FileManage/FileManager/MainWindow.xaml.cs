@@ -1,4 +1,6 @@
-﻿using MyNet.Components.WPF.Extension;
+﻿using Microsoft.Win32;
+using MyNet.Components.Extensions;
+using MyNet.Components.WPF.Extension;
 using MyNet.Components.WPF.Windows;
 using System;
 using System.Collections.Generic;
@@ -30,6 +32,44 @@ namespace FileManager
             InitializeComponent();
 
             dg.ShowRowNumber();
+
+            dg.MouseDoubleClick += Dg_MouseDoubleClick;
+        }
+
+        private void Dg_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (!dg.CurrentCell.Column.Header.ToString().Contains("logo"))
+            {
+                return;
+            }
+
+            e.Handled = true;
+            OpenFileDialog dia = new OpenFileDialog();
+            dia.Filter = "Image Files|*.jpg;*.png;*.bmp";
+            var rst = dia.ShowDialog();
+            if (rst.HasValue == false || rst == false)
+            {
+                return;
+            }
+            (dg.CurrentCell.Item as FileContent).logo = dia.FileName;
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (_model.MngFile.IsNotEmpty())
+            {
+                _model.ParseMngFileCmd.Execute(null);
+            }
+        }
+
+
+        private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2)
+            {
+                base.Resize();
+                e.Handled = true;
+            }
         }
     }
 }
