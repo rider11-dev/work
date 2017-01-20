@@ -20,7 +20,8 @@ namespace MyNet.Components.WPF.Converter
                 return null;
             }
             Uri uri = new Uri(value.ToString(), UriKind.RelativeOrAbsolute);
-            if (uri.IsAbsoluteUri && (uri.AbsolutePath.IsEmpty() || !File.Exists(uri.AbsolutePath)))
+            if (uri.IsAbsoluteUri && !uri.Host.ToLower().Contains("siteoforigin") &&
+                (uri.AbsolutePath.IsEmpty() || !File.Exists(uri.AbsolutePath)))
             {
                 return null;
             }
