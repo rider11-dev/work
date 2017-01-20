@@ -173,10 +173,7 @@
       <Name>MyNet.CustomQuery.Model</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\img\" />
-    <Folder Include="Resources\style\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Page Include="Pages\Base\FieldDetailWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

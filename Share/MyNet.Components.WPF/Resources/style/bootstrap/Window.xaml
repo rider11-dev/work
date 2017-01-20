@@ -19,6 +19,7 @@
     </Style>
     <!--弹出Window（扁平化）样式-->
     <Style x:Key="FlatPopWinStyle" TargetType="win:BaseWindow" BasedOn="{StaticResource FlatWindowStyle}">
+        <Setter Property="AllowsTransparency" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="win:BaseWindow">
