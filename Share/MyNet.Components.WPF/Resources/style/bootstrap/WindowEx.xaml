@@ -35,6 +35,7 @@
    
     <!--窗体样式扩展 详细信息-->
     <Style x:Key="FlatDetailWinStyle" TargetType="win:BaseWindow" BasedOn="{StaticResource FlatWindowStyle}">
+        <Setter Property="AllowsTransparency" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="win:BaseWindow">
@@ -83,6 +84,7 @@
     </Style>
     <!--窗体样式扩展 帮助-->
     <Style x:Key="FlatHelpWinStyle" TargetType="win:BaseWindow" BasedOn="{StaticResource FlatWindowStyle}">
+        <Setter Property="AllowsTransparency" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="win:BaseWindow">
