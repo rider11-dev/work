@@ -12,6 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace ClientFrame
 {
@@ -25,7 +26,7 @@ namespace ClientFrame
         static void Main()
         {
             myMutex = new Mutex(requestInitialOwnership, "singleton", out mutexWasCreated);
-            if(mutexWasCreated==false)
+            if (mutexWasCreated == false)
             {
                 return;
             }
@@ -58,7 +59,18 @@ namespace ClientFrame
             }
             app.StartupUri = new Uri(FrameContext.StartupWindow, UriKind.Relative);
             app.Activated += App_Activated;
+            app.DispatcherUnhandledException += App_DispatcherUnhandledException;
             app.Run();
+        }
+
+        private static void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            var rst = MessageBox.Show(e.Exception.Message + Environment.NewLine + "是否退出？", "程序异常", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (rst == MessageBoxResult.Yes)
+            {
+                Application.Current.Shutdown(-1);
+            }
+            e.Handled = true;
         }
 
         private static void App_Activated(object sender, EventArgs e)

@@ -6,6 +6,7 @@
   "mainpage": "/MyNet.Client;component/Pages/MainPage.xaml",
   "srvroot": "http://192.168.18.89/aaa/",
   //"srvroot": "http://192.168.1.103/",
-  "sysname": "党建工作信息化管理平台",
+  //"sysname": "党建工作信息化管理平台",
+  "sysname": "历城区养老自助服务一体机",
   "title": "title.png"
 }

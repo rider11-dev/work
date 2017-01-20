@@ -122,6 +122,7 @@ namespace MyNet.Components.IDCard
                 OnReadFailed(ex.Message);
                 return false;
             }
+            NotifyMessage("读卡成功");
             return true;
         }
         /// <summary>

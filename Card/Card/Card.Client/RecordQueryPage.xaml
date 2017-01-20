@@ -1,0 +1,58 @@
+﻿<page:BasePage x:Class="Card.Client.RecordQueryPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:page="clr-namespace:MyNet.Client.Pages;assembly=MyNet.Client"
+      xmlns:ctl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
+      xmlns:basecvt="clr-namespace:MyNet.Components.WPF.Converter;assembly=MyNet.Components.WPF"
+      xmlns:local="clr-namespace:Card.Client"
+      xmlns:cvt="clr-namespace:Card.Client.Converter"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="1024"
+      Style="{DynamicResource NavPageStyle}"
+      Title="消费记录查询"
+               Loaded="BasePage_Loaded">
+    <Page.Resources>
+        <ctl:PagingArgs x:Key="paging"/>
+        <cvt:OrderStateConverter x:Key="orderStateConverter"/>
+        <basecvt:UnixTimeStampConverter x:Key="unixTimeConverter"/>
+    </Page.Resources>
+    <Grid Width="1024" HorizontalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <ctl:UCIdcardReader x:Name="ucIdcardReader" AutoRead="True" Margin="12,0,0,0"/>
+            <Button Style="{DynamicResource DetailBtnStyle}" Content="查询(_Q)" Margin="4,0,0,0" Command="{Binding SearchCmd}" />
+        </StackPanel>
+        <GroupBox Header="消费记录" Grid.Row="1" Height="600" VerticalAlignment="Top">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <DataGrid Grid.Row="0" x:Name="gridRecords"  Style="{StaticResource GridBaseStyle}" ItemsSource="{Binding Models,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="订单号" Binding="{Binding order_sn}"/>
+                        <DataGridTextColumn Header="订单状态" Binding="{Binding order_state,Converter={StaticResource orderStateConverter}}"/>
+                        <DataGridTextColumn Header="商家" Binding="{Binding store_name}"/>
+                        <DataGridTextColumn Header="商品数量" Binding="{Binding goods_count}"/>
+                        <DataGridTextColumn Header="商品名称" Binding="{Binding goods_names}"/>
+                        <DataGridTextColumn Header="商品总价" Binding="{Binding goods_amount}"/>
+                        <DataGridTextColumn Header="订单总价" Binding="{Binding order_amount}"/>
+                        <DataGridTextColumn Header="下单时间" MinWidth="160" Binding="{Binding add_time,Converter={StaticResource unixTimeConverter},StringFormat='yyyy-MM-dd HH:mm:ss'}"/>
+                        <DataGridTextColumn Header="付款时间" MinWidth="160" Binding="{Binding payment_time,Converter={StaticResource unixTimeConverter},StringFormat='yyyy-MM-dd HH:mm:ss'}"/>
+                        <DataGridTextColumn Header="完成时间" MinWidth="160" Binding="{Binding finnshed_time,Converter={StaticResource unixTimeConverter},StringFormat='yyyy-MM-dd HH:mm:ss'}"/>
+                        <DataGridTextColumn Header="退款状态" Binding="{Binding refund_state}"/>
+                        <DataGridTextColumn Header="退款金额" Binding="{Binding refund_amount}"/>
+                        <DataGridTextColumn Header="支付方式" Binding="{Binding payment_name}"/>
+                        <DataGridTextColumn Header="支付现金" Binding="{Binding down_payment}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <ctl:ControlPagination x:Name="ctlPagination" Grid.Row="1" HorizontalAlignment="Center"/>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</page:BasePage>

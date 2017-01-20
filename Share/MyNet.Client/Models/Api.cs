@@ -28,7 +28,7 @@ namespace MyNet.Client.Models
         {
             get
             {
-                return ClientContext.Conf.srvroot.TrimEnd('/') + "/" + RelativeUrl;
+                return RelativeUrl.StartsWith("http") ? RelativeUrl : ClientContext.Conf.srvroot.TrimEnd('/') + "/" + RelativeUrl;
             }
         }
 

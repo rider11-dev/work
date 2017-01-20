@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="MyNet.Components.WPF.Controls.UCIdcardReader"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ext="clr-namespace:MyNet.Components.WPF.Extension"
+             xmlns:local="clr-namespace:MyNet.Components.WPF.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="40" d:DesignWidth="300"
+             Loaded="UserControl_Loaded">
+    <StackPanel Orientation="Horizontal">
+        <TextBox Tag="身份证号" Style="{DynamicResource DetailInputStyle}"  ext:InputAddonExtension.AddonWidth="90"
+                 Text="{Binding Idcard}" ToolTip="{Binding Msg}"/>
+        <Button x:Name="btnRead" Style="{DynamicResource DetailBtnStyle}" Content="读卡(_I)" Margin="2,0,0,0" Command="{Binding ReadCmd}"/>
+    </StackPanel>
+</UserControl>

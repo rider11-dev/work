@@ -4,6 +4,8 @@ using MyNet.Components.Extensions;
 using MyNet.Components.Logger;
 using MyNet.Components.Misc;
 using MyNet.WebHostService.Extension;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Owin;
 using System;
 using System.ComponentModel;
@@ -40,22 +42,16 @@ namespace MyNet.WebHostService
                 );
             //3、序列化器
             //干掉xml序列化器
+            var jsonFormatter = HostContext.Configration.Formatters.JsonFormatter;
             //解决json序列化时的循环引用问题
-            HostContext.Configration.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            jsonFormatter.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            //json序列化日期格式
+            jsonFormatter.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
             HostContext.Configration.Formatters.Remove(HostContext.Configration.Formatters.XmlFormatter);
             //4、自定义消息处理程序
             HostContext.Configration.MessageHandlers.Add(new CustomMessageHandler());
             //5、容器注册
             IocRegister();
-
-            //HostContext.Configration.Services.ReplaceRange(typeof(ModelBinderProvider),
-            //    new ModelBinderProvider[]
-            //    {
-            //        new MyTypeConverterModelBinderProvider(),
-            //        new MyComplexModelDtoModelBinderProvider(),
-            //        new MyMutableObjectModelBinderProvider()
-            //    });
-            //HostContext.Configration.Services.ReplaceRange(typeof(ValueProviderFactory), new ValueProviderFactory[] { new StaticValueProviderFactory() });
 
             appBuilder.UseWebApi(HostContext.Configration);
         }

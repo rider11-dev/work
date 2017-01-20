@@ -38,6 +38,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dlls\log4net\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -68,6 +71,7 @@
     <Compile Include="Controls\ControlTree.xaml.cs">
       <DependentUpon>ControlTree.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\IdcardReaderViewModel.cs" />
     <Compile Include="Controls\InputHelp.cs" />
     <Compile Include="Controls\HelpButton.cs" />
     <Compile Include="Controls\ControlPagination.xaml.cs">
@@ -75,8 +79,11 @@
     </Compile>
     <Compile Include="Controls\PagingArgs.cs" />
     <Compile Include="Controls\TreeViewData.cs" />
+    <Compile Include="Controls\UCIdcardReader.xaml.cs">
+      <DependentUpon>UCIdcardReader.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converter\BooleanConverter.cs" />
-    <Compile Include="Converter\DateTimeConverter.cs" />
+    <Compile Include="Converter\UnixTimeStampConverter.cs" />
     <Compile Include="Converter\ImgSourceConverter.cs" />
     <Compile Include="Converter\LevelBgColorConverter.cs" />
     <Compile Include="Converter\LevelIndentConverter.cs" />
@@ -90,6 +97,7 @@
     <Compile Include="Extension\PasswordBoxExtension.cs" />
     <Compile Include="Extension\TreeViewExtension.cs" />
     <Compile Include="Extension\VisualExtension.cs" />
+    <Compile Include="Extension\WebBrowserExtension.cs" />
     <Compile Include="Extension\WindowExtension.cs" />
     <Compile Include="Misc\ExcelHelper.cs" />
     <Compile Include="Models\CheckableModel.cs" />
@@ -126,6 +134,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\UCIdcardReader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\style\bootstrap\BaseStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -139,6 +151,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\style\bootstrap\Colors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\style\bootstrap\Image.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -300,6 +316,11 @@
   <ItemGroup>
     <Resource Include="Resources\img\node_collapse.png" />
     <Resource Include="Resources\img\node_expand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\img\idcard_1.png" />
+    <Resource Include="Resources\img\idcard_2.png" />
+    <Resource Include="Resources\img\idcard_3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

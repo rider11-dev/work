@@ -3,6 +3,7 @@
   "/MyNet.Components.WPF;component/Resources/style/bootstrap/Fonts.xaml",
   "/MyNet.Components.WPF;component/Resources/style/bootstrap/Sizes.xaml",
   "/MyNet.Components.WPF;component/Resources/style/bootstrap/BaseStyle.xaml",
+  "/MyNet.Components.WPF;component/Resources/style/bootstrap/Image.xaml",
   "/MyNet.Components.WPF;component/Resources/style/bootstrap/Button.xaml",
   "/MyNet.Components.WPF;component/Resources/style/bootstrap/FormControl.xaml",
   "/MyNet.Components.WPF;component/Resources/style/bootstrap/Label.xaml",

@@ -9,20 +9,21 @@ using System.Windows.Data;
 
 namespace MyNet.Components.WPF.Converter
 {
-    public class DateTimeConverter : IValueConverter
+    public class UnixTimeStampConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value.IsNotEmpty())
             {
-                DateTime dt;
-                if (DateTime.TryParse(value.ToString(), out dt))
+                double timeStamp = System.Convert.ToDouble(value);
+                if (timeStamp == 0)
                 {
-                    return dt.ToString("yyyy-MM-dd");
+                    return null;
                 }
+                return DateTimeExtension.ParseUnixTimeStamp(timeStamp);
             }
 
-            return "";
+            return null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

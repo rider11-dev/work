@@ -1,4 +1,5 @@
-﻿using MyNet.Components.Logger;
+﻿using MyNet.Components.Extensions;
+using MyNet.Components.Logger;
 using MyNet.Components.Result;
 using Newtonsoft.Json;
 using System;
@@ -19,6 +20,10 @@ namespace MyNet.Components.Http
 
         public static string Get(string url, string token = "")
         {
+            if (url.IsEmpty())
+            {
+                return "";
+            }
             HttpWebResponse response = null;
             try
             {
@@ -47,7 +52,8 @@ namespace MyNet.Components.Http
                     response.Close();
                 }
 
-                throw new Exception(ex.Message, ex);
+                return JsonConvert.SerializeObject(OptResult.Build(ResultCode.Exception, ex.Message));
+                //throw new Exception(ex.Message, ex);
             }
         }
 
@@ -60,6 +66,10 @@ namespace MyNet.Components.Http
 
         public static string Post(string url, object jsonData, string token = "")
         {
+            if (url.IsEmpty())
+            {
+                return "";
+            }
             HttpWebResponse response = null;
             try
             {
@@ -83,8 +93,8 @@ namespace MyNet.Components.Http
                 {
                     response.Close();
                 }
-
-                throw new Exception(ex.Message, ex);
+                return JsonConvert.SerializeObject(OptResult.Build(ResultCode.Exception, ex.Message));
+                //throw new Exception(ex.Message, ex);
             }
         }
 

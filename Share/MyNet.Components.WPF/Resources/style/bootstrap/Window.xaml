@@ -14,7 +14,6 @@
     </Style>
     <!--扁平化窗体样式-->
     <Style TargetType="Window" x:Key="FlatWindowStyle" BasedOn="{StaticResource BaseWindowStyle}">
-        <Setter Property="AllowsTransparency" Value="True" />
         <Setter Property="WindowStyle" Value="None" />
         <Setter Property="AllowDrop" Value="True"/>
     </Style>
@@ -63,6 +62,7 @@
     </Style>
     <!--消息Window（扁平化）样式-->
     <Style x:Key="FlatMsgWinStyle" TargetType="Window"  BasedOn="{StaticResource FlatWindowStyle}">
+        <Setter Property="AllowsTransparency" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Window" x:Name="FlatMsgWinTemplate">

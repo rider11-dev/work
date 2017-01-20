@@ -1,4 +1,5 @@
-﻿using MyNet.Components.WPF.Windows;
+﻿using MyNet.Components.WPF.Command;
+using MyNet.Components.WPF.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -41,10 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICardInfoVM.cs" />
+    <Compile Include="ICardAccountVM.cs" />
+    <Compile Include="CardAccountVM.cs" />
+    <Compile Include="CardInfoVM.cs" />
     <Compile Include="GetByIdcardVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Share\MyNet.Components\MyNet.Components.csproj">
+      <Project>{9ED019A0-A26A-4725-AA70-2B52BF7A5416}</Project>
+      <Name>MyNet.Components</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Share\MyNet.ViewModel\MyNet.ViewModel.csproj">
       <Project>{D61D6F00-3662-4EEF-84FE-7C038CABAB23}</Project>
       <Name>MyNet.ViewModel</Name>

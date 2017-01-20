@@ -265,4 +265,22 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!--图片按钮-->
+    <Style x:Key="btn img" BasedOn="{StaticResource ButtonBaseStyle}" TargetType="Button">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Image Source="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Tag}" 
+                           Style="{DynamicResource ImageDynamicStyle}"
+                           Stretch="Fill"
+                           Width="{Binding  RelativeSource={RelativeSource TemplatedParent},Path=Width}"
+                           Height="{Binding  RelativeSource={RelativeSource TemplatedParent},Path=Height}"
+                           />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

@@ -10,6 +10,7 @@ using MyNet.Model.Auth;
 using System.Windows;
 using System.Windows.Input;
 using MyNet.Model.Interface.Auth;
+using MyNet.Components.WPF.Command;
 
 namespace MyNet.Client.Pages
 {
@@ -47,6 +48,39 @@ namespace MyNet.Client.Pages
                 }
                 container.Children.Add(btn);
             }
+        }
+
+        private ICommand _navigateCmd;
+        public ICommand NavigateCmd
+        {
+            get
+            {
+                if (_navigateCmd == null)
+                {
+                    _navigateCmd = new DelegateCommand(NavigateAction);
+                }
+                return _navigateCmd;
+            }
+        }
+
+        private void NavigateAction(object obj)
+        {
+            if (obj == null || this.NavigationService == null)
+            {
+                return;
+            }
+            var uriStr = obj.ToString();
+            if (uriStr == "-1")
+            {
+                this.NavigationService.GoBack();
+                return;
+            }
+            if (uriStr.IsEmpty())
+            {
+                return;
+            }
+            Uri uri = new Uri(uriStr, UriKind.RelativeOrAbsolute);
+            this.NavigationService.Navigate(uri);
         }
     }
 }
