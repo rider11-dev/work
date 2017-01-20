@@ -7,6 +7,7 @@
         xmlns:pub="clr-namespace:MyNet.Client.Public"
         WindowStartupLocation="CenterScreen" Height="Auto" Width="Auto"
         Style="{StaticResource FlatWindowStyle}"
+        AllowsTransparency="True"
         Title="{x:Static pub:ClientContext.SysName}" 
         Loaded="MainWindow_Loaded">
     <Window.Resources>
