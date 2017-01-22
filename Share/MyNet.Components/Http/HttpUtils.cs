@@ -22,7 +22,7 @@ namespace MyNet.Components.Http
         {
             if (url.IsEmpty())
             {
-                return "";
+                return JsonConvert.SerializeObject(OptResult.Build(ResultCode.ParamError, "url不能为空"));
             }
             HttpWebResponse response = null;
             try
@@ -68,7 +68,7 @@ namespace MyNet.Components.Http
         {
             if (url.IsEmpty())
             {
-                return "";
+                return JsonConvert.SerializeObject(OptResult.Build(ResultCode.ParamError, "url不能为空"));
             }
             HttpWebResponse response = null;
             try

@@ -21,12 +21,16 @@ namespace MyNet.Components.Extensions
             {
                 foreach (var file in assFiles)
                 {
-                    AssemblyName assName = AssemblyName.GetAssemblyName(file.FullName);
-                    if (!AppDomain.CurrentDomain.GetAssemblies()
-                        .Any(ass => AssemblyName.ReferenceMatchesDefinition(ass.GetName(), assName)))
+                    try
                     {
-                        AppDomain.CurrentDomain.Load(assName);
+                        AssemblyName assName = AssemblyName.GetAssemblyName(file.FullName);
+                        if (!AppDomain.CurrentDomain.GetAssemblies()
+                            .Any(ass => AssemblyName.ReferenceMatchesDefinition(ass.GetName(), assName)))
+                        {
+                            AppDomain.CurrentDomain.Load(assName);
+                        }
                     }
+                    catch { }
                 }
             }
         }
