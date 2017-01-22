@@ -63,6 +63,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ResConf.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

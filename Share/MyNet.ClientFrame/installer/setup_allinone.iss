@@ -93,8 +93,8 @@ begin
     begin
       if MsgBox('系统检测到您没有安装.Net Framework4.5.2，是否立刻安装？', mbConfirmation, MB_YESNO) = idYes then
         begin
-          ExtractTemporaryFile('dotNetFx45_Full_setup.exe');
-          Exec(ExpandConstant('{tmp}\dotNetFx45_Full_setup.exe'), '', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ResultCode);
+          ExtractTemporaryFile('NDP452-KB2901954-Web.exe');
+          Exec(ExpandConstant('{tmp}\NDP452-KB2901954-Web.exe'), '', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ResultCode);
           if not IsDotNetDetected('v4.5',0,379893) then 
           begin
             MsgBox('.Net Framework4.5.2安装失败，本安装程序即将退出！',mbInformation,MB_OK);
@@ -114,7 +114,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\dotNetFx45_Full_setup.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\NDP452-KB2901954-Web.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\Autofac.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\ClientFrame.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\ClientFrame.exe.config"; DestDir: "{app}"; Flags: ignoreversion
@@ -125,9 +125,33 @@ Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\MyNet.Components.dll"; DestDir:
 Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\System.Windows.Interactivity.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\RdCard.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\cef.pak"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\cef_100_percent.pak"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\cef_200_percent.pak"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\cef_extensions.pak"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\CefSharp.BrowserSubprocess.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\CefSharp.BrowserSubprocess.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\CefSharp.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\CefSharp.Core.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\CefSharp.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\CefSharp.Wpf.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\CefSharp.Wpf.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\CefSharp.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\d3dcompiler_43.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\d3dcompiler_47.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\devtools_resources.pak"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\icudtl.dat"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\libcef.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\libEGL.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\libGLESv2.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\natives_blob.bin"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\pepflashplayer.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\snapshot_blob.bin"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\widevinecdmadapter.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\icons\*"; DestDir: "{app}\icons"; Flags: recursesubdirs
 Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\plugin\*"; DestDir: "{app}\plugin"; Flags: recursesubdirs
 Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\upgrade\*"; DestDir: "{app}\upgrade"; Flags: recursesubdirs
+Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\locales\*"; DestDir: "{app}\locales"; Flags: recursesubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

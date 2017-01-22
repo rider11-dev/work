@@ -104,25 +104,27 @@ namespace ClientFrame
 
             if (resFiles.IsNotEmpty())
             {
-                foreach (var file in resFiles)
+                var lstResConf = resFiles.Select(f => LoadResourseFromFile(f));
+                if (lstResConf.IsNotEmpty())
                 {
-                    LoadResourseFromFile(file, app);
+                    var lstResConfOrdered = lstResConf.Where(rc => rc != null).OrderBy(rc => rc.order).ToList();
+                    for (var idx = 0; idx < lstResConfOrdered.Count; idx++)
+                    {
+                        app.Resources.MergedDictionaries.AddRange(lstResConfOrdered[idx].res.Select(s => new ResourceDictionary { Source = new Uri(s, UriKind.Relative) }));
+                    }
                 }
             }
         }
 
-        private static void LoadResourseFromFile(FileInfo file, Application app = null)
+        private static ResConf LoadResourseFromFile(FileInfo file)
         {
             if (file == null || !file.Exists)
             {
-                return;
+                return null;
             }
             var confData = File.ReadAllText(file.FullName);
-            var reses = JsonConvert.DeserializeObject<IList<string>>(confData);
-            if (reses != null && reses.Count > 0)
-            {
-                app.Resources.MergedDictionaries.AddRange(reses.Select(s => new ResourceDictionary { Source = new Uri(s, UriKind.Relative) }));
-            }
+            var resConf = JsonConvert.DeserializeObject<ResConf>(confData);
+            return resConf;
         }
 
     }

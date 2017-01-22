@@ -67,50 +67,8 @@
     <Compile Include="CardApiKeys.cs" />
     <Compile Include="CardConf.cs" />
     <Compile Include="CardContext.cs" />
-    <Compile Include="CardQueryViewModel.cs" />
     <Compile Include="Converter\OrderStateConverter.cs" />
     <Compile Include="OrderRecords.cs" />
-    <Compile Include="LinkPage.xaml.cs">
-      <DependentUpon>LinkPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="OrderRecordsViewModel.cs" />
-    <Compile Include="RecordQueryPage.xaml.cs">
-      <DependentUpon>RecordQueryPage.xaml</DependentUpon>
-    </Compile>
-    <Page Include="CardQueryPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="LinkPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="CardQueryPage.xaml.cs">
-      <DependentUpon>CardQueryPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="RecordQueryPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\Styles\NavigatePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -126,15 +84,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Resource Include="Resources\Images\bill1.png" />
-    <Resource Include="Resources\Images\bill2.png" />
-    <Resource Include="Resources\Images\browser1.png" />
-    <Resource Include="Resources\Images\browser2.png" />
-    <Resource Include="Resources\Images\browser3.png" />
-    <Resource Include="Resources\Images\query1.png" />
-    <Resource Include="Resources\Images\backoff.png" />
-    <Resource Include="Resources\Images\forward.png" />
-    <Resource Include="Resources\Images\back_0.png" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -147,9 +96,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <Content Include="resconf.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="cardconf.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -179,7 +125,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\logo_hwxk.png" />
+    <Folder Include="Resources\Images\" />
+    <Folder Include="Resources\Styles\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

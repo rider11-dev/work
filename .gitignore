@@ -127,3 +127,5 @@
 /AllInOne/.vs
 /AllInOne/AllInOne.Client/obj
 /AllInOne/AllInOne.Client/bin
+/Share/MyNet.ClientFrame/installer/setup_frame.exe
+/Share/MyNet.ClientFrame/installer/setup_aio.exe
