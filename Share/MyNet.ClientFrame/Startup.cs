@@ -85,7 +85,7 @@ namespace ClientFrame
         private static void LoadResources(Application app)
         {
             //加载插件目录程序集
-            AssemblyExtention.LoadAssemblies(FrameContext.PluginPath, "^*.dll$");
+            AssemblyExtention.LoadAssemblies(FrameContext.PluginPath, "^*.(dll|exe)$");
 
             //加载资源文件
             List<FileInfo> resFiles = new List<FileInfo>();
