@@ -1,0 +1,34 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:page="clr-namespace:MyNet.Client.Pages;assembly=MyNet.Client"
+                    xmlns:local="clr-namespace:Card.Client.Resources">
+    <Style x:Key="NavPageStyle" TargetType="page:BasePage">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="page:BasePage">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="100"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" BorderBrush="LightGray" BorderThickness="0,0,0,1">
+                            <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                                <Button Style="{StaticResource btn img}" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                        Width="56" Height="56" Margin="40,0,0,0"
+                                        Tag="/Card.Client;component/Resources/Images/back_0.png"
+                                        Command="{Binding RelativeSource={RelativeSource AncestorType=page:BasePage},Path=NavigateCmd}"
+                                        CommandParameter="-1"/>
+                                <Label Style="{DynamicResource h1}" Margin="30,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Content="{Binding RelativeSource={RelativeSource AncestorType=Page},Path=Title}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Row="1">
+                            <AdornerDecorator>
+                                <ContentPresenter/>
+                            </AdornerDecorator>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

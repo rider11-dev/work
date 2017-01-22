@@ -1,0 +1,15 @@
+﻿<win:BaseWindow x:Class=" AllInOne.Client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AllInOne.Client"
+        xmlns:win="clr-namespace:MyNet.Components.WPF.Windows;assembly=MyNet.Components.WPF"
+        WindowState="Maximized" Title="历城区养老自助服务一体机"
+        mc:Ignorable="d" CustomTitle="历城区养老自助服务一体机"
+        Style="{StaticResource FlatWindowStyle}"
+         Height="350" Width="525">
+    <Frame NavigationUIVisibility="Hidden" Source="/AllInOne.Client;component/MainPage.xaml">
+        
+    </Frame>
+</win:BaseWindow>
