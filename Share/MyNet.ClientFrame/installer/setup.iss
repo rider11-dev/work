@@ -30,11 +30,42 @@ SolidCompression=yes
 [Languages]
 Name: "chinese"; MessagesFile: "compiler:Languages\Chinese.isl" 
 
+[Code]
+function DotNet45NotSetup():Boolean;
+begin 
+  Result:= not RegKeyExists(HKLM,'SOFTWARE\Microsoft\.NETFramework\policy\v4.0');
+end;
+
+function InitializeSetup():Boolean;
+var ResultCode:integer;
+begin 
+  Result:=true;  
+  if DotNet45NotSetup() then
+    begin
+      if MsgBox('系统检测到您没有安装.Net Framework4.5，是否立刻安装？', mbConfirmation, MB_YESNO) = idYes then
+        begin
+          ExtractTemporaryFile('dotNetFx45_Full_setup.exe');
+          Exec(ExpandConstant('{tmp}\dotNetFx45_Full_setup.exe'), '', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ResultCode);
+          if DotNet45NotSetup() then 
+          begin
+            MsgBox('.Net Framework4.5安装失败，本安装程序即将退出！',mbInformation,MB_OK);
+            Result:=false;
+          end 
+        end
+      else 
+        begin
+          MsgBox('没有安装.Net Framework4.5环境，本安装程序即将退出！',mbInformation,MB_OK);
+          Result:=false; 
+        end
+    end
+end;
+
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
+Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\dotNetFx45_Full_setup.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\Autofac.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\ClientFrame.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "F:\Git\work\Share\MyNet.ClientFrame\bin\ClientFrame.exe.config"; DestDir: "{app}"; Flags: ignoreversion
