@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyNet.Components.Logger;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace MyNet.Components.Extensions
 {
     public static class AssemblyExtention
     {
+        static ILogHelper<dynamic> _logHelper = LogHelperFactory.GetLogHelper<dynamic>();
         /// <summary>
         /// 加载程序集到应用程序域
         /// </summary>
@@ -30,7 +32,13 @@ namespace MyNet.Components.Extensions
                             AppDomain.CurrentDomain.Load(assName);
                         }
                     }
-                    catch { }
+                    catch (Exception ex)
+                    {
+                        _logHelper.LogError("加载程序集到应用程序域异常", ex);
+#if DEBUG
+                        throw new Exception("加载程序集到应用程序域", ex);
+#endif
+                    }
                 }
             }
         }
