@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using MyNet.Components;
 using MyNet.Components.Result;
 using MyNet.Components.WPF.Controls;
 using MyNet.Components.WPF.Models;
@@ -9,16 +8,12 @@ using MyNet.Client.Public;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using MyNet.Components.WPF.Windows;
 using MyNet.Model.Auth;
-using MyNet.Components.Mapper;
 using MyNet.Components.WPF.Command;
 using MyNet.Client.Help;
 using MyNet.Components.Http;
-using MyNet.Model.Interface.Auth;
 using MyNet.Components.Extensions;
 using MyNet.ViewModel.Auth.Permission;
 

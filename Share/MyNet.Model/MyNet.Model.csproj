@@ -53,6 +53,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MyNet.ClientFrame\upgrade\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -79,15 +83,20 @@
     <Compile Include="Courses\Course.cs" />
     <Compile Include="Courses\CourseRepeatSet.cs" />
     <Compile Include="Courses\CourseTaken.cs" />
+    <Compile Include="CustomQuery\BoundaryValue.cs" />
+    <Compile Include="CustomQuery\Condition.cs" />
+    <Compile Include="CustomQuery\DbField.cs" />
+    <Compile Include="CustomQuery\DbTable.cs" />
+    <Compile Include="CustomQuery\EmptyModel.cs" />
+    <Compile Include="CustomQuery\Field.cs" />
+    <Compile Include="CustomQuery\QueryModel.cs" />
+    <Compile Include="CustomQuery\Sort.cs" />
+    <Compile Include="CustomQuery\Table.cs" />
+    <Compile Include="CustomQuery\TableRelation.cs" />
     <Compile Include="Dto\Auth\PermissionCacheDto.cs" />
     <Compile Include="Dto\Base\DictCmbDto.cs" />
-    <Compile Include="Interface\Auth\IGroup.cs" />
-    <Compile Include="Interface\Auth\IPermission.cs" />
-    <Compile Include="Interface\Auth\IUser.cs" />
-    <Compile Include="Interface\Auth\IUserPermissionRel.cs" />
-    <Compile Include="Interface\Auth\PermType.cs" />
-    <Compile Include="Interface\Base\IDict.cs" />
-    <Compile Include="Interface\Base\IDictType.cs" />
+    <Compile Include="Auth\PermType.cs" />
+    <Compile Include="Dto\CustomQuery\FieldDto.cs" />
     <Compile Include="PageQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tools\Tool.cs" />

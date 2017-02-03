@@ -45,5 +45,25 @@ namespace MyNet.Client.Models
         public const string GetAllFuncs = "per_allfuncs";
         public const string GetAllOpts = "per_allopts";
 
+        /*-------------------------------------自定义查询-----------------------------------------*/
+        /*————————————tables——————————*/
+        public const string Cq_TablePage = "table_page";
+        public const string Cq_TableAllWithFields = "table_all_with_fields";
+        public const string Cq_TableAdd = "table_add";
+        public const string Cq_TableUpdate = "table_update";
+        public const string Cq_TableDel = "table_del";
+        public const string Cq_TableDbTables = "table_dbtables";
+        public const string Cq_TableInit = "table_init";
+
+        /*————————————fields——————————*/
+        public const string Cq_FieldPage = "field_page";
+        public const string Cq_FieldAdd = "field_add";
+        public const string Cq_FieldUpdate = "field_update";
+        public const string Cq_FieldDel = "field_del";
+        public const string Cq_FieldDbFields = "field_dbfields";
+        public const string Cq_FieldInit = "field_init";
+
+        /*————————————query——————————*/
+        public const string Cq_ExecQuery = "exec_query";
     }
 }

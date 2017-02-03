@@ -18,7 +18,6 @@ using MyNet.Components.WPF.Controls;
 using MyNet.Client.Help;
 using MyNet.Model.Dto.Auth;
 using MyNet.Components.Http;
-using MyNet.Model.Interface.Auth;
 using MyNet.ViewModel.Auth.Permission;
 using MyNet.Components.Emit;
 using MyNet.Components.Misc;

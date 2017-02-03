@@ -105,6 +105,23 @@
     <Compile Include="Models\Auth\PermViewModel.cs" />
     <Compile Include="Models\Auth\UserDetailViewModel.cs" />
     <Compile Include="Models\Auth\UserMngViewModel.cs" />
+    <Compile Include="Models\CustomQuery\ExecQuery\ConditionViewModel.cs" />
+    <Compile Include="Models\CustomQuery\ExecQuery\ExecQueryModel.cs" />
+    <Compile Include="Models\CustomQuery\ExecQuery\FilterFieldsSelector.cs" />
+    <Compile Include="Models\CustomQuery\ExecQuery\QueryExecutor.cs" />
+    <Compile Include="Models\CustomQuery\ExecQuery\SelFieldsSelector.cs" />
+    <Compile Include="Models\CustomQuery\ExecQuery\SortFieldsSelector.cs" />
+    <Compile Include="Models\CustomQuery\ExecQuery\SortViewModel.cs" />
+    <Compile Include="Models\CustomQuery\ExecQuery\TableSelector.cs" />
+    <Compile Include="Models\CustomQuery\FieldDetailViewModel.cs" />
+    <Compile Include="Models\CustomQuery\FieldInitViewModel.cs" />
+    <Compile Include="Models\CustomQuery\FieldMngViewModel.cs" />
+    <Compile Include="Models\CustomQuery\FieldViewModel.cs" />
+    <Compile Include="Models\CustomQuery\SortTypeConverter.cs" />
+    <Compile Include="Models\CustomQuery\TableDetailViewModel.cs" />
+    <Compile Include="Models\CustomQuery\TableInitViewModel.cs" />
+    <Compile Include="Models\CustomQuery\TableMngViewModel.cs" />
+    <Compile Include="Models\CustomQuery\TableViewModel.cs" />
     <Compile Include="Models\MngViewModel.cs" />
     <Compile Include="Pages\Account\DetailPage.xaml.cs">
       <DependentUpon>DetailPage.xaml</DependentUpon>
@@ -131,6 +148,13 @@
       <DependentUpon>UserMngPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\BasePage.cs" />
+    <Compile Include="Pages\CustomQuery\Basic\FieldDetailWindow.xaml.cs" />
+    <Compile Include="Pages\CustomQuery\Basic\FieldInitWindow.xaml.cs" />
+    <Compile Include="Pages\CustomQuery\Basic\FieldsMngPage.xaml.cs" />
+    <Compile Include="Pages\CustomQuery\Basic\TableDetailWindow.xaml.cs" />
+    <Compile Include="Pages\CustomQuery\Basic\TableInitWindow.xaml.cs" />
+    <Compile Include="Pages\CustomQuery\Basic\TablesMngPage.xaml.cs" />
+    <Compile Include="Pages\CustomQuery\ExecQueryPage.xaml.cs" />
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -188,6 +212,34 @@
     <Page Include="Pages\Auth\UserMngPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\CustomQuery\Basic\FieldDetailWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\CustomQuery\Basic\FieldInitWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\CustomQuery\Basic\FieldsMngPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\CustomQuery\Basic\TableDetailWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\CustomQuery\Basic\TableInitWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\CustomQuery\Basic\TablesMngPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\CustomQuery\ExecQueryPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\MainPage.xaml">
       <SubType>Designer</SubType>

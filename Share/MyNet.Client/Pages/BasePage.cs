@@ -2,14 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using MyNet.Components.Extensions;
 using MyNet.Model.Auth;
 using System.Windows;
 using System.Windows.Input;
-using MyNet.Model.Interface.Auth;
 using MyNet.Components.WPF.Command;
 
 namespace MyNet.Client.Pages

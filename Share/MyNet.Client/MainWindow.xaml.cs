@@ -15,7 +15,6 @@ using MyNet.Client.Command;
 using MyNet.Components.Logger;
 using MyNet.Components.WPF.Windows;
 using MyNet.Components.Http;
-using MyNet.Model.Interface.Auth;
 
 namespace MyNet.Client
 {

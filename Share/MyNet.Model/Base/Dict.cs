@@ -1,5 +1,4 @@
-﻿using MyNet.Model.Interface.Base;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +9,7 @@ namespace MyNet.Model.Base
     /// <summary>
     /// 基础数据——字典
     /// </summary>
-    public class Dict : IDict
+    public class Dict
     {
         public string dict_id { get; set; }
         /// <summary>

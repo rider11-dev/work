@@ -26,5 +26,18 @@ namespace MyNet.Client.Public
         public const string Assign = "分配用户权限";
         public const string Search = "查询";
 
+        /**********************CustomQuery*********************/
+        public const string Cq_GetDbTables = "获取数据库表信息";
+        public const string Cq_GetDbFields = "获取数据库字段信息";
+        public const string Cq_InitTables = "初始化查询表信息";
+        public const string Cq_InitFields = "初始化查询字段信息";
+
+        public const string Cq_AddJoinTable = "添加关联表";
+        public const string Cq_DelJoinTable = "删除关联表";
+
+        public const string Cq_AddRelField = "添加关联字段";
+        public const string Cq_DelRelField = "删除关联字段";
+
+        public const string Cq_ExecQuery = "执行自定义查询";
     }
 }

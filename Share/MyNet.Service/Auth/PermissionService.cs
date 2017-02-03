@@ -6,7 +6,6 @@ using MyNet.Model;
 using MyNet.Model.Auth;
 using MyNet.Model.Base;
 using MyNet.Model.Dto.Auth;
-using MyNet.Model.Interface.Auth;
 using MyNet.Repository.Auth;
 using MyNet.Repository.Base;
 using MyNet.Repository.Db;

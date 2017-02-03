@@ -13,7 +13,6 @@ using MyNet.Components.Mapper;
 using MyNet.Model.Auth;
 using MyNet.WebApi.Models;
 using MyNet.Model;
-using MyNet.Model.Interface.Auth;
 using MyNet.Components.Emit;
 
 namespace MyNet.WebApi.Controllers.Auth

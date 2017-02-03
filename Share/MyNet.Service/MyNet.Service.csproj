@@ -78,6 +78,9 @@
     <Compile Include="Card\Models\PayEntity.cs" />
     <Compile Include="Card\Models\RefundEntity.cs" />
     <Compile Include="Context.cs" />
+    <Compile Include="CustomQuery\CustomQueryService.cs" />
+    <Compile Include="CustomQuery\FieldService.cs" />
+    <Compile Include="CustomQuery\TableService.cs" />
     <Compile Include="IBaseService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

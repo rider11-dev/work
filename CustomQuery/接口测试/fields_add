@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<rest-client version="3.4.2"><request><http-version>1.1</http-version><http-follow-redirects/><URL>http://192.168.18.89/aaa/api/customquery/fields/add</URL><method>POST</method><body><string content-type="application/json" charset="UTF-8">{
-"tbid":"0",
-"fieldname":"20",
-"displayname":"哈斯卡党费",
-"remark":"阿斯蒂芬"
-}</string></body></request></rest-client>

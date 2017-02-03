@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MyNet.Components.Extensions;
-using MyNet.Model.Interface.Auth;
 
 namespace MyNet.Model.Auth
 {
     /// <summary>
     /// 权限控制——权限列表
     /// </summary>
-    public class Permission : IPermission
+    public class Permission 
     {
         public string per_id { get; set; }
         public string per_code { get; set; }

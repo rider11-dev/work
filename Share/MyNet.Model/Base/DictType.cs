@@ -1,5 +1,4 @@
-﻿using MyNet.Model.Interface.Base;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +9,7 @@ namespace MyNet.Model.Base
     /// <summary>
     /// 字典类型
     /// </summary>
-    public class DictType : IDictType
+    public class DictType 
     {
         /// <summary>
         /// 权限类型，对应数据表base_dict_type中的一条数据

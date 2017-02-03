@@ -89,6 +89,9 @@
     <Compile Include="Controllers\Card\MallAccountController.cs" />
     <Compile Include="Controllers\Common\MiscController.cs" />
     <Compile Include="Controllers\Auth\UserController.cs" />
+    <Compile Include="Controllers\CustomQuery\CustomQueryController.cs" />
+    <Compile Include="Controllers\CustomQuery\FieldController.cs" />
+    <Compile Include="Controllers\CustomQuery\TableController.cs" />
     <Compile Include="Extensions\ModelStateExtension.cs" />
     <Compile Include="Extensions\UploadHelper.cs" />
     <Compile Include="Filters\TokenValidateFilterAttribute.cs" />

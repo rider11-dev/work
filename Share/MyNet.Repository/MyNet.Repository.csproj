@@ -79,6 +79,11 @@
     <Compile Include="Card\Mapper\CardBillMapper.cs" />
     <Compile Include="Card\Mapper\CardInfoMapper.cs" />
     <Compile Include="Card\Mapper\CardRecordMapper.cs" />
+    <Compile Include="CustomQuery\CustomQueryRepository.cs" />
+    <Compile Include="CustomQuery\FieldRepository.cs" />
+    <Compile Include="CustomQuery\Mapper\FieldMapper.cs" />
+    <Compile Include="CustomQuery\Mapper\TableMapper.cs" />
+    <Compile Include="CustomQuery\TableRepository.cs" />
     <Compile Include="Db\DatabaseType.cs" />
     <Compile Include="Db\Database.cs" />
     <Compile Include="Db\DbSession.cs" />
@@ -100,6 +105,9 @@
     <None Include="sql.base.mysql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
+    </None>
+    <None Include="sql.customquery.mysql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
