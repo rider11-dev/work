@@ -1,2 +1,0 @@
-1、vc++2013 (cefsharp.core.dll依赖之)，加到安装包里？
-2、.net 4.5.2
