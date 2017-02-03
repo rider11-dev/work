@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<rest-client version="3.4.2"><request><http-version>1.1</http-version><http-follow-redirects/><URL>http://localhost/aaa/api/party/org/get</URL><method>POST</method><headers><header key="token" value="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhZG1pbiIsImlhdCI6MTQ3NjE2NTg2NywidXNlciI6bnVsbH0.vGbRZRUXqWMzHwapI1-C6iMu1d8KEGUte28ZgdVcqjw"/></headers><body><string content-type="application/json" charset="UTF-8">{
-"pk":"41eb283780cd4d5dbcb8798f74d41478"
-}</string></body></request></rest-client>
