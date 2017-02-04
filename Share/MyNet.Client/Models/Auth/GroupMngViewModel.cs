@@ -147,7 +147,6 @@ namespace MyNet.Client.Models.Auth
                 {
                     page.PageCount = 0;
                     page.PageIndex = 1;
-                    base.Models = null;
                     return;
                 }
                 page.PageCount = Convert.ToInt32(Math.Ceiling(page.RecordsCount * 1.0 / page.PageSize));

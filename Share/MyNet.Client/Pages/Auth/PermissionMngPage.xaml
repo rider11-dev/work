@@ -3,11 +3,12 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:ctl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
+       xmlns:ctl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
       xmlns:local="clr-namespace:MyNet.Client.Pages" 
       xmlns:vmauth="clr-namespace:MyNet.Client.Models.Auth"
       xmlns:cvt="clr-namespace:MyNet.Components.WPF.Converter;assembly=MyNet.Components.WPF"
       xmlns:vmwpf="clr-namespace:MyNet.Components.WPF.Models;assembly=MyNet.Components.WPF"
+      xmlns:ext="clr-namespace:MyNet.Components.WPF.Extension;assembly=MyNet.Components.WPF"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="600"
       Loaded="PermissionMngPage_Loaded"
@@ -24,52 +25,38 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <!--row1：工具栏-->
-        <Border x:Name="bdBtns" Grid.Row="0" Style="{StaticResource mngBdStyle}">
+        <Border x:Name="bdBtns" Grid.Row="0" Style="{StaticResource MngBdStyle}">
             <StackPanel x:Name="panelBtns" Orientation="Horizontal">
             </StackPanel>
         </Border>
         <!--row2：过滤-->
-        <Border x:Name="bdSearch" Grid.Row="1" Style="{StaticResource mngBdStyle}">
+        <Border x:Name="bdSearch" Grid.Row="1" Style="{StaticResource MngBdStyle}">
             <StackPanel Orientation="Horizontal">
-                <Label Content="编号" Style="{StaticResource mngLblStyle}"/>
-                <TextBox Style="{StaticResource mngInputStyle}"
-                         Text="{Binding Path=Filter_PerCode}"
-                         IsReadOnly="{Binding}"
-                         />
-                <Label Content="名称" Style="{StaticResource mngLblStyle}"/>
-                <TextBox Style="{StaticResource mngInputStyle}"
-                         Text="{Binding Path=Filter_PerName}"
-                         />
-                <Label Content="类型" Style="{StaticResource mngLblStyle}"/>
-                <ComboBox x:Name="cbPermType" Grid.Row="3" Grid.Column="1" 
-                  Style="{StaticResource cbBaseStyle}"
-                  Width="80" Height="26" FontSize="12"
-                  SelectedValue="{Binding Path=Filter_PerType,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                  />
-                <Label Content="上级" Style="{StaticResource mngLblStyle}"/>
-                <ctl:HelpButton Width="180" Height="26" 
-                         Style="{StaticResource inputBtnAddOnStyle}" 
-                         Content="{Binding Path=Filter_PerParent_Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                         Command="{Binding Path=PermParentHelpCmd}"
-                         />
-                <Button x:Name="btnSearch" Style="{StaticResource mngBtnStyle}" Content="查 询"
+                <TextBox Tag="编号" Style="{StaticResource MngInputStyle}" Text="{Binding Path=Filter_PerCode}"/>
+                <TextBox Tag="名称" Style="{StaticResource MngInputStyle}" Text="{Binding Path=Filter_PerName}"/>
+                <ComboBox x:Name="cbPermType" Tag="类型" Style="{DynamicResource DetailCmbStyle}"  Margin="4,0,0,0" Width="150"
+                  SelectedValue="{Binding Path=Filter_PerType,Source={StaticResource model},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                <ctl:InputHelp Tag="上级" Style="{DynamicResource MngHelpInputStyle}" Margin="4,0,0,0"
+                         ext:InputAddonExtension.AddonWidth="50" ext:InputAddonExtension.ContentWidth="80"
+                         OpenHelpCmd="{Binding Path=PermParentHelpCmd}" ForbidInput="True"
+                         Text="{Binding Path=Filter_PerParent_Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                <Button x:Name="btnSearch" Style="{StaticResource MngBtnStyle}" Content="查 询(_Q)"
                         Command="{Binding Path=SearchCmd}"
                         CommandParameter="{StaticResource paging}"
                         />
             </StackPanel>
         </Border>
         <!--row3：内容-->
-        <Border x:Name="bdMain" Grid.Row="2" Style="{StaticResource mngBdStyle}">
+        <Border x:Name="bdMain" Grid.Row="2" Style="{StaticResource MngBdStyle}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
-                <DataGrid x:Name="dgPers" Grid.Row="0" Style="{StaticResource GridBaseStyle}"
+                <DataGrid x:Name="dgPers" Grid.Row="0" Style="{DynamicResource GridBaseStyle}"
                           ItemsSource="{Binding Path=Models,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Margin="-10,0,10,0">
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn CellStyle="{StaticResource CkCellStyle}" HeaderStyle="{StaticResource CkCellHeaderStyle}"
-                                                CanUserResize="False"/>
+                        <DataGridTemplateColumn CellStyle="{DynamicResource CkCellStyle}" HeaderStyle="{DynamicResource CkCellHeaderStyle}" CanUserResize="False"/>
                         <DataGridTextColumn Header="编号" Binding="{Binding permdata.per_code}"/>
                         <DataGridTextColumn Header="名称" Binding="{Binding permdata.per_name}"/>
                         <DataGridTemplateColumn Header="类型">

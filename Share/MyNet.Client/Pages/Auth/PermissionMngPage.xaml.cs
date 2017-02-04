@@ -1,23 +1,8 @@
 ﻿using MyNet.Client.Models.Auth;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using MyNet.Components.WPF.Extension;
 using MyNet.Client.Public;
 using MyNet.Model.Base;
-using MyNet.Components.WPF.Windows;
-using MyNet.Components.WPF.Controls;
 
 namespace MyNet.Client.Pages.Auth
 {
@@ -33,6 +18,7 @@ namespace MyNet.Client.Pages.Auth
             this.DataContext = model;
             this.AddModel(model);
             base.Commands = model.Commands;
+
             InitializeComponent();
         }
 
