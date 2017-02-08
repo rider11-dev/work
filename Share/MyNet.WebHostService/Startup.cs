@@ -11,6 +11,7 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Dispatcher;
 using System.Web.Http.ModelBinding;
 using System.Web.Http.ModelBinding.Binders;
@@ -52,6 +53,8 @@ namespace MyNet.WebHostService
             HostContext.Configration.MessageHandlers.Add(new CustomMessageHandler());
             //5、容器注册
             IocRegister();
+            //6、跨域
+            HostContext.Configration.EnableCors(new EnableCorsAttribute("http://localhost:1841", "*", "*"));
 
             appBuilder.UseWebApi(HostContext.Configration);
         }
