@@ -54,7 +54,7 @@ namespace MyNet.WebHostService
             //5、容器注册
             IocRegister();
             //6、跨域
-            HostContext.Configration.EnableCors(new EnableCorsAttribute("*", "*", "*"));
+            HostContext.Configration.EnableCors(new EnableCorsAttribute("", "*", "*") { SupportsCredentials = true });
 
             appBuilder.UseWebApi(HostContext.Configration);
         }
