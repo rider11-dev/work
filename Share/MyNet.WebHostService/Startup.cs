@@ -54,7 +54,7 @@ namespace MyNet.WebHostService
             //5、容器注册
             IocRegister();
             //6、跨域
-            HostContext.Configration.EnableCors(new EnableCorsAttribute("http://localhost:1841", "*", "*"));
+            HostContext.Configration.EnableCors(new EnableCorsAttribute("*", "*", "*"));
 
             appBuilder.UseWebApi(HostContext.Configration);
         }
