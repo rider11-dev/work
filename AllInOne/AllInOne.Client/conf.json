@@ -1,4 +1,5 @@
 ﻿{
-  "linkurl": "http://www.licheng.gov.cn/",
+  "url_gov": "http://www.licheng.gov.cn/",
+  "url_buy": "http://124.128.208.58:81/shop_lc/",
   "card_read_interval": "5"
 }

@@ -8,7 +8,14 @@ namespace  AllInOne.Client
 {
     public class AIOConf
     {
-        public string linkurl { get; set; }
+        /// <summary>
+        /// 政府在线url
+        /// </summary>
+        public string url_gov { get; set; }
+        /// <summary>
+        /// 服务购买url
+        /// </summary>
+        public string url_buy { get; set; }
         public int card_read_interval { get; set; }
     }
 }

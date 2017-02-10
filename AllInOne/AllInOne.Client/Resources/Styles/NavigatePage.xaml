@@ -7,17 +7,21 @@
                 <ControlTemplate TargetType="page:BasePage">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="100"/>
+                            <RowDefinition Height="126"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <Border Grid.Row="0" BorderBrush="LightGray" BorderThickness="0,0,0,1">
+                        <Border Grid.Row="0">
+                            <Border.Background>
+                                <ImageBrush Stretch="Fill" ImageSource="/AllInOne.Client;component/Resources/Images/inner_header_bg.jpg"/>
+                            </Border.Background>
                             <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
                                 <Button Style="{StaticResource btn img}" HorizontalAlignment="Left" VerticalAlignment="Center"
-                                        Width="56" Height="56" Margin="40,0,0,0"
-                                        Tag="/AllInOne.Client;component/Resources/Images/back_0.png"
+                                        Width="48" Height="48" Margin="40,0,0,0"
+                                        Tag="/AllInOne.Client;component/Resources/Images/return.png"
                                         Command="{Binding RelativeSource={RelativeSource AncestorType=page:BasePage},Path=NavigateCmd}"
                                         CommandParameter="-1"/>
-                                <Label Style="{DynamicResource h1}" Margin="30,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Content="{Binding RelativeSource={RelativeSource AncestorType=Page},Path=Title}"/>
+                                <!--<Label Style="{DynamicResource h1}" Margin="30,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Content="{Binding RelativeSource={RelativeSource AncestorType=Page},Path=Title}"/>-->
+                                <Image  Margin="30,0,0,0" Style="{StaticResource ImgBaseStyle}" Height="43" Source="{Binding RelativeSource={RelativeSource AncestorType=Page},Path=Tag}"/>
                             </StackPanel>
                         </Border>
                         <Border Grid.Row="1">
