@@ -58,6 +58,7 @@ from auth_user usr
 left join auth_group gp on usr.user_group=gp.gp_id
 */
 
+/*
 CALL sp_page_query(  
 'usr.*,gp.gp_code,gp.gp_name'#查询字段  
 ,'auth_user usr left join auth_group gp on usr.user_group=gp.gp_id'#表名  
@@ -69,3 +70,4 @@ CALL sp_page_query(
 ,@pagecount #输出用页数  
 );  
 SELECT @totalcount,@pagecount;  
+*/
