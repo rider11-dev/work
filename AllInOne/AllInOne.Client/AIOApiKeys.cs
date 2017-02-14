@@ -13,5 +13,7 @@ namespace  AllInOne.Client
         public const string GetCardAccount = "get_card_account";
         public const string GetCards = "get_cards";
         public const string GetOrderRecords = "get_order_records";
+
+        public const string GetElderInfo = "get_elder_info";
     }
 }

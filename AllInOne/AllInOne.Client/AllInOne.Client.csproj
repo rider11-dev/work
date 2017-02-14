@@ -131,6 +131,12 @@
     <Compile Include="CardQueryPage.xaml.cs" />
     <Compile Include="CardQueryViewModel.cs" />
     <Compile Include="BuyLinkPage.xaml.cs" />
+    <Compile Include="ElderQueryPage.xaml.cs">
+      <DependentUpon>ElderQueryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ElderQueryViewModel.cs" />
+    <Compile Include="ElderInfoVM.cs" />
+    <Compile Include="OptResultElder.cs" />
     <Compile Include="WebBrowserUtils.cs" />
     <Compile Include="Converter\OrderStateConverter.cs" />
     <Compile Include="GovLinkPage.xaml.cs" />
@@ -153,6 +159,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Resources\Images\bills_query.png" />
+    <Resource Include="Resources\Images\elder_query.png" />
+    <Resource Include="Resources\Images\elder_query_title.png" />
+    <Resource Include="Resources\Images\link_buy.png" />
+    <Resource Include="Resources\Images\link_gov.png" />
     <Resource Include="Resources\Images\nav_forward.png" />
     <Resource Include="Resources\Images\nav_back.png" />
     <Resource Include="Resources\Images\inner_header_bg.jpg" />
@@ -163,10 +174,7 @@
     <Resource Include="Resources\Images\return.png" />
     <Resource Include="Resources\Images\main_bg.jpg" />
     <Resource Include="Resources\Images\balance.png" />
-    <Resource Include="Resources\Images\gov.png" />
-    <Resource Include="Resources\Images\bills.png" />
     <Resource Include="Resources\Images\title.png" />
-    <Resource Include="Resources\Images\buy.png" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -202,6 +210,10 @@
     <Page Include="BuyLinkPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ElderQueryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GovLinkPage.xaml">
       <Generator>MSBuild:Compile</Generator>

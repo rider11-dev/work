@@ -1,0 +1,74 @@
+﻿<page:BasePage x:Class="AllInOne.Client.ElderQueryPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:page="clr-namespace:MyNet.Client.Pages;assembly=MyNet.Client"
+      xmlns:local="clr-namespace:AllInOne.Client"
+      xmlns:ext="clr-namespace:MyNet.Components.WPF.Extension;assembly=MyNet.Components.WPF"
+      xmlns:ctl="clr-namespace:MyNet.Components.WPF.Controls;assembly=MyNet.Components.WPF"
+      mc:Ignorable="d" 
+      Style="{DynamicResource NavPageStyle}"
+      d:DesignHeight="800" d:DesignWidth="800"
+      Tag="/AllInOne.Client;component/Resources/Images/elder_query_title.png"
+      Title="老人信息查询">
+    <Page.Resources>
+        <Style x:Key="inputStyle" TargetType="TextBox" BasedOn="{StaticResource DetailInputStyle}">
+            <Setter Property="ext:InputAddonExtension.AddonWidth" Value="84"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="Width" Value="490"/>
+            <Setter Property="ext:InputAddonExtension.ContentWidth" Value="400"/>
+        </Style>
+    </Page.Resources>
+    <Grid Width="1024" HorizontalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <ctl:UCIdcardReader x:Name="ucIdcardReader" AutoRead="True" Margin="12,0,0,0"/>
+            <Button Style="{DynamicResource DetailBtnStyle}" Content="查询(_Q)" Margin="4,0,0,0" Command="{Binding QueryCmd}" />
+        </StackPanel>
+        <GroupBox Header="老人信息" Grid.Row="1" Height="600" VerticalAlignment="Top">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Row="0" Grid.Column="0" Tag="姓名" Style="{StaticResource inputStyle}" Text="{Binding Path=ElderInfo.name,Mode=OneWay}"/>
+                <TextBox Grid.Row="1" Grid.Column="0" Tag="年龄" Style="{StaticResource inputStyle}" Text="{Binding Path=ElderInfo.age,Mode=OneWay}"/>
+                <TextBox Grid.Row="2" Grid.Column="0" Tag="身份证号" Style="{StaticResource inputStyle}" Text="{Binding Path=ElderInfo.idcard,Mode=OneWay}"/>
+                <TextBox Grid.Row="3" Grid.Column="0" Tag="户籍地" Style="{StaticResource inputStyle}" Text="{Binding Path=ElderInfo.huadres,Mode=OneWay}"/>
+                <TextBox Grid.Row="4" Grid.Column="0" Tag="电话" Style="{StaticResource inputStyle}" Text="{Binding Path=ElderInfo.tel,Mode=OneWay}"/>
+                <TextBox Grid.Row="5" Grid.Column="0" Tag="健康状况" Style="{StaticResource inputStyle}" Text="{Binding Path=ElderInfo.health,Mode=OneWay}"/>
+                <TextBox Grid.Row="6" Grid.Column="0" Tag="职务" Style="{StaticResource inputStyle}" Text="{Binding Path=ElderInfo.job,Mode=OneWay}"/>
+                <TextBox Grid.Row="7" Grid.Column="0" Tag="宗教信仰" Style="{StaticResource inputStyle}" Text="{Binding Path=ElderInfo.religious,Mode=OneWay}"/>
+                <TextBox Grid.Row="8" Grid.Column="0" Tag="结婚日期" Style="{StaticResource inputStyle}" Text="{Binding Path=ElderInfo.marryDate,Mode=OneWay}"/>
+                <TextBox Grid.Row="9" Grid.Column="0" Tag="户口性质" Style="{StaticResource inputStyle}" Text="{Binding Path=ElderInfo.nature,Mode=OneWay}"/>
+
+                <TextBox Grid.Row="0" Grid.Column="1" Tag="性别" Style="{StaticResource inputStyle}" Text="{Binding Path=ElderInfo.sex,Mode=OneWay}"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Tag="出生日期" Style="{StaticResource inputStyle}" Text="{Binding Path=ElderInfo.birthday,Mode=OneWay}"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Tag="地址" Style="{StaticResource inputStyle}" Text="{Binding Path=ElderInfo.address,Mode=OneWay}"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Tag="手机号" Style="{StaticResource inputStyle}" Text="{Binding Path=ElderInfo.phone,Mode=OneWay}"/>
+                <TextBox Grid.Row="4" Grid.Column="1" Tag="文化程度" Style="{StaticResource inputStyle}" Text="{Binding Path=ElderInfo.education,Mode=OneWay}"/>
+                <TextBox Grid.Row="5" Grid.Column="1" Tag="工作单位" Style="{StaticResource inputStyle}" Text="{Binding Path=ElderInfo.companyWork,Mode=OneWay}"/>
+                <TextBox Grid.Row="6" Grid.Column="1" Tag="政治面貌" Style="{StaticResource inputStyle}" Text="{Binding Path=ElderInfo.political,Mode=OneWay}"/>
+                <TextBox Grid.Row="7" Grid.Column="1" Tag="婚姻状况" Style="{StaticResource inputStyle}" Text="{Binding Path=ElderInfo.maritaltid,Mode=OneWay}"/>
+                <TextBox Grid.Row="8" Grid.Column="1" Tag="民族" Style="{StaticResource inputStyle}" Text="{Binding Path=ElderInfo.nation,Mode=OneWay}"/>
+                <TextBox Grid.Row="9" Grid.Column="1" Tag="管理类型" Style="{StaticResource inputStyle}" Text="{Binding Path=ElderInfo.status,Mode=OneWay}"/>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</page:BasePage>

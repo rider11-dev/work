@@ -19,8 +19,8 @@
         </Style>
         <Style x:Key="BtnImgStyle" TargetType="Button" BasedOn="{StaticResource btn img}">
             <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="Width" Value="243"/>
-            <Setter Property="Height" Value="238"/>
+            <Setter Property="Width" Value="176"/>
+            <Setter Property="Height" Value="176"/>
             <Setter Property="Margin" Value="0,4,0,0"/>
         </Style>
     </Page.Resources>
@@ -35,16 +35,18 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="238"/>
+            <ColumnDefinition Width="176"/>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="238"/>
+            <ColumnDefinition Width="176"/>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="238"/>
+            <ColumnDefinition Width="176"/>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="238"/>
+            <ColumnDefinition Width="176"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="176"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <Image Grid.Row="0" Grid.ColumnSpan="9" 
+        <Image Grid.Row="0" Grid.ColumnSpan="11" 
                 Style="{StaticResource ImgBaseStyle}" Width="725" Height="63"
                Source="/AllInOne.Client;component/Resources/Images/title.png"/>
         <Label Grid.Row="1" Grid.Column="1" Content="一卡通余额查询" Style="{StaticResource LblStyle}"/>
@@ -53,15 +55,19 @@
                 Command="{Binding Path=NavigateCmd,RelativeSource={RelativeSource AncestorType=page:BasePage}}" CommandParameter="/AllInOne.Client;component/CardQueryPage.xaml"/>
         <Label Grid.Row="1" Grid.Column="3" Content="消费记录查询" Style="{StaticResource LblStyle}"/>
         <Button Grid.Row="2" Grid.Column="3" Style="{StaticResource BtnImgStyle}"
-                Tag="/AllInOne.Client;component/Resources/Images/bills.png"
+                Tag="/AllInOne.Client;component/Resources/Images/bills_query.png"
                 Command="{Binding Path=NavigateCmd,RelativeSource={RelativeSource AncestorType=page:BasePage}}" CommandParameter="/AllInOne.Client;component/BillsPage.xaml"/>
         <Label Grid.Row="1" Grid.Column="5" Content="政府在线" Style="{StaticResource LblStyle}"/>
         <Button Grid.Row="2" Grid.Column="5" Style="{StaticResource BtnImgStyle}"
-                Tag="/AllInOne.Client;component/Resources/Images/gov.png"
+                Tag="/AllInOne.Client;component/Resources/Images/link_gov.png"
                 Command="{Binding Path=NavigateCmd,RelativeSource={RelativeSource AncestorType=page:BasePage}}" CommandParameter="/AllInOne.Client;component/GovLinkPage.xaml"/>
-        <Label Grid.Row="1" Grid.Column="7" Content="服务购买" Style="{StaticResource LblStyle}"/>
+        <Label Grid.Row="1" Grid.Column="7" Content="老人信息查询" Style="{StaticResource LblStyle}"/>
         <Button Grid.Row="2" Grid.Column="7" Style="{StaticResource BtnImgStyle}"
-                Tag="/AllInOne.Client;component/Resources/Images/buy.png"
+                Tag="/AllInOne.Client;component/Resources/Images/elder_query.png"
+                Command="{Binding Path=NavigateCmd,RelativeSource={RelativeSource AncestorType=page:BasePage}}" CommandParameter="/AllInOne.Client;component/ElderQueryPage.xaml"/>
+        <Label Grid.Row="1" Grid.Column="9" Content="服务购买" Style="{StaticResource LblStyle}"/>
+        <Button Grid.Row="2" Grid.Column="9" Style="{StaticResource BtnImgStyle}"
+                Tag="/AllInOne.Client;component/Resources/Images/link_buy.png"
                 Command="{Binding Path=NavigateCmd,RelativeSource={RelativeSource AncestorType=page:BasePage}}" CommandParameter="/AllInOne.Client;component/BuyLinkPage.xaml"/>
     </Grid>
 </page:BasePage>
